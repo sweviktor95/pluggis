@@ -94,6 +94,32 @@
     max-width: 100%;
   }
   .slider-rad { text-align: center; margin: 10px 0; }
+
+  .sektion {
+    background: white;
+    border: 1px solid #e2e6ee;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 16px 0;
+  }
+  .sektion h3 {
+    margin-top: 0;
+    color: #2f4a73;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sektion-ikon { font-size: 1.3em; }
+  .begrepp-box {
+    background: #eef3fb;
+    border-left: 4px solid #4a6fa5;
+    border-radius: 6px;
+    padding: 15px 20px;
+    margin: 20px 0;
+  }
+  .begrepp-box h3 { margin-top: 0; color: #2f4a73; }
+  .begrepp-box ul { margin: 0; padding-left: 20px; }
+  .begrepp-box li { margin: 6px 0; }
 </style>
 </head>
 <body>
@@ -106,6 +132,7 @@
 <script src="innehall/struktur.js"></script>
 
 <script src="innehall/matematik-tallinjen.js"></script>
+<script src="innehall/biologi-vetenskap.js"></script>
 
 <script>
   var app = document.getElementById("app");
@@ -168,7 +195,28 @@
     } else {
       var data = innehall[id];
       html += "<h2>" + node.titel + "</h2>";
-      if (data) {
+      if (data && data.sektioner) {
+        // Rikare sida: intro + flera namngivna sektioner + ev. begreppsruta
+        if (data.intro) { html += "<p>" + data.intro + "</p>"; }
+        data.sektioner.forEach(function(sek) {
+          html += '<div class="sektion">';
+          html += '<h3><span class="sektion-ikon">' + sek.ikon + '</span>' + sek.titel + '</h3>';
+          sek.text.forEach(function(stycke) {
+            html += "<p>" + stycke + "</p>";
+          });
+          if (sek.bild) {
+            html += '<img src="' + sek.bild + '" style="width:100%;border-radius:8px;margin:10px 0;">';
+          }
+          html += '</div>';
+        });
+        if (data.begrepp) {
+          html += '<div class="begrepp-box"><h3>📖 Bra att kunna</h3><ul>';
+          data.begrepp.forEach(function(b) {
+            html += '<li><strong>' + b.term + ':</strong> ' + b.forklaring + '</li>';
+          });
+          html += '</ul></div>';
+        }
+      } else if (data) {
         html += "<p>" + data.text + "</p>";
         if (data.bild) {
           html += '<img src="' + data.bild + '" style="width:100%;border-radius:8px;">';
