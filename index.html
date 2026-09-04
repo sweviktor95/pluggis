@@ -120,6 +120,53 @@
   .begrepp-box h3 { margin-top: 0; color: #2f4a73; }
   .begrepp-box ul { margin: 0; padding-left: 20px; }
   .begrepp-box li { margin: 6px 0; }
+
+  .kontrollfraga {
+    background: #fff8ec;
+    border-left: 4px solid #e0a53f;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin: 14px 0 0 0;
+  }
+  .kontrollfraga p { margin: 6px 0; }
+  .kontrollfraga details summary {
+    cursor: pointer;
+    color: #4a6fa5;
+    font-weight: bold;
+    margin-top: 6px;
+  }
+
+  .exit-ticket {
+    background: #eefaf0;
+    border: 2px dashed #5aa66b;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin: 25px 0;
+  }
+  .exit-ticket h3 { margin-top: 0; color: #2f6a3f; }
+  .exit-fraga { margin: 12px 0; }
+  .exit-fraga details summary {
+    cursor: pointer;
+    color: #4a6fa5;
+    font-weight: bold;
+  }
+
+  .skriv-ut-knapp {
+    background: #6b7a8f;
+    max-width: 260px;
+    font-size: 15px;
+    padding: 10px 16px;
+  }
+  .skriv-ut-knapp:hover { background: #55606f; }
+
+  @media print {
+    .knapp, .brodsmulor { display: none !important; }
+    canvas, .slider-rad { display: none !important; }
+    .sektion, .begrepp-box, .kontrollfraga, .exit-ticket {
+      break-inside: avoid;
+    }
+    body { margin: 0; }
+  }
 </style>
 </head>
 <body>
@@ -195,6 +242,9 @@
     } else {
       var data = innehall[id];
       html += "<h2>" + node.titel + "</h2>";
+      if (data) {
+        html += '<button class="knapp skriv-ut-knapp" onclick="window.print()">🖨️ Skriv ut / Spara som PDF</button>';
+      }
       if (data && data.sektioner) {
         // Rikare sida: intro + flera namngivna sektioner + ev. begreppsruta
         if (data.intro) { html += "<p>" + data.intro + "</p>"; }
@@ -206,6 +256,14 @@
           });
           if (sek.bild) {
             html += '<img src="' + sek.bild + '" style="width:100%;border-radius:8px;margin:10px 0;">';
+          }
+          if (sek.kontrollfraga) {
+            html += '<div class="kontrollfraga"><p>🤔 <strong>Kolla din förståelse:</strong> ' +
+                    sek.kontrollfraga + '</p>';
+            if (sek.kontrollsvar) {
+              html += '<details><summary>Visa svar</summary><p>' + sek.kontrollsvar + '</p></details>';
+            }
+            html += '</div>';
           }
           html += '</div>';
         });
@@ -235,6 +293,19 @@
         }
       } else {
         html += "<p><em>Inget innehåll skrivet för det här momentet än.</em></p>";
+      }
+
+      if (data && data.exitTicket) {
+        html += '<div class="exit-ticket"><h3>🎫 Exit ticket</h3>' +
+                '<p>Innan du går vidare - se om du kan svara på det här:</p>';
+        data.exitTicket.forEach(function(fraga, i) {
+          html += '<div class="exit-fraga"><p>' + (i + 1) + '. ' + fraga.fraga + '</p>';
+          if (fraga.svar) {
+            html += '<details><summary>Visa svar</summary><p>' + fraga.svar + '</p></details>';
+          }
+          html += '</div>';
+        });
+        html += '</div>';
       }
     }
 

@@ -26,7 +26,9 @@ innehall["biologi-vetenskap"] = {
         "Nästa steg är att formulera en hypotes - en gissning man kan testa, baserad på det man redan vet. Till exempel: 'Jag tror att plantorna i solljus växer snabbare, eftersom växter behöver ljus för att fotosyntetisera.'",
         "Sedan planerar man en undersökning: vad ska man mäta, hur ofta, och hur länge? Det är viktigt att bara ändra en sak i taget (till exempel mängden ljus) och hålla allt annat likadant (samma jord, samma mängd vatten) - annars vet man inte vad som faktiskt orsakade skillnaden.",
         "Till sist utför man undersökningen och utvärderar resultatet: stämde hypotesen, eller inte? Även en hypotes som visar sig vara fel är värdefull kunskap!"
-      ]
+      ],
+      kontrollfraga: "Varför är det viktigt att bara ändra en sak i taget i en undersökning?",
+      kontrollsvar: "Om man ändrar flera saker samtidigt vet man inte vilken av ändringarna som faktiskt orsakade resultatet. Genom att bara ändra en variabel kan man dra en säker slutsats om just den faktorn."
     },
     {
       ikon: "🗂️",
@@ -58,7 +60,9 @@ innehall["biologi-vetenskap"] = {
       text: [
         "Du möter påståenden om biologi varje dag - i tidningar, sociala medier och på nätet. Alla källor är inte lika pålitliga, så det är viktigt att kunna granska information källkritiskt.",
         "Bra frågor att ställa: Vem säger det här, och vilken kunskap har den personen? Finns det belägg (bevis) för påståendet? Säger andra pålitliga källor samma sak? Kan avsändaren ha ett eget intresse av att du ska tro på just det här?"
-      ]
+      ],
+      kontrollfraga: "Nämn två frågor du kan ställa dig för att källkritiskt granska ett påstående du sett på nätet.",
+      kontrollsvar: "Till exempel: Vem säger det här och vilken kunskap har personen? Finns det belägg för påståendet? Säger andra pålitliga källor samma sak? Kan avsändaren tjäna på att du tror på det?"
     }
   ],
 
@@ -67,6 +71,21 @@ innehall["biologi-vetenskap"] = {
     { term: "Fältstudie", forklaring: "en undersökning som görs ute i naturen, inte i ett labb" },
     { term: "Variabel", forklaring: "något som kan ändras eller mätas i en undersökning" },
     { term: "Källkritik", forklaring: "att granska och värdera hur pålitlig en källa till information är" }
+  ],
+
+  exitTicket: [
+    {
+      fraga: "Vad är skillnaden på en hypotes och en teori?",
+      svar: "En hypotes är en gissning man vill testa i en enskild undersökning. En teori bygger på många undersökningar över tid som tillsammans ger en väl underbyggd förklaringsmodell."
+    },
+    {
+      fraga: "Ge ett exempel på hur man kan dokumentera resultaten från en biologisk undersökning.",
+      svar: "Till exempel med en tabell över mätvärden, ett diagram som visar mönster, bilder på det man undersökt, eller en skriftlig rapport som beskriver metod och resultat."
+    },
+    {
+      fraga: "Du läser en artikel på nätet som påstår att en viss växt botar alla sjukdomar. Vad bör du tänka på innan du litar på det?",
+      svar: "Granska källan källkritiskt: vem skriver detta och vilken kunskap har de? Finns det vetenskapliga belägg? Säger andra pålitliga källor samma sak? Har avsändaren något att tjäna på att du tror på påståendet?"
+    }
   ]
 };
 
