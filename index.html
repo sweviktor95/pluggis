@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pluggis</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background: #f7f7f9;
+    color: #222;
+  }
+  h1 {
+    text-align: center;
+    color: #2f4a73;
+    font-size: 2.5em;
+    margin-bottom: 5px;
+  }
+  .undertitel {
+    text-align: center;
+    color: #777;
+    margin-bottom: 30px;
+  }
+
+  .startsida-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+  }
+  @media (max-width: 700px) {
+    .startsida-grid { grid-template-columns: 1fr; }
+  }
+  .amne-ruta {
+    background: white;
+    border: 2px solid #dde3ec;
+    border-radius: 14px;
+    padding: 25px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .amne-ruta:hover {
+    transform: translateY(-3px);
+    border-color: #4a6fa5;
+  }
+  .amne-ikon { font-size: 2.5em; display: block; margin-bottom: 8px; }
+  .amne-titel { font-weight: bold; font-size: 1.1em; color: #2f4a73; }
+
+  .knapp {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    margin: 10px 0;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: left;
+  }
+  .knapp:hover { background: #3a5a8a; }
+  .tillbaka { background: #999; margin-top: 20px; }
+
+  .brodsmulor {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  .brodsmulor span { cursor: pointer; color: #4a6fa5; }
+  .brodsmulor span:hover { text-decoration: underline; }
+
+  .bild-platshallare {
+    width: 100%;
+    height: 200px;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    border-radius: 8px;
+    margin: 15px 0;
+  }
+  canvas {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: block;
+    margin: 15px auto;
+    max-width: 100%;
+  }
+  .slider-rad { text-align: center; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<h1>Pluggis</h1>
+<p class="undertitel">Välj ett ämne för att komma igång</p>
+
+<div id="app"></div>
+
+<script src="innehall/struktur.js"></script>
+
+<script src="innehall/matematik-tallinjen.js"></script>
+
+<script>
+  var app = document.getElementById("app");
+
+  var nodKarta = {};
+  function byggKarta(noder, parentId) {
+    noder.forEach(function(n) {
+      nodKarta[n.id] = { node: n, parentId: parentId };
+      if (n.barn && n.barn.length > 0) {
+        byggKarta(n.barn, n.id);
+      }
+    });
+  }
+  byggKarta(struktur, null);
+
+  function hamtaSokvag(id) {
+    var vag = [];
+    var aktuellId = id;
+    while (aktuellId) {
+      vag.unshift(nodKarta[aktuellId].node);
+      aktuellId = nodKarta[aktuellId].parentId;
+    }
+    return vag;
+  }
+
+  function renderaBrodsmulor(id) {
+    var vag = hamtaSokvag(id);
+    var html = '<div class="brodsmulor"><span onclick="visStartsida()">Pluggis</span>';
+    vag.forEach(function(n) {
+      html += ' &raquo; <span onclick="visNod(\'' + n.id + '\')">' + n.titel + '</span>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function visStartsida() {
+    var html = '<div class="startsida-grid">';
+    struktur.forEach(function(amne) {
+      html += '<div class="amne-ruta" onclick="visNod(\'' + amne.id + '\')">' +
+              '<span class="amne-ikon">' + (amne.ikon || "📘") + '</span>' +
+              '<span class="amne-titel">' + amne.titel + '</span></div>';
+    });
+    html += '</div>';
+    app.innerHTML = html;
+  }
+
+  function visNod(id) {
+    var entry = nodKarta[id];
+    var node = entry.node;
+    var harBarn = node.barn && node.barn.length > 0;
+
+    var html = renderaBrodsmulor(id);
+
+    if (harBarn) {
+      html += "<h2>" + node.titel + "</h2>";
+      node.barn.forEach(function(barn) {
+        html += '<button class="knapp" onclick="visNod(\'' + barn.id + '\')">' +
+                barn.titel + '</button>';
+      });
+    } else {
+      var data = innehall[id];
+      html += "<h2>" + node.titel + "</h2>";
+      if (data) {
+        html += "<p>" + data.text + "</p>";
+        if (data.bild) {
+          html += '<img src="' + data.bild + '" style="width:100%;border-radius:8px;">';
+        } else {
+          html += '<div class="bild-platshallare">[Ingen bild angiven]</div>';
+        }
+        if (data.simulering === "linje-k-slider") {
+          html += '<canvas id="ritKanvas" width="400" height="300"></canvas>';
+          html += '<div class="slider-rad">k = <span id="kVarde">1</span> ' +
+                  '<input type="range" id="kSlider" min="-5" max="5" step="0.5" value="1" ' +
+                  'oninput="ritaLinje()"></div>';
+        }
+        if (data.simulering === "tallinjen-heltal-0-10") {
+          html += '<canvas id="tallinjeKanvas" width="500" height="140"></canvas>';
+          html += '<p style="text-align:center;" id="tallinjeText">Klicka på tallinjen för att välja ett tal.</p>';
+        }
+      } else {
+        html += "<p><em>Inget innehåll skrivet för det här momentet än.</em></p>";
+      }
+    }
+
+    html += '<button class="knapp tillbaka" onclick="' +
+            (entry.parentId ? "visNod('" + entry.parentId + "')" : "visStartsida()") +
+            '">Tillbaka</button>';
+
+    app.innerHTML = html;
+
+    if (!harBarn && innehall[id] && innehall[id].simulering === "linje-k-slider") {
+      ritaLinje();
+    }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "tallinjen-heltal-0-10") {
+      initieraTallinje();
+    }
+  }
+
+  function ritaLinje() {
+    var k = parseFloat(document.getElementById("kSlider").value);
+    document.getElementById("kVarde").innerText = k;
+
+    var canvas = document.getElementById("ritKanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    var mittX = canvas.width / 2;
+    var mittY = canvas.height / 2;
+
+    ctx.strokeStyle = "#ccc";
+    ctx.beginPath();
+    ctx.moveTo(0, mittY); ctx.lineTo(canvas.width, mittY);
+    ctx.moveTo(mittX, 0); ctx.lineTo(mittX, canvas.height);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#4a6fa5";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    var x1 = -mittX, x2 = mittX;
+    ctx.moveTo(mittX + x1, mittY - k * x1);
+    ctx.lineTo(mittX + x2, mittY - k * x2);
+    ctx.stroke();
+  }
+
+  // Generisk simulering: interaktiv tallinje med heltal 0-10.
+  // Klicka var som helst på linjen för att välja närmaste heltal.
+  // Återanvänds av vilket delmoment som helst genom att sätta
+  // simulering: "tallinjen-heltal-0-10" i dess innehållsfil.
+  var tallinjeValtTal = null;
+
+  function ritaTallinje() {
+    var canvas = document.getElementById("tallinjeKanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    var startX = 40, endX = 460, y = 70;
+    var steg = (endX - startX) / 10;
+
+    // Själva linjen
+    ctx.strokeStyle = "#4a6fa5";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(startX, y);
+    ctx.lineTo(endX, y);
+    ctx.stroke();
+
+    // Skalstreck och siffror 0-10
+    ctx.fillStyle = "#2f4a73";
+    ctx.font = "14px Arial";
+    ctx.textAlign = "center";
+    for (var i = 0; i <= 10; i++) {
+      var x = startX + i * steg;
+      ctx.beginPath();
+      ctx.moveTo(x, y - 8);
+      ctx.lineTo(x, y + 8);
+      ctx.stroke();
+      ctx.fillText(i, x, y + 28);
+    }
+
+    // Markera valt tal, om något är valt
+    if (tallinjeValtTal !== null) {
+      var valdX = startX + tallinjeValtTal * steg;
+      ctx.beginPath();
+      ctx.arc(valdX, y, 8, 0, Math.PI * 2);
+      ctx.fillStyle = "#e07a3f";
+      ctx.fill();
+    }
+  }
+
+  function initieraTallinje() {
+    tallinjeValtTal = null;
+    ritaTallinje();
+
+    var canvas = document.getElementById("tallinjeKanvas");
+    canvas.onclick = function(e) {
+      var rect = canvas.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var startX = 40, endX = 460;
+      var steg = (endX - startX) / 10;
+
+      var tal = Math.round((x - startX) / steg);
+      tal = Math.max(0, Math.min(10, tal));
+
+      tallinjeValtTal = tal;
+      ritaTallinje();
+      document.getElementById("tallinjeText").innerText = "Du valde: " + tal;
+    };
+  }
+
+  visStartsida();
+</script>
+
+</body>
+</html>
