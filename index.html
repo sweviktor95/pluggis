@@ -156,16 +156,53 @@
     max-width: 260px;
     font-size: 15px;
     padding: 10px 16px;
+    margin: 10px 0 0 0;
   }
   .skriv-ut-knapp:hover { background: #55606f; }
 
+  .skriv-ut-rad {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .lasstod-etikett {
+    font-size: 15px;
+    color: #444;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lasstod-etikett input { cursor: pointer; }
+
   @media print {
-    .knapp, .brodsmulor { display: none !important; }
+    .knapp, .brodsmulor, .skriv-ut-rad { display: none !important; }
     canvas, .slider-rad { display: none !important; }
     .sektion, .begrepp-box, .kontrollfraga, .exit-ticket {
       break-inside: avoid;
     }
     body { margin: 0; }
+
+    /* Fokusläge: större text och en sektion per utskriven sida */
+    body.fokus-utskrift { font-size: 1.3em; line-height: 1.6; }
+    body.fokus-utskrift h2 { font-size: 1.9em; }
+    body.fokus-utskrift .sektion {
+      page-break-after: always;
+      break-after: page;
+      font-size: 1.1em;
+    }
+    body.fokus-utskrift .sektion h3 { font-size: 1.3em; }
+    body.fokus-utskrift .sektion:last-of-type {
+      page-break-after: auto;
+      break-after: auto;
+    }
+    body.fokus-utskrift .exit-ticket {
+      page-break-before: always;
+      break-before: page;
+      font-size: 1.1em;
+    }
   }
 </style>
 </head>
@@ -243,7 +280,11 @@
       var data = innehall[id];
       html += "<h2>" + node.titel + "</h2>";
       if (data) {
-        html += '<button class="knapp skriv-ut-knapp" onclick="window.print()">🖨️ Skriv ut / Spara som PDF</button>';
+        html += '<div class="skriv-ut-rad">';
+        html += '<button class="knapp skriv-ut-knapp" onclick="skrivUt()">🖨️ Skriv ut / Spara som PDF</button>';
+        html += '<label class="lasstod-etikett"><input type="checkbox" id="lasvanligtKryss"> ' +
+                'Lättläst utskrift: ett stycke per sida, större text</label>';
+        html += '</div>';
       }
       if (data && data.sektioner) {
         // Rikare sida: intro + flera namngivna sektioner + ev. begreppsruta
@@ -411,6 +452,24 @@
       tallinjeValtTal = tal;
       ritaTallinje();
       document.getElementById("tallinjeText").innerText = "Du valde: " + tal;
+    };
+  }
+
+  function skrivUt() {
+    var kryss = document.getElementById("lasvanligtKryss");
+    var fokuslage = kryss && kryss.checked;
+
+    if (fokuslage) {
+      document.body.classList.add("fokus-utskrift");
+    }
+
+    window.print();
+
+    // Ta bort fokusläget igen efter utskrift/PDF-dialogen stängts,
+    // så det inte påverkar den vanliga webbvisningen.
+    window.onafterprint = function() {
+      document.body.classList.remove("fokus-utskrift");
+      window.onafterprint = null;
     };
   }
 
