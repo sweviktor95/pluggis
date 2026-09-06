@@ -27,7 +27,14 @@ var struktur = [
           },
           { id: "matematik-ak7-brak", titel: "Bråk" },
           { id: "matematik-ak7-procent", titel: "Procent" },
-          { id: "matematik-ak7-algebra", titel: "Algebra" },
+          {
+            id: "matematik-ak7-algebra",
+            titel: "Algebra",
+            barn: [
+              { id: "matematik-intro-ekvationer", titel: "Intro ekvationer" },
+              { id: "matematik-ekvationer", titel: "Ekvationer" }
+            ]
+          },
           { id: "matematik-ak7-geometri", titel: "Geometri" }
         ]
       },

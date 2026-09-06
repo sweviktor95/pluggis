@@ -151,6 +151,63 @@
     font-weight: bold;
   }
 
+  .algebra-box {
+    background: white;
+    border: 1px solid #e2e6ee;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+    text-align: center;
+  }
+  .algebra-uppgift { font-size: 1.8em; margin: 10px 0; }
+  .algebra-svar-rad { margin: 15px 0; font-size: 1.1em; }
+  .algebra-svar-rad input {
+    font-size: 1.1em;
+    width: 70px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin: 0 6px;
+    text-align: center;
+  }
+  .algebra-kolla-knapp, .algebra-ny-knapp {
+    display: inline-block;
+    width: auto;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .algebra-kolla-knapp { background: #4a6fa5; margin-left: 6px; }
+  .algebra-kolla-knapp:hover { background: #3a5a8a; }
+  .algebra-ny-knapp { background: #5aa66b; margin-top: 10px; }
+  .algebra-ny-knapp:hover { background: #489058; }
+  .algebra-ratt { color: #2f6a3f; font-weight: bold; }
+  .algebra-fel { color: #a33; font-weight: bold; }
+
+  .symbol-ruta {
+    display: inline-block;
+    background: #e0e8f5;
+    border: 2px solid #4a6fa5;
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-weight: bold;
+    color: #2f4a73;
+  }
+  .variabel-x {
+    font-style: italic;
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+    color: #2f4a73;
+  }
+  .berattelse-text {
+    font-size: 1.2em;
+    line-height: 1.6;
+    text-align: left;
+  }
+
   .skriv-ut-knapp {
     background: #6b7a8f;
     max-width: 260px;
@@ -217,6 +274,8 @@
 
 <script src="innehall/matematik-tallinjen.js"></script>
 <script src="innehall/biologi-vetenskap.js"></script>
+<script src="innehall/matematik-intro-ekvationer.js"></script>
+<script src="innehall/matematik-ekvationer.js"></script>
 
 <script>
   var app = document.getElementById("app");
@@ -332,6 +391,73 @@
           html += '<canvas id="tallinjeKanvas" width="500" height="140"></canvas>';
           html += '<p style="text-align:center;" id="tallinjeText">Klicka på tallinjen för att välja ett tal.</p>';
         }
+        if (data.simulering === "algebra-objekt-varde") {
+          html += '<div class="algebra-box">' +
+            '<p class="algebra-uppgift" id="algebraUppgift"></p>' +
+            '<div class="algebra-svar-rad">Vad är <span id="algebraObjektNamn"></span> värt? ' +
+            '<input type="number" id="algebraSvarInput"> ' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraAlgebraSvar()">Kolla svar</button></div>' +
+            '<p id="algebraFeedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraAlgebraUppgift()">🔄 Ny uppgift</button>' +
+            '</div>';
+        }
+        if (data.simulering === "ekvationer-berattelse-abstrakt") {
+          html += '<div class="algebra-box">' +
+            '<h3>Steg 1: Berättelseuppgift</h3>' +
+            '<p class="berattelse-text" id="berattelseText"></p>' +
+            '<div class="algebra-svar-rad">Vilket var talet? ' +
+            '<input type="number" id="berattelseSvarInput"> ' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraBerattelsesvar()">Kolla svar</button></div>' +
+            '<p id="berattelseFeedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraBerattelseuppgift()">🔄 Ny uppgift</button>' +
+            '</div>';
+          html += '<div class="algebra-box">' +
+            '<h3>Steg 2: Ekvationer med tal och bokstäver</h3>' +
+            '<p>Lös ekvationen. Vad är x värt?</p>' +
+            '<p class="algebra-uppgift" id="abstraktUppgift"></p>' +
+            '<div class="algebra-svar-rad">x = ' +
+            '<input type="number" id="abstraktSvarInput"> ' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraAbstraktSvar()">Kolla svar</button></div>' +
+            '<p id="abstraktFeedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraAbstraktEkvation()">🔄 Ny uppgift</button>' +
+            '</div>';
+        }
+        if (data.simulering === "berattelseuppgift") {
+          html += '<div class="algebra-box">' +
+            '<p class="berattelse-text" id="berattelseText"></p>' +
+            '<div class="algebra-svar-rad">Vilket var talet? ' +
+            '<input type="number" id="berattelseSvarInput"> ' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraBerattelsesvar()">Kolla svar</button></div>' +
+            '<p id="berattelseFeedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraBerattelseuppgift()">🔄 Ny uppgift</button>' +
+            '</div>';
+        }
+        if (data.simulering === "ekvationer-tresteg") {
+          var ekvSteg = [
+            { nr: 1, titel: "Steg 1: Konkreta objekt",
+              forklaring: "Börja med att räkna ut vad ett enda objekt är värt." },
+            { nr: 2, titel: "Steg 2: En symbol istället för objekt",
+              forklaring: "Samma idé, men nu använder vi en symbol istället för frukt - lite mer abstrakt." },
+            { nr: 3, titel: "Steg 3: Bokstaven x - den riktiga matematiska varianten",
+              forklaring: "Nu skriver vi det som man gör i vanlig algebra, med bokstaven x." },
+            { nr: 4, titel: "Steg 4: Ekvationsnotation",
+              forklaring: "Sista steget - nu skriver vi det som en riktig ekvation, med koefficienten direkt framför x, precis som i en vanlig matteuppgift." }
+          ];
+          ekvSteg.forEach(function(steg) {
+            html += '<div class="algebra-box">' +
+              '<h3>' + steg.titel + '</h3>' +
+              '<p>' + steg.forklaring + '</p>' +
+              '<p class="algebra-uppgift" id="ekvUppgift' + steg.nr + '"></p>' +
+              '<div class="algebra-svar-rad">Vad är <span id="ekvObjektNamn' + steg.nr + '"></span> värt? ' +
+              '<input type="number" id="ekvSvarInput' + steg.nr + '"> ' +
+              '<button class="algebra-kolla-knapp" onclick="kontrolleraEkvationssteg(' + steg.nr +
+              ')">Kolla svar</button></div>' +
+              '<p id="ekvFeedback' + steg.nr + '"></p>' +
+              '<button class="algebra-ny-knapp" onclick="genereraEkvationssteg(' + steg.nr +
+              ')">🔄 Ny uppgift</button>' +
+              '</div>';
+          });
+        }
       } else {
         html += "<p><em>Inget innehåll skrivet för det här momentet än.</em></p>";
       }
@@ -361,6 +487,22 @@
     }
     if (!harBarn && innehall[id] && innehall[id].simulering === "tallinjen-heltal-0-10") {
       initieraTallinje();
+    }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "algebra-objekt-varde") {
+      genereraAlgebraUppgift();
+    }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "berattelseuppgift") {
+      genereraBerattelseuppgift();
+    }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "ekvationer-berattelse-abstrakt") {
+      genereraBerattelseuppgift();
+      genereraAbstraktEkvation();
+    }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "ekvationer-tresteg") {
+      genereraEkvationssteg(1);
+      genereraEkvationssteg(2);
+      genereraEkvationssteg(3);
+      genereraEkvationssteg(4);
     }
   }
 
@@ -453,6 +595,232 @@
       ritaTallinje();
       document.getElementById("tallinjeText").innerText = "Du valde: " + tal;
     };
+  }
+
+  // Generisk simulering: slumpad algebrauppgift med objekt (emoji)
+  // vars värde man ska lista ut utifrån en given summa.
+  // Återanvänds genom att sätta simulering: "algebra-objekt-varde".
+  var algebraObjekt = ["🍎", "🍌", "🍇", "🍉", "🍒", "⚽", "🎈", "🍪"];
+  var algebraRattSvar = null;
+
+  function genereraAlgebraUppgift() {
+    var emoji = algebraObjekt[Math.floor(Math.random() * algebraObjekt.length)];
+    var antal = Math.floor(Math.random() * 4) + 2;   // 2-5 objekt
+    var varde = Math.floor(Math.random() * 8) + 2;   // värde 2-9
+    var summa = antal * varde;
+    algebraRattSvar = varde;
+
+    var rad = "";
+    for (var i = 0; i < antal; i++) {
+      rad += emoji + (i < antal - 1 ? " + " : "");
+    }
+    rad += " = " + summa;
+
+    document.getElementById("algebraUppgift").innerHTML = rad;
+    document.getElementById("algebraObjektNamn").innerText = emoji;
+    document.getElementById("algebraSvarInput").value = "";
+    document.getElementById("algebraFeedback").innerHTML = "";
+  }
+
+  function kontrolleraAlgebraSvar() {
+    var input = document.getElementById("algebraSvarInput");
+    var svar = parseInt(input.value, 10);
+    var feedback = document.getElementById("algebraFeedback");
+
+    if (isNaN(svar)) {
+      feedback.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>';
+      return;
+    }
+    if (svar === algebraRattSvar) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
+  }
+
+  // Tre-stegs progression för Ekvationer: samma princip (räkna ut vad ett
+  // objekt är värt utifrån en summa) men med tre olika symboltyper -
+  // konkreta objekt, en generisk symbol, och slutligen bokstaven x.
+  var ekvRattSvar = {};
+
+  function genereraEkvationssteg(steg) {
+    var antal = Math.floor(Math.random() * 4) + 2;   // 2-5 st
+    var varde = Math.floor(Math.random() * 8) + 2;   // värde 2-9
+    var summa = antal * varde;
+    ekvRattSvar[steg] = varde;
+
+    if (steg === 4) {
+      // Ekvationsnotation: koefficient direkt framför x, t.ex. "3x = 12"
+      var ekvationsrad = antal + '<span class="variabel-x">x</span> = ' + summa;
+      document.getElementById("ekvUppgift4").innerHTML = ekvationsrad;
+      document.getElementById("ekvObjektNamn4").innerHTML = '<span class="variabel-x">x</span>';
+      document.getElementById("ekvSvarInput4").value = "";
+      document.getElementById("ekvFeedback4").innerHTML = "";
+      return;
+    }
+
+    var symbol;
+    if (steg === 1) {
+      symbol = algebraObjekt[Math.floor(Math.random() * algebraObjekt.length)];
+    } else if (steg === 2) {
+      symbol = "❎";
+    } else {
+      symbol = '<span class="variabel-x">x</span>';
+    }
+
+    var rad = "";
+    for (var i = 0; i < antal; i++) {
+      rad += symbol + (i < antal - 1 ? " + " : "");
+    }
+    rad += " = " + summa;
+
+    document.getElementById("ekvUppgift" + steg).innerHTML = rad;
+    document.getElementById("ekvObjektNamn" + steg).innerHTML = symbol;
+    document.getElementById("ekvSvarInput" + steg).value = "";
+    document.getElementById("ekvFeedback" + steg).innerHTML = "";
+  }
+
+  function kontrolleraEkvationssteg(steg) {
+    var input = document.getElementById("ekvSvarInput" + steg);
+    var svar = parseInt(input.value, 10);
+    var feedback = document.getElementById("ekvFeedback" + steg);
+
+    if (isNaN(svar)) {
+      feedback.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>';
+      return;
+    }
+    if (svar === ekvRattSvar[steg]) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
+  }
+
+  // Berättelseuppgifter: slumpar fram en kedja på 1-2 räknesteg (av alla
+  // fyra räknesätten) utifrån ett okänt tal, och formulerar det som text.
+  // Garanterar att inget mellansteg blir negativt eller ger ett brutet tal.
+  var berattelseRattSvar = null;
+  var opNamn = { add: "adderas", sub: "subtraheras", mul: "multipliceras", div: "delas" };
+
+  function slumpaBerattelsekedja() {
+    for (var forsok = 0; forsok < 30; forsok++) {
+      var start = Math.floor(Math.random() * 16) + 2;   // 2-17
+      var antalSteg = Math.random() < 0.5 ? 1 : 2;
+      var steg = [];
+      var varde = start;
+      var giltig = true;
+
+      for (var i = 0; i < antalSteg; i++) {
+        var opTyp = Math.floor(Math.random() * 4);
+        var tal, ny, typ;
+
+        if (opTyp === 0) {
+          tal = Math.floor(Math.random() * 10) + 1;
+          ny = varde + tal;
+          typ = "add";
+        } else if (opTyp === 1) {
+          tal = Math.floor(Math.random() * 10) + 1;
+          ny = varde - tal;
+          if (ny < 0) { giltig = false; break; }
+          typ = "sub";
+        } else if (opTyp === 2) {
+          tal = Math.floor(Math.random() * 4) + 2; // 2-5
+          ny = varde * tal;
+          typ = "mul";
+        } else {
+          var divisorer = [];
+          for (var d = 2; d <= 10; d++) {
+            if (varde % d === 0) { divisorer.push(d); }
+          }
+          if (divisorer.length === 0) { giltig = false; break; }
+          tal = divisorer[Math.floor(Math.random() * divisorer.length)];
+          ny = varde / tal;
+          typ = "div";
+        }
+
+        steg.push({ typ: typ, tal: tal });
+        varde = ny;
+      }
+
+      if (giltig && varde !== start) {
+        return { start: start, steg: steg, resultat: varde };
+      }
+    }
+    // Osannolik reservuppgift ifall inget lyckades
+    return { start: 10, steg: [{ typ: "add", tal: 5 }], resultat: 15 };
+  }
+
+  function genereraBerattelseuppgift() {
+    var uppgift = slumpaBerattelsekedja();
+    berattelseRattSvar = uppgift.start;
+
+    var text = "Jag tänker på ett tal. Talet " + opNamn[uppgift.steg[0].typ] +
+                " med " + uppgift.steg[0].tal + ".";
+    if (uppgift.steg[1]) {
+      text += " Talet " + opNamn[uppgift.steg[1].typ] + " sedan med " + uppgift.steg[1].tal + ".";
+    }
+    text += " Då får vi " + uppgift.resultat + ". Vilket var talet?";
+
+    document.getElementById("berattelseText").innerText = text;
+    document.getElementById("berattelseSvarInput").value = "";
+    document.getElementById("berattelseFeedback").innerHTML = "";
+  }
+
+  function kontrolleraBerattelsesvar() {
+    var input = document.getElementById("berattelseSvarInput");
+    var svar = parseInt(input.value, 10);
+    var feedback = document.getElementById("berattelseFeedback");
+
+    if (isNaN(svar)) {
+      feedback.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>';
+      return;
+    }
+    if (svar === berattelseRattSvar) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
+  }
+
+  // Abstrakta ekvationer: en riktig ekvation med enbart tal och bokstäver,
+  // t.ex. "2x + 3 = 11" eller "4x - 5 = 7". Löser man ut x?
+  var abstraktRattSvar = null;
+
+  function genereraAbstraktEkvation() {
+    var a = Math.floor(Math.random() * 5) + 2;    // koefficient 2-6
+    var x = Math.floor(Math.random() * 9) + 1;   // svaret 1-9
+    var b = Math.floor(Math.random() * 10) + 1;   // konstant 1-10
+    var plus = Math.random() < 0.5;
+    var c, text;
+
+    if (plus) {
+      c = a * x + b;
+      text = a + '<span class="variabel-x">x</span> + ' + b + ' = ' + c;
+    } else {
+      c = a * x - b;
+      text = a + '<span class="variabel-x">x</span> - ' + b + ' = ' + c;
+    }
+
+    abstraktRattSvar = x;
+    document.getElementById("abstraktUppgift").innerHTML = text;
+    document.getElementById("abstraktSvarInput").value = "";
+    document.getElementById("abstraktFeedback").innerHTML = "";
+  }
+
+  function kontrolleraAbstraktSvar() {
+    var input = document.getElementById("abstraktSvarInput");
+    var svar = parseInt(input.value, 10);
+    var feedback = document.getElementById("abstraktFeedback");
+
+    if (isNaN(svar)) {
+      feedback.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>';
+      return;
+    }
+    if (svar === abstraktRattSvar) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
   }
 
   function skrivUt() {
