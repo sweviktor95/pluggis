@@ -39,7 +39,32 @@ var struktur = [
         ]
       },
       { id: "matematik-ak8", titel: "Årskurs 8", barn: [] },
-      { id: "matematik-ak9", titel: "Årskurs 9", barn: [] }
+      {
+        id: "matematik-ak9",
+        titel: "Årskurs 9",
+        barn: [
+          {
+            id: "matematik-ak9-algebra",
+            titel: "Algebra",
+            barn: [
+              { id: "matematik-ak9-intro-ekvationer", titel: "Intro ekvationer" },
+              { id: "matematik-ak9-ekvationer", titel: "Ekvationer" }
+            ]
+          },
+          {
+            id: "matematik-ak9-brak",
+            titel: "Bråk",
+            barn: [
+              { id: "matematik-ak9-tallinjen", titel: "Tallinjen" },
+              { id: "matematik-ak9-brak-forlang-forkorta", titel: "Förlänga och förkorta bråk" },
+              { id: "matematik-ak9-brak-add-sub", titel: "Addition och subtraktion av bråk" },
+              { id: "matematik-ak9-brak-mult", titel: "Multiplikation av bråk" },
+              { id: "matematik-ak9-brak-div", titel: "Division av bråk" },
+              { id: "matematik-ak9-brak-repetition", titel: "Repetition bråk" }
+            ]
+          }
+        ]
+      }
     ]
   },
   {

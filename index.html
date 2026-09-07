@@ -208,6 +208,74 @@
     text-align: left;
   }
 
+  /* Lodrät bråkrendering: täljare/streck/nämnare, inget snedstreck */
+  .brak {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 4px;
+  }
+  .brak-taljare {
+    display: block;
+    border-bottom: 2px solid #2f4a73;
+    padding: 0 6px 2px 6px;
+  }
+  .brak-namnare {
+    display: block;
+    padding: 2px 6px 0 6px;
+  }
+  .stort-snedstreck {
+    font-size: 1.6em;
+    margin: 0 4px;
+    vertical-align: middle;
+    color: #2f4a73;
+  }
+
+  .jeopardy-tabell {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+  }
+  .jeopardy-tabell th {
+    background: #2f4a73;
+    color: white;
+    padding: 10px 6px;
+    font-size: 0.9em;
+  }
+  .jeopardy-tabell td {
+    padding: 6px;
+    text-align: center;
+  }
+  .jeopardy-ruta {
+    width: 100%;
+    padding: 14px 4px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .jeopardy-ruta:hover { background: #3a5a8a; }
+  .jeopardy-klar {
+    background: #cfd6e0;
+    color: #8894a5;
+    cursor: default;
+  }
+  .jeopardy-fraga-box {
+    background: white;
+    border: 1px solid #e2e6ee;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .jeopardy-etikett {
+    font-weight: bold;
+    color: #2f4a73;
+    font-size: 1.1em;
+  }
+
   .skriv-ut-knapp {
     background: #6b7a8f;
     max-width: 260px;
@@ -276,6 +344,8 @@
 <script src="innehall/biologi-vetenskap.js"></script>
 <script src="innehall/matematik-intro-ekvationer.js"></script>
 <script src="innehall/matematik-ekvationer.js"></script>
+<script src="innehall/matematik-ak9-tallinjen.js"></script>
+<script src="innehall/matematik-ak9-brak-repetition.js"></script>
 
 <script>
   var app = document.getElementById("app");
@@ -401,6 +471,10 @@
             '<button class="algebra-ny-knapp" onclick="genereraAlgebraUppgift()">🔄 Ny uppgift</button>' +
             '</div>';
         }
+        if (data.simulering === "jeopardy-brak") {
+          html += '<div id="jeopardyContainer"><div id="jeopardyBrada"></div></div>' +
+            '<button class="algebra-ny-knapp" onclick="initJeopardy()">🔄 Nytt spel</button>';
+        }
         if (data.simulering === "ekvationer-berattelse-abstrakt") {
           html += '<div class="algebra-box">' +
             '<h3>Steg 1: Berättelseuppgift</h3>' +
@@ -497,6 +571,9 @@
     if (!harBarn && innehall[id] && innehall[id].simulering === "ekvationer-berattelse-abstrakt") {
       genereraBerattelseuppgift();
       genereraAbstraktEkvation();
+    }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "jeopardy-brak") {
+      initJeopardy();
     }
     if (!harBarn && innehall[id] && innehall[id].simulering === "ekvationer-tresteg") {
       genereraEkvationssteg(1);
@@ -820,6 +897,265 @@
       feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
     } else {
       feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
+  }
+
+  // ===== Jeopardy: Repetition bråk =====
+  // Hjälpfunktioner för bråkräkning och lodrät bråkrendering.
+  function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+  function storstaGemensammaNamnare(a, b) {
+    a = Math.abs(a); b = Math.abs(b);
+    while (b) { var t = b; b = a % b; a = t; }
+    return a || 1;
+  }
+  function forenklaBrak(taljare, namnare) {
+    var g = storstaGemensammaNamnare(taljare, namnare);
+    return { taljare: taljare / g, namnare: namnare / g };
+  }
+  // Lodrät bråkrendering: täljare ovanpå, streck, nämnare under - inget snedstreck.
+  function brakHTML(t, n) {
+    return '<span class="brak"><span class="brak-taljare">' + t +
+           '</span><span class="brak-namnare">' + n + '</span></span>';
+  }
+
+  var jeopardyKategorier = ["Förlänga och förkorta", "Addition och subtraktion", "Multiplikation", "Division"];
+  var jeopardyPoangLista = [100, 200, 300, 400, 500];
+
+  // 4 kategorier x 5 svårighetsgrader (100-500p), ökande svårighet i varje rad.
+  var jeopardyGeneratorer = [
+    // Kategori 0: Förlänga och förkorta
+    [
+      function() {
+        var a = randInt(1, 4), b = randInt(a + 1, 6), k = randInt(2, 4);
+        var malNamnare = b * k, ratt = a * k;
+        return { fraga: "Förläng bråket " + brakHTML(a, b) + " så att nämnaren blir " + malNamnare +
+                 ". Vad blir täljaren?", svarTyp: "heltal", ratt: ratt };
+      },
+      function() {
+        var a0 = randInt(1, 4), b0 = randInt(a0 + 1, 6), k = randInt(2, 4);
+        var a = a0 * k, b = b0 * k;
+        return { fraga: "Förkorta bråket " + brakHTML(a, b) + " genom att dela täljare och nämnare med " +
+                 k + ". Vad blir täljaren?", svarTyp: "heltal", ratt: a0 };
+      },
+      function() {
+        var a0 = randInt(2, 6), b0 = randInt(a0 + 1, 9), k = randInt(2, 5);
+        var a = a0 * k, b = b0 * k;
+        return { fraga: "Förkorta bråket " + brakHTML(a, b) + " genom att dela med " + k +
+                 ". Skriv svaret som ett bråk.", svarTyp: "brak", ratt: { taljare: a0, namnare: b0 } };
+      },
+      function() {
+        var a0 = randInt(3, 9), b0 = randInt(a0 + 1, 12), k = randInt(3, 6);
+        var a = a0 * k, b = b0 * k;
+        return { fraga: "Förkorta bråket " + brakHTML(a, b) + " genom att dela med " + k +
+                 ". Skriv svaret som ett bråk.", svarTyp: "brak", ratt: { taljare: a0, namnare: b0 } };
+      },
+      function() {
+        var a0, b0, forsok = 0;
+        do { a0 = randInt(2, 9); b0 = randInt(a0 + 1, 12); forsok++; }
+        while (storstaGemensammaNamnare(a0, b0) !== 1 && forsok < 30);
+        var m = randInt(2, 6);
+        var a = a0 * m, b = b0 * m;
+        return { fraga: "Skriv bråket " + brakHTML(a, b) + " i enklaste form.",
+                 svarTyp: "brak", ratt: { taljare: a0, namnare: b0 } };
+      }
+    ],
+    // Kategori 1: Addition och subtraktion
+    [
+      function() {
+        var n = randInt(4, 8), a = randInt(1, n - 2), b = randInt(1, Math.max(1, n - 1 - a));
+        return { fraga: brakHTML(a, n) + " + " + brakHTML(b, n) + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(a + b, n) };
+      },
+      function() {
+        var n = randInt(4, 10), a = randInt(2, n - 1), b = randInt(1, a - 1);
+        return { fraga: brakHTML(a, n) + " - " + brakHTML(b, n) + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(a - b, n) };
+      },
+      function() {
+        var b1 = randInt(2, 5), k = randInt(2, 4), b2 = b1 * k;
+        var a1 = randInt(1, b1 - 1), a2 = randInt(1, b2 - 1);
+        var summa = a1 * k + a2;
+        return { fraga: brakHTML(a1, b1) + " + " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(summa, b2) };
+      },
+      function() {
+        var b1, b2, forsok = 0;
+        do { b1 = randInt(3, 8); b2 = randInt(3, 8); forsok++; }
+        while ((b1 === b2 || b1 % b2 === 0 || b2 % b1 === 0) && forsok < 30);
+        var g = storstaGemensammaNamnare(b1, b2), lcm = b1 * b2 / g;
+        var a1 = randInt(1, b1 - 1), a2 = randInt(1, b2 - 1);
+        var n1 = a1 * (lcm / b1), n2 = a2 * (lcm / b2);
+        return { fraga: brakHTML(a1, b1) + " + " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(n1 + n2, lcm) };
+      },
+      function() {
+        var b1, b2, forsok = 0;
+        do { b1 = randInt(3, 8); b2 = randInt(3, 8); forsok++; }
+        while ((b1 === b2 || b1 % b2 === 0 || b2 % b1 === 0) && forsok < 30);
+        var g = storstaGemensammaNamnare(b1, b2), lcm = b1 * b2 / g;
+        var a1, a2, n1, n2, forsok2 = 0;
+        do {
+          a1 = randInt(1, b1 - 1); a2 = randInt(1, b2 - 1);
+          n1 = a1 * (lcm / b1); n2 = a2 * (lcm / b2);
+          forsok2++;
+        } while (n1 === n2 && forsok2 < 30);
+        if (n1 < n2) {
+          var tA = a1, tB = b1, tN = n1;
+          a1 = a2; b1 = b2; n1 = n2;
+          a2 = tA; b2 = tB; n2 = tN;
+        }
+        return { fraga: brakHTML(a1, b1) + " - " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(n1 - n2, lcm) };
+      }
+    ],
+    // Kategori 2: Multiplikation
+    [
+      function() {
+        var a = randInt(1, 5), b = randInt(a + 1, 8), heltal = randInt(2, 5);
+        return { fraga: brakHTML(a, b) + " × " + heltal + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(a * heltal, b) };
+      },
+      function() {
+        var a = randInt(2, 7), b = randInt(a + 1, 10), heltal = randInt(3, 7);
+        return { fraga: brakHTML(a, b) + " × " + heltal + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(a * heltal, b) };
+      },
+      function() {
+        var a1 = randInt(1, 5), b1 = randInt(a1 + 1, 7), a2 = randInt(1, 5), b2 = randInt(a2 + 1, 7);
+        return { fraga: brakHTML(a1, b1) + " × " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(a1 * a2, b1 * b2) };
+      },
+      function() {
+        var a1 = randInt(2, 8), b1 = randInt(a1 + 1, 10), a2 = randInt(2, 8), b2 = randInt(a2 + 1, 10);
+        return { fraga: brakHTML(a1, b1) + " × " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(a1 * a2, b1 * b2) };
+      },
+      function() {
+        var a1 = randInt(3, 11), b1 = randInt(a1 + 1, 13), a2 = randInt(3, 11), b2 = randInt(a2 + 1, 13);
+        return { fraga: brakHTML(a1, b1) + " × " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(a1 * a2, b1 * b2) };
+      }
+    ],
+    // Kategori 3: Division
+    [
+      function() {
+        var a = randInt(1, 10), b = randInt(2, 10);
+        return { fraga: a + " ÷ " + b + " = ? Skriv svaret som ett bråk i enklaste form.",
+                 svarTyp: "brak", ratt: forenklaBrak(a, b) };
+      },
+      function() {
+        var heltal = randInt(2, 6), c = randInt(1, 5), d = randInt(c + 1, 7);
+        return { fraga: heltal + " ÷ " + brakHTML(c, d) + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(heltal * d, c) };
+      },
+      function() {
+        var a = randInt(1, 6), b = randInt(a + 1, 8), heltal = randInt(2, 5);
+        return { fraga: brakHTML(a, b) + " ÷ " + heltal + " = ? (svara i enklaste form)",
+                 svarTyp: "brak", ratt: forenklaBrak(a, b * heltal) };
+      },
+      function() {
+        var a1 = randInt(1, 5), b1 = randInt(a1 + 1, 7), a2 = randInt(1, 5), b2 = randInt(a2 + 1, 7);
+        return { fraga: brakHTML(a1, b1) + '<span class="stort-snedstreck">/</span>' + brakHTML(a2, b2) +
+                 " = ? (svara i enklaste form)", svarTyp: "brak", ratt: forenklaBrak(a1 * b2, b1 * a2) };
+      },
+      function() {
+        var a1 = randInt(2, 9), b1 = randInt(a1 + 1, 11), a2 = randInt(2, 9), b2 = randInt(a2 + 1, 11);
+        return { fraga: brakHTML(a1, b1) + '<span class="stort-snedstreck">/</span>' + brakHTML(a2, b2) +
+                 " = ? (svara i enklaste form)", svarTyp: "brak", ratt: forenklaBrak(a1 * b2, b1 * a2) };
+      }
+    ]
+  ];
+
+  var jeopardyData = {};
+
+  function initJeopardy() {
+    jeopardyData = {};
+    jeopardyKategorier.forEach(function(kat, ki) {
+      jeopardyPoangLista.forEach(function(p, ni) {
+        var key = ki + "-" + p;
+        var fraga = jeopardyGeneratorer[ki][ni]();
+        fraga.avklarad = false;
+        jeopardyData[key] = fraga;
+      });
+    });
+    ritaJeopardyBrada();
+  }
+
+  function ritaJeopardyBrada() {
+    var html = '<table class="jeopardy-tabell"><thead><tr>';
+    jeopardyKategorier.forEach(function(kat) {
+      html += "<th>" + kat + "</th>";
+    });
+    html += "</tr></thead><tbody>";
+    jeopardyPoangLista.forEach(function(p) {
+      html += "<tr>";
+      jeopardyKategorier.forEach(function(kat, ki) {
+        var key = ki + "-" + p;
+        var avklarad = jeopardyData[key].avklarad;
+        html += "<td>";
+        if (avklarad) {
+          html += '<button class="jeopardy-ruta jeopardy-klar" disabled>✔️</button>';
+        } else {
+          html += '<button class="jeopardy-ruta" onclick="visaJeopardyFraga(\'' + key + '\')">' + p + "</button>";
+        }
+        html += "</td>";
+      });
+      html += "</tr>";
+    });
+    html += "</tbody></table>";
+    document.getElementById("jeopardyBrada").innerHTML = html;
+  }
+
+  function visaJeopardyFraga(key) {
+    var data = jeopardyData[key];
+    data.avklarad = true;
+
+    var delar = key.split("-");
+    var katIndex = parseInt(delar[0], 10);
+    var poang = delar[1];
+
+    var html = '<div class="jeopardy-fraga-box">';
+    html += '<p class="jeopardy-etikett">' + poang + " poäng - " + jeopardyKategorier[katIndex] + "</p>";
+    html += '<div class="algebra-uppgift">' + data.fraga + "</div>";
+
+    if (data.svarTyp === "heltal") {
+      html += '<div class="algebra-svar-rad">Svar: <input type="number" id="jeoSvarHel"> ' +
+              '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
+              '\')">Kolla svar</button></div>';
+    } else {
+      html += '<div class="algebra-svar-rad">Täljare: <input type="number" id="jeoSvarTaljare"> ' +
+              'Nämnare: <input type="number" id="jeoSvarNamnare"> ' +
+              '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
+              '\')">Kolla svar</button></div>';
+    }
+    html += '<p id="jeoFeedback"></p>';
+    html += '<button class="algebra-ny-knapp" onclick="ritaJeopardyBrada()">⬅️ Tillbaka till spelplanen</button>';
+    html += "</div>";
+
+    document.getElementById("jeopardyBrada").innerHTML = html;
+  }
+
+  function kontrolleraJeopardySvar(key) {
+    var data = jeopardyData[key];
+    var feedback = document.getElementById("jeoFeedback");
+    var ratt = false;
+    var facitText;
+
+    if (data.svarTyp === "heltal") {
+      var v = parseInt(document.getElementById("jeoSvarHel").value, 10);
+      ratt = (v === data.ratt);
+      facitText = data.ratt;
+    } else {
+      var t = parseInt(document.getElementById("jeoSvarTaljare").value, 10);
+      var n = parseInt(document.getElementById("jeoSvarNamnare").value, 10);
+      ratt = (t === data.ratt.taljare && n === data.ratt.namnare);
+      facitText = data.ratt.taljare + "/" + data.ratt.namnare;
+    }
+
+    if (ratt) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Rätt svar var ' + facitText + ".</span>";
     }
   }
 
