@@ -1,0 +1,49 @@
+<svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="700" height="260" fill="#fbfbfd"/>
+
+  <defs>
+    <marker id="pil" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4a6fa5"/>
+    </marker>
+  </defs>
+
+  <!-- Steg-rutor -->
+  <g font-size="14" font-weight="bold" fill="#2f4a73" text-anchor="middle">
+    <rect x="10" y="70" width="118" height="70" rx="14" fill="#eef3fb" stroke="#4a6fa5" stroke-width="2"/>
+    <text x="69" y="100">❓</text>
+    <text x="69" y="122">Fråga</text>
+
+    <rect x="146" y="70" width="118" height="70" rx="14" fill="#eef3fb" stroke="#4a6fa5" stroke-width="2"/>
+    <text x="205" y="100">💡</text>
+    <text x="205" y="122">Hypotes</text>
+
+    <rect x="282" y="70" width="128" height="70" rx="14" fill="#eef3fb" stroke="#4a6fa5" stroke-width="2"/>
+    <text x="346" y="100">🔬</text>
+    <text x="346" y="122">Undersökning</text>
+
+    <rect x="428" y="70" width="118" height="70" rx="14" fill="#eef3fb" stroke="#4a6fa5" stroke-width="2"/>
+    <text x="487" y="100">📊</text>
+    <text x="487" y="122">Resultat</text>
+
+    <rect x="564" y="70" width="126" height="70" rx="14" fill="#eef3fb" stroke="#4a6fa5" stroke-width="2"/>
+    <text x="627" y="100">✅</text>
+    <text x="627" y="122">Slutsats</text>
+  </g>
+
+  <!-- Pilar mellan stegen -->
+  <line x1="128" y1="105" x2="144" y2="105" stroke="#4a6fa5" stroke-width="2.5" marker-end="url(#pil)"/>
+  <line x1="264" y1="105" x2="280" y2="105" stroke="#4a6fa5" stroke-width="2.5" marker-end="url(#pil)"/>
+  <line x1="410" y1="105" x2="426" y2="105" stroke="#4a6fa5" stroke-width="2.5" marker-end="url(#pil)"/>
+  <line x1="546" y1="105" x2="562" y2="105" stroke="#4a6fa5" stroke-width="2.5" marker-end="url(#pil)"/>
+
+  <!-- Böjd återkopplingspil från Slutsats tillbaka till Fråga -->
+  <path d="M 627 140 C 627 220, 69 220, 69 142" fill="none" stroke="#e0a53f" stroke-width="2.5" marker-end="url(#pil-guld)"/>
+  <defs>
+    <marker id="pil-guld" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#e0a53f"/>
+    </marker>
+  </defs>
+  <text x="350" y="235" text-anchor="middle" font-size="13" fill="#b8842a" font-style="italic">
+    Ledde resultatet till en ny fråga? Då börjar cykeln om!
+  </text>
+</svg>

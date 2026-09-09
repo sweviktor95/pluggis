@@ -1,0 +1,49 @@
+<svg viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="560" height="380" fill="#fbfbfd"/>
+
+  <!-- Enkel kroppssiluett -->
+  <g fill="#f0e4d8" stroke="#c9b79e" stroke-width="2">
+    <circle cx="180" cy="55" r="32"/>                                  <!-- huvud -->
+    <rect x="145" y="90" width="70" height="150" rx="30"/>              <!-- bål -->
+    <rect x="100" y="100" width="35" height="120" rx="16"/>             <!-- vänster arm -->
+    <rect x="225" y="100" width="35" height="120" rx="16"/>             <!-- höger arm -->
+    <rect x="150" y="235" width="28" height="120" rx="13"/>             <!-- vänster ben -->
+    <rect x="182" y="235" width="28" height="120" rx="13"/>             <!-- höger ben -->
+  </g>
+
+  <!-- Hjärna -->
+  <circle cx="180" cy="52" r="16" fill="#c98fb0" stroke="#8a5a75" stroke-width="1.5"/>
+
+  <!-- Lungor -->
+  <ellipse cx="163" cy="140" rx="16" ry="26" fill="#a9cdea" stroke="#4a6fa5" stroke-width="1.5"/>
+  <ellipse cx="197" cy="140" rx="16" ry="26" fill="#a9cdea" stroke="#4a6fa5" stroke-width="1.5"/>
+
+  <!-- Hjärta -->
+  <path d="M180 150 c-10,-14 -30,-4 -18,12 c6,8 18,16 18,16 c0,0 12,-8 18,-16 c12,-16 -8,-26 -18,-12 z"
+        fill="#c0392b" stroke="#8a2416" stroke-width="1.5"/>
+
+  <!-- Mage/tarmar -->
+  <ellipse cx="180" cy="205" rx="22" ry="18" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5"/>
+
+  <!-- Leder-linjer och etiketter -->
+  <g font-size="13" fill="#2f4a73">
+    <line x1="196" y1="52" x2="280" y2="45" stroke="#8a5a75" stroke-width="1.5"/>
+    <text x="285" y="50">Hjärna - styr och samordnar kroppen</text>
+
+    <line x1="215" y1="135" x2="300" y2="120" stroke="#4a6fa5" stroke-width="1.5"/>
+    <text x="305" y="125">Lungor - tar upp syre</text>
+
+    <line x1="205" y1="160" x2="330" y2="165" stroke="#8a2416" stroke-width="1.5"/>
+    <text x="335" y="170">Hjärta - pumpar blodet</text>
+
+    <line x1="202" y1="205" x2="310" y2="215" stroke="#b8842a" stroke-width="1.5"/>
+    <text x="315" y="220">Mage och tarmar - bryter ner mat</text>
+
+    <line x1="185" y1="295" x2="330" y2="290" stroke="#7a5a3a" stroke-width="1.5"/>
+    <text x="335" y="295">Skelett och muskler - rörelse</text>
+  </g>
+
+  <text x="280" y="360" text-anchor="middle" font-size="13" font-style="italic" fill="#666">
+    Organen samarbetar i organsystem för att hela kroppen ska fungera.
+  </text>
+</svg>

@@ -22,7 +22,19 @@ var struktur = [
             id: "matematik-ak7-tal",
             titel: "Tal",
             barn: [
-              { id: "matematik-tallinjen", titel: "Tallinjen" }
+              { id: "matematik-klockan", titel: "Klockan" },
+              { id: "matematik-tallinjen", titel: "Tallinjen" },
+              { id: "matematik-positionssystem", titel: "Positionssystemet" },
+              {
+                id: "matematik-rakneattt",
+                titel: "De fyra räknesätten",
+                barn: [
+                  { id: "matematik-addition", titel: "Addition" },
+                  { id: "matematik-subtraktion", titel: "Subtraktion" },
+                  { id: "matematik-multiplikation", titel: "Multiplikation" },
+                  { id: "matematik-division", titel: "Division" }
+                ]
+              }
             ]
           },
           { id: "matematik-ak7-brak", titel: "Bråk" },
@@ -73,7 +85,14 @@ var struktur = [
     ikon: "🌱",
     barn: [
       { id: "biologi-vetenskap", titel: "Vetenskap" },
-      { id: "biologi-liv", titel: "Liv" },
+      {
+        id: "biologi-liv",
+        titel: "Liv",
+        barn: [
+          { id: "biologi-cellen", titel: "Cellen" },
+          { id: "biologi-organ", titel: "Organ" }
+        ]
+      },
       { id: "biologi-mangfald", titel: "Biologisk mångfald" },
       { id: "biologi-ekologi", titel: "Ekologi" }
     ]

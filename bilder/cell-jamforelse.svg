@@ -1,0 +1,67 @@
+<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="640" height="400" fill="#fbfbfd"/>
+
+  <!-- Rubriker -->
+  <text x="150" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#2f4a73">Djurcell</text>
+  <text x="480" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#2f4a73">Växtcell</text>
+
+  <!-- ===== DJURCELL ===== -->
+  <ellipse cx="150" cy="190" rx="128" ry="105" fill="#fbe4e0" stroke="#d98a7a" stroke-width="3"/>
+
+  <!-- Cellkärna -->
+  <circle cx="150" cy="185" r="34" fill="#8a6fb0" stroke="#5f4a80" stroke-width="2"/>
+  <circle cx="150" cy="185" r="10" fill="#5f4a80"/>
+
+  <!-- Mitokondrier -->
+  <ellipse cx="80" cy="140" rx="16" ry="9" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5" transform="rotate(-20 80 140)"/>
+  <ellipse cx="215" cy="150" rx="16" ry="9" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5" transform="rotate(25 215 150)"/>
+  <ellipse cx="90" cy="240" rx="16" ry="9" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5" transform="rotate(15 90 240)"/>
+
+  <!-- Vakuol (mindre i djurcell) -->
+  <ellipse cx="205" cy="230" rx="20" ry="15" fill="#a9cdea" stroke="#4a6fa5" stroke-width="1.5"/>
+
+  <!-- Lysosomer -->
+  <circle cx="60" cy="200" r="7" fill="#c0392b"/>
+  <circle cx="200" cy="120" r="6" fill="#c0392b"/>
+
+  <!-- Ribosomer (prickar) -->
+  <circle cx="110" cy="120" r="2.2" fill="#333"/>
+  <circle cx="120" cy="128" r="2.2" fill="#333"/>
+  <circle cx="70" cy="180" r="2.2" fill="#333"/>
+  <circle cx="185" cy="200" r="2.2" fill="#333"/>
+  <circle cx="130" cy="245" r="2.2" fill="#333"/>
+  <circle cx="95" cy="255" r="2.2" fill="#333"/>
+
+  <!-- ===== VÄXTCELL ===== -->
+  <rect x="360" y="80" width="240" height="220" rx="22" fill="#eaf5e0" stroke="#2f6a2f" stroke-width="5"/>
+  <rect x="370" y="90" width="220" height="200" rx="16" fill="none" stroke="#7ab648" stroke-width="2"/>
+
+  <!-- Stor vakuol -->
+  <ellipse cx="480" cy="215" rx="70" ry="55" fill="#a9cdea" stroke="#4a6fa5" stroke-width="2"/>
+
+  <!-- Cellkärna -->
+  <circle cx="405" cy="130" r="26" fill="#8a6fb0" stroke="#5f4a80" stroke-width="2"/>
+  <circle cx="405" cy="130" r="8" fill="#5f4a80"/>
+
+  <!-- Kloroplaster -->
+  <ellipse cx="555" cy="120" rx="17" ry="11" fill="#2d6a2d" transform="rotate(-15 555 120)"/>
+  <ellipse cx="565" cy="150" rx="17" ry="11" fill="#2d6a2d" transform="rotate(20 565 150)"/>
+  <ellipse cx="400" cy="270" rx="17" ry="11" fill="#2d6a2d" transform="rotate(10 400 270)"/>
+  <ellipse cx="555" cy="270" rx="17" ry="11" fill="#2d6a2d" transform="rotate(-10 555 270)"/>
+
+  <!-- Mitokondrier -->
+  <ellipse cx="450" cy="110" rx="14" ry="8" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5"/>
+  <ellipse cx="380" cy="230" rx="14" ry="8" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5" transform="rotate(30 380 230)"/>
+
+  <!-- ===== FÖRKLARING (legend) ===== -->
+  <g font-size="13" fill="#2f4a73">
+    <circle cx="30" cy="345" r="7" fill="#8a6fb0"/><text x="45" y="350">Cellkärna</text>
+    <ellipse cx="150" cy="345" rx="9" ry="6" fill="#e0a53f"/><text x="165" y="350">Mitokondrie</text>
+    <circle cx="290" cy="345" r="2.5" fill="#333"/><text x="300" y="350">Ribosom</text>
+    <circle cx="390" cy="345" r="6" fill="#c0392b"/><text x="405" y="350">Lysosom</text>
+    <ellipse cx="490" cy="345" rx="9" ry="7" fill="#a9cdea" stroke="#4a6fa5"/><text x="505" y="350">Vakuol</text>
+
+    <rect x="24" y="370" width="14" height="10" fill="none" stroke="#2f6a2f" stroke-width="3"/><text x="45" y="379">Cellvägg</text>
+    <ellipse cx="155" cy="375" rx="9" ry="6" fill="#2d6a2d"/><text x="170" y="379">Kloroplast</text>
+  </g>
+</svg>
