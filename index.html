@@ -1447,10 +1447,11 @@
 
   var klockaAktiviteter = [
     { start: 0, slut: 6 * 60, text: "Natt - alla sover", ikon: "🌙" },
-    { start: 6 * 60, slut: 11 * 60, text: "Staden vaknar till liv - dags för skola och jobb", ikon: "🏙️" },
+    { start: 6 * 60, slut: 11 * 60, text: "Det är morgon - dags för skola och jobb", ikon: "🌅" },
     { start: 11 * 60, slut: 12 * 60, text: "Dags för lunch", ikon: "🍽️" },
-    { start: 12 * 60, slut: 16 * 60, text: "Lugn eftermiddag på gården", ikon: "🌤️" },
-    { start: 16 * 60, slut: 17 * 60, text: "Dags att börja runda av skola och jobb", ikon: "🚗" },
+    { start: 12 * 60, slut: 13 * 60, text: "Skoldagen och arbetsdagen fortsätter", ikon: "📚" },
+    { start: 13 * 60, slut: 15 * 60, text: "Dags att runda av skola och jobb", ikon: "🎒" },
+    { start: 15 * 60, slut: 17 * 60, text: "Åker hem från skola och jobb", ikon: "🚗" },
     { start: 17 * 60, slut: 18 * 60, text: "Middagsdags", ikon: "🍽️" },
     { start: 18 * 60, slut: 19 * 60, text: "Mysig kväll", ikon: "🌆" },
     { start: 19 * 60, slut: 20 * 60, text: "Fritidsaktiviteter", ikon: "⚽" },
@@ -1555,14 +1556,14 @@
     }
     var stjarnOpacity = manOpacity * 0.8;
 
-    // ----- Bilen: kör till skolan 07:00-08:00, parkerad där till 16:00,
-    // kör hem igen 16:00-17:00, annars parkerad hemma -----
+    // ----- Bilen: kör till skolan 07:00-08:00, parkerad där till 15:00,
+    // kör hem igen 15:00-17:00, annars parkerad hemma -----
     var hemX = 225, skolaX = 415, bilY = 208;
     var bilX;
     if (t < 420) { bilX = hemX; }
     else if (t < 480) { bilX = hemX + (skolaX - hemX) * ((t - 420) / 60); }
-    else if (t < 960) { bilX = skolaX; }
-    else if (t < 1020) { bilX = skolaX + (hemX - skolaX) * ((t - 960) / 60); }
+    else if (t < 900) { bilX = skolaX; }
+    else if (t < 1020) { bilX = skolaX + (hemX - skolaX) * ((t - 900) / 120); }
     else { bilX = hemX; }
 
     // ----- Mat: lunch 11-12, middag 17-18 -----
