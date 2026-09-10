@@ -37,12 +37,20 @@ var struktur = [
               }
             ]
           },
-          { id: "matematik-ak7-brak", titel: "Bråk" },
+          {
+            id: "matematik-ak7-brak",
+            titel: "Bråk",
+            barn: [
+              { id: "matematik-ak7-brak-tallinjen", titel: "Tallinjen" }
+            ]
+          },
           { id: "matematik-ak7-procent", titel: "Procent" },
           {
             id: "matematik-ak7-algebra",
             titel: "Algebra",
             barn: [
+              { id: "matematik-intro-uttryck", titel: "Intro uttryck" },
+              { id: "matematik-forenkla-uttryck", titel: "Förenkla uttryck" },
               { id: "matematik-intro-ekvationer", titel: "Intro ekvationer" },
               { id: "matematik-ekvationer", titel: "Ekvationer" }
             ]
@@ -56,14 +64,6 @@ var struktur = [
         titel: "Årskurs 9",
         barn: [
           {
-            id: "matematik-ak9-algebra",
-            titel: "Algebra",
-            barn: [
-              { id: "matematik-ak9-intro-ekvationer", titel: "Intro ekvationer" },
-              { id: "matematik-ak9-ekvationer", titel: "Ekvationer" }
-            ]
-          },
-          {
             id: "matematik-ak9-brak",
             titel: "Bråk",
             barn: [
@@ -73,6 +73,16 @@ var struktur = [
               { id: "matematik-ak9-brak-mult", titel: "Multiplikation av bråk" },
               { id: "matematik-ak9-brak-div", titel: "Division av bråk" },
               { id: "matematik-ak9-brak-repetition", titel: "Repetition bråk" }
+            ]
+          },
+          {
+            id: "matematik-ak9-algebra",
+            titel: "Algebra",
+            barn: [
+              { id: "matematik-ak9-intro-uttryck", titel: "Intro uttryck" },
+              { id: "matematik-ak9-forenkla-uttryck", titel: "Förenkla uttryck" },
+              { id: "matematik-ak9-intro-ekvationer", titel: "Intro ekvationer" },
+              { id: "matematik-ak9-ekvationer", titel: "Ekvationer" }
             ]
           }
         ]

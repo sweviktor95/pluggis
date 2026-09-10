@@ -1,9 +1,9 @@
 var innehall = window.innehall || {};
 
 innehall["matematik-ak9-tallinjen"] = {
-  text: "Här skriver ni texten om tallinjen. Förklara vad tallinjen är, hur man läser av tal på den, och gör gärna kopplingen till negativa tal och decimaltal.",
+  text: "Dra i reglaget för att se hur ett bråk hänger ihop med tallinjen. Bråket visas som hundradelar och i förkortad form, och de tre cirklarna fylls i takt med reglaget för att visa hur många hela och hur mycket av nästa hela du har.",
   bild: "",
-  simulering: "tallinjen-heltal-0-10"
+  simulering: "ak9-brak-tallinje"
 };
 
 window.innehall = innehall;

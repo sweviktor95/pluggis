@@ -161,6 +161,33 @@
   }
   .algebra-uppgift { font-size: 1.8em; margin: 10px 0; }
   .algebra-svar-rad { margin: 15px 0; font-size: 1.1em; }
+
+  .jeo-brak-svar-rad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .jeo-brak-input {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .jeo-brak-ruta {
+    width: 60px;
+    font-size: 1.1em;
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  .jeo-brak-streck {
+    width: 44px;
+    height: 2px;
+    background: #2f4a73;
+  }
   .algebra-svar-rad input {
     font-size: 1.1em;
     width: 70px;
@@ -235,16 +262,19 @@
     width: 100%;
     border-collapse: collapse;
     margin: 15px 0;
+    table-layout: fixed;
   }
   .jeopardy-tabell th {
     background: #2f4a73;
     color: white;
     padding: 10px 6px;
     font-size: 0.9em;
+    width: 25%;
   }
   .jeopardy-tabell td {
     padding: 6px;
     text-align: center;
+    width: 25%;
   }
   .jeopardy-ruta {
     width: 100%;
@@ -275,6 +305,71 @@
     color: #2f4a73;
     font-size: 1.1em;
   }
+
+  .ak9-brak-wrapper { text-align: center; }
+  .ak9-tallinje-svg { width: 100%; max-width: 500px; }
+  #ak9TallinjeSvg { cursor: grab; touch-action: none; }
+  .ak9-brak-tips { font-size: 0.9em; color: #777; margin: 4px 0 15px 0; }
+
+  .cell-diagram-svg { width: 100%; max-width: 640px; display: block; margin: 10px auto; }
+  .cell-klickbar { cursor: pointer; }
+  .cell-klickbar:hover { opacity: 0.7; }
+  .cell-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  .cell-legend-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.85em;
+    color: #2f4a73;
+    cursor: pointer;
+  }
+  .cell-legend-chip:hover { border-color: #4a6fa5; background: #eef3fb; }
+  .cell-legend-prick {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .cell-fakta-box {
+    background: #eef3fb;
+    border-left: 4px solid #4a6fa5;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    text-align: left;
+  }
+  .cell-fakta-box strong { color: #2f4a73; }
+  .cell-fakta-box p { margin: 4px 0 0 0; }
+  .cell-fakta-tips { color: #777; font-style: italic; }
+  .ak9-brak-rad {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 15px 0;
+  }
+  .ak9-brak-etikett {
+    font-size: 0.9em;
+    color: #6b7a8f;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .ak9-cirklar-rad {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+  }
+  .ak9-cirkel-svg { width: 90px; height: 90px; }
 
   .abakus-rad {
     display: flex;
@@ -523,13 +618,19 @@
 <script src="innehall/matematik-multiplikation.js"></script>
 <script src="innehall/matematik-addition.js"></script>
 <script src="innehall/matematik-subtraktion.js"></script>
+<script src="innehall/matematik-division.js"></script>
 <script src="innehall/matematik-klockan.js"></script>
 <script src="innehall/biologi-vetenskap.js"></script>
 <script src="innehall/biologi-cellen.js"></script>
 <script src="innehall/biologi-organ.js"></script>
+<script src="innehall/matematik-intro-uttryck.js"></script>
+<script src="innehall/matematik-forenkla-uttryck.js"></script>
+<script src="innehall/matematik-ak9-intro-uttryck.js"></script>
+<script src="innehall/matematik-ak9-forenkla-uttryck.js"></script>
 <script src="innehall/matematik-intro-ekvationer.js"></script>
 <script src="innehall/matematik-ekvationer.js"></script>
 <script src="innehall/matematik-ak9-tallinjen.js"></script>
+<script src="innehall/matematik-ak7-brak-tallinjen.js"></script>
 <script src="innehall/matematik-ak9-brak-repetition.js"></script>
 
 <script>
@@ -579,6 +680,7 @@
 
   function visNod(id) {
     klockaStoppaSpel(); // stoppa klockans autospel om man navigerar bort mitt i
+    tallinjeStoppaDrag(); // släpp ev. pågående drag på tallinjen
 
     var entry = nodKarta[id];
     var node = entry.node;
@@ -614,6 +716,11 @@
           if (sek.bild) {
             html += '<img src="' + sek.bild + '" style="width:100%;border-radius:8px;margin:10px 0;">';
           }
+          if (sek.interaktivtDiagram === "cell") {
+            html += '<div id="cellDiagramSvg"></div>' +
+                    '<div id="cellDiagramLegend" class="cell-legend"></div>' +
+                    '<div id="cellDiagramFakta" class="cell-fakta-box"></div>';
+          }
           if (sek.kontrollfraga) {
             html += '<div class="kontrollfraga"><p>🤔 <strong>Kolla din förståelse:</strong> ' +
                     sek.kontrollfraga + '</p>';
@@ -635,8 +742,6 @@
         html += "<p>" + data.text + "</p>";
         if (data.bild) {
           html += '<img src="' + data.bild + '" style="width:100%;border-radius:8px;">';
-        } else {
-          html += '<div class="bild-platshallare">[Ingen bild angiven]</div>';
         }
         if (data.simulering === "linje-k-slider") {
           html += '<canvas id="ritKanvas" width="400" height="300"></canvas>';
@@ -646,7 +751,18 @@
         }
         if (data.simulering === "tallinjen-heltal-0-10") {
           html += '<canvas id="tallinjeKanvas" width="500" height="140"></canvas>';
-          html += '<p style="text-align:center;" id="tallinjeText">Klicka på tallinjen för att välja ett tal.</p>';
+          html += '<p style="text-align:center;" id="tallinjeText">Tal: <strong>0</strong></p>';
+        }
+        if (data.simulering === "ak9-brak-tallinje") {
+          html += '<div class="ak9-brak-wrapper">' +
+            '<div id="ak9TallinjeSvg"></div>' +
+            '<p class="ak9-brak-tips">Dra i den orangea pricken.</p>' +
+            '<div class="ak9-brak-rad">' +
+            '<div class="ak9-brak-etikett">Hundradelar<div id="ak9BrakHundradelar"></div></div>' +
+            '<div class="ak9-brak-etikett">Förkortat<div id="ak9BrakForenklat"></div></div>' +
+            '</div>' +
+            '<div id="ak9Cirklar" class="ak9-cirklar-rad"></div>' +
+            '</div>';
         }
         if (data.simulering === "algebra-objekt-varde") {
           html += '<div class="algebra-box">' +
@@ -669,6 +785,32 @@
         }
         if (data.simulering === "subtraktionstabell") {
           html += '<div id="subtabellContainer"></div>';
+        }
+        if (data.simulering === "division-tvasteg") {
+          html += '<div class="algebra-box">' +
+            '<h3>Steg 1: Hur många gånger får talet plats?</h3>' +
+            '<p class="algebra-uppgift" id="divBlock1Uppgift"></p>' +
+            '<div class="algebra-svar-rad">Svar: <input type="number" id="divBlock1Input"> ' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraDivBlock1()">Kolla svar</button></div>' +
+            '<p id="divBlock1Feedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraDivBlock1()">🔄 Ny uppgift</button>' +
+            '</div>' +
+            '<div class="begrepp-box">' +
+            '<h3>💡 Vad betyder division egentligen?</h3>' +
+            '<p>Division är egentligen samma sak som att fråga: hur många gånger får nämnaren plats i täljaren?</p>' +
+            '<p>Om talet 5 får plats 7 gånger i talet 35, då blir divisionen ' +
+            brakHTML(35, 5) + ' = 7.</p>' +
+            '<p>Öva på det här i blocket nedan!</p>' +
+            '</div>' +
+            '<div class="algebra-box">' +
+            '<h3>Steg 2: Rena divisionstal</h3>' +
+            '<p>Räkna ut divisionen. Vad blir svaret?</p>' +
+            '<p class="algebra-uppgift" id="divBlock2Uppgift"></p>' +
+            '<div class="algebra-svar-rad">Svar: <input type="number" id="divBlock2Input"> ' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraDivBlock2()">Kolla svar</button></div>' +
+            '<p id="divBlock2Feedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraDivBlock2()">🔄 Ny uppgift</button>' +
+            '</div>';
         }
         if (data.simulering === "klockan-gard") {
           html += '<div class="klocka-wrapper">' +
@@ -714,6 +856,26 @@
             '<button class="algebra-kolla-knapp" onclick="kontrolleraBerattelsesvar()">Kolla svar</button></div>' +
             '<p id="berattelseFeedback"></p>' +
             '<button class="algebra-ny-knapp" onclick="genereraBerattelseuppgift()">🔄 Ny uppgift</button>' +
+            '</div>';
+        }
+        if (data.simulering === "uttryck-substitution") {
+          html += '<div class="algebra-box">' +
+            '<p class="algebra-uppgift" id="uttryckSubUppgift"></p>' +
+            '<div class="algebra-svar-rad">Svar: <input type="number" id="uttryckSubInput"> ' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraUttryckSub()">Kolla svar</button></div>' +
+            '<p id="uttryckSubFeedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraUttryckSub()">🔄 Ny uppgift</button>' +
+            '</div>';
+        }
+        if (data.simulering === "uttryck-forenkla") {
+          html += '<div class="algebra-box">' +
+            '<p>Förenkla uttrycket. Vad blir koefficienten framför x?</p>' +
+            '<p class="algebra-uppgift" id="uttryckForenklaUppgift"></p>' +
+            '<div class="algebra-svar-rad">Svar: <input type="number" id="uttryckForenklaInput"> ' +
+            '<span class="variabel-x">x</span>' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraUttryckForenkla()">Kolla svar</button></div>' +
+            '<p id="uttryckForenklaFeedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraUttryckForenkla()">🔄 Ny uppgift</button>' +
             '</div>';
         }
         if (data.simulering === "ekvationer-tresteg") {
@@ -772,6 +934,13 @@
     if (!harBarn && innehall[id] && innehall[id].simulering === "tallinjen-heltal-0-10") {
       initieraTallinje();
     }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "ak9-brak-tallinje") {
+      ak9InitieraTallinje();
+    }
+    if (!harBarn && innehall[id] && innehall[id].sektioner) {
+      var harCellDiagram = innehall[id].sektioner.some(function(s) { return s.interaktivtDiagram === "cell"; });
+      if (harCellDiagram) { ritaCellDiagram(); }
+    }
     if (!harBarn && innehall[id] && innehall[id].simulering === "algebra-objekt-varde") {
       genereraAlgebraUppgift();
     }
@@ -794,11 +963,21 @@
     if (!harBarn && innehall[id] && innehall[id].simulering === "subtraktionstabell") {
       ritaSubtraktionstabell();
     }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "division-tvasteg") {
+      genereraDivBlock1();
+      genereraDivBlock2();
+    }
     if (!harBarn && innehall[id] && innehall[id].simulering === "klockan-gard") {
       ritaKlockan();
     }
     if (!harBarn && innehall[id] && innehall[id].simulering === "jeopardy-brak") {
       initJeopardy();
+    }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "uttryck-substitution") {
+      genereraUttryckSub();
+    }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "uttryck-forenkla") {
+      genereraUttryckForenkla();
     }
     if (!harBarn && innehall[id] && innehall[id].simulering === "ekvationer-tresteg") {
       genereraEkvationssteg(1);
@@ -835,12 +1014,13 @@
   }
 
   // Generisk simulering: interaktiv tallinje med heltal 0-10.
-  // Klicka var som helst på linjen för att välja närmaste heltal.
-  // Återanvänds av vilket delmoment som helst genom att sätta
-  // simulering: "tallinjen-heltal-0-10" i dess innehållsfil.
-  var tallinjeValtTal = null;
+  // Klicka och dra på linjen för att välja ett tal. Under drag följer
+  // pricken musen/fingret fritt, men vid släpp hoppar den till närmaste
+  // heltal. Återanvänds via simulering: "tallinjen-heltal-0-10".
+  var tallinjeVarde = 0;
+  var tallinjeDragger = false;
 
-  function ritaTallinje() {
+  function tallinjeRitaMedPosition(pixelX, visatTal) {
     var canvas = document.getElementById("tallinjeKanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -848,7 +1028,6 @@
     var startX = 40, endX = 460, y = 70;
     var steg = (endX - startX) / 10;
 
-    // Själva linjen
     ctx.strokeStyle = "#4a6fa5";
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -856,7 +1035,6 @@
     ctx.lineTo(endX, y);
     ctx.stroke();
 
-    // Skalstreck och siffror 0-10
     ctx.fillStyle = "#2f4a73";
     ctx.font = "14px Arial";
     ctx.textAlign = "center";
@@ -869,35 +1047,101 @@
       ctx.fillText(i, x, y + 28);
     }
 
-    // Markera valt tal, om något är valt
-    if (tallinjeValtTal !== null) {
-      var valdX = startX + tallinjeValtTal * steg;
-      ctx.beginPath();
-      ctx.arc(valdX, y, 8, 0, Math.PI * 2);
-      ctx.fillStyle = "#e07a3f";
-      ctx.fill();
+    ctx.beginPath();
+    ctx.arc(pixelX, y, 8, 0, Math.PI * 2);
+    ctx.fillStyle = "#e07a3f";
+    ctx.fill();
+
+    var textEl = document.getElementById("tallinjeText");
+    if (textEl) { textEl.innerHTML = "Tal: <strong>" + visatTal + "</strong>"; }
+  }
+
+  function tallinjePixelForVarde(varde) {
+    var startX = 40, endX = 460;
+    return startX + varde * ((endX - startX) / 10);
+  }
+
+  function tallinjeHanteraDrag(e, kontinuerlig) {
+    var canvas = document.getElementById("tallinjeKanvas");
+    if (!canvas) { return; }
+    var rect = canvas.getBoundingClientRect();
+    var clientX;
+    if (e.touches && e.touches.length) { clientX = e.touches[0].clientX; }
+    else if (e.changedTouches && e.changedTouches.length) { clientX = e.changedTouches[0].clientX; }
+    else { clientX = e.clientX; }
+
+    var skala = canvas.width / rect.width;
+    var x = (clientX - rect.left) * skala;
+    var startX = 40, endX = 460;
+    var steg = (endX - startX) / 10;
+
+    var vardeFlyt = (x - startX) / steg;
+    vardeFlyt = Math.max(0, Math.min(10, vardeFlyt));
+
+    if (kontinuerlig) {
+      var visatTal = Math.round(vardeFlyt);
+      tallinjeRitaMedPosition(startX + vardeFlyt * steg, visatTal);
+    } else {
+      var snappat = Math.round(vardeFlyt);
+      tallinjeVarde = snappat;
+      tallinjeRitaMedPosition(tallinjePixelForVarde(snappat), snappat);
     }
   }
 
+  function tallinjeStoppaDrag() {
+    tallinjeDragger = false;
+    window.onmousemove = null;
+    window.onmouseup = null;
+    window.ontouchmove = null;
+    window.ontouchend = null;
+  }
+
   function initieraTallinje() {
-    tallinjeValtTal = null;
-    ritaTallinje();
+    tallinjeVarde = 0;
+    tallinjeRitaMedPosition(tallinjePixelForVarde(0), 0);
 
     var canvas = document.getElementById("tallinjeKanvas");
-    canvas.onclick = function(e) {
-      var rect = canvas.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      var startX = 40, endX = 460;
-      var steg = (endX - startX) / 10;
 
-      var tal = Math.round((x - startX) / steg);
-      tal = Math.max(0, Math.min(10, tal));
+    canvas.onmousedown = function(e) {
+      tallinjeDragger = true;
+      tallinjeHanteraDrag(e, true);
+      window.onmousemove = function(e2) { if (tallinjeDragger) { tallinjeHanteraDrag(e2, true); } };
+      window.onmouseup = function(e2) {
+        if (tallinjeDragger) { tallinjeHanteraDrag(e2, false); }
+        tallinjeStoppaDrag();
+      };
+    };
 
-      tallinjeValtTal = tal;
-      ritaTallinje();
-      document.getElementById("tallinjeText").innerText = "Du valde: " + tal;
+    canvas.ontouchstart = function(e) {
+      tallinjeDragger = true;
+      tallinjeHanteraDrag(e, true);
+      e.preventDefault();
+      window.ontouchmove = function(e2) {
+        if (tallinjeDragger) { tallinjeHanteraDrag(e2, true); e2.preventDefault(); }
+      };
+      window.ontouchend = function(e2) {
+        if (tallinjeDragger) { tallinjeHanteraDrag(e2, false); }
+        tallinjeStoppaDrag();
+      };
     };
   }
+
+  // Piltangenter styr vanliga tallinjen med ett helt steg (heltal) åt gången.
+  // Aktivt bara när #tallinjeKanvas finns i DOM:en (tallinje-sidan visas).
+  document.addEventListener("keydown", function(e) {
+    var canvas = document.getElementById("tallinjeKanvas");
+    if (!canvas) { return; }
+
+    var steg = 0;
+    if (e.key === "ArrowRight" || e.key === "ArrowUp") { steg = 1; }
+    else if (e.key === "ArrowLeft" || e.key === "ArrowDown") { steg = -1; }
+    else { return; }
+
+    e.preventDefault();
+    var nyttVarde = Math.max(0, Math.min(10, tallinjeVarde + steg));
+    tallinjeVarde = nyttVarde;
+    tallinjeRitaMedPosition(tallinjePixelForVarde(nyttVarde), nyttVarde);
+  });
 
   // Generisk simulering: slumpad algebrauppgift med objekt (emoji)
   // vars värde man ska lista ut utifrån en given summa.
@@ -944,6 +1188,63 @@
   // objekt är värt utifrån en summa) men med tre olika symboltyper -
   // konkreta objekt, en generisk symbol, och slutligen bokstaven x.
   var ekvRattSvar = {};
+
+  // ===== Intro uttryck: sätta in ett värde för x i ett uttryck =====
+  var uttryckSubRattSvar = null;
+
+  function genereraUttryckSub() {
+    var a = Math.floor(Math.random() * 5) + 2;   // koefficient 2-6
+    var b = Math.floor(Math.random() * 10) + 1;  // konstant 1-10
+    var x = Math.floor(Math.random() * 8) + 1;   // x-värde 1-8
+    uttryckSubRattSvar = a * x + b;
+
+    document.getElementById("uttryckSubUppgift").innerHTML =
+      "Om x = " + x + ", vad blir " + a + '<span class="variabel-x">x</span> + ' + b + "?";
+    document.getElementById("uttryckSubInput").value = "";
+    document.getElementById("uttryckSubFeedback").innerHTML = "";
+  }
+
+  function kontrolleraUttryckSub() {
+    var v = parseInt(document.getElementById("uttryckSubInput").value, 10);
+    var feedback = document.getElementById("uttryckSubFeedback");
+    if (isNaN(v)) {
+      feedback.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>';
+      return;
+    }
+    if (v === uttryckSubRattSvar) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
+  }
+
+  // ===== Förenkla uttryck: slå ihop liktermer (ax + bx) =====
+  var uttryckForenklaRattSvar = null;
+
+  function genereraUttryckForenkla() {
+    var a = Math.floor(Math.random() * 6) + 1;   // 1-6
+    var b = Math.floor(Math.random() * 6) + 1;   // 1-6
+    uttryckForenklaRattSvar = a + b;
+
+    document.getElementById("uttryckForenklaUppgift").innerHTML =
+      a + '<span class="variabel-x">x</span> + ' + b + '<span class="variabel-x">x</span>';
+    document.getElementById("uttryckForenklaInput").value = "";
+    document.getElementById("uttryckForenklaFeedback").innerHTML = "";
+  }
+
+  function kontrolleraUttryckForenkla() {
+    var v = parseInt(document.getElementById("uttryckForenklaInput").value, 10);
+    var feedback = document.getElementById("uttryckForenklaFeedback");
+    if (isNaN(v)) {
+      feedback.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>';
+      return;
+    }
+    if (v === uttryckForenklaRattSvar) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
+  }
 
   function genereraEkvationssteg(steg) {
     var antal = Math.floor(Math.random() * 4) + 2;   // 2-5 st
@@ -1931,8 +2232,12 @@
               '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
               '\')">Kolla svar</button></div>';
     } else {
-      html += '<div class="algebra-svar-rad">Täljare: <input type="number" id="jeoSvarTaljare"> ' +
-              'Nämnare: <input type="number" id="jeoSvarNamnare"> ' +
+      html += '<div class="algebra-svar-rad jeo-brak-svar-rad">' +
+              '<div class="jeo-brak-input">' +
+              '<input type="number" id="jeoSvarTaljare" class="jeo-brak-ruta">' +
+              '<div class="jeo-brak-streck"></div>' +
+              '<input type="number" id="jeoSvarNamnare" class="jeo-brak-ruta">' +
+              '</div>' +
               '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
               '\')">Kolla svar</button></div>';
     }
@@ -1965,6 +2270,302 @@
     } else {
       feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Rätt svar var ' + facitText + ".</span>";
     }
+  }
+
+  // ===== Division: två block =====
+  // Block 1: "Hur många gånger får talet X plats i talet Y?"
+  var divBlock1RattSvar = null;
+
+  function genereraDivBlock1() {
+    var d = Math.floor(Math.random() * 8) + 2;   // nämnare 2-9
+    var q = Math.floor(Math.random() * 8) + 2;   // kvot 2-9
+    var y = d * q;
+    divBlock1RattSvar = q;
+
+    document.getElementById("divBlock1Uppgift").innerText =
+      "Hur många gånger får talet " + d + " plats i talet " + y + "?";
+    document.getElementById("divBlock1Input").value = "";
+    document.getElementById("divBlock1Feedback").innerHTML = "";
+  }
+
+  function kontrolleraDivBlock1() {
+    var v = parseInt(document.getElementById("divBlock1Input").value, 10);
+    var feedback = document.getElementById("divBlock1Feedback");
+    if (isNaN(v)) {
+      feedback.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>';
+      return;
+    }
+    if (v === divBlock1RattSvar) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
+  }
+
+  // Block 2: rena divisionstal, skrivna som ett bråk (täljare/nämnare)
+  var divBlock2RattSvar = null;
+
+  function genereraDivBlock2() {
+    var d = Math.floor(Math.random() * 8) + 2;   // nämnare 2-9
+    var q = Math.floor(Math.random() * 8) + 2;   // kvot 2-9
+    var taljare = d * q;
+    divBlock2RattSvar = q;
+
+    document.getElementById("divBlock2Uppgift").innerHTML = brakHTML(taljare, d);
+    document.getElementById("divBlock2Input").value = "";
+    document.getElementById("divBlock2Feedback").innerHTML = "";
+  }
+
+  function kontrolleraDivBlock2() {
+    var v = parseInt(document.getElementById("divBlock2Input").value, 10);
+    var feedback = document.getElementById("divBlock2Feedback");
+    if (isNaN(v)) {
+      feedback.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>';
+      return;
+    }
+    if (v === divBlock2RattSvar) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
+  }
+
+  // ===== Åk9/åk7 Bråk: tallinje 0-3 + drag + hundradelar + förkortat bråk +
+  // fyllande cirklar i "Time Timer"-stil (fylld tårtbit, inte en ring) =====
+  var ak9BrakVarde = 0;      // 0-300 (hundradelar)
+  var ak9BrakDragger = false;
+
+  function ak9InitieraTallinje() {
+    ak9BrakVarde = 0;
+    ak9RitaAllt();
+
+    var behallare = document.getElementById("ak9TallinjeSvg");
+
+    behallare.onmousedown = function(e) {
+      ak9BrakDragger = true;
+      ak9HanteraDrag(e);
+      window.onmousemove = function(e2) { if (ak9BrakDragger) { ak9HanteraDrag(e2); } };
+      window.onmouseup = function() {
+        ak9BrakDragger = false;
+        window.onmousemove = null;
+        window.onmouseup = null;
+      };
+    };
+
+    behallare.ontouchstart = function(e) {
+      ak9BrakDragger = true;
+      ak9HanteraDrag(e);
+      e.preventDefault();
+      window.ontouchmove = function(e2) {
+        if (ak9BrakDragger) { ak9HanteraDrag(e2); e2.preventDefault(); }
+      };
+      window.ontouchend = function() {
+        ak9BrakDragger = false;
+        window.ontouchmove = null;
+        window.ontouchend = null;
+      };
+    };
+  }
+
+  // Piltangenter styr bråk-tallinjen med 1/100 (en hundradel) åt gången.
+  // Aktivt bara när #ak9TallinjeSvg finns i DOM:en (bråk-tallinje-sidan visas).
+  document.addEventListener("keydown", function(e) {
+    var behallare = document.getElementById("ak9TallinjeSvg");
+    if (!behallare) { return; }
+
+    var steg = 0;
+    if (e.key === "ArrowRight" || e.key === "ArrowUp") { steg = 1; }
+    else if (e.key === "ArrowLeft" || e.key === "ArrowDown") { steg = -1; }
+    else { return; }
+
+    e.preventDefault();
+    ak9BrakVarde = Math.max(0, Math.min(300, ak9BrakVarde + steg));
+    ak9RitaAllt();
+  });
+
+  function ak9HanteraDrag(e) {
+    var svgEl = document.getElementById("ak9TallinjeSvgEl");
+    if (!svgEl) { return; }
+    var rect = svgEl.getBoundingClientRect();
+    var clientX;
+    if (e.touches && e.touches.length) { clientX = e.touches[0].clientX; }
+    else if (e.changedTouches && e.changedTouches.length) { clientX = e.changedTouches[0].clientX; }
+    else { clientX = e.clientX; }
+
+    var skala = 500 / rect.width; // svg viewBox-bredd 500
+    var x = (clientX - rect.left) * skala;
+    var startX = 60, endX = 440;
+
+    var vardeFlyt = (x - startX) / (endX - startX) * 3; // 0-3
+    vardeFlyt = Math.max(0, Math.min(3, vardeFlyt));
+    ak9BrakVarde = Math.round(vardeFlyt * 100);
+    ak9RitaAllt();
+  }
+
+  // Ritar en fylld "tårtbit" (som en Time Timer) - växer medurs från kl 12.
+  function ak9TartbitPath(cx, cy, r, fyllnadAndel) {
+    if (fyllnadAndel <= 0) { return ""; }
+    var vinkel = fyllnadAndel * 2 * Math.PI;
+    var startVinkel = -Math.PI / 2;
+    var slutVinkel = startVinkel + vinkel;
+    var x1 = cx + r * Math.cos(startVinkel), y1 = cy + r * Math.sin(startVinkel);
+    var x2 = cx + r * Math.cos(slutVinkel), y2 = cy + r * Math.sin(slutVinkel);
+    var storBage = fyllnadAndel > 0.5 ? 1 : 0;
+    return "M" + cx + "," + cy + " L" + x1.toFixed(2) + "," + y1.toFixed(2) +
+           " A" + r + "," + r + " 0 " + storBage + " 1 " + x2.toFixed(2) + "," + y2.toFixed(2) + " Z";
+  }
+
+  // ===== Interaktivt celldiagram: klicka på en organell (i bilden eller
+  // listan under) för att se en kort faktaruta om den =====
+  var cellOrganellData = {
+    cellkarna: { namn: "Cellkärna", fakta: "Innehåller cellens DNA - ritningen för hur cellen och hela organismen ska byggas och fungera." },
+    mitokondrie: { namn: "Mitokondrie", fakta: "Bryter ner näring och frigör energi som cellen behöver - kallas ibland cellens 'kraftverk'." },
+    ribosom: { namn: "Ribosom", fakta: "Cellens fabrik för att bygga protein, något cellen behöver för nästan allt den gör." },
+    lysosom: { namn: "Lysosom", fakta: "Fungerar som en återvinningscentral - bryter ner skräp och gamla delar av cellen så att byggstenarna kan användas igen." },
+    vakuol: { namn: "Vakuol", fakta: "Ett förvaringsutrymme i cellen som kan innehålla vatten, näring eller avfall. Ofta stor i växtceller." },
+    cellvagg: { namn: "Cellvägg", fakta: "Ett stadigt skal utanför cellmembranet som finns i växtceller men inte i djurceller." },
+    kloroplast: { namn: "Kloroplast", fakta: "Fångar upp energi från solljus och används vid fotosyntes - finns bara i växtceller." }
+  };
+
+  function visaCellFakta(nyckel) {
+    var data = cellOrganellData[nyckel];
+    if (!data) { return; }
+    document.getElementById("cellDiagramFakta").innerHTML =
+      "<strong>" + data.namn + "</strong><p>" + data.fakta + "</p>";
+  }
+
+  function ritaCellDiagram() {
+    var svg = '<svg viewBox="0 0 640 350" class="cell-diagram-svg">' +
+      '<rect x="0" y="0" width="640" height="350" fill="#fbfbfd"/>' +
+      '<text x="150" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#2f4a73">Djurcell</text>' +
+      '<text x="480" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#2f4a73">Växtcell</text>' +
+
+      // ----- DJURCELL -----
+      '<ellipse cx="150" cy="190" rx="128" ry="105" fill="#fbe4e0" stroke="#d98a7a" stroke-width="3"/>' +
+
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'cellkarna\')">' +
+      '<circle cx="150" cy="185" r="34" fill="#8a6fb0" stroke="#5f4a80" stroke-width="2"/>' +
+      '<circle cx="150" cy="185" r="10" fill="#5f4a80"/></g>' +
+
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'mitokondrie\')">' +
+      '<ellipse cx="80" cy="140" rx="16" ry="9" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5" transform="rotate(-20 80 140)"/>' +
+      '<ellipse cx="215" cy="150" rx="16" ry="9" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5" transform="rotate(25 215 150)"/>' +
+      '<ellipse cx="90" cy="240" rx="16" ry="9" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5" transform="rotate(15 90 240)"/></g>' +
+
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'vakuol\')">' +
+      '<ellipse cx="205" cy="230" rx="20" ry="15" fill="#a9cdea" stroke="#4a6fa5" stroke-width="1.5"/></g>' +
+
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'lysosom\')">' +
+      '<circle cx="60" cy="200" r="7" fill="#c0392b"/>' +
+      '<circle cx="200" cy="120" r="6" fill="#c0392b"/></g>' +
+
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'ribosom\')">' +
+      '<circle cx="110" cy="120" r="2.2" fill="#333"/>' +
+      '<circle cx="120" cy="128" r="2.2" fill="#333"/>' +
+      '<circle cx="70" cy="180" r="2.2" fill="#333"/>' +
+      '<circle cx="185" cy="200" r="2.2" fill="#333"/>' +
+      '<circle cx="130" cy="245" r="2.2" fill="#333"/>' +
+      '<circle cx="95" cy="255" r="2.2" fill="#333"/></g>' +
+
+      // ----- VÄXTCELL -----
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'cellvagg\')">' +
+      '<rect x="360" y="80" width="240" height="220" rx="22" fill="#eaf5e0" stroke="#2f6a2f" stroke-width="5"/>' +
+      '<rect x="370" y="90" width="220" height="200" rx="16" fill="none" stroke="#7ab648" stroke-width="2"/></g>' +
+
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'vakuol\')">' +
+      '<ellipse cx="480" cy="215" rx="70" ry="55" fill="#a9cdea" stroke="#4a6fa5" stroke-width="2"/></g>' +
+
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'cellkarna\')">' +
+      '<circle cx="405" cy="130" r="26" fill="#8a6fb0" stroke="#5f4a80" stroke-width="2"/>' +
+      '<circle cx="405" cy="130" r="8" fill="#5f4a80"/></g>' +
+
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'kloroplast\')">' +
+      '<ellipse cx="555" cy="120" rx="17" ry="11" fill="#2d6a2d" transform="rotate(-15 555 120)"/>' +
+      '<ellipse cx="565" cy="150" rx="17" ry="11" fill="#2d6a2d" transform="rotate(20 565 150)"/>' +
+      '<ellipse cx="400" cy="270" rx="17" ry="11" fill="#2d6a2d" transform="rotate(10 400 270)"/>' +
+      '<ellipse cx="555" cy="270" rx="17" ry="11" fill="#2d6a2d" transform="rotate(-10 555 270)"/></g>' +
+
+      '<g class="cell-klickbar" onclick="visaCellFakta(\'mitokondrie\')">' +
+      '<ellipse cx="450" cy="110" rx="14" ry="8" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5"/>' +
+      '<ellipse cx="380" cy="230" rx="14" ry="8" fill="#e0a53f" stroke="#b8842a" stroke-width="1.5" transform="rotate(30 380 230)"/></g>' +
+
+      "</svg>";
+
+    document.getElementById("cellDiagramSvg").innerHTML = svg;
+
+    // Klickbar lista under bilden - samma organeller, samma fakta
+    var listaHtml = "";
+    var listaOrdning = [
+      { key: "cellkarna", farg: "#8a6fb0" },
+      { key: "mitokondrie", farg: "#e0a53f" },
+      { key: "ribosom", farg: "#333" },
+      { key: "lysosom", farg: "#c0392b" },
+      { key: "vakuol", farg: "#a9cdea" },
+      { key: "cellvagg", farg: "#2f6a2f" },
+      { key: "kloroplast", farg: "#2d6a2d" }
+    ];
+    listaOrdning.forEach(function(o) {
+      listaHtml += '<button class="cell-legend-chip" onclick="visaCellFakta(\'' + o.key + '\')">' +
+        '<span class="cell-legend-prick" style="background:' + o.farg + '"></span>' +
+        cellOrganellData[o.key].namn + "</button>";
+    });
+    document.getElementById("cellDiagramLegend").innerHTML = listaHtml;
+
+    document.getElementById("cellDiagramFakta").innerHTML =
+      '<span class="cell-fakta-tips">👆 Klicka på en organell i bilden eller i listan ovan för att läsa mer.</span>';
+  }
+
+  function ak9RitaAllt() {
+    var v = ak9BrakVarde;
+    var vardeFlyt = v / 100; // 0-3
+
+    // Nummerlinje 0-3 med fortsättningsprickar åt båda hållen
+    var startX = 60, endX = 440, y = 40;
+    var dotX = startX + vardeFlyt * (endX - startX) / 3;
+
+    var svg = '<svg viewBox="0 0 500 80" class="ak9-tallinje-svg" id="ak9TallinjeSvgEl">' +
+      '<text x="20" y="' + (y + 6) + '" font-size="20" fill="#999">···</text>' +
+      '<line x1="' + startX + '" y1="' + y + '" x2="' + endX + '" y2="' + y +
+      '" stroke="#4a6fa5" stroke-width="2"/>' +
+      '<text x="465" y="' + (y + 6) + '" font-size="20" fill="#999">···</text>';
+    for (var i = 0; i <= 3; i++) {
+      var x = startX + i * (endX - startX) / 3;
+      svg += '<line x1="' + x + '" y1="' + (y - 8) + '" x2="' + x + '" y2="' + (y + 8) +
+             '" stroke="#4a6fa5" stroke-width="2"/>';
+      svg += '<text x="' + x + '" y="' + (y + 28) + '" text-anchor="middle" font-size="14" fill="#2f4a73">' +
+             i + "</text>";
+    }
+    svg += '<circle cx="' + dotX + '" cy="' + y + '" r="9" fill="#e07a3f" style="cursor:grab;"/>';
+    svg += "</svg>";
+    document.getElementById("ak9TallinjeSvg").innerHTML = svg;
+    // OBS: onmousedown/ontouchstart sitter på behållar-diven själv (satt i
+    // ak9InitieraTallinje) och påverkas inte av att innerHTML byts ut här.
+
+    // Bråk med 100 i nämnaren + förkortad form
+    document.getElementById("ak9BrakHundradelar").innerHTML = brakHTML(v, 100);
+    var forenklat = forenklaBrak(v, 100);
+    document.getElementById("ak9BrakForenklat").innerHTML = brakHTML(forenklat.taljare, forenklat.namnare);
+
+    // Tre "Time Timer"-cirklar - en per helt tal (0-1, 1-2, 2-3),
+    // fylls medurs från klockan 12 som en fylld tårtbit.
+    var cirklarHtml = "";
+    for (var c = 0; c < 3; c++) {
+      var cirkelStart = c * 100, cirkelSlut = cirkelStart + 100;
+      var fyllnadAndel;
+      if (v <= cirkelStart) { fyllnadAndel = 0; }
+      else if (v >= cirkelSlut) { fyllnadAndel = 1; }
+      else { fyllnadAndel = (v - cirkelStart) / 100; }
+
+      cirklarHtml += '<svg viewBox="0 0 100 100" class="ak9-cirkel-svg">' +
+        '<circle cx="50" cy="50" r="35" fill="#e2e6ee"/>';
+      if (fyllnadAndel >= 1) {
+        cirklarHtml += '<circle cx="50" cy="50" r="35" fill="#4a6fa5"/>';
+      } else if (fyllnadAndel > 0) {
+        cirklarHtml += '<path d="' + ak9TartbitPath(50, 50, 35, fyllnadAndel) + '" fill="#4a6fa5"/>';
+      }
+      cirklarHtml += "</svg>";
+    }
+    document.getElementById("ak9Cirklar").innerHTML = cirklarHtml;
   }
 
   function skrivUt() {

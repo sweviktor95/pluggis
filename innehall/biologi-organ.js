@@ -1,14 +1,14 @@
 var innehall = window.innehall || {};
 
 innehall["biologi-organ"] = {
-  intro: "Celler bygger upp vävnader, och vävnader bygger i sin tur upp organ. Varje organ har en egen uppgift, men de flesta organ samarbetar tätt med varandra för att hela kroppen ska fungera.",
+  intro: "Celler bygger upp <strong>vävnader</strong>, och vävnader bygger i sin tur upp <strong>organ</strong>. Varje organ har en egen uppgift, men de flesta organ samarbetar tätt med varandra för att hela kroppen ska fungera.",
 
   sektioner: [
     {
       ikon: "🫀",
       titel: "Vad är ett organ?",
       text: [
-        "Ett organ är uppbyggt av flera olika typer av vävnader som tillsammans utför en eller flera uppgifter i kroppen.",
+        "Ett <strong>organ</strong> är uppbyggt av flera olika typer av <strong>vävnader</strong> som tillsammans utför en eller flera uppgifter i kroppen.",
         "Exempel på organ är hjärtat, lungorna, levern, magsäcken och hjärnan. Varje organ har en tydlig form och plats i kroppen, och en eller flera specifika funktioner."
       ],
       bild: "bilder/kroppens-organ.svg"
@@ -17,7 +17,7 @@ innehall["biologi-organ"] = {
       ikon: "🤝",
       titel: "Organ som samarbetar",
       text: [
-        "Organ jobbar sällan helt ensamma. När flera organ samarbetar för att utföra en gemensam uppgift kallas det ett organsystem.",
+        "Organ jobbar sällan helt ensamma. När flera organ samarbetar för att utföra en gemensam uppgift kallas det ett <strong>organsystem</strong>.",
         "Ett och samma organ kan dessutom ingå i flera olika organsystem samtidigt. Blodkärlen är till exempel en del av både cirkulationssystemet och immunsystemet."
       ],
       kontrollfraga: "Vad är skillnaden på ett organ och ett organsystem?",
@@ -46,6 +46,7 @@ innehall["biologi-organ"] = {
 
   begrepp: [
     { term: "Organ", forklaring: "en kroppsdel uppbyggd av flera vävnader som tillsammans har en tydlig funktion, t.ex. hjärtat" },
+    { term: "Vävnad", forklaring: "många celler av samma typ som sitter ihop och bildar en enhet" },
     { term: "Organsystem", forklaring: "flera organ som samarbetar för att utföra en gemensam uppgift" },
     { term: "Cirkulationssystemet", forklaring: "organsystemet som transporterar blod runt i kroppen - hjärta och blodkärl" },
     { term: "Nervsystemet", forklaring: "organsystemet som skickar signaler i kroppen - hjärna, ryggmärg och nerver" }

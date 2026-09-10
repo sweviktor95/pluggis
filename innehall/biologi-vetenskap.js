@@ -22,10 +22,10 @@ innehall["biologi-vetenskap"] = {
       ikon: "❓",
       titel: "Att undersöka som en forskare",
       text: [
-        "En vetenskaplig undersökning börjar oftast med en fråga, till exempel: 'Växer tomatplantor snabbare i solljus eller i skugga?'",
-        "Nästa steg är att formulera en hypotes - en gissning man kan testa, baserad på det man redan vet. Till exempel: 'Jag tror att plantorna i solljus växer snabbare, eftersom växter behöver ljus för att fotosyntetisera.'",
-        "Sedan planerar man en undersökning: vad ska man mäta, hur ofta, och hur länge? Det är viktigt att bara ändra en sak i taget (till exempel mängden ljus) och hålla allt annat likadant (samma jord, samma mängd vatten) - annars vet man inte vad som faktiskt orsakade skillnaden.",
-        "Till sist utför man undersökningen och utvärderar resultatet: stämde hypotesen, eller inte? Även en hypotes som visar sig vara fel är värdefull kunskap!"
+        "En vetenskaplig undersökning börjar oftast med en <strong>fråga</strong>, till exempel: 'Växer tomatplantor snabbare i solljus eller i skugga?'",
+        "Nästa steg är att formulera en <strong>hypotes</strong> - en gissning man kan testa, baserad på det man redan vet. Till exempel: 'Jag tror att plantorna i solljus växer snabbare, eftersom växter behöver ljus för att fotosyntetisera.'",
+        "Sedan planerar man en <strong>undersökning</strong>: vad ska man mäta, hur ofta, och hur länge? Det är viktigt att bara ändra en sak i taget (till exempel mängden ljus) och hålla allt annat likadant (samma jord, samma mängd vatten) - annars vet man inte vad som faktiskt orsakade skillnaden.",
+        "Till sist utför man undersökningen och utvärderar <strong>resultatet</strong>: stämde hypotesen, eller inte? Även en hypotes som visar sig vara fel är värdefull kunskap!"
       ],
       kontrollfraga: "Varför är det viktigt att bara ändra en sak i taget i en undersökning?",
       kontrollsvar: "Om man ändrar flera saker samtidigt vet man inte vilken av ändringarna som faktiskt orsakade resultatet. Genom att bara ändra en variabel kan man dra en säker slutsats om just den faktorn.",
@@ -53,7 +53,7 @@ innehall["biologi-vetenskap"] = {
       text: [
         "Du möter påståenden om biologi varje dag - i tidningar, sociala medier och på nätet. Alla källor är inte lika pålitliga, så det är viktigt att kunna granska information källkritiskt.",
         "Bra frågor att ställa: Vem säger det här, och vilken kunskap har den personen? Finns det belägg (bevis) för påståendet? Säger andra pålitliga källor samma sak? Kan avsändaren ha ett eget intresse av att du ska tro på just det här?",
-        "Var extra uppmärksam på pseudovetenskap - påståenden som presenteras som vetenskapliga men som saknar riktiga vetenskapliga bevis. Pseudovetenskap kan låta trovärdigt, använda vetenskapliga ord och hänvisa till 'studier', men bygger inte på undersökningar som andra forskare kunnat granska och upprepa. Exempel är vissa mirakelkurer eller påståenden om att särskilda kristaller kan bota sjukdomar."
+        "Var extra uppmärksam på <strong>pseudovetenskap</strong> - påståenden som presenteras som vetenskapliga men som saknar riktiga vetenskapliga bevis. Pseudovetenskap kan låta trovärdigt, använda vetenskapliga ord och hänvisa till 'studier', men bygger inte på undersökningar som andra forskare kunnat granska och upprepa. Exempel är vissa mirakelkurer eller påståenden om att särskilda kristaller kan bota sjukdomar."
       ],
       kontrollfraga: "Nämn två frågor du kan ställa dig för att källkritiskt granska ett påstående du sett på nätet.",
       kontrollsvar: "Till exempel: Vem säger det här och vilken kunskap har personen? Finns det belägg för påståendet? Säger andra pålitliga källor samma sak? Kan avsändaren tjäna på att du tror på det?"
@@ -61,7 +61,10 @@ innehall["biologi-vetenskap"] = {
   ],
 
   begrepp: [
+    { term: "Fråga", forklaring: "utgångspunkten för en vetenskaplig undersökning - det man vill ta reda på" },
     { term: "Hypotes", forklaring: "en gissning man kan testa, baserad på det man redan vet" },
+    { term: "Undersökning", forklaring: "det man gör för att testa en hypotes - t.ex. ett experiment eller en fältstudie" },
+    { term: "Resultat", forklaring: "det man kommer fram till efter en undersökning" },
     { term: "Fältstudie", forklaring: "en undersökning som görs ute i naturen, inte i ett labb" },
     { term: "Variabel", forklaring: "något som kan ändras eller mätas i en undersökning" },
     { term: "Källkritik", forklaring: "att granska och värdera hur pålitlig en källa till information är" },

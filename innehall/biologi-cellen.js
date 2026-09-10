@@ -24,7 +24,7 @@ innehall["biologi-cellen"] = {
         "<strong>Lysosomer</strong> fungerar som en återvinningscentral - de bryter ner skräp och gamla delar av cellen så att byggstenarna kan användas igen.",
         "En <strong>vakuol</strong> är ett förvaringsutrymme inne i cellen som kan innehålla vatten, näring eller avfall. I växtceller är vakuolen ofta mycket stor."
       ],
-      bild: "bilder/cell-jamforelse.svg",
+      interaktivtDiagram: "cell",
       kontrollfraga: "Vad är skillnaden mellan en prokaryot och en eukaryot cell?",
       kontrollsvar: "En eukaryot cell har en cellkärna där DNA:t förvaras - det har till exempel människo-, djur- och växtceller. En prokaryot cell, som en bakteries cell, saknar cellkärna och har DNA:t flytande fritt i cellen istället."
     },
