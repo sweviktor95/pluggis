@@ -25,6 +25,7 @@ var struktur = [
               { id: "matematik-klockan", titel: "Klockan" },
               { id: "matematik-tallinjen", titel: "Tallinjen" },
               { id: "matematik-positionssystem", titel: "Positionssystemet" },
+              { id: "matematik-positionssystem-decimaler", titel: "Positionssystemet - Inklusive decimaler" },
               {
                 id: "matematik-rakneattt",
                 titel: "De fyra räknesätten",

@@ -121,6 +121,34 @@
   .begrepp-box ul { margin: 0; padding-left: 20px; }
   .begrepp-box li { margin: 6px 0; }
 
+  .begrepp-exempel-titel {
+    font-weight: bold;
+    color: #2f4a73;
+    margin: 14px 0 6px 0;
+  }
+  .begrepp-exempel-rad {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .begrepp-exempel-del {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
+    padding: 6px 14px;
+    border-radius: 8px;
+  }
+  .begrepp-exempel-tecken { font-size: 1.3em; font-weight: bold; color: #2f4a73; }
+  .begrepp-exempel-text {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #2f4a73;
+    margin: 4px 0 10px 0;
+  }
+  .begrepp-exempel-forklaring { margin: 0; font-size: 0.95em; }
+
   .kontrollfraga {
     background: #fff8ec;
     border-left: 4px solid #e0a53f;
@@ -223,6 +251,198 @@
     font-weight: bold;
     color: #2f4a73;
   }
+  .uttryck-steg-box {
+    background: white;
+    border: 1px solid #e2e6ee;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 16px 0;
+  }
+  .uttryck-steg-box h3 { margin-top: 0; color: #2f4a73; }
+
+  .uttryck-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px;
+    background: #f7f7f9;
+    border-radius: 10px;
+    margin: 10px 0;
+    min-height: 60px;
+  }
+  .uttryck-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 46px;
+    height: 46px;
+    padding: 0 10px;
+    border-radius: 10px;
+    background: #e2e6ee;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+    cursor: grab;
+    user-select: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+  .uttryck-item-frukt { background: none; box-shadow: none; font-size: 1.8em; }
+  .uttryck-item-dragging { cursor: grabbing; opacity: 0.85; box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
+
+  .uttryck-korgar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin: 14px 0;
+  }
+  .uttryck-korg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: #f7f7f9;
+    border: 3px dashed #b8c2d4;
+    border-radius: 12px;
+    padding: 14px 18px;
+    min-width: 80px;
+  }
+  .uttryck-korg-bred { min-width: 140px; }
+  .uttryck-korg-ikon { font-size: 2em; }
+  .uttryck-korg-etikett { font-weight: bold; font-size: 1.2em; }
+  .uttryck-korg-antal {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #2f4a73;
+    background: white;
+    border-radius: 6px;
+    padding: 2px 14px;
+  }
+  .uttryck-korg-innehall {
+    font-size: 0.85em;
+    color: #666;
+    min-height: 18px;
+    text-align: center;
+  }
+  .uttryck-korg-summa {
+    font-size: 1.4em;
+    font-weight: bold;
+    background: white;
+    border-radius: 6px;
+    padding: 2px 14px;
+  }
+
+  .uttryck-sorteringsrad {
+    display: flex;
+    gap: 10px;
+    margin: 14px 0 6px 0;
+  }
+  .uttryck-zon {
+    flex: 1;
+    min-height: 70px;
+    border: 3px dashed;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .uttryck-zon-etikett { font-weight: bold; margin-bottom: 6px; }
+  .uttryck-zon-innehall { font-size: 0.85em; color: #555; min-height: 18px; }
+
+  .uttryck-summeringsrad {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .uttryck-summa-cell {
+    flex: 1;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    background: #f7f7f9;
+    border-radius: 8px;
+    padding: 6px;
+  }
+
+  .uttryck4-svar-rad { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; }
+  .uttryck4-input { width: 60px; padding: 4px 6px; border-radius: 6px; border: 1px solid #ccc; text-align: center; }
+  .uttryck-fritext-input {
+    width: 220px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1.1em;
+    text-align: center;
+  }
+
+  .uttryck-pool-statisk { cursor: default; }
+  .uttryck-item-frukt-statisk {
+    font-size: 1.8em;
+    padding: 4px;
+  }
+  .uttryck-raknerad {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin: 14px 0;
+    flex-wrap: wrap;
+  }
+  .uttryck-raknefalt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: #f7f7f9;
+    border-radius: 10px;
+    padding: 12px 18px;
+  }
+  .uttryck-raknefalt-ikon { font-size: 1.8em; }
+  .uttryck-blankrad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-size: 1.1em;
+  }
+  .uttryck-vertikal-rad {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .uttryck-vertikal-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background: #f7f7f9;
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 12px 18px;
+    min-width: 90px;
+  }
+  .uttryck-vertikal-term { font-size: 1.2em; font-weight: bold; padding: 2px 0; }
+  .uttryck-vertikal-linje { width: 100%; height: 2px; margin: 6px 0; }
+  .uttryck-vertikal-summa { font-size: 1.2em; font-weight: bold; display: flex; align-items: center; gap: 6px; }
+
+  .uttryck-horisontell-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin: 16px 0;
+  }
+  .uttryck-horisontell-rad {
+    font-size: 1.25em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f7f7f9;
+    border-radius: 8px;
+    padding: 8px 16px;
+  }
+
   .variabel-x {
     font-style: italic;
     font-family: "Times New Roman", serif;
@@ -304,6 +524,57 @@
     font-weight: bold;
     color: #2f4a73;
     font-size: 1.1em;
+  }
+
+  .jeopardy-lagesval {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .jeopardy-lage-knapp {
+    display: block;
+    width: 220px;
+    height: auto;
+    white-space: normal;
+    padding: 18px 16px;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .jeopardy-lage-beskrivning {
+    display: block;
+    font-size: 0.75em;
+    font-weight: normal;
+    margin-top: 6px;
+    opacity: 0.9;
+  }
+  .jeopardy-lage-rad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+  }
+  .jeopardy-lage-visning { color: #2f4a73; font-weight: bold; }
+  .jeopardy-byt-lage-knapp {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.85em;
+    color: #6b7a8f;
+    cursor: pointer;
+  }
+  .jeopardy-byt-lage-knapp:hover { border-color: #4a6fa5; color: #4a6fa5; }
+  .jeopardy-facit {
+    background: #eef7ee;
+    border: 2px solid #5aa66b;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 1.2em;
+    text-align: center;
   }
 
   .ak9-brak-wrapper { text-align: center; }
@@ -390,25 +661,46 @@
     font-size: 0.85em;
     text-align: center;
   }
-  .abakus-parla {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #e2e6ee;
-    border: 2px solid #b8c2d4;
-    margin: 3px 0;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
+  .abakus-rulle {
+    width: 74px;
+    height: 96px;
+    background: linear-gradient(#f7f7f9, #dfe3ea 50%, #f7f7f9);
+    border: 3px solid #2f4a73;
+    border-radius: 12px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
-    color: #5a6b85;
+    cursor: ns-resize;
     user-select: none;
+    position: relative;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,0.18), inset 0 -5px 10px rgba(0,0,0,0.18);
+    touch-action: none;
   }
-  .abakus-parla:hover { border-color: #4a6fa5; }
-  .abakus-parla-fylld { background: #4a6fa5; border-color: #2f4a73; color: white; }
+  .abakus-rulle-vald {
+    border-color: #e0a53f;
+    box-shadow: 0 0 0 3px rgba(224,165,63,0.45), inset 0 5px 10px rgba(0,0,0,0.18), inset 0 -5px 10px rgba(0,0,0,0.18);
+  }
+  .abakus-rulle::after {
+    content: "";
+    position: absolute;
+    left: 6px; right: 6px; top: 50%;
+    height: 1px;
+    background: rgba(0,0,0,0.12);
+  }
+  @keyframes abakusRullAnimation {
+    0% { transform: translateY(-16px); opacity: 0.3; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .abakus-rulle-siffra {
+    font-size: 2.3em;
+    font-weight: bold;
+    color: #2f4a73;
+    line-height: 1;
+    display: inline-block;
+  }
+  .abakus-rulle-anim { animation: abakusRullAnimation 0.15s ease-out; }
+  .abakus-rulle-pil { font-size: 0.7em; color: #8a97ac; line-height: 1; }
   .abakus-siffra {
     margin-top: 10px;
     font-size: 1.3em;
@@ -431,13 +723,21 @@
   }
   .abakus-knapp-rad {
     display: flex;
-    justify-content: center;
-    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
     margin: 8px 0 0 0;
+  }
+  .decimal-komma {
+    font-size: 2.3em;
+    font-weight: bold;
+    color: #2f4a73;
+    align-self: center;
+    padding-bottom: 20px;
   }
   .abakus-kol-knapp {
     display: inline-block;
-    width: auto;
+    width: 100%;
     padding: 5px 8px;
     font-size: 0.8em;
     font-weight: bold;
@@ -615,6 +915,7 @@
 
 <script src="innehall/matematik-tallinjen.js"></script>
 <script src="innehall/matematik-positionssystem.js"></script>
+<script src="innehall/matematik-positionssystem-decimaler.js"></script>
 <script src="innehall/matematik-multiplikation.js"></script>
 <script src="innehall/matematik-addition.js"></script>
 <script src="innehall/matematik-subtraktion.js"></script>
@@ -739,6 +1040,15 @@
           html += '</ul></div>';
         }
       } else if (data) {
+        if (data.begrepp) {
+          html += '<div class="begrepp-box"><h3>📖 Bra att kunna</h3><ul>';
+          data.begrepp.forEach(function(b) {
+            html += '<li><strong>' + b.term + ':</strong> ' + b.forklaring + '</li>';
+          });
+          html += '</ul>';
+          if (data.begreppExempel) { html += data.begreppExempel; }
+          html += '</div>';
+        }
         html += "<p>" + data.text + "</p>";
         if (data.bild) {
           html += '<img src="' + data.bild + '" style="width:100%;border-radius:8px;">';
@@ -776,6 +1086,9 @@
         }
         if (data.simulering === "abakus-positionssystem") {
           html += '<div id="abakusContainer"></div>';
+        }
+        if (data.simulering === "abakus-decimaler") {
+          html += '<div id="decimalAbakusContainer"></div>';
         }
         if (data.simulering === "multiplikationstabell") {
           html += '<div id="multtabellContainer"></div>';
@@ -858,6 +1171,33 @@
             '<button class="algebra-ny-knapp" onclick="genereraBerattelseuppgift()">🔄 Ny uppgift</button>' +
             '</div>';
         }
+        if (data.simulering === "uttryck-dragspel") {
+          html += '<div class="uttryck-steg-box">' +
+            '<h3>Steg 1: Räkna frukten</h3>' +
+            '<p>Titta noga och räkna hur många det finns av varje frukt. Skriv in antalet i rätt ruta.</p>' +
+            '<div id="uttryckSteg1Container"></div>' +
+            '</div>' +
+            '<div class="uttryck-steg-box">' +
+            '<h3>Steg 2: Sortera och summera termer</h3>' +
+            '<p>Nu är det symboler istället för frukt, och de kan vara positiva (+) eller negativa (−). Dra i termerna så att alla x hamnar bredvid varandra, alla y bredvid varandra och alla tal bredvid varandra. Klicka sedan "Klar med sorteringen" och räkna ut hur mycket det är av varje sort.</p>' +
+            '<div id="uttryckSteg2Container"></div>' +
+            '</div>' +
+            '<div class="uttryck-steg-box">' +
+            '<h3>Steg 3: Förenkla på egen hand</h3>' +
+            '<p>Nu är det dags att göra det i huvudet! Räkna ihop hur mycket det är av respektive term och fyll i rutorna.</p>' +
+            '<div id="uttryckSteg3Container">' +
+            '<p class="algebra-uppgift" id="uttryckSteg3Uppgift"></p>' +
+            '<div class="algebra-svar-rad uttryck-blankrad">' +
+            '<input type="number" id="uttryckSteg3XInput" class="uttryck4-input"><span class="variabel-x">x</span> ' +
+            '<input type="number" id="uttryckSteg3YInput" class="uttryck4-input"><span class="variabel-x">y</span> ' +
+            '<input type="number" id="uttryckSteg3TalInput" class="uttryck4-input"> ' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraSteg3Forenkla()">Kolla svar</button>' +
+            '</div>' +
+            '<p id="uttryckSteg3Feedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraSteg3Forenkla()">🔄 Ny uppgift</button>' +
+            '</div>' +
+            '</div>';
+        }
         if (data.simulering === "uttryck-substitution") {
           html += '<div class="algebra-box">' +
             '<p class="algebra-uppgift" id="uttryckSubUppgift"></p>' +
@@ -868,7 +1208,8 @@
             '</div>';
         }
         if (data.simulering === "uttryck-forenkla") {
-          html += '<div class="algebra-box">' +
+          html += '<div class="uttryck-steg-box">' +
+            '<h3>Steg 1: Positiva koefficienter</h3>' +
             '<p>Förenkla uttrycket. Vad blir koefficienten framför x?</p>' +
             '<p class="algebra-uppgift" id="uttryckForenklaUppgift"></p>' +
             '<div class="algebra-svar-rad">Svar: <input type="number" id="uttryckForenklaInput"> ' +
@@ -876,6 +1217,27 @@
             '<button class="algebra-kolla-knapp" onclick="kontrolleraUttryckForenkla()">Kolla svar</button></div>' +
             '<p id="uttryckForenklaFeedback"></p>' +
             '<button class="algebra-ny-knapp" onclick="genereraUttryckForenkla()">🔄 Ny uppgift</button>' +
+            '</div>' +
+            '<div class="uttryck-steg-box">' +
+            '<h3>Steg 2: Positiva och negativa koefficienter</h3>' +
+            '<p>Nu kan koefficienterna vara negativa också. Vad blir koefficienten framför x?</p>' +
+            '<p class="algebra-uppgift" id="uttryckForenkla2Uppgift"></p>' +
+            '<div class="algebra-svar-rad">Svar: <input type="number" id="uttryckForenkla2Input"> ' +
+            '<span class="variabel-x">x</span>' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraUttryckForenkla2()">Kolla svar</button></div>' +
+            '<p id="uttryckForenkla2Feedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraUttryckForenkla2()">🔄 Ny uppgift</button>' +
+            '</div>' +
+            '<div class="uttryck-steg-box">' +
+            '<h3>Steg 3: Med tal också</h3>' +
+            '<p>Nu är det ett tal med i uttrycket också, och allt kan vara positivt eller negativt.</p>' +
+            '<p class="algebra-uppgift" id="uttryckForenkla3Uppgift"></p>' +
+            '<div class="algebra-svar-rad uttryck-blankrad">' +
+            '<input type="number" id="uttryckForenkla3XInput" class="uttryck4-input"><span class="variabel-x">x</span> ' +
+            '<input type="number" id="uttryckForenkla3TalInput" class="uttryck4-input"> ' +
+            '<button class="algebra-kolla-knapp" onclick="kontrolleraUttryckForenkla3()">Kolla svar</button></div>' +
+            '<p id="uttryckForenkla3Feedback"></p>' +
+            '<button class="algebra-ny-knapp" onclick="genereraUttryckForenkla3()">🔄 Ny uppgift</button>' +
             '</div>';
         }
         if (data.simulering === "ekvationer-tresteg") {
@@ -954,6 +1316,9 @@
     if (!harBarn && innehall[id] && innehall[id].simulering === "abakus-positionssystem") {
       initAbakus();
     }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "abakus-decimaler") {
+      initDecimalAbakus();
+    }
     if (!harBarn && innehall[id] && innehall[id].simulering === "multiplikationstabell") {
       ritaMultiplikationstabell();
     }
@@ -973,11 +1338,18 @@
     if (!harBarn && innehall[id] && innehall[id].simulering === "jeopardy-brak") {
       initJeopardy();
     }
+    if (!harBarn && innehall[id] && innehall[id].simulering === "uttryck-dragspel") {
+      initSteg1();
+      initSteg2();
+      genereraSteg3Forenkla();
+    }
     if (!harBarn && innehall[id] && innehall[id].simulering === "uttryck-substitution") {
       genereraUttryckSub();
     }
     if (!harBarn && innehall[id] && innehall[id].simulering === "uttryck-forenkla") {
       genereraUttryckForenkla();
+      genereraUttryckForenkla2();
+      genereraUttryckForenkla3();
     }
     if (!harBarn && innehall[id] && innehall[id].simulering === "ekvationer-tresteg") {
       genereraEkvationssteg(1);
@@ -1192,6 +1564,366 @@
   // ===== Intro uttryck: sätta in ett värde för x i ett uttryck =====
   var uttryckSubRattSvar = null;
 
+  // ===== Uttryck: dra-och-släpp-motor (delad av steg 1-3) =====
+  // Item blir position:fixed och följer muspekaren/fingret. Vid släpp
+  // används document.elementFromPoint för att se vad som ligger under -
+  // mycket enklare än att räkna ut överlapp med alla möjliga rutor själv.
+  var uttryckDragInfo = null;
+  var uttryckAktivtSteg = 1;
+
+  function uttryckShuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function uttryckStartDrag(steg, itemId, e) {
+    e.preventDefault();
+    uttryckAktivtSteg = steg;
+    var itemEl = document.getElementById(itemId);
+    if (!itemEl) { return; }
+    var rect = itemEl.getBoundingClientRect();
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    uttryckDragInfo = {
+      itemEl: itemEl, itemId: itemId,
+      offsetX: clientX - rect.left, offsetY: clientY - rect.top
+    };
+
+    itemEl.style.position = "fixed";
+    itemEl.style.left = rect.left + "px";
+    itemEl.style.top = rect.top + "px";
+    itemEl.style.width = rect.width + "px";
+    itemEl.style.zIndex = "1000";
+    itemEl.style.pointerEvents = "none";
+    itemEl.classList.add("uttryck-item-dragging");
+
+    window.onmousemove = uttryckFlyttaDrag;
+    window.onmouseup = uttryckSlutDrag;
+    window.ontouchmove = function(e2) { uttryckFlyttaDrag(e2); e2.preventDefault(); };
+    window.ontouchend = uttryckSlutDrag;
+  }
+
+  function uttryckFlyttaDrag(e) {
+    if (!uttryckDragInfo) { return; }
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    uttryckDragInfo.itemEl.style.left = (clientX - uttryckDragInfo.offsetX) + "px";
+    uttryckDragInfo.itemEl.style.top = (clientY - uttryckDragInfo.offsetY) + "px";
+  }
+
+  function uttryckSlutDrag(e) {
+    if (!uttryckDragInfo) { return; }
+    var info = uttryckDragInfo;
+    uttryckDragInfo = null;
+    window.onmousemove = null; window.onmouseup = null;
+    window.ontouchmove = null; window.ontouchend = null;
+
+    var clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    var clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+
+    var dropzone = document.elementFromPoint(clientX, clientY);
+    while (dropzone && !(dropzone.hasAttribute && dropzone.hasAttribute("data-dropzone"))) {
+      dropzone = dropzone.parentElement;
+    }
+
+    var konsumerad = false;
+    if (dropzone) {
+      konsumerad = uttryckHanteraDropp(info.itemId, dropzone.getAttribute("data-dropzone"));
+    }
+
+    if (konsumerad) {
+      if (info.itemEl && info.itemEl.parentNode) { info.itemEl.parentNode.removeChild(info.itemEl); }
+    } else {
+      info.itemEl.style.position = "";
+      info.itemEl.style.left = "";
+      info.itemEl.style.top = "";
+      info.itemEl.style.width = "";
+      info.itemEl.style.zIndex = "";
+      info.itemEl.style.pointerEvents = "";
+      info.itemEl.classList.remove("uttryck-item-dragging");
+    }
+  }
+
+  function uttryckHanteraDropp(itemId, dropTyp) {
+    if (uttryckAktivtSteg === 2) { return uttryck2HanteraDropp(itemId, dropTyp); }
+    return false;
+  }
+
+  // ===== Steg 1: Räkna frukt (ingen dragning - bara räkna och skriva in) =====
+  var uttryck1FruktPool = ["🍎", "🍌", "🍇", "🍉", "🍒", "🍓"];
+  var uttryck1Data = null;
+
+  function initSteg1() {
+    var valda = uttryckShuffle(uttryck1FruktPool.slice()).slice(0, 3);
+    var antal = valda.map(function() { return Math.floor(Math.random() * 6) + 3; }); // 3-8 st
+    uttryck1Data = { typer: valda, antal: antal };
+    ritaSteg1();
+  }
+
+  function ritaSteg1() {
+    // Bygg en blandad lista av alla frukt-emojier (slumpad ordning) att räkna
+    var alla = [];
+    uttryck1Data.typer.forEach(function(f, fi) {
+      for (var i = 0; i < uttryck1Data.antal[fi]; i++) { alla.push(f); }
+    });
+    uttryckShuffle(alla);
+
+    var html = '<div class="uttryck-pool uttryck-pool-statisk">';
+    alla.forEach(function(f) {
+      html += '<span class="uttryck-item-frukt-statisk">' + f + '</span>';
+    });
+    html += '</div><div class="uttryck-raknerad">';
+    uttryck1Data.typer.forEach(function(f, fi) {
+      html += '<div class="uttryck-raknefalt">' +
+        '<span class="uttryck-raknefalt-ikon">' + f + '</span>' +
+        '<input type="number" class="uttryck4-input" id="s1input' + fi + '">' +
+        '</div>';
+    });
+    html += '</div>';
+    html += '<button class="algebra-kolla-knapp" onclick="kontrolleraSteg1()">Kolla svar</button> ';
+    html += '<button class="algebra-ny-knapp" onclick="initSteg1()">🔄 Nytt räkneexempel</button>';
+    html += '<p id="s1Feedback"></p>';
+    document.getElementById("uttryckSteg1Container").innerHTML = html;
+  }
+
+  function kontrolleraSteg1() {
+    var ratt = true;
+    var facitDelar = [];
+    uttryck1Data.typer.forEach(function(f, fi) {
+      var v = parseInt(document.getElementById("s1input" + fi).value, 10);
+      if (v !== uttryck1Data.antal[fi]) { ratt = false; }
+      facitDelar.push(f + " " + uttryck1Data.antal[fi] + " st");
+    });
+    var feedback = document.getElementById("s1Feedback");
+    if (ratt) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte helt rätt. Rätt svar: ' + facitDelar.join(", ") + ".</span>";
+    }
+  }
+
+  // ===== Steg 2 & 3 delar samma termtyper/färger =====
+  var uttryckTermTyper = [
+    { key: "x", farg: "#4a6fa5", label: "x" },
+    { key: "y", farg: "#8a6fb0", label: "y" },
+    { key: "tal", farg: "#e0a53f", label: "" }
+  ];
+
+  function uttryckFormateraTerm(varde, label) {
+    if (varde < 0) { return "−" + Math.abs(varde) + label; }
+    return "+" + varde + label;
+  }
+
+  // ===== Steg 2: Sortera termer (byt plats så samma sort hamnar ihop),
+  // sen summera hur mycket det är av varje sort =====
+  var uttryck2Data = null;
+
+  function initSteg2() {
+    var termer = [];
+    var idc = 0;
+    var facit = { x: 0, y: 0, tal: 0 };
+    uttryckTermTyper.forEach(function(t) {
+      var antal = Math.floor(Math.random() * 2) + 2; // 2-3 per typ
+      for (var i = 0; i < antal; i++) {
+        var tecken = Math.random() < 0.5 ? 1 : -1;
+        var varde = tecken * (Math.floor(Math.random() * 6) + 1);
+        facit[t.key] += varde;
+        termer.push({
+          id: "s2item" + (idc++), typ: t.key, varde: varde,
+          text: uttryckFormateraTerm(varde, t.label), farg: t.farg
+        });
+      }
+    });
+    uttryckShuffle(termer);
+    uttryck2Data = { termer: termer, facit: facit, sorteringKlar: false };
+    ritaSteg2();
+  }
+
+  function ritaSteg2() {
+    var html = '<div class="uttryck-pool">';
+    uttryck2Data.termer.forEach(function(item, i) {
+      html += '<div class="uttryck-item" id="' + item.id + '" data-dropzone="swap' + i + '" style="background:' + item.farg + '" ' +
+        'onmousedown="uttryckStartDrag(2,\'' + item.id + '\',event)" ' +
+        'ontouchstart="uttryckStartDrag(2,\'' + item.id + '\',event)">' + item.text + '</div>';
+    });
+    html += '</div>';
+
+    if (!uttryck2Data.sorteringKlar) {
+      html += '<button class="algebra-ny-knapp" onclick="uttryck2GaTillSummering()">✅ Klar med sorteringen</button>';
+    } else {
+      var grupper = uttryck2GrupperaEfterOrdning();
+      html += '<div class="uttryck-horisontell-lista">';
+      grupper.forEach(function(g, gi) {
+        var t = uttryckTermTyper.filter(function(x) { return x.key === g.typ; })[0];
+        var uttryckText = g.termer.map(function(term) { return term.text; }).join(" ");
+        html += '<div class="uttryck-horisontell-rad">' +
+          '<span style="color:' + t.farg + ';">' + uttryckText + '</span>' +
+          ' = <input type="number" id="s2GruppInput_' + gi + '" class="uttryck4-input">' +
+          (t.label ? ' <span class="variabel-x">' + t.label + '</span>' : '') +
+          '</div>';
+      });
+      html += '</div>';
+      html += '<button class="algebra-kolla-knapp" onclick="kontrolleraSteg2Summa()">Kolla svar</button>';
+      html += '<p id="s2Feedback"></p>';
+    }
+    html += '<button class="algebra-ny-knapp" onclick="initSteg2()">🔄 Nytt uttryck</button>';
+    document.getElementById("uttryckSteg2Container").innerHTML = html;
+  }
+
+  // Grupperar termerna i NUVARANDE ordning i sammanhängande "körer" av
+  // samma typ - dvs precis den ordning eleven själv sorterat fram dem i.
+  function uttryck2GrupperaEfterOrdning() {
+    var grupper = [];
+    uttryck2Data.termer.forEach(function(term) {
+      var sistaGrupp = grupper[grupper.length - 1];
+      if (sistaGrupp && sistaGrupp.typ === term.typ) {
+        sistaGrupp.termer.push(term);
+      } else {
+        grupper.push({ typ: term.typ, termer: [term] });
+      }
+    });
+    return grupper;
+  }
+
+  function uttryck2HanteraDropp(itemId, dropTyp) {
+    if (dropTyp.indexOf("swap") !== 0) { return false; }
+    var targetIndex = parseInt(dropTyp.slice(4), 10);
+    var sourceIndex = -1;
+    for (var i = 0; i < uttryck2Data.termer.length; i++) {
+      if (uttryck2Data.termer[i].id === itemId) { sourceIndex = i; break; }
+    }
+    if (sourceIndex === -1 || sourceIndex === targetIndex) { return false; }
+
+    var tmp = uttryck2Data.termer[sourceIndex];
+    uttryck2Data.termer[sourceIndex] = uttryck2Data.termer[targetIndex];
+    uttryck2Data.termer[targetIndex] = tmp;
+    ritaSteg2();
+    return true;
+  }
+
+  function uttryck2GaTillSummering() {
+    uttryck2Data.sorteringKlar = true;
+    ritaSteg2();
+  }
+
+  function kontrolleraSteg2Summa() {
+    var feedback = document.getElementById("s2Feedback");
+    var grupper = uttryck2GrupperaEfterOrdning();
+    var alltRatt = true;
+    var facitDelar = [];
+
+    grupper.forEach(function(g, gi) {
+      var summa = g.termer.reduce(function(a, b) { return a + b.varde; }, 0);
+      var input = document.getElementById("s2GruppInput_" + gi);
+      var v = input ? parseInt(input.value, 10) : NaN;
+      if (isNaN(v)) { v = 0; }
+      if (v !== summa) { alltRatt = false; }
+      var t = uttryckTermTyper.filter(function(x) { return x.key === g.typ; })[0];
+      facitDelar.push(summa + (t.label || ""));
+    });
+
+    if (alltRatt) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Rätt svar: ' + facitDelar.join(", ") + ".</span>";
+    }
+  }
+
+  // ===== Steg 3: Förenkla helt själv (ingen dragning) - fyll i tomma rutor =====
+  var uttryck4Facit = null;
+
+  function uttryck4TextFranSummor(summor) {
+    var delar = [];
+    uttryckTermTyper.forEach(function(t) {
+      var v = summor[t.key];
+      if (v !== 0) { delar.push(uttryckFormateraTerm(v, t.label)); }
+    });
+    if (delar.length === 0) { return "0"; }
+    var text = delar[0];
+    for (var i = 1; i < delar.length; i++) {
+      text += delar[i].charAt(0) === "−" ? (" − " + delar[i].slice(1)) : (" + " + delar[i].slice(1));
+    }
+    return text;
+  }
+
+  function genereraSteg3Forenkla() {
+    var antal = Math.floor(Math.random() * 5) + 6; // 6-10
+    var summor = { x: 0, y: 0, tal: 0 };
+    var delar = [];
+    for (var i = 0; i < antal; i++) {
+      var t = uttryckTermTyper[Math.floor(Math.random() * 3)];
+      var tecken = Math.random() < 0.5 ? 1 : -1;
+      var varde = tecken * (Math.floor(Math.random() * 9) + 1);
+      summor[t.key] += varde;
+      var termText = uttryckFormateraTerm(varde, t.label);
+      var visadText = (i === 0)
+        ? (termText.charAt(0) === "+" ? termText.slice(1) : termText)
+        : (termText.charAt(0) === "−" ? " − " + termText.slice(1) : " + " + termText.slice(1));
+      delar.push('<span style="color:' + t.farg + ';font-weight:bold;">' + visadText + '</span>');
+    }
+    uttryck4Facit = summor;
+
+    document.getElementById("uttryckSteg3Uppgift").innerHTML = delar.join("");
+    document.getElementById("uttryckSteg3XInput").value = "";
+    document.getElementById("uttryckSteg3YInput").value = "";
+    document.getElementById("uttryckSteg3TalInput").value = "";
+    document.getElementById("uttryckSteg3Feedback").innerHTML = "";
+  }
+
+  // Tolkar ett fritt skrivet uttryck, t.ex. "7x - 4y + 3" eller "+3 - 4y+7x",
+  // till {x, y, tal}. Sparad för eventuellt framtida bruk - används inte
+  // just nu (Steg 3 använder tre separata rutor istället).
+  function uttryckParseaFritt(text) {
+    var t = text.replace(/\s+/g, "");
+    if (t.length === 0) { return null; }
+    if (t.charAt(0) !== "+" && t.charAt(0) !== "-") { t = "+" + t; }
+
+    var termer = t.match(/[+-][^+-]+/g);
+    if (!termer) { return null; }
+
+    var resultat = { x: 0, y: 0, tal: 0 };
+    for (var i = 0; i < termer.length; i++) {
+      var term = termer[i];
+      var tecken = term.charAt(0) === "-" ? -1 : 1;
+      var rest = term.slice(1);
+      if (rest.length === 0) { return null; }
+
+      var sistaTecken = rest.charAt(rest.length - 1).toLowerCase();
+      if (sistaTecken === "x" || sistaTecken === "y") {
+        var talDel = rest.slice(0, -1);
+        var varde = talDel === "" ? 1 : parseInt(talDel, 10);
+        if (isNaN(varde)) { return null; }
+        resultat[sistaTecken] += tecken * varde;
+      } else {
+        var vardeTal = parseInt(rest, 10);
+        if (isNaN(vardeTal)) { return null; }
+        resultat.tal += tecken * vardeTal;
+      }
+    }
+    return resultat;
+  }
+
+  function kontrolleraSteg3Forenkla() {
+    var x = parseInt(document.getElementById("uttryckSteg3XInput").value, 10);
+    var y = parseInt(document.getElementById("uttryckSteg3YInput").value, 10);
+    var tal = parseInt(document.getElementById("uttryckSteg3TalInput").value, 10);
+    if (isNaN(x)) { x = 0; }
+    if (isNaN(y)) { y = 0; }
+    if (isNaN(tal)) { tal = 0; }
+
+    var feedback = document.getElementById("uttryckSteg3Feedback");
+    if (x === uttryck4Facit.x && y === uttryck4Facit.y && tal === uttryck4Facit.tal) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Rätt svar var ' +
+        uttryck4TextFranSummor(uttryck4Facit) + ".</span>";
+    }
+  }
+
   function genereraUttryckSub() {
     var a = Math.floor(Math.random() * 5) + 2;   // koefficient 2-6
     var b = Math.floor(Math.random() * 10) + 1;  // konstant 1-10
@@ -1243,6 +1975,72 @@
       feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
     } else {
       feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Testa igen!</span>';
+    }
+  }
+
+  // ===== Förenkla uttryck, Steg 2: positiva och negativa koefficienter =====
+  var uttryckForenkla2RattSvar = null;
+
+  function genereraUttryckForenkla2() {
+    var a = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 6) + 1);
+    var b = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 6) + 1);
+    uttryckForenkla2RattSvar = a + b;
+
+    var del1 = (a < 0 ? "−" + Math.abs(a) : a) + '<span class="variabel-x">x</span>';
+    var del2 = (b < 0 ? " − " + Math.abs(b) : " + " + b) + '<span class="variabel-x">x</span>';
+
+    document.getElementById("uttryckForenkla2Uppgift").innerHTML = del1 + del2;
+    document.getElementById("uttryckForenkla2Input").value = "";
+    document.getElementById("uttryckForenkla2Feedback").innerHTML = "";
+  }
+
+  function kontrolleraUttryckForenkla2() {
+    var v = parseInt(document.getElementById("uttryckForenkla2Input").value, 10);
+    var feedback = document.getElementById("uttryckForenkla2Feedback");
+    if (isNaN(v)) {
+      feedback.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>';
+      return;
+    }
+    if (v === uttryckForenkla2RattSvar) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Rätt svar var ' +
+        uttryckForenkla2RattSvar + 'x.</span>';
+    }
+  }
+
+  // ===== Förenkla uttryck, Steg 3: x-termer + ett tal, allt kan vara +/- =====
+  var uttryckForenkla3Facit = null;
+
+  function genereraUttryckForenkla3() {
+    var a = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 6) + 1);
+    var b = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 6) + 1);
+    var c = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 9) + 1);
+    uttryckForenkla3Facit = { x: a + b, tal: c };
+
+    var del1 = (a < 0 ? "−" + Math.abs(a) : a) + '<span class="variabel-x">x</span>';
+    var del2 = (b < 0 ? " − " + Math.abs(b) : " + " + b) + '<span class="variabel-x">x</span>';
+    var del3 = (c < 0 ? " − " + Math.abs(c) : " + " + c);
+
+    document.getElementById("uttryckForenkla3Uppgift").innerHTML = del1 + del2 + del3;
+    document.getElementById("uttryckForenkla3XInput").value = "";
+    document.getElementById("uttryckForenkla3TalInput").value = "";
+    document.getElementById("uttryckForenkla3Feedback").innerHTML = "";
+  }
+
+  function kontrolleraUttryckForenkla3() {
+    var x = parseInt(document.getElementById("uttryckForenkla3XInput").value, 10);
+    var tal = parseInt(document.getElementById("uttryckForenkla3TalInput").value, 10);
+    if (isNaN(x)) { x = 0; }
+    if (isNaN(tal)) { tal = 0; }
+
+    var feedback = document.getElementById("uttryckForenkla3Feedback");
+    var f = uttryckForenkla3Facit;
+    if (x === f.x && tal === f.tal) {
+      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+    } else {
+      var facitText = f.x + "x" + (f.tal >= 0 ? " + " + f.tal : " − " + Math.abs(f.tal));
+      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Rätt svar var ' + facitText + ".</span>";
     }
   }
 
@@ -1426,14 +2224,54 @@
     }
   }
 
+  // ===== Svensk sifferordskonvertering (för "bygg talet"-ordläget) =====
+  var talOrdEnsiffrigt = ["noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio",
+    "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton"];
+  var talOrdTiotal = ["", "", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio"];
+
+  function talTillOrdUnder100(n) {
+    if (n < 20) { return talOrdEnsiffrigt[n]; }
+    var t = Math.floor(n / 10), e = n % 10;
+    return talOrdTiotal[t] + (e > 0 ? talOrdEnsiffrigt[e] : "");
+  }
+
+  function talTillOrdUnder1000(n) {
+    if (n < 100) { return talTillOrdUnder100(n); }
+    var h = Math.floor(n / 100), rest = n % 100;
+    var hundraDel = (h === 1 ? "hundra" : talOrdEnsiffrigt[h] + "hundra");
+    return hundraDel + (rest > 0 ? talTillOrdUnder100(rest) : "");
+  }
+
+  function talTillOrd(n) {
+    if (n === 0) { return "noll"; }
+    var tusenDel = Math.floor(n / 1000);
+    var rest = n % 1000;
+    var resultat = "";
+    if (tusenDel === 1) {
+      resultat += "tusen";
+    } else if (tusenDel > 0) {
+      var tusenOrd = talTillOrdUnder100(tusenDel);
+      // "ett" + "tusen" slås ihop till "ettusen" (en bokstav faller bort),
+      // t.ex. tjugoett -> tjugoettusen, inte tjugoetttusen.
+      resultat += (tusenOrd.slice(-3) === "ett") ? tusenOrd + "usen" : tusenOrd + "tusen";
+    }
+    if (rest > 0) {
+      resultat += talTillOrdUnder1000(rest);
+    }
+    return resultat;
+  }
+
   // ===== Abakus: Positionssystemet =====
-  var abakusKolumner = ["Tusental", "Hundratal", "Tiotal", "Ental"];
-  var abakusVarden = [0, 0, 0, 0];
+  var abakusKolumner = ["Tiotusental", "Tusental", "Hundratal", "Tiotal", "Ental"];
+  var abakusVarden = [0, 0, 0, 0, 0];
   var abakusMalTal = null;
+  var abakusMalAromOrd = false; // visas målet som ord (t.ex. "tvåhundrasju") ibland
+  var abakusValdKolonn = 4; // vilken rulle piltangenterna upp/ner påverkar - startar på Ental
 
   function initAbakus() {
-    abakusVarden = [0, 0, 0, 0];
+    abakusVarden = [0, 0, 0, 0, 0];
     abakusMalTal = null;
+    abakusValdKolonn = 4;
     ritaAbakus();
   }
 
@@ -1447,25 +2285,112 @@
   }
 
   function abakusNollstall() {
-    abakusVarden = [0, 0, 0, 0];
+    abakusVarden = [0, 0, 0, 0, 0];
     ritaAbakus();
   }
 
   function abakusAndraTal(delta) {
-    var tal = abakusVarden[0] * 1000 + abakusVarden[1] * 100 + abakusVarden[2] * 10 + abakusVarden[3];
+    var gamlaVarden = abakusVarden.slice();
+
+    var tal = abakusRaknaUtTal();
     tal += delta;
     if (tal < 0) { tal = 0; }
-    if (tal > 9999) { tal = 9999; }
-    abakusVarden[0] = Math.floor(tal / 1000) % 10;
-    abakusVarden[1] = Math.floor(tal / 100) % 10;
-    abakusVarden[2] = Math.floor(tal / 10) % 10;
-    abakusVarden[3] = tal % 10;
-    ritaAbakus();
+    if (tal > 99999) { tal = 99999; }
+    for (var i = 0; i < abakusVarden.length; i++) {
+      abakusVarden[i] = Math.floor(tal / Math.pow(10, abakusVarden.length - 1 - i)) % 10;
+    }
+
+    abakusUppdateraSiffror(gamlaVarden);
+  }
+
+  // Uppdaterar bara de rullar vars siffra faktiskt ändrades (jämfört med
+  // gamlaVarden) - så bara DE animeras, inte alla rullar varje gång.
+  function abakusUppdateraSiffror(gamlaVarden) {
+    for (var i = 0; i < abakusVarden.length; i++) {
+      if (gamlaVarden[i] !== abakusVarden[i]) {
+        var span = document.getElementById("abakusSiffra" + i);
+        if (span) {
+          span.textContent = abakusVarden[i];
+          span.classList.remove("abakus-rulle-anim");
+          void span.offsetWidth; // tvinga omflöde så animationen kan spelas igen
+          span.classList.add("abakus-rulle-anim");
+        }
+      }
+    }
+
+    var tal = abakusRaknaUtTal();
+    var talText = document.getElementById("abakusTalText");
+    if (talText) { talText.textContent = tal; }
+
+    if (abakusMalTal !== null) {
+      var rattMsg = document.getElementById("abakusRattMsg");
+      if (rattMsg) { rattMsg.style.display = (tal === abakusMalTal) ? "block" : "none"; }
+    }
+  }
+
+  // Uppdaterar bara vilken rulle som är highlightad (ingen animation,
+  // inget värde ändras - bara markören flyttas).
+  function abakusUppdateraHighlight() {
+    for (var i = 0; i < abakusVarden.length; i++) {
+      var rulle = document.getElementById("abakusRulle" + i);
+      if (rulle) {
+        if (i === abakusValdKolonn) { rulle.classList.add("abakus-rulle-vald"); }
+        else { rulle.classList.remove("abakus-rulle-vald"); }
+      }
+    }
+  }
+
+  // Rulla en kolumn med scrollhjulet - upp = öka, ner = minska.
+  function abakusRullaMedHjul(kolonn, e) {
+    e.preventDefault();
+    var varde = Math.pow(10, abakusKolumner.length - 1 - kolonn);
+    abakusAndraTal(e.deltaY < 0 ? varde : -varde);
+  }
+
+  // Dra i en rulle (mus eller touch) för att stega den upp eller ner,
+  // ungefär som att rulla ett hjul på en spelautomat.
+  var abakusRullDragger = false;
+  var abakusRullStartY = 0;
+  var abakusRullKolonn = 0;
+  var ABAKUS_RULL_TROSKEL = 25; // pixlar per steg
+
+  function abakusRullStart(kolonn, e) {
+    abakusValdKolonn = kolonn;
+    abakusUppdateraHighlight();
+    abakusRullDragger = true;
+    abakusRullKolonn = kolonn;
+    abakusRullStartY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    window.onmousemove = abakusRullFlytta;
+    window.onmouseup = abakusRullSlut;
+    window.ontouchmove = function(e2) { abakusRullFlytta(e2); e2.preventDefault(); };
+    window.ontouchend = abakusRullSlut;
+  }
+
+  function abakusRullFlytta(e) {
+    if (!abakusRullDragger) { return; }
+    var y = e.touches ? e.touches[0].clientY : e.clientY;
+    var delta = abakusRullStartY - y; // positivt = dragit uppåt
+
+    if (Math.abs(delta) >= ABAKUS_RULL_TROSKEL) {
+      var varde = Math.pow(10, abakusKolumner.length - 1 - abakusRullKolonn);
+      abakusAndraTal(delta > 0 ? varde : -varde);
+      abakusRullStartY = y; // nollställ referensen för nästa steg
+    }
+  }
+
+  function abakusRullSlut() {
+    abakusRullDragger = false;
+    window.onmousemove = null;
+    window.onmouseup = null;
+    window.ontouchmove = null;
+    window.ontouchend = null;
   }
 
   function abakusNyttMaltal() {
-    abakusMalTal = Math.floor(Math.random() * 9000) + 1000; // 1000-9999
-    abakusVarden = [0, 0, 0, 0];
+    abakusMalTal = Math.floor(Math.random() * 90000) + 10000; // 10000-99999
+    abakusMalAromOrd = Math.random() < 0.5; // ibland som ord istället för siffror
+    abakusVarden = [0, 0, 0, 0, 0];
     ritaAbakus();
   }
 
@@ -1474,34 +2399,45 @@
     ritaAbakus();
   }
 
+  function abakusRaknaUtTal() {
+    var tal = 0;
+    for (var i = 0; i < abakusVarden.length; i++) {
+      tal += abakusVarden[i] * Math.pow(10, abakusVarden.length - 1 - i);
+    }
+    return tal;
+  }
+
   function ritaAbakus() {
     var html = '<div class="abakus-rad">';
     abakusKolumner.forEach(function(kol, ki) {
-      var varde = Math.pow(10, 3 - ki); // 1000, 100, 10, 1
+      var varde = Math.pow(10, abakusKolumner.length - 1 - ki);
       html += '<div class="abakus-kolonn"><div class="abakus-etikett">' + kol + '</div>';
-      for (var p = 9; p >= 1; p--) {
-        var fylld = (p <= abakusVarden[ki]);
-        html += '<div class="abakus-parla' + (fylld ? ' abakus-parla-fylld' : '') +
-                '" onclick="abakusKlick(' + ki + ',' + p + ')">' + p + '</div>';
-      }
-      html += '<div class="abakus-siffra">' + abakusVarden[ki] + '</div>';
+      html += '<div class="abakus-rulle' + (ki === abakusValdKolonn ? ' abakus-rulle-vald' : '') +
+              '" id="abakusRulle' + ki + '" ' +
+              'onmousedown="abakusRullStart(' + ki + ',event)" ' +
+              'ontouchstart="abakusRullStart(' + ki + ',event)" ' +
+              'onwheel="abakusRullaMedHjul(' + ki + ',event)">' +
+              '<span class="abakus-rulle-pil">▲</span>' +
+              '<span class="abakus-rulle-siffra" id="abakusSiffra' + ki + '">' + abakusVarden[ki] + '</span>' +
+              '<span class="abakus-rulle-pil">▼</span>' +
+              '</div>';
       html += '<div class="abakus-knapp-rad">' +
-              '<button class="abakus-kol-knapp" onclick="abakusAndraTal(-' + varde + ')">−' + varde + '</button>' +
               '<button class="abakus-kol-knapp" onclick="abakusAndraTal(' + varde + ')">+' + varde + '</button>' +
+              '<button class="abakus-kol-knapp" onclick="abakusAndraTal(-' + varde + ')">−' + varde + '</button>' +
               '</div>';
       html += '</div>';
     });
     html += '</div>';
 
-    var tal = abakusVarden[0] * 1000 + abakusVarden[1] * 100 + abakusVarden[2] * 10 + abakusVarden[3];
-    html += '<p class="abakus-tal-visning">Talet är: <strong>' + tal + '</strong></p>';
-    html += '<p class="abakus-tips">Tips: piltangenterna ↑ / → lägger till 1, ↓ / ← drar ifrån 1.</p>';
+    var tal = abakusRaknaUtTal();
+    html += '<p class="abakus-tal-visning">Talet är: <strong id="abakusTalText">' + tal + '</strong></p>';
+    html += '<p class="abakus-tips">Tips: dra i en rulle, scrolla på den, eller välj kolumn med ←/→ och stega med ↑/↓.</p>';
 
     if (abakusMalTal !== null) {
-      html += '<p class="abakus-mal">🎯 Bygg talet: <strong>' + abakusMalTal + '</strong></p>';
-      if (tal === abakusMalTal) {
-        html += '<p class="algebra-ratt">✅ Rätt! Bra jobbat.</p>';
-      }
+      var malVisning = abakusMalAromOrd ? talTillOrd(abakusMalTal) : abakusMalTal;
+      html += '<p class="abakus-mal">🎯 Bygg talet: <strong>' + malVisning + '</strong></p>';
+      html += '<p class="algebra-ratt" id="abakusRattMsg" style="display:' +
+              (tal === abakusMalTal ? "block" : "none") + '">✅ Rätt! Bra jobbat.</p>';
       html += '<button class="algebra-ny-knapp" onclick="abakusNyttMaltal()">🔄 Nytt tal att bygga</button> ';
       html += '<button class="algebra-ny-knapp" onclick="abakusAvslutaOvning()">↩️ Fri utforskning</button>';
     } else {
@@ -1514,16 +2450,232 @@
 
   // Piltangenter styr abakusen (bara aktivt när abakus-sidan visas -
   // kollar om #abakusContainer finns i DOM:en just nu).
+  // Vänster/höger väljer vilken rulle (kolumn) som är aktiv - den highlightas.
+  // Upp/ner ökar/minskar den valda rullen med dess platsvärde.
   document.addEventListener("keydown", function(e) {
     var container = document.getElementById("abakusContainer");
     if (!container) { return; }
 
-    if (e.key === "ArrowUp" || e.key === "ArrowRight") {
+    if (e.key === "ArrowLeft") {
       e.preventDefault();
-      abakusAndraTal(1);
-    } else if (e.key === "ArrowDown" || e.key === "ArrowLeft") {
+      abakusValdKolonn = Math.max(0, abakusValdKolonn - 1);
+      abakusUppdateraHighlight();
+    } else if (e.key === "ArrowRight") {
       e.preventDefault();
-      abakusAndraTal(-1);
+      abakusValdKolonn = Math.min(abakusKolumner.length - 1, abakusValdKolonn + 1);
+      abakusUppdateraHighlight();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      abakusAndraTal(Math.pow(10, abakusKolumner.length - 1 - abakusValdKolonn));
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      abakusAndraTal(-Math.pow(10, abakusKolumner.length - 1 - abakusValdKolonn));
+    }
+  });
+
+  // ===== Decimal-abakus: Positionssystemet med decimaler =====
+  // Kombinerar heltalsdel (Hundratal-Ental) OCH decimaldel (Tiondel-
+  // Tiotusendel) i EN sifferrad med ett komma emellan - t.ex. 347,6829.
+  // Internt räknas allt som ett enda 7-siffrigt heltal (i "tiotusendelar"),
+  // exakt samma carry-logik som den vanliga abakusen, bara med fler siffror
+  // och ett komma-tecken inritat mellan position 2 och 3 vid visning.
+  var decimalKolumner = ["Hundratal", "Tiotal", "Ental", "Tiondel", "Hundradel", "Tusendel", "Tiotusendel"];
+  var decimalPlatsetiketter = ["100", "10", "1", "0,1", "0,01", "0,001", "0,0001"];
+  var decimalVarden = [0, 0, 0, 0, 0, 0, 0]; // 7 siffror, representerar hela talet i tiotusendelar
+  var decimalMalTal = null;
+  var decimalValdKolonn = 2; // startar på Ental
+
+  function initDecimalAbakus() {
+    decimalVarden = [0, 0, 0, 0, 0, 0, 0];
+    decimalMalTal = null;
+    decimalValdKolonn = 2;
+    ritaDecimalAbakus();
+  }
+
+  function decimalRaknaUtTal() {
+    var tal = 0;
+    for (var i = 0; i < decimalVarden.length; i++) {
+      tal += decimalVarden[i] * Math.pow(10, decimalVarden.length - 1 - i);
+    }
+    return tal; // 0-9999999 (antal tiotusendelar, dvs talet x 10000)
+  }
+
+  function decimalFormatera(tiotusendelar) {
+    var heltalDel = Math.floor(tiotusendelar / 10000);
+    var decimalDel = tiotusendelar % 10000;
+    var decimalStr = String(decimalDel).padStart(4, "0");
+    return heltalDel + "," + decimalStr;
+  }
+
+  function decimalNollstall() {
+    decimalVarden = [0, 0, 0, 0, 0, 0, 0];
+    ritaDecimalAbakus();
+  }
+
+  function decimalAndraTal(delta) {
+    var gamlaVarden = decimalVarden.slice();
+
+    var tal = decimalRaknaUtTal();
+    tal += delta;
+    if (tal < 0) { tal = 0; }
+    if (tal > 9999999) { tal = 9999999; }
+    for (var i = 0; i < decimalVarden.length; i++) {
+      decimalVarden[i] = Math.floor(tal / Math.pow(10, decimalVarden.length - 1 - i)) % 10;
+    }
+
+    decimalUppdateraSiffror(gamlaVarden);
+  }
+
+  function decimalUppdateraSiffror(gamlaVarden) {
+    for (var i = 0; i < decimalVarden.length; i++) {
+      if (gamlaVarden[i] !== decimalVarden[i]) {
+        var span = document.getElementById("decimalSiffra" + i);
+        if (span) {
+          span.textContent = decimalVarden[i];
+          span.classList.remove("abakus-rulle-anim");
+          void span.offsetWidth;
+          span.classList.add("abakus-rulle-anim");
+        }
+      }
+    }
+
+    var tal = decimalRaknaUtTal();
+    var talText = document.getElementById("decimalTalText");
+    if (talText) { talText.textContent = decimalFormatera(tal); }
+
+    if (decimalMalTal !== null) {
+      var rattMsg = document.getElementById("decimalRattMsg");
+      if (rattMsg) { rattMsg.style.display = (tal === decimalMalTal) ? "block" : "none"; }
+    }
+  }
+
+  function decimalUppdateraHighlight() {
+    for (var i = 0; i < decimalVarden.length; i++) {
+      var rulle = document.getElementById("decimalRulle" + i);
+      if (rulle) {
+        if (i === decimalValdKolonn) { rulle.classList.add("abakus-rulle-vald"); }
+        else { rulle.classList.remove("abakus-rulle-vald"); }
+      }
+    }
+  }
+
+  function decimalRullaMedHjul(kolonn, e) {
+    e.preventDefault();
+    var varde = Math.pow(10, decimalKolumner.length - 1 - kolonn);
+    decimalAndraTal(e.deltaY < 0 ? varde : -varde);
+  }
+
+  var decimalRullDragger = false;
+  var decimalRullStartY = 0;
+  var decimalRullKolonn = 0;
+
+  function decimalRullStart(kolonn, e) {
+    decimalValdKolonn = kolonn;
+    decimalUppdateraHighlight();
+    decimalRullDragger = true;
+    decimalRullKolonn = kolonn;
+    decimalRullStartY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    window.onmousemove = decimalRullFlytta;
+    window.onmouseup = decimalRullSlut;
+    window.ontouchmove = function(e2) { decimalRullFlytta(e2); e2.preventDefault(); };
+    window.ontouchend = decimalRullSlut;
+  }
+
+  function decimalRullFlytta(e) {
+    if (!decimalRullDragger) { return; }
+    var y = e.touches ? e.touches[0].clientY : e.clientY;
+    var delta = decimalRullStartY - y;
+
+    if (Math.abs(delta) >= ABAKUS_RULL_TROSKEL) {
+      var varde = Math.pow(10, decimalKolumner.length - 1 - decimalRullKolonn);
+      decimalAndraTal(delta > 0 ? varde : -varde);
+      decimalRullStartY = y;
+    }
+  }
+
+  function decimalRullSlut() {
+    decimalRullDragger = false;
+    window.onmousemove = null;
+    window.onmouseup = null;
+    window.ontouchmove = null;
+    window.ontouchend = null;
+  }
+
+  function decimalNyttMaltal() {
+    decimalMalTal = Math.floor(Math.random() * 9999999) + 1; // 1-9999999 tiotusendelar
+    decimalVarden = [0, 0, 0, 0, 0, 0, 0];
+    ritaDecimalAbakus();
+  }
+
+  function decimalAvslutaOvning() {
+    decimalMalTal = null;
+    ritaDecimalAbakus();
+  }
+
+  function ritaDecimalAbakus() {
+    var html = '<div class="abakus-rad">';
+    decimalKolumner.forEach(function(kol, ki) {
+      var varde = Math.pow(10, decimalKolumner.length - 1 - ki);
+      html += '<div class="abakus-kolonn"><div class="abakus-etikett">' + kol + '</div>';
+      html += '<div class="abakus-rulle' + (ki === decimalValdKolonn ? ' abakus-rulle-vald' : '') +
+              '" id="decimalRulle' + ki + '" ' +
+              'onmousedown="decimalRullStart(' + ki + ',event)" ' +
+              'ontouchstart="decimalRullStart(' + ki + ',event)" ' +
+              'onwheel="decimalRullaMedHjul(' + ki + ',event)">' +
+              '<span class="abakus-rulle-pil">▲</span>' +
+              '<span class="abakus-rulle-siffra" id="decimalSiffra' + ki + '">' + decimalVarden[ki] + '</span>' +
+              '<span class="abakus-rulle-pil">▼</span>' +
+              '</div>';
+      html += '<div class="abakus-knapp-rad">' +
+              '<button class="abakus-kol-knapp" onclick="decimalAndraTal(' + varde + ')">+' + decimalPlatsetiketter[ki] + '</button>' +
+              '<button class="abakus-kol-knapp" onclick="decimalAndraTal(-' + varde + ')">−' + decimalPlatsetiketter[ki] + '</button>' +
+              '</div>';
+      html += '</div>';
+      // Rita in ett komma-tecken visuellt mellan Ental (index 2) och Tiondel (index 3)
+      if (ki === 2) {
+        html += '<div class="decimal-komma">,</div>';
+      }
+    });
+    html += '</div>';
+
+    var tal = decimalRaknaUtTal();
+    html += '<p class="abakus-tal-visning">Talet är: <strong id="decimalTalText">' + decimalFormatera(tal) + '</strong></p>';
+    html += '<p class="abakus-tips">Tips: dra i en rulle, scrolla på den, eller välj kolumn med ←/→ och stega med ↑/↓.</p>';
+
+    if (decimalMalTal !== null) {
+      html += '<p class="abakus-mal">🎯 Bygg talet: <strong>' + decimalFormatera(decimalMalTal) + '</strong></p>';
+      html += '<p class="algebra-ratt" id="decimalRattMsg" style="display:' +
+              (tal === decimalMalTal ? "block" : "none") + '">✅ Rätt! Bra jobbat.</p>';
+      html += '<button class="algebra-ny-knapp" onclick="decimalNyttMaltal()">🔄 Nytt tal att bygga</button> ';
+      html += '<button class="algebra-ny-knapp" onclick="decimalAvslutaOvning()">↩️ Fri utforskning</button>';
+    } else {
+      html += '<button class="algebra-ny-knapp" onclick="decimalNollstall()">🔄 Nollställ</button> ';
+      html += '<button class="algebra-ny-knapp" onclick="decimalNyttMaltal()">🎯 Öva: bygg ett tal</button>';
+    }
+
+    document.getElementById("decimalAbakusContainer").innerHTML = html;
+  }
+
+  // Piltangenter styr decimal-abakusen (bara aktivt när decimal-sidan visas).
+  document.addEventListener("keydown", function(e) {
+    var container = document.getElementById("decimalAbakusContainer");
+    if (!container) { return; }
+
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      decimalValdKolonn = Math.max(0, decimalValdKolonn - 1);
+      decimalUppdateraHighlight();
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      decimalValdKolonn = Math.min(decimalKolumner.length - 1, decimalValdKolonn + 1);
+      decimalUppdateraHighlight();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      decimalAndraTal(Math.pow(10, decimalKolumner.length - 1 - decimalValdKolonn));
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      decimalAndraTal(-Math.pow(10, decimalKolumner.length - 1 - decimalValdKolonn));
     }
   });
 
@@ -2176,8 +3328,27 @@
   ];
 
   var jeopardyData = {};
+  var jeopardyLage = null; // "klassrum" eller "ova"
 
   function initJeopardy() {
+    jeopardyLage = null;
+    visaJeopardyLagesval();
+  }
+
+  function visaJeopardyLagesval() {
+    var html = '<div class="jeopardy-lagesval">' +
+      '<button class="algebra-ny-knapp jeopardy-lage-knapp" onclick="valjJeopardyLage(\'klassrum\')">' +
+      '🏫 Klassrumsversion<br><span class="jeopardy-lage-beskrivning">Läraren styr - bara frågan visas, gruppen diskuterar och ropar ut svaret</span>' +
+      '</button>' +
+      '<button class="algebra-ny-knapp jeopardy-lage-knapp" onclick="valjJeopardyLage(\'ova\')">' +
+      '✏️ Öva-version<br><span class="jeopardy-lage-beskrivning">Skriv in ditt svar och få det rättat direkt</span>' +
+      '</button>' +
+      '</div>';
+    document.getElementById("jeopardyBrada").innerHTML = html;
+  }
+
+  function valjJeopardyLage(lage) {
+    jeopardyLage = lage;
     jeopardyData = {};
     jeopardyKategorier.forEach(function(kat, ki) {
       jeopardyPoangLista.forEach(function(p, ni) {
@@ -2191,7 +3362,11 @@
   }
 
   function ritaJeopardyBrada() {
-    var html = '<table class="jeopardy-tabell"><thead><tr>';
+    var html = '<div class="jeopardy-lage-rad">' +
+      '<span class="jeopardy-lage-visning">' +
+      (jeopardyLage === "klassrum" ? "🏫 Klassrumsversion" : "✏️ Öva-version") +
+      '</span> <button class="jeopardy-byt-lage-knapp" onclick="initJeopardy()">🔁 Byt läge</button></div>';
+    html += '<table class="jeopardy-tabell"><thead><tr>';
     jeopardyKategorier.forEach(function(kat) {
       html += "<th>" + kat + "</th>";
     });
@@ -2227,25 +3402,41 @@
     html += '<p class="jeopardy-etikett">' + poang + " poäng - " + jeopardyKategorier[katIndex] + "</p>";
     html += '<div class="algebra-uppgift">' + data.fraga + "</div>";
 
-    if (data.svarTyp === "heltal") {
-      html += '<div class="algebra-svar-rad">Svar: <input type="number" id="jeoSvarHel"> ' +
-              '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
-              '\')">Kolla svar</button></div>';
+    if (jeopardyLage === "klassrum") {
+      // Klassrumsversion: bara frågan, sen en "Visa svar"-knapp läraren
+      // klickar när gruppen har diskuterat klart.
+      html += '<div id="jeoKlassrumSvar"></div>';
+      html += '<button class="algebra-ny-knapp" onclick="visaJeopardyFacit(\'' + key + '\')">👁️ Visa svar</button>';
     } else {
-      html += '<div class="algebra-svar-rad jeo-brak-svar-rad">' +
-              '<div class="jeo-brak-input">' +
-              '<input type="number" id="jeoSvarTaljare" class="jeo-brak-ruta">' +
-              '<div class="jeo-brak-streck"></div>' +
-              '<input type="number" id="jeoSvarNamnare" class="jeo-brak-ruta">' +
-              '</div>' +
-              '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
-              '\')">Kolla svar</button></div>';
+      // Öva-version: svarsruta med direkt rättning.
+      if (data.svarTyp === "heltal") {
+        html += '<div class="algebra-svar-rad">Svar: <input type="number" id="jeoSvarHel"> ' +
+                '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
+                '\')">Kolla svar</button></div>';
+      } else {
+        html += '<div class="algebra-svar-rad jeo-brak-svar-rad">' +
+                '<div class="jeo-brak-input">' +
+                '<input type="number" id="jeoSvarTaljare" class="jeo-brak-ruta">' +
+                '<div class="jeo-brak-streck"></div>' +
+                '<input type="number" id="jeoSvarNamnare" class="jeo-brak-ruta">' +
+                '</div>' +
+                '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
+                '\')">Kolla svar</button></div>';
+      }
+      html += '<p id="jeoFeedback"></p>';
     }
-    html += '<p id="jeoFeedback"></p>';
+
     html += '<button class="algebra-ny-knapp" onclick="ritaJeopardyBrada()">⬅️ Tillbaka till spelplanen</button>';
     html += "</div>";
 
     document.getElementById("jeopardyBrada").innerHTML = html;
+  }
+
+  function visaJeopardyFacit(key) {
+    var data = jeopardyData[key];
+    var facitText = (data.svarTyp === "heltal") ? data.ratt : (data.ratt.taljare + "/" + data.ratt.namnare);
+    document.getElementById("jeoKlassrumSvar").innerHTML =
+      '<p class="jeopardy-facit">✅ Rätt svar: <strong>' + facitText + "</strong></p>";
   }
 
   function kontrolleraJeopardySvar(key) {
