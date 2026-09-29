@@ -67,6 +67,17 @@
   .tillbaka { background: #999; margin-top: 20px; }
   .knapp-repetition { background: #c1663a; }
   .knapp-repetition:hover { background: #a5522c; }
+  .tallinje-frukt-rad {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    max-width: 460px;
+    margin: 10px auto 0;
+    font-size: 28px;
+    line-height: 1;
+    min-height: 34px;
+  }
 
   .brodsmulor {
     font-size: 0.95em;
@@ -1065,6 +1076,7 @@
         if (data.simulering === "tallinjen-heltal-0-10") {
           html += '<canvas id="tallinjeKanvas" width="500" height="140"></canvas>';
           html += '<p style="text-align:center;" id="tallinjeText">Tal: <strong>0</strong></p>';
+          html += '<div id="tallinjeFrukter" class="tallinje-frukt-rad"></div>';
         }
         if (data.simulering === "ak9-brak-tallinje") {
           html += '<div class="ak9-brak-wrapper">' +
@@ -1429,6 +1441,13 @@
 
     var textEl = document.getElementById("tallinjeText");
     if (textEl) { textEl.innerHTML = "Tal: <strong>" + visatTal + "</strong>"; }
+
+    var fruktEl = document.getElementById("tallinjeFrukter");
+    if (fruktEl) {
+      var fruktHtml = "";
+      for (var f = 0; f < visatTal; f++) { fruktHtml += "🍎"; }
+      fruktEl.innerHTML = fruktHtml;
+    }
   }
 
   function tallinjePixelForVarde(varde) {
