@@ -6,7 +6,7 @@
 
 var innehall = window.innehall || {};
 
-innehall["biologi-vetenskap"] = {
+innehall["biologi-vetenskap-metod"] = {
   intro: "Biologi är ett vetenskapligt ämne. Det betyder att kunskapen inte bara är gissningar - den bygger på undersökningar som andra kan göra om och kontrollera. Här går vi igenom hur forskare (och du!) jobbar för att ta reda på hur naturen fungerar.",
 
   sektioner: [

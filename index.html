@@ -65,6 +65,8 @@
   }
   .knapp:hover { background: #3a5a8a; }
   .tillbaka { background: #999; margin-top: 20px; }
+  .knapp-repetition { background: #c1663a; }
+  .knapp-repetition:hover { background: #a5522c; }
 
   .brodsmulor {
     font-size: 0.95em;
@@ -992,7 +994,8 @@
     if (harBarn) {
       html += "<h2>" + node.titel + "</h2>";
       node.barn.forEach(function(barn) {
-        html += '<button class="knapp" onclick="visNod(\'' + barn.id + '\')">' +
+        var knappKlass = (barn.titel.indexOf("Repetition") === 0) ? "knapp knapp-repetition" : "knapp";
+        html += '<button class="' + knappKlass + '" onclick="visNod(\'' + barn.id + '\')">' +
                 barn.titel + '</button>';
       });
     } else {
