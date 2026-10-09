@@ -919,6 +919,10 @@
   .hafte-rad { margin: 14px 0; padding: 12px 14px; background: #eef5ee; border: 1px solid #c5dcc5; border-radius: 10px; }
   .hafte-knappar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
   .hafte-knappar .knapp { text-decoration: none; display: inline-block; }
+  .hafte-par { display: inline-flex; gap: 2px; }
+  .hafte-par .knapp { margin: 0; }
+  .hafte-par .knapp:first-child { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+  .hafte-ned { padding-left: 12px; padding-right: 12px; border-top-left-radius: 0; border-bottom-left-radius: 0; }
   .hafte-sidor { font-size: 14px; color: #555; margin: 8px 0 0; }
   .larar-lank { text-align: center; margin: 40px 0 10px; font-size: 13px; }
   .larar-lank a { color: #999; }
@@ -3938,7 +3942,10 @@
     if (!h || !(h.vanlig || h.lattlast || h.fordjupning)) { return ""; }
     var r = '<div class="hafte-rad"><strong>Läs som häfte (PDF)</strong><div class="hafte-knappar">';
     [["vanlig","Vanlig"],["lattlast","Lättläst"],["fordjupning","Fördjupning"]].forEach(function(p) {
-      if (h[p[0]]) { r += '<a class="knapp" href="' + h[p[0]] + '" target="_blank" rel="noopener">' + p[1] + '</a>'; }
+      if (h[p[0]]) {
+        r += '<span class="hafte-par"><a class="knapp" href="' + h[p[0]] + '" target="_blank" rel="noopener">' + p[1] + '</a>' +
+             '<a class="knapp hafte-ned" href="' + h[p[0]] + '" download title="Ladda ner ' + p[1].toLowerCase() + '" aria-label="Ladda ner ' + p[1].toLowerCase() + '">⬇</a></span>';
+      }
     });
     return r + '</div></div>';
   }
