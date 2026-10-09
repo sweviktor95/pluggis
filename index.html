@@ -916,32 +916,21 @@
   }
   .lasstod-etikett input { cursor: pointer; }
 
+  .hafte-rad { margin: 14px 0; padding: 12px 14px; background: #eef5ee; border: 1px solid #c5dcc5; border-radius: 10px; }
+  .hafte-knappar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .hafte-knappar .knapp { text-decoration: none; display: inline-block; }
+  .hafte-sidor { font-size: 14px; color: #555; margin: 8px 0 0; }
+  .larar-lank { text-align: center; margin: 40px 0 10px; font-size: 13px; }
+  .larar-lank a { color: #999; }
+
   @media print {
-    .knapp, .brodsmulor, .skriv-ut-rad, .inbaddad-ruta, .inbaddad-lank { display: none !important; }
+    .knapp, .brodsmulor, .hafte-rad, .inbaddad-ruta, .inbaddad-lank { display: none !important; }
     canvas, .slider-rad { display: none !important; }
     .sektion, .begrepp-box, .kontrollfraga, .exit-ticket {
       break-inside: avoid;
     }
     body { margin: 0; }
 
-    /* Fokusläge: större text och en sektion per utskriven sida */
-    body.fokus-utskrift { font-size: 1.3em; line-height: 1.6; }
-    body.fokus-utskrift h2 { font-size: 1.9em; }
-    body.fokus-utskrift .sektion {
-      page-break-after: always;
-      break-after: page;
-      font-size: 1.1em;
-    }
-    body.fokus-utskrift .sektion h3 { font-size: 1.3em; }
-    body.fokus-utskrift .sektion:last-of-type {
-      page-break-after: auto;
-      break-after: auto;
-    }
-    body.fokus-utskrift .exit-ticket {
-      page-break-before: always;
-      break-before: page;
-      font-size: 1.1em;
-    }
   }
 </style>
 </head>
@@ -953,6 +942,7 @@
 <div id="app"></div>
 
 <script src="innehall/struktur.js"></script>
+<script src="hafte/manifest.js"></script>
 
 <script src="innehall/matematik-tallinjen.js"></script>
 <script src="innehall/matematik-positionssystem.js"></script>
@@ -1126,6 +1116,7 @@
     if (harKlara) {
       html += '<p class="aterstall-rad"><a href="javascript:void(0)" onclick="aterstallFramsteg()">Nollställ framsteg</a></p>';
     }
+    html += '<p class="larar-lank"><a href="lararsida.html">För lärare</a></p>';
     app.innerHTML = html;
   }
 
@@ -1153,13 +1144,7 @@
       var data = innehall[id];
       if (data) { framsteg.senast = id; sparaFramsteg(); }
       html += "<h2>" + node.titel + "</h2>";
-      if (data) {
-        html += '<div class="skriv-ut-rad">';
-        html += '<button class="knapp skriv-ut-knapp" onclick="skrivUt()">🖨️ Skriv ut / Spara som PDF</button>';
-        html += '<label class="lasstod-etikett"><input type="checkbox" id="lasvanligtKryss"> ' +
-                'Lättläst utskrift: ett stycke per sida, större text</label>';
-        html += '</div>';
-      }
+      if (data) { html += haftenHtml(id); }
       if (data && data.sektioner) {
         // Rikare sida: intro + flera namngivna sektioner + ev. begreppsruta
         if (data.intro) { html += "<p>" + data.intro + "</p>"; }
@@ -3947,22 +3932,14 @@
     document.getElementById("ak9Cirklar").innerHTML = cirklarHtml;
   }
 
-  function skrivUt() {
-    var kryss = document.getElementById("lasvanligtKryss");
-    var fokuslage = kryss && kryss.checked;
-
-    if (fokuslage) {
-      document.body.classList.add("fokus-utskrift");
-    }
-
-    window.print();
-
-    // Ta bort fokusläget igen efter utskrift/PDF-dialogen stängts,
-    // så det inte påverkar den vanliga webbvisningen.
-    window.onafterprint = function() {
-      document.body.classList.remove("fokus-utskrift");
-      window.onafterprint = null;
-    };
+  function haftenHtml(id) {
+    var h = window.hafte && window.hafte[id];
+    if (!h || !(h.vanlig || h.lattlast || h.fordjupning)) { return ""; }
+    var r = '<div class="hafte-rad"><strong>Läs som häfte (PDF)</strong><div class="hafte-knappar">';
+    [["vanlig","Vanlig"],["lattlast","Lättläst"],["fordjupning","Fördjupning"]].forEach(function(p) {
+      if (h[p[0]]) { r += '<a class="knapp" href="' + h[p[0]] + '" target="_blank" rel="noopener">' + p[1] + '</a>'; }
+    });
+    return r + '</div></div>';
   }
 
   visaFranHash(); // visa rätt sida direkt utifrån adressen (#...), annars startsidan

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pluggis – för lärare</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #f7f7f9; color: #222; }
+  h1 { text-align: center; color: #2f4a73; margin-bottom: 4px; }
+  .undertitel { text-align: center; color: #777; margin-bottom: 28px; }
+  a.tillbaka { display: inline-block; margin-bottom: 18px; color: #2f4a73; }
+  #port { max-width: 360px; margin: 40px auto; background: #fff; padding: 22px; border-radius: 12px; box-shadow: 0 1px 6px rgba(0,0,0,.1); text-align: center; }
+  #port input { width: 100%; padding: 10px; font-size: 16px; border: 1px solid #bbb; border-radius: 8px; margin: 10px 0; }
+  button, .lank { background: #2f4a73; color: #fff; border: 0; padding: 9px 14px; border-radius: 8px; font-size: 15px; cursor: pointer; text-decoration: none; display: inline-block; }
+  #fel { color: #b00020; min-height: 1.2em; font-size: 14px; }
+  details { background: #fff; border-radius: 10px; margin: 10px 0; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  summary { padding: 14px 16px; font-weight: bold; cursor: pointer; font-size: 18px; }
+  .inre { padding: 0 16px 14px; }
+  .inre details { box-shadow: none; border: 1px solid #e3e3e8; }
+  .inre summary { font-size: 16px; }
+  .kapitel { padding: 10px 0; border-top: 1px solid #eee; }
+  .kapitel h4 { margin: 0 0 8px; }
+  .knappar { display: flex; flex-wrap: wrap; gap: 8px; }
+  .lank.larar { background: #8a4b9a; }
+  .tomt { color: #888; font-size: 14px; }
+  .sidor { color: #555; font-size: 14px; margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<h1>För lärare</h1>
+<p class="undertitel">Pluggis – utskrifter, lärarhandledningar och facit</p>
+<a class="tillbaka" href="index.html">← Till Pluggis</a>
+
+<div id="port">
+  <p><strong>Lösenord</strong></p>
+  <input type="password" id="los" autocomplete="off" autofocus>
+  <div id="fel"></div>
+  <button type="button" id="oppna">Öppna</button>
+</div>
+
+<div id="innehall" style="display:none"></div>
+
+<script src="innehall/struktur.js"></script>
+<script src="hafte/manifest.js"></script>
+<script>
+  // Obs: enkel spärr mot nyfikna – inget riktigt skydd (sidan är statisk).
+  var HASH = "a2c4a4f38df7a7d24eac2b8dc1c9f63487d6255208b978a29b9740423225ee3a";
+  var NYCKEL = "pluggis-larare-v1";
+
+  function hasha(text) {
+    var data = new TextEncoder().encode("pluggis-lärare:" + text);
+    return crypto.subtle.digest("SHA-256", data).then(function(buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function(b) { return ("0" + b.toString(16)).slice(-2); }).join("");
+    });
+  }
+
+  function lank(href, text, extra) {
+    return '<a class="lank ' + (extra || "") + '" href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
+  }
+
+  function kapitelHtml(blad) {
+    var h = window.hafte && window.hafte[blad.id];
+    if (!h) { return ""; }
+    var k = '<div class="kapitel"><h4>' + (h.titel || blad.titel) + '</h4><div class="knappar">';
+    if (h.paket) { k += lank(h.paket, "🖨️ Utskriftspaket (alla tre)"); }
+    if (h.vanlig) { k += lank(h.vanlig, "Vanlig"); }
+    if (h.lattlast) { k += lank(h.lattlast, "Lättläst"); }
+    if (h.fordjupning) { k += lank(h.fordjupning, "Fördjupning"); }
+    if (h.zip) { k += lank(h.zip, "📦 Zip (alla)"); }
+    if (h.handledning) { k += lank(h.handledning, "Lärarhandledning", "larar"); }
+    if (h.facit) { k += lank(h.facit, "Facit", "larar"); }
+    k += '</div>';
+    if (h.paket && h.sidor) { k += '<p class="sidor">Skriva ut bara en del? Välj sidor: ' + h.sidor + '.</p>'; }
+    return k + '</div>';
+  }
+
+  // Bygger HTML för en gren; returnerar "" om inga häften finns under den.
+  function grenHtml(nod, niva) {
+    if (!nod.barn || !nod.barn.length) { return kapitelHtml(nod); }
+    var inre = nod.barn.map(function(b) { return grenHtml(b, niva + 1); }).join("");
+    if (!inre) { return ""; }
+    return '<details' + (niva === 0 ? "" : "") + '><summary>' + (nod.ikon ? nod.ikon + " " : "") + nod.titel + '</summary><div class="inre">' + inre + '</div></details>';
+  }
+
+  function visa() {
+    document.getElementById("port").style.display = "none";
+    var ut = struktur.map(function(a) { return grenHtml(a, 0); }).join("");
+    document.getElementById("innehall").innerHTML = ut ||
+      '<p class="tomt">Inga häften är uppladdade än. De dyker upp här när de lagts in i <code>hafte/manifest.js</code>.</p>';
+    document.getElementById("innehall").style.display = "block";
+  }
+
+  function forsok() {
+    var v = document.getElementById("los").value;
+    hasha(v).then(function(h) {
+      if (h === HASH) {
+        try { localStorage.setItem(NYCKEL, HASH); } catch (e) {}
+        visa();
+      } else {
+        document.getElementById("fel").textContent = "Fel lösenord.";
+      }
+    }).catch(function() { document.getElementById("fel").textContent = "Webbläsaren stöder inte inloggning här."; });
+  }
+
+  document.getElementById("oppna").addEventListener("click", forsok);
+  document.getElementById("los").addEventListener("keydown", function(e) { if (e.key === "Enter") { forsok(); } });
+  try { if (localStorage.getItem(NYCKEL) === HASH) { visa(); } } catch (e) {}
+</script>
+</body>
+</html>
