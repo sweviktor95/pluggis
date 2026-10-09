@@ -690,6 +690,26 @@ let mode="light", cur=-1, sub=-1, moving=false;
 const done=EV.map(()=>false);
 let subDone=DEEP.map(a=>a.map(()=>false));
 let firstTry={}, asked=0;
+const SAVE_KEY="pluggis-sim-ww2-v1";
+function saveSim(){try{
+  const okE=[],okS=[];
+  EV.forEach((e,i)=>{if(e._ok)okE.push(i);});
+  DEEP.forEach((a,i)=>a.forEach((s,j)=>{if(s._ok)okS.push([i,j]);}));
+  localStorage.setItem(SAVE_KEY,JSON.stringify({mode,cur,sub,done,subDone,firstTry,asked,okE,okS}));}catch(e){}}
+function loadSim(){try{
+  const d=JSON.parse(localStorage.getItem(SAVE_KEY)||"null");
+  if(!d||!(d.cur>=0)||d.cur>=EV.length||!Array.isArray(d.done)||d.done.length!==EV.length) return null;
+  return d;}catch(e){return null;}}
+function clearSim(){try{localStorage.removeItem(SAVE_KEY);}catch(e){}}
+function restoreSim(d){
+  mode=d.mode==="deep"?"deep":"light";
+  d.done.forEach((v,i)=>{done[i]=!!v;});
+  if(Array.isArray(d.subDone)&&d.subDone.length===DEEP.length) subDone=d.subDone;
+  firstTry=d.firstTry||{}; asked=d.asked||0;
+  (d.okE||[]).forEach(i=>{if(EV[i])EV[i]._ok=true;});
+  (d.okS||[]).forEach(p=>{if(DEEP[p[0]]&&DEEP[p[0]][p[1]])DEEP[p[0]][p[1]]._ok=true;});
+}
+
 const dock=document.getElementById("dock"), clock=document.getElementById("clock"), route=document.getElementById("route");
 const subsG=document.getElementById("subs");
 const L="ABCD";
@@ -742,19 +762,26 @@ function intro(){
     </div>
     ${hasLand?"":`<p class="note">Kartbilden kunde inte laddas, men spelet fungerar ändå.</p>`}
   </article>`;
-  document.getElementById("mLight").onclick=()=>{mode="light";goTo(0);};
-  document.getElementById("mDeep").onclick=()=>{mode="deep";goTo(0);};
+  const sv=loadSim();
+  if(sv){
+    const r=document.createElement("div"); r.className="resume";
+    r.innerHTML=`<p class="note">Du har ett påbörjat uppdrag (${sv.mode==="deep"?"Fördjupning":"Lättläst"}, händelse ${sv.cur+1} av ${EV.length}).</p><p><button class="go ready" type="button" id="mResume">Fortsätt där du var →</button></p><p class="note">Eller börja om genom att välja nedan.</p>`;
+    dock.querySelector(".modes").before(r);
+    document.getElementById("mResume").onclick=()=>{restoreSim(sv);cur=sv.cur;sub=sv.sub;if(sub>=0&&DEEP[cur]&&DEEP[cur][sub])goSub(sub);else goTo(cur);};
+  }
+  document.getElementById("mLight").onclick=()=>{clearSim();mode="light";goTo(0);};
+  document.getElementById("mDeep").onclick=()=>{clearSim();mode="deep";goTo(0);};
 }
 function flying(stamp,title){
   dock.innerHTML=`<article class="card"><div class="stamp"><span>På väg</span><b>${stamp}</b></div><h2>${title}</h2><p>Kartan flyger dit…</p></article>`;
 }
 function goTo(i){
-  moving=true; cur=i; sub=-1; hideScene(); refresh(); labels.innerHTML="";
+  moving=true; cur=i; sub=-1; saveSim(); hideScene(); refresh(); labels.innerHTML="";
   const e=EV[i]; flying(e.d,e.place);
   fly(target(e),()=>{moving=false;setLabels(e);apply();render();});
 }
 function goSub(j){
-  moving=true; sub=j; hideScene(); refresh(); labels.innerHTML="";
+  moving=true; sub=j; saveSim(); hideScene(); refresh(); labels.innerHTML="";
   const s=DEEP[cur][j]; flying(s.d,s.place);
   setTimeout(()=>fly({x:s.px,y:s.py,w:s.z||EV[cur].zoom*0.6},()=>{setLabels({place:s.place,lon:s.lon,lat:s.lat});apply();
     fly({x:s.px,y:s.py,w:(s.z||EV[cur].zoom*0.6)*0.35},()=>{moving=false;showScene(cur+"_"+j,s.place,s.d);render();});}),stage.hidden?0:500);
@@ -804,9 +831,9 @@ function render(){
 function wire(item,key,onOk){
   dock.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
     const k=+b.dataset.k, fb=document.getElementById("fb");
-    if(firstTry[key]===undefined){firstTry[key]=(k===item.ok);asked++;}
+    if(firstTry[key]===undefined){firstTry[key]=(k===item.ok);asked++;saveSim();}
     if(k===item.ok){
-      onOk(); item._ok=true; refresh();
+      onOk(); item._ok=true; saveSim(); refresh();
       dock.querySelectorAll(".opt").forEach(x=>x.disabled=true); b.classList.add("right");
       fb.className="fb ok"; fb.innerHTML=`<b>Rätt!</b> ${item.why}`;
       const n=document.getElementById("next"); n.disabled=false; n.classList.add("ready"); n.focus({preventScroll:true});
@@ -827,7 +854,7 @@ function next(){
   if(cur<EV.length-1) goTo(cur+1); else finish();
 }
 function finish(){
-  moving=true; cur=EV.length; sub=-1; hideScene(); refresh(); labels.innerHTML="";
+  clearSim(); moving=true; cur=EV.length; sub=-1; hideScene(); refresh(); labels.innerHTML="";
   clock.innerHTML=`<small>Andra världskriget</small>1939–1945`;
   fly({...FULL},()=>{
     moving=false;

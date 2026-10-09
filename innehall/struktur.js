@@ -254,7 +254,7 @@ var struktur = [
         barn: [
           { id: "biologi-vetenskap-vad-ar-biologi", titel: "Vad är biologi?" },
           { id: "biologi-vetenskap-metod", titel: "Vetenskaplig metod" },
-          { id: "biologi-vetenskap-hur-utvecklas-kunskap", titel: "Hur utvecklas kunskap?" }
+          { id: "biologi-vetenskap-hur-utvecklas-kunskap", titel: "Vetenskap och källkritik" }
         ]
       },
       {

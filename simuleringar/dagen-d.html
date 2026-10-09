@@ -277,6 +277,11 @@ let cur=-1, moving=false;
 const done=STAGES.map(()=>false), firstTry=STAGES.map(()=>null);
 const dock=document.getElementById("dock"), stepsEl=document.getElementById("steps"), clock=document.getElementById("clock");
 const QUIZ=STAGES.length-1;
+const SAVE_KEY="pluggis-sim-dagend-v1";
+function saveSim(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({cur,done,firstTry}));}catch(e){}}
+function loadSim(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||"null");
+  if(!d||!(d.cur>=0)||d.cur>=QUIZ||!Array.isArray(d.done)||d.done.length!==STAGES.length) return null; return d;}catch(e){return null;}}
+function clearSim(){try{localStorage.removeItem(SAVE_KEY);}catch(e){}}
 
 function drawSteps(){
   stepsEl.innerHTML=STAGES.map((s,i)=>`<span class="dot ${done[i]?"done":""} ${i===cur?"now":""}" title="${s.label}">${i+1}</span>`).join("");
@@ -290,17 +295,24 @@ function intro(){
     <p>Vid varje röd cirkel får du läsa en fältrapport och svara på en fråga. Cirkeln blir grön när du svarat rätt, och då kan du gå vidare.</p>
     <div class="foot"><span>7 steg · ca 10 minuter</span><button class="go ready" id="start">Starta uppdraget →</button></div>
   </article>`;
-  document.getElementById("start").onclick=()=>arrive(0);
+  const sv=loadSim();
+  if(sv){
+    const r=document.createElement("p"); r.innerHTML=`<button class="go ready" type="button" id="resume">Fortsätt där du var (steg ${sv.cur+1}) →</button>`;
+    dock.querySelector(".foot").before(r);
+    document.getElementById("resume").onclick=()=>{sv.done.forEach((v,i)=>{done[i]=!!v;});(sv.firstTry||[]).forEach((v,i)=>{firstTry[i]=v;});camX=STAGES[sv.cur].x;place();arrive(sv.cur);};
+    document.getElementById("start").textContent="Börja om →";
+  }
+  document.getElementById("start").onclick=()=>{clearSim();arrive(0);};
 }
 function arrive(i){
-  cur=i;
+  cur=i; saveSim();
   const st=STAGES[i];
   clock.innerHTML=`<small>6 juni 1944 · ${st.place}</small>Kl. ${st.time}`;
   drawSteps(); render();
 }
 function render(){
   const i=cur, st=STAGES[i];
-  if(i===QUIZ){ done[i]=true; drawSteps(); }
+  if(i===QUIZ){ done[i]=true; clearSim(); drawSteps(); }
   let quiz="";
   if(i<QUIZ){
     const solved=done[i];
@@ -324,7 +336,7 @@ function answer(k,btn){
   const st=STAGES[cur], fb=document.getElementById("fb");
   if(firstTry[cur]===null) firstTry[cur]=(k===st.ok);
   if(k===st.ok){
-    done[cur]=true; drawSteps();
+    done[cur]=true; saveSim(); drawSteps();
     dock.querySelectorAll(".opt").forEach(b=>b.disabled=true);
     btn.classList.add("right");
     fb.className="fb ok"; fb.innerHTML=`<b>Rätt!</b> ${st.why}`;
