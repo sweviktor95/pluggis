@@ -1,0 +1,889 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Första världskriget på kartan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600&display=swap">
+<style>
+/* Layout: an operations map the camera flies across in date order; field-report card docked below (phone) or right (desktop). Single dark map-room look by choice. */
+:root{
+  --night:#1a1f23; --sea:#2c3f4a; --sea-line:#3b525e; --land:#cbbf9c; --land-line:#8f8466;
+  --paper:#ece5d2; --paper-ink:#2a2822; --muted:#6c675a; --khaki:#7a7848;
+  --signal:#c8452f; --clear:#5f9a4c; --brass:#d1a84c;
+  --f-display:"Special Elite","Courier New",monospace;
+  --f-body:"Barlow",system-ui,sans-serif;
+  --f-label:"Barlow Condensed","Arial Narrow",sans-serif;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.app{height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.map{position:relative;flex:1 1 52%;min-height:240px;background:var(--sea)}
+.map svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.country{fill:var(--land);stroke:var(--land-line);stroke-width:.6;vector-effect:non-scaling-stroke;transition:fill .8s}
+.country.hl{fill:#d89a7c}
+.country.swe{fill:url(#neutral)}
+.grat{fill:none;stroke:var(--sea-line);stroke-width:.7;vector-effect:non-scaling-stroke}
+.route{fill:none;stroke:var(--brass);stroke-width:2.2;stroke-dasharray:7 6;vector-effect:non-scaling-stroke}
+.mk{cursor:default}
+.mk .ring{fill:rgba(42,40,34,.55);stroke:#9b927a;stroke-width:2.5}
+.mk text{font-family:var(--f-label);font-weight:600;font-size:15px;fill:var(--paper)}
+.mk.now .ring{fill:var(--signal);stroke:#f4dcd4}
+.mk.done{cursor:pointer}
+.mk.done .ring{fill:var(--clear);stroke:#e8f0de}
+.mk .pulse{fill:none;stroke:var(--signal);stroke-width:3;opacity:0}
+.mk.now .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{from{transform:scale(1);opacity:.9}to{transform:scale(2.4);opacity:0}}
+.mk.open .ring{fill:#8a3523;stroke:#f4dcd4}
+.mk.sub .ring{stroke-width:2}
+.modes{display:grid;gap:10px;margin-top:6px}
+.mode{font:inherit;text-align:left;padding:12px 14px;border-radius:3px;border:1.5px solid #b7ae95;background:#f6f1e3;color:var(--paper-ink);cursor:pointer;display:grid;gap:2px}
+.mode b{font-family:var(--f-display);font-weight:400;font-size:1.15rem}
+.mode span{font-size:.92rem;color:var(--muted)}
+.mode:hover{border-color:var(--signal)}
+.mode:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+@media (min-width:520px){.modes{grid-template-columns:1fr 1fr}}
+.place{font-family:var(--f-label);font-size:14px;fill:#2a2822;paint-order:stroke;stroke:var(--land);stroke-width:3px;letter-spacing:.04em}
+.hud{position:absolute;top:12px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;pointer-events:none;z-index:2}
+.box{background:rgba(26,31,35,.82);padding:6px 10px;border-radius:3px}
+.clock{font-family:var(--f-display);font-size:1.05rem;line-height:1.2}
+.clock small{display:block;font-family:var(--f-label);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#c9c3b2}
+.legend{font-family:var(--f-label);font-size:.8rem;display:flex;flex-direction:column;gap:3px;color:#d8d2c0}
+.legend i{display:inline-block;width:12px;height:10px;margin-right:6px;vertical-align:-1px;border:1px solid #8f8466}
+.timeline{position:absolute;left:16px;right:16px;bottom:12px;z-index:2;pointer-events:none}
+.tl-track{position:relative;height:30px;background:rgba(26,31,35,.82);border-radius:3px}
+.tl-bar{position:absolute;left:14px;right:14px;top:9px;height:3px;background:#56615f}
+.tl-fill{position:absolute;left:0;top:0;height:100%;background:var(--brass);transition:width 1.6s ease}
+.tl-year{position:absolute;top:13px;transform:translateX(-50%);font-family:var(--f-label);font-size:.72rem;color:#c9c3b2;font-variant-numeric:tabular-nums}
+.tl-tick{position:absolute;top:-3px;width:1px;height:9px;background:#8a928f}
+.dock{flex:0 1 auto;max-height:52%;overflow:auto;padding:14px 16px 18px;background:var(--night)}
+.card{background:var(--paper);color:var(--paper-ink);border-radius:3px;padding:18px 18px 16px;box-shadow:0 6px 24px rgba(0,0,0,.35);border-top:6px double var(--khaki);max-width:62ch;margin-inline:auto;animation:pop .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{transform:translateY(14px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.stamp{font-family:var(--f-label);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.stamp b{color:var(--signal);font-weight:600}
+.card h2{font-family:var(--f-display);font-weight:400;font-size:1.5rem;line-height:1.15;margin:.35em 0 .5em;text-wrap:balance}
+.card p{margin:0 0 .7em}
+.card a{color:#8a3523;font-weight:600}
+.quiz{margin-top:14px;padding-top:12px;border-top:1px dashed #b7ae95}
+.quiz .q{font-weight:600}
+.opts{display:grid;gap:8px;margin-top:8px}
+.opt{font:inherit;text-align:left;padding:10px 12px;border-radius:3px;border:1.5px solid #b7ae95;background:#f6f1e3;color:var(--paper-ink);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--paper-ink)}
+.opt:focus-visible,.go:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.opt.wrong{border-color:var(--signal);background:#f3d9d2;text-decoration:line-through}
+.opt.right{border-color:var(--clear);background:#dcebd2;font-weight:600}
+.fb{margin-top:10px;font-size:.95rem}
+.fb.ok b{color:#3f7a30}.fb.no b{color:var(--signal)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.foot span{font-family:var(--f-label);font-size:.85rem;color:var(--muted);letter-spacing:.05em}
+.go{font-family:var(--f-label);font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 18px;border-radius:3px;border:0;background:var(--paper-ink);color:var(--paper);cursor:pointer}
+.go:disabled{opacity:.35;cursor:not-allowed}
+.go.ready{background:var(--signal);animation:nudge 1.2s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(4px)}}
+.discuss{background:#e1d8be;padding:10px 12px;border-radius:3px;font-style:italic}
+.score{font-family:var(--f-display);font-size:1.15rem}
+.note{font-size:.85rem;color:var(--muted)}
+.stage{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .9s ease;background:#1a1f23}
+.stage.in{opacity:1}
+.stage.peek{opacity:0;pointer-events:none}
+.stage-art{position:absolute;inset:0;overflow:hidden}
+.stage-art svg{width:100%;height:100%;display:block}
+.stage.in .stage-art{animation:dive 1.6s cubic-bezier(.2,.8,.2,1)}
+@keyframes dive{from{transform:scale(1.35);filter:blur(4px)}to{transform:none;filter:none}}
+.stage-cap{display:none;position:absolute;left:16px;bottom:56px;z-index:2;font-family:var(--f-display);font-size:1.25rem;color:#f4efe2;text-shadow:0 2px 8px rgba(0,0,0,.6);max-width:70%}
+.stage-cap small{display:block;font-family:var(--f-label);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#e2dccb}
+.mapbtn{position:absolute;right:16px;bottom:56px;z-index:4;font-family:var(--f-label);font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;border-radius:3px;border:0;background:rgba(26,31,35,.85);color:var(--paper);cursor:pointer;pointer-events:auto}
+.stage.peek .mapbtn{opacity:1}
+.map.scene-on .legend{display:none}
+.pan{animation:pan 34s ease-in-out infinite alternate}
+.pan.far{--d:-140px}.pan.sky{--d:-300px}.pan.mid{--d:-520px}.pan.near{--d:-620px}
+@keyframes pan{from{transform:translateX(0)}to{transform:translateX(var(--d))}}
+.fly{animation:fly 14s linear infinite}
+@keyframes fly{to{transform:translateX(2000px)}}
+.dive{animation:divebomb 5s ease-in infinite}
+@keyframes divebomb{0%{transform:translate(-120px,-80px);opacity:0}10%{opacity:1}80%{transform:translate(90px,170px);opacity:1}100%{transform:translate(110px,200px);opacity:0}}
+.bob{animation:bob 3s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(4px)}}
+.walk{animation:walk 9s linear infinite alternate}
+@keyframes walk{to{transform:translateX(60px)}}
+.drive{animation:drive 12s linear infinite}
+@keyframes drive{from{transform:translateX(-80px)}to{transform:translateX(220px)}}
+.smoke{animation:drift 9s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(26px,-14px)}}
+.glow{animation:glow 2.4s ease-in-out infinite alternate}
+@keyframes glow{to{opacity:.15}}
+.flicker{transform-box:fill-box;transform-origin:center bottom;animation:flick .5s ease-in-out infinite alternate}
+@keyframes flick{to{transform:scaleY(.82) scaleX(1.08)}}
+.flash{opacity:0;animation:flash 3.2s ease-out infinite}
+@keyframes flash{0%{opacity:0}4%{opacity:1}16%{opacity:0}100%{opacity:0}}
+.puff{opacity:0;transform-box:fill-box;transform-origin:center;animation:puff 4s ease-out infinite}
+@keyframes puff{0%{opacity:0;transform:scale(.3)}10%{opacity:.8}70%{opacity:0;transform:scale(1.8)}100%{opacity:0}}
+.beam{animation:beam 7s ease-in-out infinite alternate}
+@keyframes beam{from{transform:rotate(-24deg)}to{transform:rotate(24deg)}}
+.para{animation:para 12s linear infinite}
+@keyframes para{from{transform:translate(0,-60px)}to{transform:translate(40px,360px)}}
+.fall{animation:fall 7s linear infinite}
+@keyframes fall{to{transform:translate(30px,530px)}}
+.rise{animation:rise 6s linear infinite;opacity:.8}
+@keyframes rise{to{transform:translate(-40px,-540px);opacity:0}}
+.twinkle{animation:tw 2.2s ease-in-out infinite alternate}
+@keyframes tw{from{opacity:.15}to{opacity:1}}
+.wobble{animation:wob 2.6s ease-in-out infinite alternate}
+@keyframes wob{to{transform:scale(1.03,.97)}}
+.sway{animation:sway 4s ease-in-out infinite alternate;transform-box:view-box}
+@keyframes sway{from{transform:rotate(-1.2deg)}to{transform:rotate(1.2deg)}}
+.blink{animation:tw .9s steps(2) infinite}
+.flap{transform-box:fill-box;transform-origin:left center;animation:flap 1.6s ease-in-out infinite alternate}
+@keyframes flap{to{transform:skewY(-4deg) scaleX(.94)}}
+.wave{animation:wave 5s linear infinite}
+@keyframes wave{to{transform:translateX(-40px)}}
+@media (min-width:860px){
+  .dock{position:absolute;right:20px;top:20px;bottom:20px;width:400px;max-height:none;background:none;padding:0;z-index:3}
+  .hud{right:440px}.timeline{right:440px}
+  .map{flex:1 1 auto}
+}
+@media (max-width:520px){.legend{display:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<div class="app">
+  <div class="map" id="map">
+    <svg id="svg" preserveAspectRatio="xMidYMid meet" aria-label="Världskarta med händelser under första världskriget">
+      <defs>
+        <pattern id="neutral" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect width="6" height="6" fill="#cbbf9c"/><rect width="2.4" height="6" fill="#5d84a6"/>
+        </pattern>
+      </defs>
+      <g id="grat"></g><g id="land"></g><path id="route" class="route"></path><g id="labels"></g><g id="marks"></g><g id="subs"></g>
+    </svg>
+    <div class="stage" id="stage" hidden><div class="stage-art" id="stageArt"></div><div class="stage-cap" id="stageCap"></div><button class="mapbtn" id="mapBtn">Visa kartan</button></div>
+    <div class="hud">
+      <div class="box clock" id="clock"><small>Första världskriget</small>1914–1918</div>
+      <div class="box legend"><span><i style="background:#d89a7c"></i>Berörda länder</span><span><i style="background:repeating-linear-gradient(45deg,#cbbf9c 0 3px,#5d84a6 3px 5px)"></i>Sverige (neutralt)</span><span style="color:#a9a492">Kartan visar dagens gränser</span></div>
+    </div>
+    <div class="timeline"><div class="tl-track" id="tl"><div class="tl-bar"><div class="tl-fill" id="tlfill" style="width:0"></div></div></div></div>
+  </div>
+  <div class="dock" id="dock" aria-live="polite"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.5.9/datamaps.world.min.js"></script>
+<script>
+const DDAY_URL="";
+const EV=[
+ {d:"28 juni 1914",y:1914.49,place:"Sarajevo",lon:18.41,lat:43.86,zoom:300,hl:["BIH","SRB","AUT","HUN"],title:"Skotten i Sarajevo",
+  facts:["Den 28 juni 1914 skjuts Franz Ferdinand, tronföljare i Österrike-Ungern, och hans fru Sophie i Sarajevo. Mördaren är den 19-årige bosnienserben Gavrilo Princip.",
+   "Österrike-Ungern ger Serbien skulden och förklarar krig en månad senare. Eftersom Europas stormakter har lovat att hjälpa varandra dras snart nästan hela Europa in i kriget."],
+  q:"Varför spred sig kriget så snabbt till hela Europa?",opts:["Länderna hade allianser och lovat att hjälpa varandra","Alla länder hade samma kung","Kriget började på flera platser samtidigt"],ok:0,
+  why:"Allianserna var tänkta att avskräcka från krig, men de gjorde att en lokal konflikt blev ett storkrig."},
+ {d:"Augusti–september 1914",y:1914.62,place:"Marne",lon:3.4,lat:48.95,zoom:240,hl:["BEL","FRA","DEU"],title:"Anfallet mot Frankrike",
+  facts:["Tysklands plan, Schlieffenplanen, är att snabbt besegra Frankrike genom att gå genom det neutrala Belgien. Därför förklarar Storbritannien krig mot Tyskland den 4 augusti.",
+   "I september stoppas tyskarna vid floden Marne, inte långt från Paris. Båda sidor gräver ner sig, och det snabba kriget blir ett långt ställningskrig."],
+  q:"Varför gick Storbritannien med i kriget?",opts:["Tyskland anföll London","Tyskland gick in i det neutrala Belgien","Storbritannien ville ta Frankrikes kolonier"],ok:1,
+  why:"Storbritannien hade lovat att skydda Belgiens neutralitet."},
+ {d:"26–30 augusti 1914",y:1914.66,place:"Tannenberg",lon:20.1,lat:53.5,zoom:260,hl:["RUS","POL","DEU"],title:"Östfronten",
+  facts:["Ryssland mobiliserar snabbare än Tyskland räknat med och anfaller Ostpreussen i öster.",
+   "Vid Tannenberg omringas en rysk armé. Omkring 90 000 ryska soldater tas till fånga. På östfronten blir kriget mer rörligt än i väst, men förlusterna blir enorma."],
+  q:"Vad hände vid Tannenberg?",opts:["Ryssland erövrade Berlin","En rysk armé omringades och besegrades","Tyskland och Ryssland slöt fred"],ok:1,
+  why:"Tannenberg var en stor tysk seger tidigt i kriget."},
+ {d:"December 1914",y:1914.97,place:"Ypres",lon:2.88,lat:50.85,zoom:230,hl:["BEL","FRA","GBR"],title:"Skyttegravarna",
+  facts:["Västfronten blir en linje av skyttegravar från Nordsjön ner till Schweiz, omkring 70 mil lång. Mellan fiendernas skyttegravar ligger ingenmansland.",
+   "Soldaterna lever i lera, kyla och bland råttor och löss. Att anfalla över ingenmansland mot kulsprutor och taggtråd kostar tusentals liv för några hundra meter."],
+  q:"Vad kallades området mellan fiendernas skyttegravar?",opts:["Ingenmansland","Fronten","Bakre linjen"],ok:0,
+  why:"Den som tog sig upp ur skyttegraven hamnade direkt under eld där."},
+ {d:"25 april 1915",y:1915.31,place:"Gallipoli",lon:26.3,lat:40.2,zoom:260,hl:["TUR","AUS","NZL","GBR"],title:"Gallipoli",
+  facts:["Osmanska riket, dagens Turkiet, är på Tysklands sida. Britter och fransmän försöker ta sundet Dardanellerna för att kunna nå Ryssland till sjöss.",
+   "Soldater från bland annat Australien och Nya Zeeland landstiger på halvön Gallipoli. Efter åtta månader och omkring en halv miljon förluster på båda sidor ger de allierade upp."],
+  q:"Varför ville de allierade ta Dardanellerna?",opts:["För att få en sjöväg till Ryssland","För att hitta olja","För att anfalla Egypten"],ok:0,
+  why:"Ryssland behövde vapen, och vägen genom Östersjön var stängd av Tyskland."},
+ {d:"7 maj 1915",y:1915.35,place:"Lusitania",lon:-8.5,lat:51.4,zoom:260,hl:["GBR","IRL","DEU"],title:"Kriget till sjöss",
+  facts:["Storbritannien blockerar Tyskland så att varor inte kan komma in. Tyskland svarar med ubåtar som sänker fartyg på väg till Storbritannien.",
+   "Den 7 maj 1915 sänks passagerarfartyget Lusitania av en tysk ubåt utanför Irland. Omkring 1 200 människor dör, bland dem 128 amerikaner."],
+  q:"Vilket vapen använde Tyskland mot fartygen till Storbritannien?",opts:["Zeppelinare","Ubåtar","Stridsvagnar"],ok:1,
+  why:"Ubåtskriget gjorde USA allt mer fientligt mot Tyskland."},
+ {d:"Februari–december 1916",y:1916.14,place:"Verdun",lon:5.39,lat:49.16,zoom:220,hl:["FRA","DEU"],title:"Verdun",
+  facts:["I februari 1916 anfaller Tyskland fästningsstaden Verdun. Målet är att få Frankrike att förblöda, alltså förlora så många soldater att landet ger upp.",
+   "Slaget pågår i nästan ett år. Omkring 700 000 soldater dödas, såras eller försvinner, och fronten flyttas nästan ingenting."],
+  q:"Vad var Tysklands mål med anfallet mot Verdun?",opts:["Att ta Paris samma vecka","Att få Frankrike att förlora så många soldater att det gav upp","Att nå havet"],ok:1,
+  why:"Planen misslyckades. Även Tyskland förlorade enormt många soldater."},
+ {d:"1 juli 1916",y:1916.5,place:"Somme",lon:2.69,lat:50.01,zoom:220,hl:["FRA","GBR","DEU"],title:"Slaget vid Somme",
+  facts:["Britter och fransmän anfaller vid floden Somme för att avlasta Verdun. Första dagen förlorar britterna omkring 57 000 man, varav omkring 19 000 döda.",
+   "Under slaget används stridsvagnar för första gången. När slaget slutar i november har över en miljon soldater dödats eller sårats, och de allierade har bara tagit omkring en mil."],
+  q:"Vilket nytt vapen användes för första gången vid Somme?",opts:["Kulsprutan","Stridsvagnen","Atombomben"],ok:1,
+  why:"De första stridsvagnarna var långsamma och gick ofta sönder, men de pekade mot framtidens krig."},
+ {d:"6 april 1917",y:1917.26,place:"Washington",lon:-77.04,lat:38.9,zoom:420,hl:["USA","MEX"],title:"USA går med i kriget",
+  facts:["I februari 1917 börjar Tyskland sänka alla fartyg runt Storbritannien, även från neutrala länder. Samtidigt avslöjas att Tyskland försökt få Mexiko att anfalla USA.",
+   "Den 6 april 1917 förklarar USA krig mot Tyskland. Ett år senare finns över en miljon amerikanska soldater i Frankrike."],
+  q:"Vilka två saker fick USA att gå med i kriget?",opts:["Ubåtskriget och Tysklands försök att få med Mexiko","Ryska revolutionen och spanska sjukan","Skotten i Sarajevo och Verdun"],ok:0,
+  why:"Tysklands meddelande till Mexiko kallas Zimmermanntelegrammet."},
+ {d:"Våren 1917",y:1917.3,place:"Stockholm",lon:18.07,lat:59.33,zoom:260,hl:["NOR","DNK"],title:"Sverige i kriget",
+  facts:["Sverige håller sig neutralt under hela kriget, liksom Norge och Danmark. Men kriget påverkar ändå Sverige.",
+   "Blockaderna och en dålig skörd gör att maten tar slut. Bröd, socker och mjölk ransoneras, och våren 1917 blir det hungerkravaller i flera städer."],
+  q:"Varför blev det brist på mat i Sverige?",opts:["Sverige var med i kriget","Blockader och dålig skörd","Bönderna strejkade"],ok:1,
+  why:"Sverige var beroende av import, och blockaderna stoppade mycket av den."},
+ {d:"7 november 1917",y:1917.85,place:"Petrograd",lon:30.32,lat:59.94,zoom:300,hl:["RUS","FIN"],title:"Ryska revolutionen",
+  facts:["Ryssland har förlorat miljontals soldater och folket svälter. I mars 1917 tvingas tsaren att avgå.",
+   "I november tar bolsjevikerna under Lenin makten. I mars 1918 sluter Ryssland fred med Tyskland och lämnar kriget. Samma vinter förklarar sig Finland självständigt."],
+  q:"Vem ledde bolsjevikerna när de tog makten?",opts:["Tsar Nikolaj II","Lenin","Stalin"],ok:1,
+  why:"Stalin tog över makten först efter Lenins död 1924."},
+ {d:"11 november 1918",y:1918.86,place:"Compiègne",lon:2.83,lat:49.43,zoom:230,hl:["FRA","DEU"],title:"Vapenstilleståndet",
+  facts:["Under hösten 1918 trycks Tyskland tillbaka av de allierade, nu med hjälp av amerikanska trupper. I Tyskland gör soldater och arbetare uppror och kejsaren flyr.",
+   "Den 11 november 1918 klockan 11 tystnar vapnen. Vapenstilleståndet skrivs under i en järnvägsvagn i skogen vid Compiègne."],
+  q:"Vilken tid upphörde striderna?",opts:["Kl. 11 den 11 november 1918","Kl. 12 på nyårsafton 1918","Kl. 6 den 6 juni 1918"],ok:0,
+  why:"Den 11 november är fortfarande minnesdag för krigets offer i många länder."},
+ {d:"28 juni 1919",y:1919.49,place:"Versailles",lon:2.12,lat:48.8,zoom:230,hl:["DEU","POL","FIN","EST","LVA","LTU","CZE","SVK"],title:"Versaillesfreden",
+  facts:["Freden skrivs under i Spegelsalen i slottet Versailles, exakt fem år efter skotten i Sarajevo. Tyskland får inte vara med och förhandla.",
+   "Tyskland får ta på sig skulden för kriget, betala stora skadestånd och lämna ifrån sig land. Nya länder bildas, bland dem Polen, Tjeckoslovakien och de baltiska staterna."],
+  q:"Vad tvingades Tyskland göra enligt Versaillesfreden?",opts:["Ta på sig skulden och betala skadestånd","Bli en del av Frankrike","Ingenting, Tyskland vann"],ok:0,
+  why:"Många tyskar kände sig förödmjukade av freden. Det utnyttjade Hitler senare."}
+];
+const END={title:"Efter kriget",
+ facts:["Omkring 15–20 miljoner människor dog i första världskriget, soldater och civila. Det kallades länge för det stora kriget.",
+  "Fyra kejsardömen föll: Tyskland, Österrike-Ungern, Ryssland och Osmanska riket. För att förhindra nya krig bildades Nationernas förbund.",
+  `Bara 20 år senare började ett nytt världskrig. <a href="../index.html#historia-varldskrigen-andra" target="_top">Gå vidare till Andra världskriget →</a>`],
+ discuss:"Diskutera: Versaillesfreden brukar räknas som en av orsakerna till andra världskriget. Varför tror du att det är så?"};
+
+const D=(place,lon,lat,d,title,facts,q,opts,ok,why,z)=>({place,lon,lat,d,title,facts,q,opts,ok,why,z});
+const DEEP=[
+ [ D("Wien",16.37,48.21,"1914","Två block",
+    ["Före kriget har Europas stormakter delat upp sig i två block. Trippelententen består av Frankrike, Ryssland och Storbritannien. Centralmakterna är Tyskland och Österrike-Ungern.","Länderna kappas om kolonier och bygger upp stora arméer och flottor. Många väntar på ett krig."],
+    "Vilka länder ingick i Trippelententen?",["Tyskland, Österrike-Ungern och Italien","Frankrike, Ryssland och Storbritannien","Sverige, Norge och Danmark"],1,"Italien hörde först till Tysklands sida men gick 1915 med i kriget på ententens sida.",300),
+   D("Sarajevo",18.41,43.86,"28 juni 1914","Skotten vid Latinska bron",
+    ["Ärkehertigen Franz Ferdinand åker i öppen bil genom Sarajevo. Ett första attentat med en bomb misslyckas.","Senare svänger chauffören fel och stannar, precis där Gavrilo Princip står. Princip skjuter både Franz Ferdinand och hans fru Sophie. Han tillhör en grupp som vill att Bosnien ska höra till Serbien."],
+    "Varför ville Gavrilo Princip döda Franz Ferdinand?",["Han ville att Bosnien skulle höra till Serbien","Han ville bli kejsare själv","Han var anställd av Frankrike"],0,"Bosnien hade tagits över av Österrike-Ungern, vilket många bosnienserber var emot.",260),
+   D("Belgrad",20.46,44.82,"23 juli–4 augusti 1914","Julikrisen",
+    ["Österrike-Ungern ställer hårda krav på Serbien, ett ultimatum. Serbien går med på nästan allt, men den 28 juli förklarar Österrike-Ungern ändå krig.","Ryssland stödjer Serbien och mobiliserar. Då förklarar Tyskland krig mot Ryssland och Frankrike. Inom en vecka är stormakterna i krig."],
+    "Vilket land stödde Serbien?",["Ryssland","Tyskland","Italien"],0,"Ryssland och Serbien var båda slaviska och ortodoxa länder och hade länge varit allierade.",260),
+   D("Berlin",13.4,52.52,"Augusti 1914","Hem till jul",
+    ["När kriget börjar jublar folkmassor i Berlin, Paris och London. Unga män anmäler sig frivilligt.","Många tror att kriget ska vara över till jul. I stället pågår det i över fyra år."],
+    "Hur länge trodde många att kriget skulle pågå?",["Till jul 1914","I tio år","Tills alla länder var med"],0,"Ingen förstod hur förödande ett modernt krig med kulsprutor och artilleri skulle bli.",260) ],
+ [ D("Berlin",13.4,52.52,"Augusti 1914","Schlieffenplanen",
+    ["Tyskland är rädd för att behöva strida mot Frankrike i väst och Ryssland i öst samtidigt.","Planen är att besegra Frankrike på sex veckor genom att gå runt de franska försvaren genom Belgien. Sedan ska trupperna skickas med tåg mot Ryssland."],
+    "Vad gick Schlieffenplanen ut på?",["Att först besegra Frankrike snabbt och sedan Ryssland","Att anfalla Storbritannien med flottan","Att försvara sig och vänta"],0,"Planen byggde på att Ryssland skulle vara långsamt att mobilisera.",300),
+   D("Liège",5.57,50.63,"5–16 augusti 1914","Belgien gör motstånd",
+    ["Belgiens armé försvarar fästningarna runt Liège. Tyskarna tar fram jättelika kanoner som skjuter sönder forten.","Tyska soldater dödar tusentals belgiska civila. I staden Leuven bränns universitetsbiblioteket med hundratusentals böcker."],
+    "Hur tog sig tyskarna förbi forten vid Liège?",["Med jättelika kanoner","De flög över dem","Forten gav upp utan strid"],0,"Belgiens motstånd försenade tyskarna några dagar, vilket gav Frankrike och Storbritannien tid."),
+   D("Marne",3.4,48.95,"5–12 september 1914","Miraklet vid Marne",
+    ["Tyskarna är bara några mil från Paris. Fransmän och britter gör motanfall vid floden Marne.","Paris taxibilar används för att köra soldater till fronten. Tyskarna tvingas backa, och båda sidor börjar gräva skyttegravar."],
+    "Vad användes för att köra franska soldater till Marne?",["Paris taxibilar","Flygplan","Cyklar"],0,"Det var inte så många soldater, men taxibilarna blev en symbol för hela Frankrikes kamp.") ],
+ [ D("Sankt Petersburg",30.32,59.94,"Augusti 1914","Den ryska ångvälten",
+    ["Ryssland har världens största armé och kallas den ryska ångvälten. Men soldaterna saknar ofta gevär, skor och ammunition.","Huvudstaden Sankt Petersburg får ett nytt namn, Petrograd, eftersom det gamla namnet låter för tyskt."],
+    "Vad var Rysslands stora svaghet?",["För få soldater","Dålig utrustning","För lite mark"],1,"Många ryska soldater skickades till fronten utan eget gevär.",300),
+   D("Tannenberg",20.1,53.5,"26–30 augusti 1914","Omringade i skogen",
+    ["Ryska befäl skickar order via radio utan att koda dem. Tyskarna lyssnar och vet exakt var de ryska trupperna ska gå.","Den ryska armén omringas bland skogar och sjöar. Omkring 90 000 ryska soldater tas till fånga."],
+    "Hur visste tyskarna var ryssarna skulle gå?",["Ryssarna skickade okodade radiomeddelanden","De hade satelliter","En rysk general bytte sida"],0,"Det var ett av de första slagen där radio spelade stor roll."),
+   D("Lemberg",24.03,49.84,"September 1914","Galicien",
+    ["Längre söderut anfaller Ryssland Österrike-Ungern i Galicien, i dagens Polen och Ukraina. Där vinner ryssarna och tar staden Lemberg, i dag Lviv.","På östfronten används fortfarande kavalleri, alltså soldater till häst, eftersom fronten är så lång och rörlig."],
+    "Vad är kavalleri?",["Soldater till häst","Soldater i ubåtar","Soldater med kanoner"],0,"På västfronten blev kavalleriet nästan meningslöst mot kulsprutor och taggtråd.",300) ],
+ [ D("Arras",2.78,50.29,"Vintern 1914–1915","Livet i skyttegraven",
+    ["Skyttegravarna är djupa diken förstärkta med sandsäckar och skyddade av taggtråd. Bakom frontlinjen finns fler linjer av skyttegravar.","Det regnar ofta och gravarna fylls med lera. Många soldater får skyttegravsfot, en svår infektion av att ha blöta fötter i veckor."],
+    "Vad var skyttegravsfot?",["En sorts känga","En infektion av blöta fötter","En dans"],1,"Soldaterna fick order om att byta strumpor varje dag för att undvika det."),
+   D("Ypres",2.88,50.85,"Julafton 1914","Julfreden",
+    ["På julafton 1914 slutar soldaterna skjuta på flera ställen längs fronten. Tyska soldater sjunger julsånger och tänder ljus.","På juldagen möts fiender i ingenmansland. De byter tobak och choklad, begraver sina döda och enligt vissa berättelser spelar de fotboll."],
+    "Vad hände under julfreden 1914?",["Kriget tog slut","Fiender möttes i ingenmansland och bytte gåvor","Alla soldater fick åka hem"],1,"Befälen gillade det inte, och julen därpå förbjöds det."),
+   D("Ypres",2.88,50.85,"22 april 1915","Giftgas",
+    ["Vid Ypres släpper tyskarna ut klorgas som driver med vinden in i de allierades skyttegravar. Soldaterna har inget skydd.","Snart använder båda sidor giftgas, och alla soldater får gasmasker. Senare används också senapsgas, som ger svåra brännskador."],
+    "Vad blev följden av gasanfallen?",["Alla soldater fick gasmasker","Kriget tog slut","Gas förbjöds direkt"],0,"Efter kriget förbjöds giftgas i krig genom ett internationellt avtal 1925."),
+   D("Flandern",3.0,50.9,"Våren 1915","Vallmon",
+    ["På de sönderskjutna fälten i Flandern blommar röda vallmor. Den kanadensiske läkaren John McCrae skriver en berömd dikt om dem.","Vallmon blev en symbol för de stupade soldaterna. I Storbritannien och Kanada bär många en vallmo varje år i november."],
+    "Vad symboliserar den röda vallmon?",["De stupade soldaterna","Freden i Versailles","Sommarlovet"],0,"Vallmofrön kan ligga i jorden länge och gror när marken grävs upp, som på slagfälten.") ],
+ [ D("Dardanellerna",26.4,40.1,"18 mars 1915","Försöket till sjöss",
+    ["Brittiska och franska slagskepp försöker skjuta sig igenom sundet Dardanellerna.","Men osmanerna har lagt ut minor. Tre slagskepp sjunker och flera skadas. Då bestämmer sig de allierade för att landstiga på halvön Gallipoli."],
+    "Vad stoppade de allierade fartygen i Dardanellerna?",["Minor","Is","En storm"],0,"Minorna hade lagts ut i hemlighet natten före anfallet."),
+   D("Anzac Cove",26.29,40.24,"25 april 1915","ANZAC",
+    ["Australiska och nyzeeländska soldater, ANZAC, landstiger i gryningen nedanför branta klippor.","Den 25 april är i dag Anzac Day, den viktigaste minnesdagen i Australien och Nya Zeeland."],
+    "Varifrån kom ANZAC-soldaterna?",["Australien och Nya Zeeland","Kanada och USA","Indien och Egypten"],0,"ANZAC står för Australian and New Zealand Army Corps."),
+   D("Gallipoli",26.4,40.33,"April 1915–januari 1916","Mustafa Kemal",
+    ["De osmanska soldaterna försvarar höjderna. En av befälhavarna är Mustafa Kemal.","Efter åtta månader evakueras de allierade. Mustafa Kemal grundar senare den moderna staten Turkiet och får namnet Atatürk."],
+    "Vem blev Mustafa Kemal senare?",["Turkiets grundare","Kung i Grekland","Brittisk premiärminister"],0,"Atatürk betyder ungefär turkarnas fader."),
+   D("Östra Anatolien",39.2,38.7,"1915–1917","Folkmordet på armenierna",
+    ["Mitt under kriget anklagar Osmanska rikets ledare den kristna armeniska folkgruppen för att stödja Ryssland. Armenier mördas eller drivs ut på dödsmarscher mot Syriens öken.","Upp till 1,5 miljoner armenier dör. Även assyrier, syrianer och greker drabbas. Sveriges riksdag erkände 2010 att det var ett folkmord."],
+    "Vad hände med armenierna i Osmanska riket under kriget?",["De utsattes för folkmord","De fick ett eget land","De flyttade frivilligt till Ryssland"],0,"Många svenskar i dag har släktingar som drabbades.",320) ],
+ [ D("Nordsjön",3.0,56.0,"1914–1918","Blockaden",
+    ["Brittiska flottan stoppar fartyg på väg till Tyskland. Även mat stoppas.","Vintern 1916–1917 kallas i Tyskland kålrotsvintern, eftersom kålrötter var nästan det enda som fanns att äta."],
+    "Vad kallades vintern 1916–1917 i Tyskland?",["Kålrotsvintern","Snövintern","Segervintern"],0,"Hundratusentals tyska civila dog av svält och sjukdomar under kriget."),
+   D("Irland",-8.5,51.4,"7 maj 1915","Lusitania",
+    ["Lusitania är på väg från New York till Liverpool. Utanför Irland träffas fartyget av en torped från ubåten U-20.","Fartyget sjunker på omkring 18 minuter. Omkring 1 200 människor dör, bland dem 128 amerikaner. Det väcker stor ilska i USA."],
+    "Varför blev amerikanerna så arga?",["128 amerikaner dog","Lusitania var amerikanskt krigsfartyg","Tyskland anföll New York"],0,"Ändå dröjde det två år innan USA gick med i kriget."),
+   D("Skagerrak",6.5,56.8,"31 maj–1 juni 1916","Skagerrakslaget",
+    ["Utanför Danmark möts Storbritanniens och Tysklands flottor, omkring 250 fartyg. Det är krigets största sjöslag.","Britterna förlorar fler fartyg och sjömän. Men efter slaget vågar den tyska flottan sällan lämna hamnen, och blockaden fortsätter."],
+    "Vem kontrollerade haven efter Skagerrakslaget?",["Storbritannien","Tyskland","Danmark"],0,"Därför satsade Tyskland i stället ännu mer på ubåtar.") ],
+ [ D("Verdun",5.39,49.16,"21 februari 1916","Anfallet",
+    ["Klockan sju på morgonen öppnar tusentals tyska kanoner eld. Bombardemanget pågår i nio timmar.","Den tyske generalen Falkenhayn tror att Frankrike aldrig ger upp Verdun och därför kommer att offra hur många soldater som helst."],
+    "Varför valde Falkenhayn just Verdun?",["Han trodde att Frankrike aldrig skulle ge upp staden","Det var Frankrikes huvudstad","Där fanns inga franska soldater"],0,"Verdun hade en lång historia och var viktig för fransmännen."),
+   D("Fort Douaumont",5.44,49.22,"25 februari 1916","Fortet faller",
+    ["Det största fortet vid Verdun, Douaumont, tas av en liten tysk grupp nästan utan strid. Fransmännen hade flyttat bort de flesta soldaterna.","Först i oktober 1916 tar fransmännen tillbaka fortet."],
+    "Hur föll Fort Douaumont?",["Efter ett års belägring","Nästan utan strid","Efter en gasattack"],1,"Förlusten var en chock i Frankrike."),
+   D("Bar-le-Duc",5.16,48.77,"1916","Den heliga vägen",
+    ["Bara en väg går till Verdun. Lastbilar kör längs den dygnet runt med soldater, mat och ammunition, ungefär en var fjortonde sekund.","Vägen kallas Den heliga vägen. Nästan hela den franska armén roterar genom Verdun."],
+    "Vad kallades vägen till Verdun?",["Den heliga vägen","Kungsvägen","Lervägen"],0,"Arbetare lade hela tiden ut grus på vägen för att den inte skulle gå sönder."),
+   D("Verdun",5.39,49.2,"December 1916","Byarna som dog",
+    ["När slaget tar slut i december har fronten nästan inte flyttats. Omkring 700 000 soldater har dödats, sårats eller försvunnit.","Nio byar utplånades helt och byggdes aldrig upp igen. Marken är fortfarande full av granatkratrar och ammunition som inte exploderat."],
+    "Vad hände med nio av byarna kring Verdun?",["De blev stora städer","De utplånades och byggdes aldrig upp","De flyttades till Paris"],1,"Byarna finns kvar på kartan som minnesplatser.") ],
+ [ D("Somme",2.69,50.01,"24 juni–1 juli 1916","En vecka av artilleri",
+    ["Innan anfallet skjuter britterna omkring 1,5 miljoner granater mot de tyska linjerna under en vecka.","Tanken är att ingen ska överleva. Men tyskarna sitter i djupa bunkrar, många granater exploderar inte och taggtråden förblir hel."],
+    "Varför lyckades inte bombardemanget?",["Tyskarna satt i djupa bunkrar och taggtråden förblev hel","Britterna hade inga kanoner","Det regnade för mycket"],0,"När bombardemanget slutade visste tyskarna att anfallet skulle komma."),
+   D("Somme",2.69,50.0,"1 juli 1916, kl. 07:30","Den första dagen",
+    ["När visslorna blåser klättrar britterna upp ur skyttegravarna och går mot de tyska linjerna. Tyska kulsprutor öppnar eld.","Omkring 57 000 britter dödas eller såras på en enda dag. Det är den blodigaste dagen i den brittiska arméns historia."],
+    "Hur många brittiska soldater dödades eller sårades första dagen?",["Omkring 570","Omkring 5 700","Omkring 57 000"],2,"Många kompanier bestod av vänner från samma stad, och hela orter förlorade sina unga män."),
+   D("Flers",2.82,50.06,"15 september 1916","Stridsvagnen",
+    ["Britterna sätter in ett hemligt vapen: stridsvagnen. För att hålla den hemlig kallades den tank, som en vattentank.","Av 49 stridsvagnar kommer bara ett fåtal fram. Resten går sönder eller fastnar. Men tyska soldater blir skräckslagna."],
+    "Varför kallas stridsvagnar tank på engelska?",["De liknade vattentankar och namnet skulle hålla dem hemliga","De drevs med vatten","Uppfinnaren hette Tank"],0,"Namnet finns kvar än i dag på många språk."),
+   D("Vaux-sur-Somme",2.55,49.93,"1916–1918","Kriget i luften",
+    ["Flygplanen är nya. Först används de för att spana, sedan för luftstrider och för att fälla bomber.","Den tyske piloten Manfred von Richthofen, Röde baronen, skjuter ner 80 plan. Han skjuts ner och dör vid Somme i april 1918."],
+    "Vad användes flygplanen främst till i början av kriget?",["Spaning","Transport av turister","Att släppa atombomber"],0,"Tyskland använde också zeppelinare, stora luftskepp, för att bomba London.") ],
+ [ D("Wilhelmshaven",8.12,53.52,"1 februari 1917","Oinskränkt ubåtskrig",
+    ["Tyskland bestämmer sig för att sänka alla fartyg runt Storbritannien utan förvarning, även fartyg från neutrala länder som USA och Sverige.","Tyskarna räknar med att svälta ut Storbritannien innan USA hinner skicka soldater."],
+    "Vad betyder oinskränkt ubåtskrig?",["Alla fartyg sänks utan förvarning","Bara krigsfartyg sänks","Ubåtarna får inte skjuta"],0,"Många svenska fartyg och sjömän gick också förlorade under kriget.",300),
+   D("Mexico City",-99.13,19.43,"Januari 1917","Zimmermanntelegrammet",
+    ["Tysklands utrikesminister Zimmermann skickar ett hemligt meddelande till Mexiko. Om Mexiko anfaller USA ska landet få tillbaka Texas, New Mexico och Arizona.","Britterna knäcker koden. Tyskland skickade ibland hemliga meddelanden via Sveriges diplomatiska telegraflinjer, något britterna kände till."],
+    "Vad lovade Tyskland Mexiko?",["Texas, New Mexico och Arizona","Kalifornien och Alaska","Pengar och vapen till Kanada"],0,"När telegrammet publicerades i amerikanska tidningar blev folk rasande.",420),
+   D("Washington",-77.04,38.9,"6 april 1917","Krigsförklaringen",
+    ["President Woodrow Wilson ber kongressen om krigsförklaring. Världen måste göras säker för demokratin, säger han.","USA har en liten armé, men en enorm industri och miljontals män som kan kallas in."],
+    "Vem var USA:s president när USA gick med i kriget?",["Abraham Lincoln","Woodrow Wilson","Franklin D. Roosevelt"],1,"Wilson blev senare den som föreslog Nationernas förbund.",420),
+   D("Saint-Nazaire",-2.2,47.27,"Juni 1917–1918","Amerikanerna kommer",
+    ["De första amerikanska soldaterna kliver i land i Frankrike i juni 1917.","I november 1918 finns omkring två miljoner amerikanska soldater i Frankrike. De nya, utvilade trupperna blir avgörande."],
+    "Hur många amerikanska soldater fanns i Frankrike vid krigsslutet?",["Omkring 2 000","Omkring 200 000","Omkring 2 miljoner"],2,"Tyskland hade inga nya reserver att sätta emot.",260) ],
+ [ D("Malmö",13.0,55.6,"18–19 december 1914","Trekungamötet",
+    ["Kungarna i Sverige, Norge och Danmark möts i Malmö. De lovar att hålla sina länder neutrala och samarbeta.","Det var första gången på länge som de tre länderna stod så enade. Norge hade blivit självständigt från Sverige bara nio år tidigare."],
+    "Vad bestämde kungarna i Malmö?",["Att gå med i kriget tillsammans","Att hålla länderna neutrala","Att bilda ett nytt land"],1,"Alla tre länderna lyckades hålla sig utanför kriget."),
+   D("Stockholm",18.07,59.33,"1916–1918","Brödkort och gulaschbaroner",
+    ["Hösten 1916 blir skörden dålig, och blockaderna stoppar importen. Sverige inför ransoneringskort för bröd, socker och andra varor.","Samtidigt blir vissa rika på att sälja mat och varor till de krigförande länderna, ibland dålig konservmat. De kallas gulaschbaroner."],
+    "Vad var en gulaschbaron?",["En adelsman i Ungern","En person som blev rik på att sälja varor till de krigförande","En kock i armén"],1,"Klyftan mellan rika och fattiga ökade oron i landet."),
+   D("Västervik",16.64,57.76,"April 1917","Hungerkravallerna",
+    ["I april 1917 demonstrerar kvinnor och arbetare i Västervik mot matbristen. Snart sprids protesterna till hela landet, ända upp till Norrbotten.","I Stockholm samlas tiotusentals människor utanför riksdagen. Många är inspirerade av revolutionen i Ryssland."],
+    "Varför protesterade människor 1917?",["Mot bristen på mat","Mot att Sverige var med i kriget","Mot ny skolreform"],0,"Regeringen var rädd att det skulle bli revolution även i Sverige."),
+   D("Riksdagshuset",18.07,59.33,"1918–1921","Rösträtt för alla",
+    ["Efter oron och revolutionerna runt om i Europa går de styrande med på reformer. 1918 beslutar riksdagen om allmän och lika rösträtt.","År 1921 får kvinnor rösta i riksdagsval för första gången. Sverige har blivit en demokrati."],
+    "Vilket år röstade kvinnor för första gången i ett riksdagsval i Sverige?",["1909","1921","1945"],1,"Fem kvinnor valdes in i riksdagen samma år.",120) ],
+ [ D("Petrograd",30.32,59.94,"Mars 1917","Februarirevolutionen",
+    ["Det är brödköer i Petrograd. Arbetare strejkar och soldater vägrar skjuta på demonstranterna.","Tsar Nikolaj II tvingas avgå. En ny regering tar över men fortsätter kriget, vilket gör många arga."],
+    "Varför gjorde folket revolution i mars 1917?",["De ville ha mer krig","Hunger och krigströtthet","Tsaren hade dött"],1,"Revolutionen kallas februarirevolutionen eftersom Ryssland då använde en äldre kalender."),
+   D("Haparanda",24.14,65.84,"April 1917","Lenin reser genom Sverige",
+    ["Tyskland hjälper Lenin att resa hem från Schweiz, i hopp om att han ska få Ryssland att lämna kriget.","Lenin åker tåg genom Sverige via Trelleborg och Stockholm upp till Haparanda. Därifrån tar han sig över Torne älv till Torneå i Finland och vidare till Petrograd."],
+    "Varför hjälpte Tyskland Lenin att resa till Ryssland?",["Tyskland hoppades att han skulle få Ryssland att lämna kriget","Lenin var tysk","Lenin skulle hjälpa Tyskland att vinna i väst"],0,"Planen fungerade. Mindre än ett år senare lämnade Ryssland kriget.",300),
+   D("Vinterpalatset",30.31,59.94,"7 november 1917","Oktoberrevolutionen",
+    ["Bolsjevikerna stormar Vinterpalatset där regeringen sitter. Kryssaren Aurora skjuter ett skott som signal.","Lenin tar makten. I mars 1918 sluter Ryssland fred med Tyskland i Brest-Litovsk och förlorar stora landområden."],
+    "Vad hände i Brest-Litovsk i mars 1918?",["Ryssland slöt fred med Tyskland","Tsaren kom tillbaka","Finland anföll Ryssland"],0,"Nu kunde Tyskland flytta trupper från öst till väst.",160),
+   D("Helsingfors",24.94,60.17,"6 december 1917","Finland blir fritt",
+    ["Finland har varit en del av Ryssland sedan 1809. Den 6 december 1917 förklarar Finland sig självständigt.","Vintern 1918 bryter inbördeskrig ut mellan röda och vita. Omkring 36 000 dör. Svenska frivilliga strider på de vitas sida."],
+    "Vilket datum firar Finland sin självständighetsdag?",["17 maj","6 december","6 juni"],1,"Fram till 1809 hade Finland varit en del av Sverige.",300) ],
+ [ D("Amiens",2.3,49.9,"8 augusti 1918","Den svarta dagen",
+    ["Våren 1918 gör Tyskland ett sista stort anfall, men det stoppas. Den 8 augusti anfaller de allierade vid Amiens med hundratals stridsvagnar och flygplan.","Tusentals tyska soldater ger upp. Den tyske generalen Ludendorff kallar det den tyska arméns svarta dag."],
+    "Vad kallade Ludendorff den 8 augusti 1918?",["Den tyska arméns svarta dag","Segerns dag","Den heliga dagen"],0,"Efter det trycktes tyskarna tillbaka i hundra dagar fram till krigsslutet."),
+   D("Kiel",10.14,54.32,"November 1918","Kejsaren flyr",
+    ["Matroserna i Kiel vägrar att segla ut i ett sista slag. Upproret sprider sig till hela Tyskland.","Kejsar Wilhelm II avgår den 9 november och flyr till Nederländerna. Tyskland blir en republik."],
+    "Vart flydde kejsar Wilhelm II?",["Till Sverige","Till Nederländerna","Till USA"],1,"Han bodde i Nederländerna resten av livet."),
+   D("Compiègne",2.83,49.43,"11 november 1918, kl. 05","Vagnen i skogen",
+    ["I en järnvägsvagn i skogen vid Compiègne skriver tyska representanter under vapenstilleståndet tidigt på morgonen.","Det ska gälla från klockan 11. Ändå fortsätter striderna in i det sista, och tusentals soldater dör samma förmiddag."],
+    "Varför dog soldater ännu den 11 november 1918?",["Striderna fortsatte tills vapenstilleståndet började gälla kl. 11","Ingen hade hört om freden","Det var en ny offensiv"],0,"I andra världskriget lät Hitler Frankrike ge upp i exakt samma vagn."),
+   D("Madrid",-3.7,40.42,"1918–1920","Spanska sjukan",
+    ["Samtidigt sprids en farlig influensa över världen. Den kallas spanska sjukan eftersom spanska tidningar, i det neutrala Spanien, var de första som skrev fritt om den.","Mellan 25 och 50 miljoner människor dör, fler än i hela kriget. I Sverige dör omkring 35 000. Den drabbar ofta unga, friska vuxna."],
+    "Varför kallades sjukdomen spanska sjukan?",["Spanska tidningar skrev först fritt om den","Den kom från Spanien","En spansk läkare upptäckte den"],0,"De krigförande länderna censurerade nyheter om sjukdomen.",300) ],
+ [ D("Versailles",2.12,48.8,"28 juni 1919","Spegelsalen",
+    ["Freden skrivs under i Spegelsalen i Versailles. Det var där det tyska kejsardömet utropades 1871, efter att Tyskland besegrat Frankrike.","Tyskland måste ta på sig skulden för kriget, betala skadestånd, lämna tillbaka Elsass-Lothringen till Frankrike och får bara ha en armé på 100 000 man."],
+    "Hur stor armé fick Tyskland ha efter freden?",["100 000 man","1 miljon man","Ingen armé alls"],0,"Tyskland fick heller inte ha ubåtar eller flygvapen."),
+   D("Warszawa",21.01,52.23,"1918–1920","Nya länder",
+    ["När kejsardömena faller bildas nya länder. Polen blir självständigt igen efter mer än hundra år.","Även Tjeckoslovakien, Jugoslavien, Estland, Lettland, Litauen och Finland blir egna stater. Österrike och Ungern blir små länder."],
+    "Vilket land blev självständigt igen efter över hundra år?",["Polen","Sverige","Frankrike"],0,"Gränserna drogs ofta så att minoriteter hamnade i fel land, vilket gav nya konflikter.",300),
+   D("Genève",6.14,46.2,"1920–1921","Nationernas förbund",
+    ["Nationernas förbund bildas för att lösa konflikter med förhandlingar i stället för krig. Sverige går med, men USA gör det aldrig.","År 1921 avgör förbundet Ålandsfrågan. Ålänningarna ville tillhöra Sverige, men Åland blir finskt. Ålänningarna får självstyre och behåller svenska språket, och öarna blir demilitariserade."],
+    "Hur löstes Ålandsfrågan 1921?",["Åland blev svenskt","Åland blev finskt men fick självstyre och svenskt språk","Åland blev ett eget land"],1,"Ålandslösningen ses ofta som ett lyckat exempel på fredlig konfliktlösning.",300),
+   D("Berlin",13.4,52.52,"1919–1939","Fröet till nästa krig",
+    ["Många tyskar kallar freden ett diktat, en fred de tvingats till. Skadestånden och den ekonomiska krisen gör många fattiga och arga.","Adolf Hitler, som själv varit soldat i kriget, lovar att riva upp Versaillesfreden. År 1933 tar han makten, och 1939 börjar andra världskriget."],
+    "Vad lovade Hitler att göra med Versaillesfreden?",["Riva upp den","Följa den noga","Förlänga den"],0,"Därför ses första och andra världskriget ibland som två delar av samma konflikt.",300) ]
+];
+
+/* ---------- projection & map data ---------- */
+const R=Math.PI/180, S=170;
+function proj(lon,lat){
+  const l=lon*R, p=lat*R, p2=p*p, p4=p2*p2;
+  const x=l*(0.8707-0.131979*p2+p4*(-0.013791+p4*(0.003971*p2-0.001529*p4)));
+  const y=p*(1.007226+p2*(0.015085+p4*(-0.044475+0.028874*p2-0.005916*p4)));
+  return [x*S,-y*S];
+}
+const NSV="http://www.w3.org/2000/svg";
+const svg=document.getElementById("svg"), land=document.getElementById("land");
+const pathOf=pts=>"M"+pts.map(([a,b])=>{const [x,y]=proj(a,b);return x.toFixed(1)+" "+y.toFixed(1)}).join("L")+"Z";
+const ringPath=pts=>{
+  const out=[pts[0].slice()];let mn=pts[0][0],mx=pts[0][0];
+  for(let i=1;i<pts.length;i++){let lon=pts[i][0];const prev=out[i-1][0];while(lon-prev>180)lon-=360;while(lon-prev<-180)lon+=360;out.push([lon,pts[i][1]]);mn=Math.min(mn,lon);mx=Math.max(mx,lon);}
+  let d=pathOf(out);
+  if(mx>180)d+=pathOf(out.map(([a,b])=>[a-360,b]));
+  if(mn<-180)d+=pathOf(out.map(([a,b])=>[a+360,b]));
+  return d;
+};
+function drawGrat(){
+  let d="";
+  for(let lon=-180;lon<=180;lon+=20){const pts=[];for(let lat=-80;lat<=80;lat+=4)pts.push(proj(lon,lat));d+="M"+pts.map(p=>p.map(v=>v.toFixed(1)).join(" ")).join("L");}
+  for(let lat=-60;lat<=80;lat+=20){const pts=[];for(let lon=-180;lon<=180;lon+=4)pts.push(proj(lon,lat));d+="M"+pts.map(p=>p.map(v=>v.toFixed(1)).join(" ")).join("L");}
+  document.getElementById("grat").innerHTML=`<path class="grat" d="${d}"/>`;
+}
+function drawLand(){
+  const topo=window.Datamap&&Datamap.prototype.worldTopo;
+  if(!topo||!topo.objects){ land.innerHTML=""; return false; }
+  const tf=topo.transform;
+  const arcs=topo.arcs.map(a=>{let x=0,y=0;return a.map(p=>{if(tf){x+=p[0];y+=p[1];return [x*tf.scale[0]+tf.translate[0],y*tf.scale[1]+tf.translate[1]];}return p;});});
+  const ring=idx=>{const out=[];idx.forEach((i,j)=>{let a=i<0?arcs[~i].slice().reverse():arcs[i];if(j>0)a=a.slice(1);out.push(...a);});return out;};
+  const obj=topo.objects.world||topo.objects[Object.keys(topo.objects)[0]];
+  let html="";
+  obj.geometries.forEach(g=>{
+    if(g.id==="ATA"||!g.arcs) return;
+    const polys=g.type==="Polygon"?[g.arcs]:g.type==="MultiPolygon"?g.arcs:[];
+    const d=polys.map(poly=>poly.map(r=>ringPath(ring(r))).join("")).join("");
+    html+=`<path class="country${g.id==="SWE"?" swe":""}" data-id="${g.id}" d="${d}" fill-rule="evenodd"/>`;
+  });
+  land.innerHTML=html; return true;
+}
+drawGrat();
+const hasLand=drawLand();
+
+/* markers */
+const marks=document.getElementById("marks"), labels=document.getElementById("labels");
+EV.forEach((e,i)=>{const [x,y]=proj(e.lon,e.lat);e.px=x;e.py=y;
+  const g=document.createElementNS(NSV,"g");g.setAttribute("class","mk");g.dataset.i=i;
+  g.innerHTML=`<circle class="pulse" r="12"/><circle class="ring" r="12"/><text text-anchor="middle" y="5">${i+1}</text>`;
+  marks.appendChild(g);
+});
+function setLabels(e){
+  labels.innerHTML="";
+  const list=[[e.place,e.lon,e.lat,true]].concat((e.extra||[]).map(a=>[a[0],a[1],a[2],false]));
+  list.forEach(([n,lon,lat,main])=>{const [x,y]=proj(lon,lat);
+    const t=document.createElementNS(NSV,"g");t.dataset.x=x;t.dataset.y=y;
+    t.innerHTML=(main?"":`<circle r="4" fill="#2a2822"/>`)+`<text class="place" x="${main?18:8}" y="${main?-14:4}">${n}</text>`;
+    labels.appendChild(t);});
+}
+
+/* ---------- camera ---------- */
+const FULL={x:0,y:-10,w:2*Math.PI*0.8707*S*1.02};
+let cam={...FULL};
+function box(){const r=svg.getBoundingClientRect();return {W:Math.max(r.width,1),H:Math.max(r.height,1)}}
+function focusFrac(){return innerWidth>=860?0.5:0.5}
+function apply(){
+  const {W,H}=box(), w=cam.w, h=w*H/W;
+  svg.setAttribute("viewBox",`${cam.x-w/2} ${cam.y-h*0.55} ${w} ${h}`);
+  const k=w/W;
+  marks.childNodes.forEach(g=>{const e=EV[g.dataset.i];g.setAttribute("transform",`translate(${e.px} ${e.py}) scale(${k})`);});
+  labels.childNodes.forEach(g=>g.setAttribute("transform",`translate(${g.dataset.x} ${g.dataset.y}) scale(${k})`));
+  document.querySelectorAll("#subs > g").forEach(g=>g.setAttribute("transform",`translate(${g.dataset.x} ${g.dataset.y}) scale(${k})`));
+}
+let raf=null;
+function fly(to,done){
+  const from={...cam}, dx=to.x-from.x, dy=to.y-from.y, dist=Math.hypot(dx,dy);
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const dur=reduce?1:Math.min(3400,1300+dist*2.2), t0=performance.now();
+  const lift=Math.max(0,dist*1.15-(from.w+to.w)/2);
+  cancelAnimationFrame(raf);
+  const step=now=>{
+    const t=Math.min(1,(now-t0)/dur), e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    cam={x:from.x+dx*e,y:from.y+dy*e,w:from.w+(to.w-from.w)*e+lift*Math.sin(Math.PI*e)};
+    apply();
+    if(t<1) raf=requestAnimationFrame(step); else done&&done();
+  };
+  raf=requestAnimationFrame(step);
+}
+addEventListener("resize",apply);
+
+/* ---------- timeline ---------- */
+const tl=document.getElementById("tl"), Y0=1914.3, Y1=1919.7;
+const frac=y=>(y-Y0)/(Y1-Y0);
+for(let y=1915;y<=1919;y++){
+  tl.insertAdjacentHTML("beforeend",`<span class="tl-year" style="left:calc(14px + (100% - 28px) * ${frac(y)})">${y}</span>`);
+  tl.querySelector(".tl-bar").insertAdjacentHTML("beforeend",`<span class="tl-tick" style="left:${frac(y)*100}%"></span>`);
+}
+const tlfill=document.getElementById("tlfill");
+
+/* ---------- scene engine: one illustrated place per delstopp ---------- */
+const H=300;
+let seed=1; const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};
+const SKY={dawn:["#46536a","#d2a57e","#6f6c74","#34383f"],day:["#7b9bb4","#d6dcd8","#8c9aa3","#3c4441"],grey:["#5f6970","#aeb2ac","#80878a","#3a3e40"],
+ dusk:["#2b2f47","#c06d4b","#4f4352","#262330"],night:["#0b111b","#2a3446","#1c2432","#10151c"],snow:["#8996a0","#e1e4e2","#aab4b9","#4a5458"],tropic:["#4c87b0","#efdcaa","#7ea3b4","#2f3d33"]};
+const GC={field:"#5c673b",snow:"#e4e9ea",steppe:"#a8945e",city:"#6a675f",jungle:"#3b5629",ice:"#cddbe1",sand:"#c9b683",sea:"#3a5862"};
+let SK; // current sky palette
+const P={
+ pines(x0,x1,n,c,h=60,snow,y=H+34){let s="";for(let i=0;i<n;i++){const x=x0+(x1-x0)*i/Math.max(1,n-1)+(rnd()-.5)*20,hh=h*(.7+rnd()*.6);
+   s+=`<path d="M${x} ${y-hh}L${x+hh*.28} ${y}L${x-hh*.28} ${y}Z" fill="${c}"/>`;if(snow)s+=`<path d="M${x} ${y-hh}L${x+hh*.1} ${y-hh*.62}L${x-hh*.1} ${y-hh*.62}Z" fill="#f1f4f4"/>`;}return s;},
+ trees(x0,x1,n,c,y=H+34){let s="";for(let i=0;i<n;i++){const x=x0+(x1-x0)*i/Math.max(1,n-1)+(rnd()-.5)*30,r=16+rnd()*14;s+=`<rect x="${x-2}" y="${y-r}" width="4" height="${r}" fill="#3a3326"/><circle cx="${x}" cy="${y-r-r*.5}" r="${r}" fill="${c}"/>`;}return s;},
+ palm(x,y,h=90){let s=`<path d="M${x} ${y} q${8} ${-h/2} ${-6} ${-h}" stroke="#4a3b28" stroke-width="5" fill="none"/>`;const tx=x-6,ty=y-h;
+   [[-45,10],[-20,-8],[10,-10],[40,8],[55,24],[-55,26]].forEach(([dx,dy])=>s+=`<path d="M${tx} ${ty} q${dx/2} ${dy-14} ${dx} ${dy+10}" stroke="#2e4a26" stroke-width="7" fill="none" stroke-linecap="round"/>`);return s;},
+ house(x,y,w,h,c="#8a7f6c",lit){let s=`<rect x="${x}" y="${y-h}" width="${w}" height="${h}" fill="${c}"/><path d="M${x-4} ${y-h}L${x+w/2} ${y-h-w*.4}L${x+w+4} ${y-h}Z" fill="#4d4036"/>`;
+   for(let i=0;i<Math.floor(w/22);i++)s+=`<rect x="${x+8+i*22}" y="${y-h+12}" width="9" height="11" fill="${lit?"#f0c66a":"#2c2a26"}"/>`;return s;},
+ ruin(x,y,w,h,c="#6e6a62"){let d=`M${x} ${y}L${x} ${y-h*.6}L${x+w*.15} ${y-h}L${x+w*.3} ${y-h*.7}L${x+w*.45} ${y-h*.9}L${x+w*.6} ${y-h*.45}L${x+w*.8} ${y-h*.75}L${x+w} ${y-h*.3}L${x+w} ${y}Z`;
+   let s=`<path d="${d}" fill="${c}"/>`;for(let i=0;i<Math.floor(w/26);i++)s+=`<rect x="${x+8+i*26}" y="${y-h*.4}" width="10" height="14" fill="#2b2925"/>`;return s;},
+ skyline(kind,y,c){let s="";let x=-150;while(x<1700){const w=30+rnd()*50,h=30+rnd()*60;s+=`<rect x="${x}" y="${y-h}" width="${w}" height="${h+2}" fill="${c}"/>`;x+=w+rnd()*8;}
+   const L=650;
+   if(kind==="london")s+=`<rect x="${L-40}" y="${y-90}" width="80" height="90" fill="${c}"/><path d="M${L-36} ${y-90}a36 40 0 0 1 72 0Z" fill="${c}"/><rect x="${L-4}" y="${y-150}" width="8" height="24" fill="${c}"/>`;
+   if(kind==="paris")s+=`<path d="M${L-46} ${y}L${L-6} ${y-200}L${L+6} ${y-200}L${L+46} ${y}L${L+26} ${y}Q${L} ${y-50} ${L-26} ${y}Z" fill="${c}"/><rect x="${L-2}" y="${y-235}" width="4" height="40" fill="${c}"/><rect x="${L-30}" y="${y-70}" width="60" height="6" fill="${c}"/><rect x="${L-20}" y="${y-130}" width="40" height="5" fill="${c}"/>`;
+   if(kind==="moscow")[[-60,60],[0,90],[60,70]].forEach(([dx,h])=>s+=`<rect x="${L+dx-12}" y="${y-h}" width="24" height="${h}" fill="${c}"/><path d="M${L+dx-16} ${y-h}q16 -36 16 -44q0 8 16 44Z" fill="${c}"/>`);
+   if(kind==="berlin")s+=`<rect x="${L-90}" y="${y-70}" width="180" height="70" fill="${c}"/><path d="M${L-40} ${y-70}a40 34 0 0 1 80 0" fill="none" stroke="${c}" stroke-width="4"/><path d="M${L-20} ${y-70}l0 -30M${L} ${y-104}l0 34M${L+20} ${y-70}l0 -30" stroke="${c}" stroke-width="3"/><rect x="${L-1}" y="${y-140}" width="2" height="36" fill="${c}"/><rect x="${L+1}" y="${y-140}" width="26" height="16" fill="#b8352b"/>`;
+   if(kind==="budapest")s+=`<rect x="${L-160}" y="${y-60}" width="320" height="60" fill="${c}"/><path d="M${L-36} ${y-60}a36 46 0 0 1 72 0Z" fill="${c}"/><rect x="${L-2}" y="${y-130}" width="4" height="26" fill="${c}"/>`+[-150,-110,110,150].map(dx=>`<path d="M${L+dx-5} ${y-60}l5 -36l5 36Z" fill="${c}"/>`).join("");
+   if(kind==="leningrad")s+=`<rect x="${L-60}" y="${y-60}" width="120" height="60" fill="${c}"/><rect x="${L-12}" y="${y-110}" width="24" height="50" fill="${c}"/><path d="M${L-3} ${y-110}L${L} ${y-200}L${L+3} ${y-110}Z" fill="${c}"/>`;
+   if(kind==="pagoda"||kind==="tokyo")for(let k=0;k<5;k++){const w=70-k*12;s+=`<path d="M${L-w} ${y-k*26-14}L${L+w} ${y-k*26-14}L${L+w*.7} ${y-k*26-26}L${L-w*.7} ${y-k*26-26}Z" fill="${c}"/><rect x="${L-w*.5}" y="${y-k*26-14}" width="${w}" height="14" fill="${c}"/>`;}
+   if(kind==="church")[[300,110],[1000,90]].forEach(([cx,h])=>s+=`<rect x="${cx-10}" y="${y-h}" width="20" height="${h}" fill="${c}"/><path d="M${cx-12} ${y-h}L${cx} ${y-h-40}L${cx+12} ${y-h}Z" fill="${c}"/>`);
+   return s;},
+ mountains(y,c,snow,hgt=150){let d=`M-200 ${y}`,pk=[];for(let x=-200;x<=1800;x+=120){const h=hgt*(.5+rnd()*.6);d+=`L${x+60} ${y-h}L${x+120} ${y-h*.3}`;pk.push([x+60,y-h,h]);}
+   let s=`<path d="${d}L1800 ${y}Z" fill="${c}"/>`;if(snow)pk.forEach(([x,yy,h])=>s+=`<path d="M${x} ${yy}L${x+h*.18} ${yy+h*.3}L${x+4} ${yy+h*.24}L${x-h*.18} ${yy+h*.3}Z" fill="#eef2f3"/>`);return s;},
+ hills(y,c){let d=`M-200 ${y+20}`;for(let x=-200;x<=1800;x+=40)d+=`L${x} ${(y-18*Math.sin(x/170)-10*Math.sin(x/61)).toFixed(1)}`;return `<path d="${d}L1800 ${y+40}L-200 ${y+40}Z" fill="${c}"/>`;},
+ cliffs(x0,x1,y){return `<path d="M${x0} ${y}L${x0+30} ${y-70}L${x1-40} ${y-80}L${x1} ${y}Z" fill="#e8e6dc"/><path d="M${x0+30} ${y-70}L${x1-40} ${y-80}L${x1-40} ${y-90}L${x0+30} ${y-80}Z" fill="#5c6a3e"/>`;},
+ ship(x,y,kind="battle",k=1,smoke){let s=`<g transform="translate(${x} ${y}) scale(${k})">`;const c="#3d4448";
+   if(kind==="fish")s+=`<path d="M-30 0L30 0L24 10L-24 10Z" fill="#5a4b3a"/><rect x="-6" y="-14" width="12" height="14" fill="#7a6a52"/><line x1="10" y1="0" x2="10" y2="-30" stroke="#3a3326" stroke-width="2"/>`;
+   else if(kind==="carrier")s+=`<path d="M-130 -4L130 -4L120 14L-118 14Z" fill="${c}"/><rect x="-140" y="-10" width="280" height="6" fill="#55595a"/><rect x="50" y="-34" width="22" height="24" fill="${c}"/>`;
+   else if(kind==="tanker")s+=`<path d="M-110 0L110 0L102 16L-104 16Z" fill="#4a4a40"/><rect x="70" y="-18" width="26" height="18" fill="#5d5a4c"/><rect x="-90" y="-6" width="140" height="6" fill="#5d5a4c"/>`;
+   else s+=`<path d="M-120 0L125 0L112 16L-110 16Z" fill="${c}"/><path d="M-60 0L-50 -22L30 -22L40 0Z" fill="#4a5256"/><rect x="-14" y="-46" width="16" height="24" fill="#4a5256"/><rect x="10" y="-40" width="10" height="18" fill="#4a5256"/><path d="M-75 -6L-110 -12M70 -6L108 -12" stroke="${c}" stroke-width="4"/>`;
+   s+=`</g>`;if(smoke)s+=P.smoke(x,y-20,1.2);return s;},
+ boats(x0,x1,y,n){let s="";for(let i=0;i<n;i++){const x=x0+(x1-x0)*i/Math.max(1,n-1)+(rnd()-.5)*30,yy=y+rnd()*30;s+=`<g class="bob" style="animation-delay:${(rnd()*3).toFixed(1)}s"><path d="M${x-14} ${yy}L${x+14} ${yy}L${x+10} ${yy+7}L${x-10} ${yy+7}Z" fill="#4c4235"/><line x1="${x}" y1="${yy}" x2="${x}" y2="${yy-14}" stroke="#3a3326" stroke-width="1.5"/></g>`;}return s;},
+ plane(kind,y,t=14,delay=0,k=1){const c="#2f3437";let b;
+   if(kind==="bomber")b=`<ellipse cx="0" cy="0" rx="32" ry="5" fill="${c}"/><path d="M-6 -2L-16 -30L-6 -30L8 -2ZM-6 2L-16 30L-6 30L8 2Z" fill="${c}"/><path d="M-30 -2L-36 -12L-28 -12L-24 -2Z" fill="${c}"/>`;
+   else if(kind==="glider")b=`<ellipse cx="0" cy="0" rx="26" ry="4" fill="${c}"/><path d="M-2 -1L-8 -34L0 -34L6 -1ZM-2 1L-8 34L0 34L6 1Z" fill="${c}"/>`;
+   else b=`<ellipse cx="0" cy="0" rx="18" ry="3.5" fill="${c}"/><path d="M-2 -1L-8 -18L-1 -18L6 -1ZM-2 1L-8 18L-1 18L6 1Z" fill="${c}"/><path d="M-16 -1L-20 -8L-15 -8Z" fill="${c}"/>`;
+   return `<g class="fly" style="animation-duration:${t}s;animation-delay:${-delay}s"><g transform="translate(-200 ${y}) scale(${k}) scale(1 .45)">${b}</g></g>`;},
+ dive(x,y){return `<g class="dive"><g transform="translate(${x} ${y}) rotate(28) scale(1 .5)"><ellipse rx="18" ry="3.5" fill="#2f3437"/><path d="M-2 -1L-8 -18L-1 -18L6 -1ZM-2 1L-8 18L-1 18L6 1Z" fill="#2f3437"/></g></g>`;},
+ tank(x,y,k=1,c="#4b4e36"){return `<g transform="translate(${x} ${y}) scale(${k})"><rect x="-24" y="-12" width="48" height="12" rx="6" fill="#2e2f28"/><path d="M-22 -12L22 -12L18 -22L-18 -22Z" fill="${c}"/><rect x="-10" y="-30" width="20" height="9" rx="2" fill="${c}"/><rect x="8" y="-28" width="26" height="3.5" fill="${c}"/></g>`;},
+ tanks(x0,n,y,k=1,c,gap=80){let s="";for(let i=0;i<n;i++)s+=P.tank(x0+i*gap+(rnd()-.5)*16,y+(rnd()-.5)*10,k,c);return s;},
+ truck(x,y,c="#4f5238"){return `<rect x="${x-26}" y="${y-22}" width="34" height="16" fill="${c}"/><rect x="${x+8}" y="${y-18}" width="14" height="12" fill="${c}"/><circle cx="${x-16}" cy="${y-4}" r="5" fill="#222"/><circle cx="${x+14}" cy="${y-4}" r="5" fill="#222"/>`;},
+ soldiers(x0,n,y,style="walk",gap=26){let s="";const c=style==="white"||style==="ski"?"#eef1f1":style==="civil"?"#5b4a43":"#454631";
+   for(let i=0;i<n;i++){const x=x0+i*gap+(rnd()-.5)*8,yy=y+(rnd()-.5)*6;s+=`<g transform="translate(${x} ${yy})"><rect x="-4" y="-22" width="8" height="13" rx="2" fill="${c}"/><circle cx="0" cy="-26" r="3.6" fill="${style==="white"||style==="ski"?"#dfe3e3":"#b89a7c"}"/><path d="M-3 -9L-4 0M3 -9L4 0" stroke="${c}" stroke-width="3"/>${style==="ski"?`<path d="M-10 1L12 -1" stroke="#5a4a36" stroke-width="2"/><path d="M5 -18L10 0" stroke="#5a4a36" stroke-width="1.2"/>`:style==="civil"?"":`<path d="M4 -16L9 -32" stroke="#2c2618" stroke-width="1.6"/>`}</g>`;}
+   return `<g class="${style==="march"||style==="walk"||style==="ski"?"walk":""}">${s}</g>`;},
+ train(x,y,n=6,ore){let s=`<rect x="${x}" y="${y-26}" width="46" height="20" fill="#2d2f30"/><rect x="${x+28}" y="${y-40}" width="18" height="16" fill="#2d2f30"/><rect x="${x+6}" y="${y-36}" width="8" height="10" fill="#2d2f30"/>`;
+   for(let i=1;i<=n;i++)s+=ore?`<path d="M${x-i*44+4} ${y-22}L${x-i*44+38} ${y-22}L${x-i*44+34} ${y-6}L${x-i*44+8} ${y-6}Z" fill="#40403a"/><path d="M${x-i*44+6} ${y-22}q15 -10 30 0Z" fill="#5a3e33"/>`:`<rect x="${x-i*44+3}" y="${y-24}" width="38" height="18" fill="#5b3f30"/>`;
+   for(let i=0;i<=n;i++)s+=`<circle cx="${x-i*44+12}" cy="${y-5}" r="4" fill="#1d1d1d"/><circle cx="${x-i*44+34}" cy="${y-5}" r="4" fill="#1d1d1d"/>`;return s+P.smoke(x+10,y-40,.6);},
+ rails(x0,x1,y){let s=`<path d="M${x0} ${y}L${x1} ${y}" stroke="#3a3632" stroke-width="2.5"/>`;for(let x=x0;x<x1;x+=14)s+=`<rect x="${x}" y="${y-1}" width="6" height="4" fill="#4a3d2e"/>`;return s;},
+ bridge(x,y,w,c="#4b4f52"){let s=`<rect x="${x}" y="${y-30}" width="${w}" height="8" fill="${c}"/>`;for(let i=0;i<=w;i+=w/4)s+=`<rect x="${x+i-4}" y="${y-24}" width="8" height="34" fill="${c}"/>`;
+   s+=`<path d="M${x} ${y-30}Q${x+w/2} ${y-90} ${x+w} ${y-30}" stroke="${c}" stroke-width="3" fill="none"/>`;return s;},
+ carriage(x,y){return `<rect x="${x}" y="${y-38}" width="150" height="30" rx="4" fill="#4e3a2c"/><rect x="${x-4}" y="${y-42}" width="158" height="6" rx="3" fill="#3a2b20"/>`+[0,1,2,3,4,5].map(i=>`<rect x="${x+10+i*23}" y="${y-32}" width="14" height="12" fill="#d8c68e"/>`).join("")+`<circle cx="${x+22}" cy="${y-6}" r="6" fill="#1d1d1d"/><circle cx="${x+128}" cy="${y-6}" r="6" fill="#1d1d1d"/>`;},
+ bus(x,y){return `<g class="drive"><rect x="${x}" y="${y-34}" width="74" height="28" rx="5" fill="#eceae2"/><rect x="${x+6}" y="${y-29}" width="50" height="9" fill="#7d8b90"/><rect x="${x+60}" y="${y-29}" width="10" height="12" fill="#7d8b90"/><path d="M${x+30} ${y-17}h8v-3h4v3h8v4h-8v3h-4v-3h-8z" fill="#c8352c"/><circle cx="${x+16}" cy="${y-5}" r="6" fill="#222"/><circle cx="${x+58}" cy="${y-5}" r="6" fill="#222"/></g>`;},
+ derrick(x,y){return `<path d="M${x-16} ${y}L${x} ${y-90}L${x+16} ${y}M${x-11} ${y-30}L${x+11} ${y-30}M${x-6} ${y-60}L${x+6} ${y-60}M${x-16} ${y}L${x+11} ${y-30}M${x+16} ${y}L${x-11} ${y-30}" stroke="#2e2a24" stroke-width="2.5" fill="none"/>`;},
+ radar(x,y,h=170){let s=`<path d="M${x-14} ${y}L${x} ${y-h}L${x+14} ${y}" stroke="#454a4c" stroke-width="2.5" fill="none"/>`;for(let k=1;k<6;k++){const yy=y-h*k/6,w=14*(1-k/6);s+=`<path d="M${x-w} ${yy}L${x+w} ${yy}" stroke="#454a4c" stroke-width="1.5"/>`;}return s;},
+ fence(x0,x1,y,h=40){let s=`<path d="M${x0} ${y-h*.3}L${x1} ${y-h*.3}M${x0} ${y-h*.6}L${x1} ${y-h*.6}M${x0} ${y-h*.9}L${x1} ${y-h*.9}" stroke="#3b3a36" stroke-width="1"/>`;for(let x=x0;x<=x1;x+=40)s+=`<path d="M${x} ${y}L${x} ${y-h}l6 -6" stroke="#4a4844" stroke-width="3" fill="none"/>`;return s;},
+ tower(x,y){return `<path d="M${x-12} ${y}L${x-8} ${y-70}M${x+12} ${y}L${x+8} ${y-70}" stroke="#4a3e30" stroke-width="3"/><rect x="${x-16}" y="${y-92}" width="32" height="22" fill="#4f4334"/><path d="M${x-20} ${y-92}L${x} ${y-104}L${x+20} ${y-92}Z" fill="#3b3128"/>`;},
+ gatehouse(x,y){return `<rect x="${x-220}" y="${y-40}" width="440" height="40" fill="#6b4f42"/><path d="M${x-226} ${y-40}L${x+226} ${y-40}L${x+214} ${y-54}L${x-214} ${y-54}Z" fill="#4a3a32"/><rect x="${x-34}" y="${y-100}" width="68" height="60" fill="#6b4f42"/><path d="M${x-40} ${y-100}L${x} ${y-122}L${x+40} ${y-100}Z" fill="#4a3a32"/><path d="M${x-20} ${y}L${x-20} ${y-26}A20 20 0 0 1 ${x+20} ${y-26}L${x+20} ${y}Z" fill="#26211e"/>`;},
+ wall(x0,x1,y,h=46){return `<rect x="${x0}" y="${y-h}" width="${x1-x0}" height="${h}" fill="#8e7765"/><rect x="${x0}" y="${y-h-4}" width="${x1-x0}" height="4" fill="#5d4e43"/>`+P.fence(x0,x1,y-h,14);},
+ dome(x,y){let s=`<path d="M${x-80} ${y}L${x-80} ${y-80}L${x-40} ${y-80}L${x-40} ${y-120}L${x+40} ${y-120}L${x+40} ${y-80}L${x+80} ${y-80}L${x+80} ${y}Z" fill="#7c766c"/><path d="M${x-30} ${y-120}A30 34 0 0 1 ${x+30} ${y-120}" fill="none" stroke="#3b3934" stroke-width="3"/>`;
+   for(let k=-2;k<=2;k++)s+=`<path d="M${x+k*12} ${y-120}Q${x+k*6} ${y-152} ${x} ${y-154}" stroke="#3b3934" stroke-width="2" fill="none"/>`;for(let i=0;i<5;i++)s+=`<rect x="${x-70+i*30}" y="${y-60}" width="12" height="18" fill="#3b3934"/>`;return s;},
+ cranes(){let s="";[90,190,300,420,560,700,830,960,1090,1230].forEach((x,i)=>{const len=60+rnd()*140,c=["#c8452f","#d1a84c","#5d84a6","#5f9a4c","#e9e2cf"][i%5];
+   s+=`<g class="sway" style="animation-delay:${(rnd()*2).toFixed(1)}s"><line x1="${x}" y1="-10" x2="${x}" y2="${len}" stroke="#d8d2c0" stroke-width="1"/>`;for(let k=0;k<3;k++){const yy=len-k*26;s+=`<path d="M${x-10} ${yy}L${x} ${yy-6}L${x+10} ${yy}L${x} ${yy+4}Z" fill="${c}"/>`;}s+=`</g>`;});return s;},
+ fuji(x,y){return `<path d="M${x-260} ${y}L${x-50} ${y-170}L${x+50} ${y-170}L${x+260} ${y}Z" fill="#7d8c99"/><path d="M${x-50} ${y-170}L${x+50} ${y-170}L${x+90} ${y-138}L${x+40} ${y-148}L${x} ${y-132}L${x-40} ${y-148}L${x-90} ${y-138}Z" fill="#eef2f3"/>`;},
+ castle(x,y,c){return `<rect x="${x-26}" y="${y-140}" width="52" height="140" fill="${c}"/><path d="M${x-30} ${y-140}L${x} ${y-190}L${x+30} ${y-140}Z" fill="${c}"/><rect x="${x-80}" y="${y-50}" width="160" height="50" fill="${c}"/>`;},
+ fortress(x,y,w){let s=`<path d="M${x} ${y}L${x+20} ${y-34}L${x+w-20} ${y-34}L${x+w} ${y}Z" fill="#6f6a5c"/>`;for(let i=0;i<w/40;i++)s+=`<rect x="${x+30+i*40}" y="${y-26}" width="14" height="6" fill="#262420"/>`;return s;},
+ smoke(x,y,k=1){let s=`<g class="smoke">`;for(let i=0;i<4;i++)s+=`<circle cx="${x+i*14*k}" cy="${y-i*34*k}" r="${(14+i*9)*k}" fill="#3e403f" opacity="${.55-i*.1}"/>`;return s+`</g>`;},
+ fire(x,y,k=1){return `<ellipse cx="${x}" cy="${y-10*k}" rx="${46*k}" ry="${26*k}" fill="#e2763a" opacity=".35" class="glow"/><path d="M${x-14*k} ${y}Q${x-10*k} ${y-30*k} ${x} ${y-40*k}Q${x+6*k} ${y-22*k} ${x+14*k} ${y}Z" fill="#f09a3c" class="flicker"/>`;},
+ flash(x,y,d=0){return `<circle cx="${x}" cy="${y}" r="18" fill="#ffd27a" class="flash" style="animation-delay:${d}s"/>`;},
+ flak(n=8){let s="";for(let i=0;i<n;i++)s+=`<g class="puff" style="animation-delay:${(rnd()*4).toFixed(1)}s"><circle cx="${100+rnd()*1200}" cy="${60+rnd()*140}" r="9" fill="#2f2f2f"/></g>`;return s;},
+ search(x,y){return `<path d="M${x} ${y}L${x-30} -20L${x+30} -20Z" fill="#e8e6c8" opacity=".16" class="beam" style="transform-origin:${x}px ${y}px"/>`;},
+ splash(x,y){return `<path d="M${x-10} ${y}L${x-4} ${y-40}L${x} ${y-10}L${x+5} ${y-46}L${x+10} ${y}Z" fill="#dfe8ea" class="flash" style="animation-delay:${(rnd()*3).toFixed(1)}s"/>`;},
+ hedgehogs(x0,n,y){let s="";for(let i=0;i<n;i++){const x=x0+i*70+(rnd()-.5)*20;s+=`<g stroke="#2f3133" stroke-width="5"><line x1="${x-18}" y1="${y}" x2="${x+18}" y2="${y-34}"/><line x1="${x+18}" y1="${y}" x2="${x-18}" y2="${y-34}"/></g>`;}return s;},
+ paras(n=8){let s="";for(let i=0;i<n;i++){const x=80+rnd()*1200,d=(rnd()*10).toFixed(1);s+=`<g class="para" style="animation-delay:${-d}s"><path d="M${x-16} 0q16 -18 32 0Z" fill="#d9d4c3"/><path d="M${x-16} 0L${x} 22L${x+16} 0" stroke="#d9d4c3" fill="none" stroke-width=".8"/><rect x="${x-3}" y="22" width="6" height="10" fill="#2f3022"/></g>`;}return s;},
+ glider(x,y,rot=0){return `<g transform="translate(${x} ${y}) rotate(${rot})"><path d="M-46 -6L46 -4L40 4L-44 2Z" fill="#3d4136"/><path d="M-10 -6L-40 -10L30 -10L10 -6Z" fill="#4a4e40"/><path d="M38 -4L46 -18L50 -4Z" fill="#3d4136"/></g>`;},
+ crowd(x0,x1,y,n){let s="";const cols=["#5b4a43","#3c4a5a","#6b5a3a","#7a3e33","#454631","#8a7f6c"];for(let i=0;i<n;i++){const x=x0+rnd()*(x1-x0),yy=y+rnd()*24;s+=`<rect x="${x-4}" y="${yy-18}" width="8" height="18" rx="3" fill="${cols[i%6]}"/><circle cx="${x}" cy="${yy-21}" r="3.5" fill="#c4a487"/>`;}return s;},
+ flag(x,y,cols,h=70,vert){let s=`<line x1="${x}" y1="${y}" x2="${x}" y2="${y-h}" stroke="#2f2b26" stroke-width="2.5"/><g class="flap">`;const w=42,fh=26;
+   cols.forEach((c,i)=>s+=vert?`<rect x="${x+i*w/cols.length}" y="${y-h}" width="${w/cols.length}" height="${fh}" fill="${c}"/>`:`<rect x="${x}" y="${y-h+i*fh/cols.length}" width="${w}" height="${fh/cols.length}" fill="${c}"/>`);return s+`</g>`;},
+ sweflag(x,y){return `<line x1="${x}" y1="${y}" x2="${x}" y2="${y-70}" stroke="#2f2b26" stroke-width="2.5"/><g class="flap"><rect x="${x}" y="${y-70}" width="42" height="26" fill="#2f5d9e"/><rect x="${x+12}" y="${y-70}" width="6" height="26" fill="#e9c23a"/><rect x="${x}" y="${y-60}" width="42" height="6" fill="#e9c23a"/></g>`;},
+ tent(x,y){return `<path d="M${x-30} ${y}L${x} ${y-36}L${x+30} ${y}Z" fill="#d9d6ca"/><path d="M${x-4} ${y}L${x} ${y-20}L${x+4} ${y}Z" fill="#6c665a"/>`;},
+ mast(x,y,h=160){return P.radar(x,y,h)+`<circle cx="${x}" cy="${y-h}" r="4" fill="#ff5a3c" class="blink"/>`;},
+ portcrane(x,y){return `<path d="M${x} ${y}L${x} ${y-110}L${x+80} ${y-110}M${x} ${y-80}L${x+60} ${y-110}M${x+70} ${y-110}L${x+70} ${y-60}" stroke="#3a3f42" stroke-width="5" fill="none"/>`;},
+ lights(x0,x1,y,n){let s="";for(let i=0;i<n;i++)s+=`<circle cx="${x0+rnd()*(x1-x0)}" cy="${y+rnd()*6}" r="1.8" fill="#f2d48a" class="twinkle" style="animation-delay:${(rnd()*3).toFixed(1)}s"/>`;return s;},
+ glints(x0,x1,y,n){let s="";for(let i=0;i<n;i++){const x=x0+rnd()*(x1-x0),yy=y+rnd()*20;s+=`<path d="M${x-3} ${yy}L${x+3} ${yy-2}L${x+1} ${yy+3}Z" fill="#e9f0f2" class="twinkle" style="animation-delay:${(rnd()*3).toFixed(1)}s"/>`;}return s;},
+ inflatable(x,y){return `<g class="wobble" style="transform-origin:${x}px ${y}px">${P.tank(x,y,1.3,"#6b7044")}</g>`;},
+ carry(x,y){return P.inflatable(x,y-36)+P.soldiers(x-22,3,y,"walk",22);},
+ hut(x,y){return `<rect x="${x}" y="${y-40}" width="90" height="40" fill="#5a4a38"/><path d="M${x-8} ${y-40}L${x+45} ${y-66}L${x+98} ${y-40}Z" fill="#3e3326"/><rect x="${x+12}" y="${y-30}" width="16" height="12" fill="#f0c66a"/><rect x="${x+56}" y="${y-30}" width="16" height="12" fill="#f0c66a"/>`;},
+ ore(x,y){return `<path d="M${x} ${y}L${x+40} ${y-60}L${x+80} ${y}Z" fill="#4c3a32"/>`;}
+};
+/* item → layer */
+const LAYER={pines:"mid",trees:"mid",palm:"mid",house:"mid",ruin:"mid",skyline:"far",mountains:"far",hills:"far",cliffs:"mid",ship:"mid",boats:"mid",plane:"sky",dive:"sky",tank:"mid",tanks:"mid",truck:"mid",soldiers:"near",train:"mid",rails:"mid",bridge:"mid",carriage:"mid",bus:"near",derrick:"mid",radar:"far",fence:"mid",tower:"mid",gatehouse:"mid",wall:"mid",dome:"mid",cranes:"fx",fuji:"far",castle:"far",fortress:"mid",smoke:"mid",fire:"lit",flash:"lit",flak:"sky",search:"lit",splash:"mid",hedgehogs:"near",paras:"sky",glider:"near",crowd:"near",flag:"mid",sweflag:"mid",tent:"mid",mast:"mid",portcrane:"mid",lights:"lit",glints:"lit",inflatable:"mid",carry:"near",hut:"mid",ore:"mid"};
+
+function ground(g,sk){
+  const far=sk[2], b={far:"",mid:"",near:""};
+  const land=(c,c2)=>{b.mid+=`<rect x="-300" y="${H}" width="2200" height="300" fill="${c}"/>`;b.near+=`<path d="M-300 ${H+150}Q400 ${H+136} 900 ${H+148}T2000 ${H+142}L2000 600L-300 600Z" fill="${c2||c}"/>`;};
+  const sea=(c=GC.sea)=>{b.mid+=`<rect x="-300" y="${H}" width="2200" height="300" fill="${c}"/>`;let w="";for(let r=0;r<6;r++){const y=H+18+r*r*9;w+=`<path class="wave" d="M-300 ${y}`+Array.from({length:60},(_,i)=>` q20 -4 40 0`).join("")+`" stroke="#a9bec3" stroke-opacity="${.18+r*.05}" fill="none"/>`;}b.mid+=w;};
+  const dark=c=>sk===SKY.night?"#28313a":c;
+  switch(g){
+    case "sea": sea(); break;
+    case "coast": sea(); b.mid+=`<path d="M820 600L860 ${H+40}Q1100 ${H+20} 2000 ${H+30}L2000 600Z" fill="${GC.sand}"/>`; break;
+    case "beach": b.mid+=`<rect x="-300" y="${H}" width="2200" height="60" fill="${GC.sea}"/><rect x="-300" y="${H+56}" width="2200" height="300" fill="${GC.sand}"/>`; break;
+    case "fjord": sea(); break;
+    case "river": land(dark(GC.field),dark("#4f5a32")); b.mid+=`<path d="M-300 ${H+22}Q600 ${H+10} 1900 ${H+28}L1900 ${H+50}Q600 ${H+40} -300 ${H+48}Z" fill="#45626b"/>`; break;
+    case "ice": b.mid+=`<rect x="-300" y="${H}" width="2200" height="300" fill="${dark(GC.ice)}"/>`;for(let i=0;i<12;i++){const x=rnd()*1600;b.near+=`<path d="M${x} ${H+80+rnd()*120}l40 -6l30 10" stroke="#9fb3bb" fill="none"/>`;} break;
+    case "jungle": sea(); b.mid+=`<path d="M560 600L620 ${H+46}Q1100 ${H+30} 2000 ${H+40}L2000 600Z" fill="${GC.sand}"/>`; break;
+    default: land(dark(GC[g]||GC.field), dark(g==="snow"?"#f1f4f4":g==="steppe"?"#b39f68":g==="city"?"#59564f":"#4f5a32"));
+  }
+  return b;
+}
+function sceneSVG(spec,key){
+  seed=key; SK=SKY[spec.sky]||SKY.day;
+  const L={far:"",mid:"",sky:"",near:"",lit:"",fx:""};
+  const b=ground(spec.g,SK); L.far+=b.far; L.mid+=b.mid; L.near+=b.near;
+  spec.it.forEach(([name,...a])=>{
+    let args=a.map(v=>v==="F"?SK[2]:v==="M"?SK[3]:v);
+    const out=P[name](...args); L[LAYER[name]||"mid"]+=out;
+  });
+  let fx="";
+  if(spec.fx==="snow")for(let i=0;i<70;i++)fx+=`<circle class="fall" cx="${(rnd()*800).toFixed(0)}" cy="-10" r="${(1+rnd()*1.8).toFixed(1)}" fill="#fff" opacity=".85" style="animation-delay:${(-rnd()*8).toFixed(1)}s;animation-duration:${(5+rnd()*5).toFixed(1)}s"/>`;
+  if(spec.fx==="rain")for(let i=0;i<90;i++)fx+=`<path class="fall" d="M${(rnd()*800).toFixed(0)} -10l-4 14" stroke="#c9d3d8" stroke-width="1" opacity=".55" style="animation-delay:${(-rnd()*2).toFixed(1)}s;animation-duration:${(1+rnd()*.6).toFixed(2)}s"/>`;
+  if(spec.fx==="embers")for(let i=0;i<30;i++)fx+=`<circle class="rise" cx="${(rnd()*800).toFixed(0)}" cy="520" r="1.6" fill="#f3a246" style="animation-delay:${(-rnd()*6).toFixed(1)}s"/>`;
+  const tint=spec.sky==="night"?`<rect x="0" y="0" width="800" height="500" fill="#06101c" opacity=".38"/>`:"";
+  return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SK[0]}"/><stop offset=".62" stop-color="${SK[1]}"/></linearGradient></defs>
+    <rect width="800" height="500" fill="url(#skyg)"/>
+    <g class="pan far">${L.far}</g><g class="pan sky">${L.sky}</g><g class="pan mid">${L.mid}</g><g class="pan near">${L.near}</g>${tint}<g class="pan mid">${L.lit}</g><g>${L.fx}${fx}</g></svg>`;
+}
+/* scene per delstopp: key "event_sub" */
+/* ---------- extra motiv för första världskriget ---------- */
+Object.assign(P,{
+ trench(y,c="#3a3024"){let s=`<rect x="-300" y="${y}" width="2200" height="34" fill="${c}"/><rect x="-300" y="${y+30}" width="2200" height="6" fill="#2a221a"/>`;
+   for(let x=-300;x<1900;x+=30)s+=`<ellipse cx="${x+(rnd()-.5)*6}" cy="${y-2}" rx="17" ry="7" fill="${rnd()>.5?"#8a7a58":"#7a6c4e"}"/>`;
+   for(let x=-300;x<1900;x+=34)s+=`<ellipse cx="${x+15}" cy="${y-10}" rx="16" ry="6" fill="${rnd()>.5?"#97875f":"#857553"}"/>`;
+   for(let x=-280;x<1900;x+=120)s+=`<rect x="${x}" y="${y+4}" width="6" height="30" fill="#5a4630"/>`;return s;},
+ wire(x0,x1,y){let s="";for(let x=x0;x<x1;x+=50){s+=`<path d="M${x} ${y}L${x+8} ${y-30}M${x+16} ${y}L${x+8} ${y-30}" stroke="#4a3e30" stroke-width="2.5"/>`;}
+   let d=`M${x0} ${y-18}`;for(let x=x0;x<x1;x+=10)d+=` q5 ${rnd()>.5?-8:8} 10 0`;s+=`<path d="${d}" stroke="#2e2a26" stroke-width="1.2" fill="none"/>`;
+   d=`M${x0} ${y-8}`;for(let x=x0;x<x1;x+=10)d+=` q5 ${rnd()>.5?-7:7} 10 0`;return s+`<path d="${d}" stroke="#2e2a26" stroke-width="1.2" fill="none"/>`;},
+ craters(x0,x1,y,n){let s="";for(let i=0;i<n;i++){const x=x0+rnd()*(x1-x0),yy=y+rnd()*80,w=20+rnd()*40;s+=`<ellipse cx="${x}" cy="${yy}" rx="${w}" ry="${w*.22}" fill="#3e3428"/><ellipse cx="${x}" cy="${yy-2}" rx="${w*.8}" ry="${w*.14}" fill="#52463a"/><ellipse cx="${x}" cy="${yy+1}" rx="${w*.55}" ry="${w*.08}" fill="#5a6a72" opacity=".6"/>`;}return s;},
+ stumps(x0,x1,n,y){let s="";for(let i=0;i<n;i++){const x=x0+(x1-x0)*i/Math.max(1,n-1)+(rnd()-.5)*40,h=40+rnd()*90;s+=`<path d="M${x-4} ${y}L${x-2} ${y-h}L${x+3} ${y-h+8}L${x+4} ${y}Z" fill="#2e2a26"/>`;if(rnd()>.5)s+=`<path d="M${x} ${y-h*.6}l${12+rnd()*10} -${10+rnd()*10}" stroke="#2e2a26" stroke-width="2.5"/>`;}return s;},
+ gas(x,y,k=1){let s=`<g class="smoke" style="animation-duration:12s">`;for(let i=0;i<7;i++)s+=`<ellipse cx="${x+i*70*k}" cy="${y-(i%2)*20}" rx="${(80+rnd()*40)*k}" ry="${(36+rnd()*14)*k}" fill="#c9c46a" opacity=".42"/>`;return s+`</g>`;},
+ biplane(y,t=12,delay=0,k=1,c="#5a4a36"){return `<g class="fly" style="animation-duration:${t}s;animation-delay:${-delay}s"><g transform="translate(-200 ${y}) scale(${k})">
+   <path d="M-22 0L18 -3L22 0L18 4L-20 3Z" fill="${c}"/><rect x="-6" y="-12" width="20" height="3" fill="${c}"/><rect x="-6" y="5" width="20" height="3" fill="${c}"/>
+   <path d="M0 -10V6M10 -10V6" stroke="#2a2420" stroke-width="1"/><path d="M-22 0L-28 -8L-20 -2Z" fill="${c}"/><ellipse cx="23" cy="0" rx="1.5" ry="8" fill="#2a2420" opacity=".6"/><circle cx="2" cy="10" r="2.4" fill="#222"/></g></g>`;},
+ zeppelin(y,t=60,delay=0,k=1){return `<g class="fly" style="animation-duration:${t}s;animation-delay:${-delay}s"><g transform="translate(-200 ${y}) scale(${k})"><ellipse cx="0" cy="0" rx="90" ry="17" fill="#8a8e8c"/><path d="M-90 0h180" stroke="#7a7e7c" stroke-width="1"/><path d="M-80 -6L-104 -20L-96 0L-104 20L-80 6Z" fill="#7a7e7c"/><rect x="-14" y="16" width="28" height="7" rx="2" fill="#4a4e4c"/></g></g>`;},
+ uboat(x,y,k=1){return `<g transform="translate(${x} ${y}) scale(${k})"><path d="M-70 0Q-60 -8 0 -8Q60 -8 74 0Q60 6 0 6Q-60 6 -70 0Z" fill="#3e4446"/><path d="M-8 -8L-4 -26L14 -26L18 -8Z" fill="#3e4446"/><path d="M4 -26V-40" stroke="#3e4446" stroke-width="2"/><rect x="-40" y="-12" width="6" height="5" fill="#3e4446"/></g>`;},
+ liner(x,y,k=1,tilt=0){let s=`<g transform="translate(${x} ${y}) scale(${k}) rotate(${tilt})"><path d="M-160 -8L160 -8L150 16L-150 16Z" fill="#1f1f22"/><rect x="-140" y="-24" width="270" height="16" fill="#e9e6dc"/><rect x="-120" y="-34" width="220" height="10" fill="#e9e6dc"/>`;
+   for(let i=0;i<4;i++)s+=`<rect x="${-90+i*50}" y="-66" width="18" height="32" fill="#b84a2e"/><rect x="${-90+i*50}" y="-66" width="18" height="7" fill="#1f1f22"/>`;
+   for(let i=0;i<20;i++)s+=`<circle cx="${-130+i*13}" cy="-16" r="2" fill="#3a3e44"/>`;return s+`</g>`;},
+ cannon(x,y,k=1,flash){return `<g transform="translate(${x} ${y}) scale(${k})"><path d="M-6 -14L44 -40L48 -34L0 -6Z" fill="#3a3c34"/><rect x="-20" y="-16" width="34" height="12" fill="#4a4c40"/><circle cx="-12" cy="-4" r="11" fill="none" stroke="#2a2420" stroke-width="3.5"/><circle cx="8" cy="-4" r="11" fill="none" stroke="#2a2420" stroke-width="3.5"/><path d="M-20 -6L-48 0" stroke="#3a3c34" stroke-width="5"/>${flash?`<circle cx="52" cy="-40" r="14" fill="#ffd27a" class="flash" style="animation-delay:${(rnd()*3).toFixed(1)}s"/>`:""}</g>`;},
+ horses(x0,n,y,gap=60,c="#5a4030"){let s=`<g class="walk">`;for(let i=0;i<n;i++){const x=x0+i*gap+(rnd()-.5)*14;
+   s+=`<g transform="translate(${x} ${y})"><ellipse cx="0" cy="-26" rx="20" ry="9" fill="${c}"/><path d="M-14 -20v20M-8 -20v20M8 -20v20M14 -20v20" stroke="${c}" stroke-width="3.5"/><path d="M16 -30L28 -44L33 -40L22 -24Z" fill="${c}"/><path d="M-20 -28q-10 4 -8 14" stroke="#2a2018" stroke-width="3" fill="none"/>
+   <rect x="-5" y="-50" width="9" height="18" rx="2" fill="#4a5038"/><circle cx="0" cy="-54" r="4" fill="#b89a7c"/><path d="M4 -46L18 -62" stroke="#2c2618" stroke-width="1.6"/></g>`;}return s+`</g>`;},
+ oldcar(x,y,c="#2a2a2e"){return `<g class="drive"><path d="M${x} ${y-18}L${x+70} ${y-18}L${x+76} ${y-8}L${x-6} ${y-8}Z" fill="${c}"/><rect x="${x+50}" y="${y-28}" width="16" height="10" fill="${c}"/><path d="M${x+10} ${y-18}q14 -16 30 0" fill="#e4dccb"/><circle cx="${x+30}" cy="${y-30}" r="4" fill="#d8b294"/><circle cx="${x+18}" cy="${y-28}" r="4" fill="#d8b294"/><path d="M${x+12} ${y-34}h12" stroke="#e9e3d6" stroke-width="3"/>
+   <circle cx="${x+8}" cy="${y-5}" r="8" fill="none" stroke="#1a1a1a" stroke-width="3"/><circle cx="${x+62}" cy="${y-5}" r="8" fill="none" stroke="#1a1a1a" stroke-width="3"/></g>`;},
+ poppies(x0,x1,y,n){let s="";for(let i=0;i<n;i++){const x=x0+rnd()*(x1-x0),yy=y+rnd()*130,h=10+rnd()*14;s+=`<path d="M${x} ${yy}v-${h}" stroke="#4f6a36" stroke-width="1.6"/><circle cx="${x}" cy="${yy-h-3}" r="${4+rnd()*2.5}" fill="#c8302a"/><circle cx="${x}" cy="${yy-h-3}" r="1.4" fill="#1a1a1a"/>`;}return s;},
+ ww1tanks(x0,n,y,k=1,c="#6a6646",gap=150){let s="";for(let i=0;i<n;i++){const x=x0+i*gap+(rnd()-.5)*20;
+   s+=`<g transform="translate(${x} ${y}) scale(${k})"><path d="M-44 0L-50 -16L-36 -34L36 -34L50 -16L44 0Z" fill="${c}"/><path d="M-40 -6L-44 -16L-32 -28L32 -28L44 -16L40 -6Z" fill="none" stroke="#3a3826" stroke-width="2" stroke-dasharray="4 3"/><rect x="-12" y="-28" width="22" height="14" fill="#55523a"/><path d="M10 -22L26 -24" stroke="#3a3826" stroke-width="3"/><path d="M-46 -10L-64 2" stroke="#3a3826" stroke-width="2"/></g>`;}return s;},
+ palace(x,y,w=900,c="#d8ccb0"){let s=`<rect x="${x-w/2}" y="${y-80}" width="${w}" height="80" fill="${c}"/><rect x="${x-w/2}" y="${y-92}" width="${w}" height="12" fill="#8a8678"/><rect x="${x-90}" y="${y-110}" width="180" height="110" fill="${c}"/><path d="M${x-96} ${y-110}L${x} ${y-140}L${x+96} ${y-110}Z" fill="#8a8678"/>`;
+   for(let i=0;i<w/24;i++)s+=`<rect x="${x-w/2+8+i*24}" y="${y-70}" width="10" height="26" rx="5" fill="#6a6e78"/><rect x="${x-w/2+8+i*24}" y="${y-36}" width="10" height="22" fill="#6a6e78"/>`;
+   for(let i=0;i<6;i++)s+=`<rect x="${x-80+i*30}" y="${y-100}" width="12" height="30" rx="6" fill="#e9d48a"/>`;return s;},
+ sled(x,y){return `<g class="drive" style="animation-duration:16s"><ellipse cx="${x+20}" cy="${y-26}" rx="18" ry="8" fill="#3a2a20"/><path d="M${x+8} ${y-20}v18M${x+14} ${y-20}v18M${x+28} ${y-20}v18M${x+34} ${y-20}v18" stroke="#3a2a20" stroke-width="3"/><path d="M${x+34} ${y-30}L${x+46} ${y-42}L${x+50} ${y-38}L${x+40} ${y-24}Z" fill="#3a2a20"/>
+   <path d="M${x+2} ${y-24}L${x-30} ${y-14}" stroke="#2a2018" stroke-width="1.5"/><rect x="${x-80}" y="${y-22}" width="56" height="14" fill="#6a4a30"/><path d="M${x-86} ${y-4}L${x-20} ${y-4}q8 0 8 -8" stroke="#2a2018" stroke-width="2.5" fill="none"/><path d="M${x-80} ${y-8}v4M${x-30} ${y-8}v4" stroke="#2a2018" stroke-width="2"/>
+   <rect x="${x-70}" y="${y-44}" width="14" height="22" rx="4" fill="#2a2a2e"/><circle cx="${x-63}" cy="${y-49}" r="5" fill="#d8b294"/><path d="M${x-69} ${y-52}h12v-5h-12z" fill="#1f1f22"/><rect x="${x-48}" y="${y-40}" width="12" height="18" rx="4" fill="#4a3a30"/><circle cx="${x-42}" cy="${y-44}" r="4.5" fill="#d8b294"/></g>`;},
+ dome2(x,y,c="#e6e0d0"){return `<rect x="${x-160}" y="${y-60}" width="320" height="60" fill="${c}"/><rect x="${x-40}" y="${y-100}" width="80" height="40" fill="${c}"/><path d="M${x-40} ${y-100}A40 44 0 0 1 ${x+40} ${y-100}Z" fill="${c}"/><rect x="${x-4}" y="${y-160}" width="8" height="20" fill="${c}"/>`+[-140,-100,-60,60,100,140].map(dx=>`<rect x="${x+dx-4}" y="${y-56}" width="8" height="52" fill="#b8b2a2"/>`).join("");},
+ cathedral(x,y,c="#eceae2"){return `<rect x="${x-70}" y="${y-70}" width="140" height="70" fill="${c}"/><rect x="${x-30}" y="${y-110}" width="60" height="40" fill="${c}"/><path d="M${x-30} ${y-110}A30 34 0 0 1 ${x+30} ${y-110}Z" fill="#5f8a7a"/>`+[-60,60].map(dx=>`<path d="M${x+dx-12} ${y-70}A12 14 0 0 1 ${x+dx+12} ${y-70}Z" fill="#5f8a7a"/>`).join("")+`<path d="M${x-80} ${y}h160v-6h-160z" fill="#b8b4a8"/>`;},
+ crossflag(x,y,bg,cr,inner){let s=`<line x1="${x}" y1="${y}" x2="${x}" y2="${y-70}" stroke="#2f2b26" stroke-width="2.5"/><g class="flap"><rect x="${x}" y="${y-70}" width="42" height="26" fill="${bg}"/><rect x="${x+11}" y="${y-70}" width="8" height="26" fill="${cr}"/><rect x="${x}" y="${y-61}" width="42" height="8" fill="${cr}"/>`;
+   if(inner)s+=`<rect x="${x+13.5}" y="${y-70}" width="3" height="26" fill="${inner}"/><rect x="${x}" y="${y-58.5}" width="42" height="3" fill="${inner}"/>`;return s+`</g>`;},
+ riksdag(x,y,c="#cfc6b0"){let s=`<rect x="${x-180}" y="${y-70}" width="360" height="70" fill="${c}"/><path d="M${x-60} ${y-70}A60 30 0 0 1 ${x+60} ${y-70}Z" fill="#7a8a80"/>`;for(let i=0;i<12;i++)s+=`<rect x="${x-170+i*30}" y="${y-60}" width="12" height="24" fill="#5a5e66"/>`;return s;}
+});
+P.soldiers=function(x0,n,y,style="walk",gap=26,col){let s="";const c=col||(style==="white"||style==="ski"?"#eef1f1":style==="civil"?"#5b4a43":"#454631");
+   for(let i=0;i<n;i++){const x=x0+i*gap+(rnd()-.5)*8,yy=y+(rnd()-.5)*6;s+=`<g transform="translate(${x} ${yy})"><rect x="-4" y="-22" width="8" height="13" rx="2" fill="${c}"/><circle cx="0" cy="-26" r="3.6" fill="${style==="white"||style==="ski"?"#dfe3e3":"#b89a7c"}"/><path d="M-3 -9L-4 0M3 -9L4 0" stroke="${c}" stroke-width="3"/>${style==="civil"?"":`<path d="M-5 -29q5 -6 10 0z" fill="${c}"/><path d="M4 -16L9 -32" stroke="#2c2618" stroke-width="1.6"/>`}</g>`;}
+   return `<g class="${style==="civil"||style==="stand"?"":"walk"}">${s}</g>`;};
+Object.assign(LAYER,{trench:"near",wire:"near",craters:"mid",stumps:"mid",gas:"lit",biplane:"sky",zeppelin:"sky",uboat:"mid",liner:"mid",cannon:"mid",horses:"near",oldcar:"near",poppies:"near",ww1tanks:"near",palace:"mid",sled:"near",dome2:"mid",cathedral:"mid",riksdag:"mid",crossflag:"mid"});
+const BR="#7a6a48", FR="#6a7f9a", DE="#6c6e62", RU="#7a7650", TU="#8a7a5a";
+const SC={
+ "0_0":{sky:"day",g:"city",it:[["skyline","church",H+2,"F"],["palace",650,H+50,700,"#d9cfb4"],["flag",200,H+60,["#1f1f1f","#e9e3d6","#c8302a"],90],["flag",1100,H+60,["#c8302a","#f2efe6","#c8302a"],90],["crowd",-100,1600,H+120,40]]},
+ "0_1":{sky:"day",g:"river",it:[["hills",H,"#7d8a72"],["house",-50,H+16,90,50,"#d8c9a8"],["house",80,H+16,80,44,"#cdbd98"],["house",900,H+16,100,56,"#d8c9a8"],["house",1050,H+16,80,46,"#c4b48e"],["bridge",500,H+46,200,"#c9bfa6"],["oldcar",420,H+140],["crowd",-100,1600,H+128,50],["soldiers",780,1,H+150,"civil"]]},
+ "0_2":{sky:"dusk",g:"river",it:[["skyline","church",H+2,"F"],["castle",1050,H+6,"F"],["cannon",300,H+120,1.1,true],["cannon",500,H+126,1.1,true],["smoke",900,H-10,1.2]]},
+ "0_3":{sky:"day",g:"city",it:[["skyline","church",H+6,"F"],["rails",-300,1900,H+86],["train",1100,H+86,8],["crowd",-100,1600,H+120,90],["flag",300,H+120,["#1f1f1f","#f2efe6","#c8302a"],90],["soldiers",200,10,H+150,"walk",30,DE]]},
+ "1_0":{sky:"grey",g:"city",it:[["skyline","church",H+6,"F"],["rails",-300,1900,H+90],["train",900,H+90,10],["soldiers",100,16,H+150,"march",34,DE]]},
+ "1_1":{sky:"grey",g:"field",it:[["hills",H,"F"],["fortress",500,H+40,360],["cannon",200,H+110,1.6,true],["smoke",650,H,1.6],["flash",700,H+20,.4],["flash",820,H+24,1.2],["soldiers",900,8,H+150,"walk",30,DE]]},
+ "1_2":{sky:"day",g:"field",it:[["trees",-200,1800,16,"#4b5f36"],["oldcar",100,H+120],["oldcar",260,H+124],["oldcar",420,H+120],["soldiers",600,12,H+150,"walk",30,FR]]},
+ "2_0":{sky:"day",g:"city",it:[["skyline","leningrad",H+4,"F"],["soldiers",-50,22,H+150,"march",34,RU],["flag",1050,H+90,["#f2efe6","#2f5d9e","#c8302a"],90]]},
+ "2_1":{sky:"grey",g:"field",it:[["pines",-200,1800,26,"#2f3f2a",110],["smoke",400,H-20,1.4],["smoke",1000,H-10,1.2],["soldiers",200,14,H+150,"civil",34,RU],["soldiers",780,4,H+150,"walk",30,DE]]},
+ "2_2":{sky:"day",g:"steppe",it:[["hills",H,"#8f8458"],["skyline","church",H+4,"F"],["horses",100,9,H+140,80,"#5a4030"],["smoke",900,H+10,1]]},
+ "3_0":{sky:"grey",g:"field",fx:"rain",it:[["stumps",-200,1800,18,H+30],["craters",-200,1800,H+40,14],["wire",-300,1900,H+90],["trench",H+130,"#3a3024"],["soldiers",200,8,H+160,"stand",70,BR]]},
+ "3_1":{sky:"night",g:"snow",fx:"snow",it:[["stumps",-200,1800,10,H+30],["wire",-300,1900,H+60],["lights",-100,1600,H+40,30],["soldiers",450,4,H+120,"stand",26,DE],["soldiers",560,4,H+124,"stand",26,BR],["trench",H+150,"#2a2a2e"]]},
+ "3_2":{sky:"grey",g:"field",it:[["stumps",-200,1800,14,H+30],["craters",-200,1800,H+40,10],["gas",-100,H+40,1.2],["wire",-300,1900,H+90],["trench",H+130,"#3a3024"],["soldiers",300,6,H+160,"stand",60,BR]]},
+ "3_3":{sky:"dawn",g:"field",it:[["hills",H,"F"],["trees",-200,1800,8,"#4b5f36"],["poppies",-300,1900,H+20,260]]},
+ "4_0":{sky:"day",g:"sea",it:[["hills",H,"#8a8a6a"],["fortress",900,H+6,260],["ship",300,H+60,"battle",1.2,true],["ship",650,H+100,"battle",1,true],["splash",420,H+80],["splash",760,H+120],["flash",950,H-10,.6]]},
+ "4_1":{sky:"dawn",g:"beach",it:[["mountains",H+50,"#9a7f5a",false,120],["boats",-50,1500,H+30,12],["soldiers",200,14,H+150,"walk",40,"#8a7a52"]]},
+ "4_2":{sky:"day",g:"steppe",it:[["hills",H,"#a89a70"],["trench",H+120,"#6a5a40"],["wire",-300,1900,H+86],["soldiers",250,8,H+160,"stand",70,TU]]},
+ "4_3":{sky:"grey",g:"steppe",it:[["mountains",H+2,"#8a8478",false,110],["hills",H,"#a8996e"]]},
+ "5_0":{sky:"grey",g:"sea",it:[["ship",300,H+40,"battle",1],["ship",800,H+60,"battle",1.1],["ship",1150,H+30,"cruiser",.8],["uboat",550,H+130,1.4]]},
+ "5_1":{sky:"day",g:"sea",it:[["hills",H,"#5a6a4c"],["liner",500,H+60,1,8],["smoke",560,H-20,1.4],["boats",200,900,H+120,6],["uboat",1100,H+150,.8]]},
+ "5_2":{sky:"dusk",g:"sea",it:[["ship",150,H+20,"battle",.7,true],["ship",500,H+30,"battle",.8],["ship",900,H+26,"battle",.7,true],["ship",400,H+110,"battle",1.2,true],["ship",950,H+130,"cruiser",1.1],["flash",300,H+10,0],["flash",700,H+16,.8],["flash",1050,H+12,1.6],["splash",600,H+140],["fire",420,H+90,1]]},
+ "6_0":{sky:"dawn",g:"field",it:[["hills",H,"F"],["cannon",150,H+110,1.3,true],["cannon",420,H+120,1.3,true],["cannon",700,H+110,1.3,true],["smoke",1000,H-20,1.8],["flash",1050,H+10,.3],["flash",1200,H+20,1.1]]},
+ "6_1":{sky:"grey",g:"field",it:[["hills",H,"#6f6a52"],["fortress",420,H+30,460],["craters",-200,1800,H+50,16],["smoke",700,H-20,1.4],["soldiers",200,6,H+150,"walk",40,DE]]},
+ "6_2":{sky:"grey",g:"field",it:[["trees",-200,1800,10,"#4b5f36"],["truck",100,H+100,"#4a5040"],["truck",230,H+104,"#4a5040"],["truck",360,H+100,"#4a5040"],["truck",490,H+104,"#4a5040"],["truck",620,H+100,"#4a5040"],["truck",750,H+104,"#4a5040"],["soldiers",850,10,H+150,"walk",30,FR]]},
+ "6_3":{sky:"grey",g:"field",it:[["stumps",-200,1800,22,H+30],["craters",-200,1800,H+20,26],["ruin",300,H+40,160,60,"#6e6a62"],["ruin",900,H+44,140,50,"#6e6a62"]]},
+ "7_0":{sky:"night",g:"field",it:[["hills",H,"#1c2420"],["cannon",100,H+110,1.2,true],["cannon",350,H+116,1.2,true],["cannon",600,H+110,1.2,true],["cannon",850,H+116,1.2,true],["flash",1100,H-10,0],["flash",1250,H,1.2],["flak",6]]},
+ "7_1":{sky:"dawn",g:"field",it:[["craters",-200,1800,H+20,12],["wire",-300,1900,H+50],["soldiers",-50,24,H+110,"walk",50,BR],["trench",H+150,"#3a3024"]]},
+ "7_2":{sky:"grey",g:"field",it:[["stumps",-200,1800,12,H+30],["craters",-200,1800,H+30,12],["ww1tanks",200,3,H+110,1.2,"#6a6646",260],["soldiers",250,10,H+150,"walk",60,BR]]},
+ "7_3":{sky:"day",g:"field",it:[["hills",H,"F"],["biplane",80,10,0,1.4,"#8a2a22"],["biplane",120,10,1.4,1.2,"#5a4a36"],["biplane",60,13,5,1.1,"#5a4a36"],["zeppelin",40,60,20,.7],["trees",-200,1800,8,"#4b5f36"]]},
+ "8_0":{sky:"grey",g:"sea",it:[["hills",H,"#6a6e62"],["portcrane",900,H+40],["portcrane",1050,H+40],["uboat",300,H+60,1.3],["uboat",600,H+90,1.4],["uboat",350,H+150,1.6]]},
+ "8_1":{sky:"tropic",g:"steppe",it:[["mountains",H+2,"#9a8a72",false,120],["skyline","church",H+6,"#a89a7c"],["rails",-300,1900,H+60],["mast",900,H+60,120],["mast",1200,H+60,120]]},
+ "8_2":{sky:"day",g:"city",it:[["dome2",650,H+40],["trees",-200,1800,10,"#5f8a3e"],["flag",250,H+80,["#c8302a","#f2efe6","#c8302a","#f2efe6","#2f4a8a"],100],["crowd",-100,1600,H+120,70]]},
+ "8_3":{sky:"day",g:"coast",it:[["ship",300,H+40,"tanker",1.1],["ship",650,H+80,"tanker",1],["portcrane",950,H+40],["soldiers",150,18,H+150,"march",30,"#7a7048"]]},
+ "9_0":{sky:"grey",g:"city",it:[["skyline","church",H+4,"F"],["house",400,H+40,240,80,"#c9b48e"],["sweflag",250,H+90],["crossflag",620,H+90,"#c8302a","#f2efe6"],["crossflag",900,H+90,"#c8302a","#f2efe6","#2f4a8a"],["crowd",-100,1600,H+130,60]]},
+ "9_1":{sky:"grey",g:"city",fx:"snow",it:[["skyline","church",H+4,"F"],["house",200,H+40,160,80,"#c9b48e"],["house",500,H+40,140,70,"#b87a5a",true],["soldiers",100,26,H+150,"civil",24]]},
+ "9_2":{sky:"day",g:"city",it:[["skyline","church",H+4,"F"],["house",100,H+40,140,70,"#c9a06a"],["house",700,H+40,160,80,"#c9b48e"],["crowd",-100,1600,H+110,120],["flag",500,H+110,["#c8302a"],90]]},
+ "9_3":{sky:"day",g:"city",it:[["riksdag",650,H+40],["sweflag",350,H+100],["sweflag",1000,H+100],["crowd",-100,1600,H+120,100]]},
+ "10_0":{sky:"grey",g:"snow",fx:"snow",it:[["skyline","leningrad",H+4,"F"],["crowd",-100,1600,H+110,110],["flag",300,H+110,["#c8302a"],90],["flag",900,H+110,["#c8302a"],90]]},
+ "10_1":{sky:"snow",g:"ice",fx:"snow",it:[["pines",-200,1800,20,"#2c3a2c",80,true],["house",1000,H-2,70,40,"#8a3a2c"],["sled",500,H+140]]},
+ "10_2":{sky:"night",g:"river",it:[["palace",650,H+20,800,"#6a7a6a"],["search",300,H+20],["search",1000,H+20],["ship",250,H+90,"cruiser",1.1,true],["flash",360,H+60,.3],["crowd",400,1400,H+120,50]]},
+ "10_3":{sky:"snow",g:"snow",fx:"snow",it:[["cathedral",650,H+20],["house",200,H+30,120,60,"#c9b48e"],["house",1000,H+30,120,60,"#d8c9a8"],["crossflag",420,H+90,"#f2efe6","#2f4a8a"],["soldiers",100,8,H+150,"walk",40,"#5a5e60"]]},
+ "11_0":{sky:"day",g:"field",it:[["hills",H,"F"],["ww1tanks",-50,4,H+120,1.1,"#6a6646",230],["biplane",70,9,0,1.2],["biplane",100,9,3,1.1],["soldiers",100,16,H+150,"walk",50,"#7a7048"]]},
+ "11_1":{sky:"grey",g:"sea",it:[["skyline","church",H+2,"F"],["ship",300,H+60,"battle",1.2],["ship",800,H+70,"battle",1.1],["crowd",900,1600,H+140,40],["flag",1100,H+140,["#c8302a"],90]]},
+ "11_2":{sky:"grey",g:"field",it:[["trees",-200,1800,22,"#3d4f2c"],["rails",-300,1900,H+86],["carriage",560,H+86],["soldiers",300,3,H+150,"stand",30,FR],["soldiers",900,3,H+150,"stand",30,FR]]},
+ "11_3":{sky:"grey",g:"city",it:[["skyline","church",H+4,"F"],["house",100,H+40,140,70,"#d8c09a"],["house",350,H+40,120,60,"#c9a87a"],["house",800,H+40,160,80,"#d8c9a8"],["soldiers",500,3,H+150,"civil",60]]},
+ "12_0":{sky:"day",g:"field",it:[["palace",650,H+40,1000],["trees",-200,1800,14,"#4b6a36",H+70],["crowd",-100,1600,H+140,40]]},
+ "12_1":{sky:"day",g:"city",it:[["skyline","church",H+4,"F"],["house",200,H+40,160,80,"#d8c09a"],["house",800,H+40,160,80,"#c9b48e"],["flag",500,H+100,["#f2efe6","#c8302a"],100],["crowd",-100,1600,H+120,90]]},
+ "12_2":{sky:"day",g:"river",it:[["mountains",H+2,"#8a9ca6",true,160],["palace",650,H+30,560,"#e6e0d0"],["flag",400,H+10,["#244a94"],70],["flag",900,H+10,["#244a94"],70]]},
+ "12_3":{sky:"dusk",g:"city",it:[["skyline","generic",H+6,"F"],["ruin",100,H+50,160,40,"#4a4642"],["house",400,H+50,200,90,"#5a5248",true],["soldiers",200,14,H+150,"civil",40]]}
+};
+
+/* ---------- game ---------- */
+let mode="light", cur=-1, sub=-1, moving=false;
+const done=EV.map(()=>false);
+let subDone=DEEP.map(a=>a.map(()=>false));
+let firstTry={}, asked=0;
+const dock=document.getElementById("dock"), clock=document.getElementById("clock"), route=document.getElementById("route");
+const subsG=document.getElementById("subs");
+const L="ABCD";
+const stage=document.getElementById("stage"),stageArt=document.getElementById("stageArt"),stageCap=document.getElementById("stageCap"),mapBtn=document.getElementById("mapBtn"),mapEl=document.getElementById("map");
+let stageTimer=null;
+function showScene(key,cap,date){
+  const spec=SC[key]; if(!spec){hideScene();return;}
+  clearTimeout(stageTimer);
+  stageArt.innerHTML=sceneSVG(spec,key.split("_").reduce((a,b)=>a*31+(+b)+7,11));
+  stageCap.innerHTML=`<small>${date}</small>${cap}`;
+  stage.hidden=false; stage.classList.remove("peek"); mapBtn.textContent="Visa kartan"; mapEl.classList.add("scene-on");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>stage.classList.add("in")));
+}
+function hideScene(){
+  stage.classList.remove("in"); mapEl.classList.remove("scene-on");
+  stageTimer=setTimeout(()=>{stage.hidden=true;stageArt.innerHTML="";},900);
+}
+mapBtn.onclick=()=>{const p=stage.classList.toggle("peek");mapBtn.textContent=p?"Visa platsen":"Visa kartan";mapEl.classList.toggle("scene-on",!p);};
+
+function drawSubs(){
+  subsG.innerHTML="";
+  if(mode!=="deep"||cur<0||cur>=EV.length) return;
+  DEEP[cur].forEach((s,j)=>{const [x,y]=proj(s.lon,s.lat);s.px=x;s.py=y;
+    const g=document.createElementNS(NSV,"g");g.dataset.x=x;g.dataset.y=y;
+    g.setAttribute("class","mk sub"+(subDone[cur][j]?" done":"")+(j===sub?" now":""));
+    g.innerHTML=`<circle class="pulse" r="9"/><circle class="ring" r="9"/><text text-anchor="middle" y="4" style="font-size:12px">${L[j]}</text>`;
+    subsG.appendChild(g);});
+}
+function refresh(){
+  marks.childNodes.forEach(g=>{const i=+g.dataset.i;g.setAttribute("class","mk"+(done[i]?" done":"")+(i===cur&&sub<0?" now":"")+(i===cur&&sub>=0?" open":""));});
+  const hl=cur>=0&&cur<EV.length?EV[cur].hl:[];
+  land.querySelectorAll(".country").forEach(p=>p.classList.toggle("hl",hl.includes(p.dataset.id)));
+  const reached=EV.filter((e,i)=>i<=cur||done[i]);
+  route.setAttribute("d",reached.length>1?"M"+reached.map(e=>e.px.toFixed(1)+" "+e.py.toFixed(1)).join("L"):"");
+  const y=cur>=EV.length?Y1:cur>=0?EV[cur].y:Y0;
+  tlfill.style.width=(frac(y)*100)+"%";
+  drawSubs(); apply();
+}
+function target(e){return {x:e.px,y:e.py,w:e.zoom}}
+function intro(){
+  cur=-1; sub=-1; hideScene(); refresh(); labels.innerHTML="";
+  dock.innerHTML=`<article class="card">
+    <div class="stamp"><span>Uppdrag · 1914–1918</span><b>Kartrummet</b></div>
+    <h2>Första världskriget, steg för steg</h2>
+    <p>Du följer kriget från skotten i Sarajevo till freden i Versailles. Kartan flyger till varje händelse i tidsordning.</p>
+    <p>Välj hur du vill spela:</p>
+    <div class="modes">
+      <button class="mode" id="mLight"><b>Lättläst</b><span>${EV.length} händelser, en kort rapport och en fråga vid varje. Ca 20 minuter.</span></button>
+      <button class="mode" id="mDeep"><b>Fördjupning</b><span>Varje händelse delas upp i 3–4 delstopp med egna rapporter och frågor. Ca 60 minuter.</span></button>
+    </div>
+    ${hasLand?"":`<p class="note">Kartbilden kunde inte laddas, men spelet fungerar ändå.</p>`}
+  </article>`;
+  document.getElementById("mLight").onclick=()=>{mode="light";goTo(0);};
+  document.getElementById("mDeep").onclick=()=>{mode="deep";goTo(0);};
+}
+function flying(stamp,title){
+  dock.innerHTML=`<article class="card"><div class="stamp"><span>På väg</span><b>${stamp}</b></div><h2>${title}</h2><p>Kartan flyger dit…</p></article>`;
+}
+function goTo(i){
+  moving=true; cur=i; sub=-1; hideScene(); refresh(); labels.innerHTML="";
+  const e=EV[i]; flying(e.d,e.place);
+  fly(target(e),()=>{moving=false;setLabels(e);apply();render();});
+}
+function goSub(j){
+  moving=true; sub=j; hideScene(); refresh(); labels.innerHTML="";
+  const s=DEEP[cur][j]; flying(s.d,s.place);
+  setTimeout(()=>fly({x:s.px,y:s.py,w:s.z||EV[cur].zoom*0.6},()=>{setLabels({place:s.place,lon:s.lon,lat:s.lat});apply();
+    fly({x:s.px,y:s.py,w:(s.z||EV[cur].zoom*0.6)*0.35},()=>{moving=false;showScene(cur+"_"+j,s.place,s.d);render();});}),stage.hidden?0:500);
+}
+function quizHTML(item,key){
+  const solved=firstTry[key]!==undefined&&item._ok;
+  return `<div class="quiz"><p class="q">${item.q}</p><div class="opts">${item.opts.map((o,k)=>`<button class="opt ${solved&&k===item.ok?"right":""}" data-k="${k}" ${solved?"disabled":""}>${o}</button>`).join("")}</div>
+    <p class="fb ${solved?"ok":""}" id="fb">${solved?`<b>Rätt!</b> ${item.why}`:""}</p></div>`;
+}
+function render(){
+  const i=cur, e=EV[i];
+  const dd=`<p><a href="${DDAY_URL}" target="_blank" rel="noopener">Spela Dagen D-uppdraget →</a></p>`;
+  if(mode==="light"){
+    clock.innerHTML=`<small>${e.place}</small>${e.d}`;
+    const solved=done[i];
+    dock.innerHTML=`<article class="card">
+      <div class="stamp"><span>${e.d} · ${e.place}</span><b>Händelse ${i+1}/${EV.length}</b></div>
+      <h2>${e.title}</h2>${e.facts.map(f=>`<p>${f}</p>`).join("")}${e.dday?dd:""}
+      ${quizHTML(e,"e"+i)}
+      <div class="foot"><span>${Math.floor(e.y)}</span><button class="go ${solved?"ready":""}" id="next" ${solved?"":"disabled"}>${i<EV.length-1?"Nästa händelse →":"Krigets slut →"}</button></div>
+    </article>`;
+    wire(e,"e"+i,()=>{done[i]=true;});
+  } else if(sub<0){
+    clock.innerHTML=`<small>${e.place}</small>${e.d}`;
+    const parts=DEEP[i];
+    dock.innerHTML=`<article class="card">
+      <div class="stamp"><span>${e.d}</span><b>Händelse ${i+1}/${EV.length}</b></div>
+      <h2>${e.title}</h2><p>${e.facts[0]}</p>
+      <p class="note">Händelsen har ${parts.length} delstopp: ${parts.map((p,j)=>`<b>${L[j]}</b> ${p.place}`).join(", ")}.</p>
+      <div class="foot"><span>Fördjupning</span><button class="go ready" id="next">Gå in i händelsen →</button></div>
+    </article>`;
+    document.getElementById("next").onclick=()=>{if(!moving)goSub(0);};
+  } else {
+    const s=DEEP[i][sub], n=DEEP[i].length, last=sub===n-1;
+    clock.innerHTML=`<small>${s.place}</small>${s.d}`;
+    const solved=subDone[i][sub];
+    dock.innerHTML=`<article class="card">
+      <div class="stamp"><span>${s.d} · ${s.place}</span><b>${i+1}${L[sub]} · ${e.title}</b></div>
+      <h2>${s.title}</h2>${s.facts.map(f=>`<p>${f}</p>`).join("")}${e.dday&&s.place==="Omaha Beach"?dd:""}
+      ${quizHTML(s,"s"+i+"_"+sub)}
+      <div class="foot"><span>Delstopp ${sub+1} av ${n}</span><button class="go ${solved?"ready":""}" id="next" ${solved?"":"disabled"}>${last?(i<EV.length-1?"Nästa händelse →":"Krigets slut →"):"Nästa delstopp →"}</button></div>
+    </article>`;
+    wire(s,"s"+i+"_"+sub,()=>{subDone[i][sub]=true;if(subDone[i].every(Boolean))done[i]=true;});
+  }
+  dock.scrollTop=0;
+}
+function wire(item,key,onOk){
+  dock.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    const k=+b.dataset.k, fb=document.getElementById("fb");
+    if(firstTry[key]===undefined){firstTry[key]=(k===item.ok);asked++;}
+    if(k===item.ok){
+      onOk(); item._ok=true; refresh();
+      dock.querySelectorAll(".opt").forEach(x=>x.disabled=true); b.classList.add("right");
+      fb.className="fb ok"; fb.innerHTML=`<b>Rätt!</b> ${item.why}`;
+      const n=document.getElementById("next"); n.disabled=false; n.classList.add("ready"); n.focus({preventScroll:true});
+    } else {
+      b.classList.add("wrong"); b.disabled=true;
+      fb.className="fb no"; fb.innerHTML=`<b>Inte riktigt.</b> Läs rapporten igen och försök på nytt.`;
+    }
+  });
+  document.getElementById("next").onclick=next;
+}
+function next(){
+  if(moving||cur<0||cur>=EV.length) return;
+  if(mode==="deep"){
+    if(sub<0){goSub(0);return;}
+    if(!subDone[cur][sub]) return;
+    if(sub<DEEP[cur].length-1){goSub(sub+1);return;}
+  } else if(!done[cur]) return;
+  if(cur<EV.length-1) goTo(cur+1); else finish();
+}
+function finish(){
+  moving=true; cur=EV.length; sub=-1; hideScene(); refresh(); labels.innerHTML="";
+  clock.innerHTML=`<small>Första världskriget</small>1914–1918`;
+  fly({...FULL},()=>{
+    moving=false;
+    const score=Object.values(firstTry).filter(Boolean).length;
+    dock.innerHTML=`<article class="card">
+      <div class="stamp"><span>1919</span><b>Slutrapport</b></div>
+      <h2>${END.title}</h2>${END.facts.map(f=>`<p>${f}</p>`).join("")}
+      <p class="discuss">${END.discuss}</p>
+      <div class="foot"><span class="score">${score} av ${asked} rätt på första försöket</span><button class="go" id="again">Spela igen</button></div>
+    </article>`;
+    document.getElementById("again").onclick=()=>{
+      done.fill(false); subDone=DEEP.map(a=>a.map(()=>false)); firstTry={}; asked=0;
+      EV.forEach(e=>delete e._ok); DEEP.flat().forEach(s=>delete s._ok); intro();};
+  });
+}
+addEventListener("keydown",e=>{if(e.key==="ArrowRight")next();});
+
+apply(); intro();
+</script>
+
+</body></html>

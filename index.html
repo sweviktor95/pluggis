@@ -67,6 +67,34 @@
   .tillbaka { background: #999; margin-top: 20px; }
   .knapp-repetition { background: #c1663a; }
   .knapp-repetition:hover { background: #a5522c; }
+  .inbaddad-ruta { margin: 14px 0 6px; border-radius: 8px; overflow: hidden; background: #1a1f23; }
+  .inbaddad-ruta iframe { display: block; width: 100%; height: 80vh; min-height: 560px; border: 0; }
+  .inbaddad-lank { text-align: center; font-size: 0.9em; margin: 4px 0 0; }
+  .framsteg-tagg {
+    float: right;
+    background: rgba(255,255,255,0.25);
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  .framsteg-tagg.klar { background: #2f8a4b; }
+  .framsteg-sammanfattning { margin: 4px 0 6px; color: #55657d; }
+  .framsteg-bar { height: 8px; background: #dfe5ee; border-radius: 4px; overflow: hidden; margin-bottom: 14px; }
+  .framsteg-bar-fyll { height: 100%; background: #2f8a4b; }
+  .klar-knapp { background: #6b7f99; margin-top: 24px; }
+  .klar-knapp:hover { background: #5a6d86; }
+  .klar-knapp.ar-klar { background: #2f8a4b; }
+  .klar-knapp.ar-klar:hover { background: #26733e; }
+  .grann-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grann-knapp { background: #7d93b5; margin: 10px 0 0; font-size: 16px; }
+  .grann-knapp:hover { background: #667da1; }
+  .grann-nasta { text-align: right; }
+  .fortsatt-knapp { background: #c1663a; margin: 0 0 16px; }
+  .fortsatt-knapp:hover { background: #a5522c; }
+  .amne-framsteg { display: block; font-size: 0.85em; color: #55657d; margin-top: 4px; }
+  .aterstall-rad { text-align: center; margin-top: 24px; font-size: 0.9em; }
+  .aterstall-rad a { color: #7a7f88; }
   .tallinje-frukt-rad {
     display: flex;
     flex-wrap: wrap;
@@ -889,7 +917,7 @@
   .lasstod-etikett input { cursor: pointer; }
 
   @media print {
-    .knapp, .brodsmulor, .skriv-ut-rad { display: none !important; }
+    .knapp, .brodsmulor, .skriv-ut-rad, .inbaddad-ruta, .inbaddad-lank { display: none !important; }
     canvas, .slider-rad { display: none !important; }
     .sektion, .begrepp-box, .kontrollfraga, .exit-ticket {
       break-inside: avoid;
@@ -946,6 +974,8 @@
 <script src="innehall/matematik-ak9-tallinjen.js"></script>
 <script src="innehall/matematik-ak7-brak-tallinjen.js"></script>
 <script src="innehall/matematik-ak9-brak-repetition.js"></script>
+<script src="innehall/historia-forsta-varldskriget.js"></script>
+<script src="innehall/historia-andra-varldskriget.js"></script>
 
 <script>
   var app = document.getElementById("app");
@@ -981,21 +1011,125 @@
     return html;
   }
 
-  function visStartsida() {
-    var html = '<div class="startsida-grid">';
+  // ===== Navigation (webbläsarens bakåt/framåt) + framsteg =====
+  // Sidan använder #-adressen som "var är jag?". Därför fungerar bakåt- och
+  // framåtknapparna, F5 stannar kvar på samma sida och man kan dela länkar.
+  // Framsteget (avklarade moment + senast besökta) sparas i webbläsarens
+  // localStorage på just den här enheten - inget skickas någonstans.
+  var FRAMSTEG_NYCKEL = "pluggis-framsteg-v1";
+  var framsteg = { klara: {}, senast: null };
+  try {
+    var sparatFramsteg = JSON.parse(window.localStorage.getItem(FRAMSTEG_NYCKEL) || "null");
+    if (sparatFramsteg && sparatFramsteg.klara) { framsteg = sparatFramsteg; }
+  } catch (e) { /* localStorage blockerat - då hålls framsteget bara i minnet */ }
+
+  function sparaFramsteg() {
+    try { window.localStorage.setItem(FRAMSTEG_NYCKEL, JSON.stringify(framsteg)); } catch (e) {}
+  }
+
+  // Räknar moment MED innehåll (tomma platshållare räknas inte).
+  function raknaFramsteg(n) {
+    if (!n.barn || n.barn.length === 0) {
+      if (!innehall[n.id]) { return { totalt: 0, klara: 0 }; }
+      return { totalt: 1, klara: framsteg.klara[n.id] ? 1 : 0 };
+    }
+    var summa = { totalt: 0, klara: 0 };
+    n.barn.forEach(function(b) {
+      var r = raknaFramsteg(b);
+      summa.totalt += r.totalt;
+      summa.klara += r.klara;
+    });
+    return summa;
+  }
+
+  function framstegTagg(n) {
+    var r = raknaFramsteg(n);
+    if (r.totalt === 0) { return ""; }
+    var arBlad = !n.barn || n.barn.length === 0;
+    if (arBlad) { return r.klara ? '<span class="framsteg-tagg klar">✓</span>' : ""; }
+    var allaKlara = r.klara === r.totalt;
+    return '<span class="framsteg-tagg' + (allaKlara ? ' klar' : '') + '">' +
+           (allaKlara ? '✓ ' : '') + r.klara + '/' + r.totalt + '</span>';
+  }
+
+  function vaxlaKlar(id) {
+    if (framsteg.klara[id]) { delete framsteg.klara[id]; } else { framsteg.klara[id] = true; }
+    sparaFramsteg();
+    var knapp = document.getElementById("klarKnapp");
+    if (knapp) {
+      var klar = !!framsteg.klara[id];
+      knapp.className = "knapp klar-knapp" + (klar ? " ar-klar" : "");
+      knapp.innerHTML = klar ? "✅ Klar (klicka för att ångra)" : "☐ Markera som klar";
+    }
+  }
+
+  function aterstallFramsteg() {
+    if (!window.confirm("Vill du nollställa allt framsteg på den här enheten?")) { return; }
+    framsteg = { klara: {}, senast: null };
+    sparaFramsteg();
+    renderaStartsida();
+  }
+
+  // Föregående/nästa moment med innehåll bland syskonen (samma förälder).
+  function hittaGrannar(id) {
+    var entry = nodKarta[id];
+    if (!entry || !entry.parentId) { return {}; }
+    var blad = [];
+    (function samla(n) {
+      if (!n.barn || n.barn.length === 0) { blad.push(n); } else { n.barn.forEach(samla); }
+    })(nodKarta[entry.parentId].node);
+    var i = blad.map(function(n) { return n.id; }).indexOf(id);
+    var foreg = null, nasta = null, j;
+    for (j = i - 1; j >= 0; j--) { if (innehall[blad[j].id]) { foreg = blad[j]; break; } }
+    for (j = i + 1; j < blad.length; j++) { if (innehall[blad[j].id]) { nasta = blad[j]; break; } }
+    return { foreg: foreg, nasta: nasta };
+  }
+
+  function visaFranHash() {
+    var id = "";
+    try { id = decodeURIComponent((window.location.hash || "").replace(/^#/, "")); } catch (e) {}
+    klockaStoppaSpel(); // stoppa klockans autospel om man navigerar bort mitt i
+    tallinjeStoppaDrag(); // släpp ev. pågående drag på tallinjen
+    if (id && nodKarta[id]) { renderaNod(id); } else { renderaStartsida(); }
+    window.scrollTo(0, 0);
+  }
+
+  function navigeraTill(id) {
+    var mal = id ? "#" + id : "";
+    var nu = window.location.hash || "";
+    var samma = id ? (nu === mal) : (nu === "" || nu === "#");
+    if (samma) { visaFranHash(); } else { window.location.hash = mal; }
+  }
+
+  function visNod(id) { navigeraTill(id); }
+  function visStartsida() { navigeraTill(""); }
+  window.addEventListener("hashchange", visaFranHash);
+
+  function renderaStartsida() {
+    var html = "";
+    if (framsteg.senast && nodKarta[framsteg.senast]) {
+      html += '<button class="knapp fortsatt-knapp" onclick="visNod(\'' + framsteg.senast + '\')">' +
+              '▶ Fortsätt där du slutade: ' + nodKarta[framsteg.senast].node.titel + '</button>';
+    }
+    html += '<div class="startsida-grid">';
+    var harKlara = false;
     struktur.forEach(function(amne) {
+      var r = raknaFramsteg(amne);
+      if (r.klara > 0) { harKlara = true; }
       html += '<div class="amne-ruta" onclick="visNod(\'' + amne.id + '\')">' +
               '<span class="amne-ikon">' + (amne.ikon || "📘") + '</span>' +
-              '<span class="amne-titel">' + amne.titel + '</span></div>';
+              '<span class="amne-titel">' + amne.titel + '</span>' +
+              (r.totalt ? '<span class="amne-framsteg">' + r.klara + ' av ' + r.totalt + ' klara</span>' : '') +
+              '</div>';
     });
     html += '</div>';
+    if (harKlara) {
+      html += '<p class="aterstall-rad"><a href="javascript:void(0)" onclick="aterstallFramsteg()">Nollställ framsteg</a></p>';
+    }
     app.innerHTML = html;
   }
 
-  function visNod(id) {
-    klockaStoppaSpel(); // stoppa klockans autospel om man navigerar bort mitt i
-    tallinjeStoppaDrag(); // släpp ev. pågående drag på tallinjen
-
+  function renderaNod(id) {
     var entry = nodKarta[id];
     var node = entry.node;
     var harBarn = node.barn && node.barn.length > 0;
@@ -1004,13 +1138,20 @@
 
     if (harBarn) {
       html += "<h2>" + node.titel + "</h2>";
+      var sammanfattning = raknaFramsteg(node);
+      if (sammanfattning.totalt > 0) {
+        html += '<p class="framsteg-sammanfattning">' + sammanfattning.klara + ' av ' + sammanfattning.totalt +
+                ' moment klara</p><div class="framsteg-bar"><div class="framsteg-bar-fyll" style="width:' +
+                Math.round(100 * sammanfattning.klara / sammanfattning.totalt) + '%"></div></div>';
+      }
       node.barn.forEach(function(barn) {
         var knappKlass = (barn.titel.indexOf("Repetition") === 0) ? "knapp knapp-repetition" : "knapp";
         html += '<button class="' + knappKlass + '" onclick="visNod(\'' + barn.id + '\')">' +
-                barn.titel + '</button>';
+                framstegTagg(barn) + barn.titel + '</button>';
       });
     } else {
       var data = innehall[id];
+      if (data) { framsteg.senast = id; sparaFramsteg(); }
       html += "<h2>" + node.titel + "</h2>";
       if (data) {
         html += '<div class="skriv-ut-rad">';
@@ -1066,6 +1207,13 @@
         html += "<p>" + data.text + "</p>";
         if (data.bild) {
           html += '<img src="' + data.bild + '" style="width:100%;border-radius:8px;">';
+        }
+        if (data.inbaddad) {
+          // Egen fristående sida (t.ex. en kartsimulering) visas i en ram.
+          html += '<div class="inbaddad-ruta"><iframe src="' + data.inbaddad + '" title="' +
+                  (data.inbaddadTitel || node.titel) + '" allowfullscreen></iframe></div>' +
+                  '<p class="inbaddad-lank"><a href="' + data.inbaddad +
+                  '" target="_blank" rel="noopener">Öppna i helskärm ↗</a> (rekommenderas på mobil)</p>';
         }
         if (data.simulering === "linje-k-slider") {
           html += '<canvas id="ritKanvas" width="400" height="300"></canvas>';
@@ -1296,6 +1444,24 @@
           html += '</div>';
         });
         html += '</div>';
+      }
+    }
+
+    if (!harBarn) {
+      if (innehall[id]) {
+        var arKlar = !!framsteg.klara[id];
+        html += '<button id="klarKnapp" class="knapp klar-knapp' + (arKlar ? ' ar-klar' : '') +
+                '" onclick="vaxlaKlar(\'' + id + '\')">' +
+                (arKlar ? '✅ Klar (klicka för att ångra)' : '☐ Markera som klar') + '</button>';
+      }
+      var grannar = hittaGrannar(id);
+      if (grannar.foreg || grannar.nasta) {
+        html += '<div class="grann-nav">' +
+          (grannar.foreg ? '<button class="knapp grann-knapp" onclick="visNod(\'' + grannar.foreg.id +
+            '\')">← ' + grannar.foreg.titel + '</button>' : '<span></span>') +
+          (grannar.nasta ? '<button class="knapp grann-knapp grann-nasta" onclick="visNod(\'' + grannar.nasta.id +
+            '\')">' + grannar.nasta.titel + ' →</button>' : '<span></span>') +
+          '</div>';
       }
     }
 
@@ -3799,7 +3965,7 @@
     };
   }
 
-  visStartsida();
+  visaFranHash(); // visa rätt sida direkt utifrån adressen (#...), annars startsidan
 </script>
 
 </body>

@@ -430,5 +430,20 @@ var struktur = [
     titel: "Teknik",
     ikon: "⚙️",
     barn: []
+  },
+  {
+    id: "historia",
+    titel: "Historia",
+    ikon: "🏛️",
+    barn: [
+      {
+        id: "historia-varldskrigen",
+        titel: "Världskrigen",
+        barn: [
+          { id: "historia-varldskrigen-forsta", titel: "Första världskriget" },
+          { id: "historia-varldskrigen-andra", titel: "Andra världskriget" }
+        ]
+      }
+    ]
   }
 ];

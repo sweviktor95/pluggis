@@ -1,0 +1,835 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Andra världskriget på kartan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600&display=swap">
+<style>
+/* Layout: an operations map the camera flies across in date order; field-report card docked below (phone) or right (desktop). Single dark map-room look by choice. */
+:root{
+  --night:#1a1f23; --sea:#2c3f4a; --sea-line:#3b525e; --land:#cbbf9c; --land-line:#8f8466;
+  --paper:#ece5d2; --paper-ink:#2a2822; --muted:#6c675a; --khaki:#7a7848;
+  --signal:#c8452f; --clear:#5f9a4c; --brass:#d1a84c;
+  --f-display:"Special Elite","Courier New",monospace;
+  --f-body:"Barlow",system-ui,sans-serif;
+  --f-label:"Barlow Condensed","Arial Narrow",sans-serif;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.app{height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.map{position:relative;flex:1 1 52%;min-height:240px;background:var(--sea)}
+.map svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.country{fill:var(--land);stroke:var(--land-line);stroke-width:.6;vector-effect:non-scaling-stroke;transition:fill .8s}
+.country.hl{fill:#d89a7c}
+.country.swe{fill:url(#neutral)}
+.grat{fill:none;stroke:var(--sea-line);stroke-width:.7;vector-effect:non-scaling-stroke}
+.route{fill:none;stroke:var(--brass);stroke-width:2.2;stroke-dasharray:7 6;vector-effect:non-scaling-stroke}
+.mk{cursor:default}
+.mk .ring{fill:rgba(42,40,34,.55);stroke:#9b927a;stroke-width:2.5}
+.mk text{font-family:var(--f-label);font-weight:600;font-size:15px;fill:var(--paper)}
+.mk.now .ring{fill:var(--signal);stroke:#f4dcd4}
+.mk.done{cursor:pointer}
+.mk.done .ring{fill:var(--clear);stroke:#e8f0de}
+.mk .pulse{fill:none;stroke:var(--signal);stroke-width:3;opacity:0}
+.mk.now .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{from{transform:scale(1);opacity:.9}to{transform:scale(2.4);opacity:0}}
+.mk.open .ring{fill:#8a3523;stroke:#f4dcd4}
+.mk.sub .ring{stroke-width:2}
+.modes{display:grid;gap:10px;margin-top:6px}
+.mode{font:inherit;text-align:left;padding:12px 14px;border-radius:3px;border:1.5px solid #b7ae95;background:#f6f1e3;color:var(--paper-ink);cursor:pointer;display:grid;gap:2px}
+.mode b{font-family:var(--f-display);font-weight:400;font-size:1.15rem}
+.mode span{font-size:.92rem;color:var(--muted)}
+.mode:hover{border-color:var(--signal)}
+.mode:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+@media (min-width:520px){.modes{grid-template-columns:1fr 1fr}}
+.place{font-family:var(--f-label);font-size:14px;fill:#2a2822;paint-order:stroke;stroke:var(--land);stroke-width:3px;letter-spacing:.04em}
+.hud{position:absolute;top:12px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;pointer-events:none;z-index:2}
+.box{background:rgba(26,31,35,.82);padding:6px 10px;border-radius:3px}
+.clock{font-family:var(--f-display);font-size:1.05rem;line-height:1.2}
+.clock small{display:block;font-family:var(--f-label);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#c9c3b2}
+.legend{font-family:var(--f-label);font-size:.8rem;display:flex;flex-direction:column;gap:3px;color:#d8d2c0}
+.legend i{display:inline-block;width:12px;height:10px;margin-right:6px;vertical-align:-1px;border:1px solid #8f8466}
+.timeline{position:absolute;left:16px;right:16px;bottom:12px;z-index:2;pointer-events:none}
+.tl-track{position:relative;height:30px;background:rgba(26,31,35,.82);border-radius:3px}
+.tl-bar{position:absolute;left:14px;right:14px;top:9px;height:3px;background:#56615f}
+.tl-fill{position:absolute;left:0;top:0;height:100%;background:var(--brass);transition:width 1.6s ease}
+.tl-year{position:absolute;top:13px;transform:translateX(-50%);font-family:var(--f-label);font-size:.72rem;color:#c9c3b2;font-variant-numeric:tabular-nums}
+.tl-tick{position:absolute;top:-3px;width:1px;height:9px;background:#8a928f}
+.dock{flex:0 1 auto;max-height:52%;overflow:auto;padding:14px 16px 18px;background:var(--night)}
+.card{background:var(--paper);color:var(--paper-ink);border-radius:3px;padding:18px 18px 16px;box-shadow:0 6px 24px rgba(0,0,0,.35);border-top:6px double var(--khaki);max-width:62ch;margin-inline:auto;animation:pop .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{transform:translateY(14px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.stamp{font-family:var(--f-label);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.stamp b{color:var(--signal);font-weight:600}
+.card h2{font-family:var(--f-display);font-weight:400;font-size:1.5rem;line-height:1.15;margin:.35em 0 .5em;text-wrap:balance}
+.card p{margin:0 0 .7em}
+.card a{color:#8a3523;font-weight:600}
+.quiz{margin-top:14px;padding-top:12px;border-top:1px dashed #b7ae95}
+.quiz .q{font-weight:600}
+.opts{display:grid;gap:8px;margin-top:8px}
+.opt{font:inherit;text-align:left;padding:10px 12px;border-radius:3px;border:1.5px solid #b7ae95;background:#f6f1e3;color:var(--paper-ink);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--paper-ink)}
+.opt:focus-visible,.go:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.opt.wrong{border-color:var(--signal);background:#f3d9d2;text-decoration:line-through}
+.opt.right{border-color:var(--clear);background:#dcebd2;font-weight:600}
+.fb{margin-top:10px;font-size:.95rem}
+.fb.ok b{color:#3f7a30}.fb.no b{color:var(--signal)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.foot span{font-family:var(--f-label);font-size:.85rem;color:var(--muted);letter-spacing:.05em}
+.go{font-family:var(--f-label);font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 18px;border-radius:3px;border:0;background:var(--paper-ink);color:var(--paper);cursor:pointer}
+.go:disabled{opacity:.35;cursor:not-allowed}
+.go.ready{background:var(--signal);animation:nudge 1.2s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(4px)}}
+.discuss{background:#e1d8be;padding:10px 12px;border-radius:3px;font-style:italic}
+.score{font-family:var(--f-display);font-size:1.15rem}
+.note{font-size:.85rem;color:var(--muted)}
+.stage{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .9s ease;background:#1a1f23}
+.stage.in{opacity:1}
+.stage.peek{opacity:0;pointer-events:none}
+.stage-art{position:absolute;inset:0;overflow:hidden}
+.stage-art svg{width:100%;height:100%;display:block}
+.stage.in .stage-art{animation:dive 1.6s cubic-bezier(.2,.8,.2,1)}
+@keyframes dive{from{transform:scale(1.35);filter:blur(4px)}to{transform:none;filter:none}}
+.stage-cap{display:none;position:absolute;left:16px;bottom:56px;z-index:2;font-family:var(--f-display);font-size:1.25rem;color:#f4efe2;text-shadow:0 2px 8px rgba(0,0,0,.6);max-width:70%}
+.stage-cap small{display:block;font-family:var(--f-label);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#e2dccb}
+.mapbtn{position:absolute;right:16px;bottom:56px;z-index:4;font-family:var(--f-label);font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;border-radius:3px;border:0;background:rgba(26,31,35,.85);color:var(--paper);cursor:pointer;pointer-events:auto}
+.stage.peek .mapbtn{opacity:1}
+.map.scene-on .legend{display:none}
+.pan{animation:pan 34s ease-in-out infinite alternate}
+.pan.far{--d:-140px}.pan.sky{--d:-300px}.pan.mid{--d:-520px}.pan.near{--d:-620px}
+@keyframes pan{from{transform:translateX(0)}to{transform:translateX(var(--d))}}
+.fly{animation:fly 14s linear infinite}
+@keyframes fly{to{transform:translateX(2000px)}}
+.dive{animation:divebomb 5s ease-in infinite}
+@keyframes divebomb{0%{transform:translate(-120px,-80px);opacity:0}10%{opacity:1}80%{transform:translate(90px,170px);opacity:1}100%{transform:translate(110px,200px);opacity:0}}
+.bob{animation:bob 3s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(4px)}}
+.walk{animation:walk 9s linear infinite alternate}
+@keyframes walk{to{transform:translateX(60px)}}
+.drive{animation:drive 12s linear infinite}
+@keyframes drive{from{transform:translateX(-80px)}to{transform:translateX(220px)}}
+.smoke{animation:drift 9s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(26px,-14px)}}
+.glow{animation:glow 2.4s ease-in-out infinite alternate}
+@keyframes glow{to{opacity:.15}}
+.flicker{transform-box:fill-box;transform-origin:center bottom;animation:flick .5s ease-in-out infinite alternate}
+@keyframes flick{to{transform:scaleY(.82) scaleX(1.08)}}
+.flash{opacity:0;animation:flash 3.2s ease-out infinite}
+@keyframes flash{0%{opacity:0}4%{opacity:1}16%{opacity:0}100%{opacity:0}}
+.puff{opacity:0;transform-box:fill-box;transform-origin:center;animation:puff 4s ease-out infinite}
+@keyframes puff{0%{opacity:0;transform:scale(.3)}10%{opacity:.8}70%{opacity:0;transform:scale(1.8)}100%{opacity:0}}
+.beam{animation:beam 7s ease-in-out infinite alternate}
+@keyframes beam{from{transform:rotate(-24deg)}to{transform:rotate(24deg)}}
+.para{animation:para 12s linear infinite}
+@keyframes para{from{transform:translate(0,-60px)}to{transform:translate(40px,360px)}}
+.fall{animation:fall 7s linear infinite}
+@keyframes fall{to{transform:translate(30px,530px)}}
+.rise{animation:rise 6s linear infinite;opacity:.8}
+@keyframes rise{to{transform:translate(-40px,-540px);opacity:0}}
+.twinkle{animation:tw 2.2s ease-in-out infinite alternate}
+@keyframes tw{from{opacity:.15}to{opacity:1}}
+.wobble{animation:wob 2.6s ease-in-out infinite alternate}
+@keyframes wob{to{transform:scale(1.03,.97)}}
+.sway{animation:sway 4s ease-in-out infinite alternate;transform-box:view-box}
+@keyframes sway{from{transform:rotate(-1.2deg)}to{transform:rotate(1.2deg)}}
+.blink{animation:tw .9s steps(2) infinite}
+.flap{transform-box:fill-box;transform-origin:left center;animation:flap 1.6s ease-in-out infinite alternate}
+@keyframes flap{to{transform:skewY(-4deg) scaleX(.94)}}
+.wave{animation:wave 5s linear infinite}
+@keyframes wave{to{transform:translateX(-40px)}}
+@media (min-width:860px){
+  .dock{position:absolute;right:20px;top:20px;bottom:20px;width:400px;max-height:none;background:none;padding:0;z-index:3}
+  .hud{right:440px}.timeline{right:440px}
+  .map{flex:1 1 auto}
+}
+@media (max-width:520px){.legend{display:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<div class="app">
+  <div class="map" id="map">
+    <svg id="svg" preserveAspectRatio="xMidYMid meet" aria-label="Världskarta med händelser under andra världskriget">
+      <defs>
+        <pattern id="neutral" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect width="6" height="6" fill="#cbbf9c"/><rect width="2.4" height="6" fill="#5d84a6"/>
+        </pattern>
+      </defs>
+      <g id="grat"></g><g id="land"></g><path id="route" class="route"></path><g id="labels"></g><g id="marks"></g><g id="subs"></g>
+    </svg>
+    <div class="stage" id="stage" hidden><div class="stage-art" id="stageArt"></div><div class="stage-cap" id="stageCap"></div><button class="mapbtn" id="mapBtn">Visa kartan</button></div>
+    <div class="hud">
+      <div class="box clock" id="clock"><small>Andra världskriget</small>1939–1945</div>
+      <div class="box legend"><span><i style="background:#d89a7c"></i>Berörda länder</span><span><i style="background:repeating-linear-gradient(45deg,#cbbf9c 0 3px,#5d84a6 3px 5px)"></i>Sverige (neutralt)</span><span style="color:#a9a492">Kartan visar dagens gränser</span></div>
+    </div>
+    <div class="timeline"><div class="tl-track" id="tl"><div class="tl-bar"><div class="tl-fill" id="tlfill" style="width:0"></div></div></div></div>
+  </div>
+  <div class="dock" id="dock" aria-live="polite"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.5.9/datamaps.world.min.js"></script>
+<script>
+const DDAY_URL="";
+const EV=[
+ {d:"1 september 1939",y:1939.67,place:"Polen",lon:21.0,lat:52.2,zoom:230,hl:["POL","DEU"],title:"Kriget börjar",
+  facts:["Tyskland anfaller Polen den 1 september 1939. Två dagar senare förklarar Storbritannien och Frankrike krig mot Tyskland.",
+   "Veckan innan hade Hitler och Stalin skrivit under en pakt om att inte anfalla varandra. I hemlighet delade de upp Östeuropa mellan sig, och den 17 september anföll Sovjetunionen Polen från öster."],
+  q:"Vilket land anföll Polen från öster den 17 september 1939?",opts:["Italien","Sovjetunionen","Ungern"],ok:1,
+  why:"Pakten mellan Hitler och Stalin gav Sovjetunionen östra Polen."},
+ {d:"30 november 1939",y:1939.91,place:"Finland",lon:28.7,lat:60.7,zoom:260,hl:["FIN","RUS"],title:"Vinterkriget",
+  facts:["Sovjetunionen anfaller Finland. Finländarna försvarar sig i sträng kyla, bland annat med skidpatruller i vita kamouflagedräkter.",
+   "Omkring 8 000 svenska frivilliga reste till Finland för att strida. Sverige var officiellt neutralt men skickade också vapen och förnödenheter.",
+   "I mars 1940 slöts fred. Finland förblev självständigt men fick lämna ifrån sig stora delar av Karelen."],
+  q:"Hur hjälpte många svenskar Finland under vinterkriget?",opts:["Sverige förklarade krig mot Sovjetunionen","De reste dit som frivilliga soldater","Svenska flottan blockerade Leningrad"],ok:1,
+  why:"Sverige gick aldrig med i kriget, men frivilligkåren och materielhjälpen var stor."},
+ {d:"9 april 1940",y:1940.27,place:"Narvik",lon:17.4,lat:68.4,zoom:240,hl:["NOR","DNK"],extra:[["Kiruna",20.2,67.85],["Luleå",22.15,65.58]],title:"Danmark och Norge ockuperas",
+  facts:["Tyskland ockuperar Danmark på några timmar och anfaller Norge. Norge gör motstånd i två månader men kapitulerar i juni 1940.",
+   "Narvik var viktigt på grund av järnmalmen från Kiruna. På vintern, när hamnen i Luleå frös, skeppades malmen ut via isfria Narvik. Mycket av malmen gick till Tysklands vapenindustri.",
+   "Sverige höll sig utanför kriget men lät tyska soldater resa med tåg genom landet mellan 1940 och 1943. Det kallades permittenttrafiken och var mycket omdiskuterat."],
+  q:"Varför var Narvik så viktigt för Tyskland?",opts:["Det var Norges huvudstad","Hamnen skeppade ut järnmalm från Kiruna","Där fanns Norges enda flygplats"],ok:1,
+  why:"Järnmalm behövs för att tillverka stål, och stål behövs till stridsvagnar, fartyg och vapen."},
+ {d:"26 maj 1940",y:1940.4,place:"Dunkerque",lon:2.4,lat:51.0,zoom:230,hl:["FRA","BEL","NLD"],title:"Frankrike faller",
+  facts:["Den 10 maj 1940 anfaller Tyskland Nederländerna, Belgien och Frankrike. Med snabba anfall med stridsvagnar och flyg tar de sig runt de allierades försvar.",
+   "Vid Dunkerque blir de allierade instängda mot havet. Under nio dagar evakueras omkring 338 000 soldater till England, med hjälp av hundratals civila småbåtar.",
+   "Den 14 juni intas Paris. Frankrike skriver under ett vapenstillestånd den 22 juni."],
+  q:"Vad kallades Tysklands snabba anfallstaktik?",opts:["Blixtkrig","Ställningskrig","Gerillakrig"],ok:0,
+  why:"Ställningskrig med skyttegravar präglade första världskriget. Blixtkriget var raka motsatsen."},
+ {d:"Juli–oktober 1940",y:1940.6,place:"London",lon:-0.13,lat:51.5,zoom:230,hl:["GBR"],title:"Slaget om Storbritannien",
+  facts:["Hitler vill invadera Storbritannien, men först måste Tyskland ta kontrollen över luften. Från juli till oktober 1940 strider tyska Luftwaffe mot brittiska RAF.",
+   "Britterna har radar som varnar när planen kommer. Tyskland misslyckas och skjuter upp invasionen. I stället bombas London och andra städer under det som kallas the Blitz."],
+  q:"Vilken teknik hjälpte britterna att upptäcka fiendens flygplan i tid?",opts:["Satelliter","Drönare","Radar"],ok:2,
+  why:"Radarstationer längs kusten gav RAF tid att få upp sina plan i luften."},
+ {d:"22 juni 1941",y:1941.47,place:"Moskva",lon:37.6,lat:55.75,zoom:330,hl:["RUS","UKR","BLR"],title:"Operation Barbarossa",
+  facts:["Tyskland bryter pakten och anfaller Sovjetunionen med omkring tre miljoner soldater. Det är det största anfallet i krigets historia.",
+   "Finland går också med i anfallet för att ta tillbaka Karelen. Det kallas fortsättningskriget.",
+   "Tyskarna tar sig nästan fram till Moskva men stoppas i december 1941 av sträng vinter och sovjetiska motanfall. Leningrad belägras i nästan 900 dagar."],
+  q:"Varför stoppades tyskarna framför Moskva?",opts:["Sträng vinter och sovjetiska motanfall","Hitler bestämde sig för att vända om","USA bombade Berlin"],ok:0,
+  why:"De tyska soldaterna saknade vinterutrustning, och Sovjet hade fått nya trupper från Sibirien."},
+ {d:"7 december 1941",y:1941.93,place:"Pearl Harbor",lon:-157.95,lat:21.35,zoom:420,hl:["USA","JPN"],title:"Japan anfaller USA",
+  facts:["Japanska flygplan från hangarfartyg anfaller den amerikanska flottbasen Pearl Harbor på Hawaii. Omkring 2 400 amerikaner dödas.",
+   "Dagen efter förklarar USA krig mot Japan. Några dagar senare förklarar Tyskland och Italien krig mot USA. Nu är kriget verkligen ett världskrig."],
+  q:"Vad blev följden av anfallet mot Pearl Harbor?",opts:["USA gick med i kriget","USA förklarade sig neutralt","Japan kapitulerade"],ok:0,
+  why:"USA:s enorma industri blev avgörande för de allierade resten av kriget."},
+ {d:"1942",y:1942.05,place:"Auschwitz",lon:19.2,lat:50.03,zoom:230,hl:["POL","DEU"],title:"Förintelsen",
+  facts:["Nazisterna förföljde judar från första dagen vid makten. I januari 1942 planerade nazistiska ledare vid Wannseekonferensen i Berlin hur Europas judar skulle mördas.",
+   "Omkring sex miljoner judar mördades under Förintelsen. Även romer, homosexuella, personer med funktionsnedsättning och politiska motståndare förföljdes och mördades.",
+   "I Auschwitz-Birkenau i det ockuperade Polen mördades över en miljon människor. Lägret befriades av sovjetiska soldater den 27 januari 1945."],
+  q:"Varför är 27 januari Förintelsens minnesdag?",opts:["Då började andra världskriget","Då befriades Auschwitz","Då kapitulerade Tyskland"],ok:1,
+  why:"Varje år den 27 januari minns man Förintelsens offer, även i svenska skolor."},
+ {d:"4 juni 1942",y:1942.43,place:"Midway",lon:-177.37,lat:28.2,zoom:420,hl:["JPN"],title:"Slaget vid Midway",
+  facts:["Japan har erövrat stora delar av Sydostasien och Stilla havet. Vid ön Midway försöker de locka ut och förstöra den amerikanska flottan.",
+   "Amerikanerna har knäckt Japans hemliga koder och vet vad som ska hända. De sänker fyra japanska hangarfartyg. Efter Midway är Japan på reträtt."],
+  q:"Hur kunde amerikanerna veta om anfallet i förväg?",opts:["En japansk general avslöjade planen","De hade knäckt Japans koder","De såg flottan med satellit"],ok:1,
+  why:"Kodknäckning var avgörande på flera fronter. Britterna knäckte också tyska Enigma-koder."},
+ {d:"2 februari 1943",y:1943.09,place:"Stalingrad",lon:44.5,lat:48.7,zoom:300,hl:["RUS"],title:"Slaget om Stalingrad",
+  facts:["Från augusti 1942 strider tyska och sovjetiska soldater om varje hus och gata i staden Stalingrad vid floden Volga.",
+   "Röda armén omringar den tyska 6:e armén, som kapitulerar i februari 1943. Omkring två miljoner soldater och civila dödas eller skadas. Slaget ses som vändpunkten på östfronten."],
+  q:"Varför räknas Stalingrad som en vändpunkt?",opts:["Där tog kriget slut","Där gick USA med i kriget","Efter slaget var Tyskland på reträtt i öst"],ok:2,
+  why:"Efter Stalingrad tog Röda armén initiativet och pressade tyskarna västerut ända till Berlin."},
+ {d:"6 juni 1944",y:1944.43,place:"Normandie",lon:-0.87,lat:49.37,zoom:220,hl:["FRA"],title:"Dagen D",dday:true,
+  facts:["Omkring 156 000 allierade soldater landstiger i Normandie från havet och luften. Nu måste Tyskland strida på två fronter i Europa: i väst och i öst.",
+   "Paris befrias i augusti 1944."],
+  q:"Varför var Dagen D så viktig?",opts:["Kriget i Stilla havet tog slut","Tyskland fick strida på två fronter","Sverige gick med i kriget"],ok:1,
+  why:"Med Sovjet i öst och de västallierade i väst trycktes Tyskland ihop från två håll."},
+ {d:"8 maj 1945",y:1945.35,place:"Berlin",lon:13.4,lat:52.52,zoom:230,hl:["DEU"],title:"Tyskland kapitulerar",
+  facts:["Våren 1945 når sovjetiska trupper Berlin från öster, medan amerikanska och brittiska trupper kommer från väster. Hitler tar sitt liv den 30 april.",
+   "Den 8 maj 1945 kapitulerar Tyskland villkorslöst och kriget i Europa är slut. Tyskland delas upp i fyra ockupationszoner."],
+  q:"Vilket datum tog kriget i Europa slut?",opts:["6 juni 1944","8 maj 1945","2 september 1945"],ok:1,
+  why:"Den 2 september 1945 tog hela världskriget slut, när Japan skrev under sin kapitulation."},
+ {d:"2 september 1945",y:1945.67,place:"Hiroshima",lon:132.46,lat:34.39,zoom:300,hl:["JPN"],extra:[["Nagasaki",129.87,32.75],["Tokyo",139.7,35.7]],title:"Atombomberna och krigets slut",
+  facts:["Den 6 augusti 1945 fäller USA en atombomb över Hiroshima och den 9 augusti över Nagasaki. Omkring 200 000 människor dör före årets slut, många av brännskador och strålning.",
+   "Den 8 augusti förklarar även Sovjetunionen krig mot Japan. Japan kapitulerar, och den 2 september 1945 skrivs kapitulationen under i Tokyobukten. Andra världskriget är slut."],
+  q:"Vilka två städer drabbades av atombomber?",opts:["Tokyo och Osaka","Hiroshima och Kyoto","Hiroshima och Nagasaki"],ok:2,
+  why:"Det är de enda gånger kärnvapen har använts i krig."}
+];
+const END={title:"Efter kriget",
+ facts:["Uppskattningsvis 70–85 miljoner människor dog i andra världskriget, de flesta civila. Det är den dödligaste konflikten i historien.",
+  "I oktober 1945 bildades FN för att förhindra nya världskrig. Europa delades mellan öst och väst, och snart började kalla kriget."],
+ discuss:"Diskutera: Sverige höll sig utanför kriget men sålde järnmalm till Tyskland och släppte igenom tyska soldater. Var det rätt eller fel? Vad hade alternativet varit?"};
+
+/* ---------- fördjupning: delstopp per händelse ---------- */
+const D=(place,lon,lat,d,title,facts,q,opts,ok,why,z)=>({place,lon,lat,d,title,facts,q,opts,ok,why,z});
+const DEEP=[
+ [ D("Westerplatte",18.67,54.41,"1 sep 1939, gryning","Första skotten",
+    ["Kriget börjar när det tyska slagskeppet Schleswig-Holstein öppnar eld mot den polska militärbasen Westerplatte vid Danzig.","Omkring 200 polska soldater håller ut i sju dagar mot en mycket större styrka. Samma morgon bombar tyskt flyg polska städer, bland annat Wieluń."],
+    "Hur länge höll de polska soldaterna ut på Westerplatte?",["En dag","En vecka","Ett år"],1,"De kapitulerade den 7 september, när ammunition och förband tog slut."),
+   D("Warszawa",21.0,52.23,"September 1939","Huvudstaden belägras",
+    ["Polen har en stor armé men få stridsvagnar och flygplan jämfört med Tyskland. De tyska pansarförbanden tränger snabbt fram mot Warszawa.","Staden belägras och bombas hårt. Den 28 september kapitulerar Warszawa, efter att stora delar av staden förstörts."],
+    "Varför hade Polen svårt att stå emot?",["Polen saknade helt armé","Färre stridsvagnar och flygplan, och anfall från två håll","Polen ville inte försvara sig"],1,"Från den 17 september anföll även Sovjetunionen, och då fanns inget sätt att hålla ut."),
+   D("Brest",23.7,52.1,"17–22 september 1939","Polen delas",
+    ["Röda armén går in i östra Polen. När tyska och sovjetiska trupper möts i staden Brest håller de en gemensam parad.","Polen delas mellan Tyskland och Sovjetunionen. Regeringen flyr och fortsätter kampen i exil, och tusentals polska soldater strider senare på de allierades sida."],
+    "Vad hände med Polen efter hösten 1939?",["Landet blev neutralt som Sverige","Landet delades mellan Tyskland och Sovjetunionen","Landet gick frivilligt med i Tyskland"],1,"Polen fanns inte som självständig stat igen förrän efter kriget.") ],
+ [ D("Suomussalmi",28.9,64.9,"December 1939","Skidtrupperna i skogen",
+    ["Sovjetiska förband rycker in med stridsvagnar och lastbilar på smala skogsvägar. Finländarna rör sig snabbt på skidor i terrängen runt omkring.","De delar upp fiendens kolonner i små inringade grupper som får slut på mat och värme. Taktiken kallas motti."],
+    "Vad kallades den finska taktiken att dela upp fienden i inringade grupper?",["Motti","Blixtkrig","Sisu"],0,"Sisu betyder ungefär uthållighet och envishet, och användes ofta om den finska kampviljan."),
+   D("Salla",28.66,66.83,"Februari–mars 1940","Svenska frivilliga",
+    ["Den svenska frivilligkåren, omkring 8 000 man, tar över ansvaret för fronten vid Salla i norra Finland.","Då kan finska soldater flyttas söderut till de hårdaste striderna. Sverige kallade sig vid den här tiden icke krigförande i stället för neutralt."],
+    "Varför var de svenska frivilliga en stor hjälp?",["Finska trupper kunde flyttas till andra fronter","De vann kriget på egen hand","De stoppade tyskarna i Norge"],0,"Varje frivillig vid Salla frigjorde en finsk soldat för Karelska näset."),
+   D("Viborg",28.75,60.71,"13 mars 1940","Freden i Moskva",
+    ["I februari 1940 bryter Röda armén igenom den finska försvarslinjen på Karelska näset, Mannerheimlinjen.","I freden förlorar Finland omkring en tiondel av sin yta, bland annat staden Viborg. Över 400 000 karelare tvingas lämna sina hem."],
+    "Vad fick Finland lämna ifrån sig i freden?",["Helsingfors","Karelen med Viborg","Hela Lappland"],1,"Finland behöll sin självständighet, vilket många ser som en stor seger trots förlusterna.") ],
+ [ D("Köpenhamn",12.57,55.68,"9 april 1940","Danmark ger upp",
+    ["Danmark kapitulerar efter några timmar för att undvika förstörelse. Kungen och regeringen blir kvar under tysk ockupation.","Hösten 1943 skulle Danmarks judar deporteras. Varnade av danskar flydde de flesta, omkring 7 000 människor, i fiskebåtar över Öresund."],
+    "Vart flydde de flesta danska judarna 1943?",["Till England","Till Sverige","Till Norge"],1,"Sverige tog emot flyktingarna, och nästan alla danska judar överlevde."),
+   D("Oslofjorden",10.63,59.66,"9 april 1940","Blücher sänks",
+    ["Den tyska kryssaren Blücher är på väg mot Oslo med trupper. Kanoner och torpeder från fästningen Oscarsborg sänker fartyget i Oslofjorden.","Förseningen gör att kungen och regeringen hinner fly från Oslo med landets guldreserv. Kung Haakon leder senare motståndet från London."],
+    "Vad hann kungen och regeringen göra tack vare sänkningen?",["Kapitulera","Fly från Oslo","Anfalla Danmark"],1,"Därför kunde Norge fortsätta kriget med en regering i exil."),
+   D("Narvik",17.43,68.44,"April–juni 1940","Striden om malmhamnen",
+    ["Brittiska, franska, polska och norska trupper strider mot tyskarna om Narvik och tar staden i slutet av maj.","Men i juni behövs trupperna i Frankrike, som håller på att falla. De allierade lämnar Narvik och Norge kapitulerar den 10 juni."],
+    "Varför lämnade de allierade Narvik i juni 1940?",["De hade förlorat alla strider","Trupperna behövdes i Frankrike","Sverige krävde det"],1,"Narvik var en av de få allierade segrarna våren 1940, men den gick inte att hålla."),
+   D("Storlien",12.1,63.32,"1940–1943","Tåg genom Sverige",
+    ["Sverige låter tyska soldater på permission resa med tåg genom landet mellan Norge och Tyskland. Det kallas permittenttrafiken och pågår till augusti 1943.","Sommaren 1941 tillåter regeringen också att en hel tysk division åker genom Sverige till Finland. Beslutet kallas midsommarkrisen."],
+    "Vad var permittenttrafiken?",["Svensk export av bilar","Tyska soldater som reste med tåg genom Sverige","Flyktingar som kom till Sverige"],1,"Många svenskar tyckte att trafiken bröt mot neutraliteten. Den stoppades när kriget började vända.") ],
+ [ D("Sedan",4.94,49.7,"13 maj 1940","Genom Ardennerna",
+    ["Frankrike hade byggt en stark försvarslinje mot Tyskland, Maginotlinjen. Fransmännen trodde att de täta skogarna i Ardennerna var omöjliga för stridsvagnar.","Tyskarna tar sig ändå igenom skogen och går över floden Maas vid Sedan. Därmed går de runt Maginotlinjen."],
+    "Varför hjälpte inte Maginotlinjen?",["Tyskarna gick runt den genom Ardennerna","Den låg i Spanien","Den var inte byggd ännu"],0,"Tyskarna anföll där fransmännen minst väntade sig det."),
+   D("Dunkerque",2.38,51.03,"26 maj–4 juni 1940","Operation Dynamo",
+    ["Tyskarna når kusten och stänger in de allierade arméerna vid Dunkerque. Britterna startar en räddningsoperation.","Örlogsfartyg och hundratals civila småbåtar hämtar omkring 338 000 soldater. Nästan all utrustning måste lämnas kvar på stranden."],
+    "Vad hette evakueringen från Dunkerque?",["Operation Overlord","Operation Dynamo","Operation Barbarossa"],1,"Overlord var landstigningen i Normandie 1944, och Barbarossa anfallet mot Sovjet 1941."),
+   D("Compiègne",2.83,49.43,"22 juni 1940","Vagnen i skogen",
+    ["Hitler kräver att vapenstilleståndet skrivs under i samma järnvägsvagn i Compiègne där Tyskland fick ge upp i första världskriget 1918.","Norra Frankrike ockuperas, och i söder styr en regering i staden Vichy som samarbetar med Tyskland. Från London uppmanar generalen Charles de Gaulle fransmännen att fortsätta kämpa."],
+    "Varför valde Hitler just den järnvägsvagnen?",["Det var hans egen vagn","Där fick Tyskland ge upp 1918","Den var den enda som fanns"],1,"Hitler ville hämnas förnedringen från första världskriget.") ],
+ [ D("Dover",1.31,51.13,"Juli–augusti 1940","Striden över kanalen",
+    ["Tyskland planerar en invasion av Storbritannien som kallas Operation Sjölejonet. För att lyckas måste Luftwaffe först slå ut det brittiska flygvapnet.","Tyska plan anfaller fartyg i Engelska kanalen, radarstationer och flygfält i södra England."],
+    "Vad var Operation Sjölejonet?",["Tysklands planerade invasion av Storbritannien","Britternas evakuering från Frankrike","En tysk ubåtsflotta"],0,"Invasionen sköts upp i september 1940 och genomfördes aldrig."),
+   D("Kent",0.6,51.25,"Augusti–september 1940","Piloterna",
+    ["RAF flyger jaktplanen Spitfire och Hurricane. Radarstationer längs kusten varnar så att planen kommer upp i luften i tid.","Piloterna kommer från många länder. Den polska 303-skvadronen blir en av de mest framgångsrika under hela slaget."],
+    "Från vilket land kom piloterna i den berömda 303-skvadronen?",["Polen","Sverige","Frankrike"],0,"Polska piloter som flytt sitt land fortsatte kriget från England."),
+   D("London",-0.1,51.5,"September 1940–maj 1941","The Blitz",
+    ["Från den 7 september bombas London natt efter natt. Även andra städer som Coventry och Liverpool drabbas.","Omkring 40 000 civila dör under Blitzen. Många Londonbor sover i tunnelbanan, och barn skickas ut på landsbygden för att vara säkra."],
+    "Var sökte många Londonbor skydd under bombningarna?",["På hustaken","I tunnelbanan","I parkerna"],1,"Tunnelbanestationerna låg djupt ner och skyddade mot bomberna.") ],
+ [ D("Brest",23.65,52.08,"22 juni 1941, gryning","Anfallet börjar",
+    ["Anfallet startar i gryningen längs en front från Östersjön till Svarta havet.","Tyskarna delar upp anfallet i tre delar: mot Leningrad i norr, mot Moskva i mitten och mot Ukraina i söder."],
+    "Vilka var de tre målen för anfallet?",["Leningrad, Moskva och Ukraina","Paris, London och Rom","Oslo, Stockholm och Helsingfors"],0,"Ukraina var viktigt för sin spannmål och sina råvaror."),
+   D("Leningrad",30.32,59.94,"September 1941–januari 1944","Belägringen",
+    ["Tyska och finska trupper stänger in Leningrad. Belägringen pågår i 872 dagar.","Omkring en miljon civila dör, de flesta av svält. På vintern körs mat in med lastbilar över isen på Ladogasjön, en väg som kallades livets väg."],
+    "Hur fick Leningrad mat på vintern?",["Med tåg från Finland","Över isen på Ladogasjön","Med flyg från USA"],1,"Isvägen var livsfarlig men räddade hundratusentals liv."),
+   D("Moskva",37.62,55.75,"December 1941","Framför Moskva",
+    ["Tyskarna kommer så nära som omkring 30 kilometer från Moskva. Temperaturen sjunker under minus 30 grader och de saknar vinterkläder.","Den 5 december anfaller Röda armén med nya trupper från Sibirien som är vana vid kyla. Tyskarna trycks tillbaka för första gången."],
+    "Varför var trupperna från Sibirien så viktiga?",["De var vana vid och utrustade för vinterkrig","De hade nya stridsvagnar från USA","De var tyskar som bytt sida"],0,"Stalin vågade flytta dem västerut sedan spioner rapporterat att Japan inte tänkte anfalla Sibirien.") ],
+ [ D("Nanjing",118.8,32.06,"1937–1941","Bakgrunden i Asien",
+    ["Japan har varit i krig med Kina sedan 1937. När japanska soldater intog staden Nanjing mördade de tiotusentals civila.","Som straff för Japans krig stoppade USA sin export av olja till Japan sommaren 1941. Utan olja kunde Japans flotta och industri inte fortsätta."],
+    "Vad slutade USA att sälja till Japan 1941?",["Ris","Olja","Bilar"],1,"Japan bestämde sig för att ta oljan i Sydostasien, och då ville de först slå ut USA:s flotta.",900),
+   D("Pearl Harbor",-157.95,21.35,"7 december 1941, kl. 07:48","Anfallet",
+    ["Över 350 japanska flygplan anfaller i två vågor. Slagskeppet USS Arizona exploderar och över 1 100 sjömän dör ombord.","Men de amerikanska hangarfartygen är ute till sjöss och klarar sig. President Roosevelt kallar dagen för en dag som ska leva i skam."],
+    "Varför var det tur för USA att hangarfartygen inte låg i hamnen?",["De var gamla och oviktiga","Hangarfartygen blev avgörande i kriget till sjöss","De var fulla med guld"],1,"Kriget i Stilla havet avgjordes av flyg från hangarfartyg, inte av slagskepp.",260),
+   D("Singapore",103.82,1.35,"15 februari 1942","Imperiet faller",
+    ["Samma dygn som Pearl Harbor anfaller Japan även Filippinerna, Hongkong och Malackahalvön.","I februari 1942 faller den brittiska basen Singapore. Omkring 80 000 brittiska, indiska och australiska soldater tas till fånga, Storbritanniens största nederlag i kriget."],
+    "Vilken brittisk bas föll i februari 1942?",["Singapore","Sydney","Bombay"],0,"Många fångar tvingades sedan arbeta under svåra förhållanden, bland annat vid bygget av Burmajärnvägen.",420) ],
+ [ D("Berlin",13.4,52.52,"1933–1938","Utestängda steg för steg",
+    ["När nazisterna tar makten 1933 börjar de ta bort judars rättigheter. Nürnberglagarna 1935 gör judar till andra klassens medborgare.","Under Kristallnatten i november 1938 bränns synagogor och judiska affärer förstörs över hela Tyskland. Tusentals judar skickas till koncentrationsläger."],
+    "Vad hände under Kristallnatten?",["Synagogor och judiska affärer förstördes","Tyskland anföll Polen","Berlin bombades av britterna"],0,"Namnet kommer från alla krossade fönsterrutor på gatorna."),
+   D("Warszawas getto",20.99,52.24,"1940–1943","Gettot",
+    ["Omkring 400 000 judar tvingas in i ett instängt område i Warszawa. Svält och sjukdomar dödar tiotusentals.","Våren 1943 gör judarna i gettot ett väpnat uppror. De håller ut i nästan en månad innan upproret slås ner."],
+    "Vad hände i Warszawas getto våren 1943?",["Gettot öppnades","Ett väpnat uppror","Invånarna fick flytta till Sverige"],1,"Upproret blev en symbol för motstånd mot förintelsen."),
+   D("Auschwitz",19.2,50.03,"1942–1945","Förintelselägren",
+    ["Nazisterna bygger förintelseläger i det ockuperade Polen. I Auschwitz-Birkenau mördas över en miljon människor, de allra flesta judar, i gaskammare.","Fångar som kunde arbeta fick slava under svält. Lägret befriades den 27 januari 1945, som i dag är Förintelsens minnesdag."],
+    "Varför är 27 januari Förintelsens minnesdag?",["Då började kriget","Då befriades Auschwitz","Då kapitulerade Tyskland"],1,"Överlevare har sedan dess berättat om lägren, bland annat i svenska skolor."),
+   D("Budapest",19.04,47.5,"1944","Raoul Wallenberg",
+    ["Våren 1944 börjar deportationerna av Ungerns judar. Den svenske diplomaten Raoul Wallenberg skickas till Budapest.","Han delar ut svenska skyddspass och hyr hus där judar kan skyddas. Han räddar tusentals människor men försvinner i sovjetisk fångenskap 1945."],
+    "Vad gjorde Raoul Wallenberg?",["Räddade judar med svenska skyddspass","Ledde de svenska frivilliga i Finland","Förhandlade fram freden 1945"],0,"Vad som hände Wallenberg efter 1945 är fortfarande inte helt utrett.") ],
+ [ D("Tokyo",139.7,35.7,"18 april 1942","Bomber över Tokyo",
+    ["16 amerikanska bombplan startar från ett hangarfartyg och bombar Tokyo. Skadorna blir små.","Men Japans ledning blir chockad över att hemlandet kan nås. De bestämmer sig för att slå ut den amerikanska flottan vid Midway."],
+    "Vad fick bombningen av Tokyo för följd?",["Japan kapitulerade direkt","Japan beslöt att anfalla Midway","USA slutade kriga"],1,"En liten räd fick alltså stora följder.",300),
+   D("Hawaii",-157.86,21.31,"Maj 1942","Kodknäckarna",
+    ["Amerikanska kodknäckare på Hawaii läser delar av Japans meddelanden. De vet att ett anfall mot ett mål som kallas AF är på gång.","För att få veta vad AF är skickar de ett falskt meddelande om att Midway har brist på vatten. Snart rapporterar japanerna att AF har ont om vatten."],
+    "Hur lurade amerikanerna Japan att avslöja målet?",["Med ett falskt meddelande om vattenbrist","Med en spion i Tokyo","De gissade"],0,"Därmed visste de att AF betydde Midway.",300),
+   D("Midway",-177.37,28.2,"4 juni 1942","Fem minuter",
+    ["Amerikanska dykbombplan träffar tre japanska hangarfartyg på bara några minuter. Ett fjärde sänks senare samma dag.","Japan förlorar också hundratals erfarna piloter. USA förlorar hangarfartyget Yorktown."],
+    "Vilken fartygstyp var viktigast i kriget på Stilla havet?",["Hangarfartyg","Slagskepp","Fiskebåtar"],0,"Den som hade flest flygplan till sjöss kunde kontrollera havet.",300),
+   D("Guadalcanal",160.0,-9.5,"Augusti 1942–februari 1943","Öhoppningen",
+    ["På ön Guadalcanal landstiger amerikanska soldater i den första stora allierade offensiven i Stilla havet.","USA tar sedan vissa viktiga öar och hoppar över andra, närmare och närmare Japan. Strategin kallas öhoppning."],
+    "Vad kallades strategin att ta vissa öar och hoppa över andra?",["Motti","Blixtkrig","Öhoppning"],2,"På så sätt slapp USA strida om varje ö.",420) ],
+ [ D("Kaukasus",44.0,43.5,"Sommaren 1942","Jakten på olja",
+    ["Tyskland behöver olja till sina stridsvagnar och flygplan. Sommaren 1942 anfaller de söderut mot oljefälten i Kaukasus.","För att skydda flanken ska staden Stalingrad vid floden Volga tas. Staden bär Stalins namn och blir viktig för båda sidor."],
+    "Vad var Tyskland ute efter i söder?",["Olja","Guld","Vete"],0,"Utan olja stannar en modern armé.",360),
+   D("Stalingrad",44.5,48.7,"September–november 1942","Råttkriget",
+    ["Staden bombas sönder och striderna sker i ruinerna, hus för hus och rum för rum.","Sovjetiska soldater försvarar ett bostadshus, Pavlovs hus, i nästan två månader. Tyska soldater kallar striderna för råttkriget."],
+    "Vad kallade tyska soldater striderna i Stalingrad?",["Blixtkriget","Råttkriget","Vinterkriget"],1,"Striderna skedde på nära håll i källare, trappor och avloppstunnlar."),
+   D("Kalach",43.53,48.69,"19 november 1942","Operation Uranus",
+    ["Röda armén anfaller de svagare rumänska förbanden på sidorna av fronten och möts bakom staden. Omkring 300 000 soldater blir instängda.","I februari 1943 kapitulerar resterna av den tyska 6:e armén. Av omkring 91 000 fångar kommer bara ungefär 5 000 hem efter kriget."],
+    "Var anföll Röda armén när de stängde in tyskarna?",["Mitt i staden","På de svagare flankerna","Från Kaspiska havet"],1,"Att anfalla där fienden är svagast är en klassisk taktik."),
+   D("Kursk",36.19,51.73,"Juli 1943","Det sista anfallet",
+    ["Tyskland gör ett sista stort anfall i öst vid Kursk. Det blir ett av historiens största slag med stridsvagnar.","Röda armén har byggt djupa försvar och vinner. Efter Kursk anfaller Tyskland aldrig mer i öst."],
+    "Vad var speciellt med slaget vid Kursk?",["Det var ett av de största stridsvagnsslagen i historien","Där användes atombomber","Det utkämpades till sjöss"],0,"Därefter gick Röda armén framåt nästan hela vägen till Berlin.") ],
+ [ D("Calais",1.86,50.95,"Våren 1944","Den stora bluffen",
+    ["De allierade bygger upp en påhittad armé i sydöstra England, med uppblåsbara stridsvagnar och falska radiomeddelanden. Den leds på papperet av den kände generalen Patton.","Tyskarna tror att invasionen ska komma vid Calais och håller kvar stora styrkor där även efter Dagen D."],
+    "Varför trodde tyskarna att anfallet skulle komma vid Calais?",["De allierade hade lurat dem med en påhittad armé","De hade knäckt de allierades koder","Calais var den enda hamnen"],0,"Bluffen kallades Operation Fortitude."),
+   D("Pegasusbron",-0.27,49.24,"6 juni 1944, strax efter midnatt","Glidflygplanen",
+    ["Brittiska soldater landar i glidflygplan bara några meter från en viktig bro över en kanal. På omkring tio minuter är bron tagen.","Samtidigt hoppar tusentals fallskärmsjägare bakom stränderna för att hindra tyska förstärkningar."],
+    "Hur tog sig soldaterna till Pegasusbron?",["Med glidflygplan","Med ubåt","Till fots från Paris"],0,"Glidflygplan har ingen motor och kunde landa tyst i mörkret."),
+   D("Omaha Beach",-0.87,49.37,"6 juni 1944","Stranden",
+    ["På Omaha Beach möter amerikanerna det hårdaste försvaret. Omkring 2 400 blir dödade, sårade eller saknade bara där.","Vid kvällen har ändå alla fem stränderna tagits."],
+    "Hur många stränder landsteg de allierade på?",["Två","Fem","Tio"],1,"Utah, Omaha, Gold, Juno och Sword."),
+   D("Paris",2.35,48.86,"25 augusti 1944","Paris befrias",
+    ["Efter hårda strider i Normandie bryter de allierade igenom. I Paris gör motståndsrörelsen uppror.","En fransk pansardivision får köra in först i staden. Dagen efter går general de Gaulle i segerparad längs Champs-Élysées."],
+    "Vilka soldater fick köra in först i Paris?",["Amerikanska","Franska","Brittiska"],1,"Det var viktigt för fransmännen att de själva befriade sin huvudstad.") ],
+ [ D("Bastogne",5.72,50.0,"December 1944","Ardennoffensiven",
+    ["Hitler gör ett sista överraskningsanfall i väst genom Ardennerna, samma skogar som 1940.","Amerikanska soldater blir omringade i staden Bastogne men håller ut tills hjälp kommer. Efter offensiven har Tyskland nästan inga reserver kvar."],
+    "Vad hände i Bastogne?",["Omringade amerikaner höll ut tills hjälp kom","Tyskland kapitulerade","Hitler tog sitt liv"],0,"Slaget kallas på engelska Battle of the Bulge."),
+   D("Ravensbrück",13.17,53.19,"Mars–maj 1945","De vita bussarna",
+    ["Svenska Röda korset, lett av Folke Bernadotte, förhandlar med nazistiska ledare om att få hämta ut fångar ur koncentrationsläger.","Med vitmålade bussar räddas omkring 15 000 fångar till Sverige. Många kommer från kvinnolägret Ravensbrück."],
+    "Vilken organisation körde de vita bussarna?",["FN","Svenska Röda korset","Svenska armén"],1,"Bussarna målades vita med röda kors för att inte bli beskjutna."),
+   D("Berlin",13.4,52.52,"April–maj 1945","Slaget om Berlin",
+    ["Röda armén anfaller Berlin den 16 april. Pojkar och gamla män kallas in för att försvara staden.","Hitler tar sitt liv i sin bunker den 30 april. Sovjetiska soldater hissar flaggan på riksdagshuset och den 2 maj ger staden upp."],
+    "Vem försvarade Berlin i slutet?",["Bara erfarna soldater","Även pojkar och gamla män","Amerikanska soldater"],1,"Tyskland hade så få soldater kvar att barn sattes in i striderna."),
+   D("Berlin-Karlshorst",13.52,52.48,"8 maj 1945","Freden i Europa",
+    ["Tyskland kapitulerar villkorslöst. I Stockholm firar tusentals människor på gatorna när beskedet kommer.","Tyskland delas i fyra ockupationszoner: amerikansk, brittisk, fransk och sovjetisk. Berlin delas på samma sätt."],
+    "Hur många ockupationszoner delades Tyskland i?",["Två","Fyra","Sex"],1,"Uppdelningen ledde till att det blev två tyska stater 1949.",180) ],
+ [ D("Okinawa",127.68,26.21,"April–juni 1945","Okinawa",
+    ["USA landstiger på Okinawa, nära Japan. Striderna blir bland krigets blodigaste, och omkring 100 000 civila dör.","Japanska kamikazepiloter störtar sina plan mot amerikanska fartyg."],
+    "Vad gjorde kamikazepiloterna?",["Spanade från luften","Störtade sina plan mot fiendens fartyg","Släppte flygblad"],1,"Förlusterna på Okinawa fick USA att frukta en invasion av Japan.",360),
+   D("Hiroshima",132.46,34.39,"6 augusti 1945, kl. 08:15","Hiroshima",
+    ["Bombplanet Enola Gay fäller en atombomb över Hiroshima. Staden förstörs nästan helt.","Flickan Sadako Sasaki överlevde som tvååring men blev sjuk av strålningen. Hon vek pappers­tranor i hopp om att bli frisk, och tranor blev en symbol för fred."],
+    "Vad blev en symbol för fred efter Hiroshima?",["Pappers­tranor","Vita duvor av glas","Röda ballonger"],0,"I Hiroshimas fredspark hänger tusentals tranor från skolbarn över hela världen.",300),
+   D("Nagasaki",129.87,32.75,"8–9 augusti 1945","Nagasaki och Sovjet",
+    ["Den 8 augusti förklarar Sovjetunionen krig mot Japan och anfaller i Manchuriet.","Dagen efter fälls en andra atombomb, över Nagasaki."],
+    "Vilket land förklarade krig mot Japan den 8 augusti 1945?",["Sverige","Sovjetunionen","Tyskland"],1,"Både atombomberna och Sovjets anfall bidrog till att Japan gav upp.",300),
+   D("Tokyobukten",139.75,35.35,"15 aug–2 sep 1945","Kejsarens röst",
+    ["Den 15 augusti talar kejsar Hirohito i radio och säger att Japan ger upp. Det är första gången vanligt folk hör hans röst.","Den 2 september skrivs kapitulationen under på slagskeppet USS Missouri i Tokyobukten. Andra världskriget är slut."],
+    "Vad var speciellt med kejsarens radiotal?",["Det var på engelska","Folket hörde hans röst för första gången","Det sändes i tv"],1,"Kejsaren sågs nästan som en gud och talade normalt aldrig till folket.",300) ]
+];
+
+/* ---------- projection & map data ---------- */
+const R=Math.PI/180, S=170;
+function proj(lon,lat){
+  const l=lon*R, p=lat*R, p2=p*p, p4=p2*p2;
+  const x=l*(0.8707-0.131979*p2+p4*(-0.013791+p4*(0.003971*p2-0.001529*p4)));
+  const y=p*(1.007226+p2*(0.015085+p4*(-0.044475+0.028874*p2-0.005916*p4)));
+  return [x*S,-y*S];
+}
+const NSV="http://www.w3.org/2000/svg";
+const svg=document.getElementById("svg"), land=document.getElementById("land");
+const pathOf=pts=>"M"+pts.map(([a,b])=>{const [x,y]=proj(a,b);return x.toFixed(1)+" "+y.toFixed(1)}).join("L")+"Z";
+const ringPath=pts=>{
+  const out=[pts[0].slice()];let mn=pts[0][0],mx=pts[0][0];
+  for(let i=1;i<pts.length;i++){let lon=pts[i][0];const prev=out[i-1][0];while(lon-prev>180)lon-=360;while(lon-prev<-180)lon+=360;out.push([lon,pts[i][1]]);mn=Math.min(mn,lon);mx=Math.max(mx,lon);}
+  let d=pathOf(out);
+  if(mx>180)d+=pathOf(out.map(([a,b])=>[a-360,b]));
+  if(mn<-180)d+=pathOf(out.map(([a,b])=>[a+360,b]));
+  return d;
+};
+function drawGrat(){
+  let d="";
+  for(let lon=-180;lon<=180;lon+=20){const pts=[];for(let lat=-80;lat<=80;lat+=4)pts.push(proj(lon,lat));d+="M"+pts.map(p=>p.map(v=>v.toFixed(1)).join(" ")).join("L");}
+  for(let lat=-60;lat<=80;lat+=20){const pts=[];for(let lon=-180;lon<=180;lon+=4)pts.push(proj(lon,lat));d+="M"+pts.map(p=>p.map(v=>v.toFixed(1)).join(" ")).join("L");}
+  document.getElementById("grat").innerHTML=`<path class="grat" d="${d}"/>`;
+}
+function drawLand(){
+  const topo=window.Datamap&&Datamap.prototype.worldTopo;
+  if(!topo||!topo.objects){ land.innerHTML=""; return false; }
+  const tf=topo.transform;
+  const arcs=topo.arcs.map(a=>{let x=0,y=0;return a.map(p=>{if(tf){x+=p[0];y+=p[1];return [x*tf.scale[0]+tf.translate[0],y*tf.scale[1]+tf.translate[1]];}return p;});});
+  const ring=idx=>{const out=[];idx.forEach((i,j)=>{let a=i<0?arcs[~i].slice().reverse():arcs[i];if(j>0)a=a.slice(1);out.push(...a);});return out;};
+  const obj=topo.objects.world||topo.objects[Object.keys(topo.objects)[0]];
+  let html="";
+  obj.geometries.forEach(g=>{
+    if(g.id==="ATA"||!g.arcs) return;
+    const polys=g.type==="Polygon"?[g.arcs]:g.type==="MultiPolygon"?g.arcs:[];
+    const d=polys.map(poly=>poly.map(r=>ringPath(ring(r))).join("")).join("");
+    html+=`<path class="country${g.id==="SWE"?" swe":""}" data-id="${g.id}" d="${d}" fill-rule="evenodd"/>`;
+  });
+  land.innerHTML=html; return true;
+}
+drawGrat();
+const hasLand=drawLand();
+
+/* markers */
+const marks=document.getElementById("marks"), labels=document.getElementById("labels");
+EV.forEach((e,i)=>{const [x,y]=proj(e.lon,e.lat);e.px=x;e.py=y;
+  const g=document.createElementNS(NSV,"g");g.setAttribute("class","mk");g.dataset.i=i;
+  g.innerHTML=`<circle class="pulse" r="12"/><circle class="ring" r="12"/><text text-anchor="middle" y="5">${i+1}</text>`;
+  marks.appendChild(g);
+});
+function setLabels(e){
+  labels.innerHTML="";
+  const list=[[e.place,e.lon,e.lat,true]].concat((e.extra||[]).map(a=>[a[0],a[1],a[2],false]));
+  list.forEach(([n,lon,lat,main])=>{const [x,y]=proj(lon,lat);
+    const t=document.createElementNS(NSV,"g");t.dataset.x=x;t.dataset.y=y;
+    t.innerHTML=(main?"":`<circle r="4" fill="#2a2822"/>`)+`<text class="place" x="${main?18:8}" y="${main?-14:4}">${n}</text>`;
+    labels.appendChild(t);});
+}
+
+/* ---------- camera ---------- */
+const FULL={x:0,y:-10,w:2*Math.PI*0.8707*S*1.02};
+let cam={...FULL};
+function box(){const r=svg.getBoundingClientRect();return {W:Math.max(r.width,1),H:Math.max(r.height,1)}}
+function focusFrac(){return innerWidth>=860?0.5:0.5}
+function apply(){
+  const {W,H}=box(), w=cam.w, h=w*H/W;
+  svg.setAttribute("viewBox",`${cam.x-w/2} ${cam.y-h*0.55} ${w} ${h}`);
+  const k=w/W;
+  marks.childNodes.forEach(g=>{const e=EV[g.dataset.i];g.setAttribute("transform",`translate(${e.px} ${e.py}) scale(${k})`);});
+  labels.childNodes.forEach(g=>g.setAttribute("transform",`translate(${g.dataset.x} ${g.dataset.y}) scale(${k})`));
+  document.querySelectorAll("#subs > g").forEach(g=>g.setAttribute("transform",`translate(${g.dataset.x} ${g.dataset.y}) scale(${k})`));
+}
+let raf=null;
+function fly(to,done){
+  const from={...cam}, dx=to.x-from.x, dy=to.y-from.y, dist=Math.hypot(dx,dy);
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const dur=reduce?1:Math.min(3400,1300+dist*2.2), t0=performance.now();
+  const lift=Math.max(0,dist*1.15-(from.w+to.w)/2);
+  cancelAnimationFrame(raf);
+  const step=now=>{
+    const t=Math.min(1,(now-t0)/dur), e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    cam={x:from.x+dx*e,y:from.y+dy*e,w:from.w+(to.w-from.w)*e+lift*Math.sin(Math.PI*e)};
+    apply();
+    if(t<1) raf=requestAnimationFrame(step); else done&&done();
+  };
+  raf=requestAnimationFrame(step);
+}
+addEventListener("resize",apply);
+
+/* ---------- timeline ---------- */
+const tl=document.getElementById("tl"), Y0=1939.5, Y1=1945.8;
+const frac=y=>(y-Y0)/(Y1-Y0);
+for(let y=1940;y<=1945;y++){
+  tl.insertAdjacentHTML("beforeend",`<span class="tl-year" style="left:calc(14px + (100% - 28px) * ${frac(y)})">${y}</span>`);
+  tl.querySelector(".tl-bar").insertAdjacentHTML("beforeend",`<span class="tl-tick" style="left:${frac(y)*100}%"></span>`);
+}
+const tlfill=document.getElementById("tlfill");
+
+/* ---------- scene engine: one illustrated place per delstopp ---------- */
+const H=300;
+let seed=1; const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};
+const SKY={dawn:["#46536a","#d2a57e","#6f6c74","#34383f"],day:["#7b9bb4","#d6dcd8","#8c9aa3","#3c4441"],grey:["#5f6970","#aeb2ac","#80878a","#3a3e40"],
+ dusk:["#2b2f47","#c06d4b","#4f4352","#262330"],night:["#0b111b","#2a3446","#1c2432","#10151c"],snow:["#8996a0","#e1e4e2","#aab4b9","#4a5458"],tropic:["#4c87b0","#efdcaa","#7ea3b4","#2f3d33"]};
+const GC={field:"#5c673b",snow:"#e4e9ea",steppe:"#a8945e",city:"#6a675f",jungle:"#3b5629",ice:"#cddbe1",sand:"#c9b683",sea:"#3a5862"};
+let SK; // current sky palette
+const P={
+ pines(x0,x1,n,c,h=60,snow,y=H+34){let s="";for(let i=0;i<n;i++){const x=x0+(x1-x0)*i/Math.max(1,n-1)+(rnd()-.5)*20,hh=h*(.7+rnd()*.6);
+   s+=`<path d="M${x} ${y-hh}L${x+hh*.28} ${y}L${x-hh*.28} ${y}Z" fill="${c}"/>`;if(snow)s+=`<path d="M${x} ${y-hh}L${x+hh*.1} ${y-hh*.62}L${x-hh*.1} ${y-hh*.62}Z" fill="#f1f4f4"/>`;}return s;},
+ trees(x0,x1,n,c,y=H+34){let s="";for(let i=0;i<n;i++){const x=x0+(x1-x0)*i/Math.max(1,n-1)+(rnd()-.5)*30,r=16+rnd()*14;s+=`<rect x="${x-2}" y="${y-r}" width="4" height="${r}" fill="#3a3326"/><circle cx="${x}" cy="${y-r-r*.5}" r="${r}" fill="${c}"/>`;}return s;},
+ palm(x,y,h=90){let s=`<path d="M${x} ${y} q${8} ${-h/2} ${-6} ${-h}" stroke="#4a3b28" stroke-width="5" fill="none"/>`;const tx=x-6,ty=y-h;
+   [[-45,10],[-20,-8],[10,-10],[40,8],[55,24],[-55,26]].forEach(([dx,dy])=>s+=`<path d="M${tx} ${ty} q${dx/2} ${dy-14} ${dx} ${dy+10}" stroke="#2e4a26" stroke-width="7" fill="none" stroke-linecap="round"/>`);return s;},
+ house(x,y,w,h,c="#8a7f6c",lit){let s=`<rect x="${x}" y="${y-h}" width="${w}" height="${h}" fill="${c}"/><path d="M${x-4} ${y-h}L${x+w/2} ${y-h-w*.4}L${x+w+4} ${y-h}Z" fill="#4d4036"/>`;
+   for(let i=0;i<Math.floor(w/22);i++)s+=`<rect x="${x+8+i*22}" y="${y-h+12}" width="9" height="11" fill="${lit?"#f0c66a":"#2c2a26"}"/>`;return s;},
+ ruin(x,y,w,h,c="#6e6a62"){let d=`M${x} ${y}L${x} ${y-h*.6}L${x+w*.15} ${y-h}L${x+w*.3} ${y-h*.7}L${x+w*.45} ${y-h*.9}L${x+w*.6} ${y-h*.45}L${x+w*.8} ${y-h*.75}L${x+w} ${y-h*.3}L${x+w} ${y}Z`;
+   let s=`<path d="${d}" fill="${c}"/>`;for(let i=0;i<Math.floor(w/26);i++)s+=`<rect x="${x+8+i*26}" y="${y-h*.4}" width="10" height="14" fill="#2b2925"/>`;return s;},
+ skyline(kind,y,c){let s="";let x=-150;while(x<1700){const w=30+rnd()*50,h=30+rnd()*60;s+=`<rect x="${x}" y="${y-h}" width="${w}" height="${h+2}" fill="${c}"/>`;x+=w+rnd()*8;}
+   const L=650;
+   if(kind==="london")s+=`<rect x="${L-40}" y="${y-90}" width="80" height="90" fill="${c}"/><path d="M${L-36} ${y-90}a36 40 0 0 1 72 0Z" fill="${c}"/><rect x="${L-4}" y="${y-150}" width="8" height="24" fill="${c}"/>`;
+   if(kind==="paris")s+=`<path d="M${L-46} ${y}L${L-6} ${y-200}L${L+6} ${y-200}L${L+46} ${y}L${L+26} ${y}Q${L} ${y-50} ${L-26} ${y}Z" fill="${c}"/><rect x="${L-2}" y="${y-235}" width="4" height="40" fill="${c}"/><rect x="${L-30}" y="${y-70}" width="60" height="6" fill="${c}"/><rect x="${L-20}" y="${y-130}" width="40" height="5" fill="${c}"/>`;
+   if(kind==="moscow")[[-60,60],[0,90],[60,70]].forEach(([dx,h])=>s+=`<rect x="${L+dx-12}" y="${y-h}" width="24" height="${h}" fill="${c}"/><path d="M${L+dx-16} ${y-h}q16 -36 16 -44q0 8 16 44Z" fill="${c}"/>`);
+   if(kind==="berlin")s+=`<rect x="${L-90}" y="${y-70}" width="180" height="70" fill="${c}"/><path d="M${L-40} ${y-70}a40 34 0 0 1 80 0" fill="none" stroke="${c}" stroke-width="4"/><path d="M${L-20} ${y-70}l0 -30M${L} ${y-104}l0 34M${L+20} ${y-70}l0 -30" stroke="${c}" stroke-width="3"/><rect x="${L-1}" y="${y-140}" width="2" height="36" fill="${c}"/><rect x="${L+1}" y="${y-140}" width="26" height="16" fill="#b8352b"/>`;
+   if(kind==="budapest")s+=`<rect x="${L-160}" y="${y-60}" width="320" height="60" fill="${c}"/><path d="M${L-36} ${y-60}a36 46 0 0 1 72 0Z" fill="${c}"/><rect x="${L-2}" y="${y-130}" width="4" height="26" fill="${c}"/>`+[-150,-110,110,150].map(dx=>`<path d="M${L+dx-5} ${y-60}l5 -36l5 36Z" fill="${c}"/>`).join("");
+   if(kind==="leningrad")s+=`<rect x="${L-60}" y="${y-60}" width="120" height="60" fill="${c}"/><rect x="${L-12}" y="${y-110}" width="24" height="50" fill="${c}"/><path d="M${L-3} ${y-110}L${L} ${y-200}L${L+3} ${y-110}Z" fill="${c}"/>`;
+   if(kind==="pagoda"||kind==="tokyo")for(let k=0;k<5;k++){const w=70-k*12;s+=`<path d="M${L-w} ${y-k*26-14}L${L+w} ${y-k*26-14}L${L+w*.7} ${y-k*26-26}L${L-w*.7} ${y-k*26-26}Z" fill="${c}"/><rect x="${L-w*.5}" y="${y-k*26-14}" width="${w}" height="14" fill="${c}"/>`;}
+   if(kind==="church")[[300,110],[1000,90]].forEach(([cx,h])=>s+=`<rect x="${cx-10}" y="${y-h}" width="20" height="${h}" fill="${c}"/><path d="M${cx-12} ${y-h}L${cx} ${y-h-40}L${cx+12} ${y-h}Z" fill="${c}"/>`);
+   return s;},
+ mountains(y,c,snow,hgt=150){let d=`M-200 ${y}`,pk=[];for(let x=-200;x<=1800;x+=120){const h=hgt*(.5+rnd()*.6);d+=`L${x+60} ${y-h}L${x+120} ${y-h*.3}`;pk.push([x+60,y-h,h]);}
+   let s=`<path d="${d}L1800 ${y}Z" fill="${c}"/>`;if(snow)pk.forEach(([x,yy,h])=>s+=`<path d="M${x} ${yy}L${x+h*.18} ${yy+h*.3}L${x+4} ${yy+h*.24}L${x-h*.18} ${yy+h*.3}Z" fill="#eef2f3"/>`);return s;},
+ hills(y,c){let d=`M-200 ${y+20}`;for(let x=-200;x<=1800;x+=40)d+=`L${x} ${(y-18*Math.sin(x/170)-10*Math.sin(x/61)).toFixed(1)}`;return `<path d="${d}L1800 ${y+40}L-200 ${y+40}Z" fill="${c}"/>`;},
+ cliffs(x0,x1,y){return `<path d="M${x0} ${y}L${x0+30} ${y-70}L${x1-40} ${y-80}L${x1} ${y}Z" fill="#e8e6dc"/><path d="M${x0+30} ${y-70}L${x1-40} ${y-80}L${x1-40} ${y-90}L${x0+30} ${y-80}Z" fill="#5c6a3e"/>`;},
+ ship(x,y,kind="battle",k=1,smoke){let s=`<g transform="translate(${x} ${y}) scale(${k})">`;const c="#3d4448";
+   if(kind==="fish")s+=`<path d="M-30 0L30 0L24 10L-24 10Z" fill="#5a4b3a"/><rect x="-6" y="-14" width="12" height="14" fill="#7a6a52"/><line x1="10" y1="0" x2="10" y2="-30" stroke="#3a3326" stroke-width="2"/>`;
+   else if(kind==="carrier")s+=`<path d="M-130 -4L130 -4L120 14L-118 14Z" fill="${c}"/><rect x="-140" y="-10" width="280" height="6" fill="#55595a"/><rect x="50" y="-34" width="22" height="24" fill="${c}"/>`;
+   else if(kind==="tanker")s+=`<path d="M-110 0L110 0L102 16L-104 16Z" fill="#4a4a40"/><rect x="70" y="-18" width="26" height="18" fill="#5d5a4c"/><rect x="-90" y="-6" width="140" height="6" fill="#5d5a4c"/>`;
+   else s+=`<path d="M-120 0L125 0L112 16L-110 16Z" fill="${c}"/><path d="M-60 0L-50 -22L30 -22L40 0Z" fill="#4a5256"/><rect x="-14" y="-46" width="16" height="24" fill="#4a5256"/><rect x="10" y="-40" width="10" height="18" fill="#4a5256"/><path d="M-75 -6L-110 -12M70 -6L108 -12" stroke="${c}" stroke-width="4"/>`;
+   s+=`</g>`;if(smoke)s+=P.smoke(x,y-20,1.2);return s;},
+ boats(x0,x1,y,n){let s="";for(let i=0;i<n;i++){const x=x0+(x1-x0)*i/Math.max(1,n-1)+(rnd()-.5)*30,yy=y+rnd()*30;s+=`<g class="bob" style="animation-delay:${(rnd()*3).toFixed(1)}s"><path d="M${x-14} ${yy}L${x+14} ${yy}L${x+10} ${yy+7}L${x-10} ${yy+7}Z" fill="#4c4235"/><line x1="${x}" y1="${yy}" x2="${x}" y2="${yy-14}" stroke="#3a3326" stroke-width="1.5"/></g>`;}return s;},
+ plane(kind,y,t=14,delay=0,k=1){const c="#2f3437";let b;
+   if(kind==="bomber")b=`<ellipse cx="0" cy="0" rx="32" ry="5" fill="${c}"/><path d="M-6 -2L-16 -30L-6 -30L8 -2ZM-6 2L-16 30L-6 30L8 2Z" fill="${c}"/><path d="M-30 -2L-36 -12L-28 -12L-24 -2Z" fill="${c}"/>`;
+   else if(kind==="glider")b=`<ellipse cx="0" cy="0" rx="26" ry="4" fill="${c}"/><path d="M-2 -1L-8 -34L0 -34L6 -1ZM-2 1L-8 34L0 34L6 1Z" fill="${c}"/>`;
+   else b=`<ellipse cx="0" cy="0" rx="18" ry="3.5" fill="${c}"/><path d="M-2 -1L-8 -18L-1 -18L6 -1ZM-2 1L-8 18L-1 18L6 1Z" fill="${c}"/><path d="M-16 -1L-20 -8L-15 -8Z" fill="${c}"/>`;
+   return `<g class="fly" style="animation-duration:${t}s;animation-delay:${-delay}s"><g transform="translate(-200 ${y}) scale(${k}) scale(1 .45)">${b}</g></g>`;},
+ dive(x,y){return `<g class="dive"><g transform="translate(${x} ${y}) rotate(28) scale(1 .5)"><ellipse rx="18" ry="3.5" fill="#2f3437"/><path d="M-2 -1L-8 -18L-1 -18L6 -1ZM-2 1L-8 18L-1 18L6 1Z" fill="#2f3437"/></g></g>`;},
+ tank(x,y,k=1,c="#4b4e36"){return `<g transform="translate(${x} ${y}) scale(${k})"><rect x="-24" y="-12" width="48" height="12" rx="6" fill="#2e2f28"/><path d="M-22 -12L22 -12L18 -22L-18 -22Z" fill="${c}"/><rect x="-10" y="-30" width="20" height="9" rx="2" fill="${c}"/><rect x="8" y="-28" width="26" height="3.5" fill="${c}"/></g>`;},
+ tanks(x0,n,y,k=1,c,gap=80){let s="";for(let i=0;i<n;i++)s+=P.tank(x0+i*gap+(rnd()-.5)*16,y+(rnd()-.5)*10,k,c);return s;},
+ truck(x,y,c="#4f5238"){return `<rect x="${x-26}" y="${y-22}" width="34" height="16" fill="${c}"/><rect x="${x+8}" y="${y-18}" width="14" height="12" fill="${c}"/><circle cx="${x-16}" cy="${y-4}" r="5" fill="#222"/><circle cx="${x+14}" cy="${y-4}" r="5" fill="#222"/>`;},
+ soldiers(x0,n,y,style="walk",gap=26){let s="";const c=style==="white"||style==="ski"?"#eef1f1":style==="civil"?"#5b4a43":"#454631";
+   for(let i=0;i<n;i++){const x=x0+i*gap+(rnd()-.5)*8,yy=y+(rnd()-.5)*6;s+=`<g transform="translate(${x} ${yy})"><rect x="-4" y="-22" width="8" height="13" rx="2" fill="${c}"/><circle cx="0" cy="-26" r="3.6" fill="${style==="white"||style==="ski"?"#dfe3e3":"#b89a7c"}"/><path d="M-3 -9L-4 0M3 -9L4 0" stroke="${c}" stroke-width="3"/>${style==="ski"?`<path d="M-10 1L12 -1" stroke="#5a4a36" stroke-width="2"/><path d="M5 -18L10 0" stroke="#5a4a36" stroke-width="1.2"/>`:style==="civil"?"":`<path d="M4 -16L9 -32" stroke="#2c2618" stroke-width="1.6"/>`}</g>`;}
+   return `<g class="${style==="march"||style==="walk"||style==="ski"?"walk":""}">${s}</g>`;},
+ train(x,y,n=6,ore){let s=`<rect x="${x}" y="${y-26}" width="46" height="20" fill="#2d2f30"/><rect x="${x+28}" y="${y-40}" width="18" height="16" fill="#2d2f30"/><rect x="${x+6}" y="${y-36}" width="8" height="10" fill="#2d2f30"/>`;
+   for(let i=1;i<=n;i++)s+=ore?`<path d="M${x-i*44+4} ${y-22}L${x-i*44+38} ${y-22}L${x-i*44+34} ${y-6}L${x-i*44+8} ${y-6}Z" fill="#40403a"/><path d="M${x-i*44+6} ${y-22}q15 -10 30 0Z" fill="#5a3e33"/>`:`<rect x="${x-i*44+3}" y="${y-24}" width="38" height="18" fill="#5b3f30"/>`;
+   for(let i=0;i<=n;i++)s+=`<circle cx="${x-i*44+12}" cy="${y-5}" r="4" fill="#1d1d1d"/><circle cx="${x-i*44+34}" cy="${y-5}" r="4" fill="#1d1d1d"/>`;return s+P.smoke(x+10,y-40,.6);},
+ rails(x0,x1,y){let s=`<path d="M${x0} ${y}L${x1} ${y}" stroke="#3a3632" stroke-width="2.5"/>`;for(let x=x0;x<x1;x+=14)s+=`<rect x="${x}" y="${y-1}" width="6" height="4" fill="#4a3d2e"/>`;return s;},
+ bridge(x,y,w,c="#4b4f52"){let s=`<rect x="${x}" y="${y-30}" width="${w}" height="8" fill="${c}"/>`;for(let i=0;i<=w;i+=w/4)s+=`<rect x="${x+i-4}" y="${y-24}" width="8" height="34" fill="${c}"/>`;
+   s+=`<path d="M${x} ${y-30}Q${x+w/2} ${y-90} ${x+w} ${y-30}" stroke="${c}" stroke-width="3" fill="none"/>`;return s;},
+ carriage(x,y){return `<rect x="${x}" y="${y-38}" width="150" height="30" rx="4" fill="#4e3a2c"/><rect x="${x-4}" y="${y-42}" width="158" height="6" rx="3" fill="#3a2b20"/>`+[0,1,2,3,4,5].map(i=>`<rect x="${x+10+i*23}" y="${y-32}" width="14" height="12" fill="#d8c68e"/>`).join("")+`<circle cx="${x+22}" cy="${y-6}" r="6" fill="#1d1d1d"/><circle cx="${x+128}" cy="${y-6}" r="6" fill="#1d1d1d"/>`;},
+ bus(x,y){return `<g class="drive"><rect x="${x}" y="${y-34}" width="74" height="28" rx="5" fill="#eceae2"/><rect x="${x+6}" y="${y-29}" width="50" height="9" fill="#7d8b90"/><rect x="${x+60}" y="${y-29}" width="10" height="12" fill="#7d8b90"/><path d="M${x+30} ${y-17}h8v-3h4v3h8v4h-8v3h-4v-3h-8z" fill="#c8352c"/><circle cx="${x+16}" cy="${y-5}" r="6" fill="#222"/><circle cx="${x+58}" cy="${y-5}" r="6" fill="#222"/></g>`;},
+ derrick(x,y){return `<path d="M${x-16} ${y}L${x} ${y-90}L${x+16} ${y}M${x-11} ${y-30}L${x+11} ${y-30}M${x-6} ${y-60}L${x+6} ${y-60}M${x-16} ${y}L${x+11} ${y-30}M${x+16} ${y}L${x-11} ${y-30}" stroke="#2e2a24" stroke-width="2.5" fill="none"/>`;},
+ radar(x,y,h=170){let s=`<path d="M${x-14} ${y}L${x} ${y-h}L${x+14} ${y}" stroke="#454a4c" stroke-width="2.5" fill="none"/>`;for(let k=1;k<6;k++){const yy=y-h*k/6,w=14*(1-k/6);s+=`<path d="M${x-w} ${yy}L${x+w} ${yy}" stroke="#454a4c" stroke-width="1.5"/>`;}return s;},
+ fence(x0,x1,y,h=40){let s=`<path d="M${x0} ${y-h*.3}L${x1} ${y-h*.3}M${x0} ${y-h*.6}L${x1} ${y-h*.6}M${x0} ${y-h*.9}L${x1} ${y-h*.9}" stroke="#3b3a36" stroke-width="1"/>`;for(let x=x0;x<=x1;x+=40)s+=`<path d="M${x} ${y}L${x} ${y-h}l6 -6" stroke="#4a4844" stroke-width="3" fill="none"/>`;return s;},
+ tower(x,y){return `<path d="M${x-12} ${y}L${x-8} ${y-70}M${x+12} ${y}L${x+8} ${y-70}" stroke="#4a3e30" stroke-width="3"/><rect x="${x-16}" y="${y-92}" width="32" height="22" fill="#4f4334"/><path d="M${x-20} ${y-92}L${x} ${y-104}L${x+20} ${y-92}Z" fill="#3b3128"/>`;},
+ gatehouse(x,y){return `<rect x="${x-220}" y="${y-40}" width="440" height="40" fill="#6b4f42"/><path d="M${x-226} ${y-40}L${x+226} ${y-40}L${x+214} ${y-54}L${x-214} ${y-54}Z" fill="#4a3a32"/><rect x="${x-34}" y="${y-100}" width="68" height="60" fill="#6b4f42"/><path d="M${x-40} ${y-100}L${x} ${y-122}L${x+40} ${y-100}Z" fill="#4a3a32"/><path d="M${x-20} ${y}L${x-20} ${y-26}A20 20 0 0 1 ${x+20} ${y-26}L${x+20} ${y}Z" fill="#26211e"/>`;},
+ wall(x0,x1,y,h=46){return `<rect x="${x0}" y="${y-h}" width="${x1-x0}" height="${h}" fill="#8e7765"/><rect x="${x0}" y="${y-h-4}" width="${x1-x0}" height="4" fill="#5d4e43"/>`+P.fence(x0,x1,y-h,14);},
+ dome(x,y){let s=`<path d="M${x-80} ${y}L${x-80} ${y-80}L${x-40} ${y-80}L${x-40} ${y-120}L${x+40} ${y-120}L${x+40} ${y-80}L${x+80} ${y-80}L${x+80} ${y}Z" fill="#7c766c"/><path d="M${x-30} ${y-120}A30 34 0 0 1 ${x+30} ${y-120}" fill="none" stroke="#3b3934" stroke-width="3"/>`;
+   for(let k=-2;k<=2;k++)s+=`<path d="M${x+k*12} ${y-120}Q${x+k*6} ${y-152} ${x} ${y-154}" stroke="#3b3934" stroke-width="2" fill="none"/>`;for(let i=0;i<5;i++)s+=`<rect x="${x-70+i*30}" y="${y-60}" width="12" height="18" fill="#3b3934"/>`;return s;},
+ cranes(){let s="";[90,190,300,420,560,700,830,960,1090,1230].forEach((x,i)=>{const len=60+rnd()*140,c=["#c8452f","#d1a84c","#5d84a6","#5f9a4c","#e9e2cf"][i%5];
+   s+=`<g class="sway" style="animation-delay:${(rnd()*2).toFixed(1)}s"><line x1="${x}" y1="-10" x2="${x}" y2="${len}" stroke="#d8d2c0" stroke-width="1"/>`;for(let k=0;k<3;k++){const yy=len-k*26;s+=`<path d="M${x-10} ${yy}L${x} ${yy-6}L${x+10} ${yy}L${x} ${yy+4}Z" fill="${c}"/>`;}s+=`</g>`;});return s;},
+ fuji(x,y){return `<path d="M${x-260} ${y}L${x-50} ${y-170}L${x+50} ${y-170}L${x+260} ${y}Z" fill="#7d8c99"/><path d="M${x-50} ${y-170}L${x+50} ${y-170}L${x+90} ${y-138}L${x+40} ${y-148}L${x} ${y-132}L${x-40} ${y-148}L${x-90} ${y-138}Z" fill="#eef2f3"/>`;},
+ castle(x,y,c){return `<rect x="${x-26}" y="${y-140}" width="52" height="140" fill="${c}"/><path d="M${x-30} ${y-140}L${x} ${y-190}L${x+30} ${y-140}Z" fill="${c}"/><rect x="${x-80}" y="${y-50}" width="160" height="50" fill="${c}"/>`;},
+ fortress(x,y,w){let s=`<path d="M${x} ${y}L${x+20} ${y-34}L${x+w-20} ${y-34}L${x+w} ${y}Z" fill="#6f6a5c"/>`;for(let i=0;i<w/40;i++)s+=`<rect x="${x+30+i*40}" y="${y-26}" width="14" height="6" fill="#262420"/>`;return s;},
+ smoke(x,y,k=1){let s=`<g class="smoke">`;for(let i=0;i<4;i++)s+=`<circle cx="${x+i*14*k}" cy="${y-i*34*k}" r="${(14+i*9)*k}" fill="#3e403f" opacity="${.55-i*.1}"/>`;return s+`</g>`;},
+ fire(x,y,k=1){return `<ellipse cx="${x}" cy="${y-10*k}" rx="${46*k}" ry="${26*k}" fill="#e2763a" opacity=".35" class="glow"/><path d="M${x-14*k} ${y}Q${x-10*k} ${y-30*k} ${x} ${y-40*k}Q${x+6*k} ${y-22*k} ${x+14*k} ${y}Z" fill="#f09a3c" class="flicker"/>`;},
+ flash(x,y,d=0){return `<circle cx="${x}" cy="${y}" r="18" fill="#ffd27a" class="flash" style="animation-delay:${d}s"/>`;},
+ flak(n=8){let s="";for(let i=0;i<n;i++)s+=`<g class="puff" style="animation-delay:${(rnd()*4).toFixed(1)}s"><circle cx="${100+rnd()*1200}" cy="${60+rnd()*140}" r="9" fill="#2f2f2f"/></g>`;return s;},
+ search(x,y){return `<path d="M${x} ${y}L${x-30} -20L${x+30} -20Z" fill="#e8e6c8" opacity=".16" class="beam" style="transform-origin:${x}px ${y}px"/>`;},
+ splash(x,y){return `<path d="M${x-10} ${y}L${x-4} ${y-40}L${x} ${y-10}L${x+5} ${y-46}L${x+10} ${y}Z" fill="#dfe8ea" class="flash" style="animation-delay:${(rnd()*3).toFixed(1)}s"/>`;},
+ hedgehogs(x0,n,y){let s="";for(let i=0;i<n;i++){const x=x0+i*70+(rnd()-.5)*20;s+=`<g stroke="#2f3133" stroke-width="5"><line x1="${x-18}" y1="${y}" x2="${x+18}" y2="${y-34}"/><line x1="${x+18}" y1="${y}" x2="${x-18}" y2="${y-34}"/></g>`;}return s;},
+ paras(n=8){let s="";for(let i=0;i<n;i++){const x=80+rnd()*1200,d=(rnd()*10).toFixed(1);s+=`<g class="para" style="animation-delay:${-d}s"><path d="M${x-16} 0q16 -18 32 0Z" fill="#d9d4c3"/><path d="M${x-16} 0L${x} 22L${x+16} 0" stroke="#d9d4c3" fill="none" stroke-width=".8"/><rect x="${x-3}" y="22" width="6" height="10" fill="#2f3022"/></g>`;}return s;},
+ glider(x,y,rot=0){return `<g transform="translate(${x} ${y}) rotate(${rot})"><path d="M-46 -6L46 -4L40 4L-44 2Z" fill="#3d4136"/><path d="M-10 -6L-40 -10L30 -10L10 -6Z" fill="#4a4e40"/><path d="M38 -4L46 -18L50 -4Z" fill="#3d4136"/></g>`;},
+ crowd(x0,x1,y,n){let s="";const cols=["#5b4a43","#3c4a5a","#6b5a3a","#7a3e33","#454631","#8a7f6c"];for(let i=0;i<n;i++){const x=x0+rnd()*(x1-x0),yy=y+rnd()*24;s+=`<rect x="${x-4}" y="${yy-18}" width="8" height="18" rx="3" fill="${cols[i%6]}"/><circle cx="${x}" cy="${yy-21}" r="3.5" fill="#c4a487"/>`;}return s;},
+ flag(x,y,cols,h=70,vert){let s=`<line x1="${x}" y1="${y}" x2="${x}" y2="${y-h}" stroke="#2f2b26" stroke-width="2.5"/><g class="flap">`;const w=42,fh=26;
+   cols.forEach((c,i)=>s+=vert?`<rect x="${x+i*w/cols.length}" y="${y-h}" width="${w/cols.length}" height="${fh}" fill="${c}"/>`:`<rect x="${x}" y="${y-h+i*fh/cols.length}" width="${w}" height="${fh/cols.length}" fill="${c}"/>`);return s+`</g>`;},
+ sweflag(x,y){return `<line x1="${x}" y1="${y}" x2="${x}" y2="${y-70}" stroke="#2f2b26" stroke-width="2.5"/><g class="flap"><rect x="${x}" y="${y-70}" width="42" height="26" fill="#2f5d9e"/><rect x="${x+12}" y="${y-70}" width="6" height="26" fill="#e9c23a"/><rect x="${x}" y="${y-60}" width="42" height="6" fill="#e9c23a"/></g>`;},
+ tent(x,y){return `<path d="M${x-30} ${y}L${x} ${y-36}L${x+30} ${y}Z" fill="#d9d6ca"/><path d="M${x-4} ${y}L${x} ${y-20}L${x+4} ${y}Z" fill="#6c665a"/>`;},
+ mast(x,y,h=160){return P.radar(x,y,h)+`<circle cx="${x}" cy="${y-h}" r="4" fill="#ff5a3c" class="blink"/>`;},
+ portcrane(x,y){return `<path d="M${x} ${y}L${x} ${y-110}L${x+80} ${y-110}M${x} ${y-80}L${x+60} ${y-110}M${x+70} ${y-110}L${x+70} ${y-60}" stroke="#3a3f42" stroke-width="5" fill="none"/>`;},
+ lights(x0,x1,y,n){let s="";for(let i=0;i<n;i++)s+=`<circle cx="${x0+rnd()*(x1-x0)}" cy="${y+rnd()*6}" r="1.8" fill="#f2d48a" class="twinkle" style="animation-delay:${(rnd()*3).toFixed(1)}s"/>`;return s;},
+ glints(x0,x1,y,n){let s="";for(let i=0;i<n;i++){const x=x0+rnd()*(x1-x0),yy=y+rnd()*20;s+=`<path d="M${x-3} ${yy}L${x+3} ${yy-2}L${x+1} ${yy+3}Z" fill="#e9f0f2" class="twinkle" style="animation-delay:${(rnd()*3).toFixed(1)}s"/>`;}return s;},
+ inflatable(x,y){return `<g class="wobble" style="transform-origin:${x}px ${y}px">${P.tank(x,y,1.3,"#6b7044")}</g>`;},
+ carry(x,y){return P.inflatable(x,y-36)+P.soldiers(x-22,3,y,"walk",22);},
+ hut(x,y){return `<rect x="${x}" y="${y-40}" width="90" height="40" fill="#5a4a38"/><path d="M${x-8} ${y-40}L${x+45} ${y-66}L${x+98} ${y-40}Z" fill="#3e3326"/><rect x="${x+12}" y="${y-30}" width="16" height="12" fill="#f0c66a"/><rect x="${x+56}" y="${y-30}" width="16" height="12" fill="#f0c66a"/>`;},
+ ore(x,y){return `<path d="M${x} ${y}L${x+40} ${y-60}L${x+80} ${y}Z" fill="#4c3a32"/>`;}
+};
+/* item → layer */
+const LAYER={pines:"mid",trees:"mid",palm:"mid",house:"mid",ruin:"mid",skyline:"far",mountains:"far",hills:"far",cliffs:"mid",ship:"mid",boats:"mid",plane:"sky",dive:"sky",tank:"mid",tanks:"mid",truck:"mid",soldiers:"near",train:"mid",rails:"mid",bridge:"mid",carriage:"mid",bus:"near",derrick:"mid",radar:"far",fence:"mid",tower:"mid",gatehouse:"mid",wall:"mid",dome:"mid",cranes:"fx",fuji:"far",castle:"far",fortress:"mid",smoke:"mid",fire:"lit",flash:"lit",flak:"sky",search:"lit",splash:"mid",hedgehogs:"near",paras:"sky",glider:"near",crowd:"near",flag:"mid",sweflag:"mid",tent:"mid",mast:"mid",portcrane:"mid",lights:"lit",glints:"lit",inflatable:"mid",carry:"near",hut:"mid",ore:"mid"};
+
+function ground(g,sk){
+  const far=sk[2], b={far:"",mid:"",near:""};
+  const land=(c,c2)=>{b.mid+=`<rect x="-300" y="${H}" width="2200" height="300" fill="${c}"/>`;b.near+=`<path d="M-300 ${H+150}Q400 ${H+136} 900 ${H+148}T2000 ${H+142}L2000 600L-300 600Z" fill="${c2||c}"/>`;};
+  const sea=(c=GC.sea)=>{b.mid+=`<rect x="-300" y="${H}" width="2200" height="300" fill="${c}"/>`;let w="";for(let r=0;r<6;r++){const y=H+18+r*r*9;w+=`<path class="wave" d="M-300 ${y}`+Array.from({length:60},(_,i)=>` q20 -4 40 0`).join("")+`" stroke="#a9bec3" stroke-opacity="${.18+r*.05}" fill="none"/>`;}b.mid+=w;};
+  const dark=c=>sk===SKY.night?"#28313a":c;
+  switch(g){
+    case "sea": sea(); break;
+    case "coast": sea(); b.mid+=`<path d="M820 600L860 ${H+40}Q1100 ${H+20} 2000 ${H+30}L2000 600Z" fill="${GC.sand}"/>`; break;
+    case "beach": b.mid+=`<rect x="-300" y="${H}" width="2200" height="60" fill="${GC.sea}"/><rect x="-300" y="${H+56}" width="2200" height="300" fill="${GC.sand}"/>`; break;
+    case "fjord": sea(); break;
+    case "river": land(dark(GC.field),dark("#4f5a32")); b.mid+=`<path d="M-300 ${H+22}Q600 ${H+10} 1900 ${H+28}L1900 ${H+50}Q600 ${H+40} -300 ${H+48}Z" fill="#45626b"/>`; break;
+    case "ice": b.mid+=`<rect x="-300" y="${H}" width="2200" height="300" fill="${dark(GC.ice)}"/>`;for(let i=0;i<12;i++){const x=rnd()*1600;b.near+=`<path d="M${x} ${H+80+rnd()*120}l40 -6l30 10" stroke="#9fb3bb" fill="none"/>`;} break;
+    case "jungle": sea(); b.mid+=`<path d="M560 600L620 ${H+46}Q1100 ${H+30} 2000 ${H+40}L2000 600Z" fill="${GC.sand}"/>`; break;
+    default: land(dark(GC[g]||GC.field), dark(g==="snow"?"#f1f4f4":g==="steppe"?"#b39f68":g==="city"?"#59564f":"#4f5a32"));
+  }
+  return b;
+}
+function sceneSVG(spec,key){
+  seed=key; SK=SKY[spec.sky]||SKY.day;
+  const L={far:"",mid:"",sky:"",near:"",lit:"",fx:""};
+  const b=ground(spec.g,SK); L.far+=b.far; L.mid+=b.mid; L.near+=b.near;
+  spec.it.forEach(([name,...a])=>{
+    let args=a.map(v=>v==="F"?SK[2]:v==="M"?SK[3]:v);
+    const out=P[name](...args); L[LAYER[name]||"mid"]+=out;
+  });
+  let fx="";
+  if(spec.fx==="snow")for(let i=0;i<70;i++)fx+=`<circle class="fall" cx="${(rnd()*800).toFixed(0)}" cy="-10" r="${(1+rnd()*1.8).toFixed(1)}" fill="#fff" opacity=".85" style="animation-delay:${(-rnd()*8).toFixed(1)}s;animation-duration:${(5+rnd()*5).toFixed(1)}s"/>`;
+  if(spec.fx==="embers")for(let i=0;i<30;i++)fx+=`<circle class="rise" cx="${(rnd()*800).toFixed(0)}" cy="520" r="1.6" fill="#f3a246" style="animation-delay:${(-rnd()*6).toFixed(1)}s"/>`;
+  const tint=spec.sky==="night"?`<rect x="0" y="0" width="800" height="500" fill="#06101c" opacity=".38"/>`:"";
+  return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SK[0]}"/><stop offset=".62" stop-color="${SK[1]}"/></linearGradient></defs>
+    <rect width="800" height="500" fill="url(#skyg)"/>
+    <g class="pan far">${L.far}</g><g class="pan sky">${L.sky}</g><g class="pan mid">${L.mid}</g><g class="pan near">${L.near}</g>${tint}<g class="pan mid">${L.lit}</g><g>${L.fx}${fx}</g></svg>`;
+}
+/* scene per delstopp: key "event_sub" */
+const SC={
+ "0_0":{sky:"dawn",g:"coast",it:[["pines",900,1700,14,"F",50],["ship",330,H+30,"battle",1.2],["flash",470,H+4,0],["flash",230,H+2,1.3],["fortress",1000,H+44,240],["smoke",1100,H+10,1.3],["flash",1150,H+20,.6],["soldiers",1060,5,H+110,"walk",28]]},
+ "0_1":{sky:"dusk",g:"city",it:[["skyline","church",H+2,"F"],["smoke",400,H-20,1.6],["smoke",950,H-40,1.4],["plane","bomber",80,16,0],["plane","bomber",120,16,4],["plane","bomber",60,16,9],["ruin",200,H+60,160,90],["ruin",820,H+66,200,110],["fire",300,H+60,1],["fire",900,H+66,1.2]],fx:"embers"},
+ "0_2":{sky:"day",g:"field",it:[["hills",H,"F"],["house",200,H+40,80,46],["house",320,H+44,60,40],["tanks",500,4,H+60,1.1,"#4b4e36",90],["tanks",950,3,H+64,1.1,"#5a5f45",90],["soldiers",420,14,H+130,"march",30]]},
+ "1_0":{sky:"snow",g:"snow",it:[["pines",-100,1700,26,"#2c3a2c",110,true],["truck",400,H+80],["truck",520,H+84],["truck",640,H+80],["pines",-100,1700,14,"#24302a",160,true],["soldiers",200,6,H+150,"ski",40],["soldiers",900,5,H+140,"ski",44]],fx:"snow"},
+ "1_1":{sky:"snow",g:"snow",it:[["pines",-100,1700,22,"#2c3a2c",110,true],["tent",500,H+90],["tent",600,H+96],["sweflag",680,H+96],["soldiers",250,6,H+150,"ski",40],["soldiers",900,4,H+140,"white",30]],fx:"snow"},
+ "1_2":{sky:"grey",g:"snow",it:[["castle",650,H+4,"F"],["skyline","church",H+6,"F"],["house",200,H+70,90,50,"#7d7466"],["house",340,H+74,70,44,"#857b6c"],["house",900,H+72,90,50,"#7d7466"],["smoke",700,H-20,1.2],["soldiers",260,8,H+150,"civil",36]],fx:"snow"},
+ "2_0":{sky:"night",g:"sea",it:[["hills",H,"#141a22"],["lights",-100,1700,H-4,40],["house",900,H+2,80,40,"#2a2c30",true],["boats",150,800,H+40,7],["boats",300,1200,H+110,6]]},
+ "2_1":{sky:"dawn",g:"fjord",it:[["mountains",H+2,"F",false,130],["fortress",900,H+30,220],["flash",960,H+6,0],["flash",1060,H+8,.8],["ship",450,H+60,"cruiser",1.3,true],["fire",430,H+40,1],["splash",320,H+70],["splash",600,H+76]]},
+ "2_2":{sky:"snow",g:"fjord",it:[["mountains",H+2,"#7f8a90",true,190],["portcrane",820,H+30],["portcrane",950,H+30],["ore",1050,H+30],["train",1300,H+32,7,true],["ship",380,H+70,"battle",1,true],["ship",650,H+120,"tanker",.9],["flash",420,H+30,.5]],fx:"snow"},
+ "2_3":{sky:"snow",g:"snow",it:[["mountains",H+2,"#8b969c",true,140],["house",300,H+60,90,46,"#8a4a3a"],["rails",-300,1900,H+90],["train",1100,H+90,9],["pines",-100,1700,12,"#2c3a2c",80,true]],fx:"snow"},
+ "3_0":{sky:"day",g:"river",it:[["pines",-200,1800,30,"#2f3d28",120],["bridge",500,H+46,360,"#55524a"],["tanks",560,4,H+16,.8,"#4b4e36",80],["plane","fighter",60,9,0],["plane","fighter",90,9,3],["smoke",1100,H+20,1]]},
+ "3_1":{sky:"grey",g:"beach",it:[["ship",300,H+6,"battle",.8],["ship",900,H+4,"cruiser",.7,true],["boats",-50,1500,H+24,16],["smoke",1200,H-10,1.8],["soldiers",200,22,H+150,"walk",40],["soldiers",500,14,H+120,"walk",40]]},
+ "3_2":{sky:"day",g:"field",it:[["trees",-200,1800,22,"#3d4f2c"],["rails",-300,1900,H+76],["carriage",560,H+76],["soldiers",400,4,H+150,"walk",30],["soldiers",820,4,H+150,"walk",30]]},
+ "4_0":{sky:"day",g:"sea",it:[["cliffs",700,1700,H+4],["ship",300,H+40,"tanker",.8],["ship",520,H+60,"tanker",.8],["plane","fighter",70,8,0],["plane","fighter",100,8,2],["plane","bomber",50,14,5],["flak",8]]},
+ "4_1":{sky:"day",g:"field",it:[["radar",900,H+4,180],["radar",960,H+4,180],["radar",1020,H+4,180],["hills",H,"F"],["house",200,H+40,140,50,"#6d6a5c"],["plane","fighter",80,10,0],["plane","fighter",110,10,5],["soldiers",500,5,H+130,"walk",40]]},
+ "4_2":{sky:"night",g:"city",it:[["skyline","london",H+10,"#1a2030"],["search",300,H+10],["search",900,H+10],["search",1250,H+10],["plane","bomber",70,18,0],["plane","bomber",100,18,7],["fire",400,H+10,1.4],["fire",1000,H+12,1.2],["flak",10],["soldiers",400,10,H+150,"civil",34]],fx:"embers"},
+ "5_0":{sky:"dawn",g:"field",it:[["fortress",300,H+40,500],["flash",420,H+14,0],["flash",620,H+16,.7],["flash",750,H+10,1.4],["tanks",900,5,H+70,1,"#4b4e36",90],["plane","bomber",60,13,2]]},
+ "5_1":{sky:"night",g:"ice",it:[["skyline","leningrad",H+2,"#151b26"],["flak",6],["truck",300,H+90,"#3f4334"],["truck",420,H+96,"#3f4334"],["truck",540,H+92,"#3f4334"],["truck",700,H+100,"#3f4334"],["truck",900,H+96,"#3f4334"]],fx:"snow"},
+ "5_2":{sky:"snow",g:"snow",it:[["skyline","moscow",H+4,"F"],["pines",-100,1700,16,"#2c3a2c",100,true],["tanks",300,3,H+80,1,"#7f867a",110],["soldiers",200,10,H+150,"ski",44]],fx:"snow"},
+ "6_0":{sky:"grey",g:"coast",it:[["skyline","pagoda",H+4,"F"],["ship",250,H+50,"tanker",1],["ship",600,H+90,"tanker",.9],["portcrane",950,H+40],["smoke",1100,H-10,1]]},
+ "6_1":{sky:"dawn",g:"sea",it:[["hills",H,"#4a5a48"],["palm",1150,H+20],["palm",1220,H+30],["ship",300,H+40,"battle",1.1,true],["ship",650,H+70,"battle",1.1,true],["fire",660,H+50,1.2],["plane","fighter",60,8,0],["plane","fighter",90,8,3],["plane","bomber",50,12,6],["flak",8]]},
+ "6_2":{sky:"tropic",g:"coast",it:[["skyline","generic",H+4,"F"],["portcrane",300,H+40],["palm",1000,H+50],["palm",1100,H+60],["palm",1300,H+50],["smoke",500,H-10,1.6],["soldiers",950,8,H+150,"walk",36]]},
+ "7_0":{sky:"night",g:"city",it:[["house",-50,H+70,120,90,"#3a3530",true],["house",100,H+70,100,80,"#433c35"],["house",400,H+66,140,96,"#3a3530",true],["ruin",600,H+70,140,100,"#3d3732"],["house",780,H+70,120,80,"#433c35",true],["fire",660,H+70,1.3],["glints",-50,1300,H+90,40],["smoke",680,H-10,1.2]],fx:"embers"},
+ "7_1":{sky:"grey",g:"city",it:[["skyline","generic",H+4,"F"],["house",50,H+50,120,90,"#7a6f62"],["house",250,H+50,100,80,"#6f655a"],["house",900,H+50,130,90,"#7a6f62"],["wall",-300,1900,H+110,50],["smoke",500,H-20,1]]},
+ "7_2":{sky:"grey",g:"field",it:[["gatehouse",650,H+40],["fence",-300,1900,H+56,44],["tower",200,H+56],["tower",1150,H+56],["rails",-300,1900,H+120]]},
+ "7_3":{sky:"dusk",g:"river",it:[["skyline","budapest",H+2,"F"],["bridge",200,H+60,500,"#3a3a40"],["house",900,H+90,100,50,"#5b4f45",true],["soldiers",950,5,H+150,"civil",30]]},
+ "8_0":{sky:"day",g:"city",it:[["fuji",1000,H+4],["skyline","tokyo",H+6,"F"],["plane","bomber",80,11,0],["plane","bomber",120,11,3],["flak",8],["smoke",400,H+20,1]]},
+ "8_1":{sky:"night",g:"jungle",it:[["palm",820,H+40],["palm",1300,H+46],["mast",960,H+40,170],["hut",1040,H+46],["lights",820,1600,H+30,14]]},
+ "8_2":{sky:"day",g:"sea",it:[["ship",300,H+40,"carrier",1,true],["ship",800,H+90,"carrier",1.1,true],["fire",820,H+70,1.3],["dive",700,120],["dive",420,90],["plane","fighter",60,8,0],["flak",6]]},
+ "8_3":{sky:"tropic",g:"jungle",it:[["mountains",H+2,"#4b6a48",false,90],["ship",250,H+30,"battle",.6],["boats",100,600,H+60,8],["palm",900,H+50],["palm",1000,H+60],["palm",1150,H+46],["palm",1300,H+58],["soldiers",850,10,H+150,"walk",34]]},
+ "9_0":{sky:"day",g:"steppe",it:[["mountains",H+2,"#8a95a0",true,170],["derrick",300,H+40],["derrick",380,H+44],["derrick",470,H+40],["tanks",700,4,H+80,1,"#5a5e40",90],["truck",1150,H+100]]},
+ "9_1":{sky:"grey",g:"city",it:[["ruin",-100,H+40,180,120],["ruin",150,H+44,140,90],["ruin",450,H+40,220,130],["ruin",780,H+46,160,100],["ruin",1050,H+40,200,120],["smoke",300,H-20,1.4],["smoke",900,H-30,1.6],["fire",560,H+40,1],["flash",700,H-40,.4],["flash",1100,H-10,1.6],["soldiers",350,5,H+150,"walk",30]]},
+ "9_2":{sky:"snow",g:"snow",it:[["hills",H,"#c9d1d3"],["tanks",100,9,H+80,1.1,"#7f867a",130],["soldiers",200,14,H+150,"ski",50]],fx:"snow"},
+ "9_3":{sky:"day",g:"steppe",it:[["hills",H,"#8f8458"],["tanks",-50,8,H+50,.8,"#5a5e40",110],["tanks",100,7,H+110,1.2,"#4b4e36",140],["smoke",500,H+20,1.4],["smoke",1100,H+30,1.2],["plane","fighter",60,9,0],["plane","bomber",90,14,4]]},
+ "10_0":{sky:"day",g:"field",it:[["hills",H,"F"],["mast",1100,H+40,150],["inflatable",300,H+70],["inflatable",470,H+74],["inflatable",640,H+70],["carry",900,H+150]]},
+ "10_1":{sky:"night",g:"river",it:[["trees",-200,1800,18,"#1d2618"],["bridge",500,H+48,260,"#3a3c40"],["glider",300,H+120,-4],["glider",900,H+130,6],["paras",10],["soldiers",350,6,H+160,"walk",30]]},
+ "10_2":{sky:"dawn",g:"beach",it:[["ship",200,H+4,"battle",.7],["ship",700,H+2,"battle",.6],["hedgehogs",100,16,H+90],["smoke",900,H+10,1.2],["soldiers",200,14,H+160,"walk",44]]},
+ "10_3":{sky:"day",g:"city",it:[["skyline","paris",H+6,"F"],["flag",300,H+60,["#244a94","#f2efe6","#c8352c"],90,true],["flag",1000,H+60,["#244a94","#f2efe6","#c8352c"],90,true],["tanks",450,3,H+90,1,"#5a6046",110],["crowd",-100,1600,H+120,90]]},
+ "11_0":{sky:"snow",g:"snow",it:[["house",500,H+50,80,46,"#7d7466"],["house",620,H+56,70,40,"#857b6c"],["pines",-100,1700,20,"#2c3a2c",120,true],["soldiers",200,6,H+150,"walk",50],["flash",900,H-20,.5]],fx:"snow"},
+ "11_1":{sky:"grey",g:"field",it:[["trees",-200,1800,14,"#4b5a38"],["fence",900,1700,H+30,30],["bus",200,H+120],["bus",420,H+124],["bus",640,H+120],["bus",860,H+126]]},
+ "11_2":{sky:"grey",g:"city",it:[["skyline","berlin",H+6,"F"],["ruin",-100,H+60,200,110],["ruin",950,H+64,220,120],["smoke",400,H-30,1.6],["fire",1000,H+64,1],["tanks",300,3,H+110,1.1,"#4b4e36",120]],fx:"embers"},
+ "11_3":{sky:"day",g:"city",it:[["skyline","generic",H+6,"F"],["house",450,H+50,240,80,"#8a7f6c"],["flag",420,H+50,["#c8352c"],100],["flag",720,H+50,["#244a94","#f2efe6","#c8352c"],100,true],["crowd",-100,1600,H+120,80]]},
+ "12_0":{sky:"day",g:"sea",it:[["hills",H,"#5a6a4c"],["ship",300,H+50,"battle",1],["ship",800,H+90,"cruiser",1.1],["dive",650,140],["flak",12],["splash",500,H+80],["fire",820,H+70,.9]]},
+ "12_1":{sky:"dusk",g:"river",it:[["hills",H,"#4a4252"],["dome",650,H+44],["cranes"]]},
+ "12_2":{sky:"grey",g:"city",it:[["hills",H,"#5a5d58"],["ruin",100,H+60,180,70],["ruin",600,H+62,220,80],["ruin",1000,H+60,180,60],["smoke",700,H-40,1.2]]},
+ "12_3":{sky:"day",g:"sea",it:[["fuji",900,H+2],["ship",650,H+80,"battle",1.6],["ship",200,H+40,"battle",.6],["ship",1200,H+46,"carrier",.6],["plane","fighter",50,10,0],["plane","fighter",70,10,1],["plane","fighter",90,10,2]]}
+};
+
+/* ---------- game ---------- */
+let mode="light", cur=-1, sub=-1, moving=false;
+const done=EV.map(()=>false);
+let subDone=DEEP.map(a=>a.map(()=>false));
+let firstTry={}, asked=0;
+const dock=document.getElementById("dock"), clock=document.getElementById("clock"), route=document.getElementById("route");
+const subsG=document.getElementById("subs");
+const L="ABCD";
+const stage=document.getElementById("stage"),stageArt=document.getElementById("stageArt"),stageCap=document.getElementById("stageCap"),mapBtn=document.getElementById("mapBtn"),mapEl=document.getElementById("map");
+let stageTimer=null;
+function showScene(key,cap,date){
+  const spec=SC[key]; if(!spec){hideScene();return;}
+  clearTimeout(stageTimer);
+  stageArt.innerHTML=sceneSVG(spec,key.split("_").reduce((a,b)=>a*31+(+b)+7,11));
+  stageCap.innerHTML=`<small>${date}</small>${cap}`;
+  stage.hidden=false; stage.classList.remove("peek"); mapBtn.textContent="Visa kartan"; mapEl.classList.add("scene-on");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>stage.classList.add("in")));
+}
+function hideScene(){
+  stage.classList.remove("in"); mapEl.classList.remove("scene-on");
+  stageTimer=setTimeout(()=>{stage.hidden=true;stageArt.innerHTML="";},900);
+}
+mapBtn.onclick=()=>{const p=stage.classList.toggle("peek");mapBtn.textContent=p?"Visa platsen":"Visa kartan";mapEl.classList.toggle("scene-on",!p);};
+
+function drawSubs(){
+  subsG.innerHTML="";
+  if(mode!=="deep"||cur<0||cur>=EV.length) return;
+  DEEP[cur].forEach((s,j)=>{const [x,y]=proj(s.lon,s.lat);s.px=x;s.py=y;
+    const g=document.createElementNS(NSV,"g");g.dataset.x=x;g.dataset.y=y;
+    g.setAttribute("class","mk sub"+(subDone[cur][j]?" done":"")+(j===sub?" now":""));
+    g.innerHTML=`<circle class="pulse" r="9"/><circle class="ring" r="9"/><text text-anchor="middle" y="4" style="font-size:12px">${L[j]}</text>`;
+    subsG.appendChild(g);});
+}
+function refresh(){
+  marks.childNodes.forEach(g=>{const i=+g.dataset.i;g.setAttribute("class","mk"+(done[i]?" done":"")+(i===cur&&sub<0?" now":"")+(i===cur&&sub>=0?" open":""));});
+  const hl=cur>=0&&cur<EV.length?EV[cur].hl:[];
+  land.querySelectorAll(".country").forEach(p=>p.classList.toggle("hl",hl.includes(p.dataset.id)));
+  const reached=EV.filter((e,i)=>i<=cur||done[i]);
+  route.setAttribute("d",reached.length>1?"M"+reached.map(e=>e.px.toFixed(1)+" "+e.py.toFixed(1)).join("L"):"");
+  const y=cur>=EV.length?Y1:cur>=0?EV[cur].y:Y0;
+  tlfill.style.width=(frac(y)*100)+"%";
+  drawSubs(); apply();
+}
+function target(e){return {x:e.px,y:e.py,w:e.zoom}}
+function intro(){
+  cur=-1; sub=-1; hideScene(); refresh(); labels.innerHTML="";
+  dock.innerHTML=`<article class="card">
+    <div class="stamp"><span>Uppdrag · 1939–1945</span><b>Kartrummet</b></div>
+    <h2>Andra världskriget, steg för steg</h2>
+    <p>Du följer kriget från första dagen i Polen till Japans kapitulation. Kartan flyger till varje händelse i tidsordning.</p>
+    <p>Välj hur du vill spela:</p>
+    <div class="modes">
+      <button class="mode" id="mLight"><b>Lättläst</b><span>${EV.length} händelser, en kort rapport och en fråga vid varje. Ca 20 minuter.</span></button>
+      <button class="mode" id="mDeep"><b>Fördjupning</b><span>Varje händelse delas upp i 3–4 delstopp med egna rapporter och frågor. Ca 60 minuter.</span></button>
+    </div>
+    ${hasLand?"":`<p class="note">Kartbilden kunde inte laddas, men spelet fungerar ändå.</p>`}
+  </article>`;
+  document.getElementById("mLight").onclick=()=>{mode="light";goTo(0);};
+  document.getElementById("mDeep").onclick=()=>{mode="deep";goTo(0);};
+}
+function flying(stamp,title){
+  dock.innerHTML=`<article class="card"><div class="stamp"><span>På väg</span><b>${stamp}</b></div><h2>${title}</h2><p>Kartan flyger dit…</p></article>`;
+}
+function goTo(i){
+  moving=true; cur=i; sub=-1; hideScene(); refresh(); labels.innerHTML="";
+  const e=EV[i]; flying(e.d,e.place);
+  fly(target(e),()=>{moving=false;setLabels(e);apply();render();});
+}
+function goSub(j){
+  moving=true; sub=j; hideScene(); refresh(); labels.innerHTML="";
+  const s=DEEP[cur][j]; flying(s.d,s.place);
+  setTimeout(()=>fly({x:s.px,y:s.py,w:s.z||EV[cur].zoom*0.6},()=>{setLabels({place:s.place,lon:s.lon,lat:s.lat});apply();
+    fly({x:s.px,y:s.py,w:(s.z||EV[cur].zoom*0.6)*0.35},()=>{moving=false;showScene(cur+"_"+j,s.place,s.d);render();});}),stage.hidden?0:500);
+}
+function quizHTML(item,key){
+  const solved=firstTry[key]!==undefined&&item._ok;
+  return `<div class="quiz"><p class="q">${item.q}</p><div class="opts">${item.opts.map((o,k)=>`<button class="opt ${solved&&k===item.ok?"right":""}" data-k="${k}" ${solved?"disabled":""}>${o}</button>`).join("")}</div>
+    <p class="fb ${solved?"ok":""}" id="fb">${solved?`<b>Rätt!</b> ${item.why}`:""}</p></div>`;
+}
+function render(){
+  const i=cur, e=EV[i];
+  const dd="";
+  if(mode==="light"){
+    clock.innerHTML=`<small>${e.place}</small>${e.d}`;
+    const solved=done[i];
+    dock.innerHTML=`<article class="card">
+      <div class="stamp"><span>${e.d} · ${e.place}</span><b>Händelse ${i+1}/${EV.length}</b></div>
+      <h2>${e.title}</h2>${e.facts.map(f=>`<p>${f}</p>`).join("")}${e.dday?dd:""}
+      ${quizHTML(e,"e"+i)}
+      <div class="foot"><span>${Math.floor(e.y)}</span><button class="go ${solved?"ready":""}" id="next" ${solved?"":"disabled"}>${i<EV.length-1?"Nästa händelse →":"Krigets slut →"}</button></div>
+    </article>`;
+    wire(e,"e"+i,()=>{done[i]=true;});
+  } else if(sub<0){
+    clock.innerHTML=`<small>${e.place}</small>${e.d}`;
+    const parts=DEEP[i];
+    dock.innerHTML=`<article class="card">
+      <div class="stamp"><span>${e.d}</span><b>Händelse ${i+1}/${EV.length}</b></div>
+      <h2>${e.title}</h2><p>${e.facts[0]}</p>
+      <p class="note">Händelsen har ${parts.length} delstopp: ${parts.map((p,j)=>`<b>${L[j]}</b> ${p.place}`).join(", ")}.</p>
+      <div class="foot"><span>Fördjupning</span><button class="go ready" id="next">Gå in i händelsen →</button></div>
+    </article>`;
+    document.getElementById("next").onclick=()=>{if(!moving)goSub(0);};
+  } else {
+    const s=DEEP[i][sub], n=DEEP[i].length, last=sub===n-1;
+    clock.innerHTML=`<small>${s.place}</small>${s.d}`;
+    const solved=subDone[i][sub];
+    dock.innerHTML=`<article class="card">
+      <div class="stamp"><span>${s.d} · ${s.place}</span><b>${i+1}${L[sub]} · ${e.title}</b></div>
+      <h2>${s.title}</h2>${s.facts.map(f=>`<p>${f}</p>`).join("")}${e.dday&&s.place==="Omaha Beach"?dd:""}
+      ${quizHTML(s,"s"+i+"_"+sub)}
+      <div class="foot"><span>Delstopp ${sub+1} av ${n}</span><button class="go ${solved?"ready":""}" id="next" ${solved?"":"disabled"}>${last?(i<EV.length-1?"Nästa händelse →":"Krigets slut →"):"Nästa delstopp →"}</button></div>
+    </article>`;
+    wire(s,"s"+i+"_"+sub,()=>{subDone[i][sub]=true;if(subDone[i].every(Boolean))done[i]=true;});
+  }
+  dock.scrollTop=0;
+}
+function wire(item,key,onOk){
+  dock.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    const k=+b.dataset.k, fb=document.getElementById("fb");
+    if(firstTry[key]===undefined){firstTry[key]=(k===item.ok);asked++;}
+    if(k===item.ok){
+      onOk(); item._ok=true; refresh();
+      dock.querySelectorAll(".opt").forEach(x=>x.disabled=true); b.classList.add("right");
+      fb.className="fb ok"; fb.innerHTML=`<b>Rätt!</b> ${item.why}`;
+      const n=document.getElementById("next"); n.disabled=false; n.classList.add("ready"); n.focus({preventScroll:true});
+    } else {
+      b.classList.add("wrong"); b.disabled=true;
+      fb.className="fb no"; fb.innerHTML=`<b>Inte riktigt.</b> Läs rapporten igen och försök på nytt.`;
+    }
+  });
+  document.getElementById("next").onclick=next;
+}
+function next(){
+  if(moving||cur<0||cur>=EV.length) return;
+  if(mode==="deep"){
+    if(sub<0){goSub(0);return;}
+    if(!subDone[cur][sub]) return;
+    if(sub<DEEP[cur].length-1){goSub(sub+1);return;}
+  } else if(!done[cur]) return;
+  if(cur<EV.length-1) goTo(cur+1); else finish();
+}
+function finish(){
+  moving=true; cur=EV.length; sub=-1; hideScene(); refresh(); labels.innerHTML="";
+  clock.innerHTML=`<small>Andra världskriget</small>1939–1945`;
+  fly({...FULL},()=>{
+    moving=false;
+    const score=Object.values(firstTry).filter(Boolean).length;
+    dock.innerHTML=`<article class="card">
+      <div class="stamp"><span>Hösten 1945</span><b>Slutrapport</b></div>
+      <h2>${END.title}</h2>${END.facts.map(f=>`<p>${f}</p>`).join("")}
+      <p class="discuss">${END.discuss}</p>
+      <div class="foot"><span class="score">${score} av ${asked} rätt på första försöket</span><button class="go" id="again">Spela igen</button></div>
+    </article>`;
+    document.getElementById("again").onclick=()=>{
+      done.fill(false); subDone=DEEP.map(a=>a.map(()=>false)); firstTry={}; asked=0;
+      EV.forEach(e=>delete e._ok); DEEP.flat().forEach(s=>delete s._ok); intro();};
+  });
+}
+addEventListener("keydown",e=>{if(e.key==="ArrowRight")next();});
+
+apply(); intro();
+</script>
+
+</body></html>
