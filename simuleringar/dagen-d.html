@@ -1,0 +1,357 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Dagen D i Normandie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600&display=swap">
+<style>
+/* Layout: one panoramic battlefield the camera walks through, with a field-report card docked below (phone) or to the right (desktop). Single dark wartime look by choice. */
+:root{
+  --night:#1b2024; --slate:#3a444b; --paper:#ece5d2; --paper-ink:#2a2822; --muted:#6c675a;
+  --khaki:#7a7848; --signal:#c8452f; --clear:#5f9a4c; --brass:#d1a84c;
+  --f-display:"Special Elite","Courier New",monospace;
+  --f-body:"Barlow",system-ui,sans-serif;
+  --f-label:"Barlow Condensed","Arial Narrow",sans-serif;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.app{height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.scene{position:relative;flex:1 1 52%;min-height:240px;background:linear-gradient(#59646b 0%,#8d9497 45%,#a9aca6 62%,#7d8784 100%)}
+.scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hud{position:absolute;top:12px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;pointer-events:none;z-index:2}
+.clock{font-family:var(--f-display);font-size:1.05rem;background:rgba(27,32,36,.78);padding:6px 10px;border-radius:3px;line-height:1.2}
+.clock small{display:block;font-family:var(--f-label);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#c9c3b2}
+.steps{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;background:rgba(27,32,36,.78);padding:7px 9px;border-radius:3px}
+.dot{width:22px;height:22px;border-radius:50%;border:2.5px solid var(--signal);display:grid;place-items:center;font-family:var(--f-label);font-size:.75rem;color:var(--paper)}
+.dot.done{background:var(--clear);border-color:var(--clear)}
+.dot.now{box-shadow:0 0 0 3px rgba(209,168,76,.75)}
+.dock{flex:0 1 auto;max-height:52%;overflow:auto;padding:14px 16px 18px;background:var(--night)}
+.card{background:var(--paper);color:var(--paper-ink);border-radius:3px;padding:18px 18px 16px;box-shadow:0 6px 24px rgba(0,0,0,.35);border-top:6px double var(--khaki);max-width:62ch;margin-inline:auto;animation:pop .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{transform:translateY(14px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.stamp{font-family:var(--f-label);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.stamp b{color:var(--signal);font-weight:600}
+.card h2{font-family:var(--f-display);font-weight:400;font-size:1.5rem;line-height:1.15;margin:.35em 0 .5em;text-wrap:balance}
+.card p{margin:0 0 .7em}
+.quiz{margin-top:14px;padding-top:12px;border-top:1px dashed #b7ae95}
+.quiz .q{font-weight:600}
+.opts{display:grid;gap:8px;margin-top:8px}
+.opt{font:inherit;text-align:left;padding:10px 12px;border-radius:3px;border:1.5px solid #b7ae95;background:#f6f1e3;color:var(--paper-ink);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--paper-ink)}
+.opt:focus-visible,.go:focus-visible,.marker:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.opt.wrong{border-color:var(--signal);background:#f3d9d2;text-decoration:line-through}
+.opt.right{border-color:var(--clear);background:#dcebd2;font-weight:600}
+.fb{margin-top:10px;font-size:.95rem}
+.fb.ok b{color:#3f7a30}.fb.no b{color:var(--signal)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.foot span{font-family:var(--f-label);font-size:.85rem;color:var(--muted);letter-spacing:.05em}
+.go{font-family:var(--f-label);font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 18px;border-radius:3px;border:0;background:var(--paper-ink);color:var(--paper);cursor:pointer}
+.go:disabled{opacity:.35;cursor:not-allowed}
+.go.ready{background:var(--signal);animation:nudge 1.2s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(4px)}}
+.discuss{background:#e1d8be;padding:10px 12px;border-radius:3px;font-style:italic}
+.score{font-family:var(--f-display);font-size:1.15rem}
+/* scene bits */
+.marker{cursor:pointer}
+.marker .ring{fill:rgba(200,69,47,.25);stroke:var(--signal);stroke-width:4}
+.marker.done .ring{fill:var(--clear);stroke:#e8f0de}
+.marker .pulse{fill:none;stroke:var(--signal);stroke-width:3;transform-box:fill-box;transform-origin:center;animation:pulse 1.8s ease-out infinite}
+.marker.done .pulse{display:none}
+@keyframes pulse{from{transform:scale(1);opacity:.9}to{transform:scale(2.3);opacity:0}}
+.wave{animation:wave 3.5s linear infinite}
+@keyframes wave{to{transform:translateX(-80px)}}
+.puff{transform-box:fill-box;transform-origin:center bottom;animation:puff 4s ease-out infinite;opacity:0}
+@keyframes puff{0%{transform:scale(.2);opacity:0}8%{opacity:.85}60%{transform:scale(1.4) translateY(-20px);opacity:0}100%{opacity:0}}
+.leg{transform-box:fill-box;transform-origin:top center}
+.walking .leg.l{animation:stepA .42s ease-in-out infinite alternate}
+.walking .leg.r{animation:stepA .42s ease-in-out infinite alternate-reverse}
+@keyframes stepA{from{transform:rotate(-22deg)}to{transform:rotate(22deg)}}
+.smoke{animation:drift 9s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(30px,-12px)}}
+.flag{transform-box:fill-box;transform-origin:left center;animation:flap 1.6s ease-in-out infinite alternate}
+@keyframes flap{to{transform:skewY(-4deg) scaleX(.94)}}
+@media (min-width:860px){
+  .dock{position:absolute;right:20px;top:72px;bottom:20px;width:400px;max-height:none;background:none;padding:0}
+  .scene{flex:1 1 auto}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+</style>
+
+<div class="app">
+  <div class="scene" id="scene">
+    <svg id="svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" aria-label="Normandies kust den 6 juni 1944">
+      <g id="far"></g>
+      <g id="world"></g>
+    </svg>
+    <div class="hud">
+      <div class="clock" id="clock"><small>6 juni 1944</small>Kl. 05:30</div>
+      <div class="steps" id="steps" aria-label="Framsteg"></div>
+    </div>
+  </div>
+  <div class="dock" id="dock" aria-live="polite"></div>
+</div>
+
+<script>
+const STAGES=[
+ {x:330,label:"Båten",time:"05:30",place:"Engelska kanalen",title:"Ombord på landstigningsbåten",
+  facts:["Det är den 6 juni 1944. Du sitter i en liten landstigningsbåt på väg mot Normandie i norra Frankrike. Invasionen heter Operation Overlord och leds av den amerikanske generalen Dwight D. Eisenhower.",
+         "Nästan 7 000 fartyg och båtar korsar Engelska kanalen samtidigt. Det är den största landstigningen från havet i historien.",
+         "Anfallet var planerat till den 5 juni men sköts upp ett dygn på grund av storm."],
+  q:"Vad hette den allierade invasionen av Normandie?",opts:["Operation Overlord","Operation Barbarossa","Operation Market Garden"],ok:0,
+  why:"Barbarossa var Tysklands anfall mot Sovjetunionen 1941. Market Garden var ett allierat anfall i Nederländerna i september 1944."},
+ {x:1100,label:"Hindren",time:"06:30",place:"Vattenbrynet",title:"Rampen fälls",
+  facts:["Rampen fälls och du hoppar ut i vatten som går upp till bröstet. Varje båt har plats för ungefär 30 soldater.",
+         "I vattnet står tyska hinder: kryss av stålbalkar som kallas ”tjeckiska igelkottar”, trästolpar och minor. De ska slita upp båtarnas botten.",
+         "De allierade landsteg vid lågvatten. Då syntes hindren, men soldaterna fick springa en längre sträcka över öppen strand."],
+  q:"Varför landsteg man vid lågvatten?",opts:["För att kunna se hindren och minorna","För att vattnet var varmare då","För att tyskarna inte vaktade på morgonen"],ok:0,
+  why:"Vid högvatten döljs hindren under ytan, och båtarna hade kört rakt in i dem."},
+ {x:1750,label:"Stranden",time:"06:45",place:"Omaha Beach",title:"Över den öppna stranden",
+  facts:["Invasionen sker på fem stränder med kodnamn: Utah och Omaha (USA), Gold och Sword (Storbritannien) och Juno (Kanada).",
+         "Omaha blir den svåraste. Bombplanen som skulle slå ut försvaret fällde sina bomber för långt in i land på grund av moln, och många stridsvagnar sjönk innan de nådde stranden.",
+         "Bara på Omaha räknar man med omkring 2 400 amerikanska förluster under dagen, alltså döda, sårade och saknade."],
+  q:"Vilket land ansvarade för stranden Juno?",opts:["Frankrike","Kanada","USA"],ok:1,
+  why:"Kanadensiska trupper landsteg på Juno. Franska soldater deltog också, men i mindre förband."},
+ {x:2280,label:"Vallen",time:"08:00",place:"Strandvallen",title:"Skydd vid strandvallen",
+  facts:["Du når en låg vall av stenar och taggtråd. Här söker soldaterna skydd medan de letar efter en väg uppför sluttningen.",
+         "Tyskarna hade byggt Atlantvallen, en försvarslinje längs kusten från Norge ner till Spanien. Den bestod av bunkrar, kanoner, minfält och hinder.",
+         "Fältmarskalk Erwin Rommel fick ansvar för att förstärka försvaret i Normandie. Under hans ledning lades miljontals minor ut längs kusten."],
+  q:"Vad kallades Tysklands försvarslinje längs Europas västkust?",opts:["Maginotlinjen","Västfronten","Atlantvallen"],ok:2,
+  why:"Maginotlinjen var Frankrikes försvarslinje mot Tyskland, byggd på 1930-talet."},
+ {x:2780,label:"Bunkern",time:"09:30",place:"Krönet",title:"Bunkern på höjden",
+  facts:["Från betongbunkrar på höjden skjuter tyska soldater med kulsprutor och kanoner ner mot stranden.",
+         "Små grupper tar sig upp genom raviner och smala stigar och anfaller bunkrarna från sidan. Ingenjörssoldater spränger hinder och taggtråd.",
+         "Väster om Omaha klättrade amerikanska rangers uppför den ungefär 30 meter höga klippan Pointe du Hoc med rep och stegar för att slå ut tyska kanoner."],
+  q:"Hur hög var klippan vid Pointe du Hoc ungefär?",opts:["3 meter","30 meter","300 meter"],ok:1,
+  why:"Ungefär som ett tiovåningshus. Rangers sköt upp rep med raketer och klättrade under beskjutning."},
+ {x:3420,label:"Byn",time:"14:00",place:"Inåt land",title:"Byn bakom stränderna",
+  facts:["Du möter fallskärmsjägare. Natten innan hoppade omkring 24 000 amerikanska, brittiska och kanadensiska soldater med fallskärm eller landade med glidflygplan bakom stränderna.",
+         "De skulle ta broar och vägkorsningar så att tyska förstärkningar inte kunde nå kusten. Byn Sainte-Mère-Église blev en av de första som befriades.",
+         "Tyskarna väntade sig huvudanfallet vid Calais, där Engelska kanalen är som smalast. De allierade lurade dem med en påhittad armé, falska radiomeddelanden och uppblåsbara stridsvagnar."],
+  q:"Var trodde tyskarna att huvudanfallet skulle komma?",opts:["I Bretagne","Vid Calais","Vid Amsterdam"],ok:1,
+  why:"Bluffen kallades Operation Fortitude. Den fick tyskarna att hålla kvar stora styrkor vid Calais i flera veckor."},
+ {x:3990,label:"Målet",time:"21:00",place:"Brohuvudet",title:"Området är intaget",
+  facts:["Vid kvällen har de allierade tagit sig i land på alla fem stränderna. Omkring 156 000 soldater kom i land under dagen, från havet och från luften.",
+         "Priset var högt: omkring 10 000 allierade soldater dödades, sårades eller saknades. Även många tyska soldater och franska civila dog.",
+         "Brohuvudet blev starten på befrielsen av Västeuropa. Paris befriades i augusti 1944, och Tyskland kapitulerade den 8 maj 1945."],
+  discuss:"Diskutera: Varför kallas Dagen D ofta för en vändpunkt i andra världskriget?"}
+];
+
+/* ---------- terrain ---------- */
+const lerp=(a,b,t)=>a+(b-a)*t, clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const smooth=t=>t*t*(3-2*t);
+function G(x){
+  if(x<600) return 520;
+  if(x<1450) return lerp(520,440,(x-600)/850);
+  if(x<2050) return lerp(440,428,(x-1450)/600);
+  if(x<2150) return lerp(428,385,smooth((x-2050)/100));
+  if(x<2500) return lerp(385,290,smooth((x-2150)/350));
+  return 290+6*Math.sin(x/140);
+}
+const SEA=440;
+function soldierY(x){ return x<520 ? 420 : G(x); }
+
+/* ---------- build the world ---------- */
+const NS="http://www.w3.org/2000/svg";
+const far=document.getElementById("far"), world=document.getElementById("world");
+function farSVG(){
+  let s=`<rect x="-400" y="360" width="3200" height="400" fill="#5d6d6e"/>`;
+  // distant coastline
+  let p="M600 372";
+  for(let x=600;x<=2800;x+=40){p+=` L${x} ${372-26*smooth(clamp((x-600)/300,0,1))-6*Math.sin(x/90)}`}
+  s+=`<path d="${p} L2800 420 L600 420Z" fill="#6f766a"/>`;
+  // fleet on the horizon
+  [[-120,1],[0,.8],[90,1.2],[200,.7],[300,1],[420,.9],[520,.75]].forEach(([x,k])=>{
+    s+=`<g transform="translate(${x} 362) scale(${k})" fill="#4a5459"><path d="M0 0 L60 0 L52 8 L6 8Z"/><rect x="22" y="-10" width="14" height="10"/><rect x="28" y="-18" width="3" height="8"/></g>`;
+  });
+  // barrage balloons
+  [[40,250],[260,230],[480,262]].forEach(([x,y])=>{
+    s+=`<line x1="${x}" y1="${y+6}" x2="${x+8}" y2="360" stroke="#4a5459" stroke-width=".8"/><ellipse cx="${x}" cy="${y}" rx="13" ry="6" fill="#5b656a"/>`;
+  });
+  return s;
+}
+function worldSVG(){
+  let s="";
+  // sea body behind
+  s+=`<rect x="-500" y="${SEA}" width="2100" height="600" fill="#4b5f60"/>`;
+  // ground
+  let d="M-500 900 L-500 "+G(-500);
+  for(let x=-500;x<=4600;x+=20) d+=` L${x} ${G(x).toFixed(1)}`;
+  d+=" L4600 900Z";
+  s+=`<path d="${d}" fill="#b7a57a"/>`;
+  let g="M2150 900";
+  for(let x=2150;x<=4600;x+=20) g+=` L${x} ${(G(x)+(x<2500?6:0)).toFixed(1)}`;
+  g+=" L4600 900Z";
+  s+=`<path d="${g}" fill="#5f6a3c"/>`;
+  // shingle bank + wire
+  s+=`<path d="M2040 ${G(2040)} Q2100 ${G(2100)-14} 2160 ${G(2160)}" stroke="#7d7a70" stroke-width="10" fill="none" stroke-linecap="round"/>`;
+  for(let x=2045;x<2165;x+=16) s+=`<circle cx="${x}" cy="${G(x)-16}" r="7" fill="none" stroke="#33302a" stroke-width="1.3"/>`;
+  // craters on beach
+  [1560,1840,1980].forEach(x=>s+=`<ellipse cx="${x}" cy="${G(x)+3}" rx="26" ry="5" fill="#8e7f5c"/>`);
+  // hedgerows (bocage)
+  for(let x=2520;x<4500;x+=95){ if(x>3220&&x<3700) continue;
+    s+=`<ellipse cx="${x}" cy="${G(x)-12}" rx="${34+(x%3)*6}" ry="20" fill="#3f4a2b"/>`; }
+  // bunker
+  const bx=2860, by=G(bx);
+  s+=`<g><path d="M${bx-70} ${by+4} L${bx-58} ${by-44} L${bx+60} ${by-48} L${bx+70} ${by+4}Z" fill="#8a8a82"/>
+     <path d="M${bx-58} ${by-44} L${bx+60} ${by-48} L${bx+56} ${by-56} L${bx-52} ${by-52}Z" fill="#6d6d66"/>
+     <rect x="${bx-54}" y="${by-30}" width="44" height="7" fill="#1e1e1c"/>
+     <path d="M${bx-30} ${by-44} q20 -10 50 -2" stroke="#5f6a3c" stroke-width="6" fill="none"/>
+     <g class="smoke"><circle cx="${bx+20}" cy="${by-80}" r="16" fill="#9a9b98" opacity=".45"/><circle cx="${bx+42}" cy="${by-104}" r="22" fill="#9a9b98" opacity=".3"/></g></g>`;
+  // village
+  const house=(x,w,h,c)=>{const y=G(x);return `<g><rect x="${x-w/2}" y="${y-h}" width="${w}" height="${h+6}" fill="${c}"/><path d="M${x-w/2-6} ${y-h} L${x} ${y-h-w*.45} L${x+w/2+6} ${y-h}Z" fill="#5a4a3c"/><rect x="${x-8}" y="${y-h+14}" width="10" height="12" fill="#2f2b26"/></g>`};
+  s+=house(3260,70,48,"#cfc4aa")+house(3345,56,40,"#b9ae93")+house(3580,64,46,"#c6bba0")+house(3660,52,38,"#b3a88c");
+  const cx=3470, cy=G(cx);
+  s+=`<g fill="#c2b79c"><rect x="${cx-40}" y="${cy-56}" width="80" height="62"/><rect x="${cx-14}" y="${cy-112}" width="28" height="60"/></g>
+      <path d="M${cx-18} ${cy-112} L${cx} ${cy-150} L${cx+18} ${cy-112}Z" fill="#5a4a3c"/><path d="M${cx-48} ${cy-56} L${cx} ${cy-80} L${cx+48} ${cy-56}Z" fill="#5a4a3c"/>
+      <path d="M${cx-6} ${cy-90} a6 6 0 0 1 12 0 v10 h-12z" fill="#2f2b26"/>`;
+  // parachute caught on the steeple area tree
+  s+=`<g opacity=".9"><path d="M${cx+70} ${cy-120} q30 -26 60 0" fill="#e6e1d2"/><line x1="${cx+70}" y1="${cy-120}" x2="${cx+100}" y2="${cy-80}" stroke="#e6e1d2"/><line x1="${cx+130}" y1="${cy-120}" x2="${cx+100}" y2="${cy-80}" stroke="#e6e1d2"/></g>`;
+  // tricolore at the goal
+  const fx=4060, fy=G(fx);
+  s+=`<line x1="${fx}" y1="${fy}" x2="${fx}" y2="${fy-110}" stroke="#2f2b26" stroke-width="3"/>
+      <g class="flag"><rect x="${fx}" y="${fy-108}" width="18" height="36" fill="#244a94"/><rect x="${fx+18}" y="${fy-108}" width="18" height="36" fill="#f2efe6"/><rect x="${fx+36}" y="${fy-108}" width="18" height="36" fill="#c8352c"/></g>`;
+  // beach obstacles: czech hedgehogs + stakes
+  [880,980,1060,1180,1270,1360,1430].forEach((x,i)=>{
+    const y=Math.min(G(x),SEA+30);
+    if(i%3===2){ s+=`<line x1="${x}" y1="${y}" x2="${x+16}" y2="${y-44}" stroke="#4b3f30" stroke-width="5"/><circle cx="${x+16}" cy="${y-44}" r="5" fill="#2d2d2a"/>`; }
+    else { s+=`<g stroke="#2f3133" stroke-width="5" stroke-linecap="square"><line x1="${x-20}" y1="${y}" x2="${x+20}" y2="${y-40}"/><line x1="${x+20}" y1="${y}" x2="${x-20}" y2="${y-40}"/><line x1="${x}" y1="${y+4}" x2="${x}" y2="${y-44}"/></g>`; }
+  });
+  // distant puffs on the beach
+  [[1500,0],[1660,1.3],[1900,2.4],[2010,.7],[2380,3.1],[1290,1.9]].forEach(([x,dl])=>{
+    s+=`<g class="puff" style="animation-delay:${dl}s"><circle cx="${x}" cy="${G(x)-14}" r="14" fill="#8d8c86"/><circle cx="${x+12}" cy="${G(x)-24}" r="11" fill="#a3a29b"/></g>`;
+  });
+  // landing craft (behind soldier: deck)
+  s+=`<rect x="250" y="${SEA-30}" width="170" height="14" fill="#55605a"/>`;
+  // markers
+  STAGES.forEach((st,i)=>{
+    const mx=st.x+70, my=(i===0?SEA-60:G(mx)-30);
+    s+=`<g class="marker" id="m${i}" data-i="${i}" tabindex="0" role="button" aria-label="Fakta: ${st.label}"><circle class="pulse" cx="${mx}" cy="${my}" r="14"/><circle class="ring" cx="${mx}" cy="${my}" r="14"/><text x="${mx}" y="${my+5}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="15" font-weight="600" fill="#f4efe2">${i+1}</text></g>`;
+  });
+  // soldier
+  s+=`<g id="sol"><g transform="scale(1.35)">
+      <path class="leg l" d="M-3 -16 L-5 0" stroke="#3d3f2a" stroke-width="4.5" stroke-linecap="round"/>
+      <path class="leg r" d="M3 -16 L5 0" stroke="#3d3f2a" stroke-width="4.5" stroke-linecap="round"/>
+      <rect x="-11" y="-33" width="6" height="13" rx="1.5" fill="#4d4a33"/>
+      <rect x="-6" y="-35" width="12" height="20" rx="3" fill="#59583a"/>
+      <line x1="5" y1="-26" x2="13" y2="-50" stroke="#2c2618" stroke-width="2.2"/>
+      <circle cx="0" cy="-39" r="4.6" fill="#c9a98b"/>
+      <path d="M-8 -40 Q0 -51 8 -40Z" fill="#4a4c33"/>
+    </g></g>`;
+  // landing craft hull + front water (cover the soldier's legs)
+  s+=`<path d="M240 ${SEA-18} L430 ${SEA-18} L420 ${SEA+8} L255 ${SEA+8}Z" fill="#6a756f"/><rect x="420" y="${SEA-34}" width="10" height="34" fill="#4f5953"/>`;
+  let w="M-600 "+(SEA+2);
+  for(let x=-600;x<=1700;x+=20) w+=` L${x} ${(SEA+2+3*Math.sin(x/80*Math.PI*2)).toFixed(1)}`;
+  w+=` L1700 1000 L-600 1000Z`;
+  s+=`<defs><linearGradient id="fade" x1="0" x2="1"><stop offset=".86" stop-color="#4f6667"/><stop offset="1" stop-color="#4f6667" stop-opacity="0"/></linearGradient></defs>
+      <g class="wave"><path d="${w}" fill="url(#fade)" opacity=".88"/></g>`;
+  return s;
+}
+far.innerHTML=farSVG();
+world.innerHTML=worldSVG();
+const sol=document.getElementById("sol");
+
+/* ---------- camera ---------- */
+let camX=STAGES[0].x, anim=null;
+function centerX(){ return innerWidth>=860?330:400; }
+function place(){
+  const y=soldierY(camX), ty=350-y, cx=centerX();
+  world.setAttribute("transform",`translate(${cx-camX} ${ty})`);
+  far.setAttribute("transform",`translate(${cx-camX*.35} ${ty*.3})`);
+  sol.setAttribute("transform",`translate(${camX} ${y})`);
+}
+function walkTo(x,done){
+  const from=camX, dist=Math.abs(x-from);
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const dur=reduce?1:clamp(dist*2.4,1400,3200), t0=performance.now();
+  sol.classList.add("walking");
+  cancelAnimationFrame(anim);
+  const step=now=>{
+    const t=clamp((now-t0)/dur,0,1), e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    camX=from+(x-from)*e; place();
+    if(t<1) anim=requestAnimationFrame(step); else { sol.classList.remove("walking"); done&&done(); }
+  };
+  anim=requestAnimationFrame(step);
+}
+addEventListener("resize",place);
+
+/* ---------- game state ---------- */
+let cur=-1, moving=false;
+const done=STAGES.map(()=>false), firstTry=STAGES.map(()=>null);
+const dock=document.getElementById("dock"), stepsEl=document.getElementById("steps"), clock=document.getElementById("clock");
+const QUIZ=STAGES.length-1;
+
+function drawSteps(){
+  stepsEl.innerHTML=STAGES.map((s,i)=>`<span class="dot ${done[i]?"done":""} ${i===cur?"now":""}" title="${s.label}">${i+1}</span>`).join("");
+  STAGES.forEach((s,i)=>document.getElementById("m"+i).classList.toggle("done",done[i]));
+}
+function intro(){
+  dock.innerHTML=`<article class="card">
+    <div class="stamp"><span>Order · Första vågen</span><b>Hemligt</b></div>
+    <h2>Dagen D, 6 juni 1944</h2>
+    <p>Du är soldat i den första vågen som ska landstiga i Normandie. Ta dig från båten, över stranden och upp till byn bakom kusten.</p>
+    <p>Vid varje röd cirkel får du läsa en fältrapport och svara på en fråga. Cirkeln blir grön när du svarat rätt, och då kan du gå vidare.</p>
+    <div class="foot"><span>7 steg · ca 10 minuter</span><button class="go ready" id="start">Starta uppdraget →</button></div>
+  </article>`;
+  document.getElementById("start").onclick=()=>arrive(0);
+}
+function arrive(i){
+  cur=i;
+  const st=STAGES[i];
+  clock.innerHTML=`<small>6 juni 1944 · ${st.place}</small>Kl. ${st.time}`;
+  drawSteps(); render();
+}
+function render(){
+  const i=cur, st=STAGES[i];
+  if(i===QUIZ){ done[i]=true; drawSteps(); }
+  let quiz="";
+  if(i<QUIZ){
+    const solved=done[i];
+    quiz=`<div class="quiz"><p class="q">${st.q}</p><div class="opts">${st.opts.map((o,k)=>`<button class="opt ${solved&&k===st.ok?"right":""}" data-k="${k}" ${solved?"disabled":""}>${o}</button>`).join("")}</div>
+      <p class="fb ${solved?"ok":""}" id="fb">${solved?`<b>Rätt!</b> ${st.why}`:""}</p></div>`;
+  } else {
+    const score=firstTry.slice(0,QUIZ).filter(Boolean).length;
+    quiz=`<p class="discuss">${st.discuss}</p>
+      <div class="foot"><span class="score">${score} av ${QUIZ} rätt på första försöket</span><button class="go" id="again">Spela igen</button></div>`;
+  }
+  const next=i<QUIZ?`<div class="foot"><span>Steg ${i+1} av ${STAGES.length}</span><button class="go ${done[i]?"ready":""}" id="next" ${done[i]?"":"disabled"}>Gå vidare →</button></div>`:"";
+  dock.innerHTML=`<article class="card">
+    <div class="stamp"><span>Kl. ${st.time} · ${st.place}</span><b>Fältrapport ${i+1}</b></div>
+    <h2>${st.title}</h2>${st.facts.map(f=>`<p>${f}</p>`).join("")}${quiz}${next}</article>`;
+  dock.scrollTop=0;
+  dock.querySelectorAll(".opt").forEach(b=>b.onclick=()=>answer(+b.dataset.k,b));
+  const n=document.getElementById("next"); if(n) n.onclick=goNext;
+  const a=document.getElementById("again"); if(a) a.onclick=restart;
+}
+function answer(k,btn){
+  const st=STAGES[cur], fb=document.getElementById("fb");
+  if(firstTry[cur]===null) firstTry[cur]=(k===st.ok);
+  if(k===st.ok){
+    done[cur]=true; drawSteps();
+    dock.querySelectorAll(".opt").forEach(b=>b.disabled=true);
+    btn.classList.add("right");
+    fb.className="fb ok"; fb.innerHTML=`<b>Rätt!</b> ${st.why}`;
+    const n=document.getElementById("next"); n.disabled=false; n.classList.add("ready"); n.focus({preventScroll:true});
+  } else {
+    btn.classList.add("wrong"); btn.disabled=true;
+    fb.className="fb no"; fb.innerHTML=`<b>Inte riktigt.</b> Läs rapporten igen och försök på nytt.`;
+  }
+}
+function goNext(){
+  if(moving||cur>=QUIZ||!done[cur]) return;
+  moving=true;
+  dock.innerHTML=`<article class="card"><div class="stamp"><span>På väg…</span><b>${STAGES[cur+1].label}</b></div><h2>Framåt!</h2><p>Du tar dig vidare mot nästa mål.</p></article>`;
+  const target=cur+1;
+  walkTo(STAGES[target].x,()=>{moving=false;arrive(target);});
+}
+function restart(){
+  done.fill(false); firstTry.fill(null); cur=-1; moving=true;
+  walkTo(STAGES[0].x,()=>{moving=false;drawSteps();intro();});
+}
+document.querySelectorAll(".marker").forEach(m=>{
+  const open=()=>{ if(+m.dataset.i===cur){ dock.scrollTop=0; dock.querySelector(".card")?.animate([{transform:"scale(.98)"},{transform:"none"}],{duration:250}); } };
+  m.addEventListener("click",open); m.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}});
+});
+addEventListener("keydown",e=>{ if(e.key==="ArrowRight") goNext(); });
+
+place(); drawSteps(); intro();
+</script>
+
+</body></html>

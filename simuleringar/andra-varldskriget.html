@@ -163,11 +163,27 @@ body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-s
   </div>
   <div class="dock" id="dock" aria-live="polite"></div>
 </div>
+<div id="ddayOverlay" style="display:none;position:fixed;inset:0;z-index:50;background:#1b2024;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 12px;font-family:var(--f-label);letter-spacing:.08em;text-transform:uppercase">
+    <span>Dagen D – uppdraget</span><button class="go" type="button" id="ddayClose">← Tillbaka till kartan</button>
+  </div>
+  <iframe id="ddayFrame" title="Dagen D i Normandie" style="flex:1;border:0;width:100%"></iframe>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.5.9/datamaps.world.min.js"></script>
 <script>
-const DDAY_URL="";
+function openDday(){
+  const o=document.getElementById("ddayOverlay"), f=document.getElementById("ddayFrame");
+  if(!f.getAttribute("src")) f.setAttribute("src",DDAY_URL);
+  o.style.display="flex"; document.getElementById("ddayClose").focus();
+}
+function closeDday(){ document.getElementById("ddayOverlay").style.display="none"; }
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("ddayClose").addEventListener("click",closeDday);
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeDday(); });
+});
+const DDAY_URL="dagen-d.html";
 const EV=[
  {d:"1 september 1939",y:1939.67,place:"Polen",lon:21.0,lat:52.2,zoom:230,hl:["POL","DEU"],title:"Kriget börjar",
   facts:["Tyskland anfaller Polen den 1 september 1939. Två dagar senare förklarar Storbritannien och Frankrike krig mot Tyskland.",
@@ -357,7 +373,7 @@ const DEEP=[
     ["Brittiska soldater landar i glidflygplan bara några meter från en viktig bro över en kanal. På omkring tio minuter är bron tagen.","Samtidigt hoppar tusentals fallskärmsjägare bakom stränderna för att hindra tyska förstärkningar."],
     "Hur tog sig soldaterna till Pegasusbron?",["Med glidflygplan","Med ubåt","Till fots från Paris"],0,"Glidflygplan har ingen motor och kunde landa tyst i mörkret."),
    D("Omaha Beach",-0.87,49.37,"6 juni 1944","Stranden",
-    ["På Omaha Beach möter amerikanerna det hårdaste försvaret. Omkring 2 400 blir dödade, sårade eller saknade bara där.","Vid kvällen har ändå alla fem stränderna tagits."],
+    ["På Omaha Beach möter amerikanerna det hårdaste försvaret. Omkring 2 400 blir dödade, sårade eller saknade bara där.","Vid kvällen har ändå alla fem stränderna tagits. Vill du gå steg för steg över stranden? Spela Dagen D-uppdraget."],
     "Hur många stränder landsteg de allierade på?",["Två","Fem","Tio"],1,"Utah, Omaha, Gold, Juno och Sword."),
    D("Paris",2.35,48.86,"25 augusti 1944","Paris befrias",
     ["Efter hårda strider i Normandie bryter de allierade igenom. I Paris gör motståndsrörelsen uppror.","En fransk pansardivision får köra in först i staden. Dagen efter går general de Gaulle i segerparad längs Champs-Élysées."],
@@ -750,7 +766,7 @@ function quizHTML(item,key){
 }
 function render(){
   const i=cur, e=EV[i];
-  const dd="";
+  const dd=`<p><button class="go ready" type="button" onclick="openDday()">Spela Dagen D-uppdraget →</button></p>`;
   if(mode==="light"){
     clock.innerHTML=`<small>${e.place}</small>${e.d}`;
     const solved=done[i];
