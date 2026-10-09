@@ -47,6 +47,11 @@
     transform: translateY(-3px);
     border-color: #4a6fa5;
   }
+  .amne-ruta.last { opacity: 0.6; cursor: not-allowed; background: #f1f2f5; border-style: dashed; }
+  .amne-ruta.last:hover { transform: none; border-color: #dde3ec; }
+  .knapp.last-knapp { background: #e4e7ec; color: #7a8394; cursor: not-allowed; border: 2px dashed #c9cfd9; }
+  .knapp.last-knapp:hover { background: #e4e7ec; }
+  .last-text { font-size: 0.85em; font-weight: normal; }
   .amne-ikon { font-size: 2.5em; display: block; margin-bottom: 8px; }
   .amne-titel { font-weight: bold; font-size: 1.1em; color: #2f4a73; }
 
@@ -919,6 +924,9 @@
   .hafte-rad { margin: 14px 0; padding: 12px 14px; background: #eef5ee; border: 1px solid #c5dcc5; border-radius: 10px; }
   .hafte-knappar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
   .hafte-knappar .knapp { text-decoration: none; display: inline-block; }
+  .valj-lage { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+  .lage-knapp { padding: 14px 10px; font-size: 1.05em; border: 2px solid #2f4a73; border-radius: 10px; background: #fff; color: #2f4a73; cursor: pointer; }
+  .lage-knapp.aktiv { background: #2f4a73; color: #fff; }
   .hafte-par { display: inline-flex; gap: 2px; }
   .hafte-par .knapp { margin: 0; }
   .hafte-par .knapp:first-child { border-top-right-radius: 0; border-bottom-right-radius: 0; }
@@ -1011,10 +1019,11 @@
   // Framsteget (avklarade moment + senast besökta) sparas i webbläsarens
   // localStorage på just den här enheten - inget skickas någonstans.
   var FRAMSTEG_NYCKEL = "pluggis-framsteg-v1";
-  var framsteg = { klara: {}, senast: null };
+  var framsteg = { klara: {}, senast: null, senastAmne: {} };
   try {
     var sparatFramsteg = JSON.parse(window.localStorage.getItem(FRAMSTEG_NYCKEL) || "null");
     if (sparatFramsteg && sparatFramsteg.klara) { framsteg = sparatFramsteg; }
+    if (!framsteg.senastAmne) { framsteg.senastAmne = {}; }
   } catch (e) { /* localStorage blockerat - då hålls framsteget bara i minnet */ }
 
   function sparaFramsteg() {
@@ -1059,7 +1068,7 @@
 
   function aterstallFramsteg() {
     if (!window.confirm("Vill du nollställa allt framsteg på den här enheten?")) { return; }
-    framsteg = { klara: {}, senast: null };
+    framsteg = { klara: {}, senast: null, senastAmne: {} };
     sparaFramsteg();
     renderaStartsida();
   }
@@ -1101,19 +1110,24 @@
 
   function renderaStartsida() {
     var html = "";
-    if (framsteg.senast && nodKarta[framsteg.senast]) {
-      html += '<button class="knapp fortsatt-knapp" onclick="visNod(\'' + framsteg.senast + '\')">' +
-              '▶ Fortsätt där du slutade: ' + nodKarta[framsteg.senast].node.titel + '</button>';
-    }
     html += '<div class="startsida-grid">';
     var harKlara = false;
-    struktur.forEach(function(amne) {
+    var amnen = struktur.slice().sort(function(x, y) { return x.titel.localeCompare(y.titel, "sv"); });
+    amnen.forEach(function(amne) {
       var r = raknaFramsteg(amne);
+      if (r.totalt === 0 && !(window.hafte && window.hafte[amne.id])) {
+        // Inget innehåll än: låst ruta som inte går att öppna.
+        html += '<div class="amne-ruta last" aria-disabled="true" title="Kommer snart">' +
+                '<span class="amne-ikon">' + (amne.ikon || "📘") + '</span>' +
+                '<span class="amne-titel">' + amne.titel + '</span>' +
+                '<span class="amne-framsteg">🔒 Kommer snart</span></div>';
+        return;
+      }
       if (r.klara > 0) { harKlara = true; }
       html += '<div class="amne-ruta" onclick="visNod(\'' + amne.id + '\')">' +
               '<span class="amne-ikon">' + (amne.ikon || "📘") + '</span>' +
               '<span class="amne-titel">' + amne.titel + '</span>' +
-              (r.totalt ? '<span class="amne-framsteg">' + r.klara + ' av ' + r.totalt + ' klara</span>' : '') +
+              '<span class="amne-framsteg">' + r.klara + ' av ' + r.totalt + ' klara</span>' +
               '</div>';
     });
     html += '</div>';
@@ -1130,10 +1144,16 @@
     var harBarn = node.barn && node.barn.length > 0;
 
     var html = renderaBrodsmulor(id);
+    var faktaStart = -1;
 
     if (harBarn) {
       html += "<h2>" + node.titel + "</h2>";
       html += haftenHtml(id);
+      var senastHar = (!entry.parentId && framsteg.senastAmne) ? framsteg.senastAmne[id] : null;
+      if (senastHar && nodKarta[senastHar]) {
+        html += '<button class="knapp fortsatt-knapp" onclick="visNod(\'' + senastHar + '\')">' +
+                '▶ Fortsätt där du var: ' + nodKarta[senastHar].node.titel + '</button>';
+      }
       var sammanfattning = raknaFramsteg(node);
       if (sammanfattning.totalt > 0) {
         html += '<p class="framsteg-sammanfattning">' + sammanfattning.klara + ' av ' + sammanfattning.totalt +
@@ -1141,15 +1161,36 @@
                 Math.round(100 * sammanfattning.klara / sammanfattning.totalt) + '%"></div></div>';
       }
       node.barn.forEach(function(barn) {
+        if (raknaFramsteg(barn).totalt === 0 && !(window.hafte && window.hafte[barn.id])) {
+          // Inget innehåll här än: låst knapp som inte går att öppna.
+          html += '<button class="knapp last-knapp" disabled aria-disabled="true" title="Kommer snart">🔒 ' + barn.titel +
+                  ' <span class="last-text">– kommer snart</span></button>';
+          return;
+        }
         var knappKlass = (barn.titel.indexOf("Repetition") === 0) ? "knapp knapp-repetition" : "knapp";
         html += '<button class="' + knappKlass + '" onclick="visNod(\'' + barn.id + '\')">' +
                 framstegTagg(barn) + barn.titel + '</button>';
       });
     } else {
       var data = innehall[id];
-      if (data) { framsteg.senast = id; sparaFramsteg(); }
+      if (data) {
+        framsteg.senast = id;
+        var rot = id;
+        while (nodKarta[rot] && nodKarta[rot].parentId) { rot = nodKarta[rot].parentId; }
+        if (!framsteg.senastAmne) { framsteg.senastAmne = {}; }
+        framsteg.senastAmne[rot] = id;
+        sparaFramsteg();
+      }
       html += "<h2>" + node.titel + "</h2>";
       if (data) { html += haftenHtml(id); }
+      if (data && data.spel) {
+        // Moment med spel: fakta är standard, spelet är ett val.
+        html += '<div class="valj-lage" role="group" aria-label="Välj hur du vill lära dig">' +
+                '<button type="button" id="lageFakta" class="lage-knapp aktiv" aria-pressed="true" onclick="visaLage(\'' + id + '\',\'fakta\')">📖 Läs fakta</button>' +
+                '<button type="button" id="lageSpel" class="lage-knapp" aria-pressed="false" onclick="visaLage(\'' + id + '\',\'spel\')">🎮 Spela dig fram</button>' +
+                '</div>';
+        faktaStart = html.length;
+      }
       if (data && data.sektioner) {
         // Rikare sida: intro + flera namngivna sektioner + ev. begreppsruta
         if (data.intro) { html += "<p>" + data.intro + "</p>"; }
@@ -1435,6 +1476,11 @@
         });
         html += '</div>';
       }
+    }
+
+    if (faktaStart >= 0) {
+      html = html.slice(0, faktaStart) + '<div id="faktaLage">' + html.slice(faktaStart) + '</div>' +
+             '<div id="spelLage" style="display:none"></div>';
     }
 
     if (!harBarn) {
@@ -3935,6 +3981,26 @@
       cirklarHtml += "</svg>";
     }
     document.getElementById("ak9Cirklar").innerHTML = cirklarHtml;
+  }
+
+  function visaLage(id, lage) {
+    var data = innehall[id];
+    var spel = document.getElementById("spelLage");
+    var fakta = document.getElementById("faktaLage");
+    if (!data || !data.spel || !spel || !fakta) { return; }
+    var visaSpel = (lage === "spel");
+    if (visaSpel && !spel.firstChild) {
+      var sp = data.spel;
+      spel.innerHTML = '<div class="inbaddad-ruta"><iframe src="' + sp.url + '" title="' + (sp.titel || "Spel") + '" allowfullscreen></iframe></div>' +
+                       '<p class="inbaddad-lank"><a href="' + sp.url + '" target="_blank" rel="noopener">Öppna i helskärm ↗</a> (rekommenderas på mobil)</p>';
+    }
+    spel.style.display = visaSpel ? "block" : "none";
+    fakta.style.display = visaSpel ? "none" : "block";
+    var bF = document.getElementById("lageFakta"), bS = document.getElementById("lageSpel");
+    if (bF && bS) {
+      bF.className = "lage-knapp" + (visaSpel ? "" : " aktiv"); bF.setAttribute("aria-pressed", visaSpel ? "false" : "true");
+      bS.className = "lage-knapp" + (visaSpel ? " aktiv" : ""); bS.setAttribute("aria-pressed", visaSpel ? "true" : "false");
+    }
   }
 
   function haftenHtml(id) {

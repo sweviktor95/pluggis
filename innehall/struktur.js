@@ -445,5 +445,79 @@ var struktur = [
         ]
       }
     ]
+  },
+  {
+    id: "bild",
+    titel: "Bild",
+    ikon: "🎨",
+    barn: []
+  },
+  {
+    id: "engelska",
+    titel: "Engelska",
+    ikon: "🇬🇧",
+    barn: []
+  },
+  {
+    id: "geografi",
+    titel: "Geografi",
+    ikon: "🌍",
+    barn: []
+  },
+  {
+    id: "hem-konsumentkunskap",
+    titel: "Hem- och konsumentkunskap",
+    ikon: "🍳",
+    barn: []
+  },
+  {
+    id: "idrott-halsa",
+    titel: "Idrott och hälsa",
+    ikon: "🏃",
+    barn: []
+  },
+  {
+    id: "moderna-sprak",
+    titel: "Moderna språk",
+    ikon: "🗣️",
+    barn: [
+      { id: "moderna-sprak-spanska", titel: "Spanska" },
+      { id: "moderna-sprak-franska", titel: "Franska" },
+      { id: "moderna-sprak-tyska", titel: "Tyska" }
+    ]
+  },
+  {
+    id: "musik",
+    titel: "Musik",
+    ikon: "🎵",
+    barn: []
+  },
+  {
+    id: "religionskunskap",
+    titel: "Religionskunskap",
+    ikon: "🕊️",
+    barn: []
+  },
+  {
+    id: "samhallskunskap",
+    titel: "Samhällskunskap",
+    ikon: "🗳️",
+    barn: []
+  },
+  {
+    id: "slojd",
+    titel: "Slöjd",
+    ikon: "🧵",
+    barn: [
+      { id: "slojd-textil", titel: "Textilslöjd" },
+      { id: "slojd-tra-metall", titel: "Trä- och metallslöjd" }
+    ]
+  },
+  {
+    id: "svenska",
+    titel: "Svenska",
+    ikon: "📖",
+    barn: []
   }
 ];
+
