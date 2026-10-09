@@ -61,25 +61,21 @@
     return '<a class="lank ' + (extra || "") + '" href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
   }
 
-  function knappar(h, etikettPrefix) {
+  function knappar(h) {
     var k = '<div class="knappar">';
-    if (h.paket) { k += lank(h.paket, "🖨️ " + etikettPrefix + "Utskriftspaket (alla tre)"); }
     if (h.vanlig) { k += lank(h.vanlig, "Vanlig"); }
     if (h.lattlast) { k += lank(h.lattlast, "Lättläst"); }
     if (h.fordjupning) { k += lank(h.fordjupning, "Fördjupning"); }
-    if (h.zip) { k += lank(h.zip, "📦 Zip (alla)"); }
-    k += '</div>';
-    if (h.paket && h.sidor) { k += '<p class="sidor">Skriva ut bara en del? Välj sidor: ' + h.sidor + '.</p>'; }
-    return k;
+    return k + '</div>';
   }
 
   function kapitelHtml(blad) {
     var h = window.hafte && window.hafte[blad.id];
     if (!h) { return ""; }
     var k = '<div class="kapitel"><h4>' + (h.titel || blad.titel) + '</h4>';
-    k += '<p class="grupp">Elevversion (utan facit, lärarhandledning och bonuslabb) – till klassen</p>' + knappar(h, "");
+    k += '<p class="grupp">Elevversion (utan facit, lärarhandledning och bonuslabb) – till klassen</p>' + knappar(h);
     if (h.komplett) {
-      k += '<p class="grupp">Komplett (med facit, lärarhandledning och bonuslabb) – för dig som lärare</p>' + knappar(h.komplett, "Komplett: ");
+      k += '<p class="grupp">Komplett (med facit, lärarhandledning och bonuslabb) – för dig som lärare</p>' + knappar(h.komplett);
     }
     return k + '</div>';
   }
