@@ -25,6 +25,7 @@
   .knappar { display: flex; flex-wrap: wrap; gap: 8px; }
   .lank.larar { background: #8a4b9a; }
   .tomt { color: #888; font-size: 14px; }
+  .grupp { font-weight: bold; font-size: 14px; margin: 12px 0 6px; color: #444; }
   .sidor { color: #555; font-size: 14px; margin: 8px 0 0; }
 </style>
 </head>
@@ -60,28 +61,36 @@
     return '<a class="lank ' + (extra || "") + '" href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
   }
 
-  function kapitelHtml(blad) {
-    var h = window.hafte && window.hafte[blad.id];
-    if (!h) { return ""; }
-    var k = '<div class="kapitel"><h4>' + (h.titel || blad.titel) + '</h4><div class="knappar">';
-    if (h.paket) { k += lank(h.paket, "🖨️ Utskriftspaket (alla tre)"); }
+  function knappar(h, etikettPrefix) {
+    var k = '<div class="knappar">';
+    if (h.paket) { k += lank(h.paket, "🖨️ " + etikettPrefix + "Utskriftspaket (alla tre)"); }
     if (h.vanlig) { k += lank(h.vanlig, "Vanlig"); }
     if (h.lattlast) { k += lank(h.lattlast, "Lättläst"); }
     if (h.fordjupning) { k += lank(h.fordjupning, "Fördjupning"); }
     if (h.zip) { k += lank(h.zip, "📦 Zip (alla)"); }
-    if (h.handledning) { k += lank(h.handledning, "Lärarhandledning", "larar"); }
-    if (h.facit) { k += lank(h.facit, "Facit", "larar"); }
     k += '</div>';
     if (h.paket && h.sidor) { k += '<p class="sidor">Skriva ut bara en del? Välj sidor: ' + h.sidor + '.</p>'; }
+    return k;
+  }
+
+  function kapitelHtml(blad) {
+    var h = window.hafte && window.hafte[blad.id];
+    if (!h) { return ""; }
+    var k = '<div class="kapitel"><h4>' + (h.titel || blad.titel) + '</h4>';
+    k += '<p class="grupp">Elevversion (utan facit, lärarhandledning och bonuslabb) – till klassen</p>' + knappar(h, "");
+    if (h.komplett) {
+      k += '<p class="grupp">Komplett (med facit, lärarhandledning och bonuslabb) – för dig som lärare</p>' + knappar(h.komplett, "Komplett: ");
+    }
     return k + '</div>';
   }
 
   // Bygger HTML för en gren; returnerar "" om inga häften finns under den.
   function grenHtml(nod, niva) {
-    if (!nod.barn || !nod.barn.length) { return kapitelHtml(nod); }
-    var inre = nod.barn.map(function(b) { return grenHtml(b, niva + 1); }).join("");
-    if (!inre) { return ""; }
-    return '<details' + (niva === 0 ? "" : "") + '><summary>' + (nod.ikon ? nod.ikon + " " : "") + nod.titel + '</summary><div class="inre">' + inre + '</div></details>';
+    var egen = kapitelHtml(nod);
+    var inre = (nod.barn || []).map(function(b) { return grenHtml(b, niva + 1); }).join("");
+    if (!nod.barn || !nod.barn.length) { return egen; }
+    if (!egen && !inre) { return ""; }
+    return '<details><summary>' + (nod.ikon ? nod.ikon + " " : "") + nod.titel + '</summary><div class="inre">' + egen + inre + '</div></details>';
   }
 
   function visa() {

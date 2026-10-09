@@ -1129,6 +1129,7 @@
 
     if (harBarn) {
       html += "<h2>" + node.titel + "</h2>";
+      html += haftenHtml(id);
       var sammanfattning = raknaFramsteg(node);
       if (sammanfattning.totalt > 0) {
         html += '<p class="framsteg-sammanfattning">' + sammanfattning.klara + ' av ' + sammanfattning.totalt +
