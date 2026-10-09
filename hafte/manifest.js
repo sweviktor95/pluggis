@@ -50,3 +50,15 @@ window.hafte["biologi-ekologi"] = {
     fordjupning: "hafte/biologi-4-ekologi-fordjupning-komplett.pdf"
   }
 };
+
+window.hafte["spanska-1-hola"] = {
+  titel: "Kapitel 1 – ¡Hola!",
+  vanlig: "hafte/spanska-1-hola-vanlig.pdf",
+  lattlast: "hafte/spanska-1-hola-lattlast.pdf",
+  fordjupning: "hafte/spanska-1-hola-fordjupning.pdf",
+  komplett: {
+    vanlig: "hafte/spanska-1-hola-vanlig-komplett.pdf",
+    lattlast: "hafte/spanska-1-hola-lattlast-komplett.pdf",
+    fordjupning: "hafte/spanska-1-hola-fordjupning-komplett.pdf"
+  }
+};

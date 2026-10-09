@@ -481,7 +481,23 @@ var struktur = [
     titel: "Moderna språk",
     ikon: "🗣️",
     barn: [
-      { id: "moderna-sprak-spanska", titel: "Spanska" },
+      {
+        id: "moderna-sprak-spanska",
+        titel: "Spanska",
+        barn: [
+          {
+            id: "spanska-1-hola",
+            titel: "Kapitel 1 – ¡Hola!",
+            barn: [
+              { id: "spanska-1-hola-varld-halsa", titel: "Spanska i världen och hälsningar" },
+              { id: "spanska-1-hola-uttal", titel: "Alfabetet och uttal" },
+              { id: "spanska-1-hola-presentera", titel: "Presentera dig och räkna" },
+              { id: "spanska-1-hola-grammatik", titel: "Verb, genus och plural" },
+              { id: "spanska-1-hola-ovning", titel: "Hola Quest – träna (spel)" }
+            ]
+          }
+        ]
+      },
       { id: "moderna-sprak-franska", titel: "Franska" },
       { id: "moderna-sprak-tyska", titel: "Tyska" }
     ]
