@@ -72,12 +72,33 @@ body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-s
   .dock{position:absolute;right:20px;top:72px;bottom:20px;width:400px;max-height:none;background:none;padding:0}
   .scene{flex:1 1 auto}
 }
+.flash{opacity:0;animation:flash 6s infinite}
+@keyframes flash{0%,90%,100%{opacity:0}92%{opacity:1}96%{opacity:.2}98%{opacity:.9}}
+.mg{opacity:0;animation:mg 2.4s infinite}
+@keyframes mg{0%,55%,100%{opacity:0}58%{opacity:1}61%{opacity:0}64%{opacity:1}67%{opacity:0}72%{opacity:1}75%{opacity:0}}
+.bob{animation:bob 3s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(1.6px)}}
+.sway{animation:sway 5s ease-in-out infinite alternate}
+@keyframes sway{from{transform:translateY(0)}to{transform:translateY(-1.5px)}}
+.plane{animation:fly 30s linear infinite}
+@keyframes fly{from{transform:translateX(-240px)}to{transform:translateX(1080px)}}
+.prop{transform-box:fill-box;transform-origin:center;animation:prop .08s linear infinite alternate}
+@keyframes prop{from{transform:scaleY(.55)}to{transform:scaleY(1)}}
+.para{animation:drop 10s linear infinite}
+@keyframes drop{0%{transform:translate(0,-300px);opacity:0}6%{opacity:1}88%{opacity:1}100%{transform:translate(46px,0);opacity:0}}
+.geyser{transform-box:fill-box;transform-origin:center bottom;animation:geyser 5s ease-out infinite;opacity:0}
+@keyframes geyser{0%{transform:scale(.2,.1);opacity:0}10%{opacity:.9}35%{transform:scale(1,1);opacity:.8}100%{transform:scale(1.3,.6);opacity:0}}
+.spray{animation:spray 1.2s ease-in-out infinite alternate}
+@keyframes spray{from{transform:translate(0,0);opacity:.9}to{transform:translate(-8px,-4px);opacity:.4}}
+.win{animation:glow 4s ease-in-out infinite alternate}
+@keyframes glow{from{opacity:.75}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
 </style>
 
 <div class="app">
   <div class="scene" id="scene">
     <svg id="svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" aria-label="Normandies kust den 6 juni 1944">
+      <g id="sky"></g>
       <g id="far"></g>
       <g id="world"></g>
     </svg>
@@ -151,6 +172,32 @@ function soldierY(x){ return x<520 ? 420 : G(x); }
 /* ---------- build the world ---------- */
 const NS="http://www.w3.org/2000/svg";
 const far=document.getElementById("far"), world=document.getElementById("world");
+const plane=(x,y,k,delay,dur)=>`<g class="plane" style="animation-delay:${delay}s;animation-duration:${dur}s"><g transform="translate(${x} ${y}) scale(${-k} ${k}) translate(-48 0)">
+  <path d="M0 0 Q4 -9 22 -10 L70 -9 Q86 -8 98 -3 L92 3 L22 5 Q4 5 0 0Z" fill="#5a6240"/>
+  <path d="M72 -9 L86 -27 L94 -27 L90 -6Z" fill="#4a5136"/>
+  <path d="M84 -4 L104 -8 L102 -2Z" fill="#4a5136"/>
+  <path d="M26 -3 L66 -3 L58 5 L34 5Z" fill="#4a5136"/>
+  <ellipse cx="46" cy="3" rx="28" ry="3" fill="#434a30"/>
+  <rect x="30" y="-1" width="16" height="8" rx="3.5" fill="#3b4129"/>
+  <g class="prop"><ellipse cx="28" cy="3" rx="1.8" ry="10" fill="#1f2118" opacity=".55"/></g>
+  <rect x="55" y="-9.6" width="3" height="14" fill="#ece9de"/><rect x="58" y="-9.6" width="3" height="14" fill="#1f1f1c"/><rect x="61" y="-9.6" width="3" height="14" fill="#ece9de"/><rect x="64" y="-9.6" width="3" height="14" fill="#1f1f1c"/><rect x="67" y="-9.6" width="3" height="14" fill="#ece9de"/>
+  <path d="M48 0 h18 M48 3 h18" stroke="#ece9de" stroke-width="2.5" opacity=".0"/>
+  <g fill="#cfd8d6" opacity=".75"><rect x="12" y="-6" width="3" height="3" rx=".6"/><rect x="17" y="-6" width="3" height="3" rx=".6"/><rect x="22" y="-6" width="3" height="3" rx=".6"/><rect x="40" y="-6.5" width="3" height="3" rx=".6"/></g>
+  <path d="M0 0 Q-6 -3 -2 -6" stroke="#2f321f" stroke-width="1" fill="none"/>
+ </g></g>`;
+const skyEl=document.getElementById("sky");
+skyEl.innerHTML=plane(0,120,1.1,0,34)+plane(-70,142,.95,-1.2,34)+plane(-140,106,1,-2.3,34)+plane(-40,196,.7,-14,42)+plane(-100,184,.65,-15.2,42)+plane(0,90,.55,-24,50);
+const ship=(x,k,fl)=>`<g transform="translate(${x} 362) scale(${k})"><g class="sway" style="animation-delay:${(x%7)/3}s" fill="#4a5459">
+  <path d="M0 -2 L96 -2 L126 -9 L116 10 L6 10Z"/>
+  <path d="M10 2 L112 2" stroke="#5f6c70" stroke-width="1.2"/>
+  <rect x="42" y="-16" width="24" height="14" fill="#3f484c"/><rect x="48" y="-26" width="11" height="10" fill="#3a4246"/>
+  <rect x="68" y="-25" width="8" height="23" fill="#434d51" transform="rotate(-4 72 -2)"/>
+  <line x1="54" y1="-26" x2="54" y2="-54" stroke="#3a4246" stroke-width="1.6"/><line x1="46" y1="-44" x2="62" y2="-44" stroke="#3a4246" stroke-width="1.4"/>
+  <rect x="86" y="-11" width="14" height="9" rx="2" fill="#3a4246"/><path d="M98 -8 L126 -14" stroke="#2f373b" stroke-width="3"/>
+  <rect x="16" y="-11" width="14" height="9" rx="2" fill="#3a4246"/><path d="M28 -8 L54 -13" stroke="#2f373b" stroke-width="3"/>
+  <polygon class="flash" style="animation-delay:${(x%5)*.9}s" points="126,-14 142,-20 136,-13 148,-11 130,-9" fill="#ffd27a"/>
+ </g></g>`;
+const destroyer=(x,k)=>`<g transform="translate(${x} 364) scale(${k})"><g class="sway" style="animation-delay:${(x%5)/2}s" fill="#505b60"><path d="M0 -1 L62 -1 L78 -6 L70 7 L4 7Z"/><rect x="24" y="-9" width="14" height="8" fill="#434d51"/><rect x="40" y="-14" width="5" height="13" fill="#434d51"/><line x1="30" y1="-9" x2="30" y2="-26" stroke="#3a4246" stroke-width="1.3"/><rect x="52" y="-7" width="8" height="6" rx="1.5" fill="#3a4246"/><path d="M58 -5 L74 -9" stroke="#2f373b" stroke-width="2"/></g></g>`;
 function farSVG(){
   let s=`<rect x="-400" y="360" width="3200" height="400" fill="#5d6d6e"/>`;
   // distant coastline
@@ -158,9 +205,8 @@ function farSVG(){
   for(let x=600;x<=2800;x+=40){p+=` L${x} ${372-26*smooth(clamp((x-600)/300,0,1))-6*Math.sin(x/90)}`}
   s+=`<path d="${p} L2800 420 L600 420Z" fill="#6f766a"/>`;
   // fleet on the horizon
-  [[-120,1],[0,.8],[90,1.2],[200,.7],[300,1],[420,.9],[520,.75]].forEach(([x,k])=>{
-    s+=`<g transform="translate(${x} 362) scale(${k})" fill="#4a5459"><path d="M0 0 L60 0 L52 8 L6 8Z"/><rect x="22" y="-10" width="14" height="10"/><rect x="28" y="-18" width="3" height="8"/></g>`;
-  });
+  s+=ship(-150,1.05)+destroyer(-20,.9)+ship(70,.85)+destroyer(170,.8)+ship(250,1.1)+destroyer(380,.75)+ship(450,.8);
+  [[-40,0],[210,2.1],[420,3.4]].forEach(([x,dl])=>{ s+=`<g class="puff" style="animation-delay:${dl}s"><circle cx="${x+120}" cy="340" r="12" fill="#8d8c86"/><circle cx="${x+132}" cy="330" r="9" fill="#a3a29b"/></g>`; });
   // barrage balloons
   [[40,250],[260,230],[480,262]].forEach(([x,y])=>{
     s+=`<line x1="${x}" y1="${y+6}" x2="${x+8}" y2="360" stroke="#4a5459" stroke-width=".8"/><ellipse cx="${x}" cy="${y}" rx="13" ry="6" fill="#5b656a"/>`;
@@ -188,20 +234,49 @@ function worldSVG(){
   // hedgerows (bocage)
   for(let x=2520;x<4500;x+=95){ if(x>3220&&x<3700) continue;
     s+=`<ellipse cx="${x}" cy="${G(x)-12}" rx="${34+(x%3)*6}" ry="20" fill="#3f4a2b"/>`; }
-  // bunker
+  // bunker (betong, kanon som pekar mot stranden)
   const bx=2860, by=G(bx);
-  s+=`<g><path d="M${bx-70} ${by+4} L${bx-58} ${by-44} L${bx+60} ${by-48} L${bx+70} ${by+4}Z" fill="#8a8a82"/>
-     <path d="M${bx-58} ${by-44} L${bx+60} ${by-48} L${bx+56} ${by-56} L${bx-52} ${by-52}Z" fill="#6d6d66"/>
-     <rect x="${bx-54}" y="${by-30}" width="44" height="7" fill="#1e1e1c"/>
-     <path d="M${bx-30} ${by-44} q20 -10 50 -2" stroke="#5f6a3c" stroke-width="6" fill="none"/>
-     <g class="smoke"><circle cx="${bx+20}" cy="${by-80}" r="16" fill="#9a9b98" opacity=".45"/><circle cx="${bx+42}" cy="${by-104}" r="22" fill="#9a9b98" opacity=".3"/></g></g>`;
-  // village
-  const house=(x,w,h,c)=>{const y=G(x);return `<g><rect x="${x-w/2}" y="${y-h}" width="${w}" height="${h+6}" fill="${c}"/><path d="M${x-w/2-6} ${y-h} L${x} ${y-h-w*.45} L${x+w/2+6} ${y-h}Z" fill="#5a4a3c"/><rect x="${x-8}" y="${y-h+14}" width="10" height="12" fill="#2f2b26"/></g>`};
-  s+=house(3260,70,48,"#cfc4aa")+house(3345,56,40,"#b9ae93")+house(3580,64,46,"#c6bba0")+house(3660,52,38,"#b3a88c");
+  s+=`<g>
+     <path d="M${bx-76} ${by+4} L${bx-70} ${by-38} L${bx-42} ${by-54} L${bx+54} ${by-54} L${bx+70} ${by-36} L${bx+78} ${by+4}Z" fill="#8f8f87"/>
+     <path d="M${bx-72} ${by-38} L${bx-42} ${by-58} L${bx+54} ${by-58} L${bx+72} ${by-36}Z" fill="#74746c"/>
+     <g stroke="#7b7b73" stroke-width="1.1" opacity=".8"><line x1="${bx-72}" y1="${by-22}" x2="${bx+76}" y2="${by-22}"/><line x1="${bx-74}" y1="${by-10}" x2="${bx+78}" y2="${by-10}"/><path d="M${bx+20} ${by-54} l-6 14 l8 8 l-4 14"/></g>
+     <rect x="${bx-62}" y="${by-36}" width="48" height="9" rx="1" fill="#171715"/>
+     <path d="M${bx-60} ${by-32} L${bx-92} ${by-33}" stroke="#2c2c29" stroke-width="5" stroke-linecap="round"/>
+     <polygon class="mg" points="${bx-94},${by-33} ${bx-112},${by-40} ${bx-104},${by-32} ${bx-116},${by-30} ${bx-102},${by-27}" fill="#ffd27a"/>
+     <rect x="${bx+30}" y="${by-34}" width="16" height="6" fill="#171715"/>
+     <path d="M${bx-48} ${by-54} q16 -12 52 -4 q24 4 40 0" stroke="#566236" stroke-width="7" fill="none" opacity=".85"/><path d="M${bx-30} ${by-52} l8 -8 l8 6 l10 -9 l9 8" stroke="#6b7745" stroke-width="3" fill="none"/>
+     <g fill="#b9a87e" stroke="#8a7a56" stroke-width="1"><ellipse cx="${bx-96}" cy="${by-2}" rx="11" ry="5"/><ellipse cx="${bx-78}" cy="${by-2}" rx="11" ry="5"/><ellipse cx="${bx-87}" cy="${by-8}" rx="11" ry="5"/></g>
+     <g class="smoke"><circle cx="${bx+20}" cy="${by-86}" r="16" fill="#9a9b98" opacity=".45"/><circle cx="${bx+42}" cy="${by-110}" r="22" fill="#9a9b98" opacity=".3"/></g></g>`;
+  // village (normandiska stenhus och kyrka)
+  const house=(x,w,h,c,i)=>{const y=G(x),l=x-w/2,t=y-h,rc=i%2?"#4f4a52":"#5a4a3c";
+    let blocks="";for(let r=0;r<Math.floor(h/9);r++){const yy=t+9*(r+1);blocks+=`<line x1="${l}" y1="${yy}" x2="${l+w}" y2="${yy}"/><line x1="${l+((r%2)?w*.3:w*.6)}" y1="${yy-9}" x2="${l+((r%2)?w*.3:w*.6)}" y2="${yy}"/>`;}
+    return `<g><rect x="${l}" y="${t}" width="${w}" height="${h+6}" fill="${c}"/><g stroke="rgba(60,50,35,.22)" stroke-width="1">${blocks}</g>
+    <path d="M${l-8} ${t+2} L${x} ${t-w*.5} L${l+w+8} ${t+2}Z" fill="${rc}"/><path d="M${l-8} ${t+2} L${x} ${t-w*.5}" stroke="rgba(0,0,0,.25)" stroke-width="2"/>
+    <g stroke="rgba(0,0,0,.18)" stroke-width="1">${[1,2,3].map(n=>`<path d="M${l-8+n*4} ${t+2-n*3} L${l+w+8-n*4} ${t+2-n*3}" />`).join("")}</g>
+    <rect x="${x+w*.18}" y="${t-w*.5+4}" width="8" height="${w*.26}" fill="#7c6f60"/><rect x="${x+w*.18-1}" y="${t-w*.5+2}" width="10" height="3" fill="#5d5247"/>
+    <rect x="${l+8}" y="${t+12}" width="11" height="14" fill="${i%2?"#e6c26a":"#2f2b26"}" class="${i%2?"win":""}"/><rect x="${l+3}" y="${t+12}" width="4" height="14" fill="#6c7f6a"/><rect x="${l+20}" y="${t+12}" width="4" height="14" fill="#6c7f6a"/>
+    <rect x="${l+w-19}" y="${t+12}" width="11" height="14" fill="#2f2b26"/><rect x="${l+w-24}" y="${t+12}" width="4" height="14" fill="#6c7f6a"/><rect x="${l+w-7}" y="${t+12}" width="4" height="14" fill="#6c7f6a"/>
+    <path d="M${x-7} ${y+6} v-22 a7 7 0 0 1 14 0 v22z" fill="#3a2f26"/></g>`};
+  s+=house(3260,74,50,"#d1c6ac",0)+house(3350,58,42,"#bdb298",1)+house(3580,66,48,"#c8bda2",2)+house(3664,54,40,"#b5aa8e",3);
+  // kyrka
   const cx=3470, cy=G(cx);
-  s+=`<g fill="#c2b79c"><rect x="${cx-40}" y="${cy-56}" width="80" height="62"/><rect x="${cx-14}" y="${cy-112}" width="28" height="60"/></g>
-      <path d="M${cx-18} ${cy-112} L${cx} ${cy-150} L${cx+18} ${cy-112}Z" fill="#5a4a3c"/><path d="M${cx-48} ${cy-56} L${cx} ${cy-80} L${cx+48} ${cy-56}Z" fill="#5a4a3c"/>
-      <path d="M${cx-6} ${cy-90} a6 6 0 0 1 12 0 v10 h-12z" fill="#2f2b26"/>`;
+  let cb="";for(let r=0;r<8;r++){const yy=cy-112+r*7.5;cb+=`<line x1="${cx-14}" y1="${yy}" x2="${cx+14}" y2="${yy}"/>`;}
+  s+=`<g><rect x="${cx-46}" y="${cy-54}" width="92" height="60" fill="#c8bda2"/>
+      <path d="M${cx-54} ${cy-54} L${cx} ${cy-84} L${cx+54} ${cy-54}Z" fill="#5a4a3c"/>
+      <g fill="#8a6f46"><path d="M${cx-38} ${cy-10} v-26 a6 6 0 0 1 12 0 v26z" opacity=".95"/><path d="M${cx+26} ${cy-10} v-26 a6 6 0 0 1 12 0 v26z"/></g>
+      <g fill="#6b8fa6" opacity=".9"><path d="M${cx-36} ${cy-12} v-22 a4 4 0 0 1 8 0 v22z"/><path d="M${cx+28} ${cy-12} v-22 a4 4 0 0 1 8 0 v22z"/></g>
+      <rect x="${cx-16}" y="${cy-116}" width="32" height="64" fill="#cfc4aa"/><g stroke="rgba(60,50,35,.22)" stroke-width="1">${cb}</g>
+      <rect x="${cx-19}" y="${cy-70}" width="6" height="18" fill="#bdb298"/><rect x="${cx+13}" y="${cy-70}" width="6" height="18" fill="#bdb298"/>
+      <path d="M${cx-20} ${cy-116} L${cx} ${cy-158} L${cx+20} ${cy-116}Z" fill="#4f4a52"/><line x1="${cx}" y1="${cy-158}" x2="${cx}" y2="${cy-174}" stroke="#2f2b26" stroke-width="2"/><line x1="${cx-5}" y1="${cy-168}" x2="${cx+5}" y2="${cy-168}" stroke="#2f2b26" stroke-width="2"/>
+      <circle cx="${cx}" cy="${cy-100}" r="8" fill="#efe8d4" stroke="#6a5a42" stroke-width="1.5"/><path d="M${cx} ${cy-100} v-5 M${cx} ${cy-100} l4 2" stroke="#2f2b26" stroke-width="1.3"/>
+      <path d="M${cx-5} ${cy-84} a5 9 0 0 1 10 0 v10 h-10z" fill="#2f2b26"/>
+      <path d="M${cx-8} ${cy+6} v-24 a8 8 0 0 1 16 0 v24z" fill="#3a2f26"/>
+     </g>`;
+  // fallskärmsjägare som dalar ner
+  [[cx-190,0,10],[cx+150,-3.5,11],[cx+260,-6.4,9.5],[cx-90,-8,12]].forEach(([px,dl,dur])=>{
+    const gy=G(px);
+    s+=`<g class="para" style="animation-delay:${dl}s;animation-duration:${dur}s"><g transform="translate(${px} ${gy-2})"><path d="M-22 -58 Q0 -86 22 -58Z" fill="#e8e3d3"/><path d="M-22 -58 Q0 -50 22 -58" stroke="#c9c3b0" fill="none"/><line x1="-21" y1="-58" x2="0" y2="-20" stroke="#d8d2bf" stroke-width="1"/><line x1="21" y1="-58" x2="0" y2="-20" stroke="#d8d2bf" stroke-width="1"/><rect x="-3" y="-24" width="6" height="12" rx="2" fill="#59583a"/><circle cx="0" cy="-27" r="3.6" fill="#c9a98b"/><path d="M-5 -28 Q0 -35 5 -28Z" fill="#4a4c33"/><line x1="-2" y1="-12" x2="-3" y2="-3" stroke="#3d3f2a" stroke-width="2.5"/><line x1="2" y1="-12" x2="3" y2="-3" stroke="#3d3f2a" stroke-width="2.5"/></g></g>`;
+  });
   // parachute caught on the steeple area tree
   s+=`<g opacity=".9"><path d="M${cx+70} ${cy-120} q30 -26 60 0" fill="#e6e1d2"/><line x1="${cx+70}" y1="${cy-120}" x2="${cx+100}" y2="${cy-80}" stroke="#e6e1d2"/><line x1="${cx+130}" y1="${cy-120}" x2="${cx+100}" y2="${cy-80}" stroke="#e6e1d2"/></g>`;
   // tricolore at the goal
@@ -219,7 +294,15 @@ function worldSVG(){
     s+=`<g class="puff" style="animation-delay:${dl}s"><circle cx="${x}" cy="${G(x)-14}" r="14" fill="#8d8c86"/><circle cx="${x+12}" cy="${G(x)-24}" r="11" fill="#a3a29b"/></g>`;
   });
   // landing craft (behind soldier: deck)
-  s+=`<rect x="250" y="${SEA-30}" width="170" height="14" fill="#55605a"/>`;
+  s+=`<g class="bob"><rect x="250" y="${SEA-30}" width="172" height="14" fill="#55605a"/>
+     ${[272,298,330,356,384].map((hx,i)=>`<g><rect x="${hx-5}" y="${SEA-44-(i%2)*2}" width="10" height="16" rx="2" fill="#59583a"/><circle cx="${hx}" cy="${SEA-48-(i%2)*2}" r="4.2" fill="#c9a98b"/><path d="M${hx-6} ${SEA-49-(i%2)*2} Q${hx} ${SEA-59-(i%2)*2} ${hx+6} ${SEA-49-(i%2)*2}Z" fill="#4a4c33"/></g>`).join("")}</g>`;
+  // avlägsna landstigningsfartyg och vattenstänk
+  [[640,.62,0],[900,.5,1.4],[1120,.44,2.6]].forEach(([x,k,dl])=>{
+    s+=`<g transform="translate(${x} ${SEA-8}) scale(${k})"><g class="bob" style="animation-delay:${dl}s"><path d="M0 0 L120 0 L112 22 L12 22Z" fill="#59635d"/><rect x="112" y="-18" width="6" height="18" fill="#4f5953"/><g fill="#59583a">${[16,34,52,70,88].map(hx=>`<circle cx="${hx}" cy="-6" r="5"/>`).join("")}</g></g></g>`;
+  });
+  [[760,0],[1010,1.8],[1250,3.1]].forEach(([x,dl])=>{
+    s+=`<g class="geyser" style="animation-delay:${dl}s"><path d="M${x-14} ${SEA+2} Q${x-6} ${SEA-30} ${x} ${SEA-52} Q${x+6} ${SEA-30} ${x+14} ${SEA+2}Z" fill="#dfe7e5"/><ellipse cx="${x}" cy="${SEA}" rx="22" ry="5" fill="#cfd9d7"/></g>`;
+  });
   // markers
   STAGES.forEach((st,i)=>{
     const mx=st.x+70, my=(i===0?SEA-60:G(mx)-30);
@@ -236,7 +319,10 @@ function worldSVG(){
       <path d="M-8 -40 Q0 -51 8 -40Z" fill="#4a4c33"/>
     </g></g>`;
   // landing craft hull + front water (cover the soldier's legs)
-  s+=`<path d="M240 ${SEA-18} L430 ${SEA-18} L420 ${SEA+8} L255 ${SEA+8}Z" fill="#6a756f"/><rect x="420" y="${SEA-34}" width="10" height="34" fill="#4f5953"/>`;
+  s+=`<g class="bob"><path d="M238 ${SEA-20} L424 ${SEA-20} L418 ${SEA+10} L252 ${SEA+10}Z" fill="#6a756f"/><path d="M238 ${SEA-20} L424 ${SEA-20}" stroke="#8a948d" stroke-width="3"/>
+     <g stroke="#59635d" stroke-width="1.2"><line x1="262" y1="${SEA-12}" x2="260" y2="${SEA+8}"/><line x1="300" y1="${SEA-12}" x2="299" y2="${SEA+8}"/><line x1="340" y1="${SEA-12}" x2="340" y2="${SEA+8}"/><line x1="380" y1="${SEA-12}" x2="381" y2="${SEA+8}"/></g>
+     <path d="M424 ${SEA-20} L452 ${SEA-8} L446 ${SEA+2} L420 ${SEA-6}Z" fill="#4f5953"/><rect x="236" y="${SEA-38}" width="8" height="22" fill="#4f5953"/><rect x="236" y="${SEA-38}" width="22" height="5" fill="#4f5953"/>
+     <g class="spray"><ellipse cx="452" cy="${SEA+6}" rx="12" ry="4" fill="#e3ebe8" opacity=".85"/><ellipse cx="238" cy="${SEA+8}" rx="14" ry="4" fill="#e3ebe8" opacity=".7"/></g></g>`;
   let w="M-600 "+(SEA+2);
   for(let x=-600;x<=1700;x+=20) w+=` L${x} ${(SEA+2+3*Math.sin(x/80*Math.PI*2)).toFixed(1)}`;
   w+=` L1700 1000 L-600 1000Z`;
