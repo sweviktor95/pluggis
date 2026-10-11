@@ -417,7 +417,110 @@ var struktur = [
     id: "kemi",
     titel: "Kemi",
     ikon: "🧪",
-    barn: []
+    barn: [
+      {
+        id: "kemi-vetenskap",
+        titel: "Kemi och vetenskap",
+        barn: [
+          { id: "kemi-vetenskap-vad-ar-kemi", titel: "Vad är kemi?" },
+          { id: "kemi-vetenskap-undersokningar", titel: "Undersökningar och labbsäkerhet" },
+          { id: "kemi-vetenskap-modeller-historia", titel: "Kemins modeller och historia" },
+          { id: "kemi-vetenskap-kallkritik-argument", titel: "Källkritik och argumentation" }
+        ]
+      },
+      {
+        id: "kemi-materia",
+        titel: "Materiens uppbyggnad",
+        barn: [
+          { id: "kemi-materia-amnen-blandningar", titel: "Ämnen och blandningar" },
+          { id: "kemi-materia-partikelmodellen", titel: "Partikelmodellen och aggregationsformer" },
+          { id: "kemi-materia-atomen", titel: "Atomer, elektroner och kärnpartiklar" },
+          { id: "kemi-materia-grundamnen", titel: "Grundämnen och periodiska systemet" },
+          { id: "kemi-materia-oforstorbarhet", titel: "Materiens kretslopp och oförstörbarhet" }
+        ]
+      },
+      {
+        id: "kemi-foreningar",
+        titel: "Kemiska föreningar",
+        barn: [
+          { id: "kemi-foreningar-molekyler", titel: "Molekylföreningar" },
+          { id: "kemi-foreningar-joner", titel: "Jonföreningar och salter" },
+          { id: "kemi-foreningar-formler", titel: "Kemiska formler och namn" }
+        ]
+      },
+      {
+        id: "kemi-reaktioner",
+        titel: "Kemiska reaktioner",
+        barn: [
+          { id: "kemi-reaktioner-omvandling", titel: "Hur ämnen omvandlas" },
+          { id: "kemi-reaktioner-reaktionsformler", titel: "Reaktionsformler och massans bevarande" },
+          { id: "kemi-reaktioner-forbranning", titel: "Förbränning och oxidation" },
+          { id: "kemi-reaktioner-syror-baser", titel: "Syror och baser" },
+          { id: "kemi-reaktioner-energi-hastighet", titel: "Energi och reaktionshastighet" }
+        ]
+      },
+      {
+        id: "kemi-separation",
+        titel: "Separation och analys",
+        barn: [
+          { id: "kemi-separation-separationsmetoder", titel: "Filtrering, indunstning och destillation" },
+          { id: "kemi-separation-fallning", titel: "Fällning" },
+          { id: "kemi-separation-ph-matning", titel: "pH-mätning" },
+          { id: "kemi-separation-identifiering", titel: "Identifiering av ämnen" }
+        ]
+      },
+      {
+        id: "kemi-vatten",
+        titel: "Vatten",
+        barn: [
+          { id: "kemi-vatten-losningsmedel", titel: "Vatten som lösningsmedel" },
+          { id: "kemi-vatten-losningar", titel: "Lösningar och koncentration" },
+          { id: "kemi-vatten-vatten-natur-kropp", titel: "Vatten i mark, växter och kroppen" },
+          { id: "kemi-vatten-vattenrening", titel: "Vattenrening" }
+        ]
+      },
+      {
+        id: "kemi-miljo",
+        titel: "Kemi i luft, mark och vatten",
+        barn: [
+          { id: "kemi-miljo-vaxthuseffekten", titel: "Växthuseffekten" },
+          { id: "kemi-miljo-forsurning-luft", titel: "Luftföroreningar och försurning" },
+          { id: "kemi-miljo-miljogifter", titel: "Miljögifter och deras spridning" },
+          { id: "kemi-miljo-overgodning", titel: "Näringsämnen och övergödning" }
+        ]
+      },
+      {
+        id: "kemi-kol",
+        titel: "Kolets kemi",
+        barn: [
+          { id: "kemi-kol-kolatomen", titel: "Kolatomens egenskaper" },
+          { id: "kemi-kol-kolets-kretslopp", titel: "Kolets kretslopp" },
+          { id: "kemi-kol-organiska-amnen", titel: "Organiska ämnen: kolväten och alkoholer" },
+          { id: "kemi-kol-branslen", titel: "Fossila och förnybara bränslen" }
+        ]
+      },
+      {
+        id: "kemi-kroppen",
+        titel: "Kemi i människokroppen",
+        barn: [
+          { id: "kemi-kroppen-kolhydrater", titel: "Kolhydrater" },
+          { id: "kemi-kroppen-proteiner", titel: "Proteiner" },
+          { id: "kemi-kroppen-fetter", titel: "Fetter" },
+          { id: "kemi-kroppen-energi-nara", titel: "Energi och näringsämnen i kroppen" }
+        ]
+      },
+      {
+        id: "kemi-material",
+        titel: "Material, produkter och hållbarhet",
+        barn: [
+          { id: "kemi-material-lakemedel", titel: "Läkemedel" },
+          { id: "kemi-material-polymerer", titel: "Plast och funktionsmaterial" },
+          { id: "kemi-material-batterier", titel: "Batterier" },
+          { id: "kemi-material-livscykler", titel: "Livscykler och miljöpåverkan" }
+        ]
+      },
+      { id: "kemi-repetition-np", titel: "Repetition inför nationella proven" }
+    ]
   },
   {
     id: "fysik",
