@@ -74,17 +74,10 @@ def simhtml(sc):
 <script>window.SCEN={json.dumps(sc,ensure_ascii=False)};</script>
 <script src="tr/assets.js"></script><script src="tr/motor.js"></script></body></html>'''
 def write_struct(struct):
-    ak={7:[],8:[],9:[]}
-    for a,nr,tit,nid,leaves in sorted(struct):
-        ak[a].append((tit,nid,leaves))
     def node(tit,nid,leaves,ind):
         sp=" "*ind
         return f'{sp}{{\n{sp}  id: "{nid}",\n{sp}  titel: "{tit}",\n{sp}  barn: [\n'+",\n".join(f'{sp}    {{ id: "{i}", titel: "{t}" }}' for i,t in leaves)+f"\n{sp}  ]\n{sp}}}"
-    blocks=[]
-    for a in (7,8,9):
-        if not ak[a]: continue
-        blocks.append(f'      {{\n        id: "historia-ak{a}",\n        titel: "Årskurs {a}",\n        barn: [\n'+",\n".join(node(t,n,l,10) for t,n,l in ak[a])+"\n        ]\n      }")
-    return ",\n".join(blocks)
+    return ",\n".join(node(t,n,l,6) for a,nr,t,n,l in sorted(struct,key=lambda x:x[1]))
 if __name__=="__main__":
     mods=sys.argv[1:]
     struct,manifest,scripts=gen(mods)
