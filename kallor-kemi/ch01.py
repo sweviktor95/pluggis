@@ -37,6 +37,7 @@ S.append(dict(id="amnen", nr="1.2", ikon="🧂", titel="Ämnen, material och bla
  intro="Allt omkring dig består av ämnen. Men vad är skillnaden mellan ett ämne, ett material och en blandning?",
  block=[
   ("p","Ett <strong>ämne</strong> är en sorts material med bestämda egenskaper, till exempel vatten, järn, socker eller koldioxid. Rent socker är ett ämne. Ett <strong>material</strong> är det något är gjort av, som trä, plast eller glas, och kan innehålla flera ämnen."),
+  ("bild","k1_blandningar","Partikelbild av ett grundämne, en kemisk förening och en blandning."),
   ("p","Ämnen känner vi igen på sina <strong>egenskaper</strong>: hur de ser ut, om de är fasta, flytande eller gas, om de löser sig i vatten, vid vilken temperatur de smälter och om de leder ström. Vatten smälter till exempel vid 0 °C och kokar vid ungefär 100 °C (vid normalt lufttryck)."),
   ("p","De flesta saker vi möter är <strong>blandningar</strong>. Luft är en blandning av gaser, saltvatten är en blandning av salt och vatten och granit är en blandning av olika mineral. I en blandning behåller varje ämne sina egenskaper, och man kan ofta skilja dem åt, till exempel genom att filtrera eller låta vatten avdunsta."),
   ("tab",["Exempel","Rent ämne eller blandning?"],[
@@ -56,12 +57,7 @@ S.append(dict(id="undersokning", nr="1.3", ikon="🔬", titel="Så gör man en s
  block=[
   ("p","Allt börjar med en <strong>undersökbar fråga</strong>, alltså en fråga som går att svara på genom att mäta eller observera. ”Är socker gott?” går inte att mäta. ”Hur påverkar vattnets temperatur hur snabbt socker löser sig?” går att undersöka."),
   ("p","Sedan formulerar man en <strong>hypotes</strong>, en förklaring eller förutsägelse som du kan pröva. Den bör ha ett ”därför att”, till exempel: ”Sockret löser sig snabbare i varmt vatten, därför att partiklarna rör sig snabbare.” En hypotes kan visa sig vara fel, och det är också ett resultat."),
-  ("tab",["Steg","Vad gör du?"],[
-    ["1. Fråga","Formulera en fråga som går att undersöka."],
-    ["2. Hypotes","Förutsäg svaret och motivera."],
-    ["3. Planera","Bestäm vad du ändrar, vad du mäter och vad som ska vara lika."],
-    ["4. Utför","Genomför, mät och skriv ner direkt."],
-    ["5. Värdera","Jämför med hypotesen, diskutera felkällor och nya frågor."]]),
+  ("bild","k1_undersokning","Undersökningens steg med exemplet socker i vatten. Värderingen leder ofta till nya frågor."),
   ("p","Det viktigaste i planeringen är <strong>variablerna</strong>. Den du ändrar kallas <em>oberoende variabel</em>. Det du mäter kallas <em>beroende variabel</em>. Allt annat måste hållas lika, annars vet du inte vad som gav skillnaden. Det kallas att ändra <strong>en sak i taget</strong>."),
   ("ruta","exempel","Exempel","Fråga: Hur påverkar vattnets temperatur lösningstiden för socker? Ändrar: temperaturen. Mäter: tiden tills inget socker syns. Lika: mängd socker, mängd vatten, glas och omrörning."),
   ("ruta","tank","Upprepa!","Gör helst varje försök minst tre gånger och räkna ut medelvärdet. Då påverkar en enstaka slarvig mätning resultatet mindre."),
@@ -80,6 +76,7 @@ S.append(dict(id="mata", nr="1.4", ikon="📊", titel="Mäta, dokumentera och v�
     ["35","52","49","55","52"],
     ["50","31","35","30","32"]]),
   ("p","Ett <strong>diagram</strong> gör mönster lättare att se. Sätt det du ändrade (temperatur) på x-axeln och det du mätte (tid) på y-axeln, och namnge axlarna med enhet. I ett kalkylblad skriver du in tabellen och använder en formel för medelvärdet, till exempel =MEDEL(B2:D2), och låter programmet göra diagrammet."),
+  ("bild","k1_diagram","Medelvärdet av lösningstiden vid tre temperaturer (tabellen ovan). Ju varmare vatten, desto kortare tid."),
   ("p","Till sist <strong>värderar</strong> du. Stämde resultatet med hypotesen? Vilka <strong>felkällor</strong> kan ha påverkat? Det kan vara att vattnet kyldes under försöket, att sockerkornen var olika stora eller att tiden avlästes olika varje gång. Skilj på slumpmässiga fel, som varierar, och systematiska fel, som alltid går åt samma håll."),
   ("ruta","fakta","Rapportens delar","En kort rapport har oftast: frågeställning, hypotes, material och metod, resultat (tabell och diagram), slutsats och diskussion om felkällor och förbättringar."),
   ("kolla",["Varför skriver man ned mätvärden direkt?","Vad ska stå på diagrammets axlar?","Ge två exempel på felkällor i en undersökning med lösningstid."]),
@@ -101,6 +98,7 @@ S.append(dict(id="sakerhet", nr="1.5", ikon="🥽", titel="Säkerhet och varning
     ["Figur med stjärna på bröstet","Allvarlig fara för hälsan på lång sikt"],
     ["Död fisk och träd","Farligt för miljön, särskilt vattenlevande djur"]]),
   ("p","Det finns nio piktogram. Tabellen visar sju av dem. De andra två är bomb som exploderar (explosivt) och gasflaska (gas under tryck). Du ser dem ofta på avloppsrengöring, tändvätska, sprayburkar och bekämpningsmedel."),
+  ("bild","k1_symboler","Sju av de nio faropiktogrammen i förenklad bild."),
   ("ruta","tank","Farligt eller riskabelt?","<strong>Fara</strong> är vad ett ämne kan göra. <strong>Risk</strong> är hur sannolikt det är att något händer, och det beror på hur mycket du utsätts för och hur du hanterar ämnet. Ett frätande ämne som är väl förvarat och används med skydd ger liten risk."),
   ("kolla",["Nämn tre grundregler i labbet.","Vad menas med signalorden Fara och Varning?","Vad är skillnaden mellan fara och risk?"]),
  ],
@@ -111,6 +109,7 @@ S.append(dict(id="modeller", nr="1.6", ikon="🧩", titel="Modeller – förenkl
  intro="Kemister kan inte se atomer med blotta ögat. Därför använder de modeller som hjälper oss att förklara det vi observerar.",
  block=[
   ("p","En <strong>förklaringsmodell</strong> är en förenklad bild eller idé som förklarar och förutsäger hur något fungerar. Den är inte hela sanningen, utan ett verktyg. En karta är en bra jämförelse: den visar vägen men inte varje sten."),
+  ("bild","k1_partikelmodell","Partikelmodellen för fast form, vätska och gas."),
   ("p","Ett viktigt exempel är <strong>partikelmodellen</strong>. Den säger att allt består av mycket små partiklar som är i ständig rörelse. I en fast form ligger partiklarna tätt och vibrerar på sina platser. I vätska glider de förbi varandra. I gas rör de sig fritt med stora avstånd."),
   ("p","Med modellen kan du förklara varför socker löser sig. Vattnets partiklar rör sig och drar loss sockermolekyler från sockerkornet. Varmare vatten betyder att partiklarna rör sig snabbare, och då går det oftast snabbare att lösa upp. Modellen hjälper dig alltså att förklara ett samband och göra en hypotes."),
   ("ruta","tank","Alla modeller har gränser","En modell passar för vissa frågor men inte för alla. Kulor som symboliserar partiklar kan visa gaser och vätskor. De säger däremot inget om hur partiklarna är uppbyggda inuti. Då behövs en annan modell, till exempel atommodellen med kärna och elektroner."),
@@ -141,6 +140,7 @@ S.append(dict(id="kallkritik", nr="1.8", ikon="🧐", titel="Källkritik och arg
  intro="Du möter påståenden om kemi i sociala medier, reklam och nyheter varje dag. Hur avgör du vad du kan lita på?",
  block=[
   ("p","<strong>Källkritik</strong> betyder att granska information. Ställ frågor om <strong>avsändaren</strong> (vem skriver och vad kan hen?), <strong>syftet</strong> (informera, sälja, påverka?), <strong>belägg</strong> (finns mätningar eller studier?), <strong>aktualitet</strong> (är det nytt eller gammalt?) och om informationen är <strong>relevant</strong> för din fråga."),
+  ("bild","k1_kallkritik","Frågor att ställa när du granskar en källa."),
   ("tab",["Mer trovärdigt","Mer att vara försiktig med"],[
     ["Myndigheter, universitet och forskningsartiklar","Anonyma sidor och inlägg utan källor"],
     ["Källor som visar hur de vet något","Påståenden som ”alla vet” eller ”läkarna döljer”"],

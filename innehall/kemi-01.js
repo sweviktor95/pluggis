@@ -31,7 +31,9 @@ innehall["kemi-vetenskap-vad-ar-kemi"] = {
     "<div class=\"ruta ruta-tank\"><span class=\"ruta-rubrik\">Naturligt eller konstgjort?</span>Ett ämne är inte farligt för att det är konstgjort och inte ofarligt för att det är naturligt. Svamp kan innehålla starka gifter, och många läkemedel är gjorda i labb. Det som avgör är ämnets egenskaper och hur mycket man utsätts för.</div>"
    ],
    "kontrollfraga": "1. Vad är skillnaden mellan ett ämne och en blandning? 2. Är vatten en kemikalie? Förklara. 3. Ge två egenskaper som kan användas för att känna igen ett ämne.",
-   "kontrollsvar": "1. Ett ämne har bestämda egenskaper. En blandning innehåller flera ämnen som behåller sina egenskaper. 2. Ja. Ordet kemikalie betyder ämnen och blandningar, och vatten är ett ämne. 3. T.ex. smältpunkt, kokpunkt, löslighet i vatten eller om det leder ström."
+   "kontrollsvar": "1. Ett ämne har bestämda egenskaper. En blandning innehåller flera ämnen som behåller sina egenskaper. 2. Ja. Ordet kemikalie betyder ämnen och blandningar, och vatten är ett ämne. 3. T.ex. smältpunkt, kokpunkt, löslighet i vatten eller om det leder ström.",
+   "bild": "bilder/kemi-k1_blandningar.png",
+   "bildText": "Partikelbild av ett grundämne, en kemisk förening och en blandning."
   }
  ],
  "begrepp": [
@@ -74,13 +76,14 @@ innehall["kemi-vetenskap-undersokningar"] = {
     "Kemister svarar på sina frågor genom att undersöka. En bra undersökning är planerad så att man kan lita på svaret.",
     "Allt börjar med en <strong>undersökbar fråga</strong>, alltså en fråga som går att svara på genom att mäta eller observera. ”Är socker gott?” går inte att mäta. ”Hur påverkar vattnets temperatur hur snabbt socker löser sig?” går att undersöka.",
     "Sedan formulerar man en <strong>hypotes</strong>, en förklaring eller förutsägelse som du kan pröva. Den bör ha ett ”därför att”, till exempel: ”Sockret löser sig snabbare i varmt vatten, därför att partiklarna rör sig snabbare.” En hypotes kan visa sig vara fel, och det är också ett resultat.",
-    "<table class=\"mini-tabell\"><thead><tr><th>Steg</th><th>Vad gör du?</th></tr></thead><tbody><tr><td>1. Fråga</td><td>Formulera en fråga som går att undersöka.</td></tr><tr><td>2. Hypotes</td><td>Förutsäg svaret och motivera.</td></tr><tr><td>3. Planera</td><td>Bestäm vad du ändrar, vad du mäter och vad som ska vara lika.</td></tr><tr><td>4. Utför</td><td>Genomför, mät och skriv ner direkt.</td></tr><tr><td>5. Värdera</td><td>Jämför med hypotesen, diskutera felkällor och nya frågor.</td></tr></tbody></table>",
     "Det viktigaste i planeringen är <strong>variablerna</strong>. Den du ändrar kallas <em>oberoende variabel</em>. Det du mäter kallas <em>beroende variabel</em>. Allt annat måste hållas lika, annars vet du inte vad som gav skillnaden. Det kallas att ändra <strong>en sak i taget</strong>.",
     "<div class=\"ruta ruta-fakta\"><span class=\"ruta-rubrik\">Exempel</span>Fråga: Hur påverkar vattnets temperatur lösningstiden för socker? Ändrar: temperaturen. Mäter: tiden tills inget socker syns. Lika: mängd socker, mängd vatten, glas och omrörning.</div>",
     "<div class=\"ruta ruta-tank\"><span class=\"ruta-rubrik\">Upprepa!</span>Gör helst varje försök minst tre gånger och räkna ut medelvärdet. Då påverkar en enstaka slarvig mätning resultatet mindre.</div>"
    ],
    "kontrollfraga": "1. Varför ska en hypotes ha en motivering? 2. Vad är oberoende och beroende variabel? 3. Varför ska man bara ändra en sak i taget?",
-   "kontrollsvar": "1. Så att den bygger på en tänkt förklaring och går att pröva, inte bara en gissning. 2. Oberoende: det du ändrar. Beroende: det du mäter. 3. Annars vet man inte vilken förändring som orsakade skillnaden i resultatet."
+   "kontrollsvar": "1. Så att den bygger på en tänkt förklaring och går att pröva, inte bara en gissning. 2. Oberoende: det du ändrar. Beroende: det du mäter. 3. Annars vet man inte vilken förändring som orsakade skillnaden i resultatet.",
+   "bild": "bilder/kemi-k1_undersokning.png",
+   "bildText": "Undersökningens steg med exemplet socker i vatten. Värderingen leder ofta till nya frågor."
   },
   {
    "ikon": "📊",
@@ -95,7 +98,9 @@ innehall["kemi-vetenskap-undersokningar"] = {
     "<div class=\"ruta ruta-fakta\"><span class=\"ruta-rubrik\">Rapportens delar</span>En kort rapport har oftast: frågeställning, hypotes, material och metod, resultat (tabell och diagram), slutsats och diskussion om felkällor och förbättringar.</div>"
    ],
    "kontrollfraga": "1. Varför skriver man ned mätvärden direkt? 2. Vad ska stå på diagrammets axlar? 3. Ge två exempel på felkällor i en undersökning med lösningstid.",
-   "kontrollsvar": "1. För att inte glömma eller komma ihåg fel, och för att kunna lita på resultaten. 2. Det du ändrade på x-axeln och det du mätte på y-axeln, båda med namn och enhet. 3. T.ex. att vattnet kyls under försöket, olika stora sockerkorn eller att tiden läses av olika."
+   "kontrollsvar": "1. För att inte glömma eller komma ihåg fel, och för att kunna lita på resultaten. 2. Det du ändrade på x-axeln och det du mätte på y-axeln, båda med namn och enhet. 3. T.ex. att vattnet kyls under försöket, olika stora sockerkorn eller att tiden läses av olika.",
+   "bild": "bilder/kemi-k1_diagram.png",
+   "bildText": "Medelvärdet av lösningstiden vid tre temperaturer (tabellen ovan). Ju varmare vatten, desto kortare tid."
   },
   {
    "ikon": "🥽",
@@ -109,7 +114,9 @@ innehall["kemi-vetenskap-undersokningar"] = {
     "<div class=\"ruta ruta-tank\"><span class=\"ruta-rubrik\">Farligt eller riskabelt?</span><strong>Fara</strong> är vad ett ämne kan göra. <strong>Risk</strong> är hur sannolikt det är att något händer, och det beror på hur mycket du utsätts för och hur du hanterar ämnet. Ett frätande ämne som är väl förvarat och används med skydd ger liten risk.</div>"
    ],
    "kontrollfraga": "1. Nämn tre grundregler i labbet. 2. Vad menas med signalorden Fara och Varning? 3. Vad är skillnaden mellan fara och risk?",
-   "kontrollsvar": "1. T.ex. skyddsglasögon, smaka aldrig, upptorkat spill, ventilation, bundet hår. 2. De visar hur allvarlig faran är. Fara är den allvarligare nivån, Varning den lindrigare. 3. Fara är vad ämnet kan göra, risk är hur sannolikt det är att det händer vid användningen."
+   "kontrollsvar": "1. T.ex. skyddsglasögon, smaka aldrig, upptorkat spill, ventilation, bundet hår. 2. De visar hur allvarlig faran är. Fara är den allvarligare nivån, Varning den lindrigare. 3. Fara är vad ämnet kan göra, risk är hur sannolikt det är att det händer vid användningen.",
+   "bild": "bilder/kemi-k1_symboler.png",
+   "bildText": "Sju av de nio faropiktogrammen i förenklad bild."
   }
  ],
  "begrepp": [
@@ -158,7 +165,9 @@ innehall["kemi-vetenskap-modeller-historia"] = {
     "<table class=\"mini-tabell\"><thead><tr><th>Modell</th><th>Bra för att förklara</th><th>Begränsning</th></tr></thead><tbody><tr><td>Partikelmodell (kulor)</td><td>Fast, flytande och gas, lösning, diffusion</td><td>Visar inte hur partiklarna är uppbyggda</td></tr><tr><td>Atommodell med kärna och elektroner</td><td>Hur atomer binds ihop</td><td>Förenklad bild av elektronerna</td></tr><tr><td>Formler som H<sub>2</sub>O</td><td>Vilka atomer och hur många som ingår</td><td>Visar inte formen på molekylen</td></tr></tbody></table>"
    ],
    "kontrollfraga": "1. Vad är en förklaringsmodell? 2. Hur förklarar partikelmodellen att socker löser sig snabbare i varmt vatten? 3. Varför ändras modeller?",
-   "kontrollsvar": "1. En förenklad bild eller idé som förklarar och förutsäger hur något fungerar. 2. I varmt vatten rör sig partiklarna snabbare och drar därför snabbare loss sockermolekyler från sockerkornet. 3. Nya undersökningar ger resultat som den gamla modellen inte kan förklara."
+   "kontrollsvar": "1. En förenklad bild eller idé som förklarar och förutsäger hur något fungerar. 2. I varmt vatten rör sig partiklarna snabbare och drar därför snabbare loss sockermolekyler från sockerkornet. 3. Nya undersökningar ger resultat som den gamla modellen inte kan förklara.",
+   "bild": "bilder/kemi-k1_partikelmodell.png",
+   "bildText": "Partikelmodellen för fast form, vätska och gas."
   },
   {
    "ikon": "⚗️",
@@ -221,7 +230,9 @@ innehall["kemi-vetenskap-kallkritik-argument"] = {
     "<div class=\"ruta ruta-tank\"><span class=\"ruta-rubrik\">Vad skulle få dig att ändra dig?</span>Ett bra argument tar hänsyn till bevis. Fråga dig själv vilka belägg som skulle kunna få dig att ändra åsikt. Det är ett tecken på ett vetenskapligt sätt att tänka.</div>"
    ],
    "kontrollfraga": "1. Nämn tre frågor man kan ställa till en källa. 2. Är ”plast är fult” ett påstående som kan prövas? 3. Varför är ”kemikaliefritt” ett problematiskt ord?",
-   "kontrollsvar": "1. T.ex. vem avsändaren är, vad syftet är, vilka belägg som finns, om informationen är aktuell. 2. Nej, det är en åsikt. 3. Allt består av kemikalier, så ordet kan inte vara sant. Det säger heller inget om hur farlig produkten är."
+   "kontrollsvar": "1. T.ex. vem avsändaren är, vad syftet är, vilka belägg som finns, om informationen är aktuell. 2. Nej, det är en åsikt. 3. Allt består av kemikalier, så ordet kan inte vara sant. Det säger heller inget om hur farlig produkten är.",
+   "bild": "bilder/kemi-k1_kallkritik.png",
+   "bildText": "Frågor att ställa när du granskar en källa."
   },
   {
    "ikon": "🔎",

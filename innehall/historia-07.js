@@ -18,7 +18,9 @@ innehall["historia-industrialiseringen-fore"] = {
     "<table class=\"mini-tabell\"><thead><tr><th>År</th><th>Händelse</th></tr></thead><tbody><tr><td>Före 1700</td><td>Jordbrukssamhälle: de flesta lever på landsbygden</td></tr><tr><td>1700-talet</td><td>Nya odlingsmetoder, potatisen sprids, befolkningen växer</td></tr><tr><td>Ca 1760</td><td>Industrialiseringen börjar i Storbritannien</td></tr><tr><td>1800-talet</td><td>Industrialiseringen sprider sig till Europa och USA</td></tr></tbody></table>"
    ],
    "kontrollfraga": "1. Vad är ett jordbrukssamhälle? 2. Nämn två förändringar som ingick i jordbruksrevolutionen. 3. Varför är jordbruksrevolutionen en orsak till industrialiseringen?",
-   "kontrollsvar": "1. Ett samhälle där de flesta lever på att odla jorden och arbetar på landsbygden. 2. T.ex. nya växtföljder, potatisodling, inhägnader (England) och skiftesreformer (Sverige). 3. Fler fick mat och befolkningen växte, och många saknade jord och sökte arbete i städer och fabriker."
+   "kontrollsvar": "1. Ett samhälle där de flesta lever på att odla jorden och arbetar på landsbygden. 2. T.ex. nya växtföljder, potatisodling, inhägnader (England) och skiftesreformer (Sverige). 3. Fler fick mat och befolkningen växte, och många saknade jord och sökte arbete i städer och fabriker.",
+   "bild": "bilder/historia-h7_fore.png",
+   "bildText": "Så skilde sig jordbrukssamhället från industrisamhället."
   },
   {
    "ikon": "🇬🇧",
@@ -32,7 +34,9 @@ innehall["historia-industrialiseringen-fore"] = {
     "<div class=\"ruta ruta-historia\"><span class=\"ruta-rubrik\">Historikerna är oense</span>Vissa forskare menar att kolet var avgörande. Andra lyfter fram att arbetskraft var dyr i Storbritannien, vilket gjorde det lönsamt att uppfinna maskiner som sparade arbete. Det är ett bra exempel på att historiska förklaringar sällan bara har en orsak. Mer om detta i fördjupningen.</div>"
    ],
    "kontrollfraga": "1. Nämn tre orsaker till att industrialiseringen började i Storbritannien. 2. Varför ersatte kolet ved som bränsle? 3. Vilken roll spelade kolonierna?",
-   "kontrollsvar": "1. T.ex. kol och järn, kapital, kolonier och handel, jordbruksrevolutionen. 2. Skogen hade blivit sällsynt och kol fanns det gott om och det var lätt att transportera. 3. De gav råvaror som bomull och marknader där brittiska varor kunde säljas."
+   "kontrollsvar": "1. T.ex. kol och järn, kapital, kolonier och handel, jordbruksrevolutionen. 2. Skogen hade blivit sällsynt och kol fanns det gott om och det var lätt att transportera. 3. De gav råvaror som bomull och marknader där brittiska varor kunde säljas.",
+   "bild": "bilder/historia-h7_britannien.png",
+   "bildText": "Flera orsaker samverkade när industrialiseringen började i Storbritannien."
   },
   {
    "ikon": "⚙️",
@@ -48,8 +52,8 @@ innehall["historia-industrialiseringen-fore"] = {
    ],
    "kontrollfraga": "1. Hur fungerar en ångmaskin i korta drag? 2. Varför flyttade textilarbetet från hemmen till fabriker? 3. Vad betydde järnvägen?",
    "kontrollsvar": "1. Kol bränns för att koka vatten, ångan trycker en kolv som sätter maskiner i rörelse. 2. Maskinerna var stora och dyra och drevs av en gemensam kraftkälla, så de samlades i fabriker. 3. Varor och människor kunde transporteras snabbt och billigt, och marknader och orter knöts ihop.",
-   "bild": "bilder/historia-industri.png",
-   "bildText": "Fabriker med skorstenar blev ett nytt inslag i landskapet."
+   "bild": "bilder/historia-h7_maskiner.png",
+   "bildText": "Ångmaskinens princip: eld, ånga, kolv och hjul."
   }
  ],
  "begrepp": [
@@ -106,7 +110,9 @@ innehall["historia-industrialiseringen-fabrik"] = {
     "<div class=\"ruta ruta-tank\"><span class=\"ruta-rubrik\">Varför ändrades lagarna?</span>Fundera: Vilka grupper kan ha drivit på för lagarna? Läkare, reformvänner, arbetare, politiker? Vad tror du att fabriksägarna tyckte? Lagar kommer sällan av sig själva. Någon måste kräva dem.</div>"
    ],
    "kontrollfraga": "1. Nämn tre saker som gjorde fabriksarbetet hårt. 2. Vad kunde vara nytt med barnarbetet i fabriken jämfört med på gården? 3. Vad stadgade den brittiska fabrikslagen 1833?",
-   "kontrollsvar": "1. T.ex. långa dagar, farliga maskiner, buller och damm, böter. 2. Långa arbetsdagar, tvång att följa maskinen och stora risker för olyckor. 3. Barn under nio år fick inte arbeta i textilfabriker, barn 9–13 år fick arbeta högst nio timmar, de skulle få skolgång och inspektörer skulle kontrollera reglerna."
+   "kontrollsvar": "1. T.ex. långa dagar, farliga maskiner, buller och damm, böter. 2. Långa arbetsdagar, tvång att följa maskinen och stora risker för olyckor. 3. Barn under nio år fick inte arbeta i textilfabriker, barn 9–13 år fick arbeta högst nio timmar, de skulle få skolgång och inspektörer skulle kontrollera reglerna.",
+   "bild": "bilder/historia-h7_fabrik.png",
+   "bildText": "Arbetstid per dag för vuxna och barn, före och efter lagarna."
   },
   {
    "ikon": "🏙️",
@@ -136,7 +142,9 @@ innehall["historia-industrialiseringen-fabrik"] = {
     "<div class=\"ruta ruta-historia\"><span class=\"ruta-rubrik\">Orsak och konsekvens</span>Orsak: dåliga arbetsvillkor och lön, samt ett nytt sätt att tänka om rättvisa. Konsekvens: fackföreningar, partier, nya lagar och med tiden en trygg arbetsmarknad. Arbetarrörelsen är en viktig förklaring till att många länder fick demokrati och välfärd.</div>"
    ],
    "kontrollfraga": "1. Vad är en strejk, och vad är en lockout? 2. Vilka krävde Socialdemokraterna i början? 3. Varför är arbetarrörelsen viktig för demokratins framväxt?",
-   "kontrollsvar": "1. Strejk: arbetarna lägger ned arbetet. Lockout: arbetsgivaren stänger ute arbetarna. 2. T.ex. allmän rösträtt, kortare arbetsdag och bättre skydd för arbetare. 3. Den krävde rösträtt och rättigheter för vanliga människor och organiserade många i politiken."
+   "kontrollsvar": "1. Strejk: arbetarna lägger ned arbetet. Lockout: arbetsgivaren stänger ute arbetarna. 2. T.ex. allmän rösträtt, kortare arbetsdag och bättre skydd för arbetare. 3. Den krävde rösträtt och rättigheter för vanliga människor och organiserade många i politiken.",
+   "bild": "bilder/historia-h7_rorelsen.png",
+   "bildText": "Från enskild arbetare till fackförening och parti."
   }
  ],
  "begrepp": [
@@ -193,7 +201,9 @@ innehall["historia-industrialiseringen-sverige"] = {
     "Orsakerna var fattigdom, dåliga skördar, att många saknade egen jord, och drömmen om ett bättre liv. Lockelserna var billig jord och arbete i Amerika. Svenskar flyttade till Mellanvästern, särskilt Minnesota och Illinois. Amerikabreven hem berättade vad det var som lockade."
    ],
    "kontrollfraga": "1. Vilka naturtillgångar var viktiga för svensk industri? 2. Nämn två svenska personer som betydde mycket och vad de gjorde. 3. Varför flyttade så många svenskar till Amerika?",
-   "kontrollsvar": "1. Skog, järnmalm och vattenkraft. 2. T.ex. Alfred Nobel (dynamit 1867) och L M Ericsson (telefoner, verkstad 1876); Göransson (stål 1858). 3. Fattigdom, brist på jord, missväxt och hopp om ett bättre liv, samt att befolkningen växte."
+   "kontrollsvar": "1. Skog, järnmalm och vattenkraft. 2. T.ex. Alfred Nobel (dynamit 1867) och L M Ericsson (telefoner, verkstad 1876); Göransson (stål 1858). 3. Fattigdom, brist på jord, missväxt och hopp om ett bättre liv, samt att befolkningen växte.",
+   "bild": "bilder/historia-h7_sverige.png",
+   "bildText": "Sveriges industri växer samtidigt som många utvandrar (siffror ungefär)."
   },
   {
    "ikon": "🌍",

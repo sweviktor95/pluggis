@@ -20,6 +20,7 @@ S.append(dict(id="fore", nr="7.1", ikon="🌾", titel="Livet före industrialise
  intro="Under tusentals år levde de allra flesta människor på landet och arbetade med jorden. Det kallas ett <strong>jordbrukssamhälle</strong>. Det är ur det samhället som industrisamhället växer fram.",
  block=[
   ("p","I ett jordbrukssamhälle gör familjen det mesta själv. Man odlar maten, spinner garn, väver tyg och bygger redskap. Arbetet följer årstiderna: så på våren, skörda på hösten, överleva vintern. Det mesta arbetet görs med människors och djurs muskelkraft, och med vind och vatten i kvarnar."),
+  ("bild","h7_fore","Så skilde sig jordbrukssamhället från industrisamhället."),
   ("p","Samhället var också mycket ojämlikt. En liten grupp ägde mycket av marken, medan många var torpare, drängar och pigor som arbetade åt andra. Missväxt kunde betyda hunger för alla."),
   ("ruta","tank","Vad betyder ”industri”?","Ordet <strong>industri</strong> betyder produktion av varor i stor skala, ofta med maskiner och i fabriker. <strong>Industrialisering</strong> är den process då ett samhälle går från att leva mest på jordbruk till att leva mest på industri och tjänster."),
   ("p","Före industrialiseringen skedde också en förändring på landsbygden, som kallas <strong>jordbruksrevolutionen</strong>. Nya metoder gjorde att bönderna kunde odla mer på samma mark. Man lät inte längre åkern vila varje år utan växlade mellan olika grödor. Potatisen kom att bli en viktig, billig mat. I England stängdes gemensam mark in av jordägare (<em>inhägnader</em>), och i Sverige slogs spridda jordlotter ihop i så kallade skiftesreformer."),
@@ -35,6 +36,7 @@ S.append(dict(id="britannien", nr="7.2", ikon="🇬🇧", titel="Varför börjad
  intro="Industrialiseringen började i Storbritannien omkring 1760. Historiker är inte helt överens om exakt varför just där. De pekar på flera orsaker som samverkade.",
  block=[
   ("p","Det som brukar nämnas först är <strong>kol</strong>. Storbritannien hade mycket kol, ofta nära kusten eller floder så att det gick att transportera. Skogen hade blivit sällsynt, så kolet ersatte ved som bränsle. Även <strong>järnmalm</strong> fanns i landet."),
+  ("bild","h7_britannien","Flera orsaker samverkade när industrialiseringen började i Storbritannien."),
   ("p","Det fanns också <strong>kapital</strong>, alltså pengar att investera. Rika köpmän och bankirer ville satsa på nya företag. Landet hade dessutom en tämligen stabil politik, och uppfinnare kunde skydda sina idéer med patent."),
   ("p","Den tredje viktiga orsaken är <strong>kolonierna och handeln</strong>. Storbritannien hade ett stort rike med kolonier i bland annat Nordamerika, Karibien och Indien. Därifrån kom råvaror som bomull och socker, och där fanns också köpare till brittiska varor. Mycket av den bomull som användes kom från plantager där slavar tvingades arbeta, och det är en mörk sida av historien."),
   ("tab",["Faktor","Hur den hjälpte industrialiseringen"],[
@@ -53,11 +55,11 @@ S.append(dict(id="maskiner", nr="7.3", ikon="⚙️", titel="Ångmaskin, textil 
  intro="Tre uppfinningar och branscher hänger ihop och blev symboler för industrialiseringen: ångmaskinen, textilindustrin och järnvägen.",
  block=[
   ("p","<strong>Ångmaskinen</strong> bränner kol för att koka vatten. Ångan driver en kolv, och kolven får hjul och maskiner att röra sig. Redan 1712 byggde Thomas Newcomen en ångmaskin för att pumpa vatten ur gruvor. James Watt förbättrade den, och 1769 fick han patent på sin version. Hans maskin kunde driva en axel och därmed olika maskiner."),
+  ("bild","h7_maskiner","Ångmaskinens princip: eld, ånga, kolv och hjul."),
   ("p","Det som gjorde ångmaskinen så viktig var att den inte var beroende av vind eller vattenfall. Fabriker kunde ligga var som helst, till exempel mitt i en stad."),
   ("p","<strong>Textilindustrin</strong> blev först ut. Tidigare spann och vävde man för hand i hemmen. Nu kom maskiner som spinnmaskinen och den mekaniska vävstolen, och garn och tyg kunde tillverkas mycket snabbare och billigare. Därför flyttade arbetet från hemmen till stora fabriker. Bomullstyg blev en av Storbritanniens viktigaste exportvaror."),
   ("p","<strong>Järnvägen</strong> kom när ångmaskinen sattes på hjul. Banan mellan Stockton och Darlington öppnades 1825, och Liverpool–Manchester följde 1830. Tåg kunde frakta tung last och många människor snabbt. Tåget gjorde att varor, människor och nyheter rörde sig på ett helt nytt sätt."),
   ("ruta","visste","Visste du?","Lokomotivet Rocket, konstruerat av Robert Stephenson i familjeföretaget Stephenson & Co, vann en tävling i Rainhill 1829 inför öppnandet av Liverpool–Manchester-banan. Vid de berömda provkörningarna i Rainhill 1829 nådde det som mest omkring 48 km/h när det inte drog några vagnar, vilket var otroligt snabbt på den tiden."),
-  ("bild","industri","Fabriker med skorstenar blev ett nytt inslag i landskapet."),
   ("tidslinje",[("1712","Newcomen bygger en ångmaskin för gruvor"),("1769","Watt får patent på sin förbättrade ångmaskin"),("1825","Stockton–Darlington, tidig järnväg"),("1830","Liverpool–Manchester öppnas"),("1856","Första järnvägen för allmän trafik i Sverige")]),
   ("kolla",["Hur fungerar en ångmaskin i korta drag?","Varför flyttade textilarbetet från hemmen till fabriker?","Vad betydde järnvägen?"]),
  ],
@@ -68,6 +70,7 @@ S.append(dict(id="fabriken", nr="7.4", ikon="🏭", titel="Fabriken och arbetsvi
  intro="Fabriken förändrade arbetet. Nu styrdes dagen av klockan och maskinen, inte av årstiderna och solen. Ägarna tjänade pengar, men för många arbetare var villkoren hårda.",
  block=[
   ("p","Arbetsdagen var lång, ofta tolv timmar eller mer, sex dagar i veckan. Fabriken kunde vara varm, dammig och bullrig, och maskinerna saknade skydd. Olyckor var vanliga. Den som kom för sent kunde få böter eller sparken."),
+  ("bild","h7_fabrik","Arbetstid per dag för vuxna och barn, före och efter lagarna."),
   ("p","<strong>Barnarbete</strong> var också vanligt. Barn var billiga att anställa och små nog att krypa under maskiner eller in i trånga gruvgångar. Men barnarbete var inget nytt. Barn hade alltid hjälpt till på gården. Det som var nytt var arbetstiderna och farorna i fabriken."),
   ("kalla","Beskrivning av barnarbete (konstruerad källa)","Jag var nio år när jag började i spinneriet. Vi gick upp före gryningen och stod på fötter hela dagen. Om jag somnade fick jag stryk av förmannen. På kvällen orkade jag knappt äta.","Konstruerad källa baserad på vittnesmål från brittiska fabriksbarn under första hälften av 1800-talet."),
   ("p","Så småningom kom lagar för att skydda barnen. I Storbritannien förbjöd en fabrikslag 1833 att barn under nio år arbetade i textilfabriker. Barn mellan nio och tretton fick arbeta högst nio timmar per dag och skulle få två timmars skolgång varje dag. Lagen skapade också fyra inspektörer som skulle kontrollera att reglerna följdes. Reglerna gällde dock bara textilfabriker, och de följdes inte alltid."),
@@ -99,6 +102,7 @@ S.append(dict(id="rorelsen", nr="7.6", ikon="✊", titel="Arbetarrörelsen",
  intro="Arbetarna var många, men ensamma hade de ingen makt mot fabriksägaren. Genom att gå samman kunde de kräva bättre villkor. Så föddes arbetarrörelsen.",
  block=[
   ("p","En <strong>fackförening</strong> är en organisation där arbetare går ihop för att förhandla om lön och arbetsvillkor. Den starkaste metoden är <strong>strejk</strong>, alltså att man lägger ned arbetet tills kraven är uppfyllda. Arbetsgivarna kunde svara med <strong>lockout</strong>, att man stänger ute arbetarna."),
+  ("bild","h7_rorelsen","Från enskild arbetare till fackförening och parti."),
   ("p","Arbetarna bildade också politiska partier. I Sverige grundades Socialdemokratiska arbetarpartiet 1889. Partiet krävde bland annat allmän rösträtt, kortare arbetsdag och bättre skydd för arbetare. Många arbetare engagerade sig också i bildningsförbund, nykterhetsrörelsen och andra folkrörelser."),
   ("p","Tänkare som Karl Marx och Friedrich Engels skrev Kommunistiska manifestet 1848. De menade att arbetarna borde ta makten över fabrikerna. Det blev en stark idé, men arbetarrörelsen var inte enig. Reformister ville förbättra samhället steg för steg, medan revolutionärer ville välta det."),
   ("p","Landsorganisationen (LO) bildades 1898. År 1909 utbröt storstrejken, som varade från augusti till början av september. Arbetsgivarna ville sänka lönerna när konjunkturen var dålig och stängde ute arbetare (lockout), och då svarade LO med storstrejk. Strejken slutade i nederlag, och LO förlorade många medlemmar. Men rörelsen överlevde, och 1938 slöts Saltsjöbadsavtalet mellan LO och arbetsgivarna, som lade grunden för samarbete på arbetsmarknaden."),
@@ -113,6 +117,7 @@ S.append(dict(id="sverige", nr="7.7", ikon="🇸🇪", titel="Sverige industrial
  intro="Sverige industrialiserades sent jämfört med Storbritannien, men sedan gick det snabbt. Samtidigt lämnade många svenskar landet.",
  block=[
   ("p","Sverige var länge ett fattigt jordbruksland. Det som drev industrin framåt var landets <strong>naturtillgångar</strong>: skog, järnmalm och vattenkraft. Svenskt järn hade exporterats länge från järnbruk. Från 1800-talets mitt växte <strong>sågverken</strong> i Norrland, särskilt längs kusten kring Sundsvall. Ångdrivna sågar sågade timmer som skeppades till Europa."),
+  ("bild","h7_sverige","Sveriges industri växer samtidigt som många utvandrar (siffror ungefär)."),
   ("p","Staten byggde de stora <strong>stambanorna</strong>, och privata bolag byggde andra banor. Den första banan för allmän trafik öppnades 1856 mellan Örebro och Nora. Redan 1874 hade Sverige fler kilometer järnväg per invånare än något annat land i Europa. Järnvägen band ihop landet."),
   ("p","Nya uppfinningar och företag kom också. Göran Fredrik Göransson lyckades 1858 använda Bessemermetoden för att göra stål i Sandviken. Alfred Nobel, född i Stockholm 1833, patenterade dynamit 1867, och hans företag byggde fabriker i många länder. Lars Magnus Ericsson startade 1876 en verkstad i Stockholm som blev ett stort telefonföretag."),
   ("ruta","fakta","Sundsvallsstrejken 1879","I Sundsvallstrakten arbetade tusentals människor vid sågverken under hårda villkor. Senvåren 1879 (strejken började den 26 maj) gick många i strejk, sedan sågverksägarna meddelat att sommarlönerna skulle sänkas. Militär sattes in och strejken slogs ned, men händelsen blev en symbol för den svenska arbetarrörelsens tidiga historia."),
