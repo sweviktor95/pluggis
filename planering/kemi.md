@@ -17,4 +17,4 @@ Källa: kursplanen i kemi (kursplaner/Kemi-GRGRKEM01.pdf). Innehållet ska behan
 | – | Repetition inför nationella proven | Alla delar |
 
 Förmågor som övas genom alla kapitel: begrepp och förklaringsmodeller, granska information och ta ställning, systematiska undersökningar.
-Samordning med biologin: kretslopp, fotosyntes/cellandning, övergödning och hållbar utveckling finns även där, så kapitel 7–8 hänvisar dit i stället för att upprepa.
+Varje ämne har egna moment. Överlapp med andra ämnen är avsiktligt och behandlas ur kemins vinkel.
