@@ -41,7 +41,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify({cur:cur,done:done,f
 function load(){try{var d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d||!(d.cur>=0)||d.cur>=QUIZ||!Array.isArray(d.done)||d.done.length!==N)return null;return d}catch(e){return null}}
 function clear(){try{localStorage.removeItem(KEY)}catch(e){}}
 function steps(){stepsEl.innerHTML=ET.map(function(e,i){return '<span class="dot '+(done[i]?"done":"")+' '+(i===cur?"now":"")+'" title="'+e.x_etikett+'">'+(i+1)+'</span>'}).join("");
-  marksG.childNodes.forEach(function(g){var i=+g.dataset.i;g.classList.toggle("done",!!done[i]);g.classList.toggle("now",i===cur)});
+  marksG.childNodes.forEach(function(g){var i=+g.dataset.i;g.classList.toggle("done",!!done[i]);g.classList.toggle("now",i===cur);g.style.display=(cur>=0&&i!==cur&&!done[i])?"none":""});
   zonG.childNodes.forEach(function(p){var i=+p.getAttribute("class").split(" z")[1];p.classList.toggle("on",!!done[i]||i===cur)});
   labG.childNodes.forEach(function(g){g.style.display=(+g.dataset.i===cur)?"":"none"});}
 function nedslag(e){if(!window.PLA)return "";var o='<svg class="ned" xmlns="'+NS+'" viewBox="0 0 640 260" role="img" aria-label="Illustration: '+e.plats+'"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+S.sky[0]+'"/><stop offset="1" stop-color="'+S.sky[1]+'"/></linearGradient></defs><rect width="640" height="260" fill="url(#sk)"/><rect y="210" width="640" height="50" fill="'+S.mark+'"/>';
