@@ -57,10 +57,11 @@ function render(){var i=cur,e=ET[i];
   else{var sc=firstTry.slice(0,QUIZ).filter(Boolean).length;
     quiz='<p class="discuss">'+S.diskutera+'</p><div class="foot"><span class="score">'+sc+' av '+QUIZ+' rätt på första försöket</span><button class="go" id="again">Spela igen</button></div>';}
   var next=i<QUIZ?'<div class="foot"><span>Etapp '+(i+1)+' av '+N+'</span><button class="go '+(done[i]?"ready":"")+'" id="next" '+(done[i]?"":"disabled")+'>Gå vidare →</button></div>':"";
-  dock.innerHTML='<article class="card"><div class="stamp"><span>'+e.tid+' · '+e.plats+'</span><b>Etapp '+(i+1)+'</b></div><h2>'+e.rubrik+'</h2>'+e.fakta.map(function(f){return '<p>'+f+'</p>'}).join("")+quiz+next+'</article>';
+  dock.innerHTML='<article class="card"><div class="stamp"><span>'+e.tid+' · '+e.plats+'</span><b>Etapp '+(i+1)+'</b></div><h2>'+e.rubrik+'</h2>'+e.fakta.map(function(f){return '<p>'+f+'</p>'}).join("")+ord(e)+quiz+next+'</article>';
   dock.scrollTop=0;
   dock.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){answer(+b.dataset.k,b)}});
   var n=document.getElementById("next");if(n)n.onclick=goNext;var a=document.getElementById("again");if(a)a.onclick=restart;}
+function ord(e){return (e.ord&&e.ord.length)?'<div class="ord"><b>Ord att kunna</b><ul>'+e.ord.map(function(o){return '<li><strong>'+o[0]+'</strong> – '+o[1]+'</li>'}).join('')+'</ul></div>':''}
 function answer(k,btn){var e=ET[cur],fb=document.getElementById("fb");if(firstTry[cur]===null)firstTry[cur]=(k===e.ratt);
   if(k===e.ratt){done[cur]=true;save();steps();dock.querySelectorAll(".opt").forEach(function(b){b.disabled=true});btn.classList.add("right");fb.className="fb ok";fb.innerHTML="<b>Rätt!</b> "+e.forklaring;var n=document.getElementById("next");n.disabled=false;n.classList.add("ready");}
   else{btn.classList.add("wrong");btn.disabled=true;fb.className="fb no";fb.innerHTML="<b>Inte riktigt.</b> Läs texten igen och försök på nytt.";}}
