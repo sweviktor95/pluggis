@@ -67,6 +67,7 @@ def gen(mods):
         struct.append((T['arskurs'],T['nr'],f"Kapitel {T['nr']} – {T['namn']}",nid,leaves))
     return struct,manifest,scripts
 def simhtml(sc):
+    if sc['etapper'][0].get('kart'): return simhtml_karta(sc)
     return f'''<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{sc['titel']}</title><link rel="stylesheet" href="tr/stil.css"></head><body>
 <div class="app"><div class="scene" id="scene"><svg id="svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" aria-label="{sc['titel']}"><g id="far"></g><g id="world"></g></svg>
 <div class="hud"><div class="clock" id="clock"><small>{sc['plats']}</small>{sc['tid']}</div><div class="steps" id="steps" aria-label="Framsteg"></div></div></div>
@@ -78,6 +79,16 @@ def write_struct(struct):
         sp=" "*ind
         return f'{sp}{{\n{sp}  id: "{nid}",\n{sp}  titel: "{tit}",\n{sp}  barn: [\n'+",\n".join(f'{sp}    {{ id: "{i}", titel: "{t}" }}' for i,t in leaves)+f"\n{sp}  ]\n{sp}}}"
     return ",\n".join(node(t,n,l,6) for a,nr,t,n,l in sorted(struct,key=lambda x:x[1]))
+
+def simhtml_karta(sc):
+    return f'''<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{sc['titel']}</title><link rel="stylesheet" href="tr/stil.css"></head><body>
+<div class="app"><div class="scene kartscen" id="scene"><svg id="svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" aria-label="Världskarta: {sc['titel']}"><g id="grat"></g><g id="land"></g><g id="zon"></g><g id="labels"></g><g id="marks"></g></svg>
+<div class="hud"><div class="clock" id="clock"><small>{sc['plats']}</small>{sc['tid']}</div><div class="steps" id="steps" aria-label="Framsteg"></div></div></div>
+<div class="dock" id="dock" aria-live="polite"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.5.9/datamaps.world.min.js"></script>
+<script>window.SCEN={json.dumps(sc,ensure_ascii=False)};</script>
+<script src="tr/assets.js"></script><script src="tr/karta.js"></script></body></html>'''
+
 if __name__=="__main__":
     mods=sys.argv[1:]
     struct,manifest,scripts=gen(mods)

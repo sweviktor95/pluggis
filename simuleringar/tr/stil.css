@@ -59,3 +59,13 @@ body{background:var(--night);color:var(--paper);font:16px/1.5 system-ui,-apple-s
 .moln{animation:drift 14s ease-in-out infinite alternate}
 @media (min-width:860px){.dock{position:absolute;right:20px;top:72px;bottom:20px;width:400px;max-height:none;background:none;padding:0}.scene{flex:1 1 auto}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+/* karta */
+.kartscen{background:#9ec4cd}.kartscen svg{background:#9ec4cd}
+.country{fill:#ecdfba;stroke:#b6a373;stroke-width:.6;vector-effect:non-scaling-stroke}
+.grat{fill:none;stroke:rgba(255,255,255,.35);stroke-width:.7;vector-effect:non-scaling-stroke}
+.zon{fill:rgba(200,53,44,.0);stroke:none;transition:fill .8s}.zon.on{fill:rgba(200,53,44,.22);stroke:rgba(200,53,44,.55);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.mk .ring{fill:rgba(42,33,24,.6);stroke:#f3ead6;stroke-width:2.5}.mk text{font-weight:700;font-size:14px;fill:#f3ead6}
+.mk{cursor:pointer}.mk .pulse{fill:none;stroke:var(--acc2);stroke-width:3;transform-box:fill-box;transform-origin:center;animation:pulse 1.8s ease-out infinite}
+.mk.done .ring{fill:var(--clear);stroke:#e8f0de}.mk.done .pulse{display:none}.mk.now .ring{fill:var(--acc2);stroke:#fff}
+.place{font-weight:700;font-size:15px;fill:#2a2118;paint-order:stroke;stroke:#fbf3dc;stroke-width:4px;stroke-linejoin:round}
+.ned{width:100%;height:auto;border-radius:6px;display:block;margin:8px 0 4px}

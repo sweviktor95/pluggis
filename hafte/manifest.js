@@ -63,6 +63,20 @@ window.hafte["spanska-1-hola"] = {
   }
 };
 
+// ==== KEMI START ====
+window.hafte["kemi-vetenskap"] = {
+  titel: "Kapitel 1 – Kemi och vetenskap",
+  vanlig: "hafte/kemi-01-kemi-och-vetenskap-vanlig.pdf",
+  lattlast: "hafte/kemi-01-kemi-och-vetenskap-lattlast.pdf",
+  fordjupning: "hafte/kemi-01-kemi-och-vetenskap-fordjupning.pdf",
+  komplett: {
+    vanlig: "hafte/kemi-01-kemi-och-vetenskap-vanlig-komplett.pdf",
+    lattlast: "hafte/kemi-01-kemi-och-vetenskap-lattlast-komplett.pdf",
+    fordjupning: "hafte/kemi-01-kemi-och-vetenskap-fordjupning-komplett.pdf"
+  }
+};
+// ==== KEMI END ====
+
 // ==== HISTORIA START ====
 window.hafte["historia-verktyg"] = {
   titel: "Kapitel 1 – Historiens verktyg",

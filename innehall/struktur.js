@@ -415,7 +415,7 @@ var struktur = [
   },
   {
     id: "kemi",
-    titel: "Kemi",
+    titel: "Kemi (beta)",
     ikon: "🧪",
     barn: [
       {

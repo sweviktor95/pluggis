@@ -405,3 +405,16 @@ SCEN = dict(
  ],
  diskutera="Vilka likheter och skillnader mellan högkulturerna märkte du på din resa? Vilket arv från dem använder du själv varje dag?",
 )
+
+# --- karta (nedslag) ---
+_K = {
+ "Uruk": ([45.64,31.32,230], [[45.0,31.6,2.6,1.6]]),
+ "Giza": ([31.13,29.98,230], [[31.2,27.5,2.2,4.2]]),
+ "Mohenjo-daro": ([68.1,27.33,260], [[68.0,27.5,4.5,4.2]]),
+ "Ur": ([46.1,30.96,200], [[45.0,31.6,2.6,1.6]]),
+ "Babylon": ([44.42,32.54,200], [[44.0,32.0,2.8,1.8]]),
+ "Anyang": ([114.35,36.1,260], [[112.5,35.5,4.0,3.0]]),
+ "Arvet": ([18.07,59.33,330], []),
+}
+for _e in SCEN['etapper']:
+    _e['kart'], _e['zon'] = _K[_e['x_etikett']]
