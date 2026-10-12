@@ -95,7 +95,7 @@ add("1.1.3", "Värdera", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · Vä
 
 # ------------------------------------------------------------------ Labb 1.1
 add("Labb", "1.1 Reaktionstid som rättvist försök", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · Labb 1.1 Reaktionstid",
- "<p>Du ska planera och genomföra en hel undersökning på 45 minuter. Hur snabbt reagerar du? Med en linjal som någon släpper kan du mäta det: ju kortare linjalen hinner falla innan du fångar den, desto snabbare är din reaktion.</p>"
+ "<p>Du ska planera och genomföra en hel undersökning. Hur snabbt reagerar du? Med en linjal som någon släpper kan du mäta det: ju kortare linjalen hinner falla innan du fångar den, desto snabbare är din reaktion.</p>"
  + fig(FIG+"v_linjal.png", "<b>Bild 1.5</b> Linjalen släpps utan förvarning. Du fångar den med tumme och pekfinger. Läs av vid fingrarna.", "52%")
  + roww("<p><strong class='green'>Frågeställning:</strong> Reagerar jag snabbare med en hand än med den andra? (Eller välj en egen fråga.)</p><p><strong class='green'>Hypotes:</strong> Skriv vad du tror och motivera.</p>"
         "<p><strong class='green'>Material:</strong> linjal 30 cm, penna, papper.</p><h3>Gör så här</h3>"
@@ -164,7 +164,7 @@ add("1.2.3", "Söka information och bedöma källor", f"Kapitel {NR} · Delområ
 
 # ------------------------------------------------------------------ Labb 1.2
 add("Labb", "1.2 Granska ett påstående", f"Kapitel {NR} · Delområde 1.2 {DELOMR['1.2']} · Labb 1.2 Granska ett påstående",
- "<p>Du ska granska ett påstående med hjälp av två källor och skriva ett argument med belägg och motargument. Arbetet tar 45 minuter. Välj ett påstående:</p>"
+ "<p>Du ska granska ett påstående med hjälp av två källor och skriva ett argument med belägg och motargument. Välj ett påstående:</p>"
  + bullets(["Vi använder bara tio procent av hjärnan.", "Socker gör barn hyperaktiva.", "Blixten slår aldrig ned två gånger på samma plats."])
  + roww("<h3 style='margin-top:0'>Gör så här</h3>" + steps(["Sök efter påståendet med flera sökord. Hitta två källor av olika typ, till exempel en myndighet och en tidning.", "Bedöm varje källa: äkthet, tid, beroende och tendens. Är den trovärdig? Är den relevant?",
           "Bestäm om påståendet är sant, osant eller osäkert, och skriv varför.", "Skriv ett argument: påstående, belägg, motargument, bemötande, slutsats."]),
@@ -212,20 +212,20 @@ LGR = ("Området täcker det centrala innehållet ”Systematiska undersökninga
 FAKTA = ("Krass- och tabellvärden är exempelvärden för undervisning. Faktakontrollerat mot: Semmelweis, MJA 2018 (11,4 % år 1846; andra avdelningen 2,8 %, Wikipedia efter Semmelweis egna siffror, 1,3 % år 1848, Kolletschka 1847); Pasteur, Britannica och Memorial University (svanhalskolv, 1861); Marshall och Warren, Nobelstiftelsen 2005 och PMC2661189 (upptäckt 1982, självförsök 1984); "
          "Carlson, Nature 1985 (28 astrologer, ej bättre än slump). Reaktionstidstabellen är räknad med t = √(2s/g). Se kallor-omrade1.md. · Illustrationer: egenritade.")
 HANDLEDNING_HTML = """<h3>Handledning per moment (grundtext)</h3>
-<p><b>Start (ca 15 min).</b> Mål: eleven vet vad biologi är och att organismer är allt levande. Låt eleverna berätta vilken biolog de skulle vilja vara.</p>
+<p><b>Start.</b> Mål: eleven vet vad biologi är och att organismer är allt levande. Låt eleverna berätta vilken biolog de skulle vilja vara.</p>
 <p><b>Från fråga till plan.</b> C-mål: oberoende, beroende och kontrollerade variabler samt kontrollgrupp. Vanligt fel: eleverna blandar ihop oberoende och beroende. Hjälp: ”det jag ändrar” / ”det jag mäter”. Låt eleverna omformulera ”åsiktsfrågor” till undersökningsbara.</p>
 <p><b>Dokumentera.</b> C-mål: välja diagramtyp och motivera, räkna medelvärde, läsa av diagram. Vanligt fel: linjediagram för jämförelse av två grupper, saknade enheter.</p>
 <p><b>Värdera.</b> C-mål: skilja slump från systematiskt fel och förklara hur upprepning hjälper. Slutsatsen ska svara på frågan. Fördjupning ligger i fördjupningstexten.</p>
-<p><b>Labb 1.1 Reaktionstid (45 min).</b> Material: linjal 30 cm. Förväntat: ca 15–25 cm, alltså 0,17–0,23 s (t = √(2s/g)). Vanliga fel: eleven ser kompisens hand, linjalen hålls sned, startläget ändras. Redovisa klassens värden. Bonuslabb: se sist i lärarhandledningen.</p>
+<p><b>Labb 1.1 Reaktionstid.</b> Material: linjal 30 cm. Förväntat: ca 15–25 cm, alltså 0,17–0,23 s (t = √(2s/g)). Vanliga fel: eleven ser kompisens hand, linjalen hålls sned, startläget ändras. Redovisa klassens värden. Bonuslabb: se sist i lärarhandledningen.</p>
 <p><b>Vad kan vetenskap pröva?</b> C-mål: skilja belägg, åsikt och tro; förstå att ett påstående måste kunna visa sig vara fel. Horoskopexemplet: Carlson, Nature 1985. Vanligt fel: ”pröva” uppfattas som ”bevisa sant”.</p>
 <p><b>När forskare ändrat sig.</b> C-mål: förstå vad som var belägget i varje fall och att en modell är en förenkling. Kommentar: Semmelweis siffror är från MJA 2018. Betona att Marshalls självförsök inte är något att efterlikna.</p>
 <p><b>Söka information och bedöma källor.</b> C-mål: olika källtyper, trovärdig kontra relevant, de fyra kriterierna samt ett enkelt argument med motargument.</p>
-<p><b>Labb 1.2 Granska ett påstående (45 min).</b> Facit: (1) Tio-procentsmyten stämmer inte: PET och fMRI visar aktivitet i alla hjärnområden, även under sömn. (2) Kontrollerade studier (Wolraich m.fl.) visar inget samband mellan socker och hyperaktivitet hos barn. (3) Blixten kan slå ned flera gånger på samma plats; höga byggnader som Empire State Building träffas flera gånger varje år (NOAA/National Weather Service). Bedömning: C kräver motiverad bedömning av trovärdighet och relevans samt ett argument med bemött motargument.</p>"""
+<p><b>Labb 1.2 Granska ett påstående.</b> Facit: (1) Tio-procentsmyten stämmer inte: PET och fMRI visar aktivitet i alla hjärnområden, även under sömn. (2) Kontrollerade studier (Wolraich m.fl.) visar inget samband mellan socker och hyperaktivitet hos barn. (3) Blixten kan slå ned flera gånger på samma plats; höga byggnader som Empire State Building träffas flera gånger varje år (NOAA/National Weather Service). Bedömning: C kräver motiverad bedömning av trovärdighet och relevans samt ett argument med bemött motargument.</p>"""
 BONUS = dict(
  titel="Hjälper musik minnet?",
  ingress="En kontrollerad undersökning med minnestest. Eleverna väljer själva hur de testar om musik påverkar hur många ord man minns.",
  syfte="Eleverna planerar och genomför en egen undersökning med variabler, upprepning och värdering. Kopplar till momenten Från fråga till plan, Dokumentera och Värdera.",
- tid="40–60 minuter. Grupper om tre till fyra.",
+ tid="Grupper om tre till fyra.",
  material=["Två ordlistor med 15 vardagliga ord (olika ord men lika svåra)", "Stoppur", "Valfri musik", "Papper"],
  genomf=["Gruppen formulerar frågeställning och hypotes.", "Hälften av gruppen lär sig lista A i tystnad och lista B med musik. Den andra hälften gör tvärtom, så att ordningen inte spelar roll.", "Titta på listan i 60 sekunder, vänd bort och skriv upp så många ord som möjligt.", "Räkna medelvärde per villkor och rita diagram."],
  resultat="Resultaten varierar och är ofta små. Det är en poäng: med få deltagare kan slumpen styra. Låt grupperna diskutera hur de skulle göra för att få säkrare svar.",

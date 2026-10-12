@@ -4,7 +4,7 @@ build({
   title: "Introduktion till biologi", kicker: "BIOLOGI · KAPITEL 1 · BIOLOGI SOM VETENSKAP", sub: "Start: vad är biologi och vad gör biologer?",
   lessons: "Startlektion före delområde 1.1 · Vad är biologi? · Organismer · Naturvetenskap · Biologer",
   foot: "Biologi · Kapitel 1 · Introduktion till biologi",
-  titleNotes: "Kort startlektion (ca 30–40 min) som följer avsnittet Start i grundtexten, före delområde 1.1. Anteckningarna innehåller handledning.",
+  titleNotes: "Kort startlektion som följer avsnittet Start i grundtexten, före delområde 1.1. Anteckningarna innehåller handledning.",
   async slides(h) {
     const S = "Introduktion till biologi";
     h.section(S, "Start: biologi, organismer och biologer", "Börja med att fråga: vad tror ni att biologi handlar om? Samla svaren på tavlan.");

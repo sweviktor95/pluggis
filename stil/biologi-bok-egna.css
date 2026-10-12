@@ -5,7 +5,7 @@
 .nivaruta .sektion p{line-height:1.7}
 .nivaruta .sek-bild{max-width:520px;margin:16px auto}
 .nivaruta .sek-bild figcaption{text-align:left}
-.nivaruta .pahittat{display:inline-block;background:#fde7e3;color:#a3281a;border-radius:999px;padding:1px 10px;font-size:.78em;font-weight:700;margin-right:6px;vertical-align:1px}
+.nivaruta .pahittat{display:inline-block;background:#245040;color:#fff;border-radius:999px;padding:1px 10px;font-size:.78em;font-weight:700;margin-right:6px;vertical-align:1px}
 .nivaruta .not{font-size:.88em;color:#666}
 .nivaruta .tabell-ram{overflow-x:auto;margin:14px 0}
 .nivaruta .tabell{border-collapse:collapse;width:100%;font-size:.93em;line-height:1.5}
@@ -14,7 +14,7 @@
 .nivaruta .kort-rad{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0}
 .nivaruta .kort{background:#f4f9f3;border:1px solid #DCE6DF;border-radius:8px;padding:10px 14px;font-size:.94em}
 .nivaruta .kort strong{display:block;color:#38564A;margin-bottom:2px}
-.ruta-varning{background:#fde7e3}.ruta-varning .ruta-rubrik{color:#a3281a}
+.ruta-varning{background:#dfeae3;border-left-color:#245040}.ruta-varning .ruta-rubrik{color:#245040}
 .nivaruta .kontrollfraga ol{margin:6px 0 4px;padding-left:22px}
 .nivaruta .kontrollfraga li{margin:4px 0}
 .nivaruta ol.ovning{padding-left:22px}
@@ -38,7 +38,7 @@
 .ov-val{display:flex;flex-direction:column;gap:8px}
 .ov-knapp,.ov-kryss{font:inherit;text-align:left;min-height:46px;padding:10px 14px;border:2px solid #cfe0d6;background:#fff;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px}
 .ov-knapp.ratt,.ov-kryss.ratt,.ov-rad.ratt,.ov-mening.ratt{border-color:#3d9a5f;background:#e6f5ec}
-.ov-knapp.fel,.ov-kryss.fel,.ov-rad.fel,.ov-mening.fel{border-color:#d4685a;background:#fdeceb}
+.ov-knapp.fel,.ov-kryss.fel,.ov-rad.fel,.ov-mening.fel{border-color:#b9876f;background:#f6efe9}
 .ov-knapp:disabled{opacity:.85;cursor:default}
 .ov-kryss input,.ov-sf input{width:22px;height:22px;flex:none}
 .ov-rad{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;border:2px solid transparent;border-radius:10px;padding:6px 8px;margin:4px 0}
@@ -55,7 +55,7 @@
 .ov-kolla{font:inherit;min-height:44px;padding:8px 20px;margin-top:8px;border:0;border-radius:999px;background:#5F8472;color:#fff;cursor:pointer}
 .ov-svar{margin-top:8px;font-weight:600}
 .ov-svar:empty{display:none}
-.ov-svar.ratt{color:#2d7a4a}.ov-svar.fel{color:#b0392b}.ov-svar.forslag{font-weight:400;background:#fff8ec;border-left:4px solid #e0a53f;padding:8px 12px;border-radius:6px;color:#444}
+.ov-svar.ratt{color:#2f6b4f}.ov-svar.fel{color:#8a5a45}.ov-svar.forslag{font-weight:400;background:#f3f8f4;border-left:4px solid #5F8472;padding:8px 12px;border-radius:6px;color:#444}
 .kf-lista .ov{background:transparent;border:0;padding:6px 0;margin:8px 0 0}
 .kf-lista .ov-fraga{font-weight:600}
 .kf-lista .kf-fraga{margin:8px 0}

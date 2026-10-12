@@ -1,30 +1,27 @@
-# Biologi åk 7–9 – planering på ca 25 veckor (Lgr22)
+# Biologi åk 7–9 – planering (Lgr22)
 
 Status: förslag, väntar på granskning. Genereras av `planering/biologi_plan25.py` – ändra där, inte här.
 
-Planen är kortad till ca 24,5 veckor: 12 områden, 25 delområden (ca en vecka vardera), 74 lektionsmoment och 24 labbpass. Det som inte ryms står under *Om tid / fördjupning* (80 moment) och kan användas i fördjupningshäftena eller om tiden räcker.
-
-Tidsram: ca 2,5 timmar lektion per vecka (tre moment à ca 50 minuter) plus ca 45 minuter labb per vecka. Ett delområde tar ca en vecka: tre lektionsmoment och ett labbpass.
+Planen omfattar 12 områden, 25 delområden, 74 lektionsmoment och 24 labbpass. Det som inte ryms står under *Om tid / fördjupning* (80 moment) och kan användas i fördjupningshäftena.
 
 Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilket **centralt innehåll** och vilken **förmåga** (begrepp/modeller, granska/ta ställning, undersöka) det bygger på. Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
 
 ## Översikt
 
-| Område | Delområden | Veckor |
-|---|---|---|
-| 1. Biologi som vetenskap | Undersöka systematiskt, Modeller, källor och argument | 2 |
-| 2. Cellen och livets processer | Cellen, Fotosyntes och cellandning, Organ och organsystem | 2,5 |
-| 3. Biologisk mångfald | Mångfald, hot och ekosystemtjänster, Gruppera och organismvärlden | 2 |
-| 4. Ekologi | Ekosystem och energi, Materiens kretslopp, Populationer och samspel | 3 |
-| 5. Människan och miljön | Påverkan på naturen och klimat, Hållbar utveckling och ställningstagande | 2 |
-| 6. Kroppens system: mat, andning och blod | Mat och matspjälkning, Andning, blod och samverkan | 2 |
-| 7. Infektioner och immunförsvar | Bakterier, virus och smitta, Immunförsvar, vaccin och antibiotika | 2 |
-| 8. Arv, genetik och genteknik | DNA och nedärvning, Arv och miljö, mutationer och genteknik | 2 |
-| 9. Evolution och livets historia | Livets historia och bevis, Evolutionens mekanismer | 2 |
-| 10. Hälsa och levnadsvanor | Stress, sömn och psykisk hälsa, Beroendeframkallande medel | 2 |
-| 11. Pubertet, sexualitet och relationer | Pubertet, reproduktion, preventivmedel och STI, Relationer, identitet och samtycke | 2 |
-| 12. Repetition inför nationella proven | Repetition inför nationella proven | 1 |
-| **Totalt** | | **24,5** |
+| Område | Delområden |
+|---|---|
+| 1. Biologi som vetenskap | Undersöka systematiskt, Modeller, källor och argument |
+| 2. Cellen och livets processer | Cellen, Fotosyntes och cellandning, Organ och organsystem |
+| 3. Biologisk mångfald | Mångfald, hot och ekosystemtjänster, Gruppera och organismvärlden |
+| 4. Ekologi | Ekosystem och energi, Materiens kretslopp, Populationer och samspel |
+| 5. Människan och miljön | Påverkan på naturen och klimat, Hållbar utveckling och ställningstagande |
+| 6. Kroppens system: mat, andning och blod | Mat och matspjälkning, Andning, blod och samverkan |
+| 7. Infektioner och immunförsvar | Bakterier, virus och smitta, Immunförsvar, vaccin och antibiotika |
+| 8. Arv, genetik och genteknik | DNA och nedärvning, Arv och miljö, mutationer och genteknik |
+| 9. Evolution och livets historia | Livets historia och bevis, Evolutionens mekanismer |
+| 10. Hälsa och levnadsvanor | Stress, sömn och psykisk hälsa, Beroendeframkallande medel |
+| 11. Pubertet, sexualitet och relationer | Pubertet, reproduktion, preventivmedel och STI, Relationer, identitet och samtycke |
+| 12. Repetition inför nationella proven | Repetition inför nationella proven |
 
 ## Planen
 
@@ -32,7 +29,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Hur vi vet det vi vet i biologi: undersöka, värdera, granska och argumentera. Läggs först eftersom allt annat bygger på det.*
 
-### 1.1 Undersöka systematiskt (1 v)
+### 1.1 Undersöka systematiskt
 
 **Mål:** Eleven kan planera, utföra, dokumentera och värdera en undersökning med en variabel i taget, säkert och med lämplig utrustning.
 
@@ -49,7 +46,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Vad är biologi?; Från nyfikenhet till fråga; Utföra: material, säkerhet, digitala verktyg
 
-### 1.2 Modeller, källor och argument (1 v)
+### 1.2 Modeller, källor och argument
 
 **Mål:** Eleven kan förklara att biologisk kunskap prövas och förändras, skilja vad vetenskap kan pröva och granska källor.
 
@@ -70,7 +67,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Cellen som livets enhet, energin som driver den och vägen från cell till organism.*
 
-### 2.1 Cellen (1 v)
+### 2.1 Cellen
 
 **Mål:** Eleven kan beskriva och jämföra celltyper och förklara organellernas uppgifter.
 
@@ -87,7 +84,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Transport över cellmembranet; Gemensamt ursprung
 
-### 2.2 Fotosyntes och cellandning (1 v)
+### 2.2 Fotosyntes och cellandning
 
 **Mål:** Eleven kan förklara fotosyntes och cellandning och jämföra dem.
 
@@ -104,7 +101,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Bladet och kloroplasten; Vad påverkar fotosyntesen?; Från glukos till växtens kropp; Jäsning
 
-### 2.3 Organ och organsystem (0,5 v)
+### 2.3 Organ och organsystem
 
 **Mål:** Eleven kan beskriva hur celler bygger upp vävnader, organ och organsystem.
 
@@ -123,7 +120,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Mångfaldens nivåer, hur organismer grupperas, vad som lever omkring oss och varför mångfalden är viktig.*
 
-### 3.1 Mångfald, hot och ekosystemtjänster (1 v)
+### 3.1 Mångfald, hot och ekosystemtjänster
 
 **Mål:** Eleven kan beskriva mångfald på tre nivåer, förklara ekosystemtjänster och beskriva hoten mot mångfalden.
 
@@ -140,7 +137,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Hur mäter man mångfald?; Var finns mångfalden?
 
-### 3.2 Gruppera och organismvärlden (1 v)
+### 3.2 Gruppera och organismvärlden
 
 **Mål:** Eleven kan gruppera organismer systematiskt, bestämma en art med nyckel och beskriva anpassningar.
 
@@ -161,7 +158,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Samspel i ekosystem: energi, kretslopp, populationer och resurser, lokalt och globalt.*
 
-### 4.1 Ekosystem och energi (1 v)
+### 4.1 Ekosystem och energi
 
 **Mål:** Eleven kan beskriva ekosystem och förklara energiflöde genom näringskedjor och näringsvävar.
 
@@ -178,7 +175,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Lokala och globala ekosystem; Habitat och nisch; Producenter, konsumenter och nedbrytare; Störs vävan – vad händer?
 
-### 4.2 Materiens kretslopp (1 v)
+### 4.2 Materiens kretslopp
 
 **Mål:** Eleven kan beskriva hur kol, kväve och vatten cirkulerar och varför materia inte försvinner.
 
@@ -195,7 +192,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Kvävets och vattnets kretslopp
 
-### 4.3 Populationer och samspel (1 v)
+### 4.3 Populationer och samspel
 
 **Mål:** Eleven kan förklara hur populationer förändras och begränsas av resurser och samspel.
 
@@ -216,7 +213,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Hur människan påverkar naturen och hur individer och samhället kan främja hållbar utveckling.*
 
-### 5.1 Påverkan på naturen och klimat (1 v)
+### 5.1 Påverkan på naturen och klimat
 
 **Mål:** Eleven kan förklara hur utsläpp och klimatförändringar påverkar ekosystem.
 
@@ -233,7 +230,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Naturbruk; Miljögifter och bioackumulering; Försurning och invasiva arter; Kolsänkor och åtgärder
 
-### 5.2 Hållbar utveckling och ställningstagande (1 v)
+### 5.2 Hållbar utveckling och ställningstagande
 
 **Mål:** Eleven kan förklara hållbar utveckling och argumentera för val på individ- och samhällsnivå.
 
@@ -254,7 +251,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Hur kroppens organsystem tar upp och transporterar det cellerna behöver, och hur de samverkar.*
 
-### 6.1 Mat och matspjälkning (1 v)
+### 6.1 Mat och matspjälkning
 
 **Mål:** Eleven kan beskriva näringsämnenas uppgifter, följa maten genom kroppen och förklara hur kosten påverkar hälsan.
 
@@ -271,7 +268,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Vitaminer, mineraler, vatten och fibrer; Energi i maten; Enzymer och spjälkning; Upptag och tarmflora; Mat och miljö; Granska kostpåståenden
 
-### 6.2 Andning, blod och samverkan (1 v)
+### 6.2 Andning, blod och samverkan
 
 **Mål:** Eleven kan förklara gasutbyte och blodomlopp och hur organsystem samverkar vid ansträngning.
 
@@ -292,7 +289,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Bakterier och virus, smitta, kroppens försvar, vaccin och antibiotika.*
 
-### 7.1 Bakterier, virus och smitta (1 v)
+### 7.1 Bakterier, virus och smitta
 
 **Mål:** Eleven kan jämföra bakterier och virus, förklara smittvägar och hur infektioner förebyggs.
 
@@ -309,7 +306,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Virus
 
-### 7.2 Immunförsvar, vaccin och antibiotika (1 v)
+### 7.2 Immunförsvar, vaccin och antibiotika
 
 **Mål:** Eleven kan beskriva immunförsvaret, förklara vaccin och antibiotika och resistens som evolution.
 
@@ -330,7 +327,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Arvsmassan, hur egenskaper ärvs, samspelet mellan arv och miljö samt genteknikens möjligheter och etik.*
 
-### 8.1 DNA och nedärvning (1 v)
+### 8.1 DNA och nedärvning
 
 **Mål:** Eleven kan beskriva DNA, gener och kromosomer och förklara nedärvning med korsningsschema.
 
@@ -347,7 +344,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** DNA; Från gen till egenskap; Celldelning; Könsceller och befruktning; Ärftliga sjukdomar och stamträd
 
-### 8.2 Arv och miljö, mutationer och genteknik (1 v)
+### 8.2 Arv och miljö, mutationer och genteknik
 
 **Mål:** Eleven kan förklara arv och miljö, beskriva gentekniska metoder och argumentera om möjligheter, risker och etik.
 
@@ -366,7 +363,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Hur livet uppstod och förändras, mekanismerna och bevisen. Evolutionen bär även övriga områden.*
 
-### 9.1 Livets historia och bevis (1 v)
+### 9.1 Livets historia och bevis
 
 **Mål:** Eleven kan beskriva livets historia och naturvetenskapliga förklaringar till livets uppkomst och värdera bevis för evolution.
 
@@ -383,7 +380,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Hur kan livet ha uppstått?; DNA och direkta observationer
 
-### 9.2 Evolutionens mekanismer (1 v)
+### 9.2 Evolutionens mekanismer
 
 **Mål:** Eleven kan förklara naturligt urval, variation och artbildning och skilja naturvetenskapliga från andra sätt att förklara.
 
@@ -404,7 +401,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Hur levnadsvanor och levnadsförhållanden påverkar hälsan och vad som kan göras på individ- och samhällsnivå.*
 
-### 10.1 Stress, sömn och psykisk hälsa (1 v)
+### 10.1 Stress, sömn och psykisk hälsa
 
 **Mål:** Eleven kan förklara stress, sömn och motion och hur levnadsvanor och levnadsförhållanden påverkar hälsan.
 
@@ -421,7 +418,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Nervsystemet och sinnena; Hormoner och balans; Levnadsförhållanden och hälsa; Fysisk aktivitet; Levnadsvanor och sjukdom
 
-### 10.2 Beroendeframkallande medel (1 v)
+### 10.2 Beroendeframkallande medel
 
 **Mål:** Eleven kan förklara hur beroende uppstår och vad som kan begränsa problemen.
 
@@ -440,7 +437,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Kroppens förändringar, reproduktion, skydd, relationer och samtycke.*
 
-### 11.1 Pubertet, reproduktion, preventivmedel och STI (1 v)
+### 11.1 Pubertet, reproduktion, preventivmedel och STI
 
 **Mål:** Eleven kan beskriva pubertet, befruktning och graviditet och förklara preventivmedel och STI.
 
@@ -457,7 +454,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Om tid / fördjupning:** Könsorgan och menscykel; Graviditet och fosterutveckling; Förlossning; STI; Aborträtt och hjälp
 
-### 11.2 Relationer, identitet och samtycke (1 v)
+### 11.2 Relationer, identitet och samtycke
 
 **Mål:** Eleven kan resonera om sexualitet, identitet, relationer och samtycke.
 
@@ -476,7 +473,7 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Binder ihop begrepp, undersökningar och argumentation.*
 
-### 12.1 Repetition inför nationella proven (1 v)
+### 12.1 Repetition inför nationella proven
 
 **Mål:** Eleven kan förklara samband mellan områden, planera och värdera en undersökning och argumentera.
 
@@ -493,8 +490,6 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 ## Öppna frågor
 
-1. Stämmer antagandet att de 25 veckorna gäller hela biologin åk 7–9?
-2. Sexualitet och relationer (område 11) har bara 2 veckor. Är det rimligt?
-3. Evolutionen (område 9) ligger sent. Ska den flyttas tidigare?
-4. Delområde 2.3 är en halv vecka och har inget labbpass.
-5. Sajten har två nivåer under ämnet idag; tre nivåer kräver en ändring av ämnesträdet.
+1. Evolutionen (område 9) ligger sent. Ska den flyttas tidigare?
+2. Delområde 2.3 har inget labbpass.
+3. Sajten har två nivåer under ämnet idag; tre nivåer kräver en ändring av ämnesträdet.

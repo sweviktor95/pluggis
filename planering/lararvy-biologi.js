@@ -9,7 +9,6 @@ window.lararBiologi = {
    "nr": 1,
    "titel": "Biologi som vetenskap",
    "ide": "Hur vi vet det vi vet i biologi: undersöka, värdera, granska och argumentera. Läggs först eftersom allt annat bygger på det.",
-   "veckor": 2,
    "hafte": "biologi-vetenskap",
    "lankar": [
     [
@@ -44,7 +43,6 @@ window.lararBiologi = {
    "nr": 2,
    "titel": "Cellen och livets processer",
    "ide": "Cellen som livets enhet, energin som driver den och vägen från cell till organism.",
-   "veckor": 2.5,
    "hafte": null,
    "lankar": [],
    "ppt": []
@@ -53,7 +51,6 @@ window.lararBiologi = {
    "nr": 3,
    "titel": "Biologisk mångfald",
    "ide": "Mångfaldens nivåer, hur organismer grupperas, vad som lever omkring oss och varför mångfalden är viktig.",
-   "veckor": 2,
    "hafte": null,
    "lankar": [],
    "ppt": []
@@ -62,7 +59,6 @@ window.lararBiologi = {
    "nr": 4,
    "titel": "Ekologi",
    "ide": "Samspel i ekosystem: energi, kretslopp, populationer och resurser, lokalt och globalt.",
-   "veckor": 3,
    "hafte": "biologi-ekologi",
    "lankar": [],
    "ppt": []
@@ -71,7 +67,6 @@ window.lararBiologi = {
    "nr": 5,
    "titel": "Människan och miljön",
    "ide": "Hur människan påverkar naturen och hur individer och samhället kan främja hållbar utveckling.",
-   "veckor": 2,
    "hafte": null,
    "lankar": [],
    "ppt": []
@@ -80,7 +75,6 @@ window.lararBiologi = {
    "nr": 6,
    "titel": "Kroppens system: mat, andning och blod",
    "ide": "Hur kroppens organsystem tar upp och transporterar det cellerna behöver, och hur de samverkar.",
-   "veckor": 2,
    "hafte": null,
    "lankar": [],
    "ppt": []
@@ -89,7 +83,6 @@ window.lararBiologi = {
    "nr": 7,
    "titel": "Infektioner och immunförsvar",
    "ide": "Bakterier och virus, smitta, kroppens försvar, vaccin och antibiotika.",
-   "veckor": 2,
    "hafte": null,
    "lankar": [],
    "ppt": []
@@ -98,7 +91,6 @@ window.lararBiologi = {
    "nr": 8,
    "titel": "Arv, genetik och genteknik",
    "ide": "Arvsmassan, hur egenskaper ärvs, samspelet mellan arv och miljö samt genteknikens möjligheter och etik.",
-   "veckor": 2,
    "hafte": null,
    "lankar": [],
    "ppt": []
@@ -107,7 +99,6 @@ window.lararBiologi = {
    "nr": 9,
    "titel": "Evolution och livets historia",
    "ide": "Hur livet uppstod och förändras, mekanismerna och bevisen. Evolutionen bär även övriga områden.",
-   "veckor": 2,
    "hafte": null,
    "lankar": [],
    "ppt": []
@@ -116,7 +107,6 @@ window.lararBiologi = {
    "nr": 10,
    "titel": "Hälsa och levnadsvanor",
    "ide": "Hur levnadsvanor och levnadsförhållanden påverkar hälsan och vad som kan göras på individ- och samhällsnivå.",
-   "veckor": 2,
    "hafte": null,
    "lankar": [],
    "ppt": []
@@ -125,7 +115,6 @@ window.lararBiologi = {
    "nr": 11,
    "titel": "Pubertet, sexualitet och relationer",
    "ide": "Kroppens förändringar, reproduktion, skydd, relationer och samtycke.",
-   "veckor": 2,
    "hafte": null,
    "lankar": [],
    "ppt": []
@@ -134,7 +123,6 @@ window.lararBiologi = {
    "nr": 12,
    "titel": "Repetition inför nationella proven",
    "ide": "Binder ihop begrepp, undersökningar och argumentation.",
-   "veckor": 1,
    "hafte": null,
    "lankar": [],
    "ppt": []

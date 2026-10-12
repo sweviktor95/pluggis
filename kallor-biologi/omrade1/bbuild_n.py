@@ -95,7 +95,7 @@ def bonus_html(M):
     pro = "".join(f"<li>{x}</li>" for x in B['problem'])
     bed = '<table class="tbl">' + "<tr>" + "".join(f"<th>{a}</th>" for a, _ in B['bedom']) + "</tr><tr>" + "".join(f"<td style='font-weight:400'>{b}</td>" for _, b in B['bedom']) + "</tr></table>"
     return ('<section class="sec teacher"><div class="pill">Lärarhandledning · Bonuslabb</div><h2>' + B['titel'] + '</h2><p>' + B['ingress'] + '</p>'
-            '<div class="cols2"><h3>Syfte och koppling</h3><p>' + B['syfte'] + '</p><h3>Tid och grupper</h3><p>' + B['tid'] + '</p>'
+            '<div class="cols2"><h3>Syfte och koppling</h3><p>' + B['syfte'] + '</p><h3>Grupper</h3><p>' + B['tid'] + '</p>'
             '<h3>Material per grupp</h3><ul class="pu">' + mat + '</ul>'
             '<h3>Genomförande – tips</h3><ol class="steps g">' + gen + '</ol>'
             '<h3>Förväntat resultat och förklaring</h3><p>' + B['resultat'] + '</p>'

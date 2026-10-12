@@ -7,13 +7,13 @@
 <title>Pluggis – för lärare</title>
 <style>
   * { box-sizing: border-box; }
-  body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #f7f7f9; color: #222; }
-  h1 { text-align: center; color: #2f4a73; margin-bottom: 4px; }
+  body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #f4f8f5; color: #222; }
+  h1 { text-align: center; color: #38564A; margin-bottom: 4px; }
   .undertitel { text-align: center; color: #777; margin-bottom: 28px; }
-  a.tillbaka { display: inline-block; margin-bottom: 18px; color: #2f4a73; }
+  a.tillbaka { display: inline-block; margin-bottom: 18px; color: #38564A; }
   #port { max-width: 360px; margin: 40px auto; background: #fff; padding: 22px; border-radius: 12px; box-shadow: 0 1px 6px rgba(0,0,0,.1); text-align: center; }
   #port input { width: 100%; padding: 10px; font-size: 16px; border: 1px solid #bbb; border-radius: 8px; margin: 10px 0; }
-  button, .lank { background: #2f4a73; color: #fff; border: 0; padding: 9px 14px; border-radius: 8px; font-size: 15px; cursor: pointer; text-decoration: none; display: inline-block; }
+  button, .lank { background: #38564A; color: #fff; border: 0; padding: 9px 14px; border-radius: 8px; font-size: 15px; cursor: pointer; text-decoration: none; display: inline-block; }
   #fel { color: #b00020; min-height: 1.2em; font-size: 14px; }
   details { background: #fff; border-radius: 10px; margin: 10px 0; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
   summary { padding: 14px 16px; font-weight: bold; cursor: pointer; font-size: 18px; }
@@ -23,13 +23,13 @@
   .kapitel { padding: 10px 0; border-top: 1px solid #eee; }
   .kapitel h4 { margin: 0 0 8px; }
   .knappar { display: flex; flex-wrap: wrap; gap: 8px; }
-  .lank.larar { background: #8a4b9a; }
+  .lank.larar { background: #245040; }
   .lank.av { background: #c9c9cf; color: #555; cursor: default; }
   .tomt { color: #888; font-size: 14px; }
   .grupp { font-weight: bold; font-size: 14px; margin: 12px 0 6px; color: #444; }
   .sidor { color: #555; font-size: 14px; margin: 8px 0 0; }
   .planlank { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 0 10px; }
-  .lank.plan { background: #3e7d5a; }
+  .lank.plan { background: #5F8472; }
   .ide { color: #555; font-size: 14px; margin: 4px 0 8px; }
   .delomr { margin: 6px 0 10px; padding-left: 20px; font-size: 14px; color: #333; }
   .vecka { color: #777; font-weight: normal; font-size: 14px; }
@@ -92,13 +92,12 @@
     var d = window.lararBiologi;
     var ut = '<div class="planlank">' + lank(d.plan.pdf, "📋 Planering (PDF)", "plan") + lank(d.plan.xlsx, "Planering (Excel)", "plan") + '</div>';
     d.omraden.forEach(function(o) {
-      var v = String(o.veckor).replace(".", ",");
       var inre = '<p class="ide">' + o.ide + '</p>' +
         ((o.ppt && o.ppt.length) ? '<p class="grupp">PowerPoint – ladda ner</p><div class="knappar">' + o.ppt.map(function(l) { return lank(l[1], l[0], "plan", true); }).join("") + '</div>' : '') +
         ((o.lankar && o.lankar.length) ? '<p class="grupp">Prov och spel – till klassen och läraren</p><div class="knappar">' + o.lankar.map(function(l) { return lank(l[1], l[0]); }).join("") + '</div>' : '');
       var hafte = o.hafte ? kapitelHtml({ id: o.hafte, titel: o.titel }) : "";
       inre += hafte || '<div class="knappar" style="margin-top:10px"><span class="lank av">Häften kommer</span></div>';
-      ut += '<details><summary>' + o.nr + '. ' + o.titel + ' <span class="vecka">· ' + v + ' v</span></summary><div class="inre">' + inre + '</div></details>';
+      ut += '<details><summary>' + o.nr + '. ' + o.titel + '</summary><div class="inre">' + inre + '</div></details>';
     });
     return '<details><summary>' + (nod.ikon ? nod.ikon + " " : "") + nod.titel + '</summary><div class="inre">' + ut + '</div></details>';
   }

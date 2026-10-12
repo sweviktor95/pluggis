@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Biologiplanering på ca 25 veckor. Bygger på momenten i biologi_plan.py (den utökade planen, 77 veckor):
-varje delområde får ett urval KÄRNMOMENT (ryms i ca en vecka); resten hamnar under "Om tid / fördjupning".
+"""Biologiplanering (byggd för ca 25 veckors undervisning; tider visas inte i materialet). Bygger på momenten i biologi_plan.py (den utökade planen, 77 veckor):
+varje delområde får ett urval KÄRNMOMENT (det som ryms i planen); resten hamnar under "Om tid / fördjupning".
 Kör: python3 planering/biologi_plan25.py   -> biologi.md, biologi-planering.xlsx, biologi-planering.pdf"""
 import sys, re, html, collections, json
 sys.path.insert(0, "planering")
@@ -232,19 +232,18 @@ def main():
 # ---- Markdown ---------------------------------------------------------------
 def skriv_md(seen, s3, weeks, nk, ne, nl):
     o = []; w = o.append
-    w("# Biologi åk 7–9 – planering på ca 25 veckor (Lgr22)\n")
+    w("# Biologi åk 7–9 – planering (Lgr22)\n")
     w("Status: förslag, väntar på granskning. Genereras av `planering/biologi_plan25.py` – ändra där, inte här.\n")
-    w(f"Planen är kortad till ca {vecka(weeks)} veckor: {len(NEW)} områden, {sum(len(a[3]) for a in NEW)} delområden (ca en vecka vardera), {nk} lektionsmoment och {nl} labbpass. Det som inte ryms står under *Om tid / fördjupning* ({ne} moment) och kan användas i fördjupningshäftena eller om tiden räcker.\n")
-    w("Tidsram: ca 2,5 timmar lektion per vecka (tre moment à ca 50 minuter) plus ca 45 minuter labb per vecka. Ett delområde tar ca en vecka: tre lektionsmoment och ett labbpass.\n")
+    w(f"Planen omfattar {len(NEW)} områden, {sum(len(a[3]) for a in NEW)} delområden, {nk} lektionsmoment och {nl} labbpass. Det som inte ryms står under *Om tid / fördjupning* ({ne} moment) och kan användas i fördjupningshäftena.\n")
     w("Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilket **centralt innehåll** och vilken **förmåga** (begrepp/modeller, granska/ta ställning, undersöka) det bygger på. Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).\n")
-    w("## Översikt\n"); w("| Område | Delområden | Veckor |"); w("|---|---|---|")
-    for a in NEW: w(f"| {a[0]}. {a[1]} | {', '.join(d[1] for d in a[3])} | {vecka(sum(d[2] for d in a[3]))} |")
-    w(f"| **Totalt** | | **{vecka(weeks)}** |\n")
+    w("## Översikt\n"); w("| Område | Delområden |"); w("|---|---|")
+    for a in NEW: w(f"| {a[0]}. {a[1]} | {', '.join(d[1] for d in a[3])} |")
+    w("")
     w("## Planen\n")
     for a in NEW:
         w(f"## {a[0]}. {a[1]}\n"); w(f"*{a[2]}*\n")
         for d in a[3]:
-            w(f"### {d[0]} {d[1]} ({vecka(d[2])} v)\n"); w(f"**Mål:** {d[3]}\n"); w(f"**Nivåer (E→A):** {d[4]}\n")
+            w(f"### {d[0]} {d[1]}\n"); w(f"**Mål:** {d[3]}\n"); w(f"**Nivåer (E→A):** {d[4]}\n")
             mod = modeller(d)
             if mod: w("**Förklaringsmodeller:** " + "; ".join(mod) + "\n")
             w("| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |"); w("|---|---|---|---|---|---|")
@@ -257,11 +256,9 @@ def skriv_md(seen, s3, weeks, nk, ne, nl):
             w("")
             if d[6]: w("**Om tid / fördjupning:** " + "; ".join(mom(i)["titel"] for i in d[6]) + "\n")
     w("## Öppna frågor\n")
-    w("1. Stämmer antagandet att de 25 veckorna gäller hela biologin åk 7–9?")
-    w("2. Sexualitet och relationer (område 11) har bara 2 veckor. Är det rimligt?")
-    w("3. Evolutionen (område 9) ligger sent. Ska den flyttas tidigare?")
-    w("4. Delområde 2.3 är en halv vecka och har inget labbpass.")
-    w("5. Sajten har två nivåer under ämnet idag; tre nivåer kräver en ändring av ämnesträdet.")
+    w("1. Evolutionen (område 9) ligger sent. Ska den flyttas tidigare?")
+    w("2. Delområde 2.3 har inget labbpass.")
+    w("3. Sajten har två nivåer under ämnet idag; tre nivåer kräver en ändring av ämnesträdet.")
     open("planering/biologi.md", "w", encoding="utf-8").write("\n".join(o) + "\n")
 
 # ---- Excel -------------------------------------------------------------------
@@ -289,21 +286,22 @@ def skriv_xlsx():
                 mrows.append([a[0], a[1], d[0], d[1], d[2], "Lektionsmoment", m["titel"], m["text"], m["begrepp"], "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
             if d[0] in LAB25:
                 t, fr, var, sak, tg, beg = LAB25[d[0]]; ks = B.expand(tg)
-                mrows.append([a[0], a[1], d[0], d[1], d[2], "Labb (45 min)", t, f"{fr} {var}", beg, "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
+                mrows.append([a[0], a[1], d[0], d[1], d[2], "Labb", t, f"{fr} {var}", beg, "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
                 lrows.append([d[0], d[1], t, fr, var, sak])
             for i in d[6]:
                 m = mom(i); ks = B.expand(m["tags"])
                 mrows.append([a[0], a[1], d[0], d[1], d[2], "Om tid / fördjupning", m["titel"], m["text"], m["begrepp"], "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
     ws = wb.active; ws.title = "Moment"
-    sheet(ws, ["Område nr", "Område", "Delområde nr", "Delområde", "Veckor", "Typ", "Moment", "Innehåll i texten", "Begrepp", "Syfte", "Centralt innehåll", "Förmåga"],
-          mrows, [8, 24, 9, 28, 8, 16, 32, 55, 36, 36, 40, 22], "H2")
-    sheet(wb.create_sheet("Delområden"), ["Område nr", "Område", "Delområde nr", "Delområde", "Veckor", "Mål", "Nivåer (E→A)", "Förklaringsmodeller", "Om tid / fördjupning"], drows, [8, 24, 9, 30, 8, 50, 60, 45, 50])
-    sheet(wb.create_sheet("Områden"), ["Nr", "Område", "Idé", "Veckor", "Delområden"], arows, [6, 32, 70, 8, 10])
-    sheet(wb.create_sheet("Labbar (45 min)"), ["Delområde nr", "Delområde", "Labb", "Undersökningsbar fråga", "Upplägg", "Säkerhet och anmärkning"], lrows, [10, 30, 32, 40, 60, 50])
+    mrows = [r[:4] + r[5:] for r in mrows]; drows = [r[:4] + r[5:] for r in drows]; arows = [r[:3] + r[4:] for r in arows]
+    sheet(ws, ["Område nr", "Område", "Delområde nr", "Delområde", "Typ", "Moment", "Innehåll i texten", "Begrepp", "Syfte", "Centralt innehåll", "Förmåga"],
+          mrows, [8, 24, 9, 28, 16, 32, 55, 36, 36, 40, 22], "G2")
+    sheet(wb.create_sheet("Delområden"), ["Område nr", "Område", "Delområde nr", "Delområde", "Mål", "Nivåer (E→A)", "Förklaringsmodeller", "Om tid / fördjupning"], drows, [8, 24, 9, 30, 50, 60, 45, 50])
+    sheet(wb.create_sheet("Områden"), ["Nr", "Område", "Idé", "Delområden"], arows, [6, 32, 70, 10])
+    sheet(wb.create_sheet("Labbar"), ["Delområde nr", "Delområde", "Labb", "Undersökningsbar fråga", "Upplägg", "Säkerhet och anmärkning"], lrows, [10, 30, 32, 40, 60, 50])
     seen = kontroll()[0]
     sheet(wb.create_sheet("Täckning"), ["Kod", "Innehåll", "Antal lektioner/labbar"], [[k, v, seen[k]] for k, v in list(B.SYFTE.items()) + list(B.CI.items()) + list(B.FORM.items())], [8, 110, 14])
     wo = wb.create_sheet("Om planen", 0)
-    for r in ["Biologi åk 7–9 – planering på ca 25 veckor (Lgr22). Förslag, väntar på granskning.", "Nivåer: område → delområde (ca 1 vecka) → moment.", "Tidsram: ca 2,5 h lektion (tre moment) + ca 45 min labb per vecka.", "Syfte: den del av ämnets syfte (i sak) som momentet bygger på. Delar som följer av förmåga eller innehåll är härledda automatiskt.", "Begrepp, labbar och veckor är förslag, inte granskade mot läromedel eller skolans säkerhetsregler.", "Källa: planering/biologi_plan25.py i repot (ändra där, inte här)."]:
+    for r in ["Biologi åk 7–9 – planering (Lgr22). Förslag, väntar på granskning.", "Nivåer: område → delområde → moment.", "Syfte: den del av ämnets syfte (i sak) som momentet bygger på. Delar som följer av förmåga eller innehåll är härledda automatiskt.", "Begrepp och labbar är förslag, inte granskade mot läromedel eller skolans säkerhetsregler.", "Källa: planering/biologi_plan25.py i repot (ändra där, inte här)."]:
         wo.append([r])
     for row in wo.iter_rows():
         for c in row: c.font = F
@@ -331,11 +329,11 @@ tr.lab td{background:#f3f9f5}
 .leg{font-size:9pt;background:#f4f6f5;border-radius:4pt;padding:6pt 9pt;margin:6pt 0}.leg li{margin:1pt 0}"""
     o = ['<!doctype html><meta charset="utf-8"><style>' + css + "</style>"]
     weeks = kontroll()[7]
-    o.append(f'<div class="pg"><h1>Biologi åk 7–9 – planering</h1><div class="sub">Ca {vecka(weeks)} veckor: område → delområde (ca en vecka) → moment, med begrepp, förklaringsmodeller, labbpass och koppling till kursplanen (Lgr22). Förslag, väntar på granskning.</div>')
-    o.append('<div class="leg"><b>Så läser du planen.</b><ul style="margin:3pt 0 0 14pt;padding:0"><li><b>Tidsram:</b> ca 2,5 timmar lektion (tre moment) plus ca 45 minuter labb per vecka.</li><li><b>Område</b> = ett kapitel. <b>Delområde</b> = ca en veckas arbete. <b>Moment</b> = en lektion: vad som tas upp i texten.</li><li><b>Koppling</b> visar vilken del av ämnets <b>syfte</b>, vilket <b>centralt innehåll</b> och vilken <b>förmåga</b> (begrepp/modeller, granska/ta ställning, undersöka) momentet bygger på.</li><li>Nivåraden visar vad som skiljer godtagbara (E), goda (C) och mycket goda (A) kunskaper i delområdet.</li><li><b>Om tid / fördjupning</b> = moment som inte ryms i veckan.</li><li>🧪 = labbpass (ca 45 min).</li></ul></div>')
-    o.append('<table><tr><th>Område</th><th>Delområden</th><th style="width:12%">Veckor</th></tr>')
-    for a in NEW: o.append(f'<tr><td><b>{a[0]}. {e(a[1])}</b></td><td>{e(", ".join(d[1] for d in a[3]))}</td><td>{vecka(sum(d[2] for d in a[3]))}</td></tr>')
-    o.append(f'<tr><td><b>Totalt</b></td><td></td><td><b>{vecka(weeks)}</b></td></tr></table></div>')
+    o.append(f'<div class="pg"><h1>Biologi åk 7–9 – planering</h1><div class="sub">Område → delområde → moment, med begrepp, förklaringsmodeller, labbpass och koppling till kursplanen (Lgr22). Förslag, väntar på granskning.</div>')
+    o.append('<div class="leg"><b>Så läser du planen.</b><ul style="margin:3pt 0 0 14pt;padding:0"><li><b>Område</b> = ett kapitel. <b>Delområde</b> = ett avgränsat arbetsområde. <b>Moment</b> = en lektion: vad som tas upp i texten.</li><li><b>Koppling</b> visar vilken del av ämnets <b>syfte</b>, vilket <b>centralt innehåll</b> och vilken <b>förmåga</b> (begrepp/modeller, granska/ta ställning, undersöka) momentet bygger på.</li><li>Nivåraden visar vad som skiljer godtagbara (E), goda (C) och mycket goda (A) kunskaper i delområdet.</li><li><b>Om tid / fördjupning</b> = moment som inte ryms i planen.</li><li>🧪 = labbpass.</li></ul></div>')
+    o.append('<table><tr><th>Område</th><th>Delområden</th></tr>')
+    for a in NEW: o.append(f'<tr><td><b>{a[0]}. {e(a[1])}</b></td><td>{e(", ".join(d[1] for d in a[3]))}</td></tr>')
+    o.append('</table></div>')
     def rad(titel_html, text, beg, ks, cls=""):
         sy = kl(ks, PS); ce = kl(ks, PC); fm = kl(ks, PF); k = ""
         if sy: k += "<div><b>Syfte:</b> " + e("; ".join(sy)) + "</div>"
@@ -345,9 +343,9 @@ tr.lab td{background:#f3f9f5}
     for a in NEW:
         for di, d in enumerate(a[3]):
             o.append('<div class="pg">')
-            if di == 0: o.append(f'<h2>{a[0]}. {e(a[1])}</h2><div class="idea">{e(a[2])} ({vecka(sum(x[2] for x in a[3]))} veckor)</div>')
+            if di == 0: o.append(f'<h2>{a[0]}. {e(a[1])}</h2><div class="idea">{e(a[2])}</div>')
             else: o.append(f'<div class="idea" style="margin:0 0 4pt;color:#3e7d5a"><b>{a[0]}. {e(a[1])}</b></div>')
-            o.append(f'<h3>{d[0]} {e(d[1])} <span>({vecka(d[2])} v)</span></h3><div class="mal"><b>Mål:</b> {e(d[3])}</div><div class="niv"><b>Nivåer:</b> {e(d[4])}</div>')
+            o.append(f'<h3>{d[0]} {e(d[1])}</h3><div class="mal"><b>Mål:</b> {e(d[3])}</div><div class="niv"><b>Nivåer:</b> {e(d[4])}</div>')
             mod = modeller(d)
             if mod: o.append('<div class="mod"><b>Förklaringsmodeller:</b> ' + e("; ".join(mod)) + "</div>")
             o.append('<table><colgroup><col style="width:43%"><col style="width:22%"><col style="width:35%"></colgroup><tr><th>Moment och innehåll</th><th>Begrepp</th><th>Koppling till kursplanen</th></tr>')
@@ -355,7 +353,7 @@ tr.lab td{background:#f3f9f5}
                 m = mom(i); o.append(rad(f"{e(m['titel'])}", m["text"], m["begrepp"], B.expand(m["tags"])))
             if d[0] in LAB25:
                 t, fr, var, sak, tg, beg = LAB25[d[0]]
-                o.append(rad(f"🧪 Labb (ca 45 min): {e(t)}", f"{fr} {var} Säkerhet: {sak}", beg, B.expand(tg), "lab"))
+                o.append(rad(f"🧪 Labb: {e(t)}", f"{fr} {var} Säkerhet: {sak}", beg, B.expand(tg), "lab"))
             o.append("</table>")
             if d[6]: o.append('<div class="tid"><b>Om tid / fördjupning:</b> ' + e("; ".join(mom(i)["titel"] for i in d[6])) + "</div>")
             o.append("</div>")
@@ -379,8 +377,7 @@ MATERIAL = {1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/bio
 def skriv_js():
     import json
     data = {"plan": {"pdf": "planering/biologi-planering.pdf", "xlsx": "planering/biologi-planering.xlsx"},
-            "omraden": [{"nr": a[0], "titel": a[1], "ide": a[2], "veckor": sum(d[2] for d in a[3]),
-                         "hafte": HAFTE_NYCKEL.get(a[0]),
+            "omraden": [{"nr": a[0], "titel": a[1], "ide": a[2],                          "hafte": HAFTE_NYCKEL.get(a[0]),
                          "lankar": MATERIAL.get(a[0], {}).get("lankar", []),
                          "ppt": MATERIAL.get(a[0], {}).get("ppt", [])} for a in NEW]}
     open("planering/lararvy-biologi.js", "w", encoding="utf-8").write(
