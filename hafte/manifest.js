@@ -51,32 +51,6 @@ window.hafte["biologi-ekologi"] = {
   }
 };
 
-window.hafte["spanska-1-hola"] = {
-  titel: "Kapitel 1 – ¡Hola!",
-  vanlig: "hafte/spanska-1-hola-vanlig.pdf",
-  lattlast: "hafte/spanska-1-hola-lattlast.pdf",
-  fordjupning: "hafte/spanska-1-hola-fordjupning.pdf",
-  komplett: {
-    vanlig: "hafte/spanska-1-hola-vanlig-komplett.pdf",
-    lattlast: "hafte/spanska-1-hola-lattlast-komplett.pdf",
-    fordjupning: "hafte/spanska-1-hola-fordjupning-komplett.pdf"
-  }
-};
-
-// ==== KEMI START ====
-window.hafte["kemi-vetenskap"] = {
-  titel: "Kapitel 1 – Kemi och vetenskap",
-  vanlig: "hafte/kemi-01-kemi-och-vetenskap-vanlig.pdf",
-  lattlast: "hafte/kemi-01-kemi-och-vetenskap-lattlast.pdf",
-  fordjupning: "hafte/kemi-01-kemi-och-vetenskap-fordjupning.pdf",
-  komplett: {
-    vanlig: "hafte/kemi-01-kemi-och-vetenskap-vanlig-komplett.pdf",
-    lattlast: "hafte/kemi-01-kemi-och-vetenskap-lattlast-komplett.pdf",
-    fordjupning: "hafte/kemi-01-kemi-och-vetenskap-fordjupning-komplett.pdf"
-  }
-};
-// ==== KEMI END ====
-
 // ==== HISTORIA START ====
 window.hafte["historia-hogkulturer"] = {
   titel: "Kapitel 2 – Högkulturer",
