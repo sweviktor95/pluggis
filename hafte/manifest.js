@@ -44,11 +44,7 @@ window.hafte["biologi-ekologi"] = {
   vanlig: "hafte/biologi-4-ekologi-vanlig.pdf",
   lattlast: "hafte/biologi-4-ekologi-lattlast.pdf",
   fordjupning: "hafte/biologi-4-ekologi-fordjupning.pdf",
-  komplett: {
-    vanlig: "hafte/biologi-4-ekologi-vanlig-komplett.pdf",
-    lattlast: "hafte/biologi-4-ekologi-lattlast-komplett.pdf",
-    fordjupning: "hafte/biologi-4-ekologi-fordjupning-komplett.pdf"
-  }
+  handledning: "hafte/biologi-4-ekologi-lararhandledning.pdf"
 };
 
 // ==== HISTORIA START ====
