@@ -8,7 +8,6 @@ build({
   async slides(h) {
     const L1 = "Lektion 1.1.1";
     h.section("1.1.1 Från fråga till plan", "Lektion 1: undersökningsbar fråga, hypotes och rättvist försök", "Ca 50 min. Börja med att fråga: Vad är biologi? Vilka sorters biologer känner ni till?");
-    await h.imgText("1.1.1 Från fråga till plan", "Vad är biologi?", ["Biologi är läran om livet.", "Allt levande kallas organismer.", "Biologer arbetar ute i naturen, i labb, på sjukhus och vid datorer."], "l_yrken.png", { iw: 7.0, imgLeft: false, notes: "Låt eleverna berätta vilken sorts biolog de själva skulle vilja vara." });
     // sections must exist: handled by helper.section above
     h.table("1.1.1 Från fråga till plan", "Gör frågan undersökningsbar", ["Går inte att undersöka", "Går att undersöka"], [["Är solrosor fina?", "Hur mycket växer en solros på en vecka?"], ["Är musik bra när man pluggar?", "Kommer man ihåg fler ord efter musik än efter tystnad?"], ["Är krasse bra?", "Växer krasse högre i ljus än i mörker?"]], { colW: [5.5, 6.63], rowH: 0.95, note: "En undersökningsbar fråga kan besvaras med mätning eller observation.", notes: "Be eleverna omformulera egna åsiktsfrågor." });
     await h.imgText("1.1.1 Från fråga till plan", "Forskning är en cykel", ["Fråga: vad undrar jag?", "Hypotes: ett prövbart svar med en motivering.", "Testa: gör en undersökning.", "Slutsats: vad lärde jag mig? Ofta kommer en ny fråga."], "l_cykel.png", { iw: 6.4, imgLeft: false, notes: "En teori är en väl prövad förklaring med många belägg, till skillnad från en hypotes." });

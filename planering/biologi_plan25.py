@@ -370,7 +370,8 @@ HAFTE_NYCKEL = {1: "biologi-vetenskap", 4: "biologi-ekologi"}   # områden som r
 # Lärarmaterial per område (prov, Jeopardy) och delområde (PowerPoint)
 MATERIAL = {1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/biologi-1-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade1/biologi-1-prov-larare.pdf"],
-                           ["Jeopardy", "simuleringar/jeopardy-bio-1.html"]],
+                           ["Jeopardy", "simuleringar/jeopardy-bio-1.html"],
+                           ["📊 PowerPoint: Introduktion till biologi (start)", "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"]],
                  "ppt": {"1.1": "planering/biologi-omrade1/biologi-1-1-undersoka-systematiskt.pptx",
                          "1.2": "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"}}}
 

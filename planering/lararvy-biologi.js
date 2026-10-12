@@ -23,6 +23,10 @@ window.lararBiologi = {
     [
      "Jeopardy",
      "simuleringar/jeopardy-bio-1.html"
+    ],
+    [
+     "📊 PowerPoint: Introduktion till biologi (start)",
+     "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"
     ]
    ],
    "delomraden": [
