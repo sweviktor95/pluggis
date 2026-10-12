@@ -129,7 +129,8 @@ def esc(s):
 
 # ---- byggstenar -------------------------------------------------------
 def head(nr, titel, small=False):
-    return f'<div class="sh{" small" if small else ""}"><span class="nr">{nr}</span><h2>{titel}</h2></div>'
+    n = f'<span class="nr">{nr}</span>' if nr else ''
+    return f'<div class="sh{" small" if small else ""}">{n}<h2>{titel}</h2></div>'
 
 def fig(src, cap=None, w=None):
     st = f' style="width:{w}"' if w else ""

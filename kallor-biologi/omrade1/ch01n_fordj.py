@@ -27,11 +27,11 @@ def cards4_html():
 
 S = []; FOOTS = []
 def add(nr, t, delomr, inner):
-    S.append((nr, t, inner)); FOOTS.append(f"Fördjupning {NR} · Delområde {delomr} {D[delomr]} · {nr} {t}")
+    S.append((nr, t, inner)); FOOTS.append(f"Fördjupning {NR} · Delområde {delomr} {D[delomr]} · {t}")
 
 add("F1.1.1", "Planera ett eget försök", "1.1",
  "<p>Föreställ dig att ett företag påstår att deras nya tablett gör att förkylningar går över snabbare. Hur skulle man testa det? Det låter enkelt: ge tabletten till några förkylda personer och se om de blir friska. Men de flesta förkylningar går över av sig själva inom en vecka. Hur vet man då att det var tabletten som hjälpte? En bra plan svarar på det i förväg.</p>"
- + fig(FIG+"f_rct.png", "<b>Bild F1.1</b> En randomiserad, dubbelblind och placebokontrollerad studie: en av de mest pålitliga sorternas medicinska försök.", "82%")
+ + fig(FIG+"f_rct.png", "En randomiserad, dubbelblind och placebokontrollerad studie: en av de mest pålitliga sorternas medicinska försök.", "82%")
  + "<h3>Så motiverar du valen i din plan</h3>"
  + row("<p><strong>Variabler.</strong> Välj en oberoende variabel och motivera varför just den. Välj en beroende variabel som verkligen mäter det du vill veta (giltighet). Lista vad som måste hållas lika.</p>"
        "<p><strong>Kontrollgrupp och placebo.</strong> Kontrollgruppen får inte behandlingen. Får den en likadan tablett utan verksamt ämne, kan förväntningar inte förklara skillnaden.</p>"
@@ -58,7 +58,7 @@ add("F1.1.3", "Hur säker är slutsatsen?", "1.1",
  + "<h3>Störfaktorer</h3>"
  + roww("<p>En <strong class='green'>störfaktor</strong> är något som påverkar både det man tror är orsaken och det man mäter. Kanske äter personer som äter mycket fisk också mer grönsaker, röker mindre och har högre inkomst. Då kan det vara de sakerna, och inte fisken, som gör att de lever längre.</p>"
         "<p>Forskare försöker räkna bort kända störfaktorer, men det kan alltid finnas sådana som ingen har tänkt på. Därför är kontrollerade experiment med slumpad fördelning det säkraste sättet att visa orsak.</p>",
-        [fig(FIG+"f_storfaktor.png", "<b>Bild F1.2</b> En störfaktor kan skapa ett samband mellan två saker som inte påverkar varandra.")])
+        [fig(FIG+"f_storfaktor.png", "En störfaktor kan skapa ett samband mellan två saker som inte påverkar varandra.")])
  + "<h3>Slumpen lurar</h3>"
  + row("<p>Om du singlar slant tio gånger är det inte konstigt att få sju krona. Det betyder inte att myntet är fusk. Samma sak gäller i biologiska undersökningar: små skillnader mellan små grupper kan bero på ren slump. Ju större stickprov och ju större skillnad, desto säkrare kan man vara på att skillnaden är verklig.</p>"
        "<p>När du värderar ett försök, resonera om vilka felkällor som är störst, hur mycket de kan ha påverkat slutsatsen och hur du skulle förbättra försöket. Sluta med att säga hur säker slutsatsen är: ”Resultatet tyder på …, men eftersom … kan vi inte vara säkra på …”.</p>",
@@ -97,7 +97,7 @@ add("F1.2.3", "Väga källor och granska påståenden", "1.2",
         "<p><strong>Avkortad axel.</strong> Om y-axeln börjar på 90 i stället för 0 ser en liten skillnad enorm ut.</p>"
         "<p><strong>Relativ ökning.</strong> ”Risken dubblas!” kan betyda att den går från 1 på 100 000 till 2 på 100 000. Fråga alltid efter hur stor risken var från början.</p>"
         "<p><strong>Sponsring och tendens.</strong> En studie betald av ett företag är inte automatiskt fel, men man bör se om den är oberoende granskad och om andra har fått samma resultat.</p>",
-        [fig(FIG+"v_glass.png", "<b>Bild F1.3</b> Två kurvor som följer varandra utan att den ena orsakar den andra.")])
+        [fig(FIG+"v_glass.png", "Två kurvor som följer varandra utan att den ena orsakar den andra.")])
  + "<h3>Bemöt motargument</h3>"
  + row("<p>Ett starkt argument tar motargumentet på allvar. Skriv påstående, belägg, det starkaste motargumentet och ett svar som visar varför beläggen ändå väger tyngre, eller var du kan hålla med. Avsluta med en slutsats som säger hur säker du är.</p>",
        [box("tank", "Tänk efter", "<p>En tidning skriver: ”Studie: Kaffe förlänger livet!” Vilka tre frågor ställer du innan du tror på det?</p>")]))
@@ -107,7 +107,7 @@ UPG = [
  ("Semmelweis jämförde två avdelningar. Förklara varför jämförelsen gjorde hans slutsats starkare, och ge ett skäl till att hans slutsats ändå inte var helt säker innan handtvätten infördes.", 3),
  ("En tidning skriver: ”Ny studie: Kaffe gör att du lever längre! Forskare har följt 500 000 personer och de som drack 2–3 koppar om dagen dog i lägre grad.” Värdera rubriken med begreppen observationsstudie, störfaktor och orsakssamband. Vad skulle krävas för att man säkert kan säga att kaffet är orsaken?", 3),
  ("Två klasser testar om gödning gör att bönplantor växer högre. Klass A har 3 plantor per grupp och får skillnaden 4 mm. Klass B har 30 plantor per grupp och får skillnaden 2 mm. Vilket resultat litar du mest på? Motivera och diskutera slumpens betydelse.", 2),
- ("Tabellen om jäst (F1.1.2) har ett avvikande värde vid 40 °C. Förklara hur du hanterar det och hur du redovisar resultatet så att läsaren kan avgöra hur säker slutsatsen är.", 3),
+ ("Tabellen om jäst (avsnittet ”Tolka data och redovisa osäkerhet”) har ett avvikande värde vid 40 °C. Förklara hur du hanterar det och hur du redovisar resultatet så att läsaren kan avgöra hur säker slutsatsen är.", 3),
  ("Jämför två av exemplen Pasteur, Semmelweis och Marshall och Warren. Vad är gemensamt, och vad skiljer dem åt? Resonera om varför nya idéer ibland möts av motstånd, och om motståndet alltid är oberättigat.", 3),
  ("Två trovärdiga källor säger olika om ett kosttillskott: en myndighet avråder, en studie betald av tillverkaren visar effekt. Resonera om hur du väger källorna och vilken ytterligare information du skulle vilja ha. Formulera ett argument och bemöt ett motargument.", 3)]
 def uppg_html(): return C.uppg_html(UPG, 4)
@@ -121,9 +121,9 @@ SVAR = [
  "Väg: Vad bygger respektive källa på? Är studien oberoende granskad och upprepad? Tendens hos tillverkaren. Önskad info: fler oberoende studier, sammanställningar, storlek och design. Argument i formen påstående, belägg, motargument, bemötande, slutsats med angiven säkerhet."]
 def teacher_html():
     return C.teacher_html("Fördjupningen riktar sig till elever som är klara tidigt eller som behöver mer utmaning mot de högre kriterierna. Den fördjupar systematiska undersökningar (planering, värdering, osäkerhet), vetenskapens gränser, förklaringsmodellers föränderlighet och kritisk granskning med argumentation.",
-      SVAR, [("Resonera om störningar (F1.1.1):", "T.ex. olika svåra ordlistor, ordningen på försöken, trötthet. Byt ordning, använd likvärdiga listor, flera deltagare."),
-             ("Fundera (F1.1.2):", "Temperaturen verkar öka gasbildningen mellan 10 och 25 °C. Vid 40 °C är resultatet osäkert på grund av det avvikande värdet. Gör fler försök."),
-             ("Tänk efter (F1.1.3):", "T.ex. föräldrarnas utbildning, inkomst, tid som föräldrar läser med barnen."),
-             ("Resonera (F1.2.1):", "Naturvetenskap: hur varg påverkar bytesdjur, och hur djur påverkas. Inte: om det är rätt, vilket också beror på värderingar."),
-             ("Tänk efter (F1.2.3):", "Vem betalade? Hur många deltog och hur var det upplagt? Har andra fått samma resultat?")],
+      SVAR, [("Resonera om störningar (avsnittet ”Planera ett eget försök”):", "T.ex. olika svåra ordlistor, ordningen på försöken, trötthet. Byt ordning, använd likvärdiga listor, flera deltagare."),
+             ("Fundera (avsnittet ”Tolka data och redovisa osäkerhet”):", "Temperaturen verkar öka gasbildningen mellan 10 och 25 °C. Vid 40 °C är resultatet osäkert på grund av det avvikande värdet. Gör fler försök."),
+             ("Tänk efter (avsnittet ”Hur säker är slutsatsen?”):", "T.ex. föräldrarnas utbildning, inkomst, tid som föräldrar läser med barnen."),
+             ("Resonera (avsnittet ”Vetenskapens gränser”):", "Naturvetenskap: hur varg påverkar bytesdjur, och hur djur påverkas. Inte: om det är rätt, vilket också beror på värderingar."),
+             ("Tänk efter (avsnittet ”Väga källor och granska påståenden”):", "Vem betalade? Hur många deltog och hur var det upplagt? Har andra fått samma resultat?")],
       "Siffrorna om Semmelweis (11,4 % 1846, 1,3 % 1848): MJA 2018. Marshall och Warren: Nobelstiftelsen 2005 och PMC2661189; att långt ifrån alla smittade får magsår är allmänt känt; ingen siffra anges. Kontrollera gärna mot en medicinsk källa. Carlson, Nature 1985. Jästdata och exempel är påhittade för undervisning (medelvärden: 30,5 cm utan och 26 cm med det avvikande värdet). · Illustrationer: egenritade.")
