@@ -99,8 +99,7 @@ def ex_html(n, e):
 def prog(i, typ, d=None):
     lab = (d or {}).get('prog') or f'Del {i} av {L.NDEL}'
     if (d or {}).get('lab') and typ == 'LÄS': typ = 'LABB'
-    return ('<div class="lp"><span class="p1' + (' ova' if typ == 'ÖVA' else '') + f'">{typ}</span><span class="t">{lab}</span><span class="dots">'
-            + "".join(f'<i class="{"on" if j < i else ""}"></i>' for j in range(L.NDEL)) + '</span></div>')
+    return ('<div class="lp"><span class="p1' + (' ova' if typ == 'ÖVA' else '') + f'">{typ}</span><span class="t">{lab}</span></div>')
 
 def lasa_page(i, d):
     h = f'<section class="sec m{i}">' + prog(i, 'LÄS', d) + f'<h2 class="lh">{d["titel"]}</h2><div class="t">'
