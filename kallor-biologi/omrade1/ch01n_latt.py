@@ -59,6 +59,7 @@ TB_CHECK = ('<table class="tb"><tr><th>Fråga om källan</th><th>Bra tecken</th>
 ARG = ('<div class="arg"><b class="h">SÅ ARGUMENTERAR DU</b>1. <b>Påstående:</b> Jag tycker att …<br>2. <b>Belägg:</b> Jag tycker det eftersom …<br>'
        '3. <b>Motargument:</b> Någon kan säga att … Men …<br>4. <b>Slutsats:</b> Alltså …</div>')
 
+DELOMR = {"1.1": "Undersöka systematiskt", "1.2": "Modeller, källor och argument"}
 DELAR = [
  dict(titel="Vad är biologi?", prog="Start · Vad är biologi?",
   fore=["Biologi är läran om allt som lever.", "Allt som lever kallas <strong>organismer</strong>. Djur, växter, svampar och bakterier är organismer.", "Biologer forskar om organismer. De forskar också om människans kropp.", "Det finns många sorters biologer. Här är fyra:"],

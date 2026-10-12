@@ -103,7 +103,7 @@ def prog(i, typ, d=None):
             + "".join(f'<i class="{"on" if j < i else ""}"></i>' for j in range(L.NDEL)) + '</span></div>')
 
 def lasa_page(i, d):
-    h = '<section class="sec">' + prog(i, 'LÄS', d) + f'<h2 class="lh">{d["titel"]}</h2><div class="t">'
+    h = f'<section class="sec m{i}">' + prog(i, 'LÄS', d) + f'<h2 class="lh">{d["titel"]}</h2><div class="t">'
     for p in d['fore']: h += (p if p.startswith(('<h3','<table','<div','<ol')) else f"<p>{p}</p>")
     if 'sub1' in d:
         for key in ('sub1', 'sub2', 'sub3'):
@@ -123,7 +123,7 @@ def lasa_page(i, d):
     return h
 
 def ova_page(i, d):
-    h = '<section class="sec">' + prog(i, 'ÖVA', d) + f'<h2 class="lh">Öva: {d["titel"]}</h2>'
+    h = f'<section class="sec m{i}">' + prog(i, 'ÖVA', d) + f'<h2 class="lh">Öva: {d["titel"]}</h2>'
     for n, e in enumerate(d['ova'], 1): h += ex_html(n, e)
     return h + '</section>'
 
@@ -152,7 +152,8 @@ def first_page():
 @page{{margin:0}}
 body{{margin:0}}
 .cv img{{width:210mm;height:87.6mm;display:block}}
-.band{{background:#2f6b4f;color:#fff;height:36mm;padding:7mm 18mm 0}}
+.band{{background:#2f6b4f;color:#fff;height:36mm;padding:4mm 18mm 0}}
+.band .kn{{font:700 11pt Carlito;letter-spacing:2.5pt;color:#cfe8d6}}
 .band h1{{font:700 34pt Carlito;margin:0}}.band p{{font:15pt Carlito;margin:3pt 0 0}}
 .in{{padding:8mm 18mm 0}}
 .in p{{font-size:12pt}}
@@ -163,7 +164,7 @@ h3.sg{{font:700 14pt Carlito;color:var(--g2);margin:12pt 0 4pt}}
 .ft{{position:absolute;left:18mm;right:14.8mm;bottom:11mm;display:flex;justify-content:space-between;font:8.4pt Carlito;color:#6b625b}}
 .ft b{{color:#2f6b4f;font-size:8.8pt}}
 </style></head><body><div class="cv"><img src="file://{L.FIG}cover_lattlast.png"></div>
-<div class="band"><h1>{L.NAMN}</h1><p>{L.UNDER}</p></div>
+<div class="band"><div class="kn">KAPITEL {L.NR}</div><h1>{L.NAMN}</h1><p>{L.UNDER}</p></div>
 <div class="in"><p>{L.INTRO_L[0]}</p><p>{L.INTRO_L[1]}</p>
 <h3 class="sg">Så här gör du</h3><div class="stp">{cards}</div>
 <div class="lar"><span class="rb">DET HÄR SKA DU LÄRA DIG</span><ul>{lara}</ul></div></div>
@@ -175,13 +176,25 @@ def teacher_page(start):
     return ('<section class="sec teacher"><h2>Till läraren</h2><h3>Om den lättlästa versionen</h3><p>' + L.TILL_LARAREN + '</p><ul class="pu">' + pk + '</ul><p>' + L.TILL_TIPS + '</p>'
             + (getattr(L,'HANDLEDNING_HTML','')) + '<h3>Facit – övningar</h3><div class="cols2">' + f + '</div></section>')
 
+def named_css():
+    out = ''
+    dn = getattr(L, 'DELOMR', {})
+    for i, d in enumerate(L.DELAR, 1):
+        m = re.search(r'Delområde (\d+\.\d+)', d.get('prog', ''))
+        if m:
+            foot = f'Kapitel {L.NR} · Delområde {m.group(1)} {dn.get(m.group(1), "")} · {d["titel"]}'
+        else:
+            foot = f'Kapitel {L.NR} · {L.NAMN} · {d["titel"]}'
+        out += '.m%d{page:m%d}@page m%d{@bottom-left{content:"%s";font:8.4pt Carlito;color:#6b625b;margin-top:6mm}}' % (i, i, i, foot)
+    return out
+
 def build(komplett=True):
     body = ord_page()
     for i, d in enumerate(L.DELAR, 1):
         body += lasa_page(i, d) + ova_page(i, d)
     body += viktigast_page() + test_pages()
     foot = f'Kapitel {L.NR} · {L.NAMN} · Lättläst'
-    def full(b, start): return (f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, start)}{LCSS}{TABCSS(L.TAB)}</style></head><body>{b}</body></html>')
+    def full(b, start): return (f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, start)}{LCSS}{TABCSS(L.TAB)}{named_css()}</style></head><body>{b}</body></html>')
     tmp = f'{OUT}/_latt_body.pdf'
     html_to_pdf(full(body, 2), tmp)
     n = len(PdfReader(tmp).pages)
