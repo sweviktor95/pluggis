@@ -52,3 +52,6 @@
 .bok .t p{font-size:1em}
 .bok .ex1 .q{font-size:1.05em}
 .bok .kom .tx{font-size:1em}
+.bok .fig{max-width:560px;margin:18px auto}
+.bok .fig .cap{max-width:560px}
+.bok .vik img{max-width:90px}
