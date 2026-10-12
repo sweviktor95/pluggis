@@ -1,6 +1,6 @@
 // Ekologi – sajtsidor byggda utifrån Kapitel 4 (häftet, vanlig version).
 // Följer häftet, med rättelserna från faktakollen. Bilderna är utklippta ur häftet.
-// "Hållbar utveckling" har ännu inget innehåll (ingen motsvarande del i häftet).
+// "Hållbar utveckling" finns på sajten men inte i häftena än.
 
 var innehall = window.innehall || {};
 
@@ -230,11 +230,28 @@ innehall["biologi-ekologi-liv-i-samspel"] = {
       ],
       kontrollfraga: "Vilken sorts samspel är en lav, och vad får svampen och algen ut av det?",
       kontrollsvar: "Symbios. Algen gör fotosyntes och ger näring, och svampen skyddar algen och håller kvar vatten. Båda tjänar på samarbetet."
+    },
+    {
+      ikon: "🏠",
+      titel: "Livsmiljö och nisch",
+      text: [
+        "Alla arter har en <strong>livsmiljö</strong>, platsen där de kan leva. Kungsfågeln lever i granskog, gäddan i grunda vikar med vass och lodjuret i stora skogsområden. En viss typ av miljö, som barrskog, myr, sjö eller strandäng, kallas en <strong>biotop</strong>.",
+        "Men varje art har också en egen roll i ekosystemet. Det kallas artens <strong>nisch</strong>: vad den äter, var och när den söker mat, var den bor och vilka den påverkar. Nischen är ungefär artens ”yrke”, medan livsmiljön är dess ”adress”.",
+        "Två arter som har exakt samma nisch konkurrerar hårt, och ofta blir det bara en av dem som klarar sig. Därför har arter som lever på samma plats ofta olika nischer. I en granskog kan flera småfåglar leva sida vid sida, eftersom de söker föda på olika ställen: kungsfågeln längst ut på grenarna och trädkryparen på stammen. Ju fler olika nischer det finns, desto fler arter får plats.",
+        RUTA("tank", "Tänk efter", "Du och din granne bor på samma gata, men har olika yrken. Vad motsvarar gatan, och vad motsvarar yrket, i ekologins ord?")
+      ],
+      bild: "bilder/ekologi-nisch.png",
+      bildText: "Bild 4.7 Två småfåglar i samma gran. De söker föda på olika ställen och har därför olika nischer.",
+      kontrollfraga: "Vad är skillnaden mellan en arts livsmiljö och dess nisch?",
+      kontrollsvar: "Livsmiljön är platsen där arten lever (adressen). Nischen är artens roll i ekosystemet: vad den äter, när och var den söker mat och hur den påverkar andra (yrket)."
     }
   ],
   begrepp: [
     { term: "Konkurrens", forklaring: "När arter som behöver samma resurs tävlar om den." },
-    { term: "Symbios", forklaring: "Samarbete där båda arterna tjänar på det." }
+    { term: "Symbios", forklaring: "Samarbete där båda arterna tjänar på det." },
+    { term: "Livsmiljö", forklaring: "Platsen där en art lever." },
+    { term: "Biotop", forklaring: "En typ av livsmiljö, till exempel barrskog, myr eller sjö." },
+    { term: "Nisch", forklaring: "Artens roll i ekosystemet: vad den äter, var och när den söker mat och hur den påverkar andra." }
   ],
   exitTicket: [
     { fraga: "Rödräv och fjällräv konkurrerar om mat och lyor. Vem tjänar på det?", svar: "Ingen. Båda förlorar lite i en konkurrens." }
@@ -243,7 +260,7 @@ innehall["biologi-ekologi-liv-i-samspel"] = {
 
 // ---------- 4.7: Ekosystems känslighet ----------
 innehall["biologi-ekologi-systems-kanslighet"] = {
-  intro: "Människan är en del av ekosystemen och påverkar dem mer än någon annan art. Två tydliga exempel från Östersjön visar hur kunskap om näringskedjor och kretslopp hjälper oss att förstå miljöproblem.",
+  intro: "Människan är en del av ekosystemen och påverkar dem mer än någon annan art. Först två tydliga exempel från Östersjön, sedan tre stora hot mot naturen: klimatförändringar, förlorade livsmiljöer och invasiva arter. Kunskap om näringskedjor och kretslopp hjälper oss att förstå dem alla.",
   sektioner: [
     {
       ikon: "☠️",
@@ -267,11 +284,46 @@ innehall["biologi-ekologi-systems-kanslighet"] = {
       bildText: "Bild 4.8 Övergödning steg för steg: näring läcker ut, alger växer, algerna dör och sjunker, nedbrytare använder syre, syrebrist.",
       kontrollfraga: "Förklara kort hur övergödning kan leda till syrebrist.",
       kontrollsvar: "Näring från åkrar och avlopp gör att algerna växer kraftigt. När algerna dör sjunker de, och nedbrytarna som bryter ner dem förbrukar syret i bottenvattnet, så det blir syrebrist."
+    },
+    {
+      ikon: "🌡️",
+      titel: "Klimatförändringar",
+      text: [
+        "När vi bränner olja, kol och naturgas släpps koldioxid ut (se kolets kretslopp i 4.5). Mer koldioxid i luften förstärker växthuseffekten, och jordens medeltemperatur har hittills stigit med drygt en grad sedan 1800-talet. Det kan låta lite, men ekosystemen är byggda för vissa temperaturer.",
+        "<strong>Arter flyttar.</strong> Många arter förskjuts norrut eller uppåt i fjällen, där det är kallare. Rödräven går högre upp i fjällen och konkurrerar där med fjällräven.<br><strong>Säsongerna ändras.</strong> Om våren kommer tidigt kan insekterna komma före flyttfåglarna, som då missar maten till sina ungar.<br><strong>Isar smälter.</strong> Djur som lever på isen, som isbjörn och ringsäl, förlorar sin livsmiljö.<br><strong>Haven blir surare.</strong> Haven tar upp en del av koldioxiden, och då blir vattnet surare. Det gör det svårare för bland annat musslor, snäckor och koraller att bygga sina skal.",
+        "Arter som snabbt kan flytta eller anpassa sig klarar sig bäst. Arter som lever på en liten plats, som många fjällväxter, har svårare."
+      ],
+      kontrollfraga: "Ge två sätt som klimatförändringar kan påverka arter och ekosystem.",
+      kontrollsvar: "Till exempel att arter flyttar norrut eller uppåt i fjällen, att säsongerna ändras så att flyttfåglar och deras mat inte längre passar ihop, att isar smälter så att isdjur förlorar sin livsmiljö, eller att haven blir surare så att musslor och koraller får svårare att bygga skal."
+    },
+    {
+      ikon: "🌲",
+      titel: "Förlorade livsmiljöer",
+      text: [
+        "Det största hotet mot arter i Sverige och i världen är att deras livsmiljöer försvinner eller förändras. När skog avverkas, våtmarker dikas ut, mark bebyggs eller blir åker tappar arter sin ”adress”.",
+        "Många rödlistade arter, till exempel vitryggig hackspett, flera lavar och skalbaggar, lever i gammal skog eller på död ved. I ett skogsbruk där alla träd avverkas i ung ålder finns det därför lite plats för dem.",
+        "Även när en del av livsmiljön blir kvar kan den delas upp i små öar av vägar, åkrar och bebyggelse. Det kallas <strong>fragmentering</strong>. Små populationer på små öar har svårt att möta varandra, och de blir lättare utrotade."
+      ],
+      kontrollfraga: "Varför är förlust av livsmiljö ett så stort hot mot arter?",
+      kontrollsvar: "Alla arter behöver en plats med rätt mat, skydd och förhållanden. När livsmiljön försvinner eller delas upp i små delar får arten ingenstans att leva, och populationerna blir små och sårbara."
+    },
+    {
+      ikon: "🦞",
+      titel: "Invasiva arter",
+      text: [
+        "Ibland för människan med sig arter till nya platser, med flit eller av misstag. De flesta klarar sig inte, men en del trivs och sprider sig så mycket att de skadar de arter som redan finns där. De kallas <strong>invasiva arter</strong>. De har ofta inga naturliga fiender på den nya platsen.",
+        "<strong>Signalkräftan</strong> sattes ut i svenska vatten från 1960-talet. Den bär på kräftpest, som slår ut den inhemska flodkräftan.<br><strong>Minken</strong> kom från pälsfarmer, och den jagar bland annat sjöfåglar.<br><strong>Jättebjörnklo</strong> planterades som trädgårdsväxt, och den tränger undan andra växter. Saften kan ge brännskador på huden.",
+        "Inte alla införda arter är ett problem. Det är de som sprider sig kraftigt och hotar andra arter som kallas invasiva. Därför ska man aldrig släppa ut akvariedjur eller dumpa trädgårdsavfall i naturen."
+      ],
+      kontrollfraga: "Varför kan en invasiv art få stor skada på ett ekosystem?",
+      kontrollsvar: "Den har ofta inga naturliga fiender på den nya platsen, så den kan öka kraftigt. Den kan konkurrera ut, äta upp eller smitta de arter som redan finns där."
     }
   ],
   begrepp: [
     { term: "Anrikning", forklaring: "När ett gift samlas i allt högre halter högre upp i näringskedjan." },
-    { term: "Övergödning", forklaring: "När för mycket näringsämnen hamnar i sjöar och hav." }
+    { term: "Övergödning", forklaring: "När för mycket näringsämnen hamnar i sjöar och hav." },
+    { term: "Fragmentering", forklaring: "När en livsmiljö delas upp i små delar, till exempel av vägar och åkrar." },
+    { term: "Invasiv art", forklaring: "En art som människan fört till en ny plats och som sprider sig och skadar andra arter där." }
   ],
   exitTicket: [
     { fraga: "Vilka två ämnen från jordbruk och avlopp orsakar övergödning?", svar: "Kväve och fosfor." }
@@ -306,6 +358,28 @@ innehall["biologi-ekologi-hallbar-utveckling"] = {
       kontrollsvar: "Till exempel pollinering (bin och humlor ger skörd av bär och grödor) och rent vatten (skogar och våtmarker renar vattnet). Även mat, virke och naturupplevelser räknas."
     },
     {
+      ikon: "🌾",
+      titel: "Naturbruk: skog, jordbruk och fiske",
+      text: [
+        "<strong>Naturbruk</strong> betyder att vi använder naturen för att få mat och material. I Sverige är de tre stora områdena skogsbruk, jordbruk och fiske. Alla tre bygger på ekosystem, och alla kan skada dem om de sköts fel.",
+        "<strong>Skogsbruk.</strong> Ungefär två tredjedelar av Sveriges yta är skog, och den ger virke, papper och jobb. Skogen lagrar också kol, och den är livsmiljö för många arter. Ett hållbart skogsbruk sparar ”nyckelbiotoper”, lämnar döda träd och några levande träd på hygget och skyddar vissa områden helt.<br><strong>Jordbruk.</strong> Åkrar och betesmarker ger oss mat. Gödsel och bekämpningsmedel kan läcka till vattnet och skada insekter, så som du läste om övergödning i 4.7. Ett hållbart jordbruk gödslar lagom, har kantzoner mot vattendrag och låter djur beta gräsmarker som annars växer igen. Dessa betesmarker har ofta många arter.<br><strong>Fiske.</strong> Om man fångar fler fiskar än som hinner växa upp och föröka sig är det <strong>överfiske</strong>, och beståndet minskar. Därför finns fiskekvoter, minimimått och fredade områden. Torsken i östra Östersjön är ett exempel på ett bestånd som har blivit så litet att fisket har begränsats kraftigt.",
+        "Det gäller alltid att väga olika intressen mot varandra: jobb, mat, pengar och natur. Lösningen är att ta ut mindre än naturen hinner växa till igen. Det kallas att utnyttja naturen <em>hållbart</em>."
+      ],
+      kontrollfraga: "Ge ett exempel på hur skogsbruk, jordbruk eller fiske kan skada ett ekosystem, och ett sätt att göra det mer hållbart.",
+      kontrollsvar: "Till exempel: överfiske minskar fiskbestånden, och kvoter och fredade områden kan hjälpa. Eller: gödsel från åkrar ger övergödning, och kantzoner och lagom gödsling minskar problemet. Eller: avverkning tar bort livsmiljö för arter i gammal skog, och man kan spara gamla träd och skydda vissa områden."
+    },
+    {
+      ikon: "🥾",
+      titel: "Allemansrätten – frihet med ansvar",
+      text: [
+        "I Sverige har alla rätt att vara i naturen, även på mark som någon annan äger. Det kallas <strong>allemansrätten</strong>. Du får till exempel gå, cykla, åka skidor, bada, plocka bär, svamp och vanliga blommor och sova en natt i tält en bit från hus.",
+        "Rätten har två enkla regler: <strong>inte störa, inte förstöra</strong>. Du får inte vara nära någons hem, skräpa ner, bryta kvistar eller skada djur och fåglar. Du får inte plocka fridlysta växter eller störa häckande fåglar, och hunden ska hållas kopplad under våren och sommaren.",
+        "Allemansrätten fungerar eftersom många tar ansvar. Det är också en del av hållbar utveckling: alla får njuta av naturen, men ingen ska slita ut den."
+      ],
+      kontrollfraga: "Vad betyder ”inte störa, inte förstöra”? Ge ett exempel.",
+      kontrollsvar: "Man får vara i naturen men ska ta hänsyn till människor, djur och växter. Exempel: man får plocka bär men inte skräpa ner, bryta grenar eller komma nära en fågels bo."
+    },
+    {
       ikon: "🙋",
       titel: "Vad kan jag göra?",
       text: [
@@ -330,7 +404,10 @@ innehall["biologi-ekologi-hallbar-utveckling"] = {
   begrepp: [
     { term: "Hållbar utveckling", forklaring: "Att tillgodose dagens behov utan att ta ifrån framtida generationer möjligheten att tillgodose sina." },
     { term: "Agenda 2030", forklaring: "Världens länders 17 globala mål för hållbar utveckling, antagna 2015." },
-    { term: "Ekosystemtjänst", forklaring: "Något naturen gör för oss, till exempel pollinering, rent vatten eller mat." }
+    { term: "Ekosystemtjänst", forklaring: "Något naturen gör för oss, till exempel pollinering, rent vatten eller mat." },
+    { term: "Naturbruk", forklaring: "Att använda naturen för att få mat och material, till exempel genom skogsbruk, jordbruk och fiske." },
+    { term: "Överfiske", forklaring: "När man fiskar mer än fiskbeståndet hinner ersätta." },
+    { term: "Allemansrätten", forklaring: "Rätten att vistas i naturen, med regeln inte störa, inte förstöra." }
   ],
   exitTicket: [
     { fraga: "Vilka tre delar hänger ihop i hållbar utveckling?", svar: "Miljön, samhället och ekonomin." },
