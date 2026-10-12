@@ -51,9 +51,9 @@ h1{font-size:1.25rem;margin:0;color:var(--g1)}
 .team.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc) inset}
 .team input{width:100%;border:0;background:transparent;font:inherit;font-weight:700;color:var(--ink)}
 .team .pts{font-size:1.5rem;font-weight:800;color:var(--g1)}
-.board{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:8px 16px 24px}
-.cat{background:var(--g2);color:#fff;font-weight:700;text-align:center;padding:12px 6px;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:56px}
-.tile{background:var(--g1);color:#fff;border:0;border-radius:8px;font-size:clamp(1.2rem,3vw,2rem);font-weight:800;padding:22px 4px;cursor:pointer}
+.board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-rows:minmax(72px,auto);gap:8px;padding:8px 16px 24px}
+.cat{background:var(--g2);color:#fff;font-weight:700;text-align:center;padding:8px 6px;border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:72px;width:100%;overflow-wrap:anywhere;hyphens:auto;font-size:clamp(.8rem,1.8vw,1.1rem)}
+.tile{background:var(--g1);color:#fff;border:0;border-radius:8px;font-size:clamp(1.2rem,3vw,2rem);font-weight:800;padding:0;width:100%;height:100%;min-height:72px;cursor:pointer}
 .tile[disabled]{background:var(--line);color:transparent;cursor:default}
 .ov{position:fixed;inset:0;background:rgba(10,20,15,.82);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
 .ov.vis{display:flex}
@@ -62,17 +62,30 @@ h1{font-size:1.25rem;margin:0;color:var(--g1)}
 .box .q{font-size:clamp(1.4rem,3.4vw,2.4rem);font-weight:700;margin:14px 0}
 .box .a{font-size:clamp(1.2rem,3vw,2rem);color:var(--g1);font-weight:800;margin:10px 0;min-height:2.6rem}
 .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
-.ok{background:#2f8a4f}.no{background:#b3402f}
+
 #lar{display:none;padding:0 16px 40px}
 #lar.vis{display:block}
 #lar table{width:100%;border-collapse:collapse;margin-bottom:16px;background:var(--card)}
 #lar th,#lar td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
 #lar th{background:var(--g2);color:#fff}
 .note{padding:0 16px 24px;color:var(--ink);opacity:.8;font-size:.9rem}
+.start{max-width:520px;margin:24px auto;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:20px}
+.start h2{margin:0 0 10px;color:var(--g1);font-size:1.15rem}
+.antal{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.antal .btn{min-width:48px}.antal .btn.val{background:var(--g2);color:#fff}
+.namn{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.namn input{padding:9px 10px;border:1.5px solid var(--line);border-radius:8px;font:inherit;background:var(--bg);color:var(--ink)}
+.lagrad{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 4px;border-top:1px solid var(--line)}
+.lagrad .ln{font-weight:700;text-align:left;flex:1}
+.lagrad .vb{display:flex;gap:6px}
+.vb .btn{min-width:84px;background:transparent;color:var(--ink);border:2px solid var(--line)}
+.vb .btn.ok.pa{background:#2f8a4f;color:#fff;border-color:#2f8a4f}
+.vb .btn.no.pa{background:#b3402f;color:#fff;border-color:#b3402f}
 @media print{header .btn,.teams,.board,.note{display:none}#lar{display:block}}
 </style></head><body>
 <header><h1>Jeopardy: Biologi som vetenskap</h1>
-<div class="row"><button class="btn alt" id="lagBtn">+ Lag</button><button class="btn alt" id="larBtn">Lärarvy: alla svar</button><button class="btn" id="nytt">Nytt spel</button></div></header>
+<div class="row"><button class="btn alt" id="larBtn">Lärarvy: alla svar</button><button class="btn" id="nytt">Nytt spel</button></div></header>
+<div class="start" id="start"></div>
 <div class="teams" id="teams"></div>
 <div class="board" id="board" role="grid" aria-label="Spelplan"></div>
 <p class="note">Poängen visar nivån: 100–200 går att klara med lättläst, 300–400 med grundtexten och 500 med fördjupningen. Svaren är korta, ett ord eller en kort mening. Personer och exempel i frågorna är påhittade.</p>
@@ -80,41 +93,61 @@ h1{font-size:1.25rem;margin:0;color:var(--g1)}
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-live="polite"><div class="box">
 <div class="lv" id="lv"></div><div class="q" id="q"></div><div class="a" id="a"></div>
 <div class="row"><button class="btn alt" id="vis">Visa svar</button></div>
-<div class="row" id="bed" style="display:none"><button class="btn ok" id="ratt">Rätt</button><button class="btn no" id="fel">Fel</button><button class="btn alt" id="hopp">Ingen poäng</button></div>
+<div id="bed" style="display:none"><div id="lagrader"></div><div class="row"><button class="btn" id="klar">Klar</button></div></div>
 </div></div>
 <script>
 var DATA=__DATA__;
 var NIV={100:"Lättläst",200:"Lättläst",300:"Grundtext",400:"Grundtext",500:"Fördjupning"};
-var lag=[{n:"Lag 1",p:0},{n:"Lag 2",p:0}],tur=0,aktuell=null,anv={};
+var lag=[],aktuell=null,anv={},val={},antal=2;
+function startskarm(){
+  document.getElementById("board").style.display="none";document.getElementById("teams").style.display="none";
+  var st=document.getElementById("start");st.style.display="";
+  var h='<h2>Hur många lag?</h2><div class="antal">';
+  for(var n=1;n<=6;n++){h+='<button class="btn alt'+(n===antal?' val':'')+'" data-n="'+n+'">'+n+'</button>';}
+  h+='</div><h2>Lagnamn</h2><div class="namn">';
+  for(var i=0;i<antal;i++){h+='<input type="text" maxlength="24" aria-label="Lag '+(i+1)+'" placeholder="Lag '+(i+1)+'" value="'+(window.__namn&&window.__namn[i]||"")+'">';}
+  h+='</div><button class="btn" id="spela">Starta spelet</button>';
+  st.innerHTML=h;
+  Array.prototype.forEach.call(st.querySelectorAll("[data-n]"),function(bt){bt.onclick=function(){sparaNamn();antal=+bt.getAttribute("data-n");startskarm();};});
+  document.getElementById("spela").onclick=function(){sparaNamn();
+    lag=[];for(var i=0;i<antal;i++){lag.push({n:(window.__namn[i]||"").trim()||("Lag "+(i+1)),p:0});}
+    anv={};st.style.display="none";document.getElementById("board").style.display="";document.getElementById("teams").style.display="";rita();};
+}
+function sparaNamn(){window.__namn=Array.prototype.map.call(document.querySelectorAll(".namn input"),function(x){return x.value;});}
 function rita(){
   var b=document.getElementById("board");b.innerHTML="";
   DATA.forEach(function(c){var d=document.createElement("div");d.className="cat";d.textContent=c.kat;b.appendChild(d);});
   for(let r=0;r<5;r++){DATA.forEach(function(c,ci){var f=c.fr[r];var t=document.createElement("button");t.className="tile";t.textContent=f.p;
     var k=ci+"-"+r;if(anv[k]){t.disabled=true;}t.setAttribute("aria-label",c.kat+" "+f.p+" poäng");t.onclick=function(){oppna(ci,r,k);};b.appendChild(t);});}
   var tm=document.getElementById("teams");tm.innerHTML="";
-  lag.forEach(function(l,i){var d=document.createElement("div");d.className="team"+(i===tur?" on":"");
-    var inp=document.createElement("input");inp.value=l.n;inp.setAttribute("aria-label","Lagnamn");inp.oninput=function(){l.n=inp.value;};
-    var p=document.createElement("div");p.className="pts";p.textContent=l.p;d.appendChild(inp);d.appendChild(p);d.onclick=function(e){if(e.target.tagName!=="INPUT"){tur=i;rita();}};tm.appendChild(d);});
+  lag.forEach(function(l){var d=document.createElement("div");d.className="team";
+    var nm=document.createElement("div");nm.style.fontWeight="700";nm.textContent=l.n;
+    var p=document.createElement("div");p.className="pts";p.textContent=l.p;d.appendChild(nm);d.appendChild(p);tm.appendChild(d);});
 }
-function oppna(ci,r,k){var f=DATA[ci].fr[r];aktuell={k:k,p:f.p};
+function oppna(ci,r,k){var f=DATA[ci].fr[r];aktuell={k:k,p:f.p};val={};
   document.getElementById("lv").textContent=DATA[ci].kat+" · "+f.p+" · "+NIV[f.p];
   document.getElementById("q").textContent=f.q;document.getElementById("a").textContent="";
   document.getElementById("vis").style.display="";document.getElementById("bed").style.display="none";
   document.getElementById("ov").classList.add("vis");document.getElementById("vis").focus();
-  document.getElementById("vis").onclick=function(){document.getElementById("a").textContent=f.a;this.style.display="none";document.getElementById("bed").style.display="flex";};}
-function stang(ratt){anv[aktuell.k]=1;if(ratt===1){lag[tur].p+=aktuell.p;}else if(ratt===-1){lag[tur].p-=aktuell.p;}
-  tur=(tur+1)%lag.length;document.getElementById("ov").classList.remove("vis");rita();}
-document.getElementById("ratt").onclick=function(){stang(1);};
-document.getElementById("fel").onclick=function(){stang(-1);};
-document.getElementById("hopp").onclick=function(){stang(0);};
-document.getElementById("lagBtn").onclick=function(){if(lag.length<6){lag.push({n:"Lag "+(lag.length+1),p:0});rita();}};
-document.getElementById("nytt").onclick=function(){lag.forEach(function(l){l.p=0;});anv={};tur=0;rita();};
+  document.getElementById("vis").onclick=function(){document.getElementById("a").textContent=f.a;this.style.display="none";
+    visaLag();document.getElementById("bed").style.display="";};}
+function visaLag(){var h="";
+  lag.forEach(function(l,i){h+='<div class="lagrad"><span class="ln"></span><span class="vb"><button class="btn ok" data-i="'+i+'" data-v="1">Rätt</button><button class="btn no" data-i="'+i+'" data-v="-1">Fel</button></span></div>';});
+  var c=document.getElementById("lagrader");c.innerHTML=h;
+  Array.prototype.forEach.call(c.querySelectorAll(".ln"),function(e,i){e.textContent=lag[i].n;});
+  Array.prototype.forEach.call(c.querySelectorAll("button"),function(bt){bt.onclick=function(){
+    var i=bt.getAttribute("data-i"),v=+bt.getAttribute("data-v");val[i]=(val[i]===v)?0:v;
+    Array.prototype.forEach.call(c.querySelectorAll('button[data-i="'+i+'"]'),function(x){x.classList.toggle("pa",+x.getAttribute("data-v")===val[i]);x.setAttribute("aria-pressed",+x.getAttribute("data-v")===val[i]);});};});}
+document.getElementById("klar").onclick=function(){anv[aktuell.k]=1;
+  lag.forEach(function(l,i){if(val[i]===1){l.p+=aktuell.p;}else if(val[i]===-1){l.p-=aktuell.p;}});
+  document.getElementById("ov").classList.remove("vis");rita();};
+document.getElementById("nytt").onclick=function(){startskarm();};
 document.getElementById("larBtn").onclick=function(){document.getElementById("lar").classList.toggle("vis");};
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.getElementById("ov").classList.remove("vis");}});
 var h="";DATA.forEach(function(c){h+="<h2>"+c.kat+"</h2><table><tr><th>Poäng</th><th>Nivå</th><th>Fråga</th><th>Svar</th></tr>";
   c.fr.forEach(function(f){h+="<tr><td>"+f.p+"</td><td>"+NIV[f.p]+"</td><td>"+f.q+"</td><td>"+f.a+"</td></tr>";});h+="</table>";});
 document.getElementById("lar").innerHTML=h;
-rita();
+startskarm();
 </script></body></html>"""
 open('/home/claude/pluggis/simuleringar/jeopardy-bio-1.html', 'w', encoding='utf8').write(HTML.replace("__DATA__", json.dumps(data, ensure_ascii=False)))
 print("ok", sum(len(c["fr"]) for c in data))
