@@ -1,23 +1,56 @@
-/* Handskrivna tillägg: nivåer, Lässtöd och dyslexivänlig typografi. Ändra här, inte i -bas.css. */
-.bok{font-size:15.5px}
-.bok.lattlast{font-size:17.5px;line-height:1.65}
-.bok .bx,.bok .bx p,.bok .card,.bok .kolla,.bok .tbl,.bok .cap,.bok .note,.bok .q,.bok .sam{font-size:14px}
-.bok h3{font-size:19px}.bok h2.lh,.bok .sh h2{font-size:26px}
-.bok .t p{font-size:inherit}
-/* Dyslexivänliga standardvärden */
-.bok,.bok p,.bok li,.bok td,.bok th,.bok .bx,.bok .card,.bok .kolla,.bok .q,.bok .cap{font-family:Verdana,"Segoe UI",Arial,Helvetica,sans-serif!important}
-.bok{font-size:17px;line-height:1.75;letter-spacing:.01em;word-spacing:.06em;text-align:left}
+/* Handskrivna tillägg för biologisidorna: luftig layout i samma stil som övriga sajten,
+   dyslexivänlig typografi och Lässtöd. Ändra här, inte i -bas.css. */
+.bok{font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.75;color:#222;max-width:none;letter-spacing:.005em;word-spacing:.05em;text-align:left}
+.bok *{box-sizing:border-box}
+.bok.vanlig,.bok.fordjupning{background:#fff;border:1px solid #DCE6DF;border-radius:10px;padding:22px 26px;margin:0 0 20px}
 .bok.lattlast{font-size:18.5px;line-height:1.8}
-.bok .bx,.bok .bx p,.bok .card,.bok .kolla,.bok .tbl,.bok .cap,.bok .note,.bok .q,.bok .sam,.bok table.tb{font-size:15.5px;line-height:1.55}
+.bok .sec{background:#fff;border:1px solid #DCE6DF;border-radius:10px;padding:20px 24px;margin:0 0 18px;break-before:auto}
+.bok p,.bok li,.bok td,.bok th,.bok .bx,.bok .card,.bok .kolla,.bok .q,.bok .cap,.bok .note{font-family:Arial,Helvetica,sans-serif}
+.bok p{font-size:inherit;line-height:inherit;margin:0 0 1.1em}
+.bok h3{font-family:Arial,Helvetica,sans-serif;font-size:1.2em;color:#38564A;margin:1.6em 0 .5em}
+.bok h3:first-child{margin-top:0}
+.bok h2.lh,.bok .sh h2{font-family:Arial,Helvetica,sans-serif;font-size:1.45em;color:#38564A;margin:0 0 .6em}
 .bok em{font-style:normal;font-weight:700}
-.bok .bx .rb,.bok .kolla .kr,.bok .pill,.bok .fake,.bok .kom .lb,.bok .ex1 .ty{text-transform:none;font-size:13px}
-.bok p{margin-bottom:1em}
-/* Lässtöd (extra stort) */
+.bok .green{color:#38564A;font-weight:700}
+/* Sidoboxar blir rutor mitt i texten, som i resten av sajten */
+.bok .row,.bok .row.w,.bok .row.one{display:block}
+.bok .side{display:block;margin:14px 0 4px}
+.bok .bx{display:block;border-radius:10px;padding:13px 18px;margin:14px 0;font-size:.94em;line-height:1.6}
+.bok .bx p{font-size:inherit;line-height:inherit;margin:0 0 .5em}
+.bok .bx b.t{display:block;margin:.7em 0 .15em;color:#38564A;font-size:1em}
+.bok .bx.begrepp{background:#EAF1EC;border-left:4px solid #5F8472;border-radius:6px}
+.bok .bx .rb,.bok .kolla .kr,.bok .pill,.bok .fake,.bok .kom .lb,.bok .ex1 .ty{text-transform:none;font-size:.82em;letter-spacing:.03em;font-weight:700}
+.bok .bx.begrepp .rb{color:#38564A;font-size:1.05em}
+/* Kolla dig själv = samma look som sajtens kontrollfrågor */
+.bok .kolla{background:#fff8ec;border:0;border-left:4px solid #e0a53f;border-radius:6px;padding:14px 20px;margin:24px 0 4px;font-size:.96em}
+.bok .kolla .kr{color:#9a6b12;margin-bottom:.4em;display:block}
+.bok .kolla ol{padding-left:22px;margin:0}.bok .kolla li{margin:0 0 .35em}
+.bok .card{background:#f4f9f3;font-size:.94em;line-height:1.55}
+.bok .tbl,.bok table.tb{font-size:.92em;line-height:1.5;margin:14px 0 20px}
+.bok .tbl th,.bok .tbl td,.bok table.tb th,.bok table.tb td{padding:9px 12px}
+.bok .sam{font-size:1em;line-height:1.7;padding:16px 22px}
+.bok .fig{margin:18px 0}
+.bok .fig img{border-radius:8px}
+.bok .cap{font-size:.85em;color:#666;line-height:1.45}
+.bok .note{font-size:.88em;color:#666}
+.bok ul.pu li,.bok .steps li{margin-bottom:.5em}
+.bok .begr{columns:1}
+.bok .q{display:block;font-size:1em}
+.bok .q .n{display:inline-block;margin-right:8px}
+.bok .q .pts{display:block;text-align:left;margin-top:4px}
+.bok .kom{font-size:1em}
+.bok .ex1{margin:0 0 24px}
+.bok .ex1 .q{font-size:1em}
+.bok h1,.bok .tab{display:none}
+@media(max-width:720px){.bok.vanlig,.bok.fordjupning{padding:16px 14px}.bok .sec{padding:14px 14px}.bok .cards,.bok .stp{grid-template-columns:1fr!important}.bok .ord2,.bok .dr{grid-template-columns:1fr}.bok .begr,.bok .cols2{columns:1}}
+/* Lässtöd (extra stort och luftigt) */
 .bok.lasstod,.bok.lasstod *{font-family:Verdana,Arial,Helvetica,sans-serif!important}
-.bok.lasstod{font-size:19px;line-height:1.85;letter-spacing:.03em;word-spacing:.12em;max-width:760px}
+.bok.lasstod{font-size:19.5px;line-height:1.9;letter-spacing:.03em;word-spacing:.12em}
 .bok.lasstod p,.bok.lasstod li,.bok.lasstod td,.bok.lasstod th,.bok.lasstod .bx,.bok.lasstod .card,.bok.lasstod .kolla,.bok.lasstod .cap,.bok.lasstod .note{font-size:inherit!important;line-height:inherit!important}
-.bok.lasstod p{margin-bottom:1.1em}
-.bok.lasstod .row,.bok.lasstod .row.w{grid-template-columns:1fr}
+.bok.lasstod p{margin-bottom:1.3em}
 .bok.lasstod .cards{grid-template-columns:1fr!important}
-.bok.lasstod em{font-style:normal;font-weight:700}
 .bok.lasstod,.bok.lasstod p{text-align:left!important}
+.bok .t p,.bok .fy p,.bok .ln,.bok .dr,.bok .chips span,.bok .sort div,.bok .bank,.bok .sf,.bok .nrbox,.bok .vik{font-size:.95em;line-height:1.7}
+.bok .t p{font-size:1em}
+.bok .ex1 .q{font-size:1.05em}
+.bok .kom .tx{font-size:1em}
