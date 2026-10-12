@@ -21,7 +21,7 @@ FUNDERA = "Läs först kapitel 1 i grundboken. Fördjupningen bygger på begrepp
 S = []
 S.append(("F1.1", "Rättvisa försök",
  "<p>Föreställ dig att ett företag påstår att deras nya tablett gör att förkylningar går över snabbare. Hur skulle man kunna testa det? Det låter enkelt: ge tabletten till några förkylda personer och se om de blir friska. Men de flesta förkylningar går över av sig själva inom en vecka. Hur vet man då att det var tabletten som hjälpte?</p>"
- + fig(FIG+"f_rct.png", "<b>Bild F1.1</b> En randomiserad, dubbelblind och placebokontrollerad studie – den mest pålitliga sortens medicinska försök.")
+ + fig(FIG+"f_rct.png", "<b>Bild F1.1</b> En randomiserad, dubbelblind och placebokontrollerad studie – en av de mest pålitliga sorternas medicinska försök.")
  + "<h3>Fyra knep för att inte lura sig själv</h3>"
  + row("<p><strong>Kontrollgrupp.</strong> En grupp får inte behandlingen. Då kan man jämföra.</p>"
        "<p><strong>Placebo.</strong> Kontrollgruppen får en likadan tablett utan verksamt ämne. Annars kan förväntningar påverka hur deltagarna mår.</p>"
@@ -30,7 +30,7 @@ S.append(("F1.1", "Rättvisa försök",
        "<p>Till sist behövs många deltagare. Med bara fem personer i varje grupp kan slumpen avgöra resultatet. Med hundratals blir slumpens betydelse liten.</p>",
    [begrepp([("Randomisering", "Slumpmässig fördelning till grupper."), ("Dubbelblind", "Varken deltagare eller forskare vet vem som fått vad."), ("Stickprov", "De individer man undersöker, som ska representera en större grupp.")])])))
 S.append(("F1.2", "Semmelweis och de smutsiga händerna",
- "<p>På 1840-talet fanns det två förlossningsavdelningar på det stora sjukhuset i Wien. På den ena arbetade läkare och läkarstudenter, på den andra barnmorskor. Läkaren Ignaz Semmelweis märkte något skrämmande: på läkarnas avdelning dog många fler mödrar i barnsängsfeber. Kvinnor bad på sina knän om att få föda på barnmorskornas avdelning.</p>"
+ "<p>På 1840-talet fanns det två förlossningsavdelningar på det stora sjukhuset i Wien. På den ena arbetade läkare och läkarstudenter, på den andra barnmorskor. Läkaren Ignaz Semmelweis märkte något skrämmande: på läkarnas avdelning dog många fler mödrar i barnsängsfeber. Många kvinnor gjorde vad de kunde för att slippa föda på läkarnas avdelning.</p>"
  + "<h3>Ett detektivarbete</h3>"
  + roww("<p>Semmelweis prövade flera förklaringar och uteslöt dem en efter en: trängsel, förlossningsställning, rädsla. Avdelningarna var lika i nästan allt – utom en sak. Läkarna och studenterna obducerade döda kroppar och gick sedan direkt till förlossningarna.</p>"
         "<p>År 1847 dog en kollega efter att ha skurit sig under en obduktion. Han fick samma symtom som de sjuka mödrarna. Semmelweis drog slutsatsen att ”något” från de döda kropparna fördes vidare med läkarnas händer. Han krävde att alla skulle tvätta händerna i klorkalk. Dödligheten sjönk kraftigt.</p>",
@@ -79,4 +79,4 @@ def teacher_html():
     return C.teacher_html("Fördjupningen riktar sig till elever som är klara tidigt eller behöver mer utmaning. Den fördjupar det centrala innehållet om systematiska undersökningar, de biologiska förklaringsmodellernas historiska framväxt och föränderlighet och kritisk granskning av information, och tränar den typ av resonemang som krävs på högsta nivå i de nationella proven.",
       SVAR, [("Fundera (F1.2):", "Avdelningarna låg på samma sjukhus och tog emot liknande patienter. Det enda tydliga som skilde var vilka som förlöste och vad de gjorde innan. Utan jämförelsen hade man inte vetat vad som var en ”normal” dödlighet."),
              ("Tänk efter (F1.3):", "T.ex. föräldrarnas utbildning, inkomst, hur mycket tid föräldrarna läser med barnen, intresse för skolan.")],
-      "Siffrorna i bild F1.2 är avrundade och visar mönstret i Semmelweis data från Allmänna sjukhuset i Wien 1841–1848. Uppgifterna om Warren och Marshall: Nobelpriset i fysiologi eller medicin 2005. Källor: Skolverket, Lgr22 kursplan i biologi. · Nobelprize.org: The Nobel Prize in Physiology or Medicine 2005. · Illustrationer: egenritade.")
+      "Siffrorna i bild F1.2 är avrundade: ca 9,8 % (läkarkliniken) och ca 3,6 % (barnmorskekliniken) för 1840–1846 samt ca 1,3 % för läkarkliniken 1848 (The James Lind Library, Semmelweis). Uppgifterna om Warren och Marshall: Nobelpriset i fysiologi eller medicin 2005. Källor: Skolverket, Lgr22 kursplan i biologi. · Nobelprize.org: The Nobel Prize in Physiology or Medicine 2005. · Illustrationer: egenritade.")
