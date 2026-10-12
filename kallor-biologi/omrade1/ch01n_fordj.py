@@ -14,7 +14,7 @@ UNDER = "Hur vet vi att vi inte lurar oss själva?"
 INTRO = ("Den största utmaningen för en forskare är inte att hitta svar. Det är att inte lura sig själv. Vi ser gärna det vi vill se, och slumpen kan få nästan vad som helst att se ut som ett samband. "
          "I den här fördjupningen lär du dig hur forskare planerar rättvisa undersökningar, hur man värderar hur säkert ett resultat är, var vetenskapens gränser går, varför nya idéer ibland möts av motstånd och hur du väger källor som säger emot varandra.")
 MAL = ["Resonera i flera led: visa hur en sak leder till nästa, med ”eftersom … därför … vilket leder till …”.", "Använd begreppen korrekt och förklara dem i sammanhanget.",
-       "Väg för och nackdelar, och se frågan från flera perspektiv.", "Var nyanserad: visa vad som är osäkert och vad man mer skulle behöva veta.",
+       "Väg för- och nackdelar, och se frågan från flera perspektiv.", "Var nyanserad: visa vad som är osäkert och vad man mer skulle behöva veta.",
        "Ta ställning och motivera med naturvetenskapliga argument."]
 MAL_RUBRIK = "SÅ NÅR DU HÖGSTA NIVÅN"
 FUNDERA = "Läs först grundtexten i kapitel 1. Fördjupningen bygger på begreppen hypotes, variabel, kontrollgrupp, felkälla, belägg, trovärdig och relevant."
@@ -65,7 +65,7 @@ add("F1.1.3", "Hur säker är slutsatsen?", "1.1",
     box("tank", "Tänk efter", "<p>”Barn som har många böcker hemma får bättre betyg.” Ge två möjliga störfaktorer.</p>")]))
 
 add("F1.2.1", "Vetenskapens gränser", "1.2",
- "<p>Naturvetenskapen är kraftfull, men den svarar bara på vissa sorters frågor: frågor som går att pröva med belägg. Fråga: ”Hur påverkar en gödning tomatplantors skörd?” är en sådan. ”Är det rätt att äta kött?” är en annan sorts fråga. Biologin kan ge fakta om hur djur påverkas och hur klimatet påverkas, men vad som är rätt beror också på värderingar. Därför behövs både fakta och etiska argument.</p>"
+ "<p>Naturvetenskapen är kraftfull, men den svarar bara på vissa sorters frågor: frågor som går att pröva med belägg. Frågan ”Hur påverkar en gödning tomatplantors skörd?” är en sådan. ”Är det rätt att äta kött?” är en annan sorts fråga. Biologin kan ge fakta om hur djur påverkas och hur klimatet påverkas, men vad som är rätt beror också på värderingar. Därför behövs både fakta och etiska argument.</p>"
  + "<h3>Ett påstående måste kunna visas vara fel</h3>"
  + roww("<p>Ett vetenskapligt påstående måste kunna visa sig vara fel. Om alla tänkbara resultat passar med påståendet kan man aldrig pröva det. ”Hälsokosten hjälper om du tror på den, och om den inte hjälper tror du inte tillräckligt” går aldrig att motbevisa. Då har påståendet lämnat vetenskapen.</p>"
         "<p>Det betyder inte att alla icke-vetenskapliga svar är värdelösa. Konst, etik, religion och filosofi svarar på andra frågor än naturvetenskapen. Problemet uppstår när något gör anspråk på att vara vetenskap utan att kunna prövas.</p>",
@@ -79,12 +79,12 @@ add("F1.2.2", "Varför möts nya idéer av motstånd?", "1.2",
  + table(["", "Pasteur (1861)", "Semmelweis (1847)", "Marshall och Warren (1982)"],
          [["Gammal förklaring", "Små organismer kan uppstå av sig själva.", "Barnsängsfeber har många orsaker, ingen tänker på händerna.", "Magsår beror på stress och livsstil. Bakterier kan inte leva i magsyran."],
           ["Belägg", "Buljong i svanhalskolv förblev klar, i rak kolv blev den grumlig.", "Dödligheten på läkarkliniken föll från 11,4 % till 1,3 % efter handtvätt.", "Bakterie i magsäcken. Marshalls självförsök 1984. Antibiotika botar."],
-          ["Motstånd", "Fick mothugg men kontrollerade försök övertygade.", "Hånades. Saknade förklaring till hur. Fick inte förlängt kontrakt.", "Marshall argumenterade i två år mot skeptiker."],
+          ["Motstånd", "Fick mothugg men kontrollerade försök övertygade.", "Hånades. Saknade förklaring till hur. Fick inte förlängt kontrakt.", "Marshall möttes av stark skepsis."],
           ["Vad övertygade?", "Ett enkelt och upprepbart försök.", "Bakterieläran växte fram årtionden senare.", "Upprepade studier och en behandling som fungerade. Nobelpriset 2005."]], "tbl")
  + "<h3>Mönstret</h3>"
  + roww("<p>I alla tre fall passade resultatet inte den förklaring som alla trodde på. Det är inte konstigt att forskare håller fast vid en modell som fungerat länge. En modell är en förenkling som har varit användbar, och en enstaka avvikelse kan bero på ett fel. Motståndet kan därför vara rimligt i början. Men när belägg samlas, från olika forskare och olika metoder, ändras bilden.</p>"
         "<p>Det betyder inte att alla nya idéer har rätt. Marshall och Warren fick rätt för att de hade belägg som kunde granskas och upprepas, inte för att de var envisa.</p>"
-        "<h3>Modeller har begränsningar</h3><p>Ett exempel: bakterien <em>Helicobacter pylori</em> orsakar magsår, men enligt uppgifter får bara omkring 10–20 % av de smittade magsår. Modellen ”bakterie orsakar magsår” är användbar, men inte hela förklaringen. Fler faktorer spelar in.</p>",
+        "<h3>Modeller har begränsningar</h3><p>Ett exempel: bakterien <em>Helicobacter pylori</em> orsakar magsår, men långt ifrån alla som är smittade får magsår. Modellen ”bakterie orsakar magsår” är användbar, men inte hela förklaringen. Fler faktorer spelar in.</p>",
         [box("visste", "Lärdom", "<p>En bra modell förklarar vad man ser, förutsäger nya saker och kan prövas. Den behöver inte vara hela sanningen för att vara användbar.</p>"),
          box("varning", "Etik", "<p>Marshalls självförsök var riskabelt. Forskning på människor måste granskas av en etikprövningsmyndighet.</p>")]))
 
@@ -112,7 +112,7 @@ UPG = [
 def uppg_html(): return C.uppg_html(UPG, 4)
 SVAR = [
  "Slumpa deltagare till två grupper (randomisering) så att grupperna blir lika från början. Grupp A får sportdrycken, grupp B en likadan dryck utan det verksamma ämnet (placebo). Varken deltagare eller testledare vet vem som fått vad (dubbelblind). Mät konditionen före och efter med samma test. Många deltagare och lika träning i grupperna. Ett välutvecklat svar förklarar för varje moment vilket fel det förhindrar.",
- "Avdelningarna var lika i nästan allt utom en sak (obduktioner före förlossningar), vilket gör att skillnaden i dödlighet troligen beror på den faktorn; avdelningen fungerar som kontrollgrupp. Osäkert eftersom andra skillnader kunde finnas, t.ex. vilka kvinnor som kom till vilken avdelning, och eftersom man inte visste hur sjukdomen spreds.",
+ "Avdelningarna var troligen lika i det mesta utom en sak (obduktioner före förlossningar), vilket gör att skillnaden i dödlighet troligen beror på den faktorn; avdelningen fungerar som kontrollgrupp. Osäkert eftersom andra skillnader kunde finnas, t.ex. vilka kvinnor som kom till vilken avdelning, och eftersom man inte visste hur sjukdomen spreds.",
  "Observationsstudie: forskarna har inte slumpat vem som dricker kaffe. Störfaktorer kan förklara sambandet (livsstil, inkomst, att sjuka slutat dricka kaffe). Studien visar korrelation, inte orsak. Många deltagare minskar slumpen men tar inte bort störfaktorer. Säker slutsats kräver randomiserade försök eller många olika studier som pekar åt samma håll samt en rimlig förklaring.",
  "Klass B. Med 3 plantor kan en enda ovanlig planta ge en stor skillnad av slump. Med 30 plantor jämnar slumpen ut sig. Välutvecklat svar: båda skillnaderna är små; titta på spridningen inom grupperna och gör om försöket.",
  "Undersök först om det finns en rimlig förklaring (t.ex. att ballongen satt löst). Redovisa värdet, förklara det, och visa medelvärde med och utan värdet (26 cm respektive 30,5 cm). Redovisa spridning (lägsta och högsta). Gör fler försök. Skriv hur osäker slutsatsen är.",
@@ -125,4 +125,4 @@ def teacher_html():
              ("Tänk efter (F1.1.3):", "T.ex. föräldrarnas utbildning, inkomst, tid som föräldrar läser med barnen."),
              ("Resonera (F1.2.1):", "Naturvetenskap: hur varg påverkar bytesdjur, och hur djur påverkas. Inte: om det är rätt, vilket också beror på värderingar."),
              ("Tänk efter (F1.2.3):", "Vem betalade? Hur många deltog och hur var det upplagt? Har andra fått samma resultat?")],
-      "Siffrorna om Semmelweis (11,4 % 1846, 1,3 % 1848): MJA 2018. Marshall och Warren: Nobelstiftelsen 2005 och PMC2661189; andelen smittade som får magsår (ca 10–20 %) enligt en sekundärkälla (gutcare.com.sg), kontrollera gärna mot en medicinsk källa. Carlson, Nature 1985. Jästdata och exempel är påhittade för undervisning (medelvärden: 30,5 cm utan och 26 cm med det avvikande värdet). · Illustrationer: egenritade.")
+      "Siffrorna om Semmelweis (11,4 % 1846, 1,3 % 1848): MJA 2018. Marshall och Warren: Nobelstiftelsen 2005 och PMC2661189; att långt ifrån alla smittade får magsår är allmänt känt; ingen siffra anges. Kontrollera gärna mot en medicinsk källa. Carlson, Nature 1985. Jästdata och exempel är påhittade för undervisning (medelvärden: 30,5 cm utan och 26 cm med det avvikande värdet). · Illustrationer: egenritade.")

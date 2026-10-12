@@ -10,7 +10,7 @@ BED = [["Resonemang", "Enkla påståenden, ett led. Orsak eller verkan nämns.",
        ["Undersökningar", "Föreslår en enkel undersökning.", "Planerar med variabler och upprepningar.", "Värderar metoden, felkällor och hur säker slutsatsen kan bli."]]
 def uppg_html(UPG, split=4):
     out = ['<section class="sec"><div class="sh"><h2>Resonera och ta ställning</h2></div>'
-           '<p class="note">Uppgifterna motsvarar de svåraste uppgifterna på nationella prov. Svara utförligt och resonera i flera led. ● grundläggande &nbsp;●● utvecklat &nbsp;●●● välutvecklat</p>']
+           '<p class="note">Uppgifterna liknar de svåraste uppgifterna på nationella prov. Svara utförligt och resonera i flera led. ● grundläggande &nbsp;●● utvecklat &nbsp;●●● välutvecklat</p>']
     for i, (q, p) in enumerate(UPG, 1):
         if i == split:
             out.append('</section><section class="sec"><div class="sh"><h2>Resonera och ta ställning, forts.</h2></div>')

@@ -13,8 +13,17 @@
 .nivaer button{font:inherit;padding:8px 14px;border:2px solid #2f6b4f;background:#fff;color:#245040;border-radius:999px;cursor:pointer}
 .nivaer button.aktiv{background:#2f6b4f;color:#fff}
 @media(max-width:720px){.bok .row,.bok .row.w{grid-template-columns:1fr}.bok .cards{grid-template-columns:1fr!important}.bok .begr,.bok .cols2{columns:1}}
+
 .bok{font-size:15.5px}
 .bok.lattlast{font-size:17.5px;line-height:1.65}
 .bok .bx,.bok .bx p,.bok .card,.bok .kolla,.bok .tbl,.bok .cap,.bok .note,.bok .q,.bok .sam{font-size:14px}
 .bok h3{font-size:19px}.bok h2.lh,.bok .sh h2{font-size:26px}
 .bok .t p{font-size:inherit}
+.bok.lasstod,.bok.lasstod *{font-family:Verdana,Arial,Helvetica,sans-serif!important}
+.bok.lasstod{font-size:19px;line-height:1.85;letter-spacing:.03em;word-spacing:.12em;max-width:760px}
+.bok.lasstod p,.bok.lasstod li,.bok.lasstod td,.bok.lasstod th,.bok.lasstod .bx,.bok.lasstod .card,.bok.lasstod .kolla,.bok.lasstod .cap,.bok.lasstod .note{font-size:inherit!important;line-height:inherit!important}
+.bok.lasstod p{margin-bottom:1.1em}
+.bok.lasstod .row,.bok.lasstod .row.w{grid-template-columns:1fr}
+.bok.lasstod .cards{grid-template-columns:1fr!important}
+.bok.lasstod em{font-style:normal;font-weight:700}
+.bok.lasstod,.bok.lasstod p{text-align:left!important}

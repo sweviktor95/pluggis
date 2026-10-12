@@ -1227,7 +1227,10 @@
             return '<button type="button" data-niva="' + k + '" class="' + (k === valdNiva ? 'aktiv' : '') + '" aria-pressed="' + (k === valdNiva) + '" onclick="valjNiva(\'' + id + '\',\'' + k + '\')">' + nivaNamn[k] + '</button>';
           }).join("") + '</div>';
         }
-        html += '<div class="bok ' + valdNiva + '" id="nivaRuta">' + data.nivaer[valdNiva] + '</div>';
+        var lasStod = false;
+        try { lasStod = localStorage.getItem("pluggis-lasstod") === "1"; } catch (e) {}
+        html += '<div class="nivaer"><button type="button" id="lasStodKnapp" class="' + (lasStod ? 'aktiv' : '') + '" aria-pressed="' + lasStod + '" onclick="vaxlaLasstod()">Aa Lässtöd</button></div>';
+        html += '<div class="bok ' + valdNiva + (lasStod ? ' lasstod' : '') + '" id="nivaRuta">' + data.nivaer[valdNiva] + '</div>';
       } else if (data && data.sektioner) {
         // Rikare sida: intro + flera namngivna sektioner + ev. begreppsruta
         if (data.intro) { html += "<p>" + data.intro + "</p>"; }
@@ -4024,12 +4027,21 @@
     document.getElementById("ak9Cirklar").innerHTML = cirklarHtml;
   }
 
+  function vaxlaLasstod() {
+    var r = document.getElementById("nivaRuta");
+    if (!r) { return; }
+    var pa = r.classList.toggle("lasstod");
+    var k = document.getElementById("lasStodKnapp");
+    if (k) { k.classList.toggle("aktiv", pa); k.setAttribute("aria-pressed", pa ? "true" : "false"); }
+    try { localStorage.setItem("pluggis-lasstod", pa ? "1" : "0"); } catch (e) {}
+  }
+
   function valjNiva(id, niva) {
     var d = innehall[id];
     if (!d || !d.nivaer || !d.nivaer[niva]) { return; }
     var r = document.getElementById("nivaRuta");
     if (!r) { return; }
-    r.className = "bok " + niva;
+    r.className = "bok " + niva + (r.classList.contains("lasstod") ? " lasstod" : "");
     r.innerHTML = d.nivaer[niva];
     document.querySelectorAll(".nivaer button").forEach(function(b) {
       var on = b.getAttribute("data-niva") === niva;
