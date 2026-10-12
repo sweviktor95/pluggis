@@ -963,7 +963,6 @@
 .tiles{display:grid;gap:5px;margin:10px 0;grid-template-columns:repeat(auto-fill,minmax(64px,1fr))}.tile{background:#eef3ee;border-radius:8px;text-align:center;padding:4px 2px}.tile .big{display:block;font-weight:bold;font-size:1.05em;color:#38564A}.tile .nm{display:block;font-size:.72em}
 .mini-tabell{border-collapse:collapse;margin:.6rem 0;font-size:.95rem}.mini-tabell th,.mini-tabell td{border:1px solid #cfd8d0;padding:.35rem .7rem;text-align:left}.mini-tabell th{background:#eef3ee}
 </style>
-<link rel="stylesheet" href="stil/biologi-bok-bas.css">
 <link rel="stylesheet" href="stil/biologi-bok-egna.css">
 </head>
 <body>
@@ -1231,43 +1230,9 @@
         var lasStod = false;
         try { lasStod = localStorage.getItem("pluggis-lasstod") === "1"; } catch (e) {}
         html += '<div class="nivaer"><button type="button" id="lasStodKnapp" class="' + (lasStod ? 'aktiv' : '') + '" aria-pressed="' + lasStod + '" onclick="vaxlaLasstod()">Aa Lässtöd</button></div>';
-        html += '<div class="bok ' + valdNiva + (lasStod ? ' lasstod' : '') + '" id="nivaRuta">' + data.nivaer[valdNiva] + '</div>';
+        html += '<div class="nivaruta' + (lasStod ? ' lasstod' : '') + '" id="nivaRuta">' + byggSektioner(data.nivaer[valdNiva]) + '</div>';
       } else if (data && data.sektioner) {
-        // Rikare sida: intro + flera namngivna sektioner + ev. begreppsruta
-        if (data.intro) { html += "<p>" + data.intro + "</p>"; }
-        data.sektioner.forEach(function(sek) {
-          html += '<div class="sektion">';
-          html += '<h3><span class="sektion-ikon">' + sek.ikon + '</span>' + sek.titel + '</h3>';
-          sek.text.forEach(function(stycke) {
-            html += "<p>" + stycke + "</p>";
-          });
-          if (sek.bild) {
-            html += '<figure class="sek-bild"' + (sek.bildBredd ? ' style="max-width:' + sek.bildBredd + 'px"' : '') + '>' +
-                    '<img src="' + sek.bild + '" alt="' + (sek.bildText ? sek.bildText.replace(/"/g, "&quot;") : "") + '">' +
-                    (sek.bildText ? '<figcaption>' + sek.bildText + '</figcaption>' : '') + '</figure>';
-          }
-          if (sek.interaktivtDiagram === "cell") {
-            html += '<div id="cellDiagramSvg"></div>' +
-                    '<div id="cellDiagramLegend" class="cell-legend"></div>' +
-                    '<div id="cellDiagramFakta" class="cell-fakta-box"></div>';
-          }
-          if (sek.kontrollfraga) {
-            html += '<div class="kontrollfraga"><p>🤔 <strong>Kolla din förståelse:</strong> ' +
-                    sek.kontrollfraga + '</p>';
-            if (sek.kontrollsvar) {
-              html += '<details><summary>Visa svar</summary><p>' + sek.kontrollsvar + '</p></details>';
-            }
-            html += '</div>';
-          }
-          html += '</div>';
-        });
-        if (data.begrepp) {
-          html += '<div class="begrepp-box"><h3>📖 Bra att kunna</h3><ul>';
-          data.begrepp.forEach(function(b) {
-            html += '<li><strong>' + b.term + ':</strong> ' + b.forklaring + '</li>';
-          });
-          html += '</ul></div>';
-        }
+        html += byggSektioner(data);
       } else if (data) {
         if (data.begrepp) {
           html += '<div class="begrepp-box"><h3>📖 Bra att kunna</h3><ul>';
@@ -4028,6 +3993,49 @@
     document.getElementById("ak9Cirklar").innerHTML = cirklarHtml;
   }
 
+  function byggSektioner(data) {
+    var html = "";
+  if (data.intro) { html += "<p>" + data.intro + "</p>"; }
+  data.sektioner.forEach(function(sek) {
+    html += '<div class="sektion">';
+    html += '<h3><span class="sektion-ikon">' + sek.ikon + '</span>' + sek.titel + '</h3>';
+    sek.text.forEach(function(stycke) {
+      html += /^<(p|div|ul|ol|table|figure|details)[ >]/.test(stycke) ? stycke : "<p>" + stycke + "</p>";
+    });
+    if (sek.bild) {
+      html += '<figure class="sek-bild"' + (sek.bildBredd ? ' style="max-width:' + sek.bildBredd + 'px"' : '') + '>' +
+              '<img src="' + sek.bild + '" alt="' + (sek.bildText ? sek.bildText.replace(/"/g, "&quot;") : "") + '">' +
+              (sek.bildText ? '<figcaption>' + sek.bildText + '</figcaption>' : '') + '</figure>';
+    }
+    if (sek.interaktivtDiagram === "cell") {
+      html += '<div id="cellDiagramSvg"></div>' +
+              '<div id="cellDiagramLegend" class="cell-legend"></div>' +
+              '<div id="cellDiagramFakta" class="cell-fakta-box"></div>';
+    }
+    if (sek.fragor && sek.fragor.length) {
+      html += '<div class="kontrollfraga"><p>🤔 <strong>Kolla din förståelse:</strong></p><ol>' +
+              sek.fragor.map(function(f) { return "<li>" + f + "</li>"; }).join("") + '</ol></div>';
+    }
+    if (sek.kontrollfraga) {
+      html += '<div class="kontrollfraga"><p>🤔 <strong>Kolla din förståelse:</strong> ' +
+              sek.kontrollfraga + '</p>';
+      if (sek.kontrollsvar) {
+        html += '<details><summary>Visa svar</summary><p>' + sek.kontrollsvar + '</p></details>';
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  if (data.begrepp) {
+    html += '<div class="begrepp-box"><h3>📖 Bra att kunna</h3><ul>';
+    data.begrepp.forEach(function(b) {
+      html += '<li><strong>' + b.term + ':</strong> ' + b.forklaring + '</li>';
+    });
+    html += '</ul></div>';
+  }
+    return html;
+  }
+
   function vaxlaLasstod() {
     var r = document.getElementById("nivaRuta");
     if (!r) { return; }
@@ -4042,8 +4050,7 @@
     if (!d || !d.nivaer || !d.nivaer[niva]) { return; }
     var r = document.getElementById("nivaRuta");
     if (!r) { return; }
-    r.className = "bok " + niva + (r.classList.contains("lasstod") ? " lasstod" : "");
-    r.innerHTML = d.nivaer[niva];
+    r.innerHTML = byggSektioner(d.nivaer[niva]);
     document.querySelectorAll(".nivaer button").forEach(function(b) {
       var on = b.getAttribute("data-niva") === niva;
       b.classList.toggle("aktiv", on); b.setAttribute("aria-pressed", on ? "true" : "false");

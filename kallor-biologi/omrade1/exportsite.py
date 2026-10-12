@@ -36,51 +36,16 @@ head_start = '<h3>Vad är biologi?</h3>'
 M["biologi-m-1-1-1"]["van"] = head_start + grund["Start"] + "<h3>Från fråga till plan</h3>" + grund["1.1.1"]
 M["biologi-m-1-1-1"]["latt"] = latt[1] + latt[2]
 
-out = ["// Genereras av kallor-biologi/omrade1/exportsite.py – ändra inte för hand.",
-       "// Biologi område 1: varje moment finns i tre nivåer (lättläst, grundtext, fördjupning). Elevversion, utan facit.",
+import sajtkonv as SK
+TITEL = {"biologi-m-1-1-1": "Vad är biologi?", "biologi-m-1-1-2": "Dokumentera", "biologi-m-1-1-3": "Värdera resultat", "biologi-m-1-1-l": "Labb",
+         "biologi-m-1-2-1": "Modeller", "biologi-m-1-2-2": "Källor", "biologi-m-1-2-3": "Argument", "biologi-m-1-2-l": "Labb",
+         "biologi-m-1-s": "Sammanfattning", "biologi-m-1-t": "Testa dig själv"}
+out = ["// Genereras av kallor-biologi/omrade1/exportsite.py (sajtkonv.py) – ändra inte för hand.",
+       "// Biologi område 1: varje moment i tre nivåer (lättläst, grundtext, fördjupning), skrivet för skärm i sajtens vanliga sidformat. Elevversion, utan facit.",
        "var innehall = window.innehall || {};"]
 for id_, d in M.items():
     niv = {}
-    if d["latt"]: niv["lattlast"] = fix(d["latt"])
-    if d["van"]: niv["vanlig"] = fix(d["van"])
-    if d["ford"]: niv["fordjupning"] = fix(d["ford"])
+    for key, k in (("lattlast", "latt"), ("vanlig", "van"), ("fordjupning", "ford")):
+        if d[k]: niv[key] = SK.konvertera(fix(d[k]), TITEL[id_])
     out.append('innehall[%s] = {nivaer: %s, nivaStandard: "vanlig"};' % (json.dumps(id_), json.dumps(niv, ensure_ascii=False)))
 open('/home/claude/pluggis/innehall/biologi-omrade1.js', 'w').write("\n".join(out) + "\n")
-
-# CSS scopad under .bok
-STACK = 'Carlito,Calibri,"Segoe UI",Arial,sans-serif'
-raw = bstyle.CSS + BL.LCSS
-raw = re.sub(r'@font-face\{[^}]*\}', '', raw)
-raw = re.sub(r'@page\{(?:[^{}]|\{[^{}]*\})*\}', '', raw)
-raw = re.sub(r'@page[^{]*\{(?:[^{}]|\{[^{}]*\})*\}', '', raw)
-raw = raw.replace('Carlito', STACK).replace('Lora,serif', 'Lora,Georgia,serif')
-def scope(m):
-    sels, body = m.group(1), m.group(2)
-    outs = []
-    for s_ in sels.split(','):
-        s_ = s_.strip()
-        if s_ in ('html', 'body', ':root', '*'):
-            outs.append('.bok' if s_ != '*' else '.bok,.bok *')
-        elif s_.startswith('html') or s_.startswith('body'):
-            continue
-        else: outs.append('.bok ' + s_)
-    return ','.join(outs) + '{' + body + '}'
-css = re.sub(r'([^{}@]+)\{([^{}]*)\}', scope, raw)
-css = css.replace('.bok{margin:0}', '.bok{margin:0}')
-extra = """
-.bok{font-size:16px;line-height:1.55;max-width:860px}
-.bok .sec{break-before:auto;margin:0 0 26px}
-.bok .tab{display:none}
-.bok{--g1:#245040;--g2:#2f6b4f;--g3:#4f8a63;--ink:#241712;--mut:#6b625b;--line:#d9d2c8}
-.bok .sh .nr{display:none}
-.bok img{max-width:100%;height:auto}
-.bok .fig{max-width:100%}
-.bok table{max-width:100%}
-.bok .tbl,.bok table.tb{display:block;overflow-x:auto}
-.nivaer{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
-.nivaer button{font:inherit;padding:8px 14px;border:2px solid #2f6b4f;background:#fff;color:#245040;border-radius:999px;cursor:pointer}
-.nivaer button.aktiv{background:#2f6b4f;color:#fff}
-@media(max-width:720px){.bok .row,.bok .row.w{grid-template-columns:1fr}.bok .cards{grid-template-columns:1fr!important}.bok .begr,.bok .cols2{columns:1}}
-"""
-open('/home/claude/pluggis/stil/biologi-bok-bas.css','w').write(css + extra)
-print(len(css), [ (k, list(json.loads(json.dumps({a:1 for a in ["x"]})))) for k in []])
