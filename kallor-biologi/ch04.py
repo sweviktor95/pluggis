@@ -4,6 +4,9 @@ import sys
 sys.path.insert(0, '/tmp/bio')
 from bstyle import *
 
+NR = 4
+SLUG = "ekologi"
+TAB = "4"
 FIG = '/tmp/bio/fig/'
 NR = 4
 NAMN = "Ekologi"

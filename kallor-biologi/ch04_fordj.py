@@ -3,6 +3,9 @@
 import sys
 sys.path.insert(0, '/tmp/bio')
 from bstyle import *
+NR = 4
+SLUG = "ekologi"
+TAB = "4+"
 FIG = '/tmp/bio/fig/'
 NAMN = "Ekologi"
 UNDER = "Kretslopp, kurvor och klimat i norr"

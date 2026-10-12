@@ -5,6 +5,12 @@ from bstyle import *
 from playwright.sync_api import sync_playwright
 from pypdf import PdfReader, PdfWriter
 
+import importlib
+CH = os.environ.get('CH', '04')
+try:
+    M = importlib.import_module('ch' + CH)
+except ImportError:
+    M = None
 OUT = '/tmp/bio/out'
 os.makedirs(OUT, exist_ok=True)
 
@@ -22,6 +28,10 @@ def html_to_pdf(html, path, landscape=False):
 def page_texts(pdf):
     r = PdfReader(pdf)
     return [(pg.extract_text() or '') for pg in r.pages]
+
+def TABCSS(tab):
+    return ('@page{@right-top{content:"%s";background:linear-gradient(to right,transparent 7.3mm,#2f6b4f 7.3mm);'
+            'color:#fff;font:700 11pt Carlito;padding-left:7.3mm;text-align:center;vertical-align:middle;height:16mm;margin-top:8mm}}' % tab)
 
 def doc(body, foot, start, tab="4"):
     bg = ('@page{@right-top{content:"%s";background:linear-gradient(to right,transparent 7.3mm,#2f6b4f 7.3mm);'
@@ -84,7 +94,7 @@ def bonus_html(M):
             '<h3>Genomförande – tips</h3><ol class="steps g">' + gen + '</ol>'
             '<h3>Förväntat resultat och förklaring</h3><p>' + B['resultat'] + '</p>'
             '<h3>Säkerhet och etik</h3><ul class="pu">' + sak + '</ul>'
-            '<h3>Vanliga problem</h3><ul class="pu">' + pro + '</ul></div>'
+            '<h3>Vanliga problem</h3><ul class="pu">' + pro + '</ul>' + (('<h3>Förslag på frågeställningar</h3><ul class="pu">' + ''.join(f'<li>{x}</li>' for x in B['forslag']) + '</ul>') if 'forslag' in B else '') + '</div>'
             '<h3>Bedömning</h3>' + bed + '</section>')
 
 def elevblad(M):
@@ -114,7 +124,7 @@ def first_page(M, variant, pages):
     for nr, t, pg in pages:
         toc += f'<div class="toc"><span>{nr}</span><span>{t}</span><span class="pgn">{pg}</span></div>'
     lara = "".join(f"<li>{x}</li>" for x in M.MAL)
-    return f"""<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css('Kapitel 4 · Ekologi', 1)}
+    return f"""<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(f'Kapitel {M.NR} · {M.NAMN}', 1)}
 @page{{margin:0}}
 body{{margin:0}}
 .cv img{{width:210mm;height:87.6mm;display:block}}
@@ -126,18 +136,18 @@ body{{margin:0}}
 .lar{{background:#e7eef5;border-radius:6pt;padding:9pt 11pt;font:9.4pt/1.35 Carlito}}
 .lar .rb{{font:700 8pt Carlito;letter-spacing:1pt;color:#2b5d7a;margin-bottom:5pt;display:block}}
 .lar ul{{margin:0;padding-left:11pt}}.lar li{{margin:0 0 3pt}}
-.toc{{display:grid;grid-template-columns:22pt 1fr 24pt;font:9.6pt Carlito;padding:3pt 0;border-bottom:.5pt dotted #aaa}}
+.toc{{display:grid;grid-template-columns:22pt 1fr 38pt;font:9.6pt Carlito;padding:3pt 0;border-bottom:.5pt dotted #aaa}}
 .toc .pgn{{text-align:right}}
 .fun{{background:#fdefe3;border-radius:6pt;padding:8pt 11pt;margin-top:8pt;font:9.4pt/1.35 Carlito}}
 .fun .rb{{font:700 8pt Carlito;letter-spacing:1pt;color:#a84d22;display:block;margin-bottom:3pt}}
 .ft{{position:absolute;left:18mm;right:14.8mm;bottom:11mm;display:flex;justify-content:space-between;font:8.4pt Carlito;color:#6b625b}}
 .ft b{{color:#2f6b4f;font-size:8.8pt}}
-</style></head><body><div class="cv"><img src="file:///tmp/bio/fig/{cover}"></div>
+</style></head><body><div class="cv"><img src="file://{M.FIG}{cover}"></div>
 <div class="band"><h1>{titel}</h1><p>{under}</p></div>
 <div class="in"><p class="intro">{M.INTRO}</p>
 <div class="two"><div class="lar"><span class="rb">DET HÄR SKA DU LÄRA DIG</span><ul>{lara}</ul></div>
 <div>{toc}<div class="fun"><span class="rb">FUNDERA INNAN DU LÄSER</span>{M.FUNDERA}</div></div></div></div>
-<div class="ft"><span>Kapitel 4 · Ekologi</span><b>1</b></div></body></html>"""
+<div class="ft"><span>Kapitel {M.NR} · {M.NAMN}</span><b>1</b></div></body></html>"""
 
 # ---------------------------------------------------------------- vanlig
 def build_vanlig(M, komplett=False):
@@ -148,17 +158,17 @@ def build_vanlig(M, komplett=False):
     body += sam_html(M.SAMMAN, M.BEGR)
     body += test_html(M)
     tmp = f'{OUT}/_vanlig_body.pdf'
-    html_to_pdf(doc(body, 'Kapitel 4 · Ekologi', 2), tmp)
+    html_to_pdf(doc(body, f'Kapitel {M.NR} · {M.NAMN}', 2, tab=M.TAB), tmp)
     texts = page_texts(tmp)
     def find(s, start=0):
         for i in range(start, len(texts)):
-            if s in re.sub(r"\s+", " ", texts[i][:500].replace("ﬂ","fl").replace("ﬁ","fi")):
-                return i + 2
+            t = re.sub(r"\s+", " ", texts[i][:160].replace("ﬂ","fl").replace("ﬁ","fi")).replace(" ", "")
+            if s.replace(" ", "") in t[:200]: return i + 2
         return '?'
     pages = []
     for nr, t, _ in secs:
-        pages.append((nr, t, find(t)))
-    pages.append(('', 'Undersök: nedbrytning', find('Undersök: Var bryts')))
+        pages.append((nr, t, find(nr + t)))
+    pages.append(('', getattr(M,'LAB_TOC','Undersök: nedbrytning'), find(getattr(M,'LAB_FIND','Undersök: Var bryts'))))
     pages.append(('', 'Sammanfattning och begrepp', find('Sammanfattning')))
     a = find('Testa dig själv');
     n = len(texts) + 1
@@ -169,19 +179,18 @@ def build_vanlig(M, komplett=False):
     w = PdfWriter()
     for f in (first, tmp):
         for pg in PdfReader(f).pages: w.add_page(pg)
-    name = f'{OUT}/biologi-4-ekologi-vanlig.pdf'
+    name = f'{OUT}/biologi-{M.NR}-{M.SLUG}-vanlig.pdf'
     w.write(name); res['vanlig'] = name
     if komplett:
         t2 = f'{OUT}/_vanlig_teacher.pdf'
-        body2 = teacher_vanlig(M) + bonus_html(M) + elevblad(M)
-        html_to_pdf(doc(body2, 'Kapitel 4 · Ekologi', len(texts) + 2), t2)
+        body2 = teacher_vanlig(M) + bonus_html(M) + (M.ELEV_HTML if hasattr(M,'ELEV_HTML') else elevblad(M))
+        html_to_pdf(doc(body2, f'Kapitel {M.NR} · {M.NAMN}', len(texts) + 2, tab=M.TAB), t2)
         w2 = PdfWriter()
         for f in (name, t2):
             for pg in PdfReader(f).pages: w2.add_page(pg)
-        name2 = f'{OUT}/biologi-4-ekologi-vanlig-komplett.pdf'
+        name2 = f'{OUT}/biologi-{M.NR}-{M.SLUG}-vanlig-komplett.pdf'
         w2.write(name2); res['vanlig-komplett'] = name2
     return res
 
 if __name__ == '__main__':
-    import ch04 as M
     print(build_vanlig(M, komplett='--k' in sys.argv))

@@ -2,10 +2,11 @@
 import sys, os, re
 sys.path.insert(0, '/tmp/bio')
 from bstyle import *
-from bbuild import html_to_pdf, page_texts, doc, OUT
+from bbuild import html_to_pdf, page_texts, doc, OUT, TABCSS
 from pypdf import PdfReader, PdfWriter
-import ch04_latt as L
-import ch04 as M
+import importlib, os
+CH = os.environ.get('CH', '04')
+L = importlib.import_module('ch'+CH+'_latt')
 
 LCSS = """
 body{font-size:11.6pt;line-height:1.55}
@@ -42,6 +43,7 @@ h2.lh{font:700 22pt Carlito;color:var(--g1);margin:0 0 8pt}
 .sf{margin:6pt 0 0 25pt;font:10.6pt Carlito;width:calc(100% - 25pt)}.sf table{width:100%;border-collapse:collapse}
 .sf td{padding:4pt 2pt;border-bottom:.6pt solid #e2e2e2}.sf th{font:700 9pt Carlito;text-align:center;width:40pt}
 .sf b.bx{display:inline-block;width:12pt;height:12pt;border:1.2pt solid #9aa;border-radius:3pt}
+.bx2{display:inline-block;width:11pt;height:11pt;border:1.2pt solid #9aa;border-radius:3pt;margin-right:5pt;vertical-align:-1pt}
 .sf td.c{text-align:center}
 .nrbox{margin:6pt 0 0 25pt;font:10.6pt Carlito}.nrbox div{display:flex;gap:8pt;align-items:center;margin:0 0 5pt}.nrbox i{display:inline-block;width:17pt;height:17pt;border:1.2pt solid #9aa;border-radius:4pt}
 .ord2{display:grid;grid-template-columns:1fr 1fr;gap:6pt;margin-top:8pt}
@@ -78,6 +80,8 @@ def ex_html(n, e):
         return esc_ex(n, k, "DRA STRECK", f'<span class="q">{e[1]}</span><div class="dr">' + "".join(f"<div>{a}</div><div>{b}</div>" for a, b in zip(e[2], e[3])) + '</div>')
     if k == "sf":
         return esc_ex(n, k, "SANT ELLER FALSKT", f'<span class="q">{e[1]}</span><div class="sf"><table><tr><th></th><th>Sant</th><th>Falskt</th></tr>' + "".join(f'<tr><td>{x}</td><td class="c"><b class="bx"></b></td><td class="c"><b class="bx"></b></td></tr>' for x in e[2]) + '</table></div>')
+    if k == "kryssa":
+        return esc_ex(n, k, "KRYSSA", f'<span class="q">{e[1]}</span><div class="dr">' + "".join(f"<div><b class='bx2'></b> {x}</div>" for x in e[2]) + '</div>')
     if k == "siffror":
         return esc_ex(n, k, "SKRIV SIFFROR", f'<span class="q">{e[1]}</span><div class="nrbox">' + "".join(f"<div><i></i>{x}</div>" for x in e[2]) + '</div>')
     raise ValueError(k)
@@ -88,14 +92,14 @@ def prog(i, typ):
 
 def lasa_page(i, d):
     h = '<section class="sec">' + prog(i, 'LÄS') + f'<h2 class="lh">{d["titel"]}</h2><div class="t">'
-    for p in d['fore']: h += f"<p>{p}</p>"
+    for p in d['fore']: h += (p if p.startswith('<h3') else f"<p>{p}</p>")
     if 'sub1' in d:
         for key in ('sub1', 'sub2'):
             t, ps, f = d[key]
             h += f'<div class="sub"><h3>{t}</h3>' + "".join(f"<p>{p}</p>" for p in ps) + fig(L.FIG + f, w="82%") + '</div>'
     else:
-        if d.get('fig'): h += fig(L.FIG + d['fig'])
-        for p in d['efter'][:2] if d.get('fig2') else d['efter']: h += f"<p>{p}</p>"
+        if d.get('fig'): h += fig(L.FIG + d['fig'], w=d.get('figw'))
+        for p in d['efter'][:2] if d.get('fig2') else d['efter']: h += (p if p.startswith('<h3') else f"<p>{p}</p>")
         if d.get('fig2'):
             h += fig(L.FIG + d['fig2'], w="88%")
     h += '</div>'
@@ -128,7 +132,7 @@ def test_pages():
 def first_page():
     cards = "".join(f'<div><b>{i}</b><br>{t}</div>' for i, t in enumerate(L.SA_GOR, 1))
     lara = "".join(f"<li>{x}</li>" for x in L.LARA)
-    return f"""<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css('Kapitel 4 · Ekologi · Lättläst', 1)}{LCSS}
+    return f"""<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(f'Kapitel {L.NR} · {L.NAMN} · Lättläst', 1)}{LCSS}
 @page{{margin:0}}
 body{{margin:0}}
 .cv img{{width:210mm;height:87.6mm;display:block}}
@@ -142,12 +146,12 @@ body{{margin:0}}
 h3.sg{{font:700 14pt Carlito;color:var(--g2);margin:12pt 0 4pt}}
 .ft{{position:absolute;left:18mm;right:14.8mm;bottom:11mm;display:flex;justify-content:space-between;font:8.4pt Carlito;color:#6b625b}}
 .ft b{{color:#2f6b4f;font-size:8.8pt}}
-</style></head><body><div class="cv"><img src="file:///tmp/bio/fig/cover_lattlast.png"></div>
-<div class="band"><h1>Ekologi</h1><p>{L.UNDER}</p></div>
+</style></head><body><div class="cv"><img src="file://{L.FIG}cover_lattlast.png"></div>
+<div class="band"><h1>{L.NAMN}</h1><p>{L.UNDER}</p></div>
 <div class="in"><p>{L.INTRO_L[0]}</p><p>{L.INTRO_L[1]}</p>
 <h3 class="sg">Så här gör du</h3><div class="stp">{cards}</div>
 <div class="lar"><span class="rb">DET HÄR SKA DU LÄRA DIG</span><ul>{lara}</ul></div></div>
-<div class="ft"><span>Kapitel 4 · Ekologi · Lättläst</span><b>1</b></div></body></html>"""
+<div class="ft"><span>Kapitel {L.NR} · {L.NAMN} · Lättläst</span><b>1</b></div></body></html>"""
 
 def teacher_page(start):
     pk = "".join(f"<li>{x}</li>" for x in L.TILL_PUNKTER)
@@ -160,8 +164,8 @@ def build(komplett=True):
     for i, d in enumerate(L.DELAR, 1):
         body += lasa_page(i, d) + ova_page(i, d)
     body += viktigast_page() + test_pages()
-    foot = 'Kapitel 4 · Ekologi · Lättläst'
-    def full(b, start): return (f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, start)}{LCSS}</style></head><body><div class="tab">4</div>{b}</body></html>')
+    foot = f'Kapitel {L.NR} · {L.NAMN} · Lättläst'
+    def full(b, start): return (f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, start)}{LCSS}{TABCSS(L.TAB)}</style></head><body>{b}</body></html>')
     tmp = f'{OUT}/_latt_body.pdf'
     html_to_pdf(full(body, 2), tmp)
     n = len(PdfReader(tmp).pages)
@@ -170,7 +174,7 @@ def build(komplett=True):
     w = PdfWriter()
     for f in (p1, tmp):
         for pg in PdfReader(f).pages: w.add_page(pg)
-    name = f'{OUT}/biologi-4-ekologi-lattlast.pdf'
+    name = f'{OUT}/biologi-{L.NR}-{L.SLUG}-lattlast.pdf'
     w.write(name)
     res = {'lattlast': name}
     if komplett:
@@ -179,7 +183,7 @@ def build(komplett=True):
         w2 = PdfWriter()
         for f in (name, t2):
             for pg in PdfReader(f).pages: w2.add_page(pg)
-        name2 = f'{OUT}/biologi-4-ekologi-lattlast-komplett.pdf'
+        name2 = f'{OUT}/biologi-{L.NR}-{L.SLUG}-lattlast-komplett.pdf'
         w2.write(name2); res['lattlast-komplett'] = name2
     return res
 

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 """Kapitel 4 Ekologi – lättläst version (innehåll)."""
+NR = 4
+SLUG = "ekologi"
+TAB = "4"
+NAMN = "Ekologi"
 FIG = '/tmp/bio/fig/'
 NDEL = 8
 UNDER = "Vem äter vem – och hur allt hänger ihop"

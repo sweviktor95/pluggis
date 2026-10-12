@@ -16,7 +16,8 @@ CSS = r"""
  @bottom-right{content:counter(page);font:700 8.8pt Carlito;color:var(--g2);margin-top:6mm}}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{font-family:Lora,serif;font-size:10.1pt;line-height:1.46;color:var(--ink);counter-reset:page __START__}
+html{counter-reset:page __START__}
+body{font-family:Lora,serif;font-size:10.1pt;line-height:1.46;color:var(--ink)}
 .tab{position:fixed;right:-14.8mm;top:22mm;width:7.5mm;height:21mm;background:var(--g2);border-radius:3mm 0 0 3mm;color:#fff;font:700 11pt Carlito;display:flex;align-items:center;justify-content:center;z-index:5}
 .sec{break-before:page}
 .sec:first-of-type{break-before:auto}
@@ -67,7 +68,7 @@ ul.pu li:before{content:"•";position:absolute;left:2pt;color:var(--ink)}
 .tbl td{padding:4pt 5pt;border:.7pt solid var(--line);vertical-align:top}
 .tbl td:first-child{font-weight:700}
 .tbl.num td:first-child{font-weight:400}
-.pill{break-after:avoid;display:inline-block;background:var(--g2);color:#fff;font:700 8pt Carlito;letter-spacing:.9pt;padding:2.5pt 8pt;border-radius:4pt;margin:0 0 5pt;text-transform:uppercase}
+.pill{break-after:avoid;display:block;width:fit-content;background:var(--g2);color:#fff;font:700 8pt Carlito;letter-spacing:.9pt;padding:2.5pt 8pt;border-radius:4pt;margin:0 0 5pt;text-transform:uppercase}
 .q{display:grid;grid-template-columns:16pt minmax(0,1fr) 22pt;gap:7pt;margin:0 0 9pt;font:9.8pt/1.4 Carlito;break-inside:avoid}
 .q .n{width:14pt;height:14pt;border-radius:50%;background:var(--g2);color:#fff;font:700 8.5pt/14pt Carlito;text-align:center}
 .q .pts{text-align:right;font:700 9pt Carlito;color:var(--ink)}
@@ -93,7 +94,7 @@ ul.pu li:before{content:"•";position:absolute;left:2pt;color:var(--ink)}
 """
 
 def css(foot, start=2):
-    return CSS.replace("__FOOT__", foot).replace("__START__", str(start))
+    return CSS.replace("__FOOT__", foot).replace("__START__", str(start-1))
 
 def esc(s):
     return H.escape(s)

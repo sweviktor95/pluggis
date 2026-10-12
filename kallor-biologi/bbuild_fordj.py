@@ -3,18 +3,19 @@ import sys, re
 sys.path.insert(0,'/tmp/bio')
 import bbuild as B
 from bbuild import *
-import ch04_fordj as M
+import importlib, os
+M = importlib.import_module('ch'+os.environ.get('CH','04')+'_fordj')
 from pypdf import PdfReader, PdfWriter
 
 def first(pages):
     h = B.first_page(M, 'fordjupning', pages)
-    h = h.replace('DET HÄR SKA DU LÄRA DIG', M.MAL_RUBRIK).replace('Kapitel 4 · Ekologi', 'Fördjupning 4 · Ekologi')
+    h = h.replace('DET HÄR SKA DU LÄRA DIG', M.MAL_RUBRIK).replace(f'Kapitel {M.NR} · {M.NAMN}', f'Fördjupning {M.NR} · {M.NAMN}')
     return h
 
 body = "".join(f'<section class="sec">{head(nr, t)}{inner}</section>' for nr, t, inner in M.S) + M.uppg_html()
-FOOT = 'Fördjupning 4 · Ekologi'
+FOOT = f'Fördjupning {M.NR} · {M.NAMN}'
 tmp = f'{OUT}/_fordj_body.pdf'
-html_to_pdf(doc(body, FOOT, 2, tab="4+"), tmp)
+html_to_pdf(doc(body, FOOT, 2, tab=M.TAB), tmp)
 texts = page_texts(tmp)
 def find(s):
     for i, t in enumerate(texts):
@@ -29,9 +30,9 @@ def merge(files, name):
     for f in files:
         for pg in PdfReader(f).pages: w.add_page(pg)
     w.write(name)
-n1 = f'{OUT}/biologi-4-ekologi-fordjupning.pdf'
+n1 = f'{OUT}/biologi-{M.NR}-{M.SLUG}-fordjupning.pdf'
 merge([p1, tmp], n1)
 t2 = f'{OUT}/_fordj_teacher.pdf'
-html_to_pdf(doc(M.teacher_html(), FOOT, len(texts)+2, tab="4+"), t2)
-merge([n1, t2], f'{OUT}/biologi-4-ekologi-fordjupning-komplett.pdf')
+html_to_pdf(doc(M.teacher_html(), FOOT, len(texts)+2, tab=M.TAB), t2)
+merge([n1, t2], f'{OUT}/biologi-{M.NR}-{M.SLUG}-fordjupning-komplett.pdf')
 print(pages)
