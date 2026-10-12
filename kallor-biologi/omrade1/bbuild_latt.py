@@ -156,8 +156,8 @@ body{{margin:0}}
 .band .kn{{font:700 11pt Carlito;letter-spacing:2.5pt;color:#cfe8d6}}
 .band h1{{font:700 34pt Carlito;margin:0}}.band p{{font:15pt Carlito;margin:3pt 0 0}}
 .in{{padding:8mm 18mm 0}}
-.in p{{font-size:12.5pt;font-family:'Liberation Sans',Arial,sans-serif}}
-.lar{{background:#e7eef5;border-radius:8pt;padding:11pt 14pt;margin-top:10pt;font:12pt/1.45 'Liberation Sans',Arial,sans-serif}}
+.in p{{font-size:12pt}}
+.lar{{background:#e7eef5;border-radius:8pt;padding:11pt 14pt;margin-top:10pt;font:11pt/1.4 Carlito}}
 .lar .rb{{font:700 8.4pt Carlito;letter-spacing:1pt;color:#2b5d7a;margin-bottom:5pt;display:block}}
 .lar ul{{margin:0;padding-left:13pt}}
 h3.sg{{font:700 14pt Carlito;color:var(--g2);margin:12pt 0 4pt}}

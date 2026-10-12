@@ -138,14 +138,14 @@ body{{margin:0}}
 .band .kn{{font:700 11pt Carlito;letter-spacing:2.5pt;color:#cfe8d6}}
 .band h1{{font:700 34pt Carlito;margin:0}}.band p{{font:15pt Carlito;margin:3pt 0 0}}
 .in{{padding:7mm 18mm 0}}
-.intro{{font:11.4pt/1.55 'Liberation Sans',Arial,sans-serif;margin:0 0 5mm}}
+.intro{{font:italic 10.4pt/1.5 Lora;margin:0 0 6mm}}
 .two{{display:grid;grid-template-columns:1fr 1fr;gap:6mm}}
-.lar{{background:#e7eef5;border-radius:6pt;padding:9pt 11pt;font:10.4pt/1.4 'Liberation Sans',Arial,sans-serif}}
+.lar{{background:#e7eef5;border-radius:6pt;padding:9pt 11pt;font:9.4pt/1.35 Carlito}}
 .lar .rb{{font:700 8pt Carlito;letter-spacing:1pt;color:#2b5d7a;margin-bottom:5pt;display:block}}
 .lar ul{{margin:0;padding-left:11pt}}.lar li{{margin:0 0 3pt}}
-.toc{{display:grid;grid-template-columns:44pt 1fr 38pt;font:10.4pt 'Liberation Sans',Arial,sans-serif;padding:3pt 0;border-bottom:.5pt dotted #aaa}}
+.toc{{display:grid;grid-template-columns:44pt 1fr 38pt;font:9.6pt Carlito;padding:3pt 0;border-bottom:.5pt dotted #aaa}}
 .toc .pgn{{text-align:right}}
-.fun{{background:#fdefe3;border-radius:6pt;padding:8pt 11pt;margin-top:8pt;font:10.4pt/1.4 'Liberation Sans',Arial,sans-serif}}
+.fun{{background:#fdefe3;border-radius:6pt;padding:8pt 11pt;margin-top:8pt;font:9.4pt/1.35 Carlito}}
 .fun .rb{{font:700 8pt Carlito;letter-spacing:1pt;color:#a84d22;display:block;margin-bottom:3pt}}
 .ft{{position:absolute;left:18mm;right:14.8mm;bottom:11mm;display:flex;justify-content:space-between;font:8.4pt Carlito;color:#6b625b}}
 .ft b{{color:#2f6b4f;font-size:8.8pt}}

@@ -1,16 +1,14 @@
-/* Handskrivna tillägg för biologisidorna: luftig layout i samma stil som övriga sajten,
-   dyslexivänlig typografi och Lässtöd. Ändra här, inte i -bas.css. */
-.bok{font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.75;color:#222;max-width:none;letter-spacing:.005em;word-spacing:.05em;text-align:left}
+/* Handskrivna tillägg för biologisidorna: luftig layout i samma stil som övriga sajten och Lässtöd.
+   Dyslexivänlig standardtypografi är pausad (de gamla typsnitten Lora och Carlito används). Ändra här, inte i -bas.css. */
+.bok{font-family:Lora,Georgia,serif;font-size:17px;line-height:1.75;color:#222;max-width:none;text-align:left}
 .bok *{box-sizing:border-box}
 .bok.vanlig,.bok.fordjupning{background:#fff;border:1px solid #DCE6DF;border-radius:10px;padding:22px 26px;margin:0 0 20px}
 .bok.lattlast{font-size:18.5px;line-height:1.8}
 .bok .sec{background:#fff;border:1px solid #DCE6DF;border-radius:10px;padding:20px 24px;margin:0 0 18px;break-before:auto}
-.bok p,.bok li,.bok td,.bok th,.bok .bx,.bok .card,.bok .kolla,.bok .q,.bok .cap,.bok .note{font-family:Arial,Helvetica,sans-serif}
 .bok p{font-size:inherit;line-height:inherit;margin:0 0 1.1em}
-.bok h3{font-family:Arial,Helvetica,sans-serif;font-size:1.2em;color:#38564A;margin:1.6em 0 .5em}
+.bok h3{font-family:Carlito,Calibri,"Segoe UI",Arial,sans-serif;font-size:1.2em;color:#38564A;margin:1.6em 0 .5em}
 .bok h3:first-child{margin-top:0}
-.bok h2.lh,.bok .sh h2{font-family:Arial,Helvetica,sans-serif;font-size:1.45em;color:#38564A;margin:0 0 .6em}
-.bok em{font-style:normal;font-weight:700}
+.bok h2.lh,.bok .sh h2{font-family:Carlito,Calibri,"Segoe UI",Arial,sans-serif;font-size:1.45em;color:#38564A;margin:0 0 .6em}
 .bok .green{color:#38564A;font-weight:700}
 /* Sidoboxar blir rutor mitt i texten, som i resten av sajten */
 .bok .row,.bok .row.w,.bok .row.one{display:block}

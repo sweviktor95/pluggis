@@ -96,7 +96,8 @@ ul.pu li:before{content:"•";position:absolute;left:2pt;color:var(--ink)}
 """
 
 
-DYS = r"""
+import os as _os
+DYS_TEXT = r"""
 body{font-family:"Liberation Sans",Arial,sans-serif;font-size:12pt;line-height:1.62;letter-spacing:.012em;word-spacing:.07em;text-align:left}
 p,.t p{font-family:"Liberation Sans",Arial,sans-serif;font-size:12pt;line-height:1.62;margin:0 0 9pt}
 em,i{font-style:normal;font-weight:700}
@@ -116,6 +117,9 @@ h3{font-size:14.5pt;margin-top:13pt}
 .kolla ol,.kolla li{font-size:11pt}
 ul.pu li,.steps li{font-size:inherit}
 """
+
+# Dyslexivänlig typografi är pausad. Starta med DYS=1 i miljön för att slå på den igen.
+DYS = DYS_TEXT if _os.environ.get("DYS") == "1" else ""
 
 def css(foot, start=2):
     return CSS.replace("__FOOT__", foot).replace("__START__", str(start-1))
