@@ -60,8 +60,34 @@ window.lararBiologi = {
    "titel": "Ekologi",
    "ide": "Samspel i ekosystem: energi, kretslopp, populationer och resurser, lokalt och globalt.",
    "hafte": "biologi-ekologi",
-   "lankar": [],
-   "ppt": []
+   "lankar": [
+    [
+     "Prov (elevversion)",
+     "planering/biologi-omrade4/biologi-4-prov-elev.pdf"
+    ],
+    [
+     "Prov med facit (lärare)",
+     "planering/biologi-omrade4/biologi-4-prov-larare.pdf"
+    ],
+    [
+     "Jeopardy",
+     "simuleringar/jeopardy-bio-4.html"
+    ]
+   ],
+   "ppt": [
+    [
+     "📊 4.1 Ekosystem och energi",
+     "planering/biologi-omrade4/biologi-4-1-ekosystem-och-energi.pptx"
+    ],
+    [
+     "📊 4.2 Materiens kretslopp",
+     "planering/biologi-omrade4/biologi-4-2-materiens-kretslopp.pptx"
+    ],
+    [
+     "📊 4.3 Populationer och samspel",
+     "planering/biologi-omrade4/biologi-4-3-populationer-och-samspel.pptx"
+    ]
+   ]
   },
   {
    "nr": 5,

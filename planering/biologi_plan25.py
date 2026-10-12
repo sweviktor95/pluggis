@@ -373,7 +373,13 @@ MATERIAL = {1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/bio
                            ["Jeopardy", "simuleringar/jeopardy-bio-1.html"]],
                  "ppt": [["📊 Introduktion till biologi", "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"],
                          ["📊 1.1 Undersöka systematiskt", "planering/biologi-omrade1/biologi-1-1-undersoka-systematiskt.pptx"],
-                         ["📊 1.2 Modeller, källor och argument", "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"]]}}
+                         ["📊 1.2 Modeller, källor och argument", "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"]]},
+            4: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade4/biologi-4-prov-elev.pdf"],
+                           ["Prov med facit (lärare)", "planering/biologi-omrade4/biologi-4-prov-larare.pdf"],
+                           ["Jeopardy", "simuleringar/jeopardy-bio-4.html"]],
+                 "ppt": [["📊 4.1 Ekosystem och energi", "planering/biologi-omrade4/biologi-4-1-ekosystem-och-energi.pptx"],
+                         ["📊 4.2 Materiens kretslopp", "planering/biologi-omrade4/biologi-4-2-materiens-kretslopp.pptx"],
+                         ["📊 4.3 Populationer och samspel", "planering/biologi-omrade4/biologi-4-3-populationer-och-samspel.pptx"]]}}
 
 def skriv_js():
     import json

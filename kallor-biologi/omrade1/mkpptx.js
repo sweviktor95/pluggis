@@ -2,7 +2,7 @@ const pptxgen = require("pptxgenjs");
 const sharp = require("sharp");
 const SK = "/root/.claude/skills/synced/6ae81e9c-8cca-465f-9842-aa2795e9fcf8_27c14566-9107-4d09-9b16-8940ba7b45cb/pptx";
 const { applyTheme } = require(SK + "/scripts/apply_theme.js");
-const FIG = "/tmp/bio/fig01n/";
+const FIG = process.env.FIG || "/tmp/bio/fig01n/";
 const THEME = {
   name: "Biologi grön", headFontFace: "Calibri", bodyFontFace: "Calibri",
   colors: { dk1: "1F2A24", lt1: "FFFFFF", dk2: "245040", lt2: "EAF3EC", accent1: "2F6B4F", accent2: "E0782F", accent3: "4F8A63", accent4: "2B6A8A", accent5: "A8651A", accent6: "B3402F", hlink: "2B6A8A", folHlink: "6B625B" }
