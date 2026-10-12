@@ -367,13 +367,20 @@ tr.lab td{background:#f3f9f5}
 
 # ---- Data till lärarvyn (lararsida.html) ------------------------------------
 HAFTE_NYCKEL = {1: "biologi-vetenskap", 4: "biologi-ekologi"}   # områden som redan har ombyggda häften
+# Lärarmaterial per område (prov, Jeopardy) och delområde (PowerPoint)
+MATERIAL = {1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/biologi-1-prov-elev.pdf"],
+                           ["Prov med facit (lärare)", "planering/biologi-omrade1/biologi-1-prov-larare.pdf"],
+                           ["Jeopardy", "simuleringar/jeopardy-bio-1.html"]],
+                 "ppt": {"1.1": "planering/biologi-omrade1/biologi-1-1-undersoka-systematiskt.pptx",
+                         "1.2": "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"}}}
 
 def skriv_js():
     import json
     data = {"plan": {"pdf": "planering/biologi-planering.pdf", "xlsx": "planering/biologi-planering.xlsx"},
             "omraden": [{"nr": a[0], "titel": a[1], "ide": a[2], "veckor": sum(d[2] for d in a[3]),
                          "hafte": HAFTE_NYCKEL.get(a[0]),
-                         "delomraden": [{"nr": d[0], "titel": d[1], "veckor": d[2]} for d in a[3]]} for a in NEW]}
+                         "lankar": MATERIAL.get(a[0], {}).get("lankar", []),
+                         "delomraden": [{"nr": d[0], "titel": d[1], "veckor": d[2], "ppt": MATERIAL.get(a[0], {}).get("ppt", {}).get(d[0])} for d in a[3]]} for a in NEW]}
     open("planering/lararvy-biologi.js", "w", encoding="utf-8").write(
         "// Genereras av planering/biologi_plan25.py – ändra inte för hand.\nwindow.lararBiologi = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
 

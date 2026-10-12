@@ -963,6 +963,7 @@
 .tiles{display:grid;gap:5px;margin:10px 0;grid-template-columns:repeat(auto-fill,minmax(64px,1fr))}.tile{background:#eef3ee;border-radius:8px;text-align:center;padding:4px 2px}.tile .big{display:block;font-weight:bold;font-size:1.05em;color:#38564A}.tile .nm{display:block;font-size:.72em}
 .mini-tabell{border-collapse:collapse;margin:.6rem 0;font-size:.95rem}.mini-tabell th,.mini-tabell td{border:1px solid #cfd8d0;padding:.35rem .7rem;text-align:left}.mini-tabell th{background:#eef3ee}
 </style>
+<link rel="stylesheet" href="innehall/biologi-bok.css">
 </head>
 <body>
 
@@ -983,6 +984,7 @@
 <script src="innehall/matematik-division.js"></script>
 <script src="innehall/matematik-klockan.js"></script>
 <script src="innehall/biologi-vetenskap.js"></script>
+<script src="innehall/biologi-omrade1.js"></script>
 <script src="innehall/biologi-cellen.js"></script>
 <script src="innehall/biologi-organ.js"></script>
 <script src="innehall/biologi-mangfald.js"></script>
@@ -1213,7 +1215,20 @@
                 '</div>';
         faktaStart = html.length;
       }
-      if (data && data.sektioner) {
+      if (data && data.nivaer) {
+        // Biologi: samma moment i tre nivåer (lättläst, grundtext, fördjupning).
+        var nivaNamn = { lattlast: "Lättläst", vanlig: "Grundtext", fordjupning: "Fördjupning" };
+        var nivaOrd = ["lattlast", "vanlig", "fordjupning"].filter(function(k) { return data.nivaer[k]; });
+        var valdNiva = data.nivaStandard || "vanlig";
+        try { var sparad = localStorage.getItem("pluggis-niva"); if (sparad && data.nivaer[sparad]) { valdNiva = sparad; } } catch (e) {}
+        if (!data.nivaer[valdNiva]) { valdNiva = nivaOrd[0]; }
+        if (nivaOrd.length > 1) {
+          html += '<div class="nivaer" role="group" aria-label="Välj nivå">' + nivaOrd.map(function(k) {
+            return '<button type="button" data-niva="' + k + '" class="' + (k === valdNiva ? 'aktiv' : '') + '" aria-pressed="' + (k === valdNiva) + '" onclick="valjNiva(\'' + id + '\',\'' + k + '\')">' + nivaNamn[k] + '</button>';
+          }).join("") + '</div>';
+        }
+        html += '<div class="bok ' + valdNiva + '" id="nivaRuta">' + data.nivaer[valdNiva] + '</div>';
+      } else if (data && data.sektioner) {
         // Rikare sida: intro + flera namngivna sektioner + ev. begreppsruta
         if (data.intro) { html += "<p>" + data.intro + "</p>"; }
         data.sektioner.forEach(function(sek) {
@@ -4007,6 +4022,20 @@
       cirklarHtml += "</svg>";
     }
     document.getElementById("ak9Cirklar").innerHTML = cirklarHtml;
+  }
+
+  function valjNiva(id, niva) {
+    var d = innehall[id];
+    if (!d || !d.nivaer || !d.nivaer[niva]) { return; }
+    var r = document.getElementById("nivaRuta");
+    if (!r) { return; }
+    r.className = "bok " + niva;
+    r.innerHTML = d.nivaer[niva];
+    document.querySelectorAll(".nivaer button").forEach(function(b) {
+      var on = b.getAttribute("data-niva") === niva;
+      b.classList.toggle("aktiv", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    try { localStorage.setItem("pluggis-niva", niva); } catch (e) {}
   }
 
   function visaLage(id, lage) {

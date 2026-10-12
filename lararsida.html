@@ -93,7 +93,8 @@
     d.omraden.forEach(function(o) {
       var v = String(o.veckor).replace(".", ",");
       var inre = '<p class="ide">' + o.ide + '</p><ul class="delomr">' +
-        o.delomraden.map(function(x) { return '<li>' + x.nr + ' ' + x.titel + ' <span class="vecka">(' + String(x.veckor).replace(".", ",") + ' v)</span></li>'; }).join("") + '</ul>';
+        o.delomraden.map(function(x) { return '<li>' + x.nr + ' ' + x.titel + ' <span class="vecka">(' + String(x.veckor).replace(".", ",") + ' v)</span>' + (x.ppt ? ' <a class="plan" href="' + x.ppt + '" download>📊 PowerPoint</a>' : '') + '</li>'; }).join("") + '</ul>' +
+        ((o.lankar && o.lankar.length) ? '<p class="grupp">Prov och spel – till klassen och läraren</p><div class="knappar">' + o.lankar.map(function(l) { return lank(l[1], l[0]); }).join("") + '</div>' : '');
       var hafte = o.hafte ? kapitelHtml({ id: o.hafte, titel: o.titel }) : "";
       inre += hafte || '<p class="tomt">Häften kommer.</p>';
       ut += '<details><summary>' + o.nr + '. ' + o.titel + ' <span class="vecka">· ' + v + ' v</span></summary><div class="inre">' + inre + '</div></details>';
