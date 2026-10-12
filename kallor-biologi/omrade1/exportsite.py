@@ -38,6 +38,9 @@ M["biologi-m-1-1-1"]["latt"] = latt[1] + latt[2]
 
 import sajtkonv as SK
 import latt_ov as LO
+import svar_ov as SO
+import re as _re
+
 IKON_OVA = "✏️"
 def latt_data(idxs, forsta):
     """Lättläst: läsdel (sajtformat) + interaktiva övningar för varje del."""
@@ -59,6 +62,29 @@ LATT_DATA = {
 }
 TEST_LATT = {"sektioner": [{"ikon": "📝", "titel": "Testa dig själv", "text": ["Nu får du visa vad du har lärt dig. Du kan titta i kapitlet om du vill."],
                             "ovningar": [LO.bygg("TEST", n, ex) for n, ex in enumerate(L.TEST, 1)]}]}
+def _txt(h): return _re.sub(r"<(?!br)[^>]+>", "", h)
+BOKST = "ABCD"
+def test_grund():
+    sek = []; cur = None
+    for n, (dl, q, alts, nl, pts) in enumerate(G.TEST, 1):
+        if cur is None or cur["_d"] != dl:
+            cur = {"_d": dl, "ikon": "📖", "titel": "Del %s · %s" % (dl, G.DEL_NAMN[dl]), "text": [], "ovningar": []}
+            if dl == "A": cur["text"] = ["Uppgifterna liknar uppgifterna på nationella prov i biologi. Personer, annonser och mätvärden är påhittade."]
+            sek.append(cur)
+        facit = G.FACIT[n - 1]
+        qq = _re.sub(r"<div class=.fakeann.>.*?</div>", "", q).replace("<br>", "<br>")
+        if alts:
+            val = [_re.sub(r"^[A-D] ", "", a) for a in alts]
+            cur["ovningar"].append({"typ": "ringa", "fraga": qq, "val": val, "ratt": BOKST.index(facit)})
+        else:
+            qq = qq.replace(" ●●●", "").replace(" ●●", "").replace(" ●", "")
+            cur["ovningar"].append({"typ": "fri", "fraga": qq, "forslag": facit})
+    for c in sek: c.pop("_d")
+    return {"sektioner": sek}
+def test_fordj():
+    ov = [{"typ": "fri", "fraga": q, "forslag": F.SVAR[i]} for i, (q, p) in enumerate(F.UPG)]
+    return {"sektioner": [{"ikon": "💭", "titel": "Resonera och ta ställning", "text": ["Uppgifterna liknar de svåraste uppgifterna på nationella prov. Personer, rubriker och mätvärden är påhittade. Svara utförligt och resonera i flera led."], "ovningar": ov}]}
+TEST_GRUND = test_grund(); TEST_FORDJ = test_fordj()
 TITEL = {"biologi-m-1-1-1": "Vad är biologi?", "biologi-m-1-1-2": "Dokumentera", "biologi-m-1-1-3": "Värdera resultat", "biologi-m-1-1-l": "Labb",
          "biologi-m-1-2-1": "Modeller", "biologi-m-1-2-2": "Källor", "biologi-m-1-2-3": "Argument", "biologi-m-1-2-l": "Labb",
          "biologi-m-1-s": "Sammanfattning", "biologi-m-1-t": "Testa dig själv"}
@@ -72,5 +98,10 @@ for id_, d in M.items():
     elif d["latt"]: niv["lattlast"] = SK.konvertera(fix(d["latt"]), TITEL[id_])
     for key, k in (("vanlig", "van"), ("fordjupning", "ford")):
         if d[k]: niv[key] = SK.konvertera(fix(d[k]), TITEL[id_])
+    if id_ == "biologi-m-1-t":
+        niv["vanlig"] = TEST_GRUND; niv["fordjupning"] = TEST_FORDJ
+    for v in niv.values():
+        for sek in v["sektioner"]:
+            if sek.get("fragor"): sek["fragor"] = [SO.kolla_objekt(q) for q in sek["fragor"]]
     out.append('innehall[%s] = {nivaer: %s, nivaStandard: "vanlig"};' % (json.dumps(id_), json.dumps(niv, ensure_ascii=False)))
 open('/home/claude/pluggis/innehall/biologi-omrade1.js', 'w').write("\n".join(out) + "\n")

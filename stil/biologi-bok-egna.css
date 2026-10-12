@@ -56,3 +56,7 @@
 .ov-svar{margin-top:8px;font-weight:600}
 .ov-svar:empty{display:none}
 .ov-svar.ratt{color:#2d7a4a}.ov-svar.fel{color:#b0392b}.ov-svar.forslag{font-weight:400;background:#fff8ec;border-left:4px solid #e0a53f;padding:8px 12px;border-radius:6px;color:#444}
+.kf-lista .ov{background:transparent;border:0;padding:6px 0;margin:8px 0 0}
+.kf-lista .ov-fraga{font-weight:600}
+.kf-lista .kf-fraga{margin:8px 0}
+.ov-svar.forslag{white-space:pre-wrap}

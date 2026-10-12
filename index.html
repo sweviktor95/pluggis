@@ -4016,8 +4016,11 @@
       sek.ovningar.forEach(function(o, n) { html += ovHtml(o, n + 1); });
     }
     if (sek.fragor && sek.fragor.length) {
-      html += '<div class="kontrollfraga"><p>🤔 <strong>Kolla din förståelse:</strong></p><ol>' +
-              sek.fragor.map(function(f) { return "<li>" + f + "</li>"; }).join("") + '</ol></div>';
+      html += '<div class="kontrollfraga kf-lista"><p>🤔 <strong>Kolla din förståelse:</strong></p>' +
+              sek.fragor.map(function(f, n) {
+                return (typeof f === "string") ? '<p class="kf-fraga">' + (n + 1) + '. ' + f + '</p>'
+                  : ovHtml({ typ: "fri", fraga: f.f, forslag: f.svar, liten: true }, n + 1);
+              }).join("") + '</div>';
     }
     if (sek.kontrollfraga) {
       html += '<div class="kontrollfraga"><p>🤔 <strong>Kolla din förståelse:</strong> ' +
@@ -4068,11 +4071,11 @@
       var nn = '<option value="">…</option>' + o.delar.map(function(v, i) { return '<option>' + (i + 1) + '</option>'; }).join("");
       h += o.delar.map(function(v) { return '<div class="ov-rad"><span class="ov-ord">' + v + '</span><select aria-label="Nummer">' + nn + '</select></div>'; }).join("");
       h += '<button type="button" class="ov-kolla" onclick="ovKolla(\'' + id + '\')">Kolla</button>';
-    } else if (o.typ === "skriv" || o.typ === "skriv2" || o.typ === "rita") {
+    } else if (o.typ === "skriv" || o.typ === "skriv2" || o.typ === "rita" || o.typ === "fri") {
       var sparat = []; try { sparat = JSON.parse(localStorage.getItem(ovNyckel(o)) || "[]"); } catch (e) {}
-      var falt = o.typ === "skriv" ? [o.borja + " …"] : (o.typ === "skriv2" ? o.falt : ["Skriv här hur ditt diagram ser ut (rita gärna på papper också)"]);
-      h += falt.map(function(f, i) { return '<label class="ov-falt"><span>' + f + '</span><textarea rows="2" oninput="ovSpara(\'' + id + '\')">' + ovEsc(sparat[i] || "") + '</textarea></label>'; }).join("");
-      if (o.forslag) { h += '<button type="button" class="ov-kolla" onclick="ovForslag(\'' + id + '\')">Visa förslag</button>'; }
+      var falt = o.typ === "skriv" ? [o.borja + " …"] : (o.typ === "skriv2" ? o.falt : (o.typ === "fri" ? ["Skriv ditt svar här (om du vill)"] : ["Skriv här hur ditt diagram ser ut (rita gärna på papper också)"]));
+      h += falt.map(function(f, i) { return '<label class="ov-falt"><span>' + f + '</span><textarea rows="' + (o.typ === "fri" ? 3 : 2) + '" oninput="ovSpara(\'' + id + '\')">' + ovEsc(sparat[i] || "") + '</textarea></label>'; }).join("");
+      if (o.forslag) { h += '<button type="button" class="ov-kolla" onclick="ovForslag(\'' + id + '\')">Visa facit</button>'; }
     }
     return h + '<div class="ov-svar" aria-live="polite"></div></div>';
   }
@@ -4107,7 +4110,9 @@
     try { localStorage.setItem(ovNyckel(o), JSON.stringify(v)); } catch (e) {}
   }
   function ovForslag(id) {
-    var r = ovSvarRuta(id); r.className = "ov-svar forslag"; r.textContent = "Förslag: " + ovReg[id].forslag;
+    var r = ovSvarRuta(id); var vis = r.classList.contains("forslag");
+    r.className = vis ? "ov-svar" : "ov-svar forslag"; r.textContent = vis ? "" : "Facit: " + ovReg[id].forslag;
+    var kn = document.querySelector("#" + id + " .ov-kolla"); if (kn) { kn.textContent = vis ? "Visa facit" : "Dölj facit"; }
   }
 
   function vaxlaLasstod() {
