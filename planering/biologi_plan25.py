@@ -250,7 +250,7 @@ def skriv_md(seen, s3, weeks, nk, ne, nl):
             w("| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |"); w("|---|---|---|---|---|---|")
             for n, i in enumerate(d[5], 1):
                 m = mom(i); ks = B.expand(m["tags"])
-                w(f"| **{d[0]}.{n} {m['titel']}** | {m['text']} | {m['begrepp']} | {'; '.join(kl(ks,PS))} | {'; '.join(kl(ks,PC))} | {'; '.join(kl(ks,PF))} |")
+                w(f"| **{m['titel']}** | {m['text']} | {m['begrepp']} | {'; '.join(kl(ks,PS))} | {'; '.join(kl(ks,PC))} | {'; '.join(kl(ks,PF))} |")
             if d[0] in LAB25:
                 t, fr, var, sak, tg, beg = LAB25[d[0]]; ks = B.expand(tg)
                 w(f"| 🧪 **Labb (ca 45 min): {t}** | {fr} {var} Säkerhet: {sak} | {beg} | {'; '.join(kl(ks,PS))} | {'; '.join(kl(ks,PC))} | {'; '.join(kl(ks,PF))} |")
@@ -286,17 +286,17 @@ def skriv_xlsx():
             drows.append([a[0], a[1], d[0], d[1], d[2], d[3], d[4], "; ".join(modeller(d)), "; ".join(mom(i)["titel"] for i in d[6])])
             for n, i in enumerate(d[5], 1):
                 m = mom(i); ks = B.expand(m["tags"])
-                mrows.append([a[0], a[1], d[0], d[1], d[2], "Lektionsmoment", f"{d[0]}.{n}", m["titel"], m["text"], m["begrepp"], "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
+                mrows.append([a[0], a[1], d[0], d[1], d[2], "Lektionsmoment", m["titel"], m["text"], m["begrepp"], "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
             if d[0] in LAB25:
                 t, fr, var, sak, tg, beg = LAB25[d[0]]; ks = B.expand(tg)
-                mrows.append([a[0], a[1], d[0], d[1], d[2], "Labb (45 min)", f"{d[0]}.L", t, f"{fr} {var}", beg, "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
+                mrows.append([a[0], a[1], d[0], d[1], d[2], "Labb (45 min)", t, f"{fr} {var}", beg, "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
                 lrows.append([d[0], d[1], t, fr, var, sak])
             for i in d[6]:
                 m = mom(i); ks = B.expand(m["tags"])
-                mrows.append([a[0], a[1], d[0], d[1], d[2], "Om tid / fördjupning", "", m["titel"], m["text"], m["begrepp"], "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
+                mrows.append([a[0], a[1], d[0], d[1], d[2], "Om tid / fördjupning", m["titel"], m["text"], m["begrepp"], "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
     ws = wb.active; ws.title = "Moment"
-    sheet(ws, ["Område nr", "Område", "Delområde nr", "Delområde", "Veckor", "Typ", "Moment nr", "Moment", "Innehåll i texten", "Begrepp", "Syfte", "Centralt innehåll", "Förmåga"],
-          mrows, [8, 24, 9, 28, 8, 16, 9, 32, 55, 36, 36, 40, 22], "I2")
+    sheet(ws, ["Område nr", "Område", "Delområde nr", "Delområde", "Veckor", "Typ", "Moment", "Innehåll i texten", "Begrepp", "Syfte", "Centralt innehåll", "Förmåga"],
+          mrows, [8, 24, 9, 28, 8, 16, 32, 55, 36, 36, 40, 22], "H2")
     sheet(wb.create_sheet("Delområden"), ["Område nr", "Område", "Delområde nr", "Delområde", "Veckor", "Mål", "Nivåer (E→A)", "Förklaringsmodeller", "Om tid / fördjupning"], drows, [8, 24, 9, 30, 8, 50, 60, 45, 50])
     sheet(wb.create_sheet("Områden"), ["Nr", "Område", "Idé", "Veckor", "Delområden"], arows, [6, 32, 70, 8, 10])
     sheet(wb.create_sheet("Labbar (45 min)"), ["Delområde nr", "Delområde", "Labb", "Undersökningsbar fråga", "Upplägg", "Säkerhet och anmärkning"], lrows, [10, 30, 32, 40, 60, 50])
@@ -352,7 +352,7 @@ tr.lab td{background:#f3f9f5}
             if mod: o.append('<div class="mod"><b>Förklaringsmodeller:</b> ' + e("; ".join(mod)) + "</div>")
             o.append('<table><colgroup><col style="width:43%"><col style="width:22%"><col style="width:35%"></colgroup><tr><th>Moment och innehåll</th><th>Begrepp</th><th>Koppling till kursplanen</th></tr>')
             for n, i in enumerate(d[5], 1):
-                m = mom(i); o.append(rad(f"{d[0]}.{n} {e(m['titel'])}", m["text"], m["begrepp"], B.expand(m["tags"])))
+                m = mom(i); o.append(rad(f"{e(m['titel'])}", m["text"], m["begrepp"], B.expand(m["tags"])))
             if d[0] in LAB25:
                 t, fr, var, sak, tg, beg = LAB25[d[0]]
                 o.append(rad(f"🧪 Labb (ca 45 min): {e(t)}", f"{fr} {var} Säkerhet: {sak}", beg, B.expand(tg), "lab"))
@@ -371,10 +371,10 @@ EXTRA_BLAD = {1: ['          { id: "biologi-m-1-s", titel: "Sammanfattning och b
 # Lärarmaterial per område (prov, Jeopardy) och delområde (PowerPoint)
 MATERIAL = {1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/biologi-1-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade1/biologi-1-prov-larare.pdf"],
-                           ["Jeopardy", "simuleringar/jeopardy-bio-1.html"],
-                           ["📊 PowerPoint: Introduktion till biologi (start)", "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"]],
-                 "ppt": {"1.1": "planering/biologi-omrade1/biologi-1-1-undersoka-systematiskt.pptx",
-                         "1.2": "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"}}}
+                           ["Jeopardy", "simuleringar/jeopardy-bio-1.html"]],
+                 "ppt": [["📊 Introduktion till biologi", "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"],
+                         ["📊 1.1 Undersöka systematiskt", "planering/biologi-omrade1/biologi-1-1-undersoka-systematiskt.pptx"],
+                         ["📊 1.2 Modeller, källor och argument", "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"]]}}
 
 def skriv_js():
     import json
@@ -382,7 +382,7 @@ def skriv_js():
             "omraden": [{"nr": a[0], "titel": a[1], "ide": a[2], "veckor": sum(d[2] for d in a[3]),
                          "hafte": HAFTE_NYCKEL.get(a[0]),
                          "lankar": MATERIAL.get(a[0], {}).get("lankar", []),
-                         "delomraden": [{"nr": d[0], "titel": d[1], "veckor": d[2], "ppt": MATERIAL.get(a[0], {}).get("ppt", {}).get(d[0])} for d in a[3]]} for a in NEW]}
+                         "ppt": MATERIAL.get(a[0], {}).get("ppt", [])} for a in NEW]}
     open("planering/lararvy-biologi.js", "w", encoding="utf-8").write(
         "// Genereras av planering/biologi_plan25.py – ändra inte för hand.\nwindow.lararBiologi = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
 

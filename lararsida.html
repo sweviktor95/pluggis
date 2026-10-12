@@ -24,6 +24,7 @@
   .kapitel h4 { margin: 0 0 8px; }
   .knappar { display: flex; flex-wrap: wrap; gap: 8px; }
   .lank.larar { background: #8a4b9a; }
+  .lank.av { background: #c9c9cf; color: #555; cursor: default; }
   .tomt { color: #888; font-size: 14px; }
   .grupp { font-weight: bold; font-size: 14px; margin: 12px 0 6px; color: #444; }
   .sidor { color: #555; font-size: 14px; margin: 8px 0 0; }
@@ -63,8 +64,8 @@
     });
   }
 
-  function lank(href, text, extra) {
-    return '<a class="lank ' + (extra || "") + '" href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
+  function lank(href, text, extra, ladda) {
+    return '<a class="lank ' + (extra || "") + '" href="' + href + '"' + (ladda ? ' download' : ' target="_blank" rel="noopener"') + '>' + text + '</a>';
   }
 
   function knappar(h) {
@@ -92,11 +93,11 @@
     var ut = '<div class="planlank">' + lank(d.plan.pdf, "📋 Planering (PDF)", "plan") + lank(d.plan.xlsx, "Planering (Excel)", "plan") + '</div>';
     d.omraden.forEach(function(o) {
       var v = String(o.veckor).replace(".", ",");
-      var inre = '<p class="ide">' + o.ide + '</p><ul class="delomr">' +
-        o.delomraden.map(function(x) { return '<li>' + x.nr + ' ' + x.titel + ' <span class="vecka">(' + String(x.veckor).replace(".", ",") + ' v)</span>' + (x.ppt ? ' <a class="plan" href="' + x.ppt + '" download>📊 PowerPoint</a>' : '') + '</li>'; }).join("") + '</ul>' +
+      var inre = '<p class="ide">' + o.ide + '</p>' +
+        ((o.ppt && o.ppt.length) ? '<p class="grupp">PowerPoint – ladda ner</p><div class="knappar">' + o.ppt.map(function(l) { return lank(l[1], l[0], "plan", true); }).join("") + '</div>' : '') +
         ((o.lankar && o.lankar.length) ? '<p class="grupp">Prov och spel – till klassen och läraren</p><div class="knappar">' + o.lankar.map(function(l) { return lank(l[1], l[0]); }).join("") + '</div>' : '');
       var hafte = o.hafte ? kapitelHtml({ id: o.hafte, titel: o.titel }) : "";
-      inre += hafte || '<p class="tomt">Häften kommer.</p>';
+      inre += hafte || '<div class="knappar" style="margin-top:10px"><span class="lank av">Häften kommer</span></div>';
       ut += '<details><summary>' + o.nr + '. ' + o.titel + ' <span class="vecka">· ' + v + ' v</span></summary><div class="inre">' + inre + '</div></details>';
     });
     return '<details><summary>' + (nod.ikon ? nod.ikon + " " : "") + nod.titel + '</summary><div class="inre">' + ut + '</div></details>';

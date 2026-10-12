@@ -23,25 +23,21 @@ window.lararBiologi = {
     [
      "Jeopardy",
      "simuleringar/jeopardy-bio-1.html"
-    ],
-    [
-     "📊 PowerPoint: Introduktion till biologi (start)",
-     "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"
     ]
    ],
-   "delomraden": [
-    {
-     "nr": "1.1",
-     "titel": "Undersöka systematiskt",
-     "veckor": 1,
-     "ppt": "planering/biologi-omrade1/biologi-1-1-undersoka-systematiskt.pptx"
-    },
-    {
-     "nr": "1.2",
-     "titel": "Modeller, källor och argument",
-     "veckor": 1,
-     "ppt": "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"
-    }
+   "ppt": [
+    [
+     "📊 Introduktion till biologi",
+     "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"
+    ],
+    [
+     "📊 1.1 Undersöka systematiskt",
+     "planering/biologi-omrade1/biologi-1-1-undersoka-systematiskt.pptx"
+    ],
+    [
+     "📊 1.2 Modeller, källor och argument",
+     "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"
+    ]
    ]
   },
   {
@@ -51,26 +47,7 @@ window.lararBiologi = {
    "veckor": 2.5,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "2.1",
-     "titel": "Cellen",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "2.2",
-     "titel": "Fotosyntes och cellandning",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "2.3",
-     "titel": "Organ och organsystem",
-     "veckor": 0.5,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 3,
@@ -79,20 +56,7 @@ window.lararBiologi = {
    "veckor": 2,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "3.1",
-     "titel": "Mångfald, hot och ekosystemtjänster",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "3.2",
-     "titel": "Gruppera och organismvärlden",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 4,
@@ -101,26 +65,7 @@ window.lararBiologi = {
    "veckor": 3,
    "hafte": "biologi-ekologi",
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "4.1",
-     "titel": "Ekosystem och energi",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "4.2",
-     "titel": "Materiens kretslopp",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "4.3",
-     "titel": "Populationer och samspel",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 5,
@@ -129,20 +74,7 @@ window.lararBiologi = {
    "veckor": 2,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "5.1",
-     "titel": "Påverkan på naturen och klimat",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "5.2",
-     "titel": "Hållbar utveckling och ställningstagande",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 6,
@@ -151,20 +83,7 @@ window.lararBiologi = {
    "veckor": 2,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "6.1",
-     "titel": "Mat och matspjälkning",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "6.2",
-     "titel": "Andning, blod och samverkan",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 7,
@@ -173,20 +92,7 @@ window.lararBiologi = {
    "veckor": 2,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "7.1",
-     "titel": "Bakterier, virus och smitta",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "7.2",
-     "titel": "Immunförsvar, vaccin och antibiotika",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 8,
@@ -195,20 +101,7 @@ window.lararBiologi = {
    "veckor": 2,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "8.1",
-     "titel": "DNA och nedärvning",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "8.2",
-     "titel": "Arv och miljö, mutationer och genteknik",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 9,
@@ -217,20 +110,7 @@ window.lararBiologi = {
    "veckor": 2,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "9.1",
-     "titel": "Livets historia och bevis",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "9.2",
-     "titel": "Evolutionens mekanismer",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 10,
@@ -239,20 +119,7 @@ window.lararBiologi = {
    "veckor": 2,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "10.1",
-     "titel": "Stress, sömn och psykisk hälsa",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "10.2",
-     "titel": "Beroendeframkallande medel",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 11,
@@ -261,20 +128,7 @@ window.lararBiologi = {
    "veckor": 2,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "11.1",
-     "titel": "Pubertet, reproduktion, preventivmedel och STI",
-     "veckor": 1,
-     "ppt": null
-    },
-    {
-     "nr": "11.2",
-     "titel": "Relationer, identitet och samtycke",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   },
   {
    "nr": 12,
@@ -283,14 +137,7 @@ window.lararBiologi = {
    "veckor": 1,
    "hafte": null,
    "lankar": [],
-   "delomraden": [
-    {
-     "nr": "12.1",
-     "titel": "Repetition inför nationella proven",
-     "veckor": 1,
-     "ppt": null
-    }
-   ]
+   "ppt": []
   }
  ]
 };
