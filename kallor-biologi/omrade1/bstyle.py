@@ -128,7 +128,12 @@ def esc(s):
     return H.escape(s)
 
 # ---- byggstenar -------------------------------------------------------
+import re as _re
+def shownr(nr):
+    return '' if _re.fullmatch(r'F?\d+\.\d+\.\d+', str(nr)) else nr
+
 def head(nr, titel, small=False):
+    nr = shownr(nr)
     n = f'<span class="nr">{nr}</span>' if nr else ''
     return f'<div class="sh{" small" if small else ""}">{n}<h2>{titel}</h2></div>'
 
@@ -159,6 +164,7 @@ def cards(items):
     return '<div class="cards">' + "".join(f'<div class="card"><b class="h">{h}</b>{t}</div>' for h, t in items) + "</div>"
 
 def kolla(nr, qs):
+    nr = shownr(nr)
     return f'<div class="kolla"><span class="kr">Kolla dig själv {nr}</span><ol>' + "".join(f"<li>{q}</li>" for q in qs) + "</ol></div>"
 
 def table(head_, rows, cls="tbl"):

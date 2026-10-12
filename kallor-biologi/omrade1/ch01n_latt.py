@@ -71,7 +71,7 @@ DELAR = [
        ("streck", "Vad forskar biologerna om? Dra streck.", ["Zoolog", "Botaniker", "Marinbiolog", "Mikrobiolog"], ["växter", "små organismer, som bakterier", "djur", "livet i havet"]),
        ("fyll", ["labb", "naturen", "kropp"], ["Biologer kan arbeta ute i ______________.", "Biologer kan också arbeta inne i ett ______________.", "Biologer forskar också om människans ______________."])]),
 
- dict(titel="1.1.1 Från fråga till plan", prog="Delområde 1.1 · Moment 1.1.1",
+ dict(titel="Från fråga till plan", prog="Delområde 1.1 · Från fråga till plan",
   fore=["Forskare börjar med en fråga. Men alla frågor går inte att undersöka.", "En fråga som går att undersöka kallas en <strong>undersökningsbar fråga</strong>. Man kan svara på den genom att <strong>mäta</strong> eller <strong>titta</strong>."] + [TB_FRAGA]
        + ["Sedan gissar forskaren vad svaret blir. Det kallas en <strong>hypotes</strong>. Man skriver också varför man tror det.", "Forskare arbetar i steg. Stegen går runt i en cirkel."],
   fig="l_cykel.png",
@@ -86,7 +86,7 @@ DELAR = [
        ("kryssa", "Vad gör du i labbet? Kryssa i rätt rutor.", ["Läser hela instruktionen först", "Äter godis", "Frågar om jag är osäker", "Springer runt"]),
        ("skriv", "Varför ska man bara ändra en sak i ett test?", "Man ska bara ändra en sak eftersom", 2)]),
 
- dict(titel="1.1.2 Dokumentera", prog="Delområde 1.1 · Moment 1.1.2",
+ dict(titel="Dokumentera", prog="Delområde 1.1 · Dokumentera",
   fore=["När du mäter ska du skriva ner värdena direkt. Använd en <strong>tabell</strong>.", "Tabellen ska ha rubriker. Skriv också enhet, till exempel mm eller s.", "<span class='fake'>Påhittade siffror</span> Så här kan Ellas tabell se ut:", TB_MAT],
   fig="l_stapel.png", figw="55%",
   efter=["Ett <strong>diagram</strong> gör siffrorna lätta att jämföra. Ella ritar ett stapeldiagram.", "Ett bra diagram har <strong>rubrik</strong>. Axlarna har namn och enhet. Staplarna har namn.",
@@ -97,7 +97,7 @@ DELAR = [
        ("siffror", "Sätt delarna av rapporten i rätt ordning. Skriv 1, 2, 3 och 4.", ["Slutsats", "Fråga", "Resultat", "Så gjorde vi"]),
        ("fyll", ["tabell", "rubrik", "enhet"], ["Man skriver värdena i en ______________.", "Ett diagram ska ha en ______________.", "Efter siffran skriver man en ______________, till exempel mm."])]),
 
- dict(titel="1.1.3 Värdera", prog="Delområde 1.1 · Moment 1.1.3",
+ dict(titel="Värdera", prog="Delområde 1.1 · Värdera",
   fore=["Ett resultat kan bli fel. Det beror på <strong>felkällor</strong>.", TB_FEL, "<strong>Slump</strong> är sådant som bara händer. Därför gör man om testet flera gånger. Då blir resultatet säkrare."],
   fig="l_stapel.png", figw="55%",
   efter=["Slutsatsen ska stämma med resultatet.", "<strong>Ellas slutsats:</strong> Krassen blir högre i mörker. Den växer på höjden för att leta efter ljus. Men den mår bäst i ljus.",
@@ -119,7 +119,7 @@ DELAR = [
        ("skriv", "Vad blev din slutsats? Svara på frågan: Hur snabb är din reaktion?", "Min reaktionstid var ungefär", 2),
        ("skriv", "Nämn en felkälla. Vad kunde ha blivit fel?", "En felkälla är", 2)]),
 
- dict(titel="1.2.1 Vad kan vetenskap pröva?", prog="Delområde 1.2 · Moment 1.2.1",
+ dict(titel="Vad kan vetenskap pröva?", prog="Delområde 1.2 · Vad kan vetenskap pröva?",
   fore=["Ett <strong>påstående</strong> är något man säger är sant.", "Vetenskap kan pröva ett påstående om det går att mäta eller titta. Det man mäter eller ser kallas <strong>belägg</strong>.", "En <strong>åsikt</strong> är vad någon tycker. Åsikter går inte att mäta. Därför kan vetenskapen inte pröva dem.", TB_PROVA],
   fig=None,
   efter=["<h3>Pseudovetenskap</h3>", "Ibland låter något som vetenskap, men det finns inga belägg. Det kallas <strong>pseudovetenskap</strong>.", "Horoskopet säger att ditt stjärntecken styr hur du är. Forskare har testat det. De har inte hittat belägg."],
@@ -129,7 +129,7 @@ DELAR = [
        ("fyll", ["belägg", "åsikt", "pseudovetenskap"], ["Mätningar som visar något kallas ______________.", "Det man tycker kallas en ______________.", "Det som låter som vetenskap men saknar belägg kallas ______________."]),
        ("skriv", "Hur kan man pröva påståendet: Hundar har bättre luktsinne än människor?", "Man kan", 2)]),
 
- dict(titel="1.2.2 När forskare ändrat sig", prog="Delområde 1.2 · Moment 1.2.2",
+ dict(titel="När forskare ändrat sig", prog="Delområde 1.2 · När forskare ändrat sig",
   fore=["Forskare förklarar hur saker fungerar. En förklaring kallas en <strong>modell</strong>.", "Om nya undersökningar visar något annat, ändrar forskarna modellen. Här är tre exempel."],
   sub1=("Pasteur och kolven (1861)", ["Förr trodde många att <strong>mikroorganismer</strong>, alltså mycket små organismer, kunde uppstå av sig själva i mat.", "Pasteur kokade buljong i en kolv med lång böjd hals. Damm fastnade i böjen. Buljongen förblev klar.", "Slutsats: små organismer kommer utifrån. De uppstår inte av sig själva."], "v_pasteur.png"),
   sub2=("Semmelweis och händerna (1847)", ["I Wien dog många mammor efter förlossningen i barnsängsfeber. Det dog fler på läkarklinikens avdelning än på barnmorskornas.", "Läkarna hade rört vid döda kroppar. Semmelweis trodde att något följde med händerna. Från 1847 skulle alla tvätta händerna i klorkalklösning.", "Dödligheten sjönk från 11,4 % till 1,3 %. Men många läkare trodde inte på honom."], "f_semmelweis2.png"),
@@ -141,7 +141,7 @@ DELAR = [
        ("fyll", ["modell", "belägg", "bakterie"], ["En förklaring kallas en ______________.", "Marshall och Warren hittade en ______________ i magsäcken.", "Forskare ändrar sig när de får nya ______________."]),
        ("skriv", "Varför ändrade forskarna sig i de tre exemplen?", "De ändrade sig eftersom", 2)]),
 
- dict(titel="1.2.3 Söka information och bedöma källor", prog="Delområde 1.2 · Moment 1.2.3",
+ dict(titel="Söka information och bedöma källor", prog="Delområde 1.2 · Söka information och bedöma källor",
   fore=["När du söker på nätet: använd flera sökord. Till exempel <em>sömn tonåringar forskning</em>.", "En <strong>källa</strong> är där informationen kommer ifrån. <strong>Avsändaren</strong> är den som har skrivit eller gjort texten. Fråga dig:", "<strong>Trovärdig</strong> betyder att man kan lita på den. <strong>Relevant</strong> betyder att den passar din fråga."],
   fig="l_fyra.png",
   efter=["Fråga också: Finns det <strong>belägg</strong>? Reklam har ofta inga belägg. Den vill sälja.", TB_CHECK, ARG],
@@ -186,24 +186,24 @@ TILL_TIPS = "Tips: läs gärna texten högt tillsammans, eller låt eleven lyssn
 HANDLEDNING_HTML = """
 <h3>Handledning per moment</h3>
 <h3 class="mm">Start. Vad är biologi? (ca 15 min)</h3><p class="hl"><b>Mål:</b> eleven vet att biologi är läran om allt som lever. <b>Tips:</b> låt eleverna berätta vilken sorts biolog de själva skulle vilja vara.</p>
-<h3 class="mm">1.1.1 Från fråga till plan</h3><p class="hl"><b>E-mål:</b> eleven kan avgöra om en fråga går att undersöka, vet att man ändrar en sak åt gången och nämner några säkerhetsregler. <b>Vanligt fel:</b> eleverna ändrar flera saker samtidigt (till exempel både ljus och placering). Be dem peka ut vad som ska vara lika. <b>Kommentar:</b> hypotesen ska innehålla ett ”eftersom”.</p>
-<h3 class="mm">1.1.2 Dokumentera</h3><p class="hl"><b>E-mål:</b> eleven fyller i en tabell med rubriker och enheter och ritar ett diagram med rubrik och benämnda axlar. <b>Vanligt fel:</b> enhet saknas, axlar utan namn, staplar utan namn. <b>Kommentar:</b> låt eleverna rita för hand, så ser du direkt vad som saknas.</p>
-<h3 class="mm">1.1.3 Värdera</h3><p class="hl"><b>E-mål:</b> eleven nämner en felkälla och förklarar varför man upprepar ett försök. <b>Vanligt fel:</b> eleverna tror att ett försök där hypotesen var fel är misslyckat. <b>Kommentar:</b> skillnaden mellan slump och systematiskt fel kommer först i grundtexten.</p>
+<h3 class="mm">Från fråga till plan</h3><p class="hl"><b>E-mål:</b> eleven kan avgöra om en fråga går att undersöka, vet att man ändrar en sak åt gången och nämner några säkerhetsregler. <b>Vanligt fel:</b> eleverna ändrar flera saker samtidigt (till exempel både ljus och placering). Be dem peka ut vad som ska vara lika. <b>Kommentar:</b> hypotesen ska innehålla ett ”eftersom”.</p>
+<h3 class="mm">Dokumentera</h3><p class="hl"><b>E-mål:</b> eleven fyller i en tabell med rubriker och enheter och ritar ett diagram med rubrik och benämnda axlar. <b>Vanligt fel:</b> enhet saknas, axlar utan namn, staplar utan namn. <b>Kommentar:</b> låt eleverna rita för hand, så ser du direkt vad som saknas.</p>
+<h3 class="mm">Värdera</h3><p class="hl"><b>E-mål:</b> eleven nämner en felkälla och förklarar varför man upprepar ett försök. <b>Vanligt fel:</b> eleverna tror att ett försök där hypotesen var fel är misslyckat. <b>Kommentar:</b> skillnaden mellan slump och systematiskt fel kommer först i grundtexten.</p>
 <h3 class="mm">Labb 1.1 Reaktionstid (45 min)</h3><p class="hl"><b>Material:</b> linjal 30 cm, penna, papper. <b>Förväntat:</b> de flesta hamnar på ca 15–25 cm, alltså ca 0,17–0,23 s (tabellen räknar med t = √(2·s/g), g = 9,81 m/s²). <b>Vanliga fel:</b> eleven ser kompisens hand och förutser släppet; linjalen hålls sned; noll ligger inte vid fingrarna. <b>Redovisning:</b> klassens värden, inte personliga. <b>Bonuslabb:</b> jämför höger och vänster hand, eller före och efter några minuters övning. Tala om vad som kan förklara skillnaden.</p>
-<h3 class="mm">1.2.1 Vad kan vetenskap pröva?</h3><p class="hl"><b>E-mål:</b> eleven skiljer påståenden som går att pröva från åsikter och vet vad belägg är. <b>Vanligt fel:</b> eleverna tror att ”pröva” betyder ”bevisa att det är sant”. Ett påstående kan visa sig vara fel. <b>Kommentar:</b> horoskopet är bara ett exempel. Astrologer fick i ett dubbelblint test (Carlson, Nature 1985) para ihop födelsehoroskop med personlighetsprofiler och lyckades inte bättre än slumpen. Välj gärna egna exempel från klassen.</p>
-<h3 class="mm">1.2.2 När forskare ändrat sig</h3><p class="hl"><b>E-mål:</b> eleven kan para ihop forskare och upptäckt och förklara att nya belägg kan ändra en modell. <b>Källor:</b> siffrorna för Semmelweis är från MJA 2018; Marshalls självförsök 1984 och Nobelpriset 2005 enligt Nobelstiftelsen och PMC. <b>Kommentar:</b> betona att Marshalls självförsök inte är något man ska göra.</p>
-<h3 class="mm">1.2.3 Söka information och bedöma källor</h3><p class="hl"><b>E-mål:</b> eleven ställer frågorna vem, varför, belägg, nytt och fler källor till en källa och förklarar trovärdig och relevant. <b>Argumentation:</b> rutan ”Så argumenterar du” är den enkla mallen som används även i labben. Kunskapskraven kräver argumentation redan på E-nivå. <b>Vanligt fel:</b> eleverna blandar ihop trovärdig (går att lita på) och relevant (passar frågan).</p>
+<h3 class="mm">Vad kan vetenskap pröva?</h3><p class="hl"><b>E-mål:</b> eleven skiljer påståenden som går att pröva från åsikter och vet vad belägg är. <b>Vanligt fel:</b> eleverna tror att ”pröva” betyder ”bevisa att det är sant”. Ett påstående kan visa sig vara fel. <b>Kommentar:</b> horoskopet är bara ett exempel. Astrologer fick i ett dubbelblint test (Carlson, Nature 1985) para ihop födelsehoroskop med personlighetsprofiler och lyckades inte bättre än slumpen. Välj gärna egna exempel från klassen.</p>
+<h3 class="mm">När forskare ändrat sig</h3><p class="hl"><b>E-mål:</b> eleven kan para ihop forskare och upptäckt och förklara att nya belägg kan ändra en modell. <b>Källor:</b> siffrorna för Semmelweis är från MJA 2018; Marshalls självförsök 1984 och Nobelpriset 2005 enligt Nobelstiftelsen och PMC. <b>Kommentar:</b> betona att Marshalls självförsök inte är något man ska göra.</p>
+<h3 class="mm">Söka information och bedöma källor</h3><p class="hl"><b>E-mål:</b> eleven ställer frågorna vem, varför, belägg, nytt och fler källor till en källa och förklarar trovärdig och relevant. <b>Argumentation:</b> rutan ”Så argumenterar du” är den enkla mallen som används även i labben. Kunskapskraven kräver argumentation redan på E-nivå. <b>Vanligt fel:</b> eleverna blandar ihop trovärdig (går att lita på) och relevant (passar frågan).</p>
 <h3 class="mm">Labb 1.2 Granska ett påstående (45 min)</h3><p class="hl"><b>Påståenden:</b> (1) Att vi bara använder tio procent av hjärnan är en myt: hjärnavbildning (PET och fMRI) visar att alla delar av hjärnan är aktiva, även under sömn. (2) Socker gör barn hyperaktiva: dubbelblinda studier och en sammanställning av Wolraich m.fl. har inte visat något sådant samband. (3) Blixten kan slå ned flera gånger på samma plats: höga byggnader som Empire State Building träffas flera gånger varje år (NOAA/National Weather Service). <b>Källor:</b> Scientific American (tio-procentsmyten), Wolraich m.fl., JAMA 1995 (sammanställning av 23 studier om socker), NOAA/National Weather Service (blixt). Kontrollera gärna mot aktuella källor före lektionen. <b>Bedömningsstöd E:</b> eleven använder minst en frågeställning om källan, nämner ett belägg och drar en slutsats. <b>Bonuslabb:</b> låt eleverna hitta ett eget påstående från sociala medier och granska det.</p>
 """
 FACIT = [
  "<b>Start:</b> 1) Allt som lever. 2) Zoolog – djur; Botaniker – växter; Marinbiolog – livet i havet; Mikrobiolog – små organismer, som bakterier. 3) naturen, labb, kropp.",
- "<b>1.1.1:</b> 1) Hur långt hoppar en groda? 2) Det Ella ändrar – ljuset; mäter – hur hög krassen blir; lika – jord och vatten. 3) Samma jord, lika mycket vatten, lika många frön. 4) Läser hela instruktionen först, frågar om jag är osäker. 5) Då vet man vad som orsakade skillnaden.",
- "<b>1.1.2:</b> 1) Höjd (mm). 2) Stapeldiagram med rubrik, axlar med namn och enhet (cm), staplarna 12 och 8. 3) Slutsats 4, Fråga 1, Resultat 3, Så gjorde vi 2. 4) tabell, rubrik, enhet.",
- "<b>1.1.3:</b> 1) En felkälla. 2) Sant, falskt, sant. 3) felkälla, flera, Slutsatsen. 4) Då är det mindre troligt att resultatet bara var en slump.",
+ "<b>Från fråga till plan:</b> 1) Hur långt hoppar en groda? 2) Det Ella ändrar – ljuset; mäter – hur hög krassen blir; lika – jord och vatten. 3) Samma jord, lika mycket vatten, lika många frön. 4) Läser hela instruktionen först, frågar om jag är osäker. 5) Då vet man vad som orsakade skillnaden.",
+ "<b>Dokumentera:</b> 1) Höjd (mm). 2) Stapeldiagram med rubrik, axlar med namn och enhet (cm), staplarna 12 och 8. 3) Slutsats 4, Fråga 1, Resultat 3, Så gjorde vi 2. 4) tabell, rubrik, enhet.",
+ "<b>Värdera:</b> 1) En felkälla. 2) Sant, falskt, sant. 3) felkälla, flera, Slutsatsen. 4) Då är det mindre troligt att resultatet bara var en slump.",
  "<b>Labb 1.1:</b> 1) fem, tabell, cm. 2) Eget diagram. 3) T.ex. ”ungefär 0,2 s”. 4) T.ex. att man såg kompisens hand eller att linjalen hölls sned.",
- "<b>1.2.1:</b> 1) Kaniner springer fortare än sköldpaddor. Vatten kokar vid 100 °C. 2) Mätningar och observationer. 3) belägg, åsikt, pseudovetenskap. 4) T.ex. testa med lukter och se vilka som hittar dem.",
- "<b>1.2.2:</b> 1) Pasteur – små organismer kommer utifrån; Semmelweis – handtvätt minskar dödsfall; Marshall och Warren – magsår kommer av en bakterie. 2) Den sjönk. 3) modell, bakterie, belägg. 4) Nya undersökningar gav nya belägg.",
- "<b>1.2.3:</b> 1) Vem? – vem har skrivit texten; Varför? – vill de sälja något; När? – är texten gammal; Fler källor? – står det på fler ställen. 2) Det är nog inte sant. 3) trovärdig, relevant, belägg. 4) Kolla vem som skrivit, om de vill sälja något, om det finns belägg och om fler källor säger samma sak.",
+ "<b>Vad kan vetenskap pröva?:</b> 1) Kaniner springer fortare än sköldpaddor. Vatten kokar vid 100 °C. 2) Mätningar och observationer. 3) belägg, åsikt, pseudovetenskap. 4) T.ex. testa med lukter och se vilka som hittar dem.",
+ "<b>När forskare ändrat sig:</b> 1) Pasteur – små organismer kommer utifrån; Semmelweis – handtvätt minskar dödsfall; Marshall och Warren – magsår kommer av en bakterie. 2) Den sjönk. 3) modell, bakterie, belägg. 4) Nya undersökningar gav nya belägg.",
+ "<b>Söka information och bedöma källor:</b> 1) Vem? – vem har skrivit texten; Varför? – vill de sälja något; När? – är texten gammal; Fler källor? – står det på fler ställen. 2) Det är nog inte sant. 3) trovärdig, relevant, belägg. 4) Kolla vem som skrivit, om de vill sälja något, om det finns belägg och om fler källor säger samma sak.",
  "<b>Labb 1.2:</b> Egna svar. Se bedömningsstödet i handledningen.",
  "<b>Testa dig:</b> 1) Botaniker. 2) Hypotes – det man tror blir svaret, och varför; Resultat – det man mäter eller ser; Slutsats – det man lär sig; Belägg – mätningar som visar något. 3) Falskt, falskt, sant, falskt. 4) Hur högt hoppar en groda? 5) Ändra temperaturen. Lika: sorts bönor, antal, vatten, jord, ljus. 6) Göra om testet flera gånger, med fler bönor. 7) Den sjönk (från 11,4 % till 1,3 %). 8) T.ex. kolla vem som står bakom, om de vill sälja, och om pålitliga källor säger samma sak.",
 ]

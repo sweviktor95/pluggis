@@ -40,7 +40,7 @@ add("Start", "Vad är biologi?", f"Kapitel {NR} · {NAMN} · Start",
  + kolla("Start", ["Vad betyder ordet biologi?", "Vad menas med att en undersökning är systematisk?", "Välj två av biologerna i bild 1.1. Ge ett exempel på en fråga som var och en kan undersöka."]))
 
 # ------------------------------------------------------------------ 1.1.1
-add("1.1.1", "Från fråga till plan", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · 1.1.1 Från fråga till plan",
+add("1.1.1", "Från fråga till plan", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · Från fråga till plan",
  "<p>All forskning börjar med nyfikenhet. Men en bra undersökning börjar med en <strong class='green'>undersökningsbar fråga</strong>: en fråga som går att besvara med mätningar eller observationer. ”Är solrosor fina?” är en åsikt. ”Hur mycket växer en solros på en vecka?” går att mäta.</p>"
  + table(["Går inte att undersöka", "Går att undersöka", "Varför är den bättre?"],
          [["Är musik bra när man pluggar?", "Kommer man ihåg fler ord efter att ha lyssnat på musik än efter tystnad?", "Den säger vad som ska mätas (antal ord) och vad som ska jämföras."],
@@ -66,7 +66,7 @@ add("1.1.1", "Från fråga till plan", f"Kapitel {NR} · Delområde 1.1 {DELOMR[
  + kolla("1.1.1", ["Gör frågan ”Är hundar snälla?” om till en undersökningsbar fråga.", "Vad är skillnaden mellan oberoende och beroende variabel?", "Varför behövs en kontrollgrupp?", "Varför får man bara ändra en variabel åt gången?"]))
 
 # ------------------------------------------------------------------ 1.1.2
-add("1.1.2", "Dokumentera", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · 1.1.2 Dokumentera",
+add("1.1.2", "Dokumentera", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · Dokumentera",
  "<p>Under försöket mäter klassen krassen varje dag och skriver direkt ner värdena i en <strong class='green'>tabell</strong>. Tabellen ska ha rubriker, och efter varje mått ska enheten stå, till exempel mm eller s. När försöket är klart räknar man ut <strong class='green'>medelvärdet</strong> för varje grupp: lägg ihop alla värden och dela med antalet värden.</p>"
  + roww(table(["Dag", "1", "3", "5", "7"], [["A · ljus (mm)", "5", "15", "28", "40"], ["B · mörker (mm)", "5", "25", "42", "60"]], "tbl num")
         + '<p class="cap" style="margin-top:-4pt"><b>Tabell 1.1</b> <span class="fake">Påhittade värden</span> Krassens medelhöjd i klassens försök.</p>'
@@ -80,7 +80,7 @@ add("1.1.2", "Dokumentera", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · 
  + kolla("1.1.2", ["Vad ska en tabell innehålla?", "När passar ett stapeldiagram och när ett linjediagram?", "Räkna ut medelvärdet av 12, 14 och 13 mm.", "Vilka delar ingår i en rapport?"]))
 
 # ------------------------------------------------------------------ 1.1.3
-add("1.1.3", "Värdera", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · 1.1.3 Värdera",
+add("1.1.3", "Värdera", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · Värdera",
  "<p>En forskare frågar sig alltid: Kan jag lita på resultatet? Mätte vi rätt sak? Ett resultat kan bli fel på flera sätt. Sådant som kan ha påverkat resultatet utan att vi ville det kallas <strong class='green'>felkällor</strong>.</p>"
  + table(["Typ av felkälla", "Exempel i krassförsöket", "Vad hjälper?"],
          [["Slump", "En krasse får av en slump dålig jord. Någon läser av linjalen lite olika varje gång.", "Fler mätningar och upprepning. Slumpen jämnar då ut sig."],
@@ -107,7 +107,7 @@ add("Labb", "1.1 Reaktionstid som rättvist försök", f"Kapitel {NR} · Delomr�
  + '<p class="note">Säkerhet: låg risk. Sitt eller stå stadigt. Redovisa klassens värden, inte personliga.</p>')
 
 # ------------------------------------------------------------------ 1.2.1
-add("1.2.1", "Vad kan vetenskap pröva?", f"Kapitel {NR} · Delområde 1.2 {DELOMR['1.2']} · 1.2.1 Vad kan vetenskap pröva?",
+add("1.2.1", "Vad kan vetenskap pröva?", f"Kapitel {NR} · Delområde 1.2 {DELOMR['1.2']} · Vad kan vetenskap pröva?",
  "<p>Ett <strong class='green'>påstående</strong> är något man säger är sant. Naturvetenskapen kan pröva ett påstående om det går att undersöka med mätningar eller observationer. Det man mäter eller ser kallas <strong class='green'>belägg</strong>. Vi skiljer mellan tre saker:</p>"
  + cards4([("Belägg", "Mätningar och observationer som andra kan kontrollera. Exempel: vatten fryser vid 0 °C."), ("Åsikt", "Vad någon tycker. Går inte att mäta. Exempel: pizza är godast."), ("Tro", "Något man är övertygad om utan att det kan prövas. Vetenskapen kan varken bevisa eller motbevisa det.")]).replace("repeat(3,1fr)", "repeat(3,1fr)")
  + table(["Påstående", "Går det att pröva?", "Hur?"],
@@ -125,7 +125,7 @@ add("1.2.1", "Vad kan vetenskap pröva?", f"Kapitel {NR} · Delområde 1.2 {DELO
  + kolla("1.2.1", ["Vad är skillnaden mellan belägg och åsikt?", "Varför kan man inte pröva ”Det är fel att jaga varg” med bara mätningar?", "Ge två kännetecken på pseudovetenskap."]))
 
 # ------------------------------------------------------------------ 1.2.2
-add("1.2.2", "När forskare ändrat sig", f"Kapitel {NR} · Delområde 1.2 {DELOMR['1.2']} · 1.2.2 När forskare ändrat sig",
+add("1.2.2", "När forskare ändrat sig", f"Kapitel {NR} · Delområde 1.2 {DELOMR['1.2']} · När forskare ändrat sig",
  "<p>En <strong class='green'>förklaringsmodell</strong> är ett sätt att förklara hur något fungerar. En modell är en förenkling av verkligheten. Den är användbar så länge den hjälper oss att förstå och förutsäga, men den kan behöva ändras när nya undersökningar visar något annat. Här är tre exempel.</p>"
  + "<h3>Pasteur och svanhalskolven (1861)</h3>"
  + roww("<p>Förr trodde många att <strong class='green'>mikroorganismer</strong> kunde uppstå av sig själva i mat som stod framme. Louis Pasteur kokade buljong i två sorters glaskolvar. Kolv A hade ett rakt rör, så att damm och mikroorganismer från luften kunde falla ner. Där blev buljongen grumlig. Kolv B hade en lång, böjd ”svanhals”. Luft kom in, men dammet fastnade i böjen och buljongen förblev klar.</p>"
@@ -145,7 +145,7 @@ add("1.2.2", "När forskare ändrat sig", f"Kapitel {NR} · Delområde 1.2 {DELO
  + kolla("1.2.2", ["Vad visade Pasteurs svanhalskolv?", "Vad var beläggen för Semmelweis idé?", "Varför trodde många inte på honom?", "Vad menas med att en modell är en förenkling? Ge ett exempel."]))
 
 # ------------------------------------------------------------------ 1.2.3
-add("1.2.3", "Söka information och bedöma källor", f"Kapitel {NR} · Delområde 1.2 {DELOMR['1.2']} · 1.2.3 Söka information och bedöma källor",
+add("1.2.3", "Söka information och bedöma källor", f"Kapitel {NR} · Delområde 1.2 {DELOMR['1.2']} · Söka information och bedöma källor",
  "<p>Varje dag möter du påståenden om hälsa, mat, djur och miljö: i sociala medier, reklam, nyheter och samtal. Att söka bra information börjar med att använda flera sökord, till exempel <em>sömn tonåringar forskning</em>, och att jämföra flera källor. Sedan måste du bedöma källorna.</p>"
  + table(["Typ av källa", "Exempel", "Styrka", "Se upp med"],
          [["Myndighet", "Folkhälsomyndigheten, Naturvårdsverket, 1177", "Faktagranskad, oberoende", "Kan vara allmänt hållen"], ["Forskning", "Universitet, vetenskaplig artikel", "Granskad av andra experter", "En enda studie räcker inte. Kan vara svår att läsa"],
@@ -206,25 +206,25 @@ FACIT = ["B", "B", "B",
  "a) Både temperatur och ljus skiljer sig (fönster ljust, kylskåp mörkt). b) Båda i samma ljus eller båda i mörker; håll vatten och antal bönor lika; flera bönor.",
  "a) Tendens (företaget säljer), beroende (ingen källa till ”vetenskapligt utvecklat”), en persons upplevelse är inget belägg. b) Testa plåster på flera personer och ett rent plåster som kontroll, eller på ett plåster som bara fått fukt. Brunfärgningen kan bero på fukt.",
  "T.ex. Pasteur: fanns idén att liv uppstår av sig själv; svanhalskolven visade att mikroorganismer kommer utifrån. Semmelweis: dödligheten sjönk efter handtvätt men man visste inte varför. Marshall och Warren: bakterie i magsäcken, få trodde, Marshalls självförsök, antibiotika botar, Nobelpriset 2005. Ett välutvecklat svar förklarar varför belägg och förklaringsmodell behövdes."]
-LGR = ("Området täcker det centrala innehållet ”Systematiska undersökningar och granskning av information” i årskurs 7–9: fältstudier och experiment (1.1.1, labb 1.1), planering, utförande, värdering och dokumentation med tabeller och diagram (1.1.1–1.1.3), "
-       "sambandet mellan undersökningar och förklaringsmodellers framväxt och föränderlighet (1.2.2), informationssökning och kritisk granskning (1.2.3, labb 1.2) samt argumentation (1.2.3, labb 1.2). Kursplanens långsiktiga mål att genomföra systematiska undersökningar och använda biologi för att granska information tränas hela området. "
+LGR = ("Området täcker det centrala innehållet ”Systematiska undersökningar och granskning av information” i årskurs 7–9: fältstudier och experiment (Från fråga till plan, labb 1.1), planering, utförande, värdering och dokumentation med tabeller och diagram (Dokumentera, Värdera), "
+       "sambandet mellan undersökningar och förklaringsmodellers framväxt och föränderlighet (när forskare ändrat sig), informationssökning och kritisk granskning (Söka information och bedöma källor, labb 1.2) samt argumentation (samma moment, labb 1.2). Kursplanens långsiktiga mål att genomföra systematiska undersökningar och använda biologi för att granska information tränas hela området. "
        "Begreppen följer Skolverkets kommentarmaterial: oberoende och beroende variabel, felkällor, tillförlitlighet och giltighet, samt trovärdighet och relevans i källkritiken.")
 FAKTA = ("Krass- och tabellvärden är exempelvärden för undervisning. Faktakontrollerat mot: Semmelweis, MJA 2018 (11,4 % år 1846; andra avdelningen 2,8 %, Wikipedia efter Semmelweis egna siffror, 1,3 % år 1848, Kolletschka 1847); Pasteur, Britannica och Memorial University (svanhalskolv, 1861); Marshall och Warren, Nobelstiftelsen 2005 och PMC2661189 (upptäckt 1982, självförsök 1984); "
          "Carlson, Nature 1985 (28 astrologer, ej bättre än slump). Reaktionstidstabellen är räknad med t = √(2s/g). Se kallor-omrade1.md. · Illustrationer: egenritade.")
 HANDLEDNING_HTML = """<h3>Handledning per moment (grundtext)</h3>
 <p><b>Start (ca 15 min).</b> Mål: eleven vet vad biologi är och att organismer är allt levande. Låt eleverna berätta vilken biolog de skulle vilja vara.</p>
-<p><b>1.1.1 Från fråga till plan.</b> C-mål: oberoende, beroende och kontrollerade variabler samt kontrollgrupp. Vanligt fel: eleverna blandar ihop oberoende och beroende. Hjälp: ”det jag ändrar” / ”det jag mäter”. Låt eleverna omformulera ”åsiktsfrågor” till undersökningsbara.</p>
-<p><b>1.1.2 Dokumentera.</b> C-mål: välja diagramtyp och motivera, räkna medelvärde, läsa av diagram. Vanligt fel: linjediagram för jämförelse av två grupper, saknade enheter.</p>
-<p><b>1.1.3 Värdera.</b> C-mål: skilja slump från systematiskt fel och förklara hur upprepning hjälper. Slutsatsen ska svara på frågan. Fördjupning ligger i fördjupningstexten.</p>
+<p><b>Från fråga till plan.</b> C-mål: oberoende, beroende och kontrollerade variabler samt kontrollgrupp. Vanligt fel: eleverna blandar ihop oberoende och beroende. Hjälp: ”det jag ändrar” / ”det jag mäter”. Låt eleverna omformulera ”åsiktsfrågor” till undersökningsbara.</p>
+<p><b>Dokumentera.</b> C-mål: välja diagramtyp och motivera, räkna medelvärde, läsa av diagram. Vanligt fel: linjediagram för jämförelse av två grupper, saknade enheter.</p>
+<p><b>Värdera.</b> C-mål: skilja slump från systematiskt fel och förklara hur upprepning hjälper. Slutsatsen ska svara på frågan. Fördjupning ligger i fördjupningstexten.</p>
 <p><b>Labb 1.1 Reaktionstid (45 min).</b> Material: linjal 30 cm. Förväntat: ca 15–25 cm, alltså 0,17–0,23 s (t = √(2s/g)). Vanliga fel: eleven ser kompisens hand, linjalen hålls sned, startläget ändras. Redovisa klassens värden. Bonuslabb: se sist i lärarhandledningen.</p>
-<p><b>1.2.1 Vad kan vetenskap pröva?</b> C-mål: skilja belägg, åsikt och tro; förstå att ett påstående måste kunna visa sig vara fel. Horoskopexemplet: Carlson, Nature 1985. Vanligt fel: ”pröva” uppfattas som ”bevisa sant”.</p>
-<p><b>1.2.2 När forskare ändrat sig.</b> C-mål: förstå vad som var belägget i varje fall och att en modell är en förenkling. Kommentar: Semmelweis siffror är från MJA 2018. Betona att Marshalls självförsök inte är något att efterlikna.</p>
-<p><b>1.2.3 Söka information och bedöma källor.</b> C-mål: olika källtyper, trovärdig kontra relevant, de fyra kriterierna samt ett enkelt argument med motargument.</p>
+<p><b>Vad kan vetenskap pröva?</b> C-mål: skilja belägg, åsikt och tro; förstå att ett påstående måste kunna visa sig vara fel. Horoskopexemplet: Carlson, Nature 1985. Vanligt fel: ”pröva” uppfattas som ”bevisa sant”.</p>
+<p><b>När forskare ändrat sig.</b> C-mål: förstå vad som var belägget i varje fall och att en modell är en förenkling. Kommentar: Semmelweis siffror är från MJA 2018. Betona att Marshalls självförsök inte är något att efterlikna.</p>
+<p><b>Söka information och bedöma källor.</b> C-mål: olika källtyper, trovärdig kontra relevant, de fyra kriterierna samt ett enkelt argument med motargument.</p>
 <p><b>Labb 1.2 Granska ett påstående (45 min).</b> Facit: (1) Tio-procentsmyten stämmer inte: PET och fMRI visar aktivitet i alla hjärnområden, även under sömn. (2) Kontrollerade studier (Wolraich m.fl.) visar inget samband mellan socker och hyperaktivitet hos barn. (3) Blixten kan slå ned flera gånger på samma plats; höga byggnader som Empire State Building träffas flera gånger varje år (NOAA/National Weather Service). Bedömning: C kräver motiverad bedömning av trovärdighet och relevans samt ett argument med bemött motargument.</p>"""
 BONUS = dict(
  titel="Hjälper musik minnet?",
  ingress="En kontrollerad undersökning med minnestest. Eleverna väljer själva hur de testar om musik påverkar hur många ord man minns.",
- syfte="Eleverna planerar och genomför en egen undersökning med variabler, upprepning och värdering. Kopplar till 1.1.1–1.1.3.",
+ syfte="Eleverna planerar och genomför en egen undersökning med variabler, upprepning och värdering. Kopplar till momenten Från fråga till plan, Dokumentera och Värdera.",
  tid="40–60 minuter. Grupper om tre till fyra.",
  material=["Två ordlistor med 15 vardagliga ord (olika ord men lika svåra)", "Stoppur", "Valfri musik", "Papper"],
  genomf=["Gruppen formulerar frågeställning och hypotes.", "Hälften av gruppen lär sig lista A i tystnad och lista B med musik. Den andra hälften gör tvärtom, så att ordningen inte spelar roll.", "Titta på listan i 60 sekunder, vänd bort och skriv upp så många ord som möjligt.", "Räkna medelvärde per villkor och rita diagram."],

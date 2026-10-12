@@ -128,7 +128,7 @@ def first_page(M, variant, pages):
     under = M.UNDER
     toc = ""
     for nr, t, pg in pages:
-        toc += f'<div class="toc"><span>{nr}</span><span>{t}</span><span class="pgn">{pg}</span></div>'
+        toc += f'<div class="toc"><span>{shownr(nr)}</span><span>{t}</span><span class="pgn">{pg}</span></div>'
     lara = "".join(f"<li>{x}</li>" for x in M.MAL)
     return f"""<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(f'Kapitel {M.NR} · {M.NAMN}', 1)}
 @page{{margin:0}}
@@ -173,7 +173,7 @@ def build_vanlig(M, komplett=False):
         return '?'
     pages = []
     for nr, t, _ in secs:
-        pages.append((nr, t, find(nr + t)))
+        pages.append((nr, t, find(shownr(nr) + t)))
     if getattr(M, 'LAB_HTML', ''): pages.append(('', getattr(M,'LAB_TOC','Undersök: nedbrytning'), find(getattr(M,'LAB_FIND','Undersök: Var bryts'))))
     pages.append(('', 'Sammanfattning och begrepp', find('Sammanfattning')))
     a = find('Testa dig själv');
