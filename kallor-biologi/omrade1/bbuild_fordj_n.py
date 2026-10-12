@@ -19,7 +19,9 @@ html_to_pdf(doc(body, FOOT, 2, tab=M.TAB, extra=B.named_foot_css(getattr(M,'FOOT
 texts = page_texts(tmp)
 def find(s):
     for i, t in enumerate(texts):
-        if s in re.sub(r"\s+", " ", t[:400].replace("ﬂ","fl").replace("ﬁ","fi")): return i + 2
+        if s in re.sub(r"\s+", " ", t[:400].replace("ﬂ","fl").replace("ﬁ","fi").replace("ﬀ","ff")): return i + 2
+    for i, t in enumerate(texts):
+        if s in re.sub(r"\s+", " ", t[:900].replace("ﬂ","fl").replace("ﬁ","fi").replace("ﬀ","ff")): return i + 2
     return '?'
 pages = [('', t, find(t)) for nr, t, _ in M.S]
 a = find('Resonera och ta ställning'); pages.append(('', 'Resonera och ta ställning', f'{a}–{len(texts)+1}'))

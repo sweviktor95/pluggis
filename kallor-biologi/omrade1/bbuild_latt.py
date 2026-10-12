@@ -118,6 +118,8 @@ def lasa_page(i, d):
         if d.get('fig2'):
             h += fig(L.FIG + d['fig2'], w=d.get('fig2w', "70%"))
             for p in ef[k:]: h += (p if p.startswith(raw) else f"<p>{p}</p>")
+            for p in d.get('efter2', []): h += (p if p.startswith(raw) else f"<p>{p}</p>")
+            if d.get('fig3'): h += fig(L.FIG + d['fig3'], w=d.get('fig3w', "70%"))
     h += '</div>'
     h += f'<div class="kom"><span class="ex">!</span><div><span class="lb">KOM IHÅG</span><span class="tx">{d["kom"]}</span></div></div></section>'
     return h

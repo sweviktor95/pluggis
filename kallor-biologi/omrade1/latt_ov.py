@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Lättlästa övningar som interaktiva sajtövningar. Frågorna kommer från samma data som PDF:en (ch01n_latt.py);
 rätta svar är hämtade ur facit i lärarversionen."""
-import re
+import re, os
 
 # (delens titel eller "TEST", nr) -> rätt svar
 SVAR = {
@@ -47,11 +47,18 @@ SVAR = {
  ("TEST", 8): "Till exempel kolla vem som står bakom, om de vill sälja något och om pålitliga källor säger samma sak.",
 }
 
+if os.environ.get("CH") == "04n":
+    from latt_svar04 import SVAR  # kapitel 4 har egna svar
+
 def _gap(s): return re.sub(r"_{3,}", "§", s)
 
 def bygg(nyckel, n, e):
     """Gör om en övning (tuple ur ch01n_latt) till ett dict som sajten kan visa."""
     k = e[0]; s = SVAR.get((nyckel, n))
+    if k == "sortera":
+        return {"typ": "sf", "fraga": e[1].replace("Skriv L eller I i rutan.", "Svara sant eller falskt."), "pastaenden": [x + " är levande." for x in e[2]], "ratt": s}
+    if k == "skriv3":
+        return {"typ": "skriv2", "fraga": e[1], "falt": ["Steg 1:", "Steg 2:", "Steg 3:"], "forslag": s}
     if k == "ringa":
         return {"typ": "ringa", "fraga": e[1], "val": e[2], "ratt": s}
     if k == "streck":

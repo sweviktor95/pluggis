@@ -28,5 +28,10 @@ KOLLA = {
  "Granska ett påstående med hjälp av de fyra kriterierna.": "Äkthet: är källan äkta? Tid: är den aktuell? Beroende: har avsändaren själv undersökt eller bara hört det? Tendens: vill avsändaren sälja eller övertyga?",
  "Skriv ett kort argument om ett eget påstående, med belägg och motargument.": "Eget svar. Ett bra svar har ett påstående, ett belägg, ett motargument och ett bemötande. Exempel: ”Skolor bör ha rutiner för handtvätt. Handtvätt minskar smitta, som Semmelweis visade. Någon kan säga att det tar tid, men det är litet jämfört med dagar som sjuk.”",
 }
+try:
+    from svar_ov4 import KOLLA4
+    KOLLA.update(KOLLA4)
+except ImportError:
+    pass
 def kolla_objekt(q):
     return {"f": q, "svar": KOLLA[q]} if q in KOLLA else q

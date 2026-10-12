@@ -385,7 +385,9 @@ var struktur = [
               { id: "biologi-m-4-3-3", titel: "Konkurrens, jakt och samarbete" },
               { id: "biologi-m-4-3-l", titel: "Labb: Rovdjur–bytesmodell" }
             ]
-          }
+          },
+          { id: "biologi-m-4-s", titel: "Sammanfattning och begrepp" },
+          { id: "biologi-m-4-t", titel: "Testa dig själv" }
         ]
       },
       {

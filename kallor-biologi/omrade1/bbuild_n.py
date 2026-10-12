@@ -143,7 +143,7 @@ body{{margin:0}}
 .lar{{background:#e7eef5;border-radius:6pt;padding:9pt 11pt;font:9.4pt/1.35 Carlito}}
 .lar .rb{{font:700 8pt Carlito;letter-spacing:1pt;color:#2b5d7a;margin-bottom:5pt;display:block}}
 .lar ul{{margin:0;padding-left:11pt}}.lar li{{margin:0 0 3pt}}
-.toc{{display:grid;grid-template-columns:44pt 1fr 38pt;font:9.6pt Carlito;padding:3pt 0;border-bottom:.5pt dotted #aaa}}
+.toc{{display:grid;grid-template-columns:30pt 1fr 34pt;font:9.4pt Carlito;padding:2pt 0;border-bottom:.5pt dotted #aaa}}
 .toc .pgn{{text-align:right}}
 .fun{{background:#fdefe3;border-radius:6pt;padding:8pt 11pt;margin-top:8pt;font:9.4pt/1.35 Carlito}}
 .fun .rb{{font:700 8pt Carlito;letter-spacing:1pt;color:#a84d22;display:block;margin-bottom:3pt}}
@@ -168,7 +168,7 @@ def build_vanlig(M, komplett=False):
     texts = page_texts(tmp)
     def find(s, start=0):
         for i in range(start, len(texts)):
-            t = re.sub(r"\s+", " ", texts[i][:160].replace("ﬂ","fl").replace("ﬁ","fi")).replace(" ", "")
+            t = re.sub(r"\s+", " ", texts[i][:160].replace("ﬂ","fl").replace("ﬁ","fi").replace("ﬀ","ff")).replace(" ", "")
             if s.replace(" ", "") in t[:200]: return i + 2
         return '?'
     pages = []
