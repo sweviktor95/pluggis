@@ -79,5 +79,5 @@ extra = """
 .nivaer button.aktiv{background:#2f6b4f;color:#fff}
 @media(max-width:720px){.bok .row,.bok .row.w{grid-template-columns:1fr}.bok .cards{grid-template-columns:1fr!important}.bok .begr,.bok .cols2{columns:1}}
 """
-open('/home/claude/pluggis/innehall/biologi-bok.css','w').write(css + extra)
+open('/home/claude/pluggis/stil/biologi-bok.css','w').write(css + extra)
 print(len(css), [ (k, list(json.loads(json.dumps({a:1 for a in ["x"]})))) for k in []])
