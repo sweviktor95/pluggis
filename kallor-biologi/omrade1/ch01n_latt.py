@@ -16,8 +16,9 @@ ORD_FIG = None
 ORD_EXTRA = [("biologi", "läran om allt som lever"), ("organism", "allt som lever, till exempel djur, växter och bakterier"),
              ("undersökningsbar fråga", "en fråga du kan svara på genom att mäta eller titta"), ("hypotes", "det man tror blir svaret, och varför"),
              ("variabel", "något som kan ändras eller mätas"), ("rättvist test", "man ändrar bara en sak. Allt annat är lika"),
-             ("kontroll", "den grupp där man inte ändrar något, att jämföra med"), ("tabell", "ett sätt att skriva ner det man mäter"),
-             ("diagram", "en bild av siffror, till exempel staplar"), ("medelvärde", "alla värden läggs ihop och delas med antalet"),
+             ("tabell", "ett sätt att skriva ner det man mäter"),
+             ("diagram", "en bild av siffror, till exempel staplar"),
+             
              ("resultat", "det man mäter eller ser"), ("slutsats", "det man lär sig av resultatet"),
              ("felkälla", "något som kan göra att resultatet blir fel"), ("slump", "något som händer av en tillfällighet"),
              ("påstående", "något man säger är sant"), ("belägg", "mätningar eller observationer som visar något"),
@@ -69,7 +70,7 @@ DELAR = [
        ("fyll", ["labb", "naturen", "kropp"], ["Biologer kan arbeta ute i ______________.", "Biologer kan också arbeta inne i ett ______________.", "Biologer forskar också om människans ______________."])]),
 
  dict(titel="1.1.1 Från fråga till plan", prog="Delområde 1.1 · Moment 1.1.1",
-  fore=["Forskare börjar med en fråga. Men alla frågor går inte att undersöka.", "En fråga som går att undersöka kan man svara på genom att <strong>mäta</strong> eller <strong>titta</strong>."] + [TB_FRAGA]
+  fore=["Forskare börjar med en fråga. Men alla frågor går inte att undersöka.", "En fråga som går att undersöka kallas en <strong>undersökningsbar fråga</strong>. Man kan svara på den genom att <strong>mäta</strong> eller <strong>titta</strong>."] + [TB_FRAGA]
        + ["Sedan gissar forskaren vad svaret blir. Det kallas en <strong>hypotes</strong>. Man skriver också varför man tror det.", "Forskare arbetar i steg. Stegen går runt i en cirkel."],
   fig="l_cykel.png",
   efter=["Ella undrar: <em>Växer krasse bättre i ljus eller i mörker?</em>", "Hypotes: <em>Krassen blir högst i ljus, eftersom växter behöver ljus.</em>", "Hon gör ett <strong>rättvist test</strong> med två lådor.",
@@ -106,7 +107,7 @@ DELAR = [
        ("skriv", "Varför är det bra att göra ett test flera gånger?", "Det är bra eftersom", 2)]),
 
  dict(titel="Labb 1.1 Reaktionstid", prog="Delområde 1.1 · Labb (45 min)", lab=True,
-  fore=["<strong>Fråga:</strong> Hur snabb är din reaktion? Vi mäter med en fallande linjal.", "Ni är två och två. Ni behöver en linjal på 30 cm och en penna.", "Det är ett rättvist test. Ni ändrar inget. Ni mäter fem gånger med samma hand."],
+  fore=["<strong>Fråga:</strong> Hur snabb är din reaktion? Vi mäter med en fallande linjal.", "Ni är två och två. Ni behöver en linjal på 30 cm och en penna.", "Ni gör på samma sätt varje gång: samma linjal, samma hand och fem försök. Då blir testet rättvist."],
   fig="v_linjal.png", figw="48%",
   efter=["<ol class='st'><li>Din kompis håller linjalen lodrätt. Noll ska vara vid din tumme och pekfinger.</li><li>Kompisen släpper linjalen utan att säga till.</li><li>Du fångar den så fort du kan.</li><li>Läs av var du fångade linjalen. Skriv ner centimeter.</li><li>Gör fem försök. Byt sedan plats.</li></ol>",
          "<h3>Räkna om till tid</h3>", TB_RAKNA, "<strong>Säkerhet:</strong> Sitt eller stå stadigt. Skriv bara ner ditt eget värde. Du behöver inte visa det för alla."],
@@ -128,9 +129,9 @@ DELAR = [
 
  dict(titel="1.2.2 När forskare ändrat sig", prog="Delområde 1.2 · Moment 1.2.2",
   fore=["Forskare förklarar hur saker fungerar. En förklaring kallas en <strong>modell</strong>.", "Om nya undersökningar visar något annat, ändrar forskarna modellen. Här är tre exempel."],
-  sub1=("Pasteur och kolven (1861)", ["Förr trodde många att små organismer kunde uppstå av sig själva i mat.", "Pasteur kokade buljong i en kolv med lång böjd hals. Damm fastnade i böjen. Buljongen förblev klar.", "Slutsats: små organismer kommer utifrån. De uppstår inte av sig själva."], "v_pasteur.png"),
+  sub1=("Pasteur och kolven (1861)", ["Förr trodde många att <strong>mikroorganismer</strong>, alltså mycket små organismer, kunde uppstå av sig själva i mat.", "Pasteur kokade buljong i en kolv med lång böjd hals. Damm fastnade i böjen. Buljongen förblev klar.", "Slutsats: små organismer kommer utifrån. De uppstår inte av sig själva."], "v_pasteur.png"),
   sub2=("Semmelweis och händerna (1847)", ["I Wien dog många mammor efter förlossningen i barnsängsfeber. Det dog fler på läkarklinikens avdelning än på barnmorskornas.", "Läkarna hade rört vid döda kroppar. Semmelweis trodde att något följde med händerna. Från 1847 skulle alla tvätta händerna i klorkalklösning.", "Dödligheten sjönk från 11,4 % till 1,3 %. Men många läkare trodde inte på honom."], "f_semmelweis2.png"),
-  sub3=("Marshall, Warren och magsåren (1982)", ["Förr trodde man att magsår kom av stress och livsstil.", "Marshall och Warren hittade en bakterie i magsäcken, <em>Helicobacter pylori</em>. Många trodde inte på dem.", "År 1984 drack Marshall själv bakterier och fick en inflammation i magsäcken. Gör aldrig så själv! Idag botas magsår med antibiotika. De fick Nobelpriset 2005."], "f_hpylori.png"),
+  sub3=("Marshall, Warren och magsåren (1982)", ["Förr trodde man att magsår kom av stress och livsstil.", "Marshall och Warren hittade en bakterie i magsäcken, <em>Helicobacter pylori</em>. Många trodde inte på dem.", "År 1984 drack Marshall själv bakterier och fick en inflammation i magsäcken. Gör aldrig så själv! Idag botas magsår med antibiotika och medicin som minskar syran. De fick Nobelpriset 2005."], "f_hpylori.png"),
   subw="50%", efter=[],
   kom="En modell kan ändras när nya undersökningar visar något annat.",
   ova=[("streck", "Vem upptäckte vad? Dra streck.", ["Pasteur", "Semmelweis", "Marshall och Warren"], ["handtvätt minskar dödsfall", "magsår kommer av en bakterie", "små organismer kommer utifrån"]),
@@ -139,7 +140,7 @@ DELAR = [
        ("skriv", "Varför ändrade forskarna sig i de tre exemplen?", "De ändrade sig eftersom", 2)]),
 
  dict(titel="1.2.3 Söka information och bedöma källor", prog="Delområde 1.2 · Moment 1.2.3",
-  fore=["När du söker på nätet: använd flera sökord. Till exempel <em>sömn tonåringar forskning</em>.", "En <strong>källa</strong> är där informationen kommer ifrån. Fråga dig:", "<strong>Trovärdig</strong> betyder att man kan lita på den. <strong>Relevant</strong> betyder att den passar din fråga."],
+  fore=["När du söker på nätet: använd flera sökord. Till exempel <em>sömn tonåringar forskning</em>.", "En <strong>källa</strong> är där informationen kommer ifrån. <strong>Avsändaren</strong> är den som har skrivit eller gjort texten. Fråga dig:", "<strong>Trovärdig</strong> betyder att man kan lita på den. <strong>Relevant</strong> betyder att den passar din fråga."],
   fig="l_fyra.png",
   efter=["Fråga också: Finns det <strong>belägg</strong>? Reklam har ofta inga belägg. Den vill sälja.", TB_CHECK, ARG],
   kom="Fråga: vem, varför, belägg, när och fler källor. Då ser du om en källa går att lita på.",
@@ -187,10 +188,10 @@ HANDLEDNING_HTML = """
 <h3 class="mm">1.1.2 Dokumentera</h3><p class="hl"><b>E-mål:</b> eleven fyller i en tabell med rubriker och enheter och ritar ett diagram med rubrik och benämnda axlar. <b>Vanligt fel:</b> enhet saknas, axlar utan namn, staplar utan namn. <b>Kommentar:</b> låt eleverna rita för hand, så ser du direkt vad som saknas.</p>
 <h3 class="mm">1.1.3 Värdera</h3><p class="hl"><b>E-mål:</b> eleven nämner en felkälla och förklarar varför man upprepar ett försök. <b>Vanligt fel:</b> eleverna tror att ett försök där hypotesen var fel är misslyckat. <b>Kommentar:</b> skillnaden mellan slump och systematiskt fel kommer först i grundtexten.</p>
 <h3 class="mm">Labb 1.1 Reaktionstid (45 min)</h3><p class="hl"><b>Material:</b> linjal 30 cm, penna, papper. <b>Förväntat:</b> de flesta hamnar på ca 15–25 cm, alltså ca 0,17–0,23 s (tabellen räknar med t = √(2·s/g), g = 9,81 m/s²). <b>Vanliga fel:</b> eleven ser kompisens hand och förutser släppet; linjalen hålls sned; noll ligger inte vid fingrarna. <b>Redovisning:</b> klassens värden, inte personliga. <b>Bonuslabb:</b> jämför höger och vänster hand, eller före och efter några minuters övning. Tala om vad som kan förklara skillnaden.</p>
-<h3 class="mm">1.2.1 Vad kan vetenskap pröva?</h3><p class="hl"><b>E-mål:</b> eleven skiljer påståenden som går att pröva från åsikter och vet vad belägg är. <b>Vanligt fel:</b> eleverna tror att ”pröva” betyder ”bevisa att det är sant”. Ett påstående kan visa sig vara fel. <b>Kommentar:</b> horoskopet är bara ett exempel. Välj gärna egna exempel från klassen.</p>
+<h3 class="mm">1.2.1 Vad kan vetenskap pröva?</h3><p class="hl"><b>E-mål:</b> eleven skiljer påståenden som går att pröva från åsikter och vet vad belägg är. <b>Vanligt fel:</b> eleverna tror att ”pröva” betyder ”bevisa att det är sant”. Ett påstående kan visa sig vara fel. <b>Kommentar:</b> horoskopet är bara ett exempel. Astrologer fick i ett dubbelblint test (Carlson, Nature 1985) para ihop födelsehoroskop med personlighetsprofiler och lyckades inte bättre än slumpen. Välj gärna egna exempel från klassen.</p>
 <h3 class="mm">1.2.2 När forskare ändrat sig</h3><p class="hl"><b>E-mål:</b> eleven kan para ihop forskare och upptäckt och förklara att nya belägg kan ändra en modell. <b>Källor:</b> siffrorna för Semmelweis är från MJA 2018; Marshalls självförsök 1984 och Nobelpriset 2005 enligt Nobelstiftelsen och PMC. <b>Kommentar:</b> betona att Marshalls självförsök inte är något man ska göra.</p>
 <h3 class="mm">1.2.3 Söka information och bedöma källor</h3><p class="hl"><b>E-mål:</b> eleven ställer frågorna vem, varför, belägg, nytt och fler källor till en källa och förklarar trovärdig och relevant. <b>Argumentation:</b> rutan ”Så argumenterar du” är den enkla mallen som används även i labben. Kunskapskraven kräver argumentation redan på E-nivå. <b>Vanligt fel:</b> eleverna blandar ihop trovärdig (går att lita på) och relevant (passar frågan).</p>
-<h3 class="mm">Labb 1.2 Granska ett påstående (45 min)</h3><p class="hl"><b>Påståenden:</b> (1) Att vi bara använder tio procent av hjärnan är en myt: hjärnavbildning visar att nästan alla delar används. (2) Socker gör barn hyperaktiva: kontrollerade studier har inte visat något sådant samband. (3) Blixten slår ned flera gånger på samma plats: höga byggnader träffas ofta. <b>Obs:</b> kontrollera själv aktuella källor före lektionen. <b>Bedömningsstöd E:</b> eleven använder minst en frågeställning om källan, nämner ett belägg och drar en slutsats. <b>Bonuslabb:</b> låt eleverna hitta ett eget påstående från sociala medier och granska det.</p>
+<h3 class="mm">Labb 1.2 Granska ett påstående (45 min)</h3><p class="hl"><b>Påståenden:</b> (1) Att vi bara använder tio procent av hjärnan är en myt: hjärnavbildning (PET och fMRI) visar att alla delar av hjärnan är aktiva, även under sömn. (2) Socker gör barn hyperaktiva: dubbelblinda studier och en sammanställning av Wolraich m.fl. har inte visat något sådant samband. (3) Blixten kan slå ned flera gånger på samma plats: Empire State Building träffas ungefär 25 gånger per år (uppgift från NOAA). <b>Källor:</b> Wikipedia (tio-procentsmyten), CBC om Wolraichs arbete, KSAT med hänvisning till NOAA. Kontrollera gärna mot aktuella källor före lektionen. <b>Bedömningsstöd E:</b> eleven använder minst en frågeställning om källan, nämner ett belägg och drar en slutsats. <b>Bonuslabb:</b> låt eleverna hitta ett eget påstående från sociala medier och granska det.</p>
 """
 FACIT = [
  "<b>Start:</b> 1) Allt som lever. 2) Zoolog – djur; Botaniker – växter; Marinbiolog – livet i havet; Mikrobiolog – små organismer, som bakterier. 3) naturen, labb, kropp.",
