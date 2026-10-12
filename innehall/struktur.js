@@ -276,7 +276,9 @@ var struktur = [
               { id: "biologi-m-1-2-3", titel: "Söka information och bedöma källor" },
               { id: "biologi-m-1-2-l", titel: "Labb: Granska ett påstående" }
             ]
-          }
+          },
+          { id: "biologi-m-1-s", titel: "Sammanfattning och begrepp" },
+          { id: "biologi-m-1-t", titel: "Testa dig själv" }
         ]
       },
       {

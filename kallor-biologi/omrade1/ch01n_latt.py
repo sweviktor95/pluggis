@@ -8,7 +8,8 @@ NAMN = "Biologi som vetenskap"
 NDEL = 9
 UNDER = "Hur vet vi det vi vet om livet?"
 INTRO_L = ["I det här kapitlet lär du dig hur forskare tar reda på saker.",
-           "Du lär dig göra egna undersökningar. Du lär dig också att kolla om något är sant."]
+           "Du lär dig göra egna undersökningar. Du lär dig också att kolla om något är sant.",
+           "Namn och siffror i exemplen är påhittade. Forskarna Pasteur, Semmelweis, Marshall och Warren är riktiga."]
 SA_GOR = ["Läs de viktiga orden på nästa sida.", "Läs ett moment i taget. Titta noga på bilderna.", "Gör övningarna direkt efter varje moment.", "Läs Kom ihåg-rutan igen. Det är det viktigaste."]
 LARA = ["Delområde 1.1 Undersöka systematiskt: fråga, plan, tabell, diagram och slutsats",
         "Delområde 1.2 Modeller, källor och argument: vad vetenskap kan pröva, hur forskare har ändrat sig och hur du kollar en källa"]
@@ -74,7 +75,7 @@ DELAR = [
   fore=["Forskare börjar med en fråga. Men alla frågor går inte att undersöka.", "En fråga som går att undersöka kallas en <strong>undersökningsbar fråga</strong>. Man kan svara på den genom att <strong>mäta</strong> eller <strong>titta</strong>."] + [TB_FRAGA]
        + ["Sedan gissar forskaren vad svaret blir. Det kallas en <strong>hypotes</strong>. Man skriver också varför man tror det.", "Forskare arbetar i steg. Stegen går runt i en cirkel."],
   fig="l_cykel.png",
-  efter=["Ella undrar: <em>Växer krasse bättre i ljus eller i mörker?</em>", "Hypotes: <em>Krassen blir högst i ljus, eftersom växter behöver ljus.</em>", "Hon gör ett <strong>rättvist test</strong> med två lådor.",
+  efter=["<span class='fake'>Påhittat exempel</span> Ella undrar: <em>Växer krasse bättre i ljus eller i mörker?</em>", "Hypotes: <em>Krassen blir högst i ljus, eftersom växter behöver ljus.</em>", "Hon gör ett <strong>rättvist test</strong> med två lådor.",
          "Ella ändrar bara en sak: ljuset. Allt annat är lika. Det man ändrar kallas en <strong>variabel</strong>.", TB_ELLA,
          "<h3>Säkert i labbet</h3>", "Läs hela instruktionen först. Ha skyddsglasögon när läraren säger det. Ät och drick aldrig i labbet. Fråga om du är osäker."],
   fig2="l_krasse.png",
@@ -86,7 +87,7 @@ DELAR = [
        ("skriv", "Varför ska man bara ändra en sak i ett test?", "Man ska bara ändra en sak eftersom", 2)]),
 
  dict(titel="1.1.2 Dokumentera", prog="Delområde 1.1 · Moment 1.1.2",
-  fore=["När du mäter ska du skriva ner värdena direkt. Använd en <strong>tabell</strong>.", "Tabellen ska ha rubriker. Skriv också enhet, till exempel mm eller s.", "Så här kan Ellas tabell se ut:", TB_MAT],
+  fore=["När du mäter ska du skriva ner värdena direkt. Använd en <strong>tabell</strong>.", "Tabellen ska ha rubriker. Skriv också enhet, till exempel mm eller s.", "<span class='fake'>Påhittade siffror</span> Så här kan Ellas tabell se ut:", TB_MAT],
   fig="l_stapel.png", figw="55%",
   efter=["Ett <strong>diagram</strong> gör siffrorna lätta att jämföra. Ella ritar ett stapeldiagram.", "Ett bra diagram har <strong>rubrik</strong>. Axlarna har namn och enhet. Staplarna har namn.",
          "<h3>Så skriver du en rapport</h3>", TB_REP],

@@ -17,6 +17,7 @@ MAL = ["Resonera i flera led: visa hur en sak leder till nästa, med ”eftersom
        "Väg för- och nackdelar, och se frågan från flera perspektiv.", "Var nyanserad: visa vad som är osäkert och vad man mer skulle behöva veta.",
        "Ta ställning och motivera med naturvetenskapliga argument."]
 MAL_RUBRIK = "SÅ NÅR DU HÖGSTA NIVÅN"
+INTRO = INTRO + " Namn, klasser, produkter och mätvärden i kapitlet är påhittade exempel, om inget annat står. Forskarna och undersökningarna Pasteur, Semmelweis, Marshall och Warren samt Carlson är verkliga."
 FUNDERA = "Läs först grundtexten i kapitel 1. Fördjupningen bygger på begreppen hypotes, variabel, kontrollgrupp, felkälla, belägg, trovärdig och relevant."
 D = {"1.1": "Undersöka systematiskt", "1.2": "Modeller, källor och argument"}
 def cards4_html():
@@ -43,7 +44,7 @@ add("F1.1.1", "Planera ett eget försök", "1.1",
         ["Upprepning", "Hur många försök och deltagare?", "Hur påverkar antalet slumpen?"], ["Störningar", "Vad kan göra resultatet fel?", "Hur förebygger jag det?"]], "tbl"))
 
 add("F1.1.2", "Tolka data och redovisa osäkerhet", "1.1",
- "<p>Ett diagram visar inte bara svaret. Det visar också hur osäkert svaret är. En grupp undersökte hur temperaturen påverkar gasbildningen hos jäst. De gjorde tre försök vid varje temperatur och mätte hur mycket en ballong växte.</p>"
+ "<p>Ett diagram visar inte bara svaret. Det visar också hur osäkert svaret är. <span class='fake'>Påhittat exempel</span> En grupp undersökte hur temperaturen påverkar gasbildningen hos jäst. De gjorde tre försök vid varje temperatur och mätte hur mycket en ballong växte.</p>"
  + table(["Temperatur", "Försök 1", "Försök 2", "Försök 3", "Medelvärde"], [["10 °C", "13 cm", "12 cm", "14 cm", "13 cm"], ["25 °C", "22 cm", "24 cm", "23 cm", "23 cm"], ["40 °C", "31 cm", "18 cm", "30 cm", "?"]], "tbl num")
  + "<h3>Det avvikande värdet</h3>"
  + roww("<p>Vid 40 °C avviker ett värde mycket från de andra (18 cm). Om man räknar med det blir medelvärdet 26 cm. Utan det blir det 30,5 cm. Vad ska man göra? Man ska inte stryka ett värde bara för att det passar illa. Man frågar först: Finns det en rimlig förklaring, till exempel att ballongen satt löst? Om ja, redovisa värdet, förklara varför det kan vara fel och visa resultatet med och utan det. Om nej, gör fler försök.</p>"

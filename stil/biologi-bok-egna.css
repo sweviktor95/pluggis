@@ -1,0 +1,23 @@
+/* Handskrivna tillägg: nivåer, Lässtöd och dyslexivänlig typografi. Ändra här, inte i -bas.css. */
+.bok{font-size:15.5px}
+.bok.lattlast{font-size:17.5px;line-height:1.65}
+.bok .bx,.bok .bx p,.bok .card,.bok .kolla,.bok .tbl,.bok .cap,.bok .note,.bok .q,.bok .sam{font-size:14px}
+.bok h3{font-size:19px}.bok h2.lh,.bok .sh h2{font-size:26px}
+.bok .t p{font-size:inherit}
+/* Dyslexivänliga standardvärden */
+.bok,.bok p,.bok li,.bok td,.bok th,.bok .bx,.bok .card,.bok .kolla,.bok .q,.bok .cap{font-family:Verdana,"Segoe UI",Arial,Helvetica,sans-serif!important}
+.bok{font-size:17px;line-height:1.75;letter-spacing:.01em;word-spacing:.06em;text-align:left}
+.bok.lattlast{font-size:18.5px;line-height:1.8}
+.bok .bx,.bok .bx p,.bok .card,.bok .kolla,.bok .tbl,.bok .cap,.bok .note,.bok .q,.bok .sam,.bok table.tb{font-size:15.5px;line-height:1.55}
+.bok em{font-style:normal;font-weight:700}
+.bok .bx .rb,.bok .kolla .kr,.bok .pill,.bok .fake,.bok .kom .lb,.bok .ex1 .ty{text-transform:none;font-size:13px}
+.bok p{margin-bottom:1em}
+/* Lässtöd (extra stort) */
+.bok.lasstod,.bok.lasstod *{font-family:Verdana,Arial,Helvetica,sans-serif!important}
+.bok.lasstod{font-size:19px;line-height:1.85;letter-spacing:.03em;word-spacing:.12em;max-width:760px}
+.bok.lasstod p,.bok.lasstod li,.bok.lasstod td,.bok.lasstod th,.bok.lasstod .bx,.bok.lasstod .card,.bok.lasstod .kolla,.bok.lasstod .cap,.bok.lasstod .note{font-size:inherit!important;line-height:inherit!important}
+.bok.lasstod p{margin-bottom:1.1em}
+.bok.lasstod .row,.bok.lasstod .row.w{grid-template-columns:1fr}
+.bok.lasstod .cards{grid-template-columns:1fr!important}
+.bok.lasstod em{font-style:normal;font-weight:700}
+.bok.lasstod,.bok.lasstod p{text-align:left!important}

@@ -15,6 +15,7 @@ INTRO = ("Hur vet forskare att bakterier kan orsaka sjukdomar, att växter behö
 MAL = ["vad biologi är och vad biologer arbetar med", "hur man planerar en undersökning med fråga, hypotes och variabler", "hur man dokumenterar med tabeller, diagram och rapport",
        "hur man värderar resultat och drar en slutsats", "vad vetenskap kan och inte kan pröva", "hur förklaringar har ändrats när nya belägg kommit",
        "hur du söker information, bedömer källor och argumenterar"]
+INTRO = INTRO + " Namn, klasser, produkter och mätvärden i kapitlet är påhittade exempel, om inget annat står. Forskarna och undersökningarna Pasteur, Semmelweis, Marshall och Warren samt Carlson är verkliga."
 FUNDERA = "Tänk på något du ”vet” om kroppen eller naturen, till exempel att man blir förkyld av att frysa. Hur skulle du kunna ta reda på om det verkligen stämmer?"
 DELOMR = {"1.1": "Undersöka systematiskt", "1.2": "Modeller, källor och argument"}
 
@@ -49,7 +50,7 @@ add("1.1.1", "Från fråga till plan", f"Kapitel {NR} · Delområde 1.1 {DELOMR[
         "<p>En <strong class='green'>teori</strong> är något större än en hypotes: en förklaring som har prövats av många forskare under lång tid och som stämmer med väldigt många observationer. Evolutionsteorin och cellteorin är exempel.</p>",
         [fig(FIG+"l_cykel.png", "<b>Bild 1.2</b> Den vetenskapliga arbetsgången. I verkligheten hoppar forskare ofta fram och tillbaka mellan stegen.")])
  + "<h3>Ett rättvist försök</h3>"
- + row("<p>Klass 7B undrar om krasse behöver ljus för att växa. Hypotesen är: <em>Krassen i ljus växer högre, eftersom växter behöver ljus för fotosyntesen.</em> En <strong class='green'>variabel</strong> är något som kan ändras eller mätas. För att testet ska bli rättvist får bara <em>en</em> variabel ändras åt gången. Allt annat måste vara lika, annars vet man inte vad som orsakade resultatet.</p>"
+ + row("<p><span class='fake'>Påhittat exempel</span> Klass 7B undrar om krasse behöver ljus för att växa. Hypotesen är: <em>Krassen i ljus växer högre, eftersom växter behöver ljus för fotosyntesen.</em> En <strong class='green'>variabel</strong> är något som kan ändras eller mätas. För att testet ska bli rättvist får bara <em>en</em> variabel ändras åt gången. Allt annat måste vara lika, annars vet man inte vad som orsakade resultatet.</p>"
        "<p>Ofta har man också en <strong class='green'>kontrollgrupp</strong>, där man inte ändrar något, så att man har något att jämföra med. I krassförsöket är krassen i ljus kontrollgrupp.</p>",
        [begrepp([("Undersökningsbar fråga", "En fråga som kan besvaras med mätningar eller observationer."), ("Hypotes", "Ett möjligt, prövbart svar med en motivering."),
                  ("Variabel", "Något som kan ändras eller mätas i en undersökning."), ("Kontrollgrupp", "Grupp där man inte ändrar något, att jämföra med.")])])
@@ -68,7 +69,7 @@ add("1.1.1", "Från fråga till plan", f"Kapitel {NR} · Delområde 1.1 {DELOMR[
 add("1.1.2", "Dokumentera", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · 1.1.2 Dokumentera",
  "<p>Under försöket mäter klassen krassen varje dag och skriver direkt ner värdena i en <strong class='green'>tabell</strong>. Tabellen ska ha rubriker, och efter varje mått ska enheten stå, till exempel mm eller s. När försöket är klart räknar man ut <strong class='green'>medelvärdet</strong> för varje grupp: lägg ihop alla värden och dela med antalet värden.</p>"
  + roww(table(["Dag", "1", "3", "5", "7"], [["A · ljus (mm)", "5", "15", "28", "40"], ["B · mörker (mm)", "5", "25", "42", "60"]], "tbl num")
-        + '<p class="cap" style="margin-top:-4pt"><b>Tabell 1.1</b> Krassens medelhöjd i klassens försök (exempelvärden).</p>'
+        + '<p class="cap" style="margin-top:-4pt"><b>Tabell 1.1</b> <span class="fake">Påhittade värden</span> Krassens medelhöjd i klassens försök.</p>'
         "<h3>Välj diagram</h3><p>Ett diagram gör det lättare att se mönster. Ett <strong>stapeldiagram</strong> passar när du jämför grupper, till exempel höjden efter sju dagar. Ett <strong>linjediagram</strong> passar när något förändras över tid. Tiden sätts på x-axeln och det du mäter på y-axeln. Glöm inte rubrik, namn och enheter på axlarna.</p>"
         "<p>Läs av diagrammet noga: vilken stapel är högst, hur stor är skillnaden, och vad står siffrorna för?</p>",
         [fig(FIG+"l_stapel.png", "<b>Bild 1.4</b> Krassens höjd efter 7 dagar.")])
@@ -185,7 +186,7 @@ BEGR = [("Belägg", "Observationer och mätningar som stöder en slutsats."), ("
         ("Oberoende variabel", "Det man själv ändrar i en undersökning."), ("Pseudovetenskap", "Låter vetenskapligt men saknar prövade belägg."), ("Relevant", "Passar min fråga."),
         ("Slump", "Tillfälliga variationer som inte beror på det man undersöker."), ("Teori", "En väl prövad förklaring som stöds av många belägg."), ("Tillförlitlighet", "Hur säkra och upprepbara mätningarna är."),
         ("Trovärdig", "Går att lita på."), ("Undersökningsbar fråga", "Kan besvaras med mätningar eller observationer.")]
-ANNONS = ('<div style="border:1pt solid #d9d2c8;border-radius:5pt;padding:5pt 8pt;margin:3pt 0"><b>NYHET! DetoxPlåstret™</b><br>Sätt plåstret under foten när du sover – på morgonen har det blivit brunt av alla gifter som dragits ut ur kroppen! ”Jag har aldrig mått så bra”, säger Anna, 34. Vetenskapligt utvecklat.</div>')
+ANNONS = ('<div class="fakeann"><span class="fake">Påhittad annons</span></div><div style="border:1pt solid #d9d2c8;border-radius:5pt;padding:5pt 8pt;margin:3pt 0"><b>NYHET! DetoxPlåstret™</b><br>Sätt plåstret under foten när du sover – på morgonen har det blivit brunt av alla gifter som dragits ut ur kroppen! ”Jag har aldrig mått så bra”, säger Anna, 34. Vetenskapligt utvecklat.</div>')
 TEST = [
  ("A", "Elin undersöker om temperaturen påverkar hur mycket gas jäst bildar. Hon mäter mängden gas efter 20 minuter. Vilken är den beroende variabeln?", ["A Temperaturen", "B Mängden gas", "C Mängden jäst", "D Tiden, 20 minuter"], 1, 0),
  ("A", "Vilket påstående går att pröva med naturvetenskapliga metoder?", ["A Blåbär smakar godare än lingon.", "B Krasse gror snabbare vid 20 °C än vid 10 °C.", "C Det är fel att jaga varg.", "D Naturen vill alltid vara i balans."], 1, 0),

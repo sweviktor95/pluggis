@@ -367,6 +367,7 @@ tr.lab td{background:#f3f9f5}
 
 # ---- Data till lärarvyn (lararsida.html) ------------------------------------
 HAFTE_NYCKEL = {1: "biologi-vetenskap", 4: "biologi-ekologi"}   # områden som redan har ombyggda häften
+EXTRA_BLAD = {1: ['          { id: "biologi-m-1-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-1-t", titel: "Testa dig själv" }']}
 # Lärarmaterial per område (prov, Jeopardy) och delområde (PowerPoint)
 MATERIAL = {1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/biologi-1-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade1/biologi-1-prov-larare.pdf"],
@@ -396,7 +397,7 @@ def skriv_struktur():
             mo = [f'              {{ id: "biologi-m-{d[0].replace(".", "-")}-{n}", titel: {js(mom(i)["titel"])} }}' for n, i in enumerate(d[5], 1)]
             if d[0] in LAB25: mo.append(f'              {{ id: "biologi-m-{d[0].replace(".", "-")}-l", titel: {js("Labb: " + LAB25[d[0]][0])} }}')
             dl.append(f'          {{\n            id: "biologi-d-{d[0].replace(".", "-")}",\n            titel: {js(d[0] + " " + d[1])},\n            ramverk: true,\n            barn: [\n' + ",\n".join(mo) + "\n            ]\n          }")
-        ut.append(f'      {{\n        id: {js(oid(a))},\n        titel: {js(f"{a[0]}. {a[1]}")},\n        ramverk: true,\n        barn: [\n' + ",\n".join(dl) + "\n        ]\n      }")
+        ut.append(f'      {{\n        id: {js(oid(a))},\n        titel: {js(f"{a[0]}. {a[1]}")},\n        ramverk: true,\n        barn: [\n' + ",\n".join(dl + EXTRA_BLAD.get(a[0], [])) + "\n        ]\n      }")
     block = '  // BIOLOGI START (genereras av planering/biologi_plan25.py)\n  {\n    id: "biologi",\n    titel: "Biologi (beta)",\n    ikon: "🌱",\n    ramverk: true,\n    barn: [\n' + ",\n".join(ut) + '\n    ]\n  },\n  // BIOLOGI END\n'
     s = open("innehall/struktur.js", encoding="utf-8").read()
     a0 = s.index("  // BIOLOGI START"); b0 = s.index("  // BIOLOGI END\n") + len("  // BIOLOGI END\n")

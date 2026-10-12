@@ -91,6 +91,30 @@ ul.pu li:before{content:"•";position:absolute;left:2pt;color:var(--ink)}
 .note{font:8.2pt/1.35 Carlito;color:var(--mut)}
 .pg{break-before:page}
 .avoid{break-inside:avoid}
+.fake{display:inline-block;background:#fde8e1;color:#a83a22;font:700 7.6pt Carlito;letter-spacing:.7pt;text-transform:uppercase;padding:1pt 6pt;border-radius:4pt;margin:0 5pt 2pt 0}
+.fakeann{margin:0 0 -2pt}
+"""
+
+
+DYS = r"""
+body{font-family:"Liberation Sans",Arial,sans-serif;font-size:12pt;line-height:1.62;letter-spacing:.012em;word-spacing:.07em;text-align:left}
+p,.t p{font-family:"Liberation Sans",Arial,sans-serif;font-size:12pt;line-height:1.62;margin:0 0 9pt}
+em,i{font-style:normal;font-weight:700}
+.green{font-weight:700}
+.row{grid-template-columns:minmax(0,1fr) 54mm}
+.row.w{grid-template-columns:minmax(0,1fr) 62mm}
+.bx,.bx p,.card,.kolla,.sam,.begr,.ord2 div,.stp div,.arg,.teacher,.teacher p,.teacher .hl,.cap,.vik{font-family:"Liberation Sans",Arial,sans-serif;font-size:10.8pt;line-height:1.5;letter-spacing:.01em}
+.bx b.t,.card b.h,.begr b,.ord2 b{font-size:11.2pt}
+.tbl,table.tb,.sf,.dr,.nrbox,.ln,.fy p,.bank,.chips span,.sort div{font-family:"Liberation Sans",Arial,sans-serif;font-size:10.8pt;line-height:1.45}
+.q,.q .alts{font-family:"Liberation Sans",Arial,sans-serif;font-size:11pt;line-height:1.5}
+.ex1 .q{font-size:12.5pt}
+.kom .tx{font-size:13pt;font-family:"Liberation Sans",Arial,sans-serif}
+.t p{font-size:13pt}
+.note{font-size:9.8pt}
+h3{font-size:14.5pt;margin-top:13pt}
+.bx .rb,.kolla .kr,.pill,.fake,.kom .lb,.ex1 .ty,.sh .nr{text-transform:none;letter-spacing:.4pt;font-size:9.6pt}
+.kolla ol,.kolla li{font-size:11pt}
+ul.pu li,.steps li{font-size:inherit}
 """
 
 def css(foot, start=2):

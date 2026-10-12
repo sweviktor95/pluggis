@@ -7,7 +7,7 @@ from bbuild_n import html_to_pdf, OUT
 from pypdf import PdfReader, PdfWriter
 
 FIG = '/tmp/bio/fig01n/'
-ANNONS = ('<div style="border:1pt solid #d9d2c8;border-radius:5pt;padding:5pt 8pt;margin:4pt 0"><b>NYHET! DetoxPlåstret™</b><br>Sätt plåstret under foten när du sover – på morgonen har det blivit brunt av alla gifter som dragits ut ur kroppen! ”Jag har aldrig mått så bra”, säger Anna, 34. Vetenskapligt utvecklat.</div>')
+ANNONS = ('<div class="fakeann"><span class="fake">Påhittad annons</span></div><div style="border:1pt solid #d9d2c8;border-radius:5pt;padding:5pt 8pt;margin:4pt 0"><b>NYHET! DetoxPlåstret™</b><br>Sätt plåstret under foten när du sover – på morgonen har det blivit brunt av alla gifter som dragits ut ur kroppen! ”Jag har aldrig mått så bra”, säger Anna, 34. Vetenskapligt utvecklat.</div>')
 TABELL = table(["Temperatur", "Försök 1", "Försök 2", "Försök 3"], [["10 °C", "13 cm", "12 cm", "14 cm"], ["25 °C", "22 cm", "24 cm", "23 cm"], ["40 °C", "31 cm", "18 cm", "30 cm"]], "tbl num")
 
 def match(left, right):
@@ -34,7 +34,7 @@ P = [
   "a) Tendens: företaget säljer plåstret. Beroende: ingen källa till ”vetenskapligt utvecklat”. En persons berättelse är inget belägg. b) Trovärdig = går att lita på. Relevant = passar min fråga.", "a) 1 p per skäl med koppling till kriterium (max 2). b) 1 p för båda begreppen rätt."),
  ("A", "Ett företag påstår att deras sportdryck ger bättre kondition. Planera en undersökning som kan pröva påståendet. Beskriv hur du använder kontrollgrupp, placebo, randomisering och blindning och förklara varför varje del behövs.", None, 4, 8,
   "Slumpa deltagare till två grupper (randomisering) så att grupperna blir lika från början. Grupp A får sportdrycken, grupp B en likadan dryck utan det verksamma ämnet (placebo) så att förväntningar inte påverkar. Varken deltagare eller testledare vet vem som fått vad (dubbelblind). Mät konditionen före och efter med samma test. Många deltagare minskar slumpens betydelse.", "1 p per del som beskrivs rätt (kontrollgrupp/placebo, randomisering, blindning, mätning/upprepning). Se bedömningsguiden för resonemang."),
- ("A", "En grupp undersökte hur temperaturen påverkar jäst.<br>" + TABELL + "Siffrorna är hur mycket en ballong växte (omkrets).<br>a) Ett värde avviker. Vilket? Ge en möjlig förklaring.<br>b) Hur skulle du hantera värdet och redovisa resultatet? Vilken slutsats kan du dra om 25 °C och 40 °C?", None, 4, 8,
+ ("A", "<span class='fake'>Påhittade värden</span> En grupp undersökte hur temperaturen påverkar jäst.<br>" + TABELL + "Siffrorna är hur mycket en ballong växte (omkrets).<br>a) Ett värde avviker. Vilket? Ge en möjlig förklaring.<br>b) Hur skulle du hantera värdet och redovisa resultatet? Vilken slutsats kan du dra om 25 °C och 40 °C?", None, 4, 8,
   "a) 18 cm vid 40 °C. T.ex. ballongen satt löst, fel mängd jäst. b) Undersök först om det finns en rimlig förklaring. Redovisa värdet, förklara det och visa medelvärde med och utan det (26 cm resp. 30,5 cm). Redovisa spridning. Gör fler försök. Skillnaden mellan 10 och 25 °C är tydlig; mellan 25 och 40 °C är den osäker på grund av det avvikande värdet.", "1 p avvikande värde och förklaring. 1 p hanterar värdet motiverat. 1 p redovisar osäkerhet. 1 p slutsats med nyans."),
  ("A", "Två trovärdiga källor säger olika om ett kosttillskott: en myndighet avråder och en studie betald av tillverkaren visar effekt. Resonera om hur du väger källorna och vad du skulle vilja veta mer. Formulera ett argument och bemöt ett motargument.", None, 4, 8,
   "Väg: Vad bygger respektive källa på? Är studien oberoende granskad och upprepad? Hur många deltog, hur var den upplagd? Tendens hos tillverkaren (betald studie), men det gör den inte automatiskt fel. Vill veta mer: fler oberoende studier och sammanställningar. Argument: påstående, belägg, motargument, bemötande och slutsats med angiven säkerhet.", "1 p väger källorna med relevanta kriterier. 1 p anger vad mer som behövs. 1 p argument med belägg. 1 p bemöter motargument och anger säkerhet."),
@@ -48,7 +48,7 @@ BED = [["Uppgift", "E-nivå", "C-nivå", "A-nivå"],
 def build(lararversion):
     h = ['<section class="sec"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">Kapitel 1 · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ &nbsp; Poäng: ____ / 36</div></div>'
          '<div class="sh"><h2>Biologi som vetenskap</h2></div>'
-         '<p class="note">Tid: 60 minuter. Hjälpmedel: penna. Del E ska alla svara på. Del C och del A visar vad du kan på högre nivåer. Svara kort och tydligt. Siffran till höger visar hur många poäng uppgiften ger.</p>']
+         '<p class="note">Tid: 60 minuter. Hjälpmedel: penna. Del E ska alla svara på. Del C och del A visar vad du kan på högre nivåer. Svara kort och tydligt. Personer, annonser och mätvärden i uppgifterna är påhittade. Siffran till höger visar hur många poäng uppgiften ger.</p>']
     last = None; n = 0
     for (niv, q, alts, pts, nl, fac, bed) in P:
         n += 1
@@ -76,7 +76,7 @@ def build(lararversion):
     return "".join(h)
 
 def doc(body, foot):
-    return f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, 1)}.q .alts{{grid-template-columns:1fr 1fr}}</style></head><body>{body}</body></html>'
+    return f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, 1)}.q .alts{{grid-template-columns:1fr 1fr}}{DYS}</style></head><body>{body}</body></html>'
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

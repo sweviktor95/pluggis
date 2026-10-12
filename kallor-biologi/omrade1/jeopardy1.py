@@ -75,7 +75,7 @@ h1{font-size:1.25rem;margin:0;color:var(--g1)}
 <div class="row"><button class="btn alt" id="lagBtn">+ Lag</button><button class="btn alt" id="larBtn">Lärarvy: alla svar</button><button class="btn" id="nytt">Nytt spel</button></div></header>
 <div class="teams" id="teams"></div>
 <div class="board" id="board" role="grid" aria-label="Spelplan"></div>
-<p class="note">Poängen visar nivån: 100–200 går att klara med lättläst, 300–400 med grundtexten och 500 med fördjupningen. Svaren är korta, ett ord eller en kort mening.</p>
+<p class="note">Poängen visar nivån: 100–200 går att klara med lättläst, 300–400 med grundtexten och 500 med fördjupningen. Svaren är korta, ett ord eller en kort mening. Personer och exempel i frågorna är påhittade.</p>
 <div id="lar"></div>
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-live="polite"><div class="box">
 <div class="lv" id="lv"></div><div class="q" id="q"></div><div class="a" id="a"></div>

@@ -7,6 +7,7 @@ import bbuild_latt as BL
 import ch01n as G
 import ch01n_fordj as F
 import bstyle
+import bbuild_n as BN
 
 IMG = ("file:///tmp/bio/fig01n/", "bilder/biologi-omrade1/")
 def fix(h): return h.replace(*IMG)
@@ -29,6 +30,8 @@ M = {
  "biologi-m-1-2-l": dict(latt=latt[9], van=grund["L2"], ford=None),
 }
 
+M["biologi-m-1-s"] = dict(latt=BL.ord_page() + BL.viktigast_page(), van=BN.sam_html(G.SAMMAN, G.BEGR), ford=None)
+M["biologi-m-1-t"] = dict(latt=BL.test_pages(), van=BN.test_html(G), ford=F.uppg_html())
 head_start = '<h3>Vad är biologi?</h3>'
 M["biologi-m-1-1-1"]["van"] = head_start + grund["Start"] + "<h3>Från fråga till plan</h3>" + grund["1.1.1"]
 M["biologi-m-1-1-1"]["latt"] = latt[1] + latt[2]
@@ -79,5 +82,5 @@ extra = """
 .nivaer button.aktiv{background:#2f6b4f;color:#fff}
 @media(max-width:720px){.bok .row,.bok .row.w{grid-template-columns:1fr}.bok .cards{grid-template-columns:1fr!important}.bok .begr,.bok .cols2{columns:1}}
 """
-open('/home/claude/pluggis/stil/biologi-bok.css','w').write(css + extra)
+open('/home/claude/pluggis/stil/biologi-bok-bas.css','w').write(css + extra)
 print(len(css), [ (k, list(json.loads(json.dumps({a:1 for a in ["x"]})))) for k in []])

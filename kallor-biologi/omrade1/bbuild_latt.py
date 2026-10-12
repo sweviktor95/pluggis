@@ -156,8 +156,8 @@ body{{margin:0}}
 .band .kn{{font:700 11pt Carlito;letter-spacing:2.5pt;color:#cfe8d6}}
 .band h1{{font:700 34pt Carlito;margin:0}}.band p{{font:15pt Carlito;margin:3pt 0 0}}
 .in{{padding:8mm 18mm 0}}
-.in p{{font-size:12pt}}
-.lar{{background:#e7eef5;border-radius:8pt;padding:11pt 14pt;margin-top:10pt;font:11pt/1.4 Carlito}}
+.in p{{font-size:12.5pt;font-family:'Liberation Sans',Arial,sans-serif}}
+.lar{{background:#e7eef5;border-radius:8pt;padding:11pt 14pt;margin-top:10pt;font:12pt/1.45 'Liberation Sans',Arial,sans-serif}}
 .lar .rb{{font:700 8.4pt Carlito;letter-spacing:1pt;color:#2b5d7a;margin-bottom:5pt;display:block}}
 .lar ul{{margin:0;padding-left:13pt}}
 h3.sg{{font:700 14pt Carlito;color:var(--g2);margin:12pt 0 4pt}}
@@ -165,7 +165,7 @@ h3.sg{{font:700 14pt Carlito;color:var(--g2);margin:12pt 0 4pt}}
 .ft b{{color:#2f6b4f;font-size:8.8pt}}
 </style></head><body><div class="cv"><img src="file://{L.FIG}cover_lattlast.png"></div>
 <div class="band"><div class="kn">KAPITEL {L.NR}</div><h1>{L.NAMN}</h1><p>{L.UNDER}</p></div>
-<div class="in"><p>{L.INTRO_L[0]}</p><p>{L.INTRO_L[1]}</p>
+<div class="in"><p>{L.INTRO_L[0]}</p><p>{L.INTRO_L[1]}</p>{('<p>'+L.INTRO_L[2]+'</p>') if len(L.INTRO_L)>2 else ''}
 <h3 class="sg">Så här gör du</h3><div class="stp">{cards}</div>
 <div class="lar"><span class="rb">DET HÄR SKA DU LÄRA DIG</span><ul>{lara}</ul></div></div>
 <div class="ft"><span>Kapitel {L.NR} · {L.NAMN} · Lättläst</span><b>1</b></div></body></html>"""
@@ -194,7 +194,7 @@ def build(komplett=True):
         body += lasa_page(i, d) + ova_page(i, d)
     body += viktigast_page() + test_pages()
     foot = f'Kapitel {L.NR} · {L.NAMN} · Lättläst'
-    def full(b, start): return (f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, start)}{LCSS}{TABCSS(L.TAB)}{named_css()}</style></head><body>{b}</body></html>')
+    def full(b, start): return (f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, start)}{LCSS}{TABCSS(L.TAB)}{named_css()}{DYS}</style></head><body>{b}</body></html>')
     tmp = f'{OUT}/_latt_body.pdf'
     html_to_pdf(full(body, 2), tmp)
     n = len(PdfReader(tmp).pages)
