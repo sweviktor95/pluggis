@@ -27,6 +27,11 @@
   .tomt { color: #888; font-size: 14px; }
   .grupp { font-weight: bold; font-size: 14px; margin: 12px 0 6px; color: #444; }
   .sidor { color: #555; font-size: 14px; margin: 8px 0 0; }
+  .planlank { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 0 10px; }
+  .lank.plan { background: #3e7d5a; }
+  .ide { color: #555; font-size: 14px; margin: 4px 0 8px; }
+  .delomr { margin: 6px 0 10px; padding-left: 20px; font-size: 14px; color: #333; }
+  .vecka { color: #777; font-weight: normal; font-size: 14px; }
 </style>
 </head>
 <body>
@@ -45,6 +50,7 @@
 
 <script src="innehall/struktur.js"></script>
 <script src="hafte/manifest.js"></script>
+<script src="planering/lararvy-biologi.js"></script>
 <script>
   // Obs: enkel spärr mot nyfikna – inget riktigt skydd (sidan är statisk).
   var HASH = "a2c4a4f38df7a7d24eac2b8dc1c9f63487d6255208b978a29b9740423225ee3a";
@@ -80,8 +86,24 @@
     return k + '</div>';
   }
 
+  // Biologi i lärarvyn: planeringen som länk överst, därefter de nya områdena (kapitlen).
+  function biologiHtml(nod) {
+    var d = window.lararBiologi;
+    var ut = '<div class="planlank">' + lank(d.plan.pdf, "📋 Planering (PDF)", "plan") + lank(d.plan.xlsx, "Planering (Excel)", "plan") + '</div>';
+    d.omraden.forEach(function(o) {
+      var v = String(o.veckor).replace(".", ",");
+      var inre = '<p class="ide">' + o.ide + '</p><ul class="delomr">' +
+        o.delomraden.map(function(x) { return '<li>' + x.nr + ' ' + x.titel + ' <span class="vecka">(' + String(x.veckor).replace(".", ",") + ' v)</span></li>'; }).join("") + '</ul>';
+      var hafte = o.hafte ? kapitelHtml({ id: o.hafte, titel: o.titel }) : "";
+      inre += hafte || '<p class="tomt">Häften kommer.</p>';
+      ut += '<details><summary>' + o.nr + '. ' + o.titel + ' <span class="vecka">· ' + v + ' v</span></summary><div class="inre">' + inre + '</div></details>';
+    });
+    return '<details><summary>' + (nod.ikon ? nod.ikon + " " : "") + nod.titel + '</summary><div class="inre">' + ut + '</div></details>';
+  }
+
   // Bygger HTML för en gren; returnerar "" om inga häften finns under den.
   function grenHtml(nod, niva) {
+    if (nod.id === "biologi" && window.lararBiologi) { return biologiHtml(nod); }
     var egen = kapitelHtml(nod);
     var inre = (nod.barn || []).map(function(b) { return grenHtml(b, niva + 1); }).join("");
     if (!nod.barn || !nod.barn.length) { return egen; }

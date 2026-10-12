@@ -243,176 +243,373 @@ var struktur = [
       }
     ]
   },
+  // BIOLOGI START (genereras av planering/biologi_plan25.py)
   {
     id: "biologi",
-    titel: "Biologi",
+    titel: "Biologi (beta)",
     ikon: "🌱",
+    ramverk: true,
     barn: [
       {
         id: "biologi-vetenskap",
-        titel: "Vetenskap",
+        titel: "1. Biologi som vetenskap",
+        ramverk: true,
         barn: [
-          { id: "biologi-vetenskap-vad-ar-biologi", titel: "Vad är biologi?" },
-          { id: "biologi-vetenskap-metod", titel: "Vetenskaplig metod" },
-          { id: "biologi-vetenskap-hur-utvecklas-kunskap", titel: "Vetenskap och källkritik" }
+          {
+            id: "biologi-d-1-1",
+            titel: "1.1 Undersöka systematiskt",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-1-1-1", titel: "Från fråga till plan" },
+              { id: "biologi-m-1-1-2", titel: "Dokumentera: tabell, diagram, rapport" },
+              { id: "biologi-m-1-1-3", titel: "Värdera: slump, felkällor, slutsats" },
+              { id: "biologi-m-1-1-l", titel: "Labb: Reaktionstid som rättvist försök" }
+            ]
+          },
+          {
+            id: "biologi-d-1-2",
+            titel: "1.2 Modeller, källor och argument",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-1-2-1", titel: "Vad kan vetenskap pröva?" },
+              { id: "biologi-m-1-2-2", titel: "När forskare ändrat sig" },
+              { id: "biologi-m-1-2-3", titel: "Söka information och bedöma källor" },
+              { id: "biologi-m-1-2-l", titel: "Labb: Granska ett påstående" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-liv",
-        titel: "Liv",
+        id: "biologi-omrade-2",
+        titel: "2. Cellen och livets processer",
+        ramverk: true,
         barn: [
-          { id: "biologi-cellen", titel: "Celler (växtceller och djurceller)" },
-          { id: "biologi-organ", titel: "Organ och organsystem" },
-          { id: "biologi-liv-fotosyntes-cellandning", titel: "Fotosyntes och cellandning" }
+          {
+            id: "biologi-d-2-1",
+            titel: "2.1 Cellen",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-2-1-1", titel: "Cellteorin och mikroskopet" },
+              { id: "biologi-m-2-1-2", titel: "Djurcell och växtcell" },
+              { id: "biologi-m-2-1-3", titel: "Bakterier och encelliga organismer" },
+              { id: "biologi-m-2-1-l", titel: "Labb: Mikroskopera celler" }
+            ]
+          },
+          {
+            id: "biologi-d-2-2",
+            titel: "2.2 Fotosyntes och cellandning",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-2-2-1", titel: "Växten som producent" },
+              { id: "biologi-m-2-2-2", titel: "Cellandning" },
+              { id: "biologi-m-2-2-3", titel: "Processerna tillsammans" },
+              { id: "biologi-m-2-2-l", titel: "Labb: Jäst och koldioxid" }
+            ]
+          },
+          {
+            id: "biologi-d-2-3",
+            titel: "2.3 Organ och organsystem",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-2-3-1", titel: "Specialiserade celler och vävnader" },
+              { id: "biologi-m-2-3-2", titel: "Kroppens organsystem – översikt" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-mangfald",
-        titel: "Biologisk mångfald",
+        id: "biologi-omrade-3",
+        titel: "3. Biologisk mångfald",
+        ramverk: true,
         barn: [
-          { id: "biologi-mangfald-vad-ar", titel: "Vad är biologisk mångfald?" },
-          { id: "biologi-mangfald-varfor-viktig", titel: "Varför är biologisk mångfald viktig?" },
-          { id: "biologi-mangfald-hot", titel: "Hot mot den biologiska mångfalden" }
-        ]
-      },
-      {
-        id: "biologi-organismvarlden",
-        titel: "Organismvärlden",
-        barn: [
-          { id: "biologi-organismvarlden-alger-sporvaxter-svampar-lavar", titel: "Alger, sporväxter, svampar och lavar" },
-          { id: "biologi-organismvarlden-frovaxter", titel: "Fröväxter" },
-          { id: "biologi-organismvarlden-ryggradslosa-djur", titel: "Ryggradslösa djur" },
-          { id: "biologi-organismvarlden-ryggradsdjur", titel: "Ryggradsdjur" }
+          {
+            id: "biologi-d-3-1",
+            titel: "3.1 Mångfald, hot och ekosystemtjänster",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-3-1-1", titel: "Gener, arter och ekosystem" },
+              { id: "biologi-m-3-1-2", titel: "Ekosystemtjänster" },
+              { id: "biologi-m-3-1-3", titel: "Hoten mot mångfalden" },
+              { id: "biologi-m-3-1-l", titel: "Labb: Artinventering i en provruta" }
+            ]
+          },
+          {
+            id: "biologi-d-3-2",
+            titel: "3.2 Gruppera och organismvärlden",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-3-2-1", titel: "Rikena" },
+              { id: "biologi-m-3-2-2", titel: "Bestämningsnycklar" },
+              { id: "biologi-m-3-2-3", titel: "Anpassningar" },
+              { id: "biologi-m-3-2-l", titel: "Labb: Artbestämning med nyckel" }
+            ]
+          }
         ]
       },
       {
         id: "biologi-ekologi",
-        titel: "Ekologi",
+        titel: "4. Ekologi",
+        ramverk: true,
         barn: [
-          { id: "biologi-ekologi-population-resurser", titel: "Population och resurser" },
-          { id: "biologi-ekologi-naringskedjor-naringsvavar", titel: "Näringskedjor och näringsvävar" },
-          { id: "biologi-ekologi-liv-i-samspel", titel: "Liv i samspel" },
-          { id: "biologi-ekologi-energi-materia", titel: "Energi och materia" },
-          { id: "biologi-ekologi-systems-kanslighet", titel: "Ekosystems känslighet" },
-          { id: "biologi-ekologi-ekosystem", titel: "Ekosystem" },
-          { id: "biologi-ekologi-hallbar-utveckling", titel: "Hållbar utveckling" }
+          {
+            id: "biologi-d-4-1",
+            titel: "4.1 Ekosystem och energi",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-4-1-1", titel: "Vad är ett ekosystem?" },
+              { id: "biologi-m-4-1-2", titel: "Producenter, konsumenter och näringsvävar" },
+              { id: "biologi-m-4-1-3", titel: "Energiflöde och biomassa" },
+              { id: "biologi-m-4-1-l", titel: "Labb: Energi i en näringskedja – modellspel" }
+            ]
+          },
+          {
+            id: "biologi-d-4-2",
+            titel: "4.2 Materiens kretslopp",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-4-2-1", titel: "Materia tillverkas inte och försvinner inte" },
+              { id: "biologi-m-4-2-2", titel: "Kolets kretslopp" },
+              { id: "biologi-m-4-2-3", titel: "Nedbrytning" },
+              { id: "biologi-m-4-2-l", titel: "Labb: Nedbrytning i jord" }
+            ]
+          },
+          {
+            id: "biologi-d-4-3",
+            titel: "4.3 Populationer och samspel",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-4-3-1", titel: "Populationer och förändring" },
+              { id: "biologi-m-4-3-2", titel: "Begränsande faktorer" },
+              { id: "biologi-m-4-3-3", titel: "Konkurrens, jakt och samarbete" },
+              { id: "biologi-m-4-3-l", titel: "Labb: Rovdjur–bytesmodell" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-matspjalkning-naringslara",
-        titel: "Matspjälkning och näringslära",
+        id: "biologi-omrade-5",
+        titel: "5. Människan och miljön",
+        ramverk: true,
         barn: [
-          { id: "biologi-matspjalkning-matens-vag", titel: "Matens väg genom kroppen" },
-          { id: "biologi-matspjalkning-naringsamnen", titel: "Näringsämnen" },
-          { id: "biologi-matspjalkning-energi-kost", titel: "Energi och kost" }
+          {
+            id: "biologi-d-5-1",
+            titel: "5.1 Påverkan på naturen och klimat",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-5-1-1", titel: "Övergödning" },
+              { id: "biologi-m-5-1-2", titel: "Växthuseffekten" },
+              { id: "biologi-m-5-1-3", titel: "Följder för arter och ekosystem" },
+              { id: "biologi-m-5-1-l", titel: "Labb: Växthuseffekten – modell" }
+            ]
+          },
+          {
+            id: "biologi-d-5-2",
+            titel: "5.2 Hållbar utveckling och ställningstagande",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-5-2-1", titel: "Vad är hållbar utveckling?" },
+              { id: "biologi-m-5-2-2", titel: "Naturresurser och ekosystemtjänster" },
+              { id: "biologi-m-5-2-3", titel: "Vad kan jag och samhället göra?" },
+              { id: "biologi-m-5-2-l", titel: "Labb: Argumentera i en miljöfråga" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-andning-blodomlopp",
-        titel: "Andning och blodomlopp",
+        id: "biologi-omrade-6",
+        titel: "6. Kroppens system: mat, andning och blod",
+        ramverk: true,
         barn: [
-          { id: "biologi-andning-lungor-hjarta", titel: "Lungor och hjärta" },
-          { id: "biologi-andning-blod-syretransport", titel: "Blod och syretransport" }
+          {
+            id: "biologi-d-6-1",
+            titel: "6.1 Mat och matspjälkning",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-6-1-1", titel: "Kolhydrater, proteiner och fetter" },
+              { id: "biologi-m-6-1-2", titel: "Matens väg och spjälkning" },
+              { id: "biologi-m-6-1-3", titel: "Kostråd och energibalans" },
+              { id: "biologi-m-6-1-l", titel: "Labb: Enzymförsök" }
+            ]
+          },
+          {
+            id: "biologi-d-6-2",
+            titel: "6.2 Andning, blod och samverkan",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-6-2-1", titel: "Luftvägar och lungor" },
+              { id: "biologi-m-6-2-2", titel: "Hjärta och blodkärl" },
+              { id: "biologi-m-6-2-3", titel: "Blodomloppet och syretransport" },
+              { id: "biologi-m-6-2-l", titel: "Labb: Puls och andning vid belastning" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-immunforsvar-sjukdomar",
-        titel: "Immunförsvar och sjukdomar",
+        id: "biologi-omrade-7",
+        titel: "7. Infektioner och immunförsvar",
+        ramverk: true,
         barn: [
-          { id: "biologi-immunforsvar-bakterier", titel: "Bakterier" },
-          { id: "biologi-immunforsvar-virus", titel: "Virus" },
-          { id: "biologi-immunforsvar-vaccination", titel: "Vaccination" },
-          { id: "biologi-immunforsvar-antibiotika", titel: "Antibiotika" },
-          { id: "biologi-immunforsvar-immunforsvar", titel: "Immunförsvar" }
+          {
+            id: "biologi-d-7-1",
+            titel: "7.1 Bakterier, virus och smitta",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-7-1-1", titel: "Bakterier och virus" },
+              { id: "biologi-m-7-1-2", titel: "Smittvägar" },
+              { id: "biologi-m-7-1-3", titel: "Förebygga smitta" },
+              { id: "biologi-m-7-1-l", titel: "Labb: Smittspridningsmodell med handtvätt" }
+            ]
+          },
+          {
+            id: "biologi-d-7-2",
+            titel: "7.2 Immunförsvar, vaccin och antibiotika",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-7-2-1", titel: "Vita blodkroppar och antikroppar" },
+              { id: "biologi-m-7-2-2", titel: "Vaccination" },
+              { id: "biologi-m-7-2-3", titel: "Antibiotika och resistens" },
+              { id: "biologi-m-7-2-l", titel: "Labb: Granska ett vaccinpåstående" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-genetik",
-        titel: "Genetik",
+        id: "biologi-omrade-8",
+        titel: "8. Arv, genetik och genteknik",
+        ramverk: true,
         barn: [
-          { id: "biologi-genetik-dna", titel: "DNA" },
-          { id: "biologi-genetik-gener", titel: "Gener" },
-          { id: "biologi-genetik-kromosomer", titel: "Kromosomer" },
-          { id: "biologi-genetik-nedarvning-arftlighet", titel: "Nedärvning och ärftlighet" },
-          { id: "biologi-genetik-dominanta-recessiva-anlag", titel: "Dominanta och recessiva anlag" }
+          {
+            id: "biologi-d-8-1",
+            titel: "8.1 DNA och nedärvning",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-8-1-1", titel: "DNA, gener och kromosomer" },
+              { id: "biologi-m-8-1-2", titel: "Anlag och alleler" },
+              { id: "biologi-m-8-1-3", titel: "Korsningsschema" },
+              { id: "biologi-m-8-1-l", titel: "Labb: DNA ur frukt" }
+            ]
+          },
+          {
+            id: "biologi-d-8-2",
+            titel: "8.2 Arv och miljö, mutationer och genteknik",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-8-2-1", titel: "Arv och miljö" },
+              { id: "biologi-m-8-2-2", titel: "Gensax, GMO och kloning" },
+              { id: "biologi-m-8-2-3", titel: "Etiska frågor" },
+              { id: "biologi-m-8-2-l", titel: "Labb: Etisk bedömning av genteknik" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-fortplantning-sexualitet-relationer",
-        titel: "Fortplantning, sexualitet och relationer",
+        id: "biologi-omrade-9",
+        titel: "9. Evolution och livets historia",
+        ramverk: true,
         barn: [
-          { id: "biologi-fortplantning-pubertet", titel: "Pubertet" },
-          { id: "biologi-fortplantning-fortplantning", titel: "Fortplantning" },
-          { id: "biologi-fortplantning-graviditet", titel: "Graviditet" },
-          { id: "biologi-fortplantning-preventivmedel", titel: "Preventivmedel" },
-          { id: "biologi-fortplantning-sti", titel: "Sexuellt överförbara infektioner (STI)" },
-          { id: "biologi-fortplantning-relationer-samtycke", titel: "Relationer och samtycke" }
+          {
+            id: "biologi-d-9-1",
+            titel: "9.1 Livets historia och bevis",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-9-1-1", titel: "Jordens och livets tidslinje" },
+              { id: "biologi-m-9-1-2", titel: "Fossil och massutdöenden" },
+              { id: "biologi-m-9-1-3", titel: "Fossil och jämförande anatomi" },
+              { id: "biologi-m-9-1-l", titel: "Labb: Jämför skelett och bygg släktträd" }
+            ]
+          },
+          {
+            id: "biologi-d-9-2",
+            titel: "9.2 Evolutionens mekanismer",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-9-2-1", titel: "Variation och naturligt urval" },
+              { id: "biologi-m-9-2-2", titel: "Artbildning" },
+              { id: "biologi-m-9-2-3", titel: "Naturvetenskap och andra sätt att förklara" },
+              { id: "biologi-m-9-2-l", titel: "Labb: Modellförsök om urval" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-psykisk-fysisk-ohalsa",
-        titel: "Psykisk och fysisk ohälsa",
+        id: "biologi-omrade-10",
+        titel: "10. Hälsa och levnadsvanor",
+        ramverk: true,
         barn: [
-          { id: "biologi-ohalsa-stress", titel: "Stress" },
-          { id: "biologi-ohalsa-somn", titel: "Sömn" },
-          { id: "biologi-ohalsa-motion", titel: "Motion" },
-          { id: "biologi-ohalsa-levnadsvanor", titel: "Levnadsvanor" }
+          {
+            id: "biologi-d-10-1",
+            titel: "10.1 Stress, sömn och psykisk hälsa",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-10-1-1", titel: "Stress i kroppen" },
+              { id: "biologi-m-10-1-2", titel: "Sömn och motion" },
+              { id: "biologi-m-10-1-3", titel: "Psykisk ohälsa och stöd" },
+              { id: "biologi-m-10-1-l", titel: "Labb: Sömn och vanor: statistik" }
+            ]
+          },
+          {
+            id: "biologi-d-10-2",
+            titel: "10.2 Beroendeframkallande medel",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-10-2-1", titel: "Alkohol, tobak, nikotin och droger" },
+              { id: "biologi-m-10-2-2", titel: "Hjärnan och beroende" },
+              { id: "biologi-m-10-2-3", titel: "Förebyggande och stöd" },
+              { id: "biologi-m-10-2-l", titel: "Labb: Läs och tolka statistik om tobak och alkohol" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-evolution",
-        titel: "Evolution",
+        id: "biologi-omrade-11",
+        titel: "11. Pubertet, sexualitet och relationer",
+        ramverk: true,
         barn: [
-          { id: "biologi-evolution-naturligt-urval", titel: "Naturligt urval" },
-          { id: "biologi-evolution-mutationer", titel: "Mutationer" },
-          { id: "biologi-evolution-anpassningar", titel: "Anpassningar" },
-          { id: "biologi-evolution-artbildning", titel: "Artbildning" }
+          {
+            id: "biologi-d-11-1",
+            titel: "11.1 Pubertet, reproduktion, preventivmedel och STI",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-11-1-1", titel: "Pubertet och könsorgan" },
+              { id: "biologi-m-11-1-2", titel: "Befruktning och graviditet" },
+              { id: "biologi-m-11-1-3", titel: "Preventivmedel och STI" },
+              { id: "biologi-m-11-1-l", titel: "Labb: Faktagranska information om skydd" }
+            ]
+          },
+          {
+            id: "biologi-d-11-2",
+            titel: "11.2 Relationer, identitet och samtycke",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-11-2-1", titel: "Sexualitet och identitet" },
+              { id: "biologi-m-11-2-2", titel: "Relationer, kärlek och ansvar" },
+              { id: "biologi-m-11-2-3", titel: "Samtycke och gränser" },
+              { id: "biologi-m-11-2-l", titel: "Labb: Samtycke – fallövning" }
+            ]
+          }
         ]
       },
       {
-        id: "biologi-livets-historia",
-        titel: "Livets historia",
+        id: "biologi-omrade-12",
+        titel: "12. Repetition inför nationella proven",
+        ramverk: true,
         barn: [
-          { id: "biologi-livets-historia-fossiler", titel: "Fossiler" },
-          { id: "biologi-livets-historia-jordens-utveckling", titel: "Jordens utveckling" },
-          { id: "biologi-livets-historia-evolutionens-bevis", titel: "Evolutionens bevis" }
+          {
+            id: "biologi-d-12-1",
+            titel: "12.1 Repetition inför nationella proven",
+            ramverk: true,
+            barn: [
+              { id: "biologi-m-12-1-1", titel: "Röda trådar" },
+              { id: "biologi-m-12-1-2", titel: "Planera och värdera en undersökning" },
+              { id: "biologi-m-12-1-3", titel: "Argumentera i miljö- och hälsofrågor" },
+              { id: "biologi-m-12-1-l", titel: "Labb: Provlik mini-undersökning" }
+            ]
+          }
         ]
-      },
-      {
-        id: "biologi-ekologi-fordjupning",
-        titel: "Ekologi fördjupning",
-        barn: [
-          { id: "biologi-ekologi-fordjupning-kretslopp", titel: "Kretslopp" },
-          { id: "biologi-ekologi-fordjupning-kolcykel", titel: "Kolcykel" },
-          { id: "biologi-ekologi-fordjupning-kvavecykel", titel: "Kvävecykel" },
-          { id: "biologi-ekologi-fordjupning-biologisk-mangfald", titel: "Biologisk mångfald" },
-          { id: "biologi-ekologi-fordjupning-ekosystemtjanster", titel: "Ekosystemtjänster" }
-        ]
-      },
-      {
-        id: "biologi-klimat-hallbar-utveckling",
-        titel: "Klimat och hållbar utveckling",
-        barn: [
-          { id: "biologi-klimat-klimatforandringar", titel: "Klimatförändringar" },
-          { id: "biologi-klimat-overgodning", titel: "Övergödning" },
-          { id: "biologi-klimat-forsurning", titel: "Försurning" },
-          { id: "biologi-klimat-invasiva-arter", titel: "Invasiva arter" },
-          { id: "biologi-klimat-naturvard", titel: "Naturvård" }
-        ]
-      },
-      {
-        id: "biologi-informationsgranskning-argument",
-        titel: "Informationsgranskning och biologiska argument",
-        barn: [
-          { id: "biologi-informationsgranskning-kallkritik", titel: "Källkritik" },
-          { id: "biologi-informationsgranskning-halsopastaenden", titel: "Granskning av hälsopåståenden" },
-          { id: "biologi-informationsgranskning-vetenskapliga-argument", titel: "Vetenskapliga argument" },
-          { id: "biologi-informationsgranskning-statistik-diagram", titel: "Statistik och diagram" }
-        ]
-      },
-      { id: "biologi-repetition-np", titel: "Repetition inför nationella proven" }
+      }
     ]
   },
+  // BIOLOGI END
   {
     id: "kemi",
     titel: "Kemi",

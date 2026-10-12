@@ -2,7 +2,7 @@
 """Biologiplanering på ca 25 veckor. Bygger på momenten i biologi_plan.py (den utökade planen, 77 veckor):
 varje delområde får ett urval KÄRNMOMENT (ryms i ca en vecka); resten hamnar under "Om tid / fördjupning".
 Kör: python3 planering/biologi_plan25.py   -> biologi.md, biologi-planering.xlsx, biologi-planering.pdf"""
-import sys, re, html, collections
+import sys, re, html, collections, json
 sys.path.insert(0, "planering")
 import biologi_plan as B
 import biologi_extra as X
@@ -227,7 +227,7 @@ def main():
     print("S3 i områden:", sorted(s3))
     for a in NEW: print(a[0], sorted(area_f[a[0]]), vecka(sum(d[2] for d in a[3])), "v")
     if missing_ids or dup or unk or ej or bad: sys.exit(1)
-    skriv_md(seen, s3, weeks, nk, ne, nl); skriv_xlsx(); skriv_pdf()
+    skriv_md(seen, s3, weeks, nk, ne, nl); skriv_xlsx(); skriv_pdf(); skriv_js(); skriv_struktur()
 
 # ---- Markdown ---------------------------------------------------------------
 def skriv_md(seen, s3, weeks, nk, ne, nl):
@@ -364,6 +364,35 @@ tr.lab td{background:#f3f9f5}
     with sync_playwright() as pw:
         b = pw.chromium.launch(executable_path="/opt/pw-browsers/chromium"); pg = b.new_page()
         pg.goto("file:///tmp/plan.html"); pg.pdf(path="planering/biologi-planering.pdf", prefer_css_page_size=True, print_background=True); b.close()
+
+# ---- Data till lärarvyn (lararsida.html) ------------------------------------
+HAFTE_NYCKEL = {1: "biologi-vetenskap", 4: "biologi-ekologi"}   # områden som redan har ombyggda häften
+
+def skriv_js():
+    import json
+    data = {"plan": {"pdf": "planering/biologi-planering.pdf", "xlsx": "planering/biologi-planering.xlsx"},
+            "omraden": [{"nr": a[0], "titel": a[1], "ide": a[2], "veckor": sum(d[2] for d in a[3]),
+                         "hafte": HAFTE_NYCKEL.get(a[0]),
+                         "delomraden": [{"nr": d[0], "titel": d[1], "veckor": d[2]} for d in a[3]]} for a in NEW]}
+    open("planering/lararvy-biologi.js", "w", encoding="utf-8").write(
+        "// Genereras av planering/biologi_plan25.py – ändra inte för hand.\nwindow.lararBiologi = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
+
+# ---- Ramverk i elevvyn (innehall/struktur.js) ---------------------------------
+def skriv_struktur():
+    def js(t): return json.dumps(t, ensure_ascii=False)
+    def oid(a): return HAFTE_NYCKEL.get(a[0], f"biologi-omrade-{a[0]}")
+    ut = []
+    for a in NEW:
+        dl = []
+        for d in a[3]:
+            mo = [f'              {{ id: "biologi-m-{d[0].replace(".", "-")}-{n}", titel: {js(mom(i)["titel"])} }}' for n, i in enumerate(d[5], 1)]
+            if d[0] in LAB25: mo.append(f'              {{ id: "biologi-m-{d[0].replace(".", "-")}-l", titel: {js("Labb: " + LAB25[d[0]][0])} }}')
+            dl.append(f'          {{\n            id: "biologi-d-{d[0].replace(".", "-")}",\n            titel: {js(d[0] + " " + d[1])},\n            ramverk: true,\n            barn: [\n' + ",\n".join(mo) + "\n            ]\n          }")
+        ut.append(f'      {{\n        id: {js(oid(a))},\n        titel: {js(f"{a[0]}. {a[1]}")},\n        ramverk: true,\n        barn: [\n' + ",\n".join(dl) + "\n        ]\n      }")
+    block = '  // BIOLOGI START (genereras av planering/biologi_plan25.py)\n  {\n    id: "biologi",\n    titel: "Biologi (beta)",\n    ikon: "🌱",\n    ramverk: true,\n    barn: [\n' + ",\n".join(ut) + '\n    ]\n  },\n  // BIOLOGI END\n'
+    s = open("innehall/struktur.js", encoding="utf-8").read()
+    a0 = s.index("  // BIOLOGI START"); b0 = s.index("  // BIOLOGI END\n") + len("  // BIOLOGI END\n")
+    open("innehall/struktur.js", "w", encoding="utf-8").write(s[:a0] + block + s[b0:])
 
 if __name__ == "__main__":
     main()

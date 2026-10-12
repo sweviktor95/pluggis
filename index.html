@@ -1139,7 +1139,7 @@
     var amnen = struktur.slice().sort(function(x, y) { return x.titel.localeCompare(y.titel, "sv"); });
     amnen.forEach(function(amne) {
       var r = raknaFramsteg(amne);
-      if (r.totalt === 0 && !(window.hafte && window.hafte[amne.id])) {
+      if (r.totalt === 0 && !(window.hafte && window.hafte[amne.id]) && !amne.ramverk) {
         // Inget innehåll än: låst ruta som inte går att öppna.
         html += '<div class="amne-ruta last" aria-disabled="true" title="Kommer snart">' +
                 '<span class="amne-ikon">' + (amne.ikon || "📘") + '</span>' +
@@ -1151,7 +1151,7 @@
       html += '<div class="amne-ruta" onclick="visNod(\'' + amne.id + '\')">' +
               '<span class="amne-ikon">' + (amne.ikon || "📘") + '</span>' +
               '<span class="amne-titel">' + amne.titel + '</span>' +
-              '<span class="amne-framsteg">' + r.klara + ' av ' + r.totalt + ' klara</span>' +
+              '<span class="amne-framsteg">' + (r.totalt === 0 ? 'Under uppbyggnad' : r.klara + ' av ' + r.totalt + ' klara') + '</span>' +
               '</div>';
     });
     html += '</div>';
@@ -1184,7 +1184,7 @@
                 Math.round(100 * sammanfattning.klara / sammanfattning.totalt) + '%"></div></div>';
       }
       node.barn.forEach(function(barn) {
-        if (raknaFramsteg(barn).totalt === 0 && !(window.hafte && window.hafte[barn.id])) {
+        if (raknaFramsteg(barn).totalt === 0 && !(window.hafte && window.hafte[barn.id]) && !barn.ramverk) {
           // Inget innehåll här än: låst knapp som inte går att öppna.
           html += '<button class="knapp last-knapp" disabled aria-disabled="true" title="Kommer snart">🔒 ' + barn.titel +
                   ' <span class="last-text">– kommer snart</span></button>';
