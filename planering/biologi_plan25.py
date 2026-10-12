@@ -213,7 +213,7 @@ def kontroll():
     bad = [d[0] for a in NEW for d in a[3] if d[2] >= 1 and len(d[5]) != 3]
     return seen, area_f, s3, missing_ids, dup, unk, ej, weeks, nk, ne, nl, bad
 
-def kl(ks, pat): return [f"{k} {X.SHORT[k]}" for k in ks if re.match(pat, k)]
+def kl(ks, pat): return [(B.SYFTE[k] if k.startswith("S") and not k.startswith("SU") else X.SHORT[k]) for k in ks if re.match(pat, k)]
 PS, PC, PF = r"S\d", r"(NM|KH|SU)", r"F"
 def vecka(v): return f"{v:g}".replace(".", ",")
 
@@ -236,7 +236,7 @@ def skriv_md(seen, s3, weeks, nk, ne, nl):
     w("Status: förslag, väntar på granskning. Genereras av `planering/biologi_plan25.py` – ändra där, inte här.\n")
     w(f"Planen är kortad till ca {vecka(weeks)} veckor: {len(NEW)} områden, {sum(len(a[3]) for a in NEW)} delområden (ca en vecka vardera), {nk} lektionsmoment och {nl} labbpass. Det som inte ryms står under *Om tid / fördjupning* ({ne} moment) och kan användas i fördjupningshäftena eller om tiden räcker.\n")
     w("Tidsram: ca 2,5 timmar lektion per vecka (tre moment à ca 50 minuter) plus ca 45 minuter labb per vecka. Ett delområde tar ca en vecka: tre lektionsmoment och ett labbpass.\n")
-    w("Koder: **S1–S8** = ämnets syfte, **NM/KH/SU** = centralt innehåll, **F1–F3** = förmågorna. Syftesdelar som följer av förmåga eller innehåll är härledda: F1→S2, F3→S7, SU3→S6, SU4→S4. Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).\n")
+    w("Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilket **centralt innehåll** och vilken **förmåga** (begrepp/modeller, granska/ta ställning, undersöka) det bygger på. Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).\n")
     w("## Översikt\n"); w("| Område | Delområden | Veckor |"); w("|---|---|---|")
     for a in NEW: w(f"| {a[0]}. {a[1]} | {', '.join(d[1] for d in a[3])} | {vecka(sum(d[2] for d in a[3]))} |")
     w(f"| **Totalt** | | **{vecka(weeks)}** |\n")
@@ -303,7 +303,7 @@ def skriv_xlsx():
     seen = kontroll()[0]
     sheet(wb.create_sheet("Täckning"), ["Kod", "Innehåll", "Antal lektioner/labbar"], [[k, v, seen[k]] for k, v in list(B.SYFTE.items()) + list(B.CI.items()) + list(B.FORM.items())], [8, 110, 14])
     wo = wb.create_sheet("Om planen", 0)
-    for r in ["Biologi åk 7–9 – planering på ca 25 veckor (Lgr22). Förslag, väntar på granskning.", "Nivåer: område → delområde (ca 1 vecka) → moment.", "Tidsram: ca 2,5 h lektion (tre moment) + ca 45 min labb per vecka.", "Syftesdelar härleds: F1→S2, F3→S7, SU3→S6, SU4→S4. S1, S3, S5, S8 är satta för hand.", "Begrepp, labbar och veckor är förslag, inte granskade mot läromedel eller skolans säkerhetsregler.", "Källa: planering/biologi_plan25.py i repot (ändra där, inte här)."]:
+    for r in ["Biologi åk 7–9 – planering på ca 25 veckor (Lgr22). Förslag, väntar på granskning.", "Nivåer: område → delområde (ca 1 vecka) → moment.", "Tidsram: ca 2,5 h lektion (tre moment) + ca 45 min labb per vecka.", "Syfte: den del av ämnets syfte (i sak) som momentet bygger på. Delar som följer av förmåga eller innehåll är härledda automatiskt.", "Begrepp, labbar och veckor är förslag, inte granskade mot läromedel eller skolans säkerhetsregler.", "Källa: planering/biologi_plan25.py i repot (ändra där, inte här)."]:
         wo.append([r])
     for row in wo.iter_rows():
         for c in row: c.font = F
@@ -332,7 +332,7 @@ tr.lab td{background:#f3f9f5}
     o = ['<!doctype html><meta charset="utf-8"><style>' + css + "</style>"]
     weeks = kontroll()[7]
     o.append(f'<div class="pg"><h1>Biologi åk 7–9 – planering</h1><div class="sub">Ca {vecka(weeks)} veckor: område → delområde (ca en vecka) → moment, med begrepp, förklaringsmodeller, labbpass och koppling till kursplanen (Lgr22). Förslag, väntar på granskning.</div>')
-    o.append('<div class="leg"><b>Så läser du planen.</b><ul style="margin:3pt 0 0 14pt;padding:0"><li><b>Tidsram:</b> ca 2,5 timmar lektion (tre moment) plus ca 45 minuter labb per vecka.</li><li><b>Område</b> = ett kapitel. <b>Delområde</b> = ca en veckas arbete. <b>Moment</b> = en lektion: vad som tas upp i texten.</li><li><b>Koppling</b> visar vilken del av ämnets <b>syfte</b> (S), vilket <b>centralt innehåll</b> (NM, KH, SU) och vilken <b>förmåga</b> (F1 begrepp/modeller, F2 granska/ta ställning, F3 undersöka) momentet bygger på.</li><li>Nivåraden visar vad som skiljer godtagbara (E), goda (C) och mycket goda (A) kunskaper i delområdet.</li><li><b>Om tid / fördjupning</b> = moment som inte ryms i veckan.</li><li>🧪 = labbpass (ca 45 min).</li></ul></div>')
+    o.append('<div class="leg"><b>Så läser du planen.</b><ul style="margin:3pt 0 0 14pt;padding:0"><li><b>Tidsram:</b> ca 2,5 timmar lektion (tre moment) plus ca 45 minuter labb per vecka.</li><li><b>Område</b> = ett kapitel. <b>Delområde</b> = ca en veckas arbete. <b>Moment</b> = en lektion: vad som tas upp i texten.</li><li><b>Koppling</b> visar vilken del av ämnets <b>syfte</b>, vilket <b>centralt innehåll</b> och vilken <b>förmåga</b> (begrepp/modeller, granska/ta ställning, undersöka) momentet bygger på.</li><li>Nivåraden visar vad som skiljer godtagbara (E), goda (C) och mycket goda (A) kunskaper i delområdet.</li><li><b>Om tid / fördjupning</b> = moment som inte ryms i veckan.</li><li>🧪 = labbpass (ca 45 min).</li></ul></div>')
     o.append('<table><tr><th>Område</th><th>Delområden</th><th style="width:12%">Veckor</th></tr>')
     for a in NEW: o.append(f'<tr><td><b>{a[0]}. {e(a[1])}</b></td><td>{e(", ".join(d[1] for d in a[3]))}</td><td>{vecka(sum(d[2] for d in a[3]))}</td></tr>')
     o.append(f'<tr><td><b>Totalt</b></td><td></td><td><b>{vecka(weeks)}</b></td></tr></table></div>')
