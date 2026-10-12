@@ -2,7 +2,8 @@
 """Källan till planering/biologi.md. Kör: python3 planering/biologi_plan.py
 Skriptet kontrollerar att varje kod i syfte och centralt innehåll täcks och skriver biologi.md.
 Nivåer: OMRÅDE -> DELOMRÅDE (1-2 veckor) -> MOMENT (ca en lektion, vad som tas upp i texten)."""
-import sys, collections
+import sys, collections, re
+sys.path.insert(0, "planering")
 
 # ---- Koder -------------------------------------------------------------
 SYFTE = {
@@ -98,7 +99,7 @@ P.append((2, "Cellen och livets processer",
   [("Cellandning", "Ämnen in/ut, mitokondrien, att alla levande celler andas, energi till livsfunktioner.", "NM5 KH1 F1"),
    ("Jäsning", "Energi utan syre: jäst och mjölksyra; jämförelse med cellandning.", "NM5 F1"),
    ("Processerna tillsammans", "Fotosyntes och cellandning som varandras motsatser; kol och energi i kretslopp.", "NM5 F1"),
-   ("Elevlab: Jäst eller vattenpest", "Undersök koldioxid- eller syrebildning; planera, genomför, värdera.", "NM5 SU1 S8 F3")]),
+   ("Elevlab: Jäst och koldioxid", "Undersök koldioxidbildning; planera, genomför, värdera.", "NM5 SU1 S8 F3")]),
  ("2.4", "Från cell till organism", 1,
   "Eleven kan beskriva hur celler bygger upp vävnader, organ och organsystem och hur de samverkar.",
   "E: ger nivåordningen och exempel. C: förklarar samverkan mellan två organsystem. A: resonerar om hur en störning i ett system påverkar andra.",
@@ -168,7 +169,7 @@ P.append((4, "Ekologi",
    ("Begränsande faktorer", "Föda, plats, sjukdom; bärkraft.", "NM4 F1"),
    ("Konkurrens, jakt och samarbete", "Predation, parasitism, symbios; samutveckling som exempel på evolution.", "NM4 NM1 S3 F1"),
    ("Ekosystems känslighet", "Nyckelarter, störningar, återhämtning.", "NM4 F1"),
-   ("Elevlab: Nedbrytning eller provyta", "Planera och genomför en fältstudie och värdera.", "NM4 SU1 S8 F3")]),
+   ("Elevlab: Nedbrytning i jord", "Planera och genomför en fältstudie och värdera.", "NM4 SU1 S8 F3")]),
 ]))
 
 P.append((5, "Människan och miljön",
@@ -265,7 +266,7 @@ P.append((8, "Infektioner och immunförsvar",
    ("Antibiotika", "Verkar på bakterier, inte virus.", "KH2 F1"),
    ("Resistens", "Hur resistens uppstår genom naturligt urval; varför antibiotika ska användas rätt.", "KH2 NM1 S3 F1"),
    ("Granska påståenden om vaccin och smitta", "Källkritik och argument.", "KH2 SU3 SU4 S6 F2"),
-   ("Elevlab: Smittspridningsmodell eller bakterietillväxt", "Planera, genomför och värdera.", "KH2 SU1 S8 F3")]),
+   ("Elevlab: Smittspridningsmodell", "Planera, genomför och värdera modellen.", "KH2 SU1 S8 F3")]),
 ]))
 
 P.append((9, "Arv och genetik",
@@ -420,6 +421,19 @@ P.append((14, "Repetition inför nationella proven",
   [("Provlik uppgiftsserie", "Blandade uppgifter.", "F1 F2 F3")]),
 ]))
 
+def expand(tags):
+    """Härleder syftesdelar som följer av förmåga/innehåll: F1->S2, F3->S7, SU3->S6, SU4->S4."""
+    ks = tags.split()
+    extra = []
+    if "F1" in ks: extra.append("S2")
+    if "F3" in ks: extra.append("S7")
+    if "SU3" in ks: extra.append("S6")
+    if "SU4" in ks: extra.append("S4")
+    out = []
+    for k in ks + extra:
+        if k not in out: out.append(k)
+    return out
+
 # ---- Kontroll ------------------------------------------------------------
 def check():
     seen = collections.Counter(); area_f = collections.defaultdict(set); s3 = set(); bad = []
@@ -429,7 +443,7 @@ def check():
             n_d += 1; weeks += d[2]
             for m in d[5]:
                 n_m += 1
-                for t in m[2].split():
+                for t in expand(m[2]):
                     if t not in CODES: bad.append((m[0], t))
                     seen[t] += 1
                     if t.startswith("F"): area_f[a[0]].add(t)
@@ -455,6 +469,7 @@ def main():
     w("- **Delområde** – en snävare del som man kan arbeta med i 1–2 veckor (t.ex. Materiens kretslopp).")
     w("- **Moment** – en konkret lektion: vad som tas upp i texten. Varje moment är kodat mot kursplanen.")
     w("- Varje område (utom repetitionen) har minst en elevlab. Evolutionsperspektivet (S3) finns i åtta av fjorton områden, inte bara i kapitel 11.\n")
+    w("Syftesdelar som följer av förmåga eller innehåll är härledda automatiskt: begrepp (F1) ger S2, undersökning (F3) ger S7, informationsgranskning (SU3) ger S6 och argumentation (SU4) ger S4. S1, S3, S5 och S8 är satta för hand där momentet tydligt bygger på dem.\n")
     w("Koder: **S1–S8** = ämnets syfte, **NM/KH/SU** = centralt innehåll, **F1–F3** = förmågorna i kunskapskraven. Nivåraden i varje delområde beskriver vad som skiljer E, C och A i just det innehållet (kriterierna används som riktning, inte som facit).\n")
     w("## Översikt\n")
     w("| Område | Delområden | Veckor (förslag) |"); w("|---|---|---|")
@@ -473,15 +488,33 @@ def main():
         f = area_f[a[0]]
         w(f"| {a[0]}. {a[1]} | {'x' if 'F1' in f else ''} | {'x' if 'F2' in f else ''} | {'x' if 'F3' in f else ''} |")
     w("\n" + "Evolution (S3) finns i områdena: " + ", ".join(str(x) for x in sorted(s3)) + ".\n")
+    import biologi_extra as X
+    PS, PC, PF = r'S\d', r'(NM|KH|SU)', r'F'
+    def kodlista(ks, pat):
+        return ", ".join(f"{k} {X.SHORT[k]}" for k in ks if re.match(pat, k))
     w("## Planen\n")
+    w("Varje moment visar vad som tas upp, vilka begrepp som hör till, och vilken del av syftet (S), centralt innehåll (NM/KH/SU) och förmåga (F) det bygger på.\n")
     for a in P:
         w(f"## {a[0]}. {a[1]}\n"); w(f"*{a[2]}*\n")
         for d in a[3]:
             w(f"### {d[0]} {d[1]} ({d[2]} v)\n")
-            w(f"**Mål:** {d[3]}\n"); w(f"**Nivåer:** {d[4]}\n")
+            w(f"**Mål:** {d[3]}\n"); w(f"**Nivåer (E→A):** {d[4]}\n")
+            if d[0] in X.MODELLER: w(f"**Förklaringsmodeller:** {X.MODELLER[d[0]]}\n")
+            beg = X.BEGREPP[d[0]]
+            assert len(beg) == len(d[5]), (d[0], len(beg), len(d[5]))
+            w("| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |"); w("|---|---|---|---|---|---|")
             for i, m in enumerate(d[5], 1):
-                w(f"- **{d[0]}.{i} {m[0]}** – {m[1]} `{m[2]}`")
+                ks = expand(m[2])
+                lab = "🧪 " if m[0].startswith("Elevlab") else ""
+                syf = kodlista(ks, PS); cen = kodlista(ks, PC); fm = kodlista(ks, PF)
+                w(f"| {lab}**{d[0]}.{i} {m[0]}** | {m[1]} | {beg[i-1]} | {syf} | {cen} | {fm} |")
             w("")
+        if a[0] in X.LABB:
+            t, fr, var, sak = X.LABB[a[0]]
+            w(f"**🧪 Elevlab – {t}**  ")
+            w(f"Fråga: {fr}  ")
+            w(f"Upplägg: {var}  ")
+            w(f"Säkerhet/anmärkning: {sak}\n")
     w("## Öppna frågor\n")
     w("1. Antal veckor och lektioner per vecka beror på din timplan; ska jag skala planen efter den?")
     w("2. Kapitel 11 (evolution) ligger sent. Vill du flytta det tidigare, eftersom det är grunden i syftet?")
