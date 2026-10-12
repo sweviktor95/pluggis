@@ -70,3 +70,13 @@ body{background:var(--night);color:var(--paper);font:16px/1.5 system-ui,-apple-s
 .place{font-weight:700;font-size:15px;fill:#2a2118;paint-order:stroke;stroke:#fbf3dc;stroke-width:4px;stroke-linejoin:round}
 .ned{width:100%;height:auto;border-radius:6px;display:block;margin:8px 0 4px}
 .ord{background:#efe6cb;border-left:4px solid var(--brass);border-radius:6px;padding:8px 12px;margin:10px 0;font-size:.92rem}.ord b{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.ord ul{margin:4px 0 0;padding-left:18px}.ord li{margin:2px 0}
+
+.timeline{position:absolute;left:16px;right:16px;bottom:10px;z-index:2;pointer-events:none}
+.tl-lbl{font-family:var(--f-label,inherit);font-size:.78rem;color:#f4efe2;text-shadow:0 1px 4px rgba(0,0,0,.7);margin:0 0 3px 4px}
+.tl-track{position:relative;height:44px;background:rgba(42,33,24,.82);border-radius:6px}
+.tl-bar{position:absolute;left:4%;right:4%;top:14px;height:3px;background:#6b5b45}
+.tl-fill{height:100%;background:#e0b25a;transition:width 1.2s ease}
+.tl-dot{position:absolute;top:6px;width:19px;height:19px;margin-left:-9.5px;border-radius:50%;background:#4a3d2d;border:2px solid #9c8a6a;color:#f4efe2;font-size:.68rem;line-height:15px;text-align:center;font-weight:700}
+.tl-dot.done{background:#7a8f4a;border-color:#b8cc84}.tl-dot.now{background:#e0b25a;border-color:#fff;color:#2a2118;transform:scale(1.18)}
+.tl-yr{position:absolute;top:27px;transform:translateX(-50%);font-size:.7rem;color:#d8cdb6;white-space:nowrap}
+@media (min-width:860px){.timeline{right:436px}}

@@ -40,7 +40,16 @@ var KEY="pluggis-sim-"+S.id+"-v1";
 function save(){try{localStorage.setItem(KEY,JSON.stringify({cur:cur,done:done,firstTry:firstTry}))}catch(e){}}
 function load(){try{var d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d||!(d.cur>=0)||d.cur>=QUIZ||!Array.isArray(d.done)||d.done.length!==N)return null;return d}catch(e){return null}}
 function clear(){try{localStorage.removeItem(KEY)}catch(e){}}
-function steps(){stepsEl.innerHTML=ET.map(function(e,i){return '<span class="dot '+(done[i]?"done":"")+' '+(i===cur?"now":"")+'" title="'+e.x_etikett+'">'+(i+1)+'</span>'}).join("");
+function tl(){var sc=document.getElementById("scene"),el=document.getElementById("tl");var P=ET.filter(function(e){return typeof e.y==="number"});if(P.length<2){if(el)el.remove();return}
+  if(!el){el=document.createElement("div");el.id="tl";el.className="timeline";sc.appendChild(el)}
+  var a=Math.min.apply(null,P.map(function(e){return e.y})),b=Math.max.apply(null,P.map(function(e){return e.y})),span=(b-a)||1;
+  function yl(y){return y<0?(-y)+" f.Kr.":y+""}
+  function pos(e){return (4+92*(e.y-a)/span).toFixed(2)}
+  var now=cur>=0?ET[cur]:null,fill=0;if(now&&typeof now.y==="number")fill=+pos(now)-4;else if(cur>=0){fill=92}
+  var h='<div class="tl-lbl">'+(now&&typeof now.y==="number"?'<b>'+now.x_etikett+'</b> · '+now.tid:(cur<0?'Tidslinje · hur långt är det mellan platserna?':'Och sedan fram till idag'))+'</div><div class="tl-track"><div class="tl-bar"><div class="tl-fill" style="width:'+Math.max(0,fill/0.92)+'%"></div></div>';
+  P.forEach(function(e){var i=ET.indexOf(e);h+='<span class="tl-dot'+(done[i]?" done":"")+(i===cur?" now":"")+'" style="left:'+pos(e)+'%" title="'+e.x_etikett+' – '+e.tid+'">'+(i+1)+'</span>'});
+  h+='<span class="tl-yr" style="left:4%">'+yl(a)+'</span><span class="tl-yr" style="left:96%">'+yl(b)+'</span></div>';el.innerHTML=h}
+function steps(){tl();stepsEl.innerHTML=ET.map(function(e,i){return '<span class="dot '+(done[i]?"done":"")+' '+(i===cur?"now":"")+'" title="'+e.x_etikett+'">'+(i+1)+'</span>'}).join("");
   marksG.childNodes.forEach(function(g){var i=+g.dataset.i;g.classList.toggle("done",!!done[i]);g.classList.toggle("now",i===cur);g.style.display=(cur>=0&&i!==cur&&!done[i])?"none":""});
   zonG.childNodes.forEach(function(p){var i=+p.getAttribute("class").split(" z")[1];p.classList.toggle("on",!!done[i]||i===cur)});
   labG.childNodes.forEach(function(g){g.style.display=(+g.dataset.i===cur)?"":"none"});}
