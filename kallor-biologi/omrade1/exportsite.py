@@ -85,8 +85,8 @@ def test_fordj():
     ov = [{"typ": "fri", "fraga": q, "forslag": F.SVAR[i]} for i, (q, p) in enumerate(F.UPG)]
     return {"sektioner": [{"ikon": "💭", "titel": "Resonera och ta ställning", "text": ["Uppgifterna liknar de svåraste uppgifterna på nationella prov. Personer, rubriker och mätvärden är påhittade. Svara utförligt och resonera i flera led."], "ovningar": ov}]}
 TEST_GRUND = test_grund(); TEST_FORDJ = test_fordj()
-TITEL = {"biologi-m-1-1-1": "Vad är biologi?", "biologi-m-1-1-2": "Dokumentera", "biologi-m-1-1-3": "Värdera resultat", "biologi-m-1-1-l": "Labb",
-         "biologi-m-1-2-1": "Modeller", "biologi-m-1-2-2": "Källor", "biologi-m-1-2-3": "Argument", "biologi-m-1-2-l": "Labb",
+TITEL = {"biologi-m-1-1-1": "Vad är biologi?", "biologi-m-1-1-2": "Dokumentera", "biologi-m-1-1-3": "Värdera resultat", "biologi-m-1-1-l": "Labb 1.1 Reaktionstid",
+         "biologi-m-1-2-1": "Vad kan vetenskap pröva?", "biologi-m-1-2-2": "När forskare ändrat sig", "biologi-m-1-2-3": "Söka information och bedöma källor", "biologi-m-1-2-l": "Labb 1.2 Granska ett påstående",
          "biologi-m-1-s": "Sammanfattning", "biologi-m-1-t": "Testa dig själv"}
 out = ["// Genereras av kallor-biologi/omrade1/exportsite.py (sajtkonv.py, latt_ov.py) – ändra inte för hand.",
        "// Biologi område 1: varje moment i tre nivåer (lättläst, grundtext, fördjupning), skrivet för skärm i sajtens vanliga sidformat. Elevversion, utan facit. Lättläst har interaktiva övningar.",
@@ -97,7 +97,7 @@ for id_, d in M.items():
     elif id_ == "biologi-m-1-t": niv["lattlast"] = TEST_LATT
     elif d["latt"]: niv["lattlast"] = SK.konvertera(fix(d["latt"]), TITEL[id_])
     for key, k in (("vanlig", "van"), ("fordjupning", "ford")):
-        if d[k]: niv[key] = SK.konvertera(fix(d[k]), TITEL[id_])
+        if d[k]: niv[key] = SK.konvertera(fix(d[k]), "Från fråga till plan" if (id_, key) == ("biologi-m-1-1-1", "fordjupning") else ("Värdera" if id_ == "biologi-m-1-1-3" and key == "vanlig" else TITEL[id_]))
     if id_ == "biologi-m-1-t":
         niv["vanlig"] = TEST_GRUND; niv["fordjupning"] = TEST_FORDJ
     for v in niv.values():

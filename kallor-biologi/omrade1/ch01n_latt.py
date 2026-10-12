@@ -142,7 +142,7 @@ DELAR = [
        ("skriv", "Varför ändrade forskarna sig i de tre exemplen?", "De ändrade sig eftersom", 2)]),
 
  dict(titel="Söka information och bedöma källor", prog="Delområde 1.2 · Söka information och bedöma källor",
-  fore=["När du söker på nätet: använd flera sökord. Till exempel <em>sömn tonåringar forskning</em>.", "En <strong>källa</strong> är där informationen kommer ifrån. <strong>Avsändaren</strong> är den som har skrivit eller gjort texten. Fråga dig:", "<strong>Trovärdig</strong> betyder att man kan lita på den. <strong>Relevant</strong> betyder att den passar din fråga."],
+  fore=["När du söker på nätet: använd flera sökord. Till exempel <em>sömn tonåringar forskning</em>.", "En <strong>källa</strong> är där informationen kommer ifrån. <strong>Avsändaren</strong> är den som har skrivit eller gjort texten. Fråga dig om källan är trovärdig och relevant.", "<strong>Trovärdig</strong> betyder att man kan lita på den. <strong>Relevant</strong> betyder att den passar din fråga."],
   fig="l_fyra.png",
   efter=["Fråga också: Finns det <strong>belägg</strong>? Reklam har ofta inga belägg. Den vill sälja.", TB_CHECK, ARG],
   kom="Fråga: vem, varför, belägg, när och fler källor. Då ser du om en källa går att lita på.",

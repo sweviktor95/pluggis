@@ -148,7 +148,7 @@ class Konv:
                 if "vik" in cl:
                     s = c.find("span"); self.add('<ul class="viktigast"><li>%s</li></ul>' % inner(s)) if s else None; continue
                 if "arg" in cl:
-                    h = c.find(class_="h"); body = inner(c).replace(inner(h), "", 1).lstrip("<br>").strip() if h else inner(c)
+                    h = c.find(class_="h"); body = re.sub(r"^(\s*<br>|\s*<strong></strong>)+", "", inner(c).replace(inner(h), "", 1)).strip() if h else inner(c)
                     self.add('<div class="ruta ruta-fakta"><span class="ruta-rubrik">%s</span>%s</div>' % (cap(txt(h)) if h else "Så argumenterar du", body)); continue
                 if "ex1" in cl: continue   # lättlästa övningar byggs som interaktiva övningar (latt_ov.py)
                 if "pill" in cl:

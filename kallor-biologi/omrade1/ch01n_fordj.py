@@ -105,9 +105,9 @@ add("F1.2.3", "Väga källor och granska påståenden", "1.2",
 UPG = [
  ("Ett företag påstår att deras sportdryck ger bättre kondition. Planera en undersökning som kan pröva påståendet. Beskriv hur du använder kontrollgrupp, placebo, randomisering och blindning, och förklara varför varje del behövs.", 3),
  ("Semmelweis jämförde två avdelningar. Förklara varför jämförelsen gjorde hans slutsats starkare, och ge ett skäl till att hans slutsats ändå inte var helt säker innan handtvätten infördes.", 3),
- ("En tidning skriver: ”Ny studie: Kaffe gör att du lever längre! Forskare har följt 500 000 personer och de som drack 2–3 koppar om dagen dog i lägre grad.” Värdera rubriken med begreppen observationsstudie, störfaktor och orsakssamband. Vad skulle krävas för att man säkert kan säga att kaffet är orsaken?", 3),
+ ("En tidning skriver: ”Ny studie: Kaffe gör att du lever längre! Forskare har följt 500 000 personer och de som drack 2–3 koppar om dagen hade lägre dödlighet.” Värdera rubriken med begreppen observationsstudie, störfaktor och orsakssamband. Vad skulle krävas för att man säkert kan säga att kaffet är orsaken?", 3),
  ("Två klasser testar om gödning gör att bönplantor växer högre. Klass A har 3 plantor per grupp och får skillnaden 4 mm. Klass B har 30 plantor per grupp och får skillnaden 2 mm. Vilket resultat litar du mest på? Motivera och diskutera slumpens betydelse.", 2),
- ("Tabellen om jäst (avsnittet ”Tolka data och redovisa osäkerhet”) har ett avvikande värde vid 40 °C. Förklara hur du hanterar det och hur du redovisar resultatet så att läsaren kan avgöra hur säker slutsatsen är.", 3),
+ ("Tabellen om jäst (momentet om att tolka data och redovisa osäkerhet) har ett avvikande värde vid 40 °C. Förklara hur du hanterar det och hur du redovisar resultatet så att läsaren kan avgöra hur säker slutsatsen är.", 3),
  ("Jämför två av exemplen Pasteur, Semmelweis och Marshall och Warren. Vad är gemensamt, och vad skiljer dem åt? Resonera om varför nya idéer ibland möts av motstånd, och om motståndet alltid är oberättigat.", 3),
  ("Två trovärdiga källor säger olika om ett kosttillskott: en myndighet avråder, en studie betald av tillverkaren visar effekt. Resonera om hur du väger källorna och vilken ytterligare information du skulle vilja ha. Formulera ett argument och bemöt ett motargument.", 3)]
 def uppg_html(): return C.uppg_html(UPG, 4)
@@ -122,7 +122,7 @@ SVAR = [
 def teacher_html():
     return C.teacher_html("Fördjupningen riktar sig till elever som är klara tidigt eller som behöver mer utmaning mot de högre kriterierna. Den fördjupar systematiska undersökningar (planering, värdering, osäkerhet), vetenskapens gränser, förklaringsmodellers föränderlighet och kritisk granskning med argumentation.",
       SVAR, [("Resonera om störningar (avsnittet ”Planera ett eget försök”):", "T.ex. olika svåra ordlistor, ordningen på försöken, trötthet. Byt ordning, använd likvärdiga listor, flera deltagare."),
-             ("Fundera (avsnittet ”Tolka data och redovisa osäkerhet”):", "Temperaturen verkar öka gasbildningen mellan 10 och 25 °C. Vid 40 °C är resultatet osäkert på grund av det avvikande värdet. Gör fler försök."),
+             ("Fundera (jästtabellen):", "Temperaturen verkar öka gasbildningen mellan 10 och 25 °C. Vid 40 °C är resultatet osäkert på grund av det avvikande värdet. Gör fler försök."),
              ("Tänk efter (avsnittet ”Hur säker är slutsatsen?”):", "T.ex. föräldrarnas utbildning, inkomst, tid som föräldrar läser med barnen."),
              ("Resonera (avsnittet ”Vetenskapens gränser”):", "Naturvetenskap: hur varg påverkar bytesdjur, och hur djur påverkas. Inte: om det är rätt, vilket också beror på värderingar."),
              ("Tänk efter (avsnittet ”Väga källor och granska påståenden”):", "Vem betalade? Hur många deltog och hur var det upplagt? Har andra fått samma resultat?")],
