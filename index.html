@@ -4012,6 +4012,9 @@
               '<div id="cellDiagramLegend" class="cell-legend"></div>' +
               '<div id="cellDiagramFakta" class="cell-fakta-box"></div>';
     }
+    if (sek.ovningar && sek.ovningar.length) {
+      sek.ovningar.forEach(function(o, n) { html += ovHtml(o, n + 1); });
+    }
     if (sek.fragor && sek.fragor.length) {
       html += '<div class="kontrollfraga"><p>🤔 <strong>Kolla din förståelse:</strong></p><ol>' +
               sek.fragor.map(function(f) { return "<li>" + f + "</li>"; }).join("") + '</ol></div>';
@@ -4034,6 +4037,77 @@
     html += '</ul></div>';
   }
     return html;
+  }
+
+  // ---------- Interaktiva övningar (lättläst) ----------
+  var ovReg = {};
+  var ovTeller = 0;
+  function ovEsc(t) { return String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); }
+  function ovNyckel(o) { var h = 0, t = o.fraga + (o.borja || ""); for (var i = 0; i < t.length; i++) { h = (h * 31 + t.charCodeAt(i)) | 0; } return "pluggis-ov-" + h; }
+  function ovHtml(o, nr) {
+    var id = "ov" + (++ovTeller); ovReg[id] = o;
+    var h = '<div class="ov" id="' + id + '"><div class="ov-fraga"><span class="ov-nr">' + nr + '</span><span>' + o.fraga + '</span></div>';
+    if (o.typ === "ringa") {
+      h += '<div class="ov-val">' + o.val.map(function(v, i) { return '<button type="button" class="ov-knapp" onclick="ovRinga(\'' + id + '\',' + i + ',this)">' + v + '</button>'; }).join("") + '</div>';
+    } else if (o.typ === "kryssa") {
+      h += '<div class="ov-val">' + o.val.map(function(v, i) { return '<label class="ov-kryss"><input type="checkbox" value="' + i + '"><span>' + v + '</span></label>'; }).join("") + '</div>';
+      h += '<button type="button" class="ov-kolla" onclick="ovKolla(\'' + id + '\')">Kolla</button>';
+    } else if (o.typ === "streck") {
+      var opts = '<option value="">Välj …</option>' + o.hoger.map(function(v) { return '<option>' + ovEsc(v) + '</option>'; }).join("");
+      h += o.vanster.map(function(v, i) { return '<div class="ov-rad"><span class="ov-ord">' + v + '</span><select aria-label="' + ovEsc(v) + '">' + opts + '</select></div>'; }).join("");
+      h += '<button type="button" class="ov-kolla" onclick="ovKolla(\'' + id + '\')">Kolla</button>';
+    } else if (o.typ === "sf") {
+      h += o.pastaenden.map(function(v, i) { return '<div class="ov-rad"><span class="ov-ord">' + v + '</span><span class="ov-sf"><label><input type="radio" name="' + id + 'r' + i + '" value="1"><span>Sant</span></label><label><input type="radio" name="' + id + 'r' + i + '" value="0"><span>Falskt</span></label></span></div>'; }).join("");
+      h += '<button type="button" class="ov-kolla" onclick="ovKolla(\'' + id + '\')">Kolla</button>';
+    } else if (o.typ === "fyll") {
+      var op = '<option value="">…</option>' + o.ord.map(function(v) { return '<option>' + ovEsc(v) + '</option>'; }).join("");
+      h += '<p class="ov-bank">Ord att välja: ' + o.ord.join(" · ") + '</p>';
+      h += o.meningar.map(function(m) { return '<p class="ov-mening">' + m.replace("§", '<select>' + op + '</select>') + '</p>'; }).join("");
+      h += '<button type="button" class="ov-kolla" onclick="ovKolla(\'' + id + '\')">Kolla</button>';
+    } else if (o.typ === "siffror") {
+      var nn = '<option value="">…</option>' + o.delar.map(function(v, i) { return '<option>' + (i + 1) + '</option>'; }).join("");
+      h += o.delar.map(function(v) { return '<div class="ov-rad"><span class="ov-ord">' + v + '</span><select aria-label="Nummer">' + nn + '</select></div>'; }).join("");
+      h += '<button type="button" class="ov-kolla" onclick="ovKolla(\'' + id + '\')">Kolla</button>';
+    } else if (o.typ === "skriv" || o.typ === "skriv2" || o.typ === "rita") {
+      var sparat = []; try { sparat = JSON.parse(localStorage.getItem(ovNyckel(o)) || "[]"); } catch (e) {}
+      var falt = o.typ === "skriv" ? [o.borja + " …"] : (o.typ === "skriv2" ? o.falt : ["Skriv här hur ditt diagram ser ut (rita gärna på papper också)"]);
+      h += falt.map(function(f, i) { return '<label class="ov-falt"><span>' + f + '</span><textarea rows="2" oninput="ovSpara(\'' + id + '\')">' + ovEsc(sparat[i] || "") + '</textarea></label>'; }).join("");
+      if (o.forslag) { h += '<button type="button" class="ov-kolla" onclick="ovForslag(\'' + id + '\')">Visa förslag</button>'; }
+    }
+    return h + '<div class="ov-svar" aria-live="polite"></div></div>';
+  }
+  function ovSvarRuta(id) { return document.querySelector("#" + id + " .ov-svar"); }
+  function ovSag(id, ok, text) { var r = ovSvarRuta(id); r.className = "ov-svar " + (ok ? "ratt" : "fel"); r.textContent = text; }
+  function ovRinga(id, i, k) {
+    var o = ovReg[id], ok = (i === o.ratt);
+    if (ok) { document.querySelectorAll("#" + id + " .ov-knapp").forEach(function(b) { b.disabled = true; }); k.classList.add("ratt"); ovSag(id, true, "✓ Rätt!"); }
+    else { k.classList.add("fel"); k.disabled = true; ovSag(id, false, "Inte riktigt. Prova en annan."); }
+  }
+  function ovKolla(id) {
+    var o = ovReg[id], rad = document.querySelectorAll("#" + id + " .ov-rad"), tot = 0, ratt = 0, klar = true;
+    function markera(el, ok) { el.classList.remove("ratt", "fel"); el.classList.add(ok ? "ratt" : "fel"); tot++; if (ok) { ratt++; } }
+    if (o.typ === "kryssa") {
+      var boxar = document.querySelectorAll("#" + id + " .ov-kryss");
+      boxar.forEach(function(l, i) { var on = l.querySelector("input").checked, ska = o.ratt.indexOf(i) >= 0; markera(l, on === ska); });
+    } else if (o.typ === "streck") {
+      rad.forEach(function(r, i) { var v = r.querySelector("select").value; if (!v) { klar = false; } markera(r, v === o.ratt[i]); });
+    } else if (o.typ === "sf") {
+      rad.forEach(function(r, i) { var c = r.querySelector("input:checked"); if (!c) { klar = false; } markera(r, !!c && ((c.value === "1") === o.ratt[i])); });
+    } else if (o.typ === "fyll") {
+      document.querySelectorAll("#" + id + " .ov-mening").forEach(function(p, i) { var v = p.querySelector("select").value; if (!v) { klar = false; } markera(p, v === o.ratt[i]); });
+    } else if (o.typ === "siffror") {
+      rad.forEach(function(r, i) { var v = r.querySelector("select").value; if (!v) { klar = false; } markera(r, v === String(o.ratt[i])); });
+    }
+    if (!klar) { ovSag(id, false, "Svara på alla först. " + ratt + " av " + tot + " rätt hittills."); }
+    else if (ratt === tot) { ovSag(id, true, "✓ Alla rätt!"); }
+    else { ovSag(id, false, ratt + " av " + tot + " rätt. Rätta de röda och tryck Kolla igen."); }
+  }
+  function ovSpara(id) {
+    var o = ovReg[id], v = [].map.call(document.querySelectorAll("#" + id + " textarea"), function(t) { return t.value; });
+    try { localStorage.setItem(ovNyckel(o), JSON.stringify(v)); } catch (e) {}
+  }
+  function ovForslag(id) {
+    var r = ovSvarRuta(id); r.className = "ov-svar forslag"; r.textContent = "Förslag: " + ovReg[id].forslag;
   }
 
   function vaxlaLasstod() {

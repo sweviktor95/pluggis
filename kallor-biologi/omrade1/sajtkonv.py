@@ -150,13 +150,7 @@ class Konv:
                 if "arg" in cl:
                     h = c.find(class_="h"); body = inner(c).replace(inner(h), "", 1).lstrip("<br>").strip() if h else inner(c)
                     self.add('<div class="ruta ruta-fakta"><span class="ruta-rubrik">%s</span>%s</div>' % (cap(txt(h)) if h else "Så argumenterar du", body)); continue
-                if "ex1" in cl:
-                    if self.cur is None or self.cur["titel"] != "Öva": self.ny("Öva")
-                    last = self.cur["text"][-1] if self.cur["text"] else ""
-                    li = self.ovning(c)
-                    if last.startswith('<ol class="ovning"'): self.cur["text"][-1] = last[:-5] + li + "</ol>"
-                    else: self.add('<ol class="ovning">%s</ol>' % li)
-                    continue
+                if "ex1" in cl: continue   # lättlästa övningar byggs som interaktiva övningar (latt_ov.py)
                 if "pill" in cl:
                     t_ = txt(c); h_, _, r_ = t_.partition("·"); self.ny((h_.strip() + " · " + r_.strip().lower().capitalize()) if r_ else t_); continue
                 if "alts" in cl:

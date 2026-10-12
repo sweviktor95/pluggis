@@ -31,3 +31,28 @@
 .nivaruta.lasstod{font-size:19px;line-height:1.9;letter-spacing:.03em;word-spacing:.12em}
 .nivaruta.lasstod p,.nivaruta.lasstod li,.nivaruta.lasstod td,.nivaruta.lasstod th{font-size:inherit!important;line-height:inherit!important}
 @media(max-width:720px){.nivaruta .kort-rad{grid-template-columns:1fr}}
+/* Interaktiva övningar (lättläst) */
+.ov{background:#f7fbf8;border:1px solid #DCE6DF;border-radius:10px;padding:14px 16px;margin:14px 0}
+.ov-fraga{display:flex;gap:10px;align-items:flex-start;font-weight:600;margin-bottom:10px}
+.ov-nr{flex:none;background:#5F8472;color:#fff;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:.85em}
+.ov-val{display:flex;flex-direction:column;gap:8px}
+.ov-knapp,.ov-kryss{font:inherit;text-align:left;min-height:46px;padding:10px 14px;border:2px solid #cfe0d6;background:#fff;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px}
+.ov-knapp.ratt,.ov-kryss.ratt,.ov-rad.ratt,.ov-mening.ratt{border-color:#3d9a5f;background:#e6f5ec}
+.ov-knapp.fel,.ov-kryss.fel,.ov-rad.fel,.ov-mening.fel{border-color:#d4685a;background:#fdeceb}
+.ov-knapp:disabled{opacity:.85;cursor:default}
+.ov-kryss input,.ov-sf input{width:22px;height:22px;flex:none}
+.ov-rad{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;border:2px solid transparent;border-radius:10px;padding:6px 8px;margin:4px 0}
+.ov-ord{flex:1 1 150px}
+.ov select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid #cfe0d6;border-radius:10px;background:#fff;max-width:100%}
+.ov-rad select{flex:1 1 180px}
+.ov-sf{display:flex;gap:10px}
+.ov-sf label{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border:2px solid #cfe0d6;border-radius:10px;background:#fff;cursor:pointer}
+.ov-bank{color:#38564A;margin:0 0 8px}
+.ov-mening{border:2px solid transparent;border-radius:10px;padding:6px 8px;margin:4px 0;line-height:2.1}
+.ov-falt{display:block;margin:0 0 10px}
+.ov-falt span{display:block;color:#38564A;margin-bottom:4px}
+.ov-falt textarea{width:100%;font:inherit;padding:10px;border:2px solid #cfe0d6;border-radius:10px;resize:vertical;box-sizing:border-box}
+.ov-kolla{font:inherit;min-height:44px;padding:8px 20px;margin-top:8px;border:0;border-radius:999px;background:#5F8472;color:#fff;cursor:pointer}
+.ov-svar{margin-top:8px;font-weight:600}
+.ov-svar:empty{display:none}
+.ov-svar.ratt{color:#2d7a4a}.ov-svar.fel{color:#b0392b}.ov-svar.forslag{font-weight:400;background:#fff8ec;border-left:4px solid #e0a53f;padding:8px 12px;border-radius:6px;color:#444}
