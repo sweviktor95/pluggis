@@ -69,8 +69,8 @@
 
   function knappar(h) {
     var k = '<div class="knappar">';
-    if (h.vanlig) { k += lank(h.vanlig, "Vanlig"); }
     if (h.lattlast) { k += lank(h.lattlast, "Lättläst"); }
+    if (h.vanlig) { k += lank(h.vanlig, "Grundtext"); }
     if (h.fordjupning) { k += lank(h.fordjupning, "Fördjupning"); }
     return k + '</div>';
   }

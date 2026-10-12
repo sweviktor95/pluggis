@@ -4080,7 +4080,7 @@
     }
     if (!h || !(h.vanlig || h.lattlast || h.fordjupning)) { return ""; }
     var r = '<div class="hafte-rad"><strong>Läs som häfte (PDF)</strong><div class="hafte-knappar">';
-    [["vanlig","Vanlig"],["lattlast","Lättläst"],["fordjupning","Fördjupning"]].forEach(function(p) {
+    [["lattlast","Lättläst"],["vanlig","Grundtext"],["fordjupning","Fördjupning"]].forEach(function(p) {
       if (h[p[0]]) {
         r += '<span class="hafte-par"><a class="knapp" href="' + h[p[0]] + '" target="_blank" rel="noopener">' + p[1] + '</a>' +
              '<a class="knapp hafte-ned" href="' + h[p[0]] + '" download title="Ladda ner ' + p[1].toLowerCase() + '" aria-label="Ladda ner ' + p[1].toLowerCase() + '">⬇</a></span>';
