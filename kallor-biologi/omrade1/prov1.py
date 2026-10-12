@@ -24,8 +24,8 @@ P = [
   "Vatten kokar vid 100 °C. Kaniner springer fortare än sköldpaddor.", "1 p per rätt. Avdrag om fler än två kryssas."),
  ("E", "Ge två frågor du kan ställa till en källa för att se om den går att lita på.", None, 2, 3, "Två av: vem har skrivit, varför är det skrivet / vill de sälja något, finns det belägg, är det nytt, säger andra källor samma sak.", "1 p per fråga som går att använda för att granska en källa."),
  ("E", "Du vill testa om bönor gror bäst i varmt eller kallt. Vad ändrar du? Nämn något som ska vara lika.", None, 2, 3, "Ändrar: temperaturen. Lika: t.ex. sorts bönor, antal, vatten, jord, ljus.", "1 p ändrar temperaturen. 1 p minst en variabel som hålls lika."),
- ("C", "Mira vill ta reda på om temperaturen påverkar hur snabbt bönor gror. Hon sätter bönor i en burk i ett soligt fönster och bönor i en annan burk i kylskåpet." + fig(FIG+"p_bonor.png", None, "72%") + "a) Ge ett skäl till att undersökningen inte blir rättvis.<br>b) Föreslå en förbättring.", None, 2, 5,
-  "a) Både temperatur och ljus skiljer sig (fönster ljust, kylskåp mörkt). b) Båda i samma ljus eller båda i mörker; samma vatten och antal bönor; flera bönor.", "a) 1 p. b) 1 p."),
+ ("C", "Mira vill ta reda på om temperaturen påverkar hur snabbt bönor gror. Hon sätter bönor i en burk i ett soligt fönster och bönor i en annan burk i kylskåpet." + fig(FIG+"p_bonor.png", None, "72%") + "a) Ge ett skäl till att undersökningen inte blir rättvis.<br>b) Föreslå en förbättring och förklara varför den gör undersökningen rättvisare.", None, 3, 6,
+  "a) Både temperatur och ljus skiljer sig (fönster ljust, kylskåp mörkt). b) Båda i samma ljus eller båda i mörker; samma vatten och antal bönor; flera bönor.", "a) 1 p. b) Allmänt förslag (”gör det rättvist”) 0 p. Specifikt förslag (”båda i samma ljus”) 1 p. Specifikt förslag med förklaring (”så att bara temperaturen skiljer sig”) 2 p."),
  ("C", "a) Räkna ut medelvärdet av 12, 14 och 13 mm.<br>b) Förklara varför man gör flera försök och räknar medelvärde.", None, 2, 4, "a) 13 mm. b) En enskild mätning kan påverkas av slump eller misstag. Flera försök gör resultatet säkrare.", "a) 1 p. b) 1 p för att slumpen/misstag påverkar och att flera försök ger säkrare resultat."),
  ("C", "Förklara skillnaden mellan slump och systematiskt fel. Ge ett exempel på varje.", None, 2, 5, "Slump: tillfälliga variationer (t.ex. man läser av linjalen lite olika varje gång), jämnar ut sig vid upprepning. Systematiskt fel: samma fel varje gång (t.ex. en låda som alltid är varmare), upprepning hjälper inte, planering och kontroll hjälper.", "1 p slump med exempel. 1 p systematiskt fel med exempel."),
  ("C", "Semmelweis krävde att läkarna skulle tvätta händerna på 1840-talet.<br>a) Vilket belägg hade han för att det hjälpte?<br>b) Ge ett skäl till att många läkare ändå inte trodde honom.", None, 3, 5,
@@ -39,15 +39,48 @@ P = [
  ("A", "Två trovärdiga källor säger olika om ett kosttillskott: en myndighet avråder och en studie betald av tillverkaren visar effekt. Resonera om hur du väger källorna och vad du skulle vilja veta mer. Formulera ett argument och bemöt ett motargument.", None, 4, 8,
   "Väg: Vad bygger respektive källa på? Är studien oberoende granskad och upprepad? Hur många deltog, hur var den upplagd? Tendens hos tillverkaren (betald studie), men det gör den inte automatiskt fel. Vill veta mer: fler oberoende studier och sammanställningar. Argument: påstående, belägg, motargument, bemötande och slutsats med angiven säkerhet.", "1 p väger källorna med relevanta kriterier. 1 p anger vad mer som behövs. 1 p argument med belägg. 1 p bemöter motargument och anger säkerhet."),
 ]
+_j = P.pop(13); P.insert(12, ('C',) + _j[1:])
 NIVA = {"E": ("DEL E", "Grundläggande kunskaper"), "C": ("DEL C", "Utvecklade kunskaper"), "A": ("DEL A", "Välutvecklade kunskaper")}
 BED = [["Uppgift", "E-nivå", "C-nivå", "A-nivå"],
-       ["13 Planera", "Föreslår en enkel undersökning med en grupp som får dryck.", "Använder kontrollgrupp och placebo och förklarar varför.", "Använder alla fyra delar, förklarar vilket fel var och en förhindrar och resonerar om antal deltagare."],
-       ["14 Jäst", "Pekar ut det avvikande värdet.", "Förklarar möjlig orsak och räknar medelvärde.", "Hanterar värdet motiverat, redovisar osäkerhet och drar nyanserad slutsats."],
+       ["13 Jäst", "Pekar ut det avvikande värdet.", "Förklarar möjlig orsak och räknar medelvärde.", "Hanterar värdet motiverat, redovisar osäkerhet och drar nyanserad slutsats."],
+       ["14 Planera", "Föreslår en enkel undersökning med en grupp som får dryck.", "Använder kontrollgrupp och placebo och förklarar varför.", "Använder alla fyra delar, förklarar vilket fel var och en förhindrar och resonerar om antal deltagare."],
        ["15 Källor", "Säger att tillverkaren vill sälja.", "Använder kriterier (tendens, beroende) för båda källorna.", "Väger källorna, anger vad som saknas och bemöter ett motargument."]]
+# Förmåga per uppgift (1 = begrepp/modeller, 2 = systematiska undersökningar, 3 = granska/kommunicera/ta ställning)
+FORM = ["F2", "F2", "F1", "F2", "F2", "F3", "F2", "F2", "F2", "F2", "F1", "F3", "F2", "F2", "F3"]
+FN = {"F1": "Begrepp, modeller och samband", "F2": "Systematiska undersökningar", "F3": "Granska information, kommunicera och ta ställning"}
+FORMKOM = {"F1": "Förklaringsmodellers framväxt (uppgift 3 och 11).",
+           "F2": "Planera, dokumentera och värdera på papper. Själva genomförandet bedöms i labb 1.1 och 1.2 och i bonuslabben.",
+           "F3": "Källkritik och argumentation (uppgift 6, 12 och 15)."}
+IMPROV = ('<h3>Förbättra en undersökning (uppgift 8)</h3><p>Trappan allmänt förslag, specifikt förslag och specifikt förslag med förklaring motsvarar E-, C- och A-nivå i bedömningen av förbättringar. Därför ger ett allmänt förslag (”gör det rättvist”) ingen poäng här, ett specifikt 1 p och ett specifikt med förklaring 2 p.</p>')
+KOPPL = "Uppgift 1, 2, 4, 7, 8, 9, 10 och 13: systematiska undersökningar (planera, dokumentera, värdera). Uppgift 3 och 11: förklaringsmodellers framväxt. Uppgift 5: vad vetenskap kan pröva. Uppgift 6, 12 och 15: informationssökning, källkritik och argumentation. Uppgift 14: planering på hög nivå."
+KAP = "Kapitel 1"; NAMN_ = "Biologi som vetenskap"
+
+def teacher_section():
+    e = sum(x[3] for x in P if x[0] == "E"); c = sum(x[3] for x in P if x[0] == "C"); a = sum(x[3] for x in P if x[0] == "A")
+    import math
+    te = math.ceil(e * 2 / 3); tc = math.ceil(c / 2); ta = math.ceil(a / 2)
+    rows = ""
+    for f in ("F1", "F2", "F3"):
+        idx = [i for i, t in enumerate(FORM) if f in t]
+        pts = sum(P[i][3] for i in idx)
+        rows += f'<tr><td>{f[1]}. {FN[f]}</td><td>{", ".join(str(i+1) for i in idx) or "–"}</td><td>{pts} p</td><td>{FORMKOM[f]}</td></tr>'
+    ftab = '<table class="tbl"><tr><th>Förmåga</th><th>Uppgifter</th><th>Poäng</th><th>Kommentar</th></tr>' + rows + '</table>'
+    return ('<section class="sec teacher"><h2>Till läraren: bedömning</h2>'
+        f'<p>Provet har {e} p på del E, {c} p på del C och {a} p på del A (totalt {e+c+a} p). Fördelningen är medvetet C-tung: de flesta poängen ligger på C, sedan E och minst på A, ungefär som i de nationella proven. Del E motsvarar lättläst-versionen, del C grundtexten och del A fördjupningen. Uppgiftstyperna varierar (flerval, flersvar, matchning, kortsvar och resonemang), och varje uppgift är kopplad till en förmåga i facit.</p>'
+        '<h3>Förmågor som provet prövar</h3>' + ftab +
+        '<p class="note">Ett skriftligt prov kan inte pröva allt. Förmåga 2 bedöms också i labbrapporter och i bonuslabben, och förmåga 3 i diskussioner och argumentationer.</p>'
+        '<h3>Poängsättning av resonemang</h3><p>Resonemang poängsätts efter hur många led eleven för, inte efter hur mycket eleven skriver: 1 p för varje korrekt led (orsak, följd, konsekvens) som hänger ihop med föregående, och 1 p för slutsats eller för att relevanta begrepp används rätt. Ett längre svar som upprepar samma led ger inte fler poäng. Facit visar förväntade led, och andra rimliga led godtas.</p>'
+        + IMPROV +
+        '<h3>Gränser för provbetyg</h3>'
+        f'<p>Det finns inga prövade gränser för det här provet. De nationella proven sätter provbetyg efter poängsumma, med gränser som fastställs efter prövning på många elever, och det går inte att göra här. Som utgångspunkt kan du pröva: <b>E</b> vid minst {te} av {e} p på del E, <b>C</b> om E-nivån är uppnådd och minst {tc} av {c} p på del C, <b>A</b> om C-nivån är uppnådd och minst {ta} av {a} p på del A. Justera efter klassens resultat och efter vad eleverna visar i övrigt.</p>'
+        '<p class="note">Kunskapskraven är kvalitativa (”enkla”, ”utvecklade” och ”välutvecklade” resonemang), och betyget sätts av en samlad bedömning av provet och elevens övriga underlag.</p>'
+        '<h3>Bedömningsguide för resonemangsuppgifterna</h3>' + table(BED[0], BED[1:]) +
+        '<h3>Kopplingar</h3><p>' + KOPPL + '</p>'
+        '<p class="note">Fakta är kontrollerad mot källfilen för området. Upplägget är inspirerat av nationella prov, men provet är inte prövat på elever och gränserna är förslag. Personer, annonser och mätvärden i uppgifterna är påhittade.</p></section>')
 
 def build(lararversion):
-    h = ['<section class="sec"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">Kapitel 1 · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ &nbsp; Poäng: ____ / 36</div></div>'
-         '<div class="sh"><h2>Biologi som vetenskap</h2></div>'
+    h = ['<section class="sec"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">' + KAP + ' · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ &nbsp; Poäng: ____ / ' + str(sum(x[3] for x in P)) + '</div></div>'
+         '<div class="sh"><h2>' + NAMN_ + '</h2></div>'
          '<p class="note">Hjälpmedel: penna. Del E ska alla svara på. Del C och del A visar vad du kan på högre nivåer. Svara kort och tydligt. Personer, annonser och mätvärden i uppgifterna är påhittade. Siffran till höger visar hur många poäng uppgiften ger.</p>']
     last = None; n = 0
     for (niv, q, alts, pts, nl, fac, bed) in P:
@@ -60,19 +93,10 @@ def build(lararversion):
         if alts:
             a = '<div class="alts">' + "".join(f"<div>{x}</div>" for x in alts) + '</div>'
         l = lines(nl) if nl and not lararversion else ""
-        fa = f'<div style="background:#e9f3e9;border-radius:5pt;padding:4pt 8pt;margin-top:4pt;font:9pt/1.35 Carlito"><b>Facit:</b> {fac}<br><b>Poäng:</b> {bed}</div>' if lararversion else ""
+        fa = f'<div style="background:#e9f3e9;border-radius:5pt;padding:4pt 8pt;margin-top:4pt;font:9pt/1.35 Carlito"><b>Förmåga:</b> {FORM[n-1]} &nbsp; <b>Facit:</b> {fac}<br><b>Poäng:</b> {bed}</div>' if lararversion else ""
         h.append(f'<div class="q" style="grid-template-columns:16pt minmax(0,1fr) 30pt"><span class="n">{n}</span><div>{q}{a}{l}{fa}</div><span class="pts">{pts} p</span></div>')
     h.append('</section>')
-    if lararversion:
-        e = sum(x[3] for x in P if x[0] == "E"); c = sum(x[3] for x in P if x[0] == "C"); a = sum(x[3] for x in P if x[0] == "A")
-        h.append('<section class="sec teacher"><h2>Till läraren: bedömning</h2>'
-                 f'<p>Provet har {e} p på del E, {c} p på del C och {a} p på del A (totalt {e+c+a} p). Del E går att klara med enbart lättläst-versionen av kapitlet, del C med grundtexten och del A med fördjupningen. Elever som är bra på att se mönster kan klara högre nivåer med lägre texter.</p>'
-                 '<h3>Riktvärden</h3><ul class="pu"><li><b>E:</b> minst 8 av 12 p på del E, och uppgifterna visar att eleven kan planera enkelt, dokumentera, använda begrepp och granska en källa.</li>'
-                 '<li><b>C:</b> E-nivån samt minst 7 av 12 p på del C.</li><li><b>A:</b> C-nivån samt minst 7 av 12 p på del A, med resonemang som är sammanhängande och nyanserade.</li></ul>'
-                 '<p class="note">Poängen är en vägledning. Kunskapskraven är kvalitativa: ”enkla”, ”utvecklade” och ”välutvecklade” resonemang. Betyget sätts av en samlad bedömning av provet och elevens övriga underlag, till exempel labbrapporter och muntliga resonemang.</p>'
-                 '<h3>Bedömningsguide för resonemangsuppgifterna</h3>' + table(BED[0], BED[1:]) +
-                 '<h3>Kopplingar</h3><p>Uppgift 1, 2, 4, 7, 8, 9 och 10: systematiska undersökningar (planera, dokumentera, värdera). Uppgift 3 och 11: förklaringsmodellers framväxt. Uppgift 5: vad vetenskap kan pröva. Uppgift 6, 12, 15: informationssökning, källkritik och argumentation. Uppgift 13 och 14: planering och värdering på hög nivå.</p>'
-                 '<p class="note">Fakta kontrollerad mot kallor-omrade1.md. Provet är inte kalibrerat mot nationella prov.</p></section>')
+    if lararversion: h.append(teacher_section())
     return "".join(h)
 
 def doc(body, foot):

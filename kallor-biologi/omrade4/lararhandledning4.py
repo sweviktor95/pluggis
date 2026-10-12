@@ -55,7 +55,7 @@ for i, (nr, t, inner) in enumerate(G.S):
 t = ['<section class="sec teacher"><h2>Testa dig själv och bedömning</h2><h3>Facit: Testa dig själv, Grundtext</h3><ol class="pu">']
 for n, ((dl, q, alts, pts, nl), f) in enumerate(zip(G.TEST, G.FACIT), 1):
     qq = re.sub(r"<[^>]+>", "", q if q != "TABELL" else G.TEST_D_TEXT + " (tabell med småkryp)")
-    t.append(f"<li>Del {dl}. <i>{qq[:140]}{'…' if len(qq) > 140 else ''}</i><br>{f}</li>")
+    t.append(f"<li>Del {dl}. <i>{qq[:90]}{'…' if len(qq) > 90 else ''}</i><br>{f}</li>")
 t.append('</ol>')
 t.append('<h3>Facit: Testa dig själv, Lättläst</h3><p>' + L.FACIT[13].split(":</b>", 1)[-1].strip() + '</p>')
 t.append('<h3>Bedömningsstöd för resonemangsuppgifter</h3>' + table(["", "Grundläggande", "Utvecklade", "Välutvecklade"], C.BED))

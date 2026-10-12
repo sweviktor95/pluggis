@@ -149,7 +149,7 @@ add("4.2.3", "Nedbrytning", f"Kapitel {NR} · Delområde 4.2 {DELOMR['4.2']} · 
  + "<h3>Vad påverkar hur snabbt det går?</h3>"
  + table(["Faktor", "Effekt", "Exempel"],
          [["Temperatur", "Varmt ger snabbare nedbrytning, kallt ger långsammare.", "Löv bryts ner snabbare i södra Sverige än i Norrbotten."], ["Fukt", "Nedbrytare behöver vatten. Det kan vara för torrt.", "Torr förna ligger kvar länge."],
-          ["Syre", "De flesta nedbrytare behöver syre. Utan syre går det mycket långsamt.", "Dött material på en syrefri havsbotten bryts ner långsamt."], ["Materialet", "Mjuka löv bryts ner fortare än trä, barr och ben.", "Björklöv försvinner snabbare än ett grenvirke."]])
+          ["Syre", "De flesta nedbrytare behöver syre. Utan syre går det mycket långsamt.", "Dött material på en syrefri havsbotten bryts ner långsamt."], ["Materialet", "Mjuka löv bryts ner fortare än trä, barr och ben.", "Björklöv försvinner snabbare än grenar."]])
  + roww("<p>I barrskogen i Norrbotten bryts löv och barr ner långsamt eftersom det är kallt. Därför bildas tjocka lager av förna och torv. I den tropiska regnskogen går nedbrytningen så fort att näringen nästan direkt tas upp av växterna igen. Jorden i sig är därför ofta näringsfattig, trots att skogen är så rik.</p>",
         [box("tank", "Tänk efter", "<p>Varför är det bra att en kompost luftas och hålls lagom fuktig?</p>")])
  + kolla("4.2.3", ["Varför är nedbrytare viktiga för kretsloppet?", "Ge två faktorer som gör nedbrytningen snabbare eller långsammare. Förklara hur de påverkar.", "Varför är jorden i en regnskog ofta näringsfattig, trots att det växer så mycket där?"]))

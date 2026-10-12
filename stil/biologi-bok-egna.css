@@ -8,6 +8,8 @@
 .nivaruta .pahittat{display:inline-block;background:#245040;color:#fff;border-radius:999px;padding:1px 10px;font-size:.78em;font-weight:700;margin-right:6px;vertical-align:1px}
 .nivaruta .not{font-size:.88em;color:#666}
 .nivaruta .tabell-ram{overflow-x:auto;margin:14px 0}
+.tabell-ram{overflow-x:auto;max-width:100%}
+.tabell-ram .tabell{min-width:0}
 .nivaruta .tabell{border-collapse:collapse;width:100%;font-size:.93em;line-height:1.5}
 .nivaruta .tabell th{background:#EAF1EC;color:#38564A;text-align:left}
 .nivaruta .tabell th,.nivaruta .tabell td{border:1px solid #DCE6DF;padding:8px 12px;vertical-align:top}
@@ -60,3 +62,4 @@
 .kf-lista .ov-fraga{font-weight:600}
 .kf-lista .kf-fraga{margin:8px 0}
 .ov-svar.forslag{white-space:pre-wrap}
+.nivaruta span:has(>.tabell-ram), .nivaruta span:has(>br+.tabell-ram){display:block;max-width:100%}

@@ -68,7 +68,7 @@ add("F4.3.1", "Populationer som växer – och kraschar", "4.3",
    [fig(FIG+"f_jkurva.png", "J-kurva och S-kurva.")])
  + "<h3>Renarna på St Matthew</h3>"
  + roww("<p>År 1944 släpptes 29 renar ut på den obebodda ön St Matthew i Berings hav. Där fanns tjocka mattor av lavar men inga rovdjur och ingen jakt. Renarna förökade sig snabbt. År 1963 räknade forskare till omkring 6 000 renar. Men lavarna, som växer mycket långsamt, var nästan helt uppätna.</p>"
-       "<p>Vintern 1963–64 var ovanligt sträng med mycket snö. Renarna svalt ihjäl i stort antal. År 1966 fanns bara 42 renar kvar, och på 1980-talet var de helt borta. Lavmattorna har fortfarande inte återhämtat sig helt.</p>",
+       "<p>Vintern 1963–64 var ovanligt sträng med mycket snö. Renarna svalt ihjäl i stort antal. År 1966 fanns bara 42 renar kvar, och på 1980-talet var de helt borta. Lavmattorna tog många år på sig att återhämta sig.</p>",
    [fig(FIG+"f_ren.png", "Renpopulationen på St Matthew.")])
  + box("fundera", "Tänk efter", "<p>Varför räckte det inte att renarna hade gott om mat år 1950 för att populationen skulle förbli stabil?</p>"))
 

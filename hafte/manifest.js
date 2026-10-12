@@ -8,11 +8,7 @@ window.hafte["biologi-vetenskap"] = {
   vanlig: "hafte/biologi-1-vetenskap-vanlig.pdf",
   lattlast: "hafte/biologi-1-vetenskap-lattlast.pdf",
   fordjupning: "hafte/biologi-1-vetenskap-fordjupning.pdf",
-  komplett: {
-    vanlig: "hafte/biologi-1-vetenskap-vanlig-komplett.pdf",
-    lattlast: "hafte/biologi-1-vetenskap-lattlast-komplett.pdf",
-    fordjupning: "hafte/biologi-1-vetenskap-fordjupning-komplett.pdf"
-  }
+  handledning: "hafte/biologi-1-vetenskap-lararhandledning.pdf"
 };
 
 window.hafte["biologi-liv"] = {

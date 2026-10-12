@@ -240,3 +240,11 @@ ELEV_HTML = ('<section class="sec"><div class="pill">Elevblad · Kopieringsunder
         [table(["Person", "Tystnad (antal ord)", "Musik (antal ord)"], [["1", "", ""], ["2", "", ""], ["3", "", ""], ["4", "", ""], ["Medelvärde", "", ""]], "tbl num")
          + "<p>Slutsats:</p>" + lines(3) + "<p>Felkällor och förbättringar:</p>" + lines(3)]).replace('class="row"', 'class="row w"', 1)
   + '</section>')
+
+# Facit till rutorna Tänk efter/Fundera/Utvärdera i grundtexten: (moment-index, rubrik, svar)
+RUTOR = [
+ (1, "Tänk efter (säkerhet i labbet):", "Man kan inte alltid se vad som är farligt, och att äta i labbet kan flytta ämnen från händer och bord till munnen. Regeln gäller därför alltid, så att den blir en vana."),
+ (4, "Utvärdera (Labb 1.1):", "Ja, eleven kan bli bättre av övning, eller gissa när kompisen släpper. Förbättring: släpp vid olika tider, använd samma antal försök per person, byt vem som släpper och räkna medelvärde."),
+ (5, "Fundera (Vad kan vetenskap pröva?):", "Ett påstående som inte kan visa sig vara fel går aldrig att pröva. Att vetenskapen kan ha fel gör att den kan rättas när nya belägg kommer, medan en idé som aldrig kan ha fel inte kan lära oss något."),
+ (8, "Utvärdera (Labb 1.2):", "Man litar mest på den källa som bygger på flest och bäst undersökningar och inte har något att sälja. Två trovärdiga källor kan säga olika om de undersökt olika grupper, använt olika metoder eller är från olika tid. Då behövs fler källor."),
+]
