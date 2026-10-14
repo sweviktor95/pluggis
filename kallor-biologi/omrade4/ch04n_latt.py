@@ -130,7 +130,7 @@ DELAR = [
          "När vi bränner olja och kol släpper vi ut mer koldioxid än växterna hinner ta upp. Det påverkar klimatet. Mer om det i område 5."],
   kom="Växter tar koldioxid från luften. Cellandning, nedbrytning och förbränning släpper ut den igen.",
   ova=[("ringa", "Vad tar växterna från luften?", ["Koldioxid", "Syre", "Sten"]),
-       ("streck", "Dra streck till rätt förklaring.", ["Fotosyntes", "Cellandning", "Förbränning"], ["släpper ut koldioxid när vi bränner olja", "tar in koldioxid", "släpper ut koldioxid i alla levande"]),
+       ("streck", "Dra streck till rätt förklaring.", ["Fotosyntes", "Cellandning", "Förbränning"], ["släpper ut koldioxid när vi bränner olja", "tar in koldioxid", "släpper ut koldioxid när växter och djur får energi"]),
        ("fyll", ["koldioxid", "nedbrytning", "kretslopp"], ["Växter tar in ______________.", "Döda växter bryts ner genom ______________.", "Kolet går runt i ett ______________."]),
        ("skriv", "Vad händer med kolet i ett träd som dör i skogen?", "Kolet", 2)]),
 
@@ -246,7 +246,7 @@ FACIT = [
  "<b>Energiflöde och biomassa:</b> 1) Solen. 2) Ungefär 10 procent. 3) solljuset, värme, biomassa. 4) Energin minskar i varje led, så det räcker bara till få rovdjur.",
  "<b>Labb 4.1:</b> 1) 10, värme, 1. 2) 1 gram. 3) Energin minskar så mycket i varje led att det inte räcker till fler. 4) T.ex. att verkliga djur äter flera sorters föda eller att procenten varierar.",
  "<b>Materia tillverkas inte och försvinner inte:</b> 1) Djuret dör 3, Växten tar upp näring 1, Nedbrytare gör näring 4, Ett djur äter växten 2. 2) Sant, falskt, falskt. 3) kretslopp, värme, luften. 4) Energin går en väg och blir värme. Ämnena används om och om igen.",
- "<b>Kolets kretslopp:</b> 1) Koldioxid. 2) Fotosyntes – tar in koldioxid; Cellandning – släpper ut koldioxid i alla levande; Förbränning – släpper ut koldioxid när vi bränner olja. 3) koldioxid, nedbrytning, kretslopp. 4) Nedbrytare gör om det till koldioxid och näring.",
+ "<b>Kolets kretslopp:</b> 1) Koldioxid. 2) Fotosyntes – tar in koldioxid; Cellandning – släpper ut koldioxid när växter och djur får energi; Förbränning – släpper ut koldioxid när vi bränner olja. 3) koldioxid, nedbrytning, kretslopp. 4) Nedbrytare gör om det till koldioxid och näring.",
  "<b>Nedbrytning:</b> 1) Svampar och bakterier. 2) Sant, falskt, sant. 3) förna, näring, kallt. 4) De gör döda växter och djur till ny näring som växterna kan ta upp.",
  "<b>Labb 4.2:</b> 1) tre, väger, procent. 2) T.ex. ”Mest te försvann i skogsjord”. 3) För att slumpen mellan enskilda påsar ska jämnas ut. 4) T.ex. att påsarna låg olika djupt eller att jorden var olika fuktig.",
  "<b>Populationer och förändring:</b> 1) födda, döda, fler. 2) 120. 3) Sant, falskt, sant. 4) Fjällräven äter lämlar och får många valpar när det finns mycket mat.",

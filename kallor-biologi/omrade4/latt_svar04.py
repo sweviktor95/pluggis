@@ -29,7 +29,7 @@ SVAR = {
  ("Materia tillverkas inte och försvinner inte", 3): ["kretslopp", "värme", "luften"],
  ("Materia tillverkas inte och försvinner inte", 4): "Energin går en väg och blir värme. Ämnena används om och om igen.",
  ("Kolets kretslopp", 1): 0,
- ("Kolets kretslopp", 2): ["tar in koldioxid", "släpper ut koldioxid i alla levande", "släpper ut koldioxid när vi bränner olja"],
+ ("Kolets kretslopp", 2): ["tar in koldioxid", "släpper ut koldioxid när växter och djur får energi", "släpper ut koldioxid när vi bränner olja"],
  ("Kolets kretslopp", 3): ["koldioxid", "nedbrytning", "kretslopp"],
  ("Kolets kretslopp", 4): "Nedbrytare gör om det till koldioxid och näring.",
  ("Nedbrytning", 1): 0,
