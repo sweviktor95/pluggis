@@ -291,7 +291,7 @@ var struktur = [
             titel: "2.1 Cellen",
             ramverk: true,
             barn: [
-              { id: "biologi-m-2-1-1", titel: "Cellteorin och mikroskopet" },
+              { id: "biologi-m-2-1-1", titel: "Vad är liv? Cellteorin och mikroskopet" },
               { id: "biologi-m-2-1-2", titel: "Djurcell och växtcell" },
               { id: "biologi-m-2-1-3", titel: "Bakterier och encelliga organismer" },
               { id: "biologi-m-2-1-l", titel: "Labb: Mikroskopera celler" }
@@ -316,7 +316,9 @@ var struktur = [
               { id: "biologi-m-2-3-1", titel: "Specialiserade celler och vävnader" },
               { id: "biologi-m-2-3-2", titel: "Kroppens organsystem – översikt" }
             ]
-          }
+          },
+          { id: "biologi-m-2-s", titel: "Sammanfattning och begrepp" },
+          { id: "biologi-m-2-t", titel: "Testa dig själv" }
         ]
       },
       {

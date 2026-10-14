@@ -137,7 +137,7 @@ KKCSS = """
 """
 n_pages = len(PdfReader(student).pages)
 body = ''.join(parts)
-html = bbuild_n.doc(body, FOOT + ' · Källor', n_pages + 1, tab='4', extra=KKCSS)
+html = bbuild_n.doc(body, FOOT + ' · Källor', n_pages + 1, tab=str(int(CHP[:2])), extra=KKCSS)
 kk = f'{OUTL}/_kk_{CHP}_{LEVEL}.pdf'
 bbuild_n.html_to_pdf.__wrapped__ if False else None
 # anropa originalfunktionen utan markörinsättning (namnet slutar inte på _body.pdf)

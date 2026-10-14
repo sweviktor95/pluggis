@@ -16,16 +16,17 @@ window.hafte["biologi-vetenskap"] = {
   handledning: "hafte/biologi-1-vetenskap-lararhandledning.pdf"
 };
 
-window.hafte["biologi-liv"] = {
-  titel: "Kapitel 2 – Cellen",
+window.hafte["biologi-omrade-2"] = {
+  titel: "Kapitel 2 – Cellen och livets processer",
   vanlig: "hafte/biologi-2-cellen-vanlig.pdf",
   lattlast: "hafte/biologi-2-cellen-lattlast.pdf",
   fordjupning: "hafte/biologi-2-cellen-fordjupning.pdf",
-  komplett: {
-    vanlig: "hafte/biologi-2-cellen-vanlig-komplett.pdf",
-    lattlast: "hafte/biologi-2-cellen-lattlast-komplett.pdf",
-    fordjupning: "hafte/biologi-2-cellen-fordjupning-komplett.pdf"
-  }
+  larare: {
+    lattlast: "hafte/biologi-2-cellen-lattlast-lararversion.pdf",
+    vanlig: "hafte/biologi-2-cellen-vanlig-lararversion.pdf",
+    fordjupning: "hafte/biologi-2-cellen-fordjupning-lararversion.pdf"
+  },
+  handledning: "hafte/biologi-2-cellen-lararhandledning.pdf"
 };
 
 window.hafte["biologi-mangfald"] = {
