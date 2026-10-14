@@ -53,7 +53,7 @@ def sam_html(samman, begr):
 
 def test_html(M, nivaer=True):
     out = ['<section class="sec"><div class="sh"><h2>Testa dig själv</h2></div>'
-           '<p class="note">Uppgifterna liknar uppgifterna i nationella prov i biologi. Personer, annonser och mätvärden är påhittade. ● grundläggande &nbsp;●● utvecklat &nbsp;●●● välutvecklat</p>']
+           '<p class="note">Uppgifterna är upplagda ungefär som i nationella prov i biologi. Personer, annonser och mätvärden är påhittade. ● grundläggande &nbsp;●● utvecklat &nbsp;●●● välutvecklat</p>']
     last = None
     n = 0
     for (d, q, alts, pts, nl) in M.TEST:

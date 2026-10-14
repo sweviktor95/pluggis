@@ -11,7 +11,7 @@ NAMN = "Ekologi"
 UNDER = "Vem äter vem – och vart tar energin vägen?"
 INTRO = ("En havsörn dyker ner mot en vik i Bottenviken och fångar en gädda. Gäddan har ätit abborrar, abborrarna har ätit djurplankton och djurplanktonen har ätit små alger som har fångat solljus. "
          "Allt levande hänger ihop i ett nät av beroenden. Läran om hur organismer samspelar med varandra och med sin miljö kallas <strong>ekologi</strong>. "
-         "Namn och mätvärden i uppgifterna är påhittade, om inget annat står. Undersökningarna av van Helmont, Paine och Gause samt exemplen Yellowstone och St Matthew är verkliga.")
+         "Namn och mätvärden i uppgifterna är påhittade, om inget annat står. Undersökningen av van Helmont och exemplet Yellowstone är verkliga.")
 MAL = ["vad ekologi är och hur population, samhälle och ekosystem skiljer sig åt", "hur biotiska och abiotiska faktorer påverkar organismer",
        "vad producenter, konsumenter och nedbrytare gör och hur man tolkar näringskedjor och näringsvävar", "hur energin flödar genom ett ekosystem och varför den minskar i varje led",
        "att materien och kolet går i kretslopp och hur nedbrytning går till", "hur populationer förändras, vad som begränsar dem och hur arter samspelar"]
@@ -48,12 +48,11 @@ add("4.1.1", "Vad är ett ekosystem?", f"Kapitel {NR} · Delområde 4.1 {DELOMR[
  + cards4([("Biotiska faktorer", "Påverkan från andra levande organismer (bios = liv): föda, rovdjur, konkurrenter, sjukdomar och parasiter."),
            ("Abiotiska faktorer", "Påverkan från den livlösa miljön: temperatur, ljus, vatten, näringsämnen och vind.")])
  + row("<p>Varje art har en <strong class='green'>livsmiljö</strong>, platsen där den kan leva. En abborre behöver sjö- eller havsvatten med tillräckligt med syre. En fjällräv behöver kalla fjäll med lämlar och gamla lyor. En viss typ av livsmiljö, som barrskog, myr, sjö eller strandäng, kallas en <strong class='green'>biotop</strong>.</p>"
-       "<p>Ett ekosystem kan vara stort, som en hel skog eller ett hav, eller litet, som en vattenpöl eller en murken stubbe. Det som gör något till ett ekosystem är att organismerna och den livlösa miljön hänger ihop.</p>",
+       "<p>Ett ekosystem kan vara stort, som en hel skog eller ett hav, eller litet, som en vattenpöl eller en murken stubbe. Det som gör något till ett ekosystem är att organismerna och den livlösa miljön hänger ihop.</p>" + box("tank", "Tänk efter", "<p>Är ett ekosystem alltid stort? Kan en vattenpöl, en murken stubbe eller din tarm vara ett ekosystem?</p>"),
        [begrepp([("Biotisk faktor", "Påverkan från andra levande organismer."), ("Abiotisk faktor", "Påverkan från den livlösa miljön."),
-                 ("Livsmiljö", "Platsen där en art lever."), ("Biotop", "En typ av livsmiljö, till exempel barrskog, myr eller sjö.")]),
-        box("tank", "Tänk efter", "<p>Är ett ekosystem alltid stort? Kan en vattenpöl, en murken stubbe eller din tarm vara ett ekosystem?</p>")])
+                 ("Livsmiljö", "Platsen där en art lever."), ("Biotop", "En typ av livsmiljö, till exempel barrskog, myr eller sjö.")]),])
  + "<h3>Ekosystem ser olika ut – men fungerar likadant</h3>"
- + fig(FIG+"ekologi-ekosystem.png", "<b>Bild 4.2</b> Två ekosystem i Norrbotten och två i andra delar av världen.")
+ + fig(FIG+"ekologi-ekosystem.png", "<b>Bild 4.2</b> Två ekosystem i Norrbotten och två i andra delar av världen.", "80%")
  + table(["", "Barrskog i Norrbotten", "Bottenviken", "Tropisk regnskog", "Savann"],
          [["Klimat", "Kalla vintrar, kort sommar med ljusa nätter", "Kallt bräckt vatten, is på vintern", "Varmt och regnigt hela året", "Varmt, regnperiod och torrperiod"],
           ["Producenter", "Tall, gran, björk, bärris, mossor, lavar", "Växtplankton, alger, vass", "Höga lövträd, lianer", "Gräs, spridda träd som akacior"],
