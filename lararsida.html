@@ -81,6 +81,9 @@
     if (!h) { return ""; }
     var k = '<div class="kapitel"><h4>' + (h.titel || blad.titel) + '</h4>';
     k += '<p class="grupp">Elevversion (utan facit, lärarhandledning och bonuslabb) – till klassen</p>' + knappar(h);
+    if (h.larare) {
+      k += '<p class="grupp">Lärarversion – samma innehåll som elevhäftet, med löpande källhänvisning [1], [2] … och källförteckning sist – för dig som lärare</p>' + knappar(h.larare);
+    }
     if (h.handledning) {
       k += '<p class="grupp">Lärarhandledning för alla tre nivåerna (handledning, facit och bedömningsstöd) – för dig som lärare</p><div class="knappar">' + lank(h.handledning, "Lärarhandledning") + '</div>';
     }

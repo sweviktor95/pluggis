@@ -8,6 +8,11 @@ window.hafte["biologi-vetenskap"] = {
   vanlig: "hafte/biologi-1-vetenskap-vanlig.pdf",
   lattlast: "hafte/biologi-1-vetenskap-lattlast.pdf",
   fordjupning: "hafte/biologi-1-vetenskap-fordjupning.pdf",
+  larare: {
+    lattlast: "hafte/biologi-1-vetenskap-lattlast-lararversion.pdf",
+    vanlig: "hafte/biologi-1-vetenskap-vanlig-lararversion.pdf",
+    fordjupning: "hafte/biologi-1-vetenskap-fordjupning-lararversion.pdf"
+  },
   handledning: "hafte/biologi-1-vetenskap-lararhandledning.pdf"
 };
 
@@ -40,6 +45,11 @@ window.hafte["biologi-ekologi"] = {
   vanlig: "hafte/biologi-4-ekologi-vanlig.pdf",
   lattlast: "hafte/biologi-4-ekologi-lattlast.pdf",
   fordjupning: "hafte/biologi-4-ekologi-fordjupning.pdf",
+  larare: {
+    lattlast: "hafte/biologi-4-ekologi-lattlast-lararversion.pdf",
+    vanlig: "hafte/biologi-4-ekologi-vanlig-lararversion.pdf",
+    fordjupning: "hafte/biologi-4-ekologi-fordjupning-lararversion.pdf"
+  },
   handledning: "hafte/biologi-4-ekologi-lararhandledning.pdf"
 };
 
