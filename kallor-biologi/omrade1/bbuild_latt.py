@@ -2,7 +2,8 @@
 import sys, os, re
 sys.path.insert(0, '/tmp/bio')
 from bstyle import *
-from bbuild import html_to_pdf, page_texts, doc, OUT, TABCSS
+from bbuild import html_to_pdf, page_texts, doc, OUT
+from bbuild_n import TABCSS, tabrule
 from pypdf import PdfReader, PdfWriter
 import importlib, os
 CH = os.environ.get('CH', '04')
@@ -187,6 +188,7 @@ def named_css():
         else:
             foot = f'Kapitel {L.NR} · {L.NAMN} · {d["titel"]}'
         out += '.m%d{page:m%d}@page m%d{@bottom-left{content:"%s";font:8.4pt Carlito;color:#6b625b;margin-top:6mm}}' % (i, i, i, foot)
+        out += '@page m%d%s' % (i, tabrule(m.group(1) if m else L.TAB))
     return out
 
 def build(komplett=True):

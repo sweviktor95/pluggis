@@ -15,7 +15,7 @@ def first(pages):
 body = "".join(f'<section class="sec m{i}">{head("", t)}{inner}</section>' for i, (nr, t, inner) in enumerate(M.S, 1)) + M.uppg_html()
 FOOT = f'Fördjupning {M.NR} · {M.NAMN}'
 tmp = f'{OUT}/_fordj_body.pdf'
-html_to_pdf(doc(body, FOOT, 2, tab=M.TAB, extra=B.named_foot_css(getattr(M,'FOOTS',[]))), tmp)
+html_to_pdf(doc(body, FOOT, 2, tab=M.TAB, extra=B.named_foot_css(getattr(M,'FOOTS',[]), tab=M.TAB)), tmp)
 texts = page_texts(tmp)
 def find(s):
     for i, t in enumerate(texts):

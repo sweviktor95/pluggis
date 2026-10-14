@@ -194,17 +194,17 @@ M4_LATT = [
 ]
 
 M4_FORDJ = [
- ("minskade antalet arter till ungefär 8.", "Paines havsstjärneförsök: ca 15 arter mot ca 8 utan havsstjärnor; musslor tog över.", ['keystone']),
+ ("inom några år till ungefär 8.", "Paines havsstjärneförsök: ca 15 arter mot ca 8 utan havsstjärnor; musslor tog över.", ['keystone']),
  ("och att väder, betestryck och andra rovdjur också spelar in.", "Yellowstone: debatt om vargarnas betydelse jämfört med andra faktorer.", ['painter']),
  ("Uppifrån Nerifrån", "Uppifrån- och nerifrånkaskader.", ['ingen']),
  ("1 kg säl", "Tumregeln 10 % tillämpad på en näringskedja.", ['wiki_trophic']),
- ("hos varmblodiga däggdjur ofta mindre", "Omsättningen av energi varierar mellan djurgrupper.", ['ingen']),
+ ("varmblodiga däggdjur och fåglar ofta mindre", "Omsättningen av energi varierar mellan djurgrupper.", ['ingen']),
  ("kan ibland vara större högre upp", "Omvänd biomassapyramid i öppet hav.", ['ingen']),
  ("78 volymprocent av kvävgas", "Luften är ca 78 % kvävgas som organismer inte direkt kan använda.", ['nitrogen']),
  ("Det är en symbios.", "Kvävefixerande bakterier i rotknölar på baljväxter.", ['nitrogen']),
  ("också sker i vatten.", "Kvävefixering av cyanobakterier i vatten.", ['nitrogen']),
  ("planar ut kring det antal som miljön kan försörja långsiktigt", "J- och S-kurva, bärkraft.", ['tutor_cc']),
- ("År 1944 släpptes 29 renar", "St Matthew-renarna: 29 djur 1944, ca 6 000 år 1963, 42 år 1966.", ['stmatthew']),
+ ("År 1944 släpptes 29 renar", "St Matthew-renarna: 29 djur 1944, ca 6 000 år 1963, 42 år 1966; lavmattor under ca 1 cm mot 8–12 cm på Hall Island. Punkten 1 350 renar i diagrammet är inte kontrollerad.", ['stmatthew']),
  ("trängde så småningom ut", "Gauses försök med Paramecium och konkurrensutslagning.", ['competitive']),
  ("lever dessutom i symbios med alger", "P. bursaria samexisterade med P. aurelia (olika nisch).", ['competitive']),
 ]

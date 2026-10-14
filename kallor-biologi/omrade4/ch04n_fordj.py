@@ -28,8 +28,8 @@ def add(nr, t, delomr, inner):
 add("F4.1.2", "Nyckelarter och kaskadeffekter", "4.1",
  "<p>I grundtexten lärde du dig att en förändring i en näringsväv kan sprida sig. Men alla arter är inte lika viktiga för helheten. Vissa arter har en mycket större påverkan än deras antal eller vikt skulle antyda. De kallas <strong class='green'>nyckelarter</strong>. Om en nyckelart försvinner kan hela ekosystemet förändras.</p>"
  + "<h3>Havsstjärnan på stranden</h3>"
- + roww("<p>Ekologen Robert Paine arbetade vid 1960-talets början på en klippstrand vid Stilla havets kust i delstaten Washington. På en bit av stranden plockade han bort rovdjuret havsstjärnan <em>Pisaster ochraceus</em> gång på gång. På en jämförbar bit lät han allt vara som det var.</p>"
-        "<p>På den orörda biten fanns kvar ungefär 15 arter. På biten utan havsstjärnor minskade antalet arter till ungefär 8. Havsstjärnan äter bland annat musslor. Utan den tog musslorna över klipporna, och många andra arter, som alger och snäckor, fick ingen plats att leva på.</p>"
+ + roww("<p>Ekologen Robert Paine arbetade på 1960-talet på en klippstrand vid Stilla havets kust i delstaten Washington. På en bit av stranden plockade han bort rovdjuret havsstjärnan <em>Pisaster ochraceus</em> gång på gång. På en jämförbar bit lät han allt vara som det var.</p>"
+        "<p>På den orörda biten fanns kvar ungefär 15 arter. På biten utan havsstjärnor minskade antalet arter inom några år till ungefär 8. Havsstjärnan äter bland annat musslor. Utan den tog musslorna över klipporna, och många andra arter, som alger och snäckor, fick ingen plats att leva på.</p>"
         "<p>Paine kallade arten en <em>keystone species</em>, nyckelart. Havsstjärnan var inte talrik, men den höll musslorna i schack och gjorde att fler arter fick plats.</p>",
         [begrepp([("Nyckelart", "En art som har mycket större påverkan på ekosystemet än man kan vänta sig av dess antal."), ("Kaskadeffekt", "En förändring som sprider sig genom flera led i en näringsväv."), ("Kontrollområde", "Ett område där man inte ändrar något, för jämförelse.")]),
          box("tank", "Resonera om upplägget", "<p>Varför lät Paine en del av stranden vara orörd? Vilka felkällor kan finnas i en undersökning på bara en strand?</p>")])
@@ -47,7 +47,7 @@ add("F4.1.3", "Räkna med energi och biomassa", "4.1",
    "<p>Varje steg uppåt i kedjan gör alltså att det krävs tio gånger mer föda längst ner. Det förklarar varför toppkonsumenter är få, behöver stora områden och är så känsliga för förändringar.</p>"
    "<h3>När pyramiden blir omvänd</h3><p>Energin som flödar genom ett ekosystem bildar alltid en pyramid: mest längst ner. Men biomassan, alltså vikten av det som lever just nu, kan ibland vara större högre upp. Ett möjligt exempel finns i öppet hav, där växtplankton är mycket små och förökar sig snabbt. De äts upp nästan lika fort som de bildas. Vid ett enskilt mättillfälle kan därför vikten av djurplankton vara större än vikten av växtplankton. Det går ändå ihop eftersom växtplankton omsätts mycket snabbt: det är <em>flödet</em> av energi som bildar pyramid, inte alltid mängden vid ett visst ögonblick.</p>",
    [box("tank", "Räkna själv", "<p>Kedjan är växtplankton, djurplankton, strömming, gädda och havsörn. Ungefär hur mycket djurplankton behövs för att havsörnen ska öka 1 kg? Hur mycket växtplankton?</p>"),
-    box("varning", "Varning", "<p>10 procent är ett grovt genomsnitt. Hos växtätande insekter kan det vara mer, hos varmblodiga däggdjur ofta mindre, eftersom de använder mycket energi för att hålla värmen.</p>")]))
+    box("varning", "Varning", "<p>10 procent är ett grovt genomsnitt. Hos insekter och andra växelvarma djur kan det vara mer, hos varmblodiga däggdjur och fåglar ofta mindre, eftersom de använder mycket energi för att hålla värmen.</p>")]))
 
 add("F4.2.2", "Kvävets kretslopp", "4.2",
  "<p>Alla organismer behöver kväve för att bygga proteiner och DNA. Luften består till 78 volymprocent av kvävgas, men varken växter eller djur kan använda den direkt. Kvävgasmolekylen är för stabil. Därför är kväve ofta det ämne som begränsar hur mycket växter kan växa.</p>"
@@ -67,8 +67,8 @@ add("F4.3.1", "Populationer som växer – och kraschar", "4.3",
      "<p>Bärkraften är inte konstant. Den beror på födotillgång, väder, rovdjur och konkurrenter, och kan förändras om miljön förändras. Om en population växer långt över bärkraften kan den förstöra sin egen födobas. Då kan den krascha och bärkraften bli lägre än förut.</p>",
    [fig(FIG+"f_jkurva.png", "J-kurva och S-kurva.")])
  + "<h3>Renarna på St Matthew</h3>"
- + roww("<p>År 1944 släpptes 29 renar ut på den obebodda ön St Matthew i Berings hav. Där fanns tjocka mattor av lavar men inga rovdjur och ingen jakt. Renarna förökade sig snabbt. År 1963 räknade forskare till omkring 6 000 renar. Men lavarna, som växer mycket långsamt, var nästan helt uppätna.</p>"
-       "<p>Vintern 1963–64 var ovanligt sträng med mycket snö. Renarna svalt ihjäl i stort antal. År 1966 fanns bara 42 renar kvar, och på 1980-talet var de helt borta. Lavmattorna tog många år på sig att återhämta sig.</p>",
+ + roww("<p>År 1944 släpptes 29 renar ut på den obebodda ön St Matthew i Berings hav. Där fanns tjocka mattor av lavar men inga rovdjur och ingen jakt. Renarna förökade sig snabbt. År 1963 räknade forskare till omkring 6 000 renar. Men lavarna, som växer mycket långsamt, var kraftigt nedbetade.</p>"
+       "<p>Vintern 1963–64 var ovanligt sträng med mycket snö. Renarna svalt ihjäl i stort antal. År 1966 fanns bara 42 renar kvar, och på 1980-talet var de helt borta. År 1963 var lavmattorna sällan tjockare än ungefär 1 cm, medan de på grannön Hall Island, där det inte fanns renar, var 8–12 cm.</p>",
    [fig(FIG+"f_ren.png", "Renpopulationen på St Matthew.")])
  + box("fundera", "Tänk efter", "<p>Varför räckte det inte att renarna hade gott om mat år 1950 för att populationen skulle förbli stabil?</p>"))
 

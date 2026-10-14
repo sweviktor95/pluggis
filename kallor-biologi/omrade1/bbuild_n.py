@@ -29,20 +29,28 @@ def page_texts(pdf):
     r = PdfReader(pdf)
     return [(pg.extract_text() or '') for pg in r.pages]
 
+def tabrule(content):
+    # Grön flik i högermarginalen. Gradienten gör att fliken ligger 1,8–9,8 mm från textkanten,
+    # alltså minst 5 mm från pappersmarginalen så att den inte klipps vid utskrift.
+    return ('{@right-top{content:"%s";background:linear-gradient(to right,transparent 1.8mm,#2f6b4f 1.8mm,#2f6b4f 9.8mm,transparent 9.8mm);'
+            'color:#fff;font:700 10pt Carlito;padding-left:1.8mm;padding-right:5mm;text-align:center;vertical-align:middle;height:16mm;margin-top:8mm}}' % content)
+
 def TABCSS(tab):
-    return ('@page{@right-top{content:"%s";background:linear-gradient(to right,transparent 7.3mm,#2f6b4f 7.3mm);'
-            'color:#fff;font:700 11pt Carlito;padding-left:7.3mm;text-align:center;vertical-align:middle;height:16mm;margin-top:8mm}}' % tab)
+    return '@page' + tabrule(tab)
 
 def doc(body, foot, start, tab="4", extra=""):
-    bg = ('@page{@right-top{content:"%s";background:linear-gradient(to right,transparent 7.3mm,#2f6b4f 7.3mm);'
-          'color:#fff;font:700 11pt Carlito;padding-left:7.3mm;text-align:center;vertical-align:middle;height:16mm;margin-top:8mm}}' % tab)
+    bg = TABCSS(tab)
     return (f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, start)}{bg}{extra}{DYS}</style></head>'
             f'<body>{body}</body></html>')
 
-def named_foot_css(foots):
+def named_foot_css(foots, tab=None):
     out = ''
+    if tab is None: tab = getattr(M, 'TAB', '4') if M else '4'
     for i, f in enumerate(foots, 1):
+        m = re.search(r'Delområde (\d+\.\d+)', f)
+        t = (m.group(1) + ('+' if str(tab).endswith('+') else '')) if m else tab
         out += '.m%d{page:m%d}@page m%d{@bottom-left{content:"%s";font:8.4pt Carlito;color:#6b625b;margin-top:6mm}}' % (i, i, i, f)
+        out += '@page m%d%s' % (i, tabrule(t))
     return out
 
 # ---------------------------------------------------------------- delar
