@@ -52,6 +52,7 @@
 <script src="innehall/struktur.js"></script>
 <script src="hafte/manifest.js"></script>
 <script src="planering/lararvy-biologi.js"></script>
+<script src="planering/lararvy-kemi.js"></script>
 <script>
   // Obs: enkel spärr mot nyfikna – inget riktigt skydd (sidan är statisk).
   var HASH = "a2c4a4f38df7a7d24eac2b8dc1c9f63487d6255208b978a29b9740423225ee3a";
@@ -94,8 +95,7 @@
   }
 
   // Biologi i lärarvyn: planeringen som länk överst, därefter de nya områdena (kapitlen).
-  function biologiHtml(nod) {
-    var d = window.lararBiologi;
+  function biologiHtml(nod, d) {
     var ut = '<div class="planlank">' + lank(d.plan.pdf, "📋 Planering (PDF)", "plan") + lank(d.plan.xlsx, "Planering (Excel)", "plan") + '</div>';
     d.omraden.forEach(function(o) {
       var inre = '<p class="ide">' + o.ide + '</p>' +
@@ -110,7 +110,8 @@
 
   // Bygger HTML för en gren; returnerar "" om inga häften finns under den.
   function grenHtml(nod, niva) {
-    if (nod.id === "biologi" && window.lararBiologi) { return biologiHtml(nod); }
+    if (nod.id === "biologi" && window.lararBiologi) { return biologiHtml(nod, window.lararBiologi); }
+    if (nod.id === "kemi" && window.lararKemi) { return biologiHtml(nod, window.lararKemi); }
     var egen = kapitelHtml(nod);
     var inre = (nod.barn || []).map(function(b) { return grenHtml(b, niva + 1); }).join("");
     if (!nod.barn || !nod.barn.length) { return egen; }

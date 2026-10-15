@@ -1,0 +1,176 @@
+# -*- coding: utf-8 -*-
+"""Genererar kemiplaneringen åk 7–9 (Lgr22) från kemi_data.py.
+Kör från repots rot: python3 planering/kemi_plan.py"""
+import sys, os, html, json, re
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import kemi_data as K
+A = K.AREAS
+ALLA = {**K.SYFTE, **K.CI, **K.FORM}
+def sp(t): return t.split()
+def kl(ks, pat): return [ALLA[k] for k in ks if re.fullmatch(pat, k)]
+PS, PC, PF = r"S\d", r"(KN|SU)\d", r"F\d"
+def kort(t):
+    t = re.split(r"[;:]", t)[0].strip()
+    return t if len(t) < 75 else t[:72].rsplit(" ", 1)[0].rstrip(",") + " …"
+def lab(d): return d[6]
+def dn(d): return d[0].replace(".", "-")
+
+def kontroll():
+    seen = {k: 0 for k in ALLA}; bad = []
+    for a in A:
+        for d in a[3]:
+            if len(d[5]) != 3: bad.append(d[0])
+            rader = [m[3] for m in d[5]] + ([d[6][4]] if d[6] else [])
+            for tg in rader:
+                for k in sp(tg):
+                    if k not in ALLA: bad.append((d[0], k))
+                    else: seen[k] += 1
+    saknas = [k for k, v in seen.items() if v == 0]
+    if bad or saknas: print("FEL", bad, saknas); sys.exit(1)
+    return seen
+
+def rader(d):
+    r = [("Lektionsmoment", m[0], m[1], m[2], m[3]) for m in d[5]]
+    if d[6]: r.append(("Labb", "Labb: " + d[6][0], f"{d[6][1]} {d[6][2]} Säkerhet: {d[6][3]}", d[6][5], d[6][4]))
+    return r
+
+def skriv_md(seen):
+    o = []; w = o.append
+    nm = sum(len(d[5]) for a in A for d in a[3]); nl = sum(1 for a in A for d in a[3] if d[6]); ne = sum(len(d[7]) for a in A for d in a[3])
+    w("# Kemi åk 7–9 – planering (Lgr22)\n")
+    w("Status: förslag, väntar på granskning. Genereras av `planering/kemi_plan.py` från `planering/kemi_data.py` – ändra där, inte här.\n")
+    w(f"Planen omfattar {len(A)} områden, {sum(len(a[3]) for a in A)} delområden, {nm} lektionsmoment och {nl} labbpass. Det som inte ryms står under *Om tid / fördjupning* ({ne} förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).\n")
+    w("## Översikt\n"); w("| Område | Delområden |"); w("|---|---|")
+    for a in A: w(f"| {a[0]}. {a[1]} | {', '.join(d[1] for d in a[3])} |")
+    w(""); w("## Planen\n")
+    for a in A:
+        w(f"## {a[0]}. {a[1]}\n"); w(f"*{a[2]}*\n")
+        for d in a[3]:
+            w(f"### {d[0]} {d[1]}\n"); w(f"**Mål:** {d[2]}\n"); w(f"**Nivåer (E→A):** {d[3]}\n")
+            if d[4]: w("**Förklaringsmodeller:** " + "; ".join(d[4]) + "\n")
+            w("| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |"); w("|---|---|---|---|---|---|")
+            for typ, t, tx, beg, tg in rader(d):
+                ks = sp(tg); pre = "🧪 **" + t.replace("Labb: ", "Labb (ca 45 min): ") + "**" if typ == "Labb" else f"**{t}**"
+                w(f"| {pre} | {tx} | {beg} | {'; '.join(kort(x) for x in kl(ks,PS))} | {'; '.join(kort(x) for x in kl(ks,PC))} | {'; '.join(kl(ks,PF))} |")
+            w("")
+            if d[7]: w("**Om tid / fördjupning:** " + "; ".join(d[7]) + "\n")
+    w("## Öppna frågor\n")
+    w("1. Område 7 (kolföreningar och livets kemi) överlappar biologins område om cellen och energin. Ska ordningen samordnas med biologin?")
+    w("2. Delområde 8.3 är en repetition utan labb. Vill du hellre ha ett eget labbpass där?")
+    w("3. Labbarna är förslag; säkerhet och kemikalier måste stämma med skolans egna rutiner.")
+    open("planering/kemi.md", "w", encoding="utf-8").write("\n".join(o) + "\n")
+
+def skriv_xlsx(seen):
+    from openpyxl import Workbook
+    from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
+    from openpyxl.utils import get_column_letter
+    F = Font(name="Arial", size=10); FB = Font(name="Arial", size=10, bold=True, color="FFFFFF"); HF = PatternFill("solid", fgColor="2F6F9F")
+    th = Side(style="thin", color="CCCCCC"); BD = Border(top=th, bottom=th, left=th, right=th)
+    def sheet(ws, head, rows, widths, freeze="A2"):
+        ws.append(head)
+        for r in rows: ws.append(r)
+        for c in ws[1]: c.font = FB; c.fill = HF; c.alignment = Alignment(wrap_text=True, vertical="center")
+        for row in ws.iter_rows(min_row=2):
+            for c in row: c.font = F; c.alignment = Alignment(wrap_text=True, vertical="top"); c.border = BD
+        for i, wd in enumerate(widths, 1): ws.column_dimensions[get_column_letter(i)].width = wd
+        ws.freeze_panes = freeze; ws.auto_filter.ref = ws.dimensions
+    wb = Workbook(); m = []; dr = []; ar = []; lr = []
+    for a in A:
+        ar.append([a[0], a[1], a[2], len(a[3])])
+        for d in a[3]:
+            dr.append([a[0], a[1], d[0], d[1], d[2], d[3], "; ".join(d[4]), "; ".join(d[7])])
+            for typ, t, tx, beg, tg in rader(d):
+                ks = sp(tg); m.append([a[0], a[1], d[0], d[1], typ, t, tx, beg, "; ".join(kl(ks,PS)), "; ".join(kl(ks,PC)), "; ".join(kl(ks,PF))])
+            if d[6]: lr.append([d[0], d[1], d[6][0], d[6][1], d[6][2], d[6][3]])
+            for t in d[7]: m.append([a[0], a[1], d[0], d[1], "Om tid / fördjupning", t, "", "", "", "", ""])
+    ws = wb.active; ws.title = "Moment"
+    sheet(ws, ["Område nr", "Område", "Delområde nr", "Delområde", "Typ", "Moment", "Innehåll", "Begrepp", "Syfte", "Centralt innehåll", "Förmåga"], m, [8, 24, 9, 28, 16, 32, 55, 36, 36, 40, 22], "G2")
+    sheet(wb.create_sheet("Delområden"), ["Område nr", "Område", "Delområde nr", "Delområde", "Mål", "Nivåer (E→A)", "Förklaringsmodeller", "Om tid / fördjupning"], dr, [8, 24, 9, 30, 50, 60, 45, 50])
+    sheet(wb.create_sheet("Områden"), ["Nr", "Område", "Idé", "Delområden"], ar, [6, 32, 70, 10])
+    sheet(wb.create_sheet("Labbar"), ["Delområde nr", "Delområde", "Labb", "Undersökningsbar fråga", "Upplägg", "Säkerhet och anmärkning"], lr, [10, 30, 32, 40, 60, 50])
+    sheet(wb.create_sheet("Täckning"), ["Kod", "Innehåll", "Antal lektioner/labbar"], [[k, v, seen[k]] for k, v in ALLA.items()], [8, 110, 14])
+    wo = wb.create_sheet("Om planen", 0)
+    for r in ["Kemi åk 7–9 – planering (Lgr22). Förslag, väntar på granskning.", "Nivåer: område → delområde → moment.", "Begrepp och labbar är förslag, inte granskade mot läromedel eller skolans säkerhetsregler.", "Källa: planering/kemi_data.py i repot (ändra där, inte här)."]:
+        wo.append([r])
+    for row in wo.iter_rows():
+        for c in row: c.font = F
+    wo["A1"].font = Font(name="Arial", size=12, bold=True); wo.column_dimensions["A"].width = 120
+    wb.save("planering/kemi-planering.xlsx")
+
+def skriv_pdf():
+    e = html.escape
+    css = """@page{size:A4;margin:16mm 14mm 16mm 14mm;@bottom-center{content:counter(page);font:9pt Arial;color:#666}}
+body{font:9.5pt/1.35 Arial,'DejaVu Sans',sans-serif;color:#1c2330}
+h1{font-size:20pt;margin:0 0 4pt;color:#245a82}.sub{color:#555;margin-bottom:10pt}
+div.pg{break-after:page}div.pg:last-child{break-after:auto}
+h2{font-size:15pt;color:#fff;background:#2f6f9f;padding:5pt 8pt;border-radius:4pt;margin:0 0 3pt}
+.idea{font-style:italic;color:#444;margin:0 0 8pt}
+h3{font-size:11.5pt;color:#245a82;border-bottom:1.5px solid #2f6f9f;margin:10pt 0 3pt;padding-bottom:1pt}
+.mal,.niv,.mod{margin:2pt 0}
+table{width:100%;border-collapse:collapse;margin:3pt 0 4pt;table-layout:fixed}
+th{background:#e4eef6;text-align:left;font-size:8.5pt;padding:3pt 4pt;border:1px solid #c3d1dc}
+td{vertical-align:top;padding:3pt 4pt;border:1px solid #d3dbe2;font-size:8.8pt}
+tr{break-inside:avoid}td.m b{display:block}td.k div{margin-bottom:1.5pt}
+tr.lab td{background:#f1f7fb}
+.tid{margin:5pt 0;padding:4pt 8pt;background:#f2f5f7;border-radius:4pt;font-size:8.8pt}
+.leg{font-size:9pt;background:#f2f5f7;border-radius:4pt;padding:6pt 9pt;margin:6pt 0}.leg li{margin:1pt 0}"""
+    o = ['<!doctype html><meta charset="utf-8"><style>' + css + "</style>"]
+    o.append('<div class="pg"><h1>Kemi åk 7–9 – planering</h1><div class="sub">Område → delområde → moment, med begrepp, förklaringsmodeller, labbpass och koppling till kursplanen (Lgr22). Förslag, väntar på granskning.</div>')
+    o.append('<div class="leg"><b>Så läser du planen.</b><ul style="margin:3pt 0 0 14pt;padding:0"><li><b>Område</b> = ett kapitel. <b>Delområde</b> = ett avgränsat arbetsområde. <b>Moment</b> = en lektion.</li><li><b>Koppling</b> visar vilken del av ämnets <b>syfte</b>, vilket <b>centralt innehåll</b> och vilken <b>förmåga</b> momentet bygger på.</li><li>Nivåraden visar vad som skiljer godtagbara (E), goda (C) och mycket goda (A) kunskaper.</li><li><b>Om tid / fördjupning</b> = förslag som inte ryms i planen.</li><li>🧪 = labbpass.</li></ul></div>')
+    o.append('<table><tr><th>Område</th><th>Delområden</th></tr>')
+    for a in A: o.append(f'<tr><td><b>{a[0]}. {e(a[1])}</b></td><td>{e(", ".join(d[1] for d in a[3]))}</td></tr>')
+    o.append('</table></div>')
+    for a in A:
+        # ett område per sida om det ryms; annars bryts efter delområde
+        for di, d in enumerate(a[3]):
+            o.append('<div class="pg">')
+            if di == 0: o.append(f'<h2>{a[0]}. {e(a[1])}</h2><div class="idea">{e(a[2])}</div>')
+            else: o.append(f'<div class="idea" style="margin:0 0 4pt;color:#2f6f9f"><b>{a[0]}. {e(a[1])}</b></div>')
+            o.append(f'<h3>{d[0]} {e(d[1])}</h3><div class="mal"><b>Mål:</b> {e(d[2])}</div><div class="niv"><b>Nivåer:</b> {e(d[3])}</div>')
+            if d[4]: o.append('<div class="mod"><b>Förklaringsmodeller:</b> ' + e("; ".join(d[4])) + "</div>")
+            o.append('<table><colgroup><col style="width:43%"><col style="width:22%"><col style="width:35%"></colgroup><tr><th>Moment och innehåll</th><th>Begrepp</th><th>Koppling till kursplanen</th></tr>')
+            for typ, t, tx, beg, tg in rader(d):
+                ks = sp(tg); sy = kl(ks, PS); ce = kl(ks, PC); fm = kl(ks, PF); k = ""
+                if sy: k += "<div><b>Syfte:</b> " + e("; ".join(kort(x) for x in sy)) + "</div>"
+                if ce: k += "<div><b>Innehåll:</b> " + e("; ".join(kort(x) for x in ce)) + "</div>"
+                k += "<div><b>Förmåga:</b> " + e("; ".join(fm)) + "</div>"
+                tt = ("🧪 " if typ == "Labb" else "") + e(t)
+                o.append(f'<tr class="{"lab" if typ=="Labb" else ""}"><td class="m"><b>{tt}</b>{e(tx)}</td><td>{e(beg)}</td><td class="k">{k}</td></tr>')
+            o.append("</table>")
+            if d[7]: o.append('<div class="tid"><b>Om tid / fördjupning:</b> ' + e("; ".join(d[7])) + "</div>")
+            o.append("</div>")
+    p = "/tmp/kemi_plan.html"; open(p, "w", encoding="utf-8").write("\n".join(o))
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        b = pw.chromium.launch(executable_path="/opt/pw-browsers/chromium"); pg = b.new_page()
+        pg.goto("file://" + p); pg.pdf(path="planering/kemi-planering.pdf", prefer_css_page_size=True, print_background=True); b.close()
+
+def skriv_js():
+    data = {"plan": {"pdf": "planering/kemi-planering.pdf", "xlsx": "planering/kemi-planering.xlsx"},
+            "omraden": [{"nr": a[0], "titel": a[1], "ide": a[2], "hafte": None, "lankar": [], "ppt": []} for a in A]}
+    open("planering/lararvy-kemi.js", "w", encoding="utf-8").write(
+        "// Genereras av planering/kemi_plan.py – ändra inte för hand.\nwindow.lararKemi = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
+
+def skriv_struktur():
+    def js(t): return json.dumps(t, ensure_ascii=False)
+    ut = []
+    for a in A:
+        dl = []
+        for d in a[3]:
+            mo = [f'              {{ id: "kemi-m-{dn(d)}-{n}", titel: {js(m[0])} }}' for n, m in enumerate(d[5], 1)]
+            if d[6]: mo.append(f'              {{ id: "kemi-m-{dn(d)}-l", titel: {js("Labb: " + d[6][0])} }}')
+            dl.append(f'          {{\n            id: "kemi-d-{dn(d)}",\n            titel: {js(d[0] + " " + d[1])},\n            ramverk: true,\n            barn: [\n' + ",\n".join(mo) + "\n            ]\n          }")
+        ut.append(f'      {{\n        id: "kemi-omrade-{a[0]}",\n        titel: {js(f"{a[0]}. {a[1]}")},\n        ramverk: true,\n        barn: [\n' + ",\n".join(dl) + "\n        ]\n      }")
+    block = '  // KEMI START (genereras av planering/kemi_plan.py)\n  {\n    id: "kemi",\n    titel: "Kemi (beta)",\n    ikon: "🧪",\n    ramverk: true,\n    barn: [\n' + ",\n".join(ut) + '\n    ]\n  },\n  // KEMI END\n'
+    s = open("innehall/struktur.js", encoding="utf-8").read()
+    if "// KEMI START" in s:
+        a0 = s.index("  // KEMI START"); b0 = s.index("  // KEMI END\n") + len("  // KEMI END\n")
+    else:
+        old = '  {\n    id: "kemi",\n    titel: "Kemi",\n    ikon: "🧪",\n    barn: []\n  },\n'
+        a0 = s.index(old); b0 = a0 + len(old)
+    open("innehall/struktur.js", "w", encoding="utf-8").write(s[:a0] + block + s[b0:])
+
+if __name__ == "__main__":
+    seen = kontroll()
+    print("OK", len(A), "områden")
+    skriv_md(seen); skriv_xlsx(seen); skriv_pdf(); skriv_js(); skriv_struktur()

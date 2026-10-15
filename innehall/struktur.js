@@ -616,12 +616,258 @@ var struktur = [
     ]
   },
   // BIOLOGI END
+  // KEMI START (genereras av planering/kemi_plan.py)
   {
     id: "kemi",
-    titel: "Kemi",
+    titel: "Kemi (beta)",
     ikon: "🧪",
-    barn: []
+    ramverk: true,
+    barn: [
+      {
+        id: "kemi-omrade-1",
+        titel: "1. Kemi som vetenskap",
+        ramverk: true,
+        barn: [
+          {
+            id: "kemi-d-1-1",
+            titel: "1.1 Arbeta som kemist",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-1-1-1", titel: "Säkerhet och utrustning i kemilabbet" },
+              { id: "kemi-m-1-1-2", titel: "Från fråga till plan" },
+              { id: "kemi-m-1-1-3", titel: "Dokumentera och värdera" },
+              { id: "kemi-m-1-1-l", titel: "Labb: Hur påverkar temperaturen hur fort en brustablett löser sig?" }
+            ]
+          },
+          {
+            id: "kemi-d-1-2",
+            titel: "1.2 Modeller, källor och argument",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-1-2-1", titel: "Vad är en modell i kemi?" },
+              { id: "kemi-m-1-2-2", titel: "Hur kemin vuxit fram" },
+              { id: "kemi-m-1-2-3", titel: "Granska kemipåståenden" },
+              { id: "kemi-m-1-2-l", titel: "Labb: Granska ett påstående: fungerar fläckborttagaren bättre?" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "kemi-omrade-2",
+        titel: "2. Materia och partiklar",
+        ramverk: true,
+        barn: [
+          {
+            id: "kemi-d-2-1",
+            titel: "2.1 Ämnen, blandningar och partikelmodellen",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-2-1-1", titel: "Ämnen och material" },
+              { id: "kemi-m-2-1-2", titel: "Partikelmodellen" },
+              { id: "kemi-m-2-1-3", titel: "Rena ämnen och blandningar" },
+              { id: "kemi-m-2-1-l", titel: "Labb: Densitet och flyta eller sjunka" }
+            ]
+          },
+          {
+            id: "kemi-d-2-2",
+            titel: "2.2 Separations- och analysmetoder",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-2-2-1", titel: "Filtrering, avdunstning och sedimentering" },
+              { id: "kemi-m-2-2-2", titel: "Destillation och kromatografi" },
+              { id: "kemi-m-2-2-3", titel: "Identifiera ämnen och fällning" },
+              { id: "kemi-m-2-2-l", titel: "Labb: Separera en blandning av sand, salt och vatten" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "kemi-omrade-3",
+        titel: "3. Atomer och grundämnen",
+        ramverk: true,
+        barn: [
+          {
+            id: "kemi-d-3-1",
+            titel: "3.1 Atomens byggnad",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-3-1-1", titel: "Atomen och dess partiklar" },
+              { id: "kemi-m-3-1-2", titel: "Atommodellernas historia" },
+              { id: "kemi-m-3-1-3", titel: "Isotoper och radioaktivitet i korthet" },
+              { id: "kemi-m-3-1-l", titel: "Labb: Svarta lådan: modellera det du inte kan se" }
+            ]
+          },
+          {
+            id: "kemi-d-3-2",
+            titel: "3.2 Periodiska systemet",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-3-2-1", titel: "Grundämnen och periodiska systemet" },
+              { id: "kemi-m-3-2-2", titel: "Grupper med släktskap" },
+              { id: "kemi-m-3-2-3", titel: "Grundämnen i naturen och kroppen" },
+              { id: "kemi-m-3-2-l", titel: "Labb: Metaller och icke-metaller: egenskaper" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "kemi-omrade-4",
+        titel: "4. Kemiska föreningar och reaktioner",
+        ramverk: true,
+        barn: [
+          {
+            id: "kemi-d-4-1",
+            titel: "4.1 Molekyler och joner",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-4-1-1", titel: "Molekyler och kovalent bindning" },
+              { id: "kemi-m-4-1-2", titel: "Joner och jonföreningar" },
+              { id: "kemi-m-4-1-3", titel: "Egenskaper hos föreningar" },
+              { id: "kemi-m-4-1-l", titel: "Labb: Leder lösningar elektrisk ström?" }
+            ]
+          },
+          {
+            id: "kemi-d-4-2",
+            titel: "4.2 Kemiska reaktioner",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-4-2-1", titel: "Vad är en kemisk reaktion?" },
+              { id: "kemi-m-4-2-2", titel: "Reaktionsformler och oförstörbarhet" },
+              { id: "kemi-m-4-2-3", titel: "Hastighet och energi" },
+              { id: "kemi-m-4-2-l", titel: "Labb: Massan bevaras: väg före och efter" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "kemi-omrade-5",
+        titel: "5. Vatten, syror och baser",
+        ramverk: true,
+        barn: [
+          {
+            id: "kemi-d-5-1",
+            titel: "5.1 Vatten som lösningsmedel",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-5-1-1", titel: "Vatten och lösningar" },
+              { id: "kemi-m-5-1-2", titel: "Koncentration och löslighet" },
+              { id: "kemi-m-5-1-3", titel: "Vatten som transportör" },
+              { id: "kemi-m-5-1-l", titel: "Labb: Hur mycket salt löser sig i vatten vid olika temperaturer?" }
+            ]
+          },
+          {
+            id: "kemi-d-5-2",
+            titel: "5.2 Syror, baser och pH",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-5-2-1", titel: "Syror, baser och indikatorer" },
+              { id: "kemi-m-5-2-2", titel: "pH-skalan och pH-mätning" },
+              { id: "kemi-m-5-2-3", titel: "Neutralisation i naturen och samhället" },
+              { id: "kemi-m-5-2-l", titel: "Labb: pH med rödkålsindikator" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "kemi-omrade-6",
+        titel: "6. Kemi i naturen och miljön",
+        ramverk: true,
+        barn: [
+          {
+            id: "kemi-d-6-1",
+            titel: "6.1 Luft, växthuseffekt och klimat",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-6-1-1", titel: "Luftens sammansättning" },
+              { id: "kemi-m-6-1-2", titel: "Växthuseffekten och klimatet" },
+              { id: "kemi-m-6-1-3", titel: "Förbränning, bränslen och åtgärder" },
+              { id: "kemi-m-6-1-l", titel: "Labb: Modell av växthuseffekten" }
+            ]
+          },
+          {
+            id: "kemi-d-6-2",
+            titel: "6.2 Vatten, mark och miljögifter",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-6-2-1", titel: "Vattenrening och dricksvatten" },
+              { id: "kemi-m-6-2-2", titel: "Näringsämnen och övergödning" },
+              { id: "kemi-m-6-2-3", titel: "Miljögifter och spridning" },
+              { id: "kemi-m-6-2-l", titel: "Labb: Rena smutsigt vatten" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "kemi-omrade-7",
+        titel: "7. Kolföreningar och livets kemi",
+        ramverk: true,
+        barn: [
+          {
+            id: "kemi-d-7-1",
+            titel: "7.1 Kolatomen och kolets kretslopp",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-7-1-1", titel: "Kolatomens egenskaper" },
+              { id: "kemi-m-7-1-2", titel: "Kolväten och bränslen" },
+              { id: "kemi-m-7-1-3", titel: "Kolets kretslopp" },
+              { id: "kemi-m-7-1-l", titel: "Labb: Påvisa koldioxid i utandningsluft" }
+            ]
+          },
+          {
+            id: "kemi-d-7-2",
+            titel: "7.2 Kolhydrater, proteiner och fetter",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-7-2-1", titel: "Kolhydrater" },
+              { id: "kemi-m-7-2-2", titel: "Proteiner och fetter" },
+              { id: "kemi-m-7-2-3", titel: "Näring, energi och kostråd" },
+              { id: "kemi-m-7-2-l", titel: "Labb: Påvisa näringsämnen i mat" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "kemi-omrade-8",
+        titel: "8. Material, produkter och hållbarhet",
+        ramverk: true,
+        barn: [
+          {
+            id: "kemi-d-8-1",
+            titel: "8.1 Material och produktutveckling",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-8-1-1", titel: "Metaller, plast och andra material" },
+              { id: "kemi-m-8-1-2", titel: "Batterier och elektrokemi" },
+              { id: "kemi-m-8-1-3", titel: "Läkemedel och funktionskläder" },
+              { id: "kemi-m-8-1-l", titel: "Labb: Bygg ett batteri" }
+            ]
+          },
+          {
+            id: "kemi-d-8-2",
+            titel: "8.2 Livscykler och ställningstagande",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-8-2-1", titel: "En produkts livscykel" },
+              { id: "kemi-m-8-2-2", titel: "Återvinning och cirkulär ekonomi" },
+              { id: "kemi-m-8-2-3", titel: "Jämföra produkter och argumentera" },
+              { id: "kemi-m-8-2-l", titel: "Labb: Sortera plast efter densitet" }
+            ]
+          },
+          {
+            id: "kemi-d-8-3",
+            titel: "8.3 Repetition inför nationella proven",
+            ramverk: true,
+            barn: [
+              { id: "kemi-m-8-3-1", titel: "Begrepp och modeller: repetition" },
+              { id: "kemi-m-8-3-2", titel: "Undersökningar och information: repetition" },
+              { id: "kemi-m-8-3-3", titel: "Resonera om miljö och hälsa: repetition" }
+            ]
+          }
+        ]
+      }
+    ]
   },
+  // KEMI END
   {
     id: "fysik",
     titel: "Fysik",
