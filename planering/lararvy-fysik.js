@@ -47,14 +47,22 @@ window.lararFysik = {
   },
   {
    "nr": 6,
-   "titel": "Ljus och ljud",
-   "ide": "Vågor som bär information: hur ljus och ljud uppstår, breder ut sig, reflekteras och registreras.",
+   "titel": "Ljus",
+   "ide": "Hur ljus breder ut sig, reflekteras och bryts, och hur vi ser färger och bilder.",
    "hafte": null,
    "lankar": [],
    "ppt": []
   },
   {
    "nr": 7,
+   "titel": "Ljud",
+   "ide": "Hur ljud uppstår, breder ut sig och registreras, och hur vi hör.",
+   "hafte": null,
+   "lankar": [],
+   "ppt": []
+  },
+  {
+   "nr": 8,
    "titel": "Strålning, väder och klimat",
    "ide": "Strålning från atomkärnor och från solen: användning, risker och hur strålningsbalansen styr klimatet.",
    "hafte": null,
@@ -62,9 +70,17 @@ window.lararFysik = {
    "ppt": []
   },
   {
-   "nr": 8,
-   "titel": "Universum och helheten",
-   "ide": "Från solsystemet till universum och sökandet efter liv på andra planeter, med repetition inför de nationella proven.",
+   "nr": 9,
+   "titel": "Universum",
+   "ide": "Från solsystemet till universum och sökandet efter liv på andra planeter.",
+   "hafte": null,
+   "lankar": [],
+   "ppt": []
+  },
+  {
+   "nr": 10,
+   "titel": "Repetition inför nationella proven",
+   "ide": "Binder ihop fysikens begrepp och modeller, undersökningar och argumentation inför de nationella proven.",
    "hafte": null,
    "lankar": [],
    "ppt": []

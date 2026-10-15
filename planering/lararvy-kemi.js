@@ -68,6 +68,14 @@ window.lararKemi = {
    "hafte": null,
    "lankar": [],
    "ppt": []
+  },
+  {
+   "nr": 9,
+   "titel": "Repetition inför nationella proven",
+   "ide": "Binder ihop kemins begrepp och modeller, undersökningar och argumentation inför de nationella proven.",
+   "hafte": null,
+   "lankar": [],
+   "ppt": []
   }
  ]
 };

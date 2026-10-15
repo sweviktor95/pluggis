@@ -2,7 +2,7 @@
 
 Status: förslag, väntar på granskning. Genereras av `planering/amne_plan.py` från `planering/fysik_data.py` – ändra där, inte här.
 
-Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. Det som inte ryms står under *Om tid / fördjupning* (50 förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
+Planen omfattar 10 områden, 21 delområden, 63 lektionsmoment och 18 labbpass. Det som inte ryms står under *Om tid / fördjupning* (58 förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
 
 ## Översikt
 
@@ -13,9 +13,11 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 | 3. Krafter och rörelse | Krafter och Newtons lagar, Rörelse, hastighet och trafiksäkerhet |
 | 4. Energi | Energiformer, flöde och oförstörbarhet, Energikällor, för- och nackdelar |
 | 5. Elektricitet och magnetism | Elektriska kretsar, Magnetism och elektromagnetism |
-| 6. Ljus och ljud | Ljus: utbredning, reflektion och brytning, Ljud |
-| 7. Strålning, väder och klimat | Strålning: användning och risker, Strålningsbalans, växthuseffekt och klimat |
-| 8. Universum och helheten | Universums uppkomst och uppbyggnad, Planeter och liv i andra solsystem, Repetition inför nationella proven |
+| 6. Ljus | Ljusets utbredning och reflektion, Brytning, linser och färger |
+| 7. Ljud | Hur ljud uppstår och breder ut sig, Tonhöjd, ljudstyrka och hörsel |
+| 8. Strålning, väder och klimat | Strålning: användning och risker, Strålningsbalans, växthuseffekt och klimat |
+| 9. Universum | Universums uppkomst och uppbyggnad, Planeter och liv i andra solsystem |
+| 10. Repetition inför nationella proven | Materia, energi och krafter, Elektricitet, ljus, ljud, strålning och universum, Undersökningar, källor och argument |
 
 ## Planen
 
@@ -209,49 +211,87 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 
 **Om tid / fördjupning:** Elmotor i praktiken; Hybrid- och elbilar; Elektromagnetism i medicin
 
-## 6. Ljus och ljud
+## 6. Ljus
 
-*Vågor som bär information: hur ljus och ljud uppstår, breder ut sig, reflekteras och registreras.*
+*Hur ljus breder ut sig, reflekteras och bryts, och hur vi ser färger och bilder.*
 
-### 6.1 Ljus: utbredning, reflektion och brytning
+### 6.1 Ljusets utbredning och reflektion
 
-**Mål:** Eleven kan förklara och rita hur ljus breder ut sig, reflekteras och bryts och ge exempel på optiska instrument.
+**Mål:** Eleven kan förklara och rita hur ljus breder ut sig och reflekteras och förklara skuggor, speglar och färg.
 
-**Nivåer (E→A):** E: beskriver ljusets utbredning och ger exempel på reflektion och brytning. C: ritar strålgångar och förklarar skuggor, speglar och linser. A: förklarar och förutsäger brytning och färgspridning.
+**Nivåer (E→A):** E: beskriver ljusets utbredning och ger exempel på reflektion. C: ritar strålgångar och förklarar skuggor och speglar. A: förklarar och förutsäger reflektion och hur ytor ger färg.
 
 **Förklaringsmodeller:** Ljusstrålemodell
 
 | Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
 |---|---|---|---|---|---|
-| **Ljusets utbredning** | Ljuskällor, rätlinjig utbredning, skuggor, ljusets hastighet och ljusår; hur vi ser. | ljuskälla, ljusstråle, skugga, ljushastighet | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
-| **Reflektion** | Reflektionslagen; plana speglar; spridd reflektion; färg och ytor. | reflektion, spegel, infallsvinkel, reflektionsvinkel | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
-| **Brytning och färger** | Brytning i vatten och glas; linser och optiska instrument; prisma och ljusets färger. | brytning, lins, prisma, spektrum | Kunskaper om fysiken i naturen och samhället; Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
-| 🧪 **Labb (ca 45 min): Reflektion och brytning med ljuslåda** | Hur beter sig ljus vid spegel och i vatten? Eleverna riktar en ljusstråle mot spegel och vattenbehållare, mäter vinklarna och jämför med reflektionslagen. Säkerhet: Titta aldrig in i en laserstråle eller starkt ljus. Rikta inte laser mot ansikten. | infallsvinkel, reflektionsvinkel, brytning | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljus breder ut sig, reflekteras och bryts | Systematiska undersökningar |
+| **Ljuskällor och ljusets utbredning** | Ljuskällor, rätlinjig utbredning, skuggor, ljusets hastighet och ljusår; hur vi ser. | ljuskälla, ljusstråle, skugga, ljushastighet, ljusår | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| **Reflektion** | Reflektionslagen; plana speglar; spridd reflektion. | reflektion, spegel, infallsvinkel, reflektionsvinkel | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| **Färg och ytor** | Hur föremål får färg: ljus som absorberas och reflekteras; vitt, svart och färgat ljus. | absorption, reflektion, färg, spektrum | Kunskaper om fysiken i naturen och samhället; Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| 🧪 **Labb (ca 45 min): Reflektion med ljuslåda** | Hur beter sig ljus när det reflekteras i en spegel? Eleverna riktar en ljusstråle mot en plan spegel, mäter infalls- och reflektionsvinkel och jämför med reflektionslagen. Säkerhet: Titta aldrig in i en laserstråle eller starkt ljus. Rikta inte laser mot ansikten. | infallsvinkel, reflektionsvinkel, reflektionslagen | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljus breder ut sig, reflekteras och bryts | Systematiska undersökningar |
 
-**Om tid / fördjupning:** Optiska instrument: mikroskop och kikare; Ögats uppbyggnad; Fiberoptik
+**Om tid / fördjupning:** Periskop; Kamouflage och färg; Ljusföroreningar
 
-### 6.2 Ljud
+### 6.2 Brytning, linser och färger
 
-**Mål:** Eleven kan förklara hur ljud uppstår, breder ut sig och registreras och hur hörseln kan skyddas.
+**Mål:** Eleven kan förklara och rita brytning av ljus och hur linser och optiska instrument fungerar.
 
-**Nivåer (E→A):** E: beskriver att ljud är vibrationer och ger exempel. C: förklarar frekvens, amplitud och ljudets utbredning. A: resonerar om mätvärden, hörselskador och registrering med digitala verktyg.
+**Nivåer (E→A):** E: beskriver brytning och ger exempel. C: ritar strålgångar genom linser och förklarar prismat. A: förklarar och förutsäger brytning och färgspridning.
+
+**Förklaringsmodeller:** Ljusstrålemodell
+
+| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
+|---|---|---|---|---|---|
+| **Brytning** | Ljus mellan luft, vatten och glas; ljusets hastighet i olika medier; totalreflektion. | brytning, medium, normal, totalreflektion | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| **Linser och optiska instrument** | Konvexa och konkava linser; ögat, kikare, mikroskop och kamera. | lins, brännpunkt, bild, förstoring | Kunskaper om fysiken i naturen och samhället; Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| **Färgspridning och spektrum** | Prisma, regnbåge och ljusets färger. | prisma, spektrum, regnbåge, färgspridning | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| 🧪 **Labb (ca 45 min): Brytning i vatten** | Hur bryts ljus när det går från luft till vatten eller glas? Eleverna riktar en ljusstråle mot en halvcylinder av plast eller en vattenbehållare, mäter infalls- och brytningsvinkel och ritar strålgången. Säkerhet: Titta aldrig in i en laserstråle. Torka upp vatten. | brytningsvinkel, infallsvinkel, medium | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljus breder ut sig, reflekteras och bryts | Systematiska undersökningar |
+
+**Om tid / fördjupning:** Fiberoptik; Ögats uppbyggnad; Optiska instrument i detalj
+
+## 7. Ljud
+
+*Hur ljud uppstår, breder ut sig och registreras, och hur vi hör.*
+
+### 7.1 Hur ljud uppstår och breder ut sig
+
+**Mål:** Eleven kan förklara att ljud är vibrationer som breder ut sig i ett medium och beräkna ljudets hastighet.
+
+**Nivåer (E→A):** E: beskriver att ljud är vibrationer och ger exempel. C: förklarar utbredning i olika medier och beräknar hastighet. A: resonerar om mätvärden och om hur ljud reflekteras och absorberas.
 
 **Förklaringsmodeller:** Vågmodell
 
 | Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
 |---|---|---|---|---|---|
-| **Hur ljud uppstår och breder ut sig** | Vibrationer; ljud i luft, vätskor och fasta ämnen men inte i vakuum; ljudets hastighet; eko. | vibration, medium, ljudhastighet, eko | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
-| **Frekvens, amplitud och hörsel** | Tonhöjd och frekvens (Hz), ljudstyrka och amplitud (dB); örats funktion; hörselskydd och buller. | frekvens, hertz, amplitud, decibel, hörsel | Kunskaper om fysiken i naturen och samhället | Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
-| **Registrera ljud** | Mikrofon, frekvensanalys och appar; ultraljud och ekolod; ljudisolering. | mikrofon, ultraljud, ekolod, ljudisolering | Kunskaper om fysiken i naturen och samhället; Färdigheter i att hantera material, utrustning och digitala verktyg | Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
-| 🧪 **Labb (ca 45 min): Hur påverkar längden tonhöjden?** | Hur ändras tonhöjden när längden på ett vibrerande föremål ändras? Eleverna fäster en linjal vid bordskanten och varierar den vibrerande längden eller fyller flaskor med olika vattennivåer. Frekvensen mäts med en app. Säkerhet: Skydda hörseln: ingen hög ljudnivå. Använd inte vassa föremål. | frekvens, tonhöjd, vibration, app | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Systematiska undersökningar |
+| **Vibrationer och ljudkällor** | Hur ljud uppstår; ljudkällor och vibrerande föremål. | vibration, ljudkälla, svängning | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
+| **Ljudets utbredning** | Ljud i luft, vätskor och fasta ämnen men inte i vakuum; ljudets hastighet. | medium, ljudhastighet, vakuum | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
+| **Eko och ljudisolering** | Reflektion och absorption av ljud; eko, efterklang och ljudisolering. | eko, absorption, ljudisolering | Kunskaper om fysiken i naturen och samhället | Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
+| 🧪 **Labb (ca 45 min): Hur snabbt går ljudet?** | Hur kan ljudets hastighet mätas? Eleverna mäter tid för eko över en känd sträcka eller med två mikrofoner och en app, och beräknar v = s/t. Säkerhet: Skydda hörseln: inga höga smällar. Håll avstånd vid utomhusmätning. | ljudhastighet, sträcka, tid, eko | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Systematiska undersökningar |
+
+**Om tid / fördjupning:** Åska och ljudets hastighet; Överljud; Ljud under vatten
+
+### 7.2 Tonhöjd, ljudstyrka och hörsel
+
+**Mål:** Eleven kan förklara frekvens och amplitud, hur hörseln fungerar och hur ljud registreras.
+
+**Nivåer (E→A):** E: beskriver tonhöjd, ljudstyrka och hörselskydd. C: förklarar frekvens, amplitud och örats funktion. A: resonerar om mätvärden, hörselskador och registrering med digitala verktyg.
+
+**Förklaringsmodeller:** Vågmodell
+
+| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
+|---|---|---|---|---|---|
+| **Frekvens och amplitud** | Tonhöjd och frekvens (Hz), ljudstyrka och amplitud (dB). | frekvens, hertz, amplitud, decibel | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
+| **Hörsel och hörselskydd** | Örats funktion; buller och hörselskador; hörselskydd. | örat, buller, hörselskada, hörselskydd | Kunskaper om fysiken i naturen och samhället | Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
+| **Registrera ljud** | Mikrofon, frekvensanalys och appar; ultraljud och ekolod. | mikrofon, ultraljud, ekolod, frekvensanalys | Kunskaper om fysiken i naturen och samhället; Färdigheter i att hantera material, utrustning och digitala verktyg | Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
+| 🧪 **Labb (ca 45 min): Hur påverkar längden tonhöjden?** | Hur ändras tonhöjden när längden på ett vibrerande föremål ändras? Eleverna fäster en linjal vid bordskanten och varierar den vibrerande längden, eller fyller flaskor med olika vattennivåer. Frekvensen mäts med en app. Säkerhet: Skydda hörseln: ingen hög ljudnivå. Använd inte vassa föremål. | frekvens, tonhöjd, vibration, app | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Systematiska undersökningar |
 
 **Om tid / fördjupning:** Musikinstrument; Dopplereffekten; Akustik i klassrummet
 
-## 7. Strålning, väder och klimat
+## 8. Strålning, väder och klimat
 
 *Strålning från atomkärnor och från solen: användning, risker och hur strålningsbalansen styr klimatet.*
 
-### 7.1 Strålning: användning och risker
+### 8.1 Strålning: användning och risker
 
 **Mål:** Eleven kan skilja mellan partikelstrålning och elektromagnetisk strålning och beskriva användning och risker.
 
@@ -268,7 +308,7 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 
 **Om tid / fördjupning:** Röntgen i sjukvården; Kärnkraft och avfall; Strålning från mobiler
 
-### 7.2 Strålningsbalans, växthuseffekt och klimat
+### 8.2 Strålningsbalans, växthuseffekt och klimat
 
 **Mål:** Eleven kan förklara jordens strålningsbalans och växthuseffekten och argumentera om klimatförändringar med belägg.
 
@@ -285,11 +325,11 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 
 **Om tid / fördjupning:** Istider och klimatets historia; Ozonskiktet; Havens roll i klimatet
 
-## 8. Universum och helheten
+## 9. Universum
 
-*Från solsystemet till universum och sökandet efter liv på andra planeter, med repetition inför de nationella proven.*
+*Från solsystemet till universum och sökandet efter liv på andra planeter.*
 
-### 8.1 Universums uppkomst och uppbyggnad
+### 9.1 Universums uppkomst och uppbyggnad
 
 **Mål:** Eleven kan beskriva universums uppbyggnad och utveckling och förklara hur modellerna vuxit fram.
 
@@ -306,7 +346,7 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 
 **Om tid / fördjupning:** Svarta hål; Rymdteleskop; Rymdfärder
 
-### 8.2 Planeter och liv i andra solsystem
+### 9.2 Planeter och liv i andra solsystem
 
 **Mål:** Eleven kan förklara hur exoplaneter upptäcks och vad som krävs för liv, och granska rymdnyheter.
 
@@ -323,9 +363,13 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 
 **Om tid / fördjupning:** Mars och livet; Drake-ekvationen; SETI
 
-### 8.3 Repetition inför nationella proven
+## 10. Repetition inför nationella proven
 
-**Mål:** Eleven kan koppla ihop partikelmodell, energi, krafter, elektricitet, ljus, ljud och strålning och genomföra och granska undersökningar.
+*Binder ihop fysikens begrepp och modeller, undersökningar och argumentation inför de nationella proven.*
+
+### 10.1 Materia, energi och krafter
+
+**Mål:** Eleven kan koppla ihop partikelmodell, energi, krafter och rörelse i nya sammanhang.
 
 **Nivåer (E→A):** E: använder begreppen i enkla sammanhang. C: kopplar ihop begrepp och förklarar samband. A: använder flera modeller i nya situationer och motiverar.
 
@@ -333,15 +377,47 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 
 | Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
 |---|---|---|---|---|---|
-| **Repetition: partikelmodell, energi och krafter** | Samlad repetition av partikelmodell, tryck och densitet, energi och krafter med övningsuppgifter från tidigare nationella prov. | partikel, energi, kraft, tryck, densitet | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Partikelmodell av materiens egenskaper samt fasövergångar, tryck …; Energins flöde och oförstörbarhet samt energislags kvalitet; Krafter, rörelser och rörelseförändringar och hur kunskaper om detta … | Begrepp och förklaringsmodeller |
-| **Repetition: elektricitet, ljus, ljud och strålning** | Samlad repetition av kretsar, magnetism, ljus, ljud och strålning. | krets, magnetfält, ljus, ljud, strålning | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Partikelstrålning och elektromagnetisk strålning, deras …; Hur ljus breder ut sig, reflekteras och bryts; Hur ljud uppstår, breder ut sig och kan registreras på olika sätt; Sambandet mellan elektricitet och magnetism samt mellan ström och … | Begrepp och förklaringsmodeller |
-| **Repetition: undersökningar och argument** | Planera och värdera undersökningar, tolka diagram, granska källor och argumentera om energi, teknik och miljö. | variabel, diagram, källkritik, argument | Formulera egna och granska andras argument | Observationer och experiment (analoga och digitala verktyg); Sambandet mellan undersökningar och begrepp och förklaringsmodeller; Informationssökning, kritisk granskning och användning av information …; Argumentation och ställningstaganden i aktuella frågor som rör energi … | Granska information, kommunicera och ta ställning; Systematiska undersökningar |
+| **Partikelmodell, tryck och densitet: repetition** | Partikelmodellen, fasövergångar, tryck, volym, densitet och temperatur; enkla beräkningar. | partikel, tryck, densitet, fasövergång | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Partikelmodell av materiens egenskaper samt fasövergångar, tryck … | Begrepp och förklaringsmodeller |
+| **Energi och energikällor: repetition** | Energiomvandlingar, energins oförstörbarhet och kvalitet; energikällors för- och nackdelar. | energiform, verkningsgrad, energikälla | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Energins flöde och oförstörbarhet samt energislags kvalitet | Begrepp och förklaringsmodeller |
+| **Krafter och rörelse: repetition** | Krafter, Newtons lagar, hastighet och trafiksäkerhet; enkla beräkningar. | kraft, hastighet, acceleration, bromssträcka | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Krafter, rörelser och rörelseförändringar och hur kunskaper om detta … | Begrepp och förklaringsmodeller |
 
-**Om tid / fördjupning:** Gamla nationella prov; Provstrategier; Begreppskartor
+**Om tid / fördjupning:** Gamla nationella prov; Begreppskartor
+
+### 10.2 Elektricitet, ljus, ljud, strålning och universum
+
+**Mål:** Eleven kan koppla ihop elektricitet, magnetism, ljus, ljud, strålning, klimat och universum i nya sammanhang.
+
+**Nivåer (E→A):** E: använder begreppen i enkla sammanhang. C: kopplar ihop begrepp och förklarar samband. A: använder flera modeller i nya situationer och motiverar.
+
+**Förklaringsmodeller:** Samlad repetition
+
+| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
+|---|---|---|---|---|---|
+| **Elektricitet och magnetism: repetition** | Kretsar, ström och spänning, elektromagnetism. | krets, ström, spänning, elektromagnet | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Sambandet mellan elektricitet och magnetism samt mellan ström och … | Begrepp och förklaringsmodeller |
+| **Ljus och ljud: repetition** | Reflektion, brytning, ljudets uppkomst och utbredning. | reflektion, brytning, vibration, frekvens | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts; Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Begrepp och förklaringsmodeller |
+| **Strålning, klimat och universum: repetition** | Strålning, strålningsbalans och växthuseffekt; universums uppbyggnad. | strålning, växthuseffekt, universum | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Universums uppkomst, uppbyggnad och utveckling samt förutsättningar för …; Fysikaliska förklaringsmodeller av jordens strålningsbalans …; Partikelstrålning och elektromagnetisk strålning, deras … | Begrepp och förklaringsmodeller |
+
+**Om tid / fördjupning:** Gamla nationella prov
+
+### 10.3 Undersökningar, källor och argument
+
+**Mål:** Eleven kan genomföra och värdera undersökningar, granska information och argumentera i frågor om energi, teknik och miljö.
+
+**Nivåer (E→A):** E: använder begreppen i enkla sammanhang. C: kopplar ihop begrepp och förklarar samband. A: väger källor och argument mot varandra och motiverar.
+
+**Förklaringsmodeller:** Samlad repetition
+
+| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
+|---|---|---|---|---|---|
+| **Planera och värdera undersökningar** | Variabler, rättvist försök, mätfel; läsa tabeller och diagram. | variabel, felkälla, tabell, diagram |  | Observationer och experiment (analoga och digitala verktyg); Sambandet mellan undersökningar och begrepp och förklaringsmodeller | Systematiska undersökningar |
+| **Granska källor** | Källor, avsändare och syfte; fysikpåståenden i media. | källa, trovärdighet, påstående | Söka svar på ämnesspecifika frågor med olika typer av källor | Informationssökning, kritisk granskning och användning av information … | Granska information, kommunicera och ta ställning |
+| **Argumentera om energi, teknik och miljö** | Argumentera med belägg och motargument. | argument, belägg, motargument | Formulera egna och granska andras argument | Argumentation och ställningstaganden i aktuella frågor som rör energi … | Granska information, kommunicera och ta ställning |
+
+**Om tid / fördjupning:** Gamla nationella prov; Provstrategier
 
 ## Öppna frågor
 
 1. Ska energi (område 4) komma före krafter och rörelse (område 3)? Energin återkommer i nästan alla områden.
-2. Delområde 8.3 är en repetition utan labb. Vill du hellre ha ett eget labbpass där?
-3. Område 7 (strålning, väder och klimat) bör samordnas med geografin och kemins växthuseffekt.
+2. Repetitionskapitlet (10) har inga labbpass. Vill du hellre ha provliknande undersökningar där?
+3. Område 8 (strålning, väder och klimat) bör samordnas med geografin och kemins växthuseffekt.
 4. Labbarna är förslag; elsäkerhet och utrustning måste stämma med skolans egna rutiner.

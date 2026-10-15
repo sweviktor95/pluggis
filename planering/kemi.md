@@ -2,7 +2,7 @@
 
 Status: förslag, väntar på granskning. Genereras av `planering/amne_plan.py` från `planering/kemi_data.py` – ändra där, inte här.
 
-Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. Det som inte ryms står under *Om tid / fördjupning* (49 förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
+Planen omfattar 9 områden, 19 delområden, 57 lektionsmoment och 16 labbpass. Det som inte ryms står under *Om tid / fördjupning* (53 förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
 
 ## Översikt
 
@@ -15,7 +15,8 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 | 5. Vatten, syror och baser | Vatten som lösningsmedel, Syror, baser och pH |
 | 6. Kemi i naturen och miljön | Luft, växthuseffekt och klimat, Vatten, mark och miljögifter |
 | 7. Kolföreningar och livets kemi | Kolatomen och kolets kretslopp, Kolhydrater, proteiner och fetter |
-| 8. Material, produkter och hållbarhet | Material och produktutveckling, Livscykler och ställningstagande, Repetition inför nationella proven |
+| 8. Material, produkter och hållbarhet | Material och produktutveckling, Livscykler och ställningstagande |
+| 9. Repetition inför nationella proven | Materia, atomer och föreningar, Vatten, miljö och livets kemi, Undersökningar, källor och argument |
 
 ## Planen
 
@@ -323,9 +324,45 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 
 **Om tid / fördjupning:** Mikroplast; Kemisk återvinning; Hållbar kemi
 
-### 8.3 Repetition inför nationella proven
+## 9. Repetition inför nationella proven
 
-**Mål:** Eleven kan koppla ihop kemins delar och visa sina kunskaper i den form som nationella proven prövar.
+*Binder ihop kemins begrepp och modeller, undersökningar och argumentation inför de nationella proven.*
+
+### 9.1 Materia, atomer och föreningar
+
+**Mål:** Eleven kan koppla ihop partikelmodell, atombyggnad, periodiska systemet, molekyler och joner i nya sammanhang.
+
+**Nivåer (E→A):** E: visar grundläggande kunskaper. C: visar goda kunskaper och drar slutsatser. A: använder flera modeller i nya situationer och motiverar.
+
+**Förklaringsmodeller:** Modeller genom hela kursen
+
+| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
+|---|---|---|---|---|---|
+| **Partikelmodellen och separation: repetition** | Ämnen och blandningar, aggregationsformer, separations- och analysmetoder. | partikelmodell, blandning, filtrering, destillation | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Materiens uppbyggnad, kretslopp och oförstörbarhet med partikelmodeller; Separations- och analysmetoder, t.ex. filtrering, fällning, pH-mätning … | Begrepp och förklaringsmodeller |
+| **Atomer och periodiska systemet: repetition** | Atomens byggnad, grundämnen och periodiska systemet; jonbildning. | atom, elektron, grundämne, period, grupp, jon | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Materiens uppbyggnad, kretslopp och oförstörbarhet med partikelmodeller | Begrepp och förklaringsmodeller |
+| **Föreningar och reaktioner: repetition** | Molekyler och joner, reaktionsformler och massans oförstörbarhet. | molekyl, jonförening, reaktionsformel, oförstörbarhet | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Materiens uppbyggnad, kretslopp och oförstörbarhet med partikelmodeller | Begrepp och förklaringsmodeller |
+
+**Om tid / fördjupning:** Gamla nationella prov; Begreppskartor
+
+### 9.2 Vatten, miljö och livets kemi
+
+**Mål:** Eleven kan koppla ihop vatten, syror och baser, miljökemi, kolföreningar och livets kemi i nya sammanhang.
+
+**Nivåer (E→A):** E: visar grundläggande kunskaper. C: förklarar samband och drar slutsatser. A: resonerar med flera förklaringsmodeller.
+
+**Förklaringsmodeller:** Modeller genom hela kursen
+
+| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
+|---|---|---|---|---|---|
+| **Vatten, syror och baser: repetition** | Lösningsmedel, pH och neutralisation. | lösning, pH, syra, bas, neutralisation | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Separations- och analysmetoder, t.ex. filtrering, fällning, pH-mätning …; Vatten som lösningsmedel och transportör av ämnen, t.ex. i mark, växter … | Begrepp och förklaringsmodeller |
+| **Miljö och kretslopp: repetition** | Luft, växthuseffekt, vatten och miljögifter; kolets kretslopp. | växthuseffekt, miljögift, kolets kretslopp | Kunskaper om kemin i naturen, i samhället och i människokroppen | Kemiska processer i mark, luft och vatten och koppling till miljö och …; Kolatomens egenskaper och kretslopp i naturen, i samhället och i … | Begrepp och förklaringsmodeller |
+| **Livets kemi: repetition** | Kolhydrater, proteiner och fetter; material och livscykler. | kolhydrat, protein, fett, livscykel | Kunskaper om kemin i naturen, i samhället och i människokroppen | Kolhydrater, proteiner och fetter och deras funktioner i människokroppen; Utveckling av produkter och material, t.ex. läkemedel, funktionskläder …; Några produkters livscykler och påverkan på miljön | Begrepp och förklaringsmodeller |
+
+**Om tid / fördjupning:** Gamla nationella prov
+
+### 9.3 Undersökningar, källor och argument
+
+**Mål:** Eleven kan genomföra och värdera undersökningar, granska information och argumentera i frågor om miljö och hälsa.
 
 **Nivåer (E→A):** E: visar grundläggande kunskaper. C: visar goda kunskaper och drar slutsatser. A: genomför egna resonemang med välutvecklade belägg i frågor om miljö och hälsa.
 
@@ -333,14 +370,14 @@ Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. D
 
 | Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
 |---|---|---|---|---|---|
-| **Begrepp och modeller: repetition** | Partikel, atom, grundämne, molekyl, jon, reaktion; vilka modeller som används var. | partikelmodell, atom, reaktionsformel, kretslopp | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Materiens uppbyggnad, kretslopp och oförstörbarhet med partikelmodeller; Separations- och analysmetoder, t.ex. filtrering, fällning, pH-mätning … | Begrepp och förklaringsmodeller |
-| **Undersökningar och information: repetition** | Planera, genomföra och värdera en undersökning; granska källor; läsa tabeller och diagram. | variabel, felkälla, källa, slutsats | Söka svar med olika typer av källor; Egna systematiska undersökningar | Observationer och experiment (analoga och digitala verktyg); Informationssökning, kritisk granskning och användning av information … | Systematiska undersökningar |
-| **Resonera om miljö och hälsa: repetition** | Övningar i att argumentera med belägg och motargument i frågor om miljö och hälsa. | argument, belägg, nyans | Formulera egna och granska andras argument | Argumentation och ställningstaganden i aktuella frågor som rör miljö …; Kemiska processer i mark, luft och vatten och koppling till miljö och …; Några produkters livscykler och påverkan på miljön | Granska information, kommunicera och ta ställning |
+| **Planera och värdera undersökningar** | Variabler, rättvist försök, mätfel; läsa tabeller och diagram. | variabel, felkälla, tabell, diagram, slutsats | Egna systematiska undersökningar | Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
+| **Granska information** | Källor, avsändare och syfte; kemipåståenden i reklam. | källa, trovärdighet, påstående | Söka svar med olika typer av källor | Informationssökning, kritisk granskning och användning av information … | Granska information, kommunicera och ta ställning |
+| **Resonera om miljö och hälsa: repetition** | Argumentera med belägg och motargument i frågor om miljö och hälsa. | argument, belägg, nyans | Formulera egna och granska andras argument | Argumentation och ställningstaganden i aktuella frågor som rör miljö …; Kemiska processer i mark, luft och vatten och koppling till miljö och …; Några produkters livscykler och påverkan på miljön | Granska information, kommunicera och ta ställning |
 
-**Om tid / fördjupning:** Gamla nationella prov
+**Om tid / fördjupning:** Gamla nationella prov; Provstrategier
 
 ## Öppna frågor
 
 1. Område 7 (kolföreningar och livets kemi) överlappar biologins område om cellen och energin. Ska ordningen samordnas med biologin?
-2. Delområde 8.3 är en repetition utan labb. Vill du hellre ha ett eget labbpass där?
+2. Repetitionskapitlet (9) har inga labbpass. Vill du hellre ha provliknande undersökningar där?
 3. Labbarna är förslag; säkerhet och kemikalier måste stämma med skolans egna rutiner.
