@@ -47,16 +47,16 @@ window.lararFysik = {
   },
   {
    "nr": 6,
-   "titel": "Ljus",
-   "ide": "Hur ljus breder ut sig, reflekteras och bryts, och hur vi ser färger och bilder.",
+   "titel": "Ljud",
+   "ide": "Hur ljud uppstår, breder ut sig och registreras, och hur vi hör.",
    "hafte": null,
    "lankar": [],
    "ppt": []
   },
   {
    "nr": 7,
-   "titel": "Ljud",
-   "ide": "Hur ljud uppstår, breder ut sig och registreras, och hur vi hör.",
+   "titel": "Ljus",
+   "ide": "Hur ljus breder ut sig, reflekteras och bryts, och hur vi ser färger och bilder.",
    "hafte": null,
    "lankar": [],
    "ppt": []

@@ -13,8 +13,8 @@ Planen omfattar 10 områden, 21 delområden, 63 lektionsmoment och 18 labbpass. 
 | 3. Krafter och rörelse | Krafter och Newtons lagar, Rörelse, hastighet och trafiksäkerhet |
 | 4. Energi | Energiformer, flöde och oförstörbarhet, Energikällor, för- och nackdelar |
 | 5. Elektricitet och magnetism | Elektriska kretsar, Magnetism och elektromagnetism |
-| 6. Ljus | Ljusets utbredning och reflektion, Brytning, linser och färger |
-| 7. Ljud | Hur ljud uppstår och breder ut sig, Tonhöjd, ljudstyrka och hörsel |
+| 6. Ljud | Hur ljud uppstår och breder ut sig, Tonhöjd, ljudstyrka och hörsel |
+| 7. Ljus | Ljusets utbredning och reflektion, Brytning, linser och färger |
 | 8. Strålning, väder och klimat | Strålning: användning och risker, Strålningsbalans, växthuseffekt och klimat |
 | 9. Universum | Universums uppkomst och uppbyggnad, Planeter och liv i andra solsystem |
 | 10. Repetition inför nationella proven | Materia, energi och krafter, Elektricitet, ljus, ljud, strålning och universum, Undersökningar, källor och argument |
@@ -211,49 +211,11 @@ Planen omfattar 10 områden, 21 delområden, 63 lektionsmoment och 18 labbpass. 
 
 **Om tid / fördjupning:** Elmotor i praktiken; Hybrid- och elbilar; Elektromagnetism i medicin
 
-## 6. Ljus
-
-*Hur ljus breder ut sig, reflekteras och bryts, och hur vi ser färger och bilder.*
-
-### 6.1 Ljusets utbredning och reflektion
-
-**Mål:** Eleven kan förklara och rita hur ljus breder ut sig och reflekteras och förklara skuggor, speglar och färg.
-
-**Nivåer (E→A):** E: beskriver ljusets utbredning och ger exempel på reflektion. C: ritar strålgångar och förklarar skuggor och speglar. A: förklarar och förutsäger reflektion och hur ytor ger färg.
-
-**Förklaringsmodeller:** Ljusstrålemodell
-
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Ljuskällor och ljusets utbredning** | Ljuskällor, rätlinjig utbredning, skuggor, ljusets hastighet och ljusår; hur vi ser. | ljuskälla, ljusstråle, skugga, ljushastighet, ljusår | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
-| **Reflektion** | Reflektionslagen; plana speglar; spridd reflektion. | reflektion, spegel, infallsvinkel, reflektionsvinkel | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
-| **Färg och ytor** | Hur föremål får färg: ljus som absorberas och reflekteras; vitt, svart och färgat ljus. | absorption, reflektion, färg, spektrum | Kunskaper om fysiken i naturen och samhället; Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
-| 🧪 **Labb (ca 45 min): Reflektion med ljuslåda** | Hur beter sig ljus när det reflekteras i en spegel? Eleverna riktar en ljusstråle mot en plan spegel, mäter infalls- och reflektionsvinkel och jämför med reflektionslagen. Säkerhet: Titta aldrig in i en laserstråle eller starkt ljus. Rikta inte laser mot ansikten. | infallsvinkel, reflektionsvinkel, reflektionslagen | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljus breder ut sig, reflekteras och bryts | Systematiska undersökningar |
-
-**Om tid / fördjupning:** Periskop; Kamouflage och färg; Ljusföroreningar
-
-### 6.2 Brytning, linser och färger
-
-**Mål:** Eleven kan förklara och rita brytning av ljus och hur linser och optiska instrument fungerar.
-
-**Nivåer (E→A):** E: beskriver brytning och ger exempel. C: ritar strålgångar genom linser och förklarar prismat. A: förklarar och förutsäger brytning och färgspridning.
-
-**Förklaringsmodeller:** Ljusstrålemodell
-
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Brytning** | Ljus mellan luft, vatten och glas; ljusets hastighet i olika medier; totalreflektion. | brytning, medium, normal, totalreflektion | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
-| **Linser och optiska instrument** | Konvexa och konkava linser; ögat, kikare, mikroskop och kamera. | lins, brännpunkt, bild, förstoring | Kunskaper om fysiken i naturen och samhället; Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
-| **Färgspridning och spektrum** | Prisma, regnbåge och ljusets färger. | prisma, spektrum, regnbåge, färgspridning | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
-| 🧪 **Labb (ca 45 min): Brytning i vatten** | Hur bryts ljus när det går från luft till vatten eller glas? Eleverna riktar en ljusstråle mot en halvcylinder av plast eller en vattenbehållare, mäter infalls- och brytningsvinkel och ritar strålgången. Säkerhet: Titta aldrig in i en laserstråle. Torka upp vatten. | brytningsvinkel, infallsvinkel, medium | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljus breder ut sig, reflekteras och bryts | Systematiska undersökningar |
-
-**Om tid / fördjupning:** Fiberoptik; Ögats uppbyggnad; Optiska instrument i detalj
-
-## 7. Ljud
+## 6. Ljud
 
 *Hur ljud uppstår, breder ut sig och registreras, och hur vi hör.*
 
-### 7.1 Hur ljud uppstår och breder ut sig
+### 6.1 Hur ljud uppstår och breder ut sig
 
 **Mål:** Eleven kan förklara att ljud är vibrationer som breder ut sig i ett medium och beräkna ljudets hastighet.
 
@@ -270,7 +232,7 @@ Planen omfattar 10 områden, 21 delområden, 63 lektionsmoment och 18 labbpass. 
 
 **Om tid / fördjupning:** Åska och ljudets hastighet; Överljud; Ljud under vatten
 
-### 7.2 Tonhöjd, ljudstyrka och hörsel
+### 6.2 Tonhöjd, ljudstyrka och hörsel
 
 **Mål:** Eleven kan förklara frekvens och amplitud, hur hörseln fungerar och hur ljud registreras.
 
@@ -286,6 +248,44 @@ Planen omfattar 10 områden, 21 delområden, 63 lektionsmoment och 18 labbpass. 
 | 🧪 **Labb (ca 45 min): Hur påverkar längden tonhöjden?** | Hur ändras tonhöjden när längden på ett vibrerande föremål ändras? Eleverna fäster en linjal vid bordskanten och varierar den vibrerande längden, eller fyller flaskor med olika vattennivåer. Frekvensen mäts med en app. Säkerhet: Skydda hörseln: ingen hög ljudnivå. Använd inte vassa föremål. | frekvens, tonhöjd, vibration, app | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljud uppstår, breder ut sig och kan registreras på olika sätt | Systematiska undersökningar |
 
 **Om tid / fördjupning:** Musikinstrument; Dopplereffekten; Akustik i klassrummet
+
+## 7. Ljus
+
+*Hur ljus breder ut sig, reflekteras och bryts, och hur vi ser färger och bilder.*
+
+### 7.1 Ljusets utbredning och reflektion
+
+**Mål:** Eleven kan förklara och rita hur ljus breder ut sig och reflekteras och förklara skuggor, speglar och färg.
+
+**Nivåer (E→A):** E: beskriver ljusets utbredning och ger exempel på reflektion. C: ritar strålgångar och förklarar skuggor och speglar. A: förklarar och förutsäger reflektion och hur ytor ger färg.
+
+**Förklaringsmodeller:** Ljusstrålemodell
+
+| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
+|---|---|---|---|---|---|
+| **Ljuskällor och ljusets utbredning** | Ljuskällor, rätlinjig utbredning, skuggor, ljusets hastighet och ljusår; hur vi ser. | ljuskälla, ljusstråle, skugga, ljushastighet, ljusår | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| **Reflektion** | Reflektionslagen; plana speglar; spridd reflektion. | reflektion, spegel, infallsvinkel, reflektionsvinkel | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| **Färg och ytor** | Hur föremål får färg: ljus som absorberas och reflekteras; vitt, svart och färgat ljus. | absorption, reflektion, färg, spektrum | Kunskaper om fysiken i naturen och samhället; Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| 🧪 **Labb (ca 45 min): Reflektion med ljuslåda** | Hur beter sig ljus när det reflekteras i en spegel? Eleverna riktar en ljusstråle mot en plan spegel, mäter infalls- och reflektionsvinkel och jämför med reflektionslagen. Säkerhet: Titta aldrig in i en laserstråle eller starkt ljus. Rikta inte laser mot ansikten. | infallsvinkel, reflektionsvinkel, reflektionslagen | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljus breder ut sig, reflekteras och bryts | Systematiska undersökningar |
+
+**Om tid / fördjupning:** Periskop; Kamouflage och färg; Ljusföroreningar
+
+### 7.2 Brytning, linser och färger
+
+**Mål:** Eleven kan förklara och rita brytning av ljus och hur linser och optiska instrument fungerar.
+
+**Nivåer (E→A):** E: beskriver brytning och ger exempel. C: ritar strålgångar genom linser och förklarar prismat. A: förklarar och förutsäger brytning och färgspridning.
+
+**Förklaringsmodeller:** Ljusstrålemodell
+
+| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
+|---|---|---|---|---|---|
+| **Brytning** | Ljus mellan luft, vatten och glas; ljusets hastighet i olika medier; totalreflektion. | brytning, medium, normal, totalreflektion | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| **Linser och optiska instrument** | Konvexa och konkava linser; ögat, kikare, mikroskop och kamera. | lins, brännpunkt, bild, förstoring | Kunskaper om fysiken i naturen och samhället; Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| **Färgspridning och spektrum** | Prisma, regnbåge och ljusets färger. | prisma, spektrum, regnbåge, färgspridning | Använda fysikens begrepp och förklaringsmodeller för att beskriva och … | Hur ljus breder ut sig, reflekteras och bryts | Begrepp och förklaringsmodeller |
+| 🧪 **Labb (ca 45 min): Brytning i vatten** | Hur bryts ljus när det går från luft till vatten eller glas? Eleverna riktar en ljusstråle mot en halvcylinder av plast eller en vattenbehållare, mäter infalls- och brytningsvinkel och ritar strålgången. Säkerhet: Titta aldrig in i en laserstråle. Torka upp vatten. | brytningsvinkel, infallsvinkel, medium | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg); Hur ljus breder ut sig, reflekteras och bryts | Systematiska undersökningar |
+
+**Om tid / fördjupning:** Fiberoptik; Ögats uppbyggnad; Optiska instrument i detalj
 
 ## 8. Strålning, väder och klimat
 

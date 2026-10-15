@@ -1049,58 +1049,58 @@ var struktur = [
       },
       {
         id: "fysik-omrade-6",
-        titel: "6. Ljus",
+        titel: "6. Ljud",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-6-1",
-            titel: "6.1 Ljusets utbredning och reflektion",
+            titel: "6.1 Hur ljud uppstår och breder ut sig",
             ramverk: true,
             barn: [
-              { id: "fysik-m-6-1-1", titel: "Ljuskällor och ljusets utbredning" },
-              { id: "fysik-m-6-1-2", titel: "Reflektion" },
-              { id: "fysik-m-6-1-3", titel: "Färg och ytor" },
-              { id: "fysik-m-6-1-l", titel: "Labb: Reflektion med ljuslåda" }
+              { id: "fysik-m-6-1-1", titel: "Vibrationer och ljudkällor" },
+              { id: "fysik-m-6-1-2", titel: "Ljudets utbredning" },
+              { id: "fysik-m-6-1-3", titel: "Eko och ljudisolering" },
+              { id: "fysik-m-6-1-l", titel: "Labb: Hur snabbt går ljudet?" }
             ]
           },
           {
             id: "fysik-d-6-2",
-            titel: "6.2 Brytning, linser och färger",
+            titel: "6.2 Tonhöjd, ljudstyrka och hörsel",
             ramverk: true,
             barn: [
-              { id: "fysik-m-6-2-1", titel: "Brytning" },
-              { id: "fysik-m-6-2-2", titel: "Linser och optiska instrument" },
-              { id: "fysik-m-6-2-3", titel: "Färgspridning och spektrum" },
-              { id: "fysik-m-6-2-l", titel: "Labb: Brytning i vatten" }
+              { id: "fysik-m-6-2-1", titel: "Frekvens och amplitud" },
+              { id: "fysik-m-6-2-2", titel: "Hörsel och hörselskydd" },
+              { id: "fysik-m-6-2-3", titel: "Registrera ljud" },
+              { id: "fysik-m-6-2-l", titel: "Labb: Hur påverkar längden tonhöjden?" }
             ]
           }
         ]
       },
       {
         id: "fysik-omrade-7",
-        titel: "7. Ljud",
+        titel: "7. Ljus",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-7-1",
-            titel: "7.1 Hur ljud uppstår och breder ut sig",
+            titel: "7.1 Ljusets utbredning och reflektion",
             ramverk: true,
             barn: [
-              { id: "fysik-m-7-1-1", titel: "Vibrationer och ljudkällor" },
-              { id: "fysik-m-7-1-2", titel: "Ljudets utbredning" },
-              { id: "fysik-m-7-1-3", titel: "Eko och ljudisolering" },
-              { id: "fysik-m-7-1-l", titel: "Labb: Hur snabbt går ljudet?" }
+              { id: "fysik-m-7-1-1", titel: "Ljuskällor och ljusets utbredning" },
+              { id: "fysik-m-7-1-2", titel: "Reflektion" },
+              { id: "fysik-m-7-1-3", titel: "Färg och ytor" },
+              { id: "fysik-m-7-1-l", titel: "Labb: Reflektion med ljuslåda" }
             ]
           },
           {
             id: "fysik-d-7-2",
-            titel: "7.2 Tonhöjd, ljudstyrka och hörsel",
+            titel: "7.2 Brytning, linser och färger",
             ramverk: true,
             barn: [
-              { id: "fysik-m-7-2-1", titel: "Frekvens och amplitud" },
-              { id: "fysik-m-7-2-2", titel: "Hörsel och hörselskydd" },
-              { id: "fysik-m-7-2-3", titel: "Registrera ljud" },
-              { id: "fysik-m-7-2-l", titel: "Labb: Hur påverkar längden tonhöjden?" }
+              { id: "fysik-m-7-2-1", titel: "Brytning" },
+              { id: "fysik-m-7-2-2", titel: "Linser och optiska instrument" },
+              { id: "fysik-m-7-2-3", titel: "Färgspridning och spektrum" },
+              { id: "fysik-m-7-2-l", titel: "Labb: Brytning i vatten" }
             ]
           }
         ]
