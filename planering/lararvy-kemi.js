@@ -1,4 +1,4 @@
-// Genereras av planering/kemi_plan.py – ändra inte för hand.
+// Genereras av planering/amne_plan.py – ändra inte för hand.
 window.lararKemi = {
  "plan": {
   "pdf": "planering/kemi-planering.pdf",

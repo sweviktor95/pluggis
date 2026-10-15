@@ -616,7 +616,7 @@ var struktur = [
     ]
   },
   // BIOLOGI END
-  // KEMI START (genereras av planering/kemi_plan.py)
+  // KEMI START (genereras av planering/amne_plan.py)
   {
     id: "kemi",
     titel: "Kemi (beta)",
@@ -868,18 +868,471 @@ var struktur = [
     ]
   },
   // KEMI END
+  // FYSIK START (genereras av planering/amne_plan.py)
   {
     id: "fysik",
-    titel: "Fysik",
+    titel: "Fysik (beta)",
     ikon: "⚡",
-    barn: []
+    ramverk: true,
+    barn: [
+      {
+        id: "fysik-omrade-1",
+        titel: "1. Fysik som vetenskap",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-1-1",
+            titel: "1.1 Mäta och undersöka som fysiker",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-1-1-1", titel: "Storheter, enheter och instrument" },
+              { id: "fysik-m-1-1-2", titel: "Från fråga till plan" },
+              { id: "fysik-m-1-1-3", titel: "Mätvärden, tabeller och diagram" },
+              { id: "fysik-m-1-1-l", titel: "Labb: Hur påverkar snörets längd en pendels svängningstid?" }
+            ]
+          },
+          {
+            id: "fysik-d-1-2",
+            titel: "1.2 Modeller, källor och argument",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-1-2-1", titel: "Vad är en modell i fysik?" },
+              { id: "fysik-m-1-2-2", titel: "Hur fysiken vuxit fram" },
+              { id: "fysik-m-1-2-3", titel: "Granska fysikpåståenden" },
+              { id: "fysik-m-1-2-l", titel: "Labb: Granska ett påstående: isolerar jackan som reklamen säger?" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-2",
+        titel: "2. Materia, tryck och temperatur",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-2-1",
+            titel: "2.1 Partikelmodellen och fasövergångar",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-2-1-1", titel: "Partikelmodellen" },
+              { id: "fysik-m-2-1-2", titel: "Fasövergångar" },
+              { id: "fysik-m-2-1-3", titel: "Värme och temperatur" },
+              { id: "fysik-m-2-1-l", titel: "Labb: Hur ändras temperaturen när is smälter?" }
+            ]
+          },
+          {
+            id: "fysik-d-2-2",
+            titel: "2.2 Tryck, volym och densitet",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-2-2-1", titel: "Tryck" },
+              { id: "fysik-m-2-2-2", titel: "Densitet" },
+              { id: "fysik-m-2-2-3", titel: "Gaser: tryck, volym och temperatur" },
+              { id: "fysik-m-2-2-l", titel: "Labb: Bestäm densiteten hos olika material" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-3",
+        titel: "3. Krafter och rörelse",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-3-1",
+            titel: "3.1 Krafter och Newtons lagar",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-3-1-1", titel: "Krafter och kraftmätning" },
+              { id: "fysik-m-3-1-2", titel: "Resulterande kraft och jämvikt" },
+              { id: "fysik-m-3-1-3", titel: "Newtons andra och tredje lag" },
+              { id: "fysik-m-3-1-l", titel: "Labb: Hur påverkar underlaget friktionen?" }
+            ]
+          },
+          {
+            id: "fysik-d-3-2",
+            titel: "3.2 Rörelse, hastighet och trafiksäkerhet",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-3-2-1", titel: "Hastighet och acceleration" },
+              { id: "fysik-m-3-2-2", titel: "Rörelseenergi och bromssträcka" },
+              { id: "fysik-m-3-2-3", titel: "Trafiksäkerhet" },
+              { id: "fysik-m-3-2-l", titel: "Labb: Mät hastigheten hos en rullande kula" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-4",
+        titel: "4. Energi",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-4-1",
+            titel: "4.1 Energiformer, flöde och oförstörbarhet",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-4-1-1", titel: "Energiformer och energiomvandlingar" },
+              { id: "fysik-m-4-1-2", titel: "Energins oförstörbarhet och verkningsgrad" },
+              { id: "fysik-m-4-1-3", titel: "Energins kvalitet" },
+              { id: "fysik-m-4-1-l", titel: "Labb: Studsbollen: vart tar energin vägen?" }
+            ]
+          },
+          {
+            id: "fysik-d-4-2",
+            titel: "4.2 Energikällor, för- och nackdelar",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-4-2-1", titel: "Energikällor i Sverige och världen" },
+              { id: "fysik-m-4-2-2", titel: "För- och nackdelar för samhälle och miljö" },
+              { id: "fysik-m-4-2-3", titel: "Energi, klimat och ställningstagande" },
+              { id: "fysik-m-4-2-l", titel: "Labb: Hur påverkar solcellens vinkel elproduktionen?" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-5",
+        titel: "5. Elektricitet och magnetism",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-5-1",
+            titel: "5.1 Elektriska kretsar",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-5-1-1", titel: "Strömkrets, ström och spänning" },
+              { id: "fysik-m-5-1-2", titel: "Resistans och Ohms lag" },
+              { id: "fysik-m-5-1-3", titel: "Seriekoppling och parallellkoppling" },
+              { id: "fysik-m-5-1-l", titel: "Labb: Ström och spänning i serie och parallellt" }
+            ]
+          },
+          {
+            id: "fysik-d-5-2",
+            titel: "5.2 Magnetism och elektromagnetism",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-5-2-1", titel: "Magneter och magnetfält" },
+              { id: "fysik-m-5-2-2", titel: "Elektromagnetism" },
+              { id: "fysik-m-5-2-3", titel: "Elektricitet i samhället" },
+              { id: "fysik-m-5-2-l", titel: "Labb: Bygg en elektromagnet" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-6",
+        titel: "6. Ljus och ljud",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-6-1",
+            titel: "6.1 Ljus: utbredning, reflektion och brytning",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-6-1-1", titel: "Ljusets utbredning" },
+              { id: "fysik-m-6-1-2", titel: "Reflektion" },
+              { id: "fysik-m-6-1-3", titel: "Brytning och färger" },
+              { id: "fysik-m-6-1-l", titel: "Labb: Reflektion och brytning med ljuslåda" }
+            ]
+          },
+          {
+            id: "fysik-d-6-2",
+            titel: "6.2 Ljud",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-6-2-1", titel: "Hur ljud uppstår och breder ut sig" },
+              { id: "fysik-m-6-2-2", titel: "Frekvens, amplitud och hörsel" },
+              { id: "fysik-m-6-2-3", titel: "Registrera ljud" },
+              { id: "fysik-m-6-2-l", titel: "Labb: Hur påverkar längden tonhöjden?" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-7",
+        titel: "7. Strålning, väder och klimat",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-7-1",
+            titel: "7.1 Strålning: användning och risker",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-7-1-1", titel: "Elektromagnetisk strålning" },
+              { id: "fysik-m-7-1-2", titel: "Partikelstrålning och radioaktivitet" },
+              { id: "fysik-m-7-1-3", titel: "Användning och risker" },
+              { id: "fysik-m-7-1-l", titel: "Labb: Vad stoppar UV-strålning?" }
+            ]
+          },
+          {
+            id: "fysik-d-7-2",
+            titel: "7.2 Strålningsbalans, växthuseffekt och klimat",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-7-2-1", titel: "Jordens strålningsbalans" },
+              { id: "fysik-m-7-2-2", titel: "Växthuseffekten" },
+              { id: "fysik-m-7-2-3", titel: "Klimatförändringar och ställningstagande" },
+              { id: "fysik-m-7-2-l", titel: "Labb: Hur påverkar ytans färg uppvärmningen?" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-8",
+        titel: "8. Universum och helheten",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-8-1",
+            titel: "8.1 Universums uppkomst och uppbyggnad",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-8-1-1", titel: "Solsystemet och gravitation" },
+              { id: "fysik-m-8-1-2", titel: "Stjärnor och galaxer" },
+              { id: "fysik-m-8-1-3", titel: "Big bang och universums utveckling" },
+              { id: "fysik-m-8-1-l", titel: "Labb: Solsystemet i skala" }
+            ]
+          },
+          {
+            id: "fysik-d-8-2",
+            titel: "8.2 Planeter och liv i andra solsystem",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-8-2-1", titel: "Exoplaneter och hur vi hittar dem" },
+              { id: "fysik-m-8-2-2", titel: "Livets villkor och beboeliga zonen" },
+              { id: "fysik-m-8-2-3", titel: "Granska rymdnyheter" },
+              { id: "fysik-m-8-2-l", titel: "Labb: Transitmetoden: hur upptäcks planeter?" }
+            ]
+          },
+          {
+            id: "fysik-d-8-3",
+            titel: "8.3 Repetition inför nationella proven",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-8-3-1", titel: "Repetition: partikelmodell, energi och krafter" },
+              { id: "fysik-m-8-3-2", titel: "Repetition: elektricitet, ljus, ljud och strålning" },
+              { id: "fysik-m-8-3-3", titel: "Repetition: undersökningar och argument" }
+            ]
+          }
+        ]
+      }
+    ]
   },
+  // FYSIK END
+  // TEKNIK START (genereras av planering/amne_plan.py)
   {
     id: "teknik",
-    titel: "Teknik",
+    titel: "Teknik (beta)",
     ikon: "⚙️",
-    barn: []
+    ramverk: true,
+    barn: [
+      {
+        id: "teknik-omrade-1",
+        titel: "1. Teknik och teknikutveckling",
+        ramverk: true,
+        barn: [
+          {
+            id: "teknik-d-1-1",
+            titel: "1.1 Teknikutvecklingens faser",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-1-1-1", titel: "Behov och problem" },
+              { id: "teknik-m-1-1-2", titel: "Undersöka och föreslå lösningar" },
+              { id: "teknik-m-1-1-3", titel: "Konstruera och pröva" },
+              { id: "teknik-m-1-1-l", titel: "Praktiskt arbete: Prototyp: en lösning på ett vardagsproblem" }
+            ]
+          },
+          {
+            id: "teknik-d-1-2",
+            titel: "1.2 Digitala verktyg och dokumentation",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-1-2-1", titel: "Skisser och ritningar" },
+              { id: "teknik-m-1-2-2", titel: "Digitala modeller och simulering" },
+              { id: "teknik-m-1-2-3", titel: "Rapporten" },
+              { id: "teknik-m-1-2-l", titel: "Praktiskt arbete: Rita och simulera en lösning i CAD" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "teknik-omrade-2",
+        titel: "2. Tekniska system och delsystem",
+        ramverk: true,
+        barn: [
+          {
+            id: "teknik-d-2-1",
+            titel: "2.1 System, komponenter och delsystem",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-2-1-1", titel: "Från komponent till system" },
+              { id: "teknik-m-2-1-2", titel: "IKT-system" },
+              { id: "teknik-m-2-1-3", titel: "Hur delarna samverkar" },
+              { id: "teknik-m-2-1-l", titel: "Praktiskt arbete: Kartlägg ett system och rita en systemskiss" }
+            ]
+          },
+          {
+            id: "teknik-d-2-2",
+            titel: "2.2 Transportsystem och samhällets system",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-2-2-1", titel: "Transportsystem" },
+              { id: "teknik-m-2-2-2", titel: "Kollektivtrafik och arkitektur" },
+              { id: "teknik-m-2-2-3", titel: "Transport genom tiden" },
+              { id: "teknik-m-2-2-l", titel: "Praktiskt arbete: Planera en ny busslinje eller hållplats" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "teknik-omrade-3",
+        titel: "3. Elektronik, styrning och reglering",
+        ramverk: true,
+        barn: [
+          {
+            id: "teknik-d-3-1",
+            titel: "3.1 Elektronik och sensorer",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-3-1-1", titel: "Elektronikkomponenter" },
+              { id: "teknik-m-3-1-2", titel: "Sensorer" },
+              { id: "teknik-m-3-1-3", titel: "Styrning och reglering" },
+              { id: "teknik-m-3-1-l", titel: "Praktiskt arbete: Koppla en krets med sensor: nattlampa" }
+            ]
+          },
+          {
+            id: "teknik-d-3-2",
+            titel: "3.2 Programmering och styrning",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-3-2-1", titel: "Algoritmer och program" },
+              { id: "teknik-m-3-2-2", titel: "Programmera en styrning" },
+              { id: "teknik-m-3-2-3", titel: "Felsökning och förbättring" },
+              { id: "teknik-m-3-2-l", titel: "Praktiskt arbete: Bygg en automatisk fläkt eller ett trafikljus" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "teknik-omrade-4",
+        titel: "4. Konstruktioner och material",
+        ramverk: true,
+        barn: [
+          {
+            id: "teknik-d-4-1",
+            titel: "4.1 Hållfasta och stabila konstruktioner",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-4-1-1", titel: "Krafter i konstruktioner" },
+              { id: "teknik-m-4-1-2", titel: "Stabilitet och form" },
+              { id: "teknik-m-4-1-3", titel: "Konstruktioner i samhället" },
+              { id: "teknik-m-4-1-l", titel: "Praktiskt arbete: Bygg och belasta en bro av papper eller spagetti" }
+            ]
+          },
+          {
+            id: "teknik-d-4-2",
+            titel: "4.2 Material och deras egenskaper",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-4-2-1", titel: "Materialegenskaper" },
+              { id: "teknik-m-4-2-2", titel: "Trä, metall, plast och kompositer" },
+              { id: "teknik-m-4-2-3", titel: "Materialval och hållbarhet" },
+              { id: "teknik-m-4-2-l", titel: "Praktiskt arbete: Testa materialets styrka" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "teknik-omrade-5",
+        titel: "5. Från råvara till produkt",
+        ramverk: true,
+        barn: [
+          {
+            id: "teknik-d-5-1",
+            titel: "5.1 Tillverkning och industriella processer",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-5-1-1", titel: "Processkedjan" },
+              { id: "teknik-m-5-1-2", titel: "Förpackningar" },
+              { id: "teknik-m-5-1-3", titel: "Automation och kvalitetskontroll" },
+              { id: "teknik-m-5-1-l", titel: "Praktiskt arbete: Följ en produkt från råvara till färdig vara" }
+            ]
+          },
+          {
+            id: "teknik-d-5-2",
+            titel: "5.2 Avfall, återvinning och hållbarhet",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-5-2-1", titel: "Avfall i processen" },
+              { id: "teknik-m-5-2-2", titel: "Återvinning och cirkulär ekonomi" },
+              { id: "teknik-m-5-2-3", titel: "Livscykel" },
+              { id: "teknik-m-5-2-l", titel: "Praktiskt arbete: Sortera och väg: hur mycket avfall skapar vi?" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "teknik-omrade-6",
+        titel: "6. Internet och globala tekniska system",
+        ramverk: true,
+        barn: [
+          {
+            id: "teknik-d-6-1",
+            titel: "6.1 Internet och globala system",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-6-1-1", titel: "Hur Internet fungerar" },
+              { id: "teknik-m-6-1-2", titel: "Fördelar och begränsningar" },
+              { id: "teknik-m-6-1-3", titel: "Andra globala system" },
+              { id: "teknik-m-6-1-l", titel: "Praktiskt arbete: Kartlägg vägen från din mobil till en server" }
+            ]
+          },
+          {
+            id: "teknik-d-6-2",
+            titel: "6.2 Säkerhet, data och risker",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-6-2-1", titel: "Lösenord och kontosäkerhet" },
+              { id: "teknik-m-6-2-2", titel: "Lagring av data och integritet" },
+              { id: "teknik-m-6-2-3", titel: "Risker och ansvar" },
+              { id: "teknik-m-6-2-l", titel: "Praktiskt arbete: Granska en apps behörigheter och datainsamling" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "teknik-omrade-7",
+        titel: "7. Teknik, samhälle och framtid",
+        ramverk: true,
+        barn: [
+          {
+            id: "teknik-d-7-1",
+            titel: "7.1 Teknik och vetenskap",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-7-1-1", titel: "Teknik möjliggör vetenskap" },
+              { id: "teknik-m-7-1-2", titel: "Vetenskap möjliggör teknik" },
+              { id: "teknik-m-7-1-3", titel: "Teknikhistoria i vändpunkter" },
+              { id: "teknik-m-7-1-l", titel: "Praktiskt arbete: Bygg ett vattendroppsmikroskop" }
+            ]
+          },
+          {
+            id: "teknik-d-7-2",
+            titel: "7.2 Teknikval, hållbar utveckling och yrken",
+            ramverk: true,
+            barn: [
+              { id: "teknik-m-7-2-1", titel: "Hållbar utveckling i teknikval" },
+              { id: "teknik-m-7-2-2", titel: "Teknikval i praktiken" },
+              { id: "teknik-m-7-2-3", titel: "Föreställningar om teknik och yrkesval" },
+              { id: "teknik-m-7-2-l", titel: "Praktiskt arbete: Konsekvensanalys: vilket teknikval är mest hållbart?" }
+            ]
+          }
+        ]
+      }
+    ]
   },
+  // TEKNIK END
   {
     id: "historia",
     titel: "Historia (beta)",

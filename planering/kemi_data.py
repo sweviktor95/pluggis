@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Data till kemiplaneringen åk 7–9 (Lgr22). Används av kemi_plan.py."""
+"""Data till kemiplaneringen åk 7–9 (Lgr22). Används av amne_plan.py."""
+CFG = dict(id="kemi", titel="Kemi", ikon="🧪", js="lararKemi", farg="2F6F9F", morkt="245a82", ljust="e4eef6", labb="Labb", labb_pl="labbpass", tid="ca 45 min",
+ oppna=["Område 7 (kolföreningar och livets kemi) överlappar biologins område om cellen och energin. Ska ordningen samordnas med biologin?",
+        "Delområde 8.3 är en repetition utan labb. Vill du hellre ha ett eget labbpass där?",
+        "Labbarna är förslag; säkerhet och kemikalier måste stämma med skolans egna rutiner."])
 SYFTE = {
  "S1": "Ställa frågor om kemiska processer och materiens egenskaper och uppbyggnad",
  "S2": "Kunskaper om kemin i naturen, i samhället och i människokroppen",

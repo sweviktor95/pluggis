@@ -1,6 +1,6 @@
 # Kemi åk 7–9 – planering (Lgr22)
 
-Status: förslag, väntar på granskning. Genereras av `planering/kemi_plan.py` från `planering/kemi_data.py` – ändra där, inte här.
+Status: förslag, väntar på granskning. Genereras av `planering/amne_plan.py` från `planering/kemi_data.py` – ändra där, inte här.
 
 Planen omfattar 8 områden, 17 delområden, 51 lektionsmoment och 16 labbpass. Det som inte ryms står under *Om tid / fördjupning* (49 förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
 

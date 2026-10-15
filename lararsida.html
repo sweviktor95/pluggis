@@ -53,6 +53,8 @@
 <script src="hafte/manifest.js"></script>
 <script src="planering/lararvy-biologi.js"></script>
 <script src="planering/lararvy-kemi.js"></script>
+<script src="planering/lararvy-fysik.js"></script>
+<script src="planering/lararvy-teknik.js"></script>
 <script>
   // Obs: enkel spärr mot nyfikna – inget riktigt skydd (sidan är statisk).
   var HASH = "a2c4a4f38df7a7d24eac2b8dc1c9f63487d6255208b978a29b9740423225ee3a";
@@ -112,6 +114,8 @@
   function grenHtml(nod, niva) {
     if (nod.id === "biologi" && window.lararBiologi) { return biologiHtml(nod, window.lararBiologi); }
     if (nod.id === "kemi" && window.lararKemi) { return biologiHtml(nod, window.lararKemi); }
+    if (nod.id === "fysik" && window.lararFysik) { return biologiHtml(nod, window.lararFysik); }
+    if (nod.id === "teknik" && window.lararTeknik) { return biologiHtml(nod, window.lararTeknik); }
     var egen = kapitelHtml(nod);
     var inre = (nod.barn || []).map(function(b) { return grenHtml(b, niva + 1); }).join("");
     if (!nod.barn || !nod.barn.length) { return egen; }
