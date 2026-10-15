@@ -77,9 +77,35 @@ window.lararBiologi = {
    "nr": 3,
    "titel": "Biologisk mångfald",
    "ide": "Mångfaldens nivåer, hur organismer grupperas, vad som lever omkring oss och varför mångfalden är viktig.",
-   "hafte": null,
-   "lankar": [],
-   "ppt": []
+   "hafte": "biologi-omrade-3",
+   "lankar": [
+    [
+     "Prov (elevversion)",
+     "planering/biologi-omrade3/biologi-3-prov-elev.pdf"
+    ],
+    [
+     "Prov med facit (lärare)",
+     "planering/biologi-omrade3/biologi-3-prov-larare.pdf"
+    ],
+    [
+     "Jeopardy",
+     "simuleringar/jeopardy-bio-3.html"
+    ]
+   ],
+   "ppt": [
+    [
+     "📊 Introduktion till biologisk mångfald",
+     "planering/biologi-omrade3/biologi-3-0-introduktion-till-biologisk-mangfald.pptx"
+    ],
+    [
+     "📊 3.1 Mångfald, hot och ekosystemtjänster",
+     "planering/biologi-omrade3/biologi-3-1-mangfald-hot-och-ekosystemtjanster.pptx"
+    ],
+    [
+     "📊 3.2 Gruppera och organismvärlden",
+     "planering/biologi-omrade3/biologi-3-2-gruppera-och-organismvarlden.pptx"
+    ]
+   ]
   },
   {
    "nr": 4,

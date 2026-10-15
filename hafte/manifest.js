@@ -29,16 +29,17 @@ window.hafte["biologi-omrade-2"] = {
   handledning: "hafte/biologi-2-cellen-lararhandledning.pdf"
 };
 
-window.hafte["biologi-mangfald"] = {
+window.hafte["biologi-omrade-3"] = {
   titel: "Kapitel 3 – Biologisk mångfald",
   vanlig: "hafte/biologi-3-mangfald-vanlig.pdf",
   lattlast: "hafte/biologi-3-mangfald-lattlast.pdf",
   fordjupning: "hafte/biologi-3-mangfald-fordjupning.pdf",
-  komplett: {
-    vanlig: "hafte/biologi-3-mangfald-vanlig-komplett.pdf",
-    lattlast: "hafte/biologi-3-mangfald-lattlast-komplett.pdf",
-    fordjupning: "hafte/biologi-3-mangfald-fordjupning-komplett.pdf"
-  }
+  larare: {
+    lattlast: "hafte/biologi-3-mangfald-lattlast-lararversion.pdf",
+    vanlig: "hafte/biologi-3-mangfald-vanlig-lararversion.pdf",
+    fordjupning: "hafte/biologi-3-mangfald-fordjupning-lararversion.pdf"
+  },
+  handledning: "hafte/biologi-3-mangfald-lararhandledning.pdf"
 };
 
 window.hafte["biologi-ekologi"] = {

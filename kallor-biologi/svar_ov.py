@@ -34,6 +34,11 @@ try:
 except ImportError:
     pass
 try:
+    from svar_ov3 import KOLLA2 as KOLLA3
+    KOLLA.update(KOLLA3)
+except ImportError:
+    pass
+try:
     from svar_ov2 import KOLLA2
     KOLLA.update(KOLLA2)
 except ImportError:

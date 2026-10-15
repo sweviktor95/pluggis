@@ -331,7 +331,7 @@ var struktur = [
             titel: "3.1 Mångfald, hot och ekosystemtjänster",
             ramverk: true,
             barn: [
-              { id: "biologi-m-3-1-1", titel: "Gener, arter och ekosystem" },
+              { id: "biologi-m-3-1-1", titel: "Vad är biologisk mångfald? Gener, arter och ekosystem" },
               { id: "biologi-m-3-1-2", titel: "Ekosystemtjänster" },
               { id: "biologi-m-3-1-3", titel: "Hoten mot mångfalden" },
               { id: "biologi-m-3-1-l", titel: "Labb: Artinventering i en provruta" }
@@ -347,7 +347,9 @@ var struktur = [
               { id: "biologi-m-3-2-3", titel: "Anpassningar" },
               { id: "biologi-m-3-2-l", titel: "Labb: Artbestämning med nyckel" }
             ]
-          }
+          },
+          { id: "biologi-m-3-s", titel: "Sammanfattning och begrepp" },
+          { id: "biologi-m-3-t", titel: "Testa dig själv" }
         ]
       },
       {

@@ -370,3 +370,66 @@ M2_FORDJ = [
  ("Floemets celler är levande", "Floem är levande och transporterar åt olika håll.", ['bioninja_xp']),
 ]
 MAPS.update({('02n', 'vanlig'): M2_GRUND, ('02n', 'lattlast'): M2_LATT, ('02n', 'fordjupning'): M2_FORDJ})
+
+# ======================= Kapitel 3 Biologisk mångfald (2026-10-15) =======================
+REFS.update({
+ 'ipbes_sigma': dict(t='Sigma Xi: 10 key findings from the IPBES Global Assessment (2019)', u='https://sigmaxi.org/keyed-in/post/keyed-in/2019/05/15/10-key-findings-from-the-ipbes-global-assessment', s='K',
+    n='Bekräftar ”approximately 1 million animal and plant species are threatened with extinction” och de fem direkta drivkrafterna i fallande ordning: förändrad land- och havsanvändning, direkt exploatering, klimatförändringar, föroreningar och invasiva främmande arter. Sekundärkälla; originalet är IPBES sammanfattning för beslutsfattare.',
+    m='Läs IPBES Summary for Policymakers (ipbes.net).'),
+ 'tv4_rodlista': dict(t='TV4: Nya siffror: 5 000 arter hotade (Rödlistan 2025)', u='https://www.tv4.se/artikel/4l701w1r8tyIbsdRBvBfzM/nya-siffror-5-000-arter-hotade', s='D',
+    n='Bekräftar över 23 000 bedömda och över 5 000 rödlistade (nästan 23 procent). De exakta talen 23 103, 5 217 och 2 373 hotade kontrollerades mot SLU Artdatabanken tidigare i arbetet men öppnades inte på nytt vid sista kontrollen. Artikeln använder ”hotad” och ”rödlistad” slarvigt: hotad = VU, EN, CR; rödlistad inkluderar även nära hotade och utdöda.',
+    m='Slå upp Rödlistan 2025 på artdatabanken.slu.se.'),
+ 'nv_utvardering': dict(t='Naturvårdsverket: Den biologiska mångfalden utarmas – globalt och i Sverige', u='https://www.naturvardsverket.se/om-miljoarbetet/sveriges-miljomal/fordjupad-utvardering-av-sveriges-miljomal-2023/den-biologiska-mangfalden-utarmas--globalt-och-i-sverige/', s='K',
+    n='Bekräftar: ”Igenväxning och avverkning är de viktigaste negativa påverkansfaktorerna för rödlistade arter i Sverige” och att jordbruks- och skogslandskapen hyser över 75 procent av de rödlistade arterna. Sidan anger inga siffror per faktor.',
+    m='Läs hela utvärderingen.'),
+ 'svt_fjallrav': dict(t='SVT: Utrotningshotad fjällräv på väg tillbaka', u='https://www.svt.se/nyheter/vetenskap/utrotningshotad-fjallrav-pa-vag-tillbaka', s='K',
+    n='Bekräftar fridlysning 1928 efter hård jakt, cirka 35–50 vuxna fjällrävar i Skandinavien runt år 2000, lämlar som största födokälla och rödräven som större, starkare konkurrent som dödat fjällrävar.',
+    m='Naturvårdsverkets åtgärdsprogram för fjällräv.'),
+ 'owid_poll': dict(t='Our World in Data: Pollinator dependence', u='https://ourworldindata.org/pollinator-dependence', s='K',
+    n='Bekräftar att cirka 75 procent av grödtyperna är beroende av pollinatörer i någon grad och att cirka 35 procent av produktionen (i ton) kommer från sådana grödor. Sidan anger även produktionsförlust utan pollinatörer på cirka 5 procent (höginkomstländer) och 8 procent (låg- och medelinkomstländer), baserat på en studie som är ungefär tio år gammal.',
+    m='Läs hela artikeln om hur siffrorna ska tolkas.'),
+ 'pew_30': dict(t='Pew: Nations adopt historic new agreement for nature (2022-12-20)', u='https://www.pew.org/es/research-and-analysis/articles/2022/12/20/nations-adopt-historic-new-agreement-for-nature', s='K',
+    n='Bekräftar att 196 länder i december 2022 enades om att skydda och bevara minst 30 procent av land, inlandsvatten samt kust- och havsområden till 2030 (”30 by 30”).',
+    m='Läs avtalstexten (CBD, Kunming–Montreal).'),
+})
+M3_GRUND = [
+ ("drygt två miljoner arter", "Antalet beskrivna arter är drygt två miljoner. Läroboksfaktum, inte kontrollerat; osäkerheten om totalen är poängen.", ['ingen']),
+ ("odlade man nästan bara en sorts potatis", "Irländska potatisbladmögel 1840-talet, ca en miljon döda. Allmänt historiskt faktum, inte kontrollerat.", ['ingen']),
+ ("Ungefär tre av fyra av de grödor", "Cirka 75 procent av grödtyperna och cirka 35 procent av produktionen; förlust utan pollinatörer cirka 5–8 procent.", ['owid_poll']),
+ ("pollinera blommorna för hand", "Handpollinering i kinesiska fruktodlingar. Ofta citerat exempel, inte kontrollerat.", ['ingen']),
+ ("omkring en miljon djur- och växtarter är hotade", "IPBES 2019: cirka en miljon arter hotade.", ['ipbes_sigma']),
+ ("i den ordning IPBES rangordnar dem", "De fem drivkrafterna i fallande ordning.", ['ipbes_sigma']),
+ ("23 103 arter", "Rödlistan 2025: 23 103 bedömda, 5 217 rödlistade, 2 373 hotade.", ['tv4_rodlista']),
+ ("de viktigaste negativa påverkansfaktorerna", "Igenväxning och avverkning, och över 75 procent av de rödlistade arterna i jordbruks- och skogslandskap.", ['nv_utvardering']),
+ ("uttern och havsörnen har blivit så många igen", "Utter och havsörn inte längre rödlistade. Inte kontrollerat i detta arbete.", ['ingen']),
+ ("Den blev fridlyst 1928", "Fridlysning 1928 efter hård jakt.", ['svt_fjallrav']),
+ ("cirka 35–50 vuxna fjällrävar", "Antal vuxna fjällrävar i Skandinavien runt år 2000.", ['svt_fjallrav']),
+ ("Den är större och konkurrerar", "Rödräven är större och konkurrerar om mat och lyor.", ['svt_fjallrav']),
+ ("Fjällräven lever mest av lämlar", "Lämlar är fjällrävens största födokälla.", ['svt_fjallrav']),
+ ("kallas en signalart", "Garnlav som signalart och vinterföda för ren. Inte källkontrollerat.", ['ingen']),
+ ("Torne älv, Kalix älv, Pite älv och Vindelälven", "Sveriges fyra nationalälvar. Inte kontrollerat i detta arbete.", ['ingen']),
+ ("minst 30 procent av jordens land", "Kunming–Montreal-avtalet, december 2022.", ['pew_30']),
+ ("världsarvet Laponia", "Laponia är världsarv, med bl.a. Sarek och Padjelanta. Inte kontrollerat.", ['ingen']),
+ ("Systemet infördes av den svenske naturforskaren Carl von Linné", "Linné och det vetenskapliga namnsystemet (1700-talet). Läroboksfaktum.", ['ingen']),
+ ("blev de mörka fjärilarna vanligare", "Pepparfjärilen: förenklad framställning; vissa detaljer är omdiskuterade. Inte källkontrollerat.", ['ingen']),
+ ("Det kallas en genetisk", "", ['ingen']),
+]
+M3_GRUND = [m for m in M3_GRUND if m[1]]
+M3_LATT = [
+ ("drygt två miljoner arter", "Antalet beskrivna arter. Läroboksfaktum.", ['ingen']),
+ ("cirka en miljon arter är hotade", "IPBES 2019.", ['ipbes_sigma']),
+ ("År 2025 var 5 217 arter rödlistade", "Rödlistan 2025.", ['tv4_rodlista']),
+ ("Pollinering behövs för många bär", "", ['ingen']),
+]
+M3_LATT = [m for m in M3_LATT if m[1]]
+M3_FORDJ = [
+ ("Försäkringseffekten.", "Försäkringseffekten (insurance effect) och funktionell redundans. Etablerade ekologiska begrepp, inte källkontrollerade här.", ['ingen']),
+ ("Exempel: havsuttern.", "Havsutter, sjöborre och tångskog som trofisk kaskad. Klassiskt exempel, inte källkontrollerat här.", ['ingen']),
+ ("Exempel: bävern.", "Bävern som ekosystemingenjör. Inte källkontrollerat här.", ['ingen']),
+ ("fisket stoppades 1992", "Torskkollapsen vid Newfoundland. Inte källkontrollerat här.", ['ingen']),
+ ("Hybrider mellan brunbjörn och isbjörn", "Hybrider har hittats i naturen. Inte källkontrollerat här.", ['ingen']),
+ ("konvergent evolution", "Delfin och haj som exempel på konvergent evolution. Läroboksfaktum.", ['ingen']),
+ ("resistenta bakterier", "", ['ingen']),
+]
+M3_FORDJ = [m for m in M3_FORDJ if m[1]]
+MAPS.update({('03n', 'vanlig'): M3_GRUND, ('03n', 'lattlast'): M3_LATT, ('03n', 'fordjupning'): M3_FORDJ})

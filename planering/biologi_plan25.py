@@ -364,11 +364,25 @@ tr.lab td{background:#f3f9f5}
         pg.goto("file:///tmp/plan.html"); pg.pdf(path="planering/biologi-planering.pdf", prefer_css_page_size=True, print_background=True); b.close()
 
 # ---- Data till lärarvyn (lararsida.html) ------------------------------------
-HAFTE_NYCKEL = {1: "biologi-vetenskap", 4: "biologi-ekologi"}   # områden som redan har ombyggda häften
-EXTRA_BLAD = {1: ['          { id: "biologi-m-1-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-1-t", titel: "Testa dig själv" }'],
+HAFTE_NYCKEL = {1: "biologi-vetenskap", 2: "biologi-omrade-2", 3: "biologi-omrade-3", 4: "biologi-ekologi"}   # områden som redan har ombyggda häften
+EXTRA_BLAD = {2: ['          { id: "biologi-m-2-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-2-t", titel: "Testa dig själv" }'],
+              3: ['          { id: "biologi-m-3-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-3-t", titel: "Testa dig själv" }'],
+              1: ['          { id: "biologi-m-1-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-1-t", titel: "Testa dig själv" }'],
               4: ['          { id: "biologi-m-4-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-4-t", titel: "Testa dig själv" }']}
 # Lärarmaterial per område (prov, Jeopardy) och delområde (PowerPoint)
-MATERIAL = {1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/biologi-1-prov-elev.pdf"],
+MATERIAL = {2: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade2/biologi-2-prov-elev.pdf"],
+                           ["Prov med facit (lärare)", "planering/biologi-omrade2/biologi-2-prov-larare.pdf"],
+                           ["Jeopardy", "simuleringar/jeopardy-bio-2.html"]],
+                 "ppt": [["📊 2.1 Cellen", "planering/biologi-omrade2/biologi-2-1-cellen.pptx"],
+                         ["📊 2.2 Fotosyntes och cellandning", "planering/biologi-omrade2/biologi-2-2-fotosyntes-och-cellandning.pptx"],
+                         ["📊 2.3 Organ och organsystem", "planering/biologi-omrade2/biologi-2-3-organ-och-organsystem.pptx"]]},
+            3: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade3/biologi-3-prov-elev.pdf"],
+                           ["Prov med facit (lärare)", "planering/biologi-omrade3/biologi-3-prov-larare.pdf"],
+                           ["Jeopardy", "simuleringar/jeopardy-bio-3.html"]],
+                 "ppt": [["📊 Introduktion till biologisk mångfald", "planering/biologi-omrade3/biologi-3-0-introduktion-till-biologisk-mangfald.pptx"],
+                         ["📊 3.1 Mångfald, hot och ekosystemtjänster", "planering/biologi-omrade3/biologi-3-1-mangfald-hot-och-ekosystemtjanster.pptx"],
+                         ["📊 3.2 Gruppera och organismvärlden", "planering/biologi-omrade3/biologi-3-2-gruppera-och-organismvarlden.pptx"]]},
+            1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/biologi-1-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade1/biologi-1-prov-larare.pdf"],
                            ["Jeopardy", "simuleringar/jeopardy-bio-1.html"]],
                  "ppt": [["📊 Introduktion till biologi", "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"],
@@ -391,6 +405,9 @@ def skriv_js():
         "// Genereras av planering/biologi_plan25.py – ändra inte för hand.\nwindow.lararBiologi = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
 
 # ---- Ramverk i elevvyn (innehall/struktur.js) ---------------------------------
+# Momenttitlar som skiljer sig från planens (sajtsidan innehåller även Start-avsnittet)
+TITEL_OVR = {"biologi-m-2-1-1": "Vad är liv? Cellteorin och mikroskopet", "biologi-m-3-1-1": "Vad är biologisk mångfald? Gener, arter och ekosystem"}
+
 def skriv_struktur():
     def js(t): return json.dumps(t, ensure_ascii=False)
     def oid(a): return HAFTE_NYCKEL.get(a[0], f"biologi-omrade-{a[0]}")
@@ -398,7 +415,7 @@ def skriv_struktur():
     for a in NEW:
         dl = []
         for d in a[3]:
-            mo = [f'              {{ id: "biologi-m-{d[0].replace(".", "-")}-{n}", titel: {js(mom(i)["titel"])} }}' for n, i in enumerate(d[5], 1)]
+            mo = [f'              {{ id: "biologi-m-{d[0].replace(".", "-")}-{n}", titel: {js(TITEL_OVR.get(f"biologi-m-{d[0].replace(chr(46), chr(45))}-{n}", mom(i)["titel"]))} }}' for n, i in enumerate(d[5], 1)]
             if d[0] in LAB25: mo.append(f'              {{ id: "biologi-m-{d[0].replace(".", "-")}-l", titel: {js("Labb: " + LAB25[d[0]][0])} }}')
             dl.append(f'          {{\n            id: "biologi-d-{d[0].replace(".", "-")}",\n            titel: {js(d[0] + " " + d[1])},\n            ramverk: true,\n            barn: [\n' + ",\n".join(mo) + "\n            ]\n          }")
         ut.append(f'      {{\n        id: {js(oid(a))},\n        titel: {js(f"{a[0]}. {a[1]}")},\n        ramverk: true,\n        barn: [\n' + ",\n".join(dl + EXTRA_BLAD.get(a[0], [])) + "\n        ]\n      }")
