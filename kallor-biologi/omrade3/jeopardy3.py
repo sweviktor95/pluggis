@@ -7,7 +7,7 @@ KAT = [
    ("Vad menas med artrikedom?", "antalet olika arter i ett område"),
    ("Varför klarar ett artrikt ekosystem störningar bättre?", "det finns fler arter som kan ta över en uppgift (reservdelar) och arterna reagerar olika"),
    ("Varför slog potatisbladmögel så hårt mot potatisen på Irland på 1840-talet?", "nästan alla plantor var genetiskt mycket lika, så ingen tålde sjukdomen")]),
- ("Ekosystemtjänster", [
+ ("Naturens tjänster", [
    ("Vilka fyra typer av ekosystemtjänster finns det?", "försörjande, reglerande, stödjande och kulturella"),
    ("Vad kallas det när pollen flyttas mellan blommor?", "pollinering"),
    ("Ge ett exempel på en reglerande ekosystemtjänst.", "t.ex. pollinering, vattenrening i våtmark, koldioxidupptag i skog"),
@@ -82,6 +82,7 @@ h1{font-size:1.25rem;margin:0;color:var(--g1)}
 .vb .btn.ok.pa{background:#2f8a4f;color:#fff;border-color:#2f8a4f}
 .vb .btn.no.pa{background:#b3402f;color:#fff;border-color:#b3402f}
 @media print{header .btn,.teams,.board,.note{display:none}#lar{display:block}}
+@media(max-width:520px){.cat{font-size:.62rem!important;padding:4px 2px;hyphens:none!important;overflow-wrap:normal!important;word-break:normal!important}}
 </style></head><body>
 <header><h1>Jeopardy: Biologisk mångfald</h1>
 <div class="row"><button class="btn alt" id="larBtn">Lärarvy: alla svar</button><button class="btn" id="nytt">Nytt spel</button></div></header>

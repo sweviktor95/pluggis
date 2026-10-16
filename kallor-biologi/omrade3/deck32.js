@@ -8,18 +8,18 @@ build({
   async slides(h) {
     const A = "Rikena";
     h.section(A, "Fem riken", "Fråga: är en svamp en växt? Vad skulle man titta på för att avgöra det?");
-    await h.imgText(A, "Fem riken", ["Djur, växter, svampar, bakterier.", "Encelliga organismer med cellkärna.", "Svampar gör ingen fotosyntes.", "Lav: svamp + alg i symbios."], "rikena.png", { iw: 6.4, imgLeft: false, fs: 22, notes: "Vanligt fel: att svampar är växter. Mycel är svampens nät av trådar." });
+    await h.imgText(A, "Fem riken", ["Djur, växter, svampar, bakterier.", "Encelliga organismer med cellkärna.", "Svampar gör ingen fotosyntes.", "Lav: svamp + alg i symbios."], "rikena.png", { iw: 7.7, imgLeft: false, fs: 20, notes: "Vanligt fel: att svampar är växter. Mycel är svampens nät av trådar." });
     h.cards(A, "Vetenskapligt namn", [["Två ord", "Släkte och art."], ["Tall", "Pinus sylvestris"], ["Gran", "Picea abies"]], { h: 3.0, note: "Systemet infördes av Linné på 1700-talet.", notes: "Första ordet har stor bokstav och namnet skrivs kursivt." });
     h.kolla(A, "Kolla dig själv", ["Nämn de fem rikena.", "Vad skiljer en svamp från en växt?", "Hur skrivs ett vetenskapligt namn?", "Vad är en lav?"]);
 
     const B = "Bestämningsnycklar";
     h.section(B, "Vad heter trädet?", "Ta fram bild 3.9 och låt eleverna testa nyckeln på ett lövprov eller en bild.");
-    await h.imgText(B, "En nyckel för fem träd", ["Två alternativ i varje steg.", "Jämför kännetecken, inte känsla.", "Följ valen tills du får ett namn.", "Kontrollera i bok eller app."], "nyckel.png", { iw: 6.4, imgLeft: false, fs: 22, notes: "Låt eleverna bygga en egen nyckel för tre djur eller tre föremål." });
+    await h.imgText(B, "En nyckel för fem träd", ["Två alternativ i varje steg.", "Jämför kännetecken, inte känsla.", "Följ valen tills du får ett namn.", "Kontrollera i bok eller app."], "nyckel.png", { iw: 7.7, imgLeft: false, fs: 20, notes: "Låt eleverna bygga en egen nyckel för tre djur eller tre föremål." });
     h.kolla(B, "Kolla dig själv", ["Vad är en bestämningsnyckel?", "Varför ska nyckeln ha två alternativ i varje steg?", "Hitta på ett första steg för gädda, räv och duva."]);
 
     const C = "Anpassningar";
     h.section(C, "Passar bäst – överlever", "Fråga: varför ser fjällräv och rödräv olika ut? Koppla till miljön.");
-    await h.imgText(C, "Naturligt urval", ["Variation: individer är olika.", "Urval: de som passar bäst överlever.", "Ärftlighet: draget går i arv.", "Draget blir vanligare."], "urval.png", { iw: 6.4, imgLeft: false, fs: 22, notes: "Pepparfjärilen är förenklad. Vanligt fel: att individer anpassar sig medvetet." });
+    await h.imgText(C, "Naturligt urval", ["Variation: individer är olika.", "Urval: de som passar bäst överlever.", "Ärftlighet: draget går i arv.", "Draget blir vanligare."], "urval.png", { iw: 7.7, imgLeft: false, fs: 20, notes: "Pepparfjärilen är förenklad. Vanligt fel: att individer anpassar sig medvetet." });
     h.kolla(C, "Kolla dig själv", ["Vad är en anpassning?", "Förklara naturligt urval med tre ord.", "Varför är en anpassning ingen sak en individ bestämmer?"]);
 
     const D = "Labb 3.2 Artbestämning med nyckel";

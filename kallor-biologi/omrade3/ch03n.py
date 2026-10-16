@@ -89,7 +89,7 @@ add("3.1.1", "Gener, arter och ekosystem", f"Kapitel {NR} · Delområde 3.1 {DEL
         box("tank", "Tänk efter", "<p>Varför räcker det inte att räkna antalet arter för att veta hur rik naturen är i ett område?</p>")])
  + "<h3>Mångfald ger starka ekosystem</h3>"
  + roww("<p>I ett ekosystem är alla arter beroende av varandra. Gröna växter är <strong class='green'>producenter</strong>: med hjälp av solljus bygger de upp socker med fotosyntes. Djur är <strong class='green'>konsumenter</strong> som får sin energi genom att äta växter eller andra djur. <strong class='green'>Nedbrytare</strong> som svampar och bakterier bryter ner döda växter och djur så att näringen kan användas igen. I naturen äter de flesta djur flera olika saker, så man ritar en <strong class='green'>näringsväv</strong> med många sammanflätade kedjor. Du får lära dig mer om detta i kapitel 4.</p>"
-        "<p>Ett ekosystem med många arter är oftast mer motståndskraftigt. Vissa år blir det ont om sork. Då kan räven äta mer hare eller fågelägg i stället. I ett artfattigt system finns det färre ”reservdelar”. Man kan jämföra med ett nät: du kan klippa av några trådar utan att det går sönder, men klipper du av för många rasar det.</p>",
+        "<p>Ett ekosystem med många arter är oftast mer motståndskraftigt. Vissa år blir det ont om sork. Då kan räven äta mer skogshare eller tjäder i stället. I ett artfattigt system finns det färre ”reservdelar”. Man kan jämföra med ett nät: du kan klippa av några trådar utan att det går sönder, men klipper du av för många rasar det.</p>",
         [box("visste", "Ett exempel från historien", "<p>På 1840-talet odlade man nästan bara en sorts potatis på Irland. Alla plantor var genetiskt mycket lika. När sjukdomen potatisbladmögel kom fanns inga plantor som tålde den. Skördarna slogs ut och omkring en miljon människor dog av svält.</p>")])
  + fig(FIG+"mangfald-naringsvav.png", "<b>Bild 3.2</b> En förenklad näringsväv i en norrländsk barrskog. Pilarna visar åt vilket håll energin går: från den som blir äten till den som äter.", "86%")
  + box("tank", "Tänk efter", "<p>Titta på bild 3.2. Vad händer med räven om skogssorkarna blir färre? Vilken annan föda kan räven välja?</p>")
@@ -125,24 +125,24 @@ add("3.1.3", "Hoten mot mångfalden", f"Kapitel {NR} · Delområde 3.1 {DELOMR['
    [begrepp([("Överuttag", "När människan tar mer ur naturen än vad som hinner växa till."), ("Invasiv art", "En art som människan fört in och som sprider sig och skadar inhemska arter."),
              ("Livsmiljö", "Den plats där en art kan leva och föröka sig.")])])
  + "<h3>Rödlistan: Sveriges hälsokontroll</h3>"
- + roww("<p>Ungefär vart femte år bedömer forskare vid SLU Artdatabanken hur stor risken är att olika arter försvinner från Sverige. Resultatet kallas <strong class='green'>rödlistan</strong>. I den senaste rödlistan, som kom 2025, bedömdes 23 103 arter. Av dem var 5 217 rödlistade, och 2 373 räknades som hotade. Arter i kategorierna VU (sårbar), EN (starkt hotad) och CR (akut hotad) räknas som hotade. DD betyder att forskarna vet för lite om arten för att kunna bedöma den.</p>"
-        "<p>Enligt Naturvårdsverket är igenväxning och avverkning de viktigaste negativa påverkansfaktorerna för rödlistade arter i Sverige, och jordbruks- och skogslandskapen hyser tillsammans över 75 procent av de rödlistade arterna. Bland de rödlistade finns också djur som många känner till, till exempel lax och sill. Men det finns goda nyheter: uttern och havsörnen har blivit så många igen att de inte längre är rödlistade.</p>",
+ + roww("<p>Ungefär vart femte år bedömer forskare vid SLU Artdatabanken hur stor risken är att olika arter försvinner från Sverige. Resultatet kallas <strong class='green'>rödlistan</strong>. I den senaste rödlistan, Rödlistan 2025, bedömdes 23 103 arter. Av dem var 5 217 rödlistade, och 2 373 räknades som hotade. Arter i kategorierna VU (sårbar), EN (starkt hotad) och CR (akut hotad) räknas som hotade. DD betyder att forskarna vet för lite om arten för att kunna bedöma den.</p>"
+        "<p>Enligt Naturvårdsverket är igenväxning och avverkning de viktigaste negativa påverkansfaktorerna för rödlistade arter i Sverige, och jordbruks- och skogslandskapen hyser tillsammans över 75 procent av de rödlistade arterna. Bland de rödlistade finns också djur som många känner till, till exempel ålen. Men det finns goda nyheter: uttern och havsörnen har blivit så många igen att de inte längre är rödlistade.</p>",
         [box("klimat", "Granska kritiskt", "<p>Mellan år 2000 och 2025 ökade också antalet arter som forskarna bedömde, från cirka 19 000 till drygt 23 000. Betyder det att alla nya rödlistade arter i diagrammet har fått det sämre? Vilken annan förklaring kan finnas?</p>")])
  + fig(FIG+"mangfald-rodlista-diagram.png", "<b>Bild 3.4</b> Antal rödlistade arter i Sverige. Källa: SLU Artdatabanken.", "70%")
  + "<h3>Mångfald i Norrbotten</h3>"
  + row("<p><strong class='green'>Fjällräven</strong> jagades hårt för sin vackra vinterpäls. Den blev fridlyst 1928, men stammen återhämtade sig inte. Runt år 2000 uppskattade forskare att det bara fanns cirka 35–50 vuxna fjällrävar i hela Skandinavien. Fjällräven lever mest av lämlar, och lämmelåren har blivit ovanligare. Dessutom tar sig rödräven allt högre upp på fjället. Den är större och konkurrerar om både mat och lyor. Med stödutfodring och jakt på rödräv har fjällräven ökat igen, men den är fortfarande hotad.</p>"
        "<p><strong class='green'>Gammal skog</strong> som aldrig har kalavverkats har gamla träd, död ved och hängande lavar. Många arter kan bara leva där. Ett exempel är <strong class='green'>garnlaven</strong>, som hänger i långa grågröna trådar från granar. Den kallas en <strong class='green'>signalart</strong>: hittar man den är skogen troligen gammal och artrik. Hänglavar är också viktig vinterföda för renarna.</p>"
-       "<p>Torne älv, Kalix älv, Pite älv och Vindelälven är Sveriges fyra nationalälvar. De skyddas av lag från nya vattenkraftverk, och där kan laxen fortfarande vandra upp för att leka.</p>",
+       "<p>Torne älv, Kalix älv, Pite älv och Vindelälven är Sveriges fyra nationalälvar. De skyddas av lag mot nya vattenkraftsutbyggnader.</p>",
        [fig(FIG+"mangfald-fjallrav-rodrav.png", "<b>Bild 3.5</b> Fjällräven (till vänster) är mindre och har kort nos och små öron. Rödräven har längre ben och stora öron.", "100%"),
         fig(FIG+"mangfald-garnlav.png", "<b>Bild 3.6</b> Garnlav, en signalart.", "70%"),
         begrepp([("Rödlista", "Förteckning över arter och deras risk att dö ut."), ("Signalart", "Art som visar att en miljö har höga naturvärden.")])])
- + "<h3>Samhällsfrågan: vad ska skogen användas till?</h3>"
+ + "<div style='break-inside:avoid'><h3>Samhällsfrågan: vad ska skogen användas till?</h3>"
  + "<p>Skogen i Norrbotten ger jobb, virke och biobränsle. Den är också hem för tusentals arter och betesmark för renar. Olika grupper ser olika saker i samma skog.</p>"
  + cards4([("Skogsbolaget", "”Skogsbruket ger jobb i hela länet och virke som kan ersätta plast och betong. Vi lämnar kvar gamla träd och skyddar värdefulla områden.”"),
            ("Naturskyddsförening", "”Det finns för lite gammal skog kvar. Kalhyggen förstör livsmiljöer som tar hundratals år att bygga upp igen.”"),
            ("Renskötaren", "”När gammal skog avverkas försvinner hänglaven. Då har renarna mindre att äta på vintern.”"),
            ("Kommunen", "”Vi behöver både arbetstillfällen och natur som lockar turister och gör det skönt att bo här.”")])
- + "<p class='note'>Citaten är konstruerade för att visa olika perspektiv och är inte ordagranna uttalanden.</p>"
+ + "<p class='note'>Citaten är konstruerade för att visa olika perspektiv och är inte ordagranna uttalanden.</p></div>"
  + "<h3>Vad kan vi göra?</h3>"
  + roww("<p>Det viktigaste för att skydda den biologiska mångfalden är att bevara och återskapa livsmiljöer. Det sker på flera nivåer samtidigt. År 2022 kom världens länder överens om att skydda och bevara minst 30 procent av jordens land, sötvatten och hav till år 2030. I Sverige skyddar nationalparker och naturreservat natur, och lagar styr skogsbruk, jakt och fiske. I Norrbotten finns världsarvet Laponia med bland annat Sarek och Padjelanta.</p>"
         "<p>Ibland behöver naturen hjälp att återhämta sig. Man kan till exempel dämma igen diken så att en myr blir blöt igen, låta kor beta igenvuxna ängar eller bränna skog under kontroll, eftersom många arter är anpassade till skogsbränder. Du själv kan låta en bit gräsmatta bli äng, välja hållbart fiskad mat, rapportera arter du ser i Artportalen och aldrig slänga trädgårdsväxter i naturen.</p>",
@@ -177,7 +177,7 @@ add("3.2.1", "Rikena", f"Kapitel {NR} · Delområde 3.2 {DELOMR['3.2']} · Riken
           ["<b>Svampar</b>", "med cellkärna och cellvägg, utan kloroplaster", "tar upp näring från död eller levande materia", "flugsvamp, mögel, jäst"],
           ["<b>Bakterier</b>", "utan cellkärna", "olika sätt: några bryter ner, några gör fotosyntes", "mjölksyrabakterier, tarmbakterier"],
           ["<b>Encelliga med kärna</b>", "en enda cell med cellkärna", "olika sätt", "amöba, encelliga alger"]])
- + roww("<h3 style='margin-top:0'>Svampar är varken djur eller växter</h3><p>Svampar ser ofta ut som växter, men de gör ingen fotosyntes. Det du plockar när du plockar kantareller är bara svampens frukt-kropp. Själva svampen är ett nät av tunna trådar, <strong class='green'>mycel</strong>, som växer i marken och bryter ner död materia. Många svampar lever också tillsammans med träd och hjälper trädens rötter att ta upp vatten och näring. Svampar och bakterier är viktiga <strong class='green'>nedbrytare</strong>.</p>"
+ + roww("<h3 style='margin-top:0'>Svampar är varken djur eller växter</h3><p>Svampar ser ofta ut som växter, men de gör ingen fotosyntes. Det du plockar när du plockar kantareller är bara svampens fruktkropp. Själva svampen är ett nät av tunna trådar, <strong class='green'>mycel</strong>, som växer i marken och bryter ner död materia. Många svampar lever också tillsammans med träd och hjälper trädens rötter att ta upp vatten och näring. Svampar och bakterier är viktiga <strong class='green'>nedbrytare</strong>.</p>"
         "<h3>Laven: en samlevnad</h3><p>En lav ser ut som en enda organism men är två: en svamp och en alg (eller bakterie) som gör fotosyntes. Svampen ger skydd och vatten, och algen ger socker. Båda har nytta av varandra, och det kallas <strong class='green'>symbios</strong>. Garnlaven i bild 3.6 är en lav.</p>",
         [box("visste", "Visste du?", "<p>Du är också en art: <i>Homo sapiens</i>. Det betyder ”den kloka människan”.</p>")])
  + "<h3>Namn på latin</h3>"
@@ -232,7 +232,7 @@ SAMMAN = ["<strong>Biologisk mångfald</strong> är variationen av liv på tre n
           "Ett ekosystem med många arter och stor genetisk variation är mer motståndskraftigt mot störningar.",
           "Människan är beroende av <strong>ekosystemtjänster</strong>: försörjande, reglerande, stödjande och kulturella.",
           "De största hoten är ändrad markanvändning, överuttag, klimatförändringar, föroreningar och invasiva arter.",
-          "I Sverige följs arternas läge i <strong>rödlistan</strong>. År 2025 var 5 217 arter rödlistade och 2 373 hotade.",
+          "I Sverige följs arternas läge i <strong>rödlistan</strong>. I Rödlistan 2025 var 5 217 arter rödlistade och 2 373 hotade.",
           "Mångfalden skyddas genom skyddade områden, lagar, internationella avtal och genom vad vi gör som individer.",
           "Organismer delas in i <strong>riken</strong>: djur, växter, svampar, bakterier och encelliga med cellkärna. Varje art har ett vetenskapligt namn med två ord.",
           "Med en <strong>bestämningsnyckel</strong> kommer man fram till en arts namn genom att välja mellan två alternativ i taget.",
@@ -264,7 +264,7 @@ TEST = [
 ]
 TEST_TABELL = (["Äng", "Ruta 1", "Ruta 2", "Ruta 3"], [["Betad äng", "21", "18", "24"], ["Igenvuxen äng", "9", "12", "6"]])
 TEST_D_TEXT = "En klass räknade växtarter i provrutor på 1 m² vid två ängar. Den ena betas av kor. Den andra har inte betats på tio år och har börjat växa igen. Resultaten är påhittade."
-TEST_D_SUB = ["a) Räkna ut medelvärdet av antalet arter för varje äng.", "b) Ge en möjlig förklaring till skillnaden. ●●●"]
+TEST_D_SUB = ["a) Räkna ut medelvärdet av antalet arter för varje äng.", "b) Ge en möjlig förklaring till skillnaden."]
 DEL_NAMN = {"A": "Välj ett alternativ", "B": "Svara kort", "C": "Tolka resultat och förklara", "D": "Resonera och ta ställning", "E": "Planera och resonera"}
 FACIT = [
  "B", "C", "B", "B",

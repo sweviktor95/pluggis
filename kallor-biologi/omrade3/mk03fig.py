@@ -111,7 +111,7 @@ for i,(n,d,bg,ic) in enumerate(rik):
 render('rikena', svg(W,H,b,"#fbf9f3"), W, H, 1)
 
 # ---------- nyckel (flödesschema) ---------------------------------------------
-W,H=1600,760
+W,H=1700,760
 b=''
 def nod(x,y,w,h,t1,t2=None,fill="#fff",stroke="#cfc6b2",bold=False,sz=26):
     o=f'<rect x="{x-w/2}" y="{y-h/2}" width="{w}" height="{h}" rx="16" fill="{fill}" stroke="{stroke}" stroke-width="3"/>'
@@ -119,7 +119,7 @@ def nod(x,y,w,h,t1,t2=None,fill="#fff",stroke="#cfc6b2",bold=False,sz=26):
     return o+T(x,y+9,t1,sz,INK,"700" if bold else "400")
 def lin(x1,y1,x2,y2,lab=None,lx=0,ly=0,a="middle"):
     o=f'<path d="M{x1},{y1} L{x2},{y2}" stroke="#5d6b75" stroke-width="3.5" marker-end="url(#ah)"/>'
-    if lab: o+=T((x1+x2)/2+lx,(y1+y2)/2+ly,lab,23,"#a84d22","700",a)
+    if lab: o+=T((x1+x2)/2+lx,(y1+y2)/2+ly,lab,26,"#a84d22","700",a)
     return o
 LEAF=dict(fill="#f9f2d6",stroke="#d5c47a",bold=True)
 b+=nod(750,70,460,84,"Har trädet barr eller blad?","",fill="#e7f3e1",bold=True)

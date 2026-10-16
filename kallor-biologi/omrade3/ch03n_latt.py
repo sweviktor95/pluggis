@@ -84,7 +84,7 @@ DELAR = [
  dict(titel="Hoten mot mångfalden", prog="Delområde 3.1 · Hoten mot mångfalden",
   fore=["Arter dör ut i dag mycket snabbare än förr. FN:s experter säger att cirka en miljon arter är hotade. Orsaken är oftast människan.", TB_HOT],
   fig=None,
-  efter=["Forskare gör en <strong>rödlista</strong>. Den visar vilka arter i Sverige som kan försvinna. År 2025 var 5 217 arter rödlistade.",
+  efter=["Forskare gör en <strong>rödlista</strong>. Den visar vilka arter i Sverige som kan försvinna. I Rödlistan 2025 var 5 217 arter rödlistade.",
          "<strong>Fjällräven</strong> är hotad. Den jagades förr. Nu har den svårt att få mat, och rödräven tränger undan den.",
          "<strong>Gammal skog</strong> är hem för många arter. Garnlav är en <strong>signalart</strong>. Den visar att skogen är gammal och värdefull."],
   fig2="mangfald-fjallrav-rodrav.png", fig2w="80%",

@@ -373,6 +373,10 @@ MAPS.update({('02n', 'vanlig'): M2_GRUND, ('02n', 'lattlast'): M2_LATT, ('02n', 
 
 # ======================= Kapitel 3 Biologisk mångfald (2026-10-15) =======================
 REFS.update({
+ 'slu_forandringar': dict(t='SLU Artdatabanken: Förändringar mellan olika rödlistor', u='https://www.slu.se/artdatabanken/rodlistade-arter/forandringar-mellan-olika-rodlistor/', s='K',
+    n='Bekräftar antal rödlistade arter: cirka 4 000 (2000), 3 653 (2005), 4 127 (2010), 4 273 (2015), 4 746 (2020) och 5 217 (2025), samt att antalet bedömda arter ökade från cirka 19 000 till drygt 23 000 mellan 2000 och 2025. Antal bedömda i enskilda mellanår anges inte.', m='Läs sidan om hur rödlistans kategorier har ändrats.'),
+ 'sn_rodlista': dict(t='Sveriges Natur: Fler arter på nya rödlistan', u='https://www.sverigesnatur.org/aktuellt/fler-arter-pa-nya-rodlistan/', s='K',
+    n='Bekräftar Rödlistan 2025 (publicerad 2026): 23 103 bedömda arter (exklusive 1 687 underarter), 5 217 rödlistade (cirka 10 procent fler än 2020, då 4 746) och att antalet hotade steg från 2 249 till 2 373.', m='Rödlistan finns även hos SLU Artdatabanken.'),
  'ipbes_sigma': dict(t='Sigma Xi: 10 key findings from the IPBES Global Assessment (2019)', u='https://sigmaxi.org/keyed-in/post/keyed-in/2019/05/15/10-key-findings-from-the-ipbes-global-assessment', s='K',
     n='Bekräftar ”approximately 1 million animal and plant species are threatened with extinction” och de fem direkta drivkrafterna i fallande ordning: förändrad land- och havsanvändning, direkt exploatering, klimatförändringar, föroreningar och invasiva främmande arter. Sekundärkälla; originalet är IPBES sammanfattning för beslutsfattare.',
     m='Läs IPBES Summary for Policymakers (ipbes.net).'),
@@ -399,7 +403,8 @@ M3_GRUND = [
  ("pollinera blommorna för hand", "Handpollinering i kinesiska fruktodlingar. Ofta citerat exempel, inte kontrollerat.", ['ingen']),
  ("omkring en miljon djur- och växtarter är hotade", "IPBES 2019: cirka en miljon arter hotade.", ['ipbes_sigma']),
  ("i den ordning IPBES rangordnar dem", "De fem drivkrafterna i fallande ordning.", ['ipbes_sigma']),
- ("23 103 arter", "Rödlistan 2025: 23 103 bedömda, 5 217 rödlistade, 2 373 hotade.", ['tv4_rodlista']),
+ ("23 103 arter", "Rödlistan 2025: 23 103 bedömda, 5 217 rödlistade, 2 373 hotade (2020: 4 746 rödlistade, 2 249 hotade).", ['sn_rodlista', 'tv4_rodlista']),
+ ("Antal rödlistade arter i Sverige", "Diagrammets värden: cirka 4 000 (2000), 3 653, 4 127, 4 273, 4 746 och 5 217 (2025). Antal bedömda arter: cirka 19 000 (2000) och drygt 23 000 (2025).", ['slu_forandringar']),
  ("de viktigaste negativa påverkansfaktorerna", "Igenväxning och avverkning, och över 75 procent av de rödlistade arterna i jordbruks- och skogslandskap.", ['nv_utvardering']),
  ("uttern och havsörnen har blivit så många igen", "Utter och havsörn inte längre rödlistade. Inte kontrollerat i detta arbete.", ['ingen']),
  ("Den blev fridlyst 1928", "Fridlysning 1928 efter hård jakt.", ['svt_fjallrav']),
@@ -418,7 +423,7 @@ M3_GRUND = [m for m in M3_GRUND if m[1]]
 M3_LATT = [
  ("drygt två miljoner arter", "Antalet beskrivna arter. Läroboksfaktum.", ['ingen']),
  ("cirka en miljon arter är hotade", "IPBES 2019.", ['ipbes_sigma']),
- ("År 2025 var 5 217 arter rödlistade", "Rödlistan 2025.", ['tv4_rodlista']),
+ ("I Rödlistan 2025 var 5 217 arter rödlistade", "Rödlistan 2025.", ['tv4_rodlista']),
  ("Pollinering behövs för många bär", "", ['ingen']),
 ]
 M3_LATT = [m for m in M3_LATT if m[1]]
