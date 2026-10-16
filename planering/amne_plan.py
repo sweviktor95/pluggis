@@ -147,9 +147,22 @@ tr.lab td{background:#f4f7f9}
         b = pw.chromium.launch(executable_path="/opt/pw-browsers/chromium"); pg = b.new_page()
         pg.goto("file://" + p); pg.pdf(path=f"planering/{C['id']}-planering.pdf", prefer_css_page_size=True, print_background=True); b.close()
 
+# ---- Kapitel som är byggda (häften, lärarmaterial, extra blad) ----------------
+# Nyckel: (ämnes-id, områdesnummer)
+HAFTE = {("kemi", 1): "kemi-omrade-1"}
+EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv"]}   # blir <id>-m-<nr>-s och -t
+TITEL_OVR = {"kemi-m-1-1-1": "Vad är kemi? Säkerhet och utrustning i kemilabbet"}   # sajtsidan innehåller även Start-avsnittet
+MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade1/kemi-1-prov-elev.pdf"],
+                                     ["Prov med facit (lärare)", "planering/kemi-omrade1/kemi-1-prov-larare.pdf"],
+                                     ["Blooket (CSV)", "planering/kemi-omrade1/kemi-1-blooket.csv"],
+                                     ["Jeopardy", "simuleringar/jeopardy-kemi-1.html"]],
+                           "ppt": [["📊 Introduktion till kemi", "planering/kemi-omrade1/kemi-1-0-introduktion-till-kemi.pptx"],
+                                   ["📊 1.1 Arbeta som kemist", "planering/kemi-omrade1/kemi-1-1-arbeta-som-kemist.pptx"],
+                                   ["📊 1.2 Modeller, källor och argument", "planering/kemi-omrade1/kemi-1-2-modeller-kallor-argument.pptx"]]}}
+
 def skriv_js():
     data = {"plan": {"pdf": f"planering/{C['id']}-planering.pdf", "xlsx": f"planering/{C['id']}-planering.xlsx"},
-            "omraden": [{"nr": a[0], "titel": a[1], "ide": a[2], "hafte": None, "lankar": [], "ppt": []} for a in A]}
+            "omraden": [{"nr": a[0], "titel": a[1], "ide": a[2], "hafte": HAFTE.get((C["id"], a[0])), "lankar": MATERIAL.get((C["id"], a[0]), {}).get("lankar", []), "ppt": MATERIAL.get((C["id"], a[0]), {}).get("ppt", [])} for a in A]}
     open(f"planering/lararvy-{C['id']}.js", "w", encoding="utf-8").write(
         f"// Genereras av planering/amne_plan.py – ändra inte för hand.\nwindow.{C['js']} = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
 
@@ -159,10 +172,11 @@ def skriv_struktur():
     for a in A:
         dl = []
         for d in a[3]:
-            mo = [f'              {{ id: "{I}-m-{dn(d)}-{n}", titel: {js(m[0])} }}' for n, m in enumerate(d[5], 1)]
+            mo = [f'              {{ id: "{I}-m-{dn(d)}-{n}", titel: {js(TITEL_OVR.get(f"{I}-m-{dn(d)}-{n}", m[0]))} }}' for n, m in enumerate(d[5], 1)]
             if d[6]: mo.append(f'              {{ id: "{I}-m-{dn(d)}-l", titel: {js(C["labb"] + ": " + d[6][0])} }}')
             dl.append(f'          {{\n            id: "{I}-d-{dn(d)}",\n            titel: {js(d[0] + " " + d[1])},\n            ramverk: true,\n            barn: [\n' + ",\n".join(mo) + "\n            ]\n          }")
-        ut.append(f'      {{\n        id: "{I}-omrade-{a[0]}",\n        titel: {js(f"{a[0]}. {a[1]}")},\n        ramverk: true,\n        barn: [\n' + ",\n".join(dl) + "\n        ]\n      }")
+        ex = [f'          {{ id: "{I}-m-{a[0]}-{k}", titel: {js(t)} }}' for k, t in zip("st", EXTRA_BLAD.get((I, a[0]), []))]
+        ut.append(f'      {{\n        id: "{HAFTE.get((I, a[0]), f"{I}-omrade-{a[0]}")}",\n        titel: {js(f"{a[0]}. {a[1]}")},\n        ramverk: true,\n        barn: [\n' + ",\n".join(dl + ex) + "\n        ]\n      }")
     U = C["id"].upper()
     block = f'  // {U} START (genereras av planering/amne_plan.py)\n  {{\n    id: "{C["id"]}",\n    titel: {js(C["titel"] + " (beta)")},\n    ikon: "{C["ikon"]}",\n    ramverk: true,\n    barn: [\n' + ",\n".join(ut) + f'\n    ]\n  }},\n  // {U} END\n'
     s = open("innehall/struktur.js", encoding="utf-8").read()

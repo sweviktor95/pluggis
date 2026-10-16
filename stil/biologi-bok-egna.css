@@ -63,3 +63,5 @@
 .kf-lista .kf-fraga{margin:8px 0}
 .ov-svar.forslag{white-space:pre-wrap}
 .nivaruta span:has(>.tabell-ram), .nivaruta span:has(>br+.tabell-ram){display:block;max-width:100%}
+.ov-fraga>*{min-width:0;max-width:100%}
+.ov-fraga .tabell th,.ov-fraga .tabell td{padding:6px 5px;font-size:.8em}

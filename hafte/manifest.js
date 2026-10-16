@@ -55,6 +55,21 @@ window.hafte["biologi-ekologi"] = {
   handledning: "hafte/biologi-4-ekologi-lararhandledning.pdf"
 };
 
+// ==== KEMI START ====
+window.hafte["kemi-omrade-1"] = {
+  titel: "Område 1 – Kemi som vetenskap (beta)",
+  vanlig: "hafte/kemi-1-kemi-vetenskap-vanlig.pdf",
+  lattlast: "hafte/kemi-1-kemi-vetenskap-lattlast.pdf",
+  fordjupning: "hafte/kemi-1-kemi-vetenskap-fordjupning.pdf",
+  larare: {
+    lattlast: "hafte/kemi-1-kemi-vetenskap-lattlast-lararversion.pdf",
+    vanlig: "hafte/kemi-1-kemi-vetenskap-vanlig-lararversion.pdf",
+    fordjupning: "hafte/kemi-1-kemi-vetenskap-fordjupning-lararversion.pdf"
+  },
+  handledning: "hafte/kemi-1-kemi-vetenskap-lararhandledning.pdf"
+};
+// ==== KEMI END ====
+
 // ==== HISTORIA START ====
 window.hafte["historia-hogkulturer"] = {
   titel: "Kapitel 2 – Högkulturer",

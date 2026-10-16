@@ -635,7 +635,7 @@ var struktur = [
             titel: "1.1 Arbeta som kemist",
             ramverk: true,
             barn: [
-              { id: "kemi-m-1-1-1", titel: "Säkerhet och utrustning i kemilabbet" },
+              { id: "kemi-m-1-1-1", titel: "Vad är kemi? Säkerhet och utrustning i kemilabbet" },
               { id: "kemi-m-1-1-2", titel: "Från fråga till plan" },
               { id: "kemi-m-1-1-3", titel: "Dokumentera och värdera" },
               { id: "kemi-m-1-1-l", titel: "Labb: Hur påverkar temperaturen hur fort en brustablett löser sig?" }
@@ -651,7 +651,9 @@ var struktur = [
               { id: "kemi-m-1-2-3", titel: "Granska kemipåståenden" },
               { id: "kemi-m-1-2-l", titel: "Labb: Granska ett påstående: fungerar fläckborttagaren bättre?" }
             ]
-          }
+          },
+          { id: "kemi-m-1-s", titel: "Sammanfattning och begrepp" },
+          { id: "kemi-m-1-t", titel: "Testa dig själv" }
         ]
       },
       {

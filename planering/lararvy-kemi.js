@@ -9,9 +9,39 @@ window.lararKemi = {
    "nr": 1,
    "titel": "Kemi som vetenskap",
    "ide": "Hur kemister arbetar: undersöka, mäta, granska och förändra sina modeller. Läggs först eftersom allt annat bygger på det.",
-   "hafte": null,
-   "lankar": [],
-   "ppt": []
+   "hafte": "kemi-omrade-1",
+   "lankar": [
+    [
+     "Prov (elevversion)",
+     "planering/kemi-omrade1/kemi-1-prov-elev.pdf"
+    ],
+    [
+     "Prov med facit (lärare)",
+     "planering/kemi-omrade1/kemi-1-prov-larare.pdf"
+    ],
+    [
+     "Blooket (CSV)",
+     "planering/kemi-omrade1/kemi-1-blooket.csv"
+    ],
+    [
+     "Jeopardy",
+     "simuleringar/jeopardy-kemi-1.html"
+    ]
+   ],
+   "ppt": [
+    [
+     "📊 Introduktion till kemi",
+     "planering/kemi-omrade1/kemi-1-0-introduktion-till-kemi.pptx"
+    ],
+    [
+     "📊 1.1 Arbeta som kemist",
+     "planering/kemi-omrade1/kemi-1-1-arbeta-som-kemist.pptx"
+    ],
+    [
+     "📊 1.2 Modeller, källor och argument",
+     "planering/kemi-omrade1/kemi-1-2-modeller-kallor-argument.pptx"
+    ]
+   ]
   },
   {
    "nr": 2,
