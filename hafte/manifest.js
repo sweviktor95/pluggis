@@ -68,6 +68,18 @@ window.hafte["kemi-omrade-1"] = {
   },
   handledning: "hafte/kemi-1-kemi-vetenskap-lararhandledning.pdf"
 };
+window.hafte["kemi-omrade-2"] = {
+  titel: "Område 2 – Materia och partiklar (beta)",
+  vanlig: "hafte/kemi-2-kemi-materia-vanlig.pdf",
+  lattlast: "hafte/kemi-2-kemi-materia-lattlast.pdf",
+  fordjupning: "hafte/kemi-2-kemi-materia-fordjupning.pdf",
+  larare: {
+    lattlast: "hafte/kemi-2-kemi-materia-lattlast-lararversion.pdf",
+    vanlig: "hafte/kemi-2-kemi-materia-vanlig-lararversion.pdf",
+    fordjupning: "hafte/kemi-2-kemi-materia-fordjupning-lararversion.pdf"
+  },
+  handledning: "hafte/kemi-2-kemi-materia-lararhandledning.pdf"
+};
 // ==== KEMI END ====
 
 // ==== HISTORIA START ====

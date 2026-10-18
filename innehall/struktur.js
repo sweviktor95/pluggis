@@ -666,7 +666,7 @@ var struktur = [
             titel: "2.1 Ämnen, blandningar och partikelmodellen",
             ramverk: true,
             barn: [
-              { id: "kemi-m-2-1-1", titel: "Ämnen och material" },
+              { id: "kemi-m-2-1-1", titel: "Vad är materia? Ämnen och material" },
               { id: "kemi-m-2-1-2", titel: "Partikelmodellen" },
               { id: "kemi-m-2-1-3", titel: "Rena ämnen och blandningar" },
               { id: "kemi-m-2-1-l", titel: "Labb: Densitet och flyta eller sjunka" }
@@ -682,7 +682,9 @@ var struktur = [
               { id: "kemi-m-2-2-3", titel: "Identifiera ämnen och fällning" },
               { id: "kemi-m-2-2-l", titel: "Labb: Separera en blandning av sand, salt och vatten" }
             ]
-          }
+          },
+          { id: "kemi-m-2-s", titel: "Sammanfattning och begrepp" },
+          { id: "kemi-m-2-t", titel: "Testa dig själv" }
         ]
       },
       {

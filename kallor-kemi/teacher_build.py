@@ -131,7 +131,7 @@ KKCSS = """
 .kk .pc{font-weight:700;margin-bottom:1mm}.kk .nr{color:#8a2a22}
 .kk .ref{margin:0 0 1.4mm 4mm}.kk .rt{font-weight:600}
 .kk .st{font-weight:600;font-size:7.4pt;padding:.3mm 1.6mm;border-radius:1mm;background:#f7e1de;color:#8a2a22;margin-left:1.5mm}
-.kk .sD .st{background:#fdf1d6;color:#7a5600}.kk .sE .st{background:#fbe3e0;color:#8b2a20}.kk .sR .st{background:#e5ecf7;color:#26457a}
+.kk .sK .st,.kk .sK1 .st{background:#e0f1e0;color:#1f5f26}.kk .sD .st{background:#fdf1d6;color:#7a5600}.kk .sE .st{background:#fbe3e0;color:#8b2a20}.kk .sR .st{background:#e5ecf7;color:#26457a}
 .kk .u{font-size:7.4pt;color:#555;word-break:break-all}.kk .u a{color:#555;text-decoration:none}
 .kk .n{color:#222}.kk .m{color:#333}
 """

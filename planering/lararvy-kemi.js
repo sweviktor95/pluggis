@@ -47,9 +47,39 @@ window.lararKemi = {
    "nr": 2,
    "titel": "Materia och partiklar",
    "ide": "Allt består av partiklar. Hur partikelmodellen förklarar ämnens egenskaper, blandningar och hur man separerar dem.",
-   "hafte": null,
-   "lankar": [],
-   "ppt": []
+   "hafte": "kemi-omrade-2",
+   "lankar": [
+    [
+     "Prov (elevversion)",
+     "planering/kemi-omrade2/kemi-2-prov-elev.pdf"
+    ],
+    [
+     "Prov med facit (lärare)",
+     "planering/kemi-omrade2/kemi-2-prov-larare.pdf"
+    ],
+    [
+     "Blooket (CSV)",
+     "planering/kemi-omrade2/kemi-2-blooket.csv"
+    ],
+    [
+     "Jeopardy",
+     "simuleringar/jeopardy-kemi-2.html"
+    ]
+   ],
+   "ppt": [
+    [
+     "📊 Introduktion till materia",
+     "planering/kemi-omrade2/kemi-2-0-introduktion-till-materia.pptx"
+    ],
+    [
+     "📊 2.1 Ämnen, blandningar och partikelmodellen",
+     "planering/kemi-omrade2/kemi-2-1-amnen-blandningar-partikelmodellen.pptx"
+    ],
+    [
+     "📊 2.2 Separations- och analysmetoder",
+     "planering/kemi-omrade2/kemi-2-2-separation-och-analys.pptx"
+    ]
+   ]
   },
   {
    "nr": 3,

@@ -149,16 +149,23 @@ tr.lab td{background:#f4f7f9}
 
 # ---- Kapitel som är byggda (häften, lärarmaterial, extra blad) ----------------
 # Nyckel: (ämnes-id, områdesnummer)
-HAFTE = {("kemi", 1): "kemi-omrade-1"}
-EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv"]}   # blir <id>-m-<nr>-s och -t
-TITEL_OVR = {"kemi-m-1-1-1": "Vad är kemi? Säkerhet och utrustning i kemilabbet"}   # sajtsidan innehåller även Start-avsnittet
+HAFTE = {("kemi", 1): "kemi-omrade-1", ("kemi", 2): "kemi-omrade-2"}
+EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 2): ["Sammanfattning och begrepp", "Testa dig själv"]}   # blir <id>-m-<nr>-s och -t
+TITEL_OVR = {"kemi-m-1-1-1": "Vad är kemi? Säkerhet och utrustning i kemilabbet", "kemi-m-2-1-1": "Vad är materia? Ämnen och material"}   # sajtsidan innehåller även Start-avsnittet
 MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade1/kemi-1-prov-elev.pdf"],
                                      ["Prov med facit (lärare)", "planering/kemi-omrade1/kemi-1-prov-larare.pdf"],
                                      ["Blooket (CSV)", "planering/kemi-omrade1/kemi-1-blooket.csv"],
                                      ["Jeopardy", "simuleringar/jeopardy-kemi-1.html"]],
                            "ppt": [["📊 Introduktion till kemi", "planering/kemi-omrade1/kemi-1-0-introduktion-till-kemi.pptx"],
                                    ["📊 1.1 Arbeta som kemist", "planering/kemi-omrade1/kemi-1-1-arbeta-som-kemist.pptx"],
-                                   ["📊 1.2 Modeller, källor och argument", "planering/kemi-omrade1/kemi-1-2-modeller-kallor-argument.pptx"]]}}
+                                   ["📊 1.2 Modeller, källor och argument", "planering/kemi-omrade1/kemi-1-2-modeller-kallor-argument.pptx"]]},
+            ("kemi", 2): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade2/kemi-2-prov-elev.pdf"],
+                                     ["Prov med facit (lärare)", "planering/kemi-omrade2/kemi-2-prov-larare.pdf"],
+                                     ["Blooket (CSV)", "planering/kemi-omrade2/kemi-2-blooket.csv"],
+                                     ["Jeopardy", "simuleringar/jeopardy-kemi-2.html"]],
+                           "ppt": [["📊 Introduktion till materia", "planering/kemi-omrade2/kemi-2-0-introduktion-till-materia.pptx"],
+                                   ["📊 2.1 Ämnen, blandningar och partikelmodellen", "planering/kemi-omrade2/kemi-2-1-amnen-blandningar-partikelmodellen.pptx"],
+                                   ["📊 2.2 Separations- och analysmetoder", "planering/kemi-omrade2/kemi-2-2-separation-och-analys.pptx"]]}}
 
 def skriv_js():
     data = {"plan": {"pdf": f"planering/{C['id']}-planering.pdf", "xlsx": f"planering/{C['id']}-planering.xlsx"},
