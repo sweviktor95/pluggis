@@ -14,6 +14,7 @@ MAPS: (kap, nivå) -> lista av (nål, påstående, [ref-id], ev. extra anmärkni
 STATUS = {
     'K': 'Öppnad och kontrollerad 2026-10-14',
     'K0': 'Öppnad och kontrollerad 2026-10-12',
+    'K1': 'Öppnad och kontrollerad 2026-10-18',
     'D': 'Delvis kontrollerad',
     'R': 'Uträknat',
     'E': 'Ingen källa öppnad',
@@ -300,7 +301,7 @@ M2_GRUND = [
  ("De måste ta sig in i en levande cell", "Virus behöver en värdcell och räknas oftast inte som levande.", ['mayo']),
  ("År 1665 tittade den engelske forskaren", "Hooke, kork och ordet cell, 1665.", ['lt_celltheory']),
  ("nya celler alltid bildas av redan levande celler", "Cellteorin (Schleiden 1838, Schwann 1839, Virchow 1855).", ['lt_celltheory']),
- _e("lika många bakterier som egna celler", "Antalet bakterier jämfört med kroppens egna celler. Allmänt påstående, bör kontrolleras."),
+ ("lika många bakterier som egna celler", "Antalet bakterier jämfört med kroppens egna celler (ca 1,3 bakterier per människocell).", ['sender']),
  _e("gulan i ett strutsägg är en enda cell", "Cellstorlekar: bakterie ca 2 µm, röd blodkropp ca 0,007 mm, ägg 0,1 mm, nervcell över 1 m, strutsägg."),
  ("ger 10 · 40 =", "Förstoring = okular × objektiv.", ['calc_cell']),
  _e("förstorar upp till ungefär tusen gånger", "Ljusmikroskopets största förstoring (ca 1 000 ×)."),
@@ -350,7 +351,7 @@ M2_FORDJ = [
  ("trycker cellens innehåll mot den stela cellväggen", "Turgor i växtceller.", ['tc_osmosis']),
  ("kan svälla så mycket att de spricker, eller krympa i saltlösning", "Djurceller kan spricka eller krympa.", ['tc_osmosis']),
  ("Rotens celler tar upp mineralämnen som nitrat med aktiv transport", "Rotens upptag av mineraler med aktiv transport.", ['tc_osmosis', 'ingen']),
- ("Lynn Margulis", "Margulis och tidsangivelsen över en miljard år.", ['ingen']),
+ ("Lynn Margulis", "Margulis och tidsangivelsen över en miljard år.", ['wiki_margulis']),
  ("Båda har egen DNA, och den är ringformad som hos bakterier", "Egen ringformad DNA och egna ribosomer.", ['bioninja_endo']),
  ("Båda delar sig själva inne i cellen", "Dubbla membran och delning som hos bakterier.", ['bioninja_endo']),
  ("Teorin är mycket väl understödd", "Att de flesta forskare anser teorin stämmer.", ['ingen']),
@@ -397,31 +398,31 @@ REFS.update({
     m='Läs avtalstexten (CBD, Kunming–Montreal).'),
 })
 M3_GRUND = [
- ("drygt två miljoner arter", "Antalet beskrivna arter är drygt två miljoner. Läroboksfaktum, inte kontrollerat; osäkerheten om totalen är poängen.", ['ingen']),
- ("odlade man nästan bara en sorts potatis", "Irländska potatisbladmögel 1840-talet, ca en miljon döda. Allmänt historiskt faktum, inte kontrollerat.", ['ingen']),
+ ("drygt två miljoner arter", "Antalet beskrivna arter är drygt två miljoner. Läroboksfaktum, inte kontrollerat; osäkerheten om totalen är poängen.", ['owid_species']),
+ ("odlade man nästan bara en sorts potatis", "Irländska potatisbladmögel 1840-talet, ca en miljon döda. Allmänt historiskt faktum, inte kontrollerat.", ['irish']),
  ("Ungefär tre av fyra av de grödor", "Cirka 75 procent av grödtyperna och cirka 35 procent av produktionen; förlust utan pollinatörer cirka 5–8 procent.", ['owid_poll']),
- ("pollinera blommorna för hand", "Handpollinering i kinesiska fruktodlingar. Ofta citerat exempel, inte kontrollerat.", ['ingen']),
+ ("pollinera blommorna för hand", "Handpollinering i kinesiska fruktodlingar. Ofta citerat exempel, inte kontrollerat.", ['sichuan']),
  ("omkring en miljon djur- och växtarter är hotade", "IPBES 2019: cirka en miljon arter hotade.", ['ipbes_sigma']),
  ("i den ordning IPBES rangordnar dem", "De fem drivkrafterna i fallande ordning.", ['ipbes_sigma']),
  ("23 103 arter", "Rödlistan 2025: 23 103 bedömda, 5 217 rödlistade, 2 373 hotade (2020: 4 746 rödlistade, 2 249 hotade).", ['sn_rodlista', 'tv4_rodlista']),
  ("Antal rödlistade arter i Sverige", "Diagrammets värden: cirka 4 000 (2000), 3 653, 4 127, 4 273, 4 746 och 5 217 (2025). Antal bedömda arter: cirka 19 000 (2000) och drygt 23 000 (2025).", ['slu_forandringar']),
  ("de viktigaste negativa påverkansfaktorerna", "Igenväxning och avverkning, och över 75 procent av de rödlistade arterna i jordbruks- och skogslandskap.", ['nv_utvardering']),
- ("uttern och havsörnen har blivit så många igen", "Utter och havsörn inte längre rödlistade. Inte kontrollerat i detta arbete.", ['ingen']),
+ ("uttern och havsörnen har blivit så många igen", "Utter och havsörn inte längre rödlistade. Inte kontrollerat i detta arbete.", ['slu_rl2025']),
  ("Den blev fridlyst 1928", "Fridlysning 1928 efter hård jakt.", ['svt_fjallrav']),
  ("cirka 35–50 vuxna fjällrävar", "Antal vuxna fjällrävar i Skandinavien runt år 2000.", ['svt_fjallrav']),
  ("Den är större och konkurrerar", "Rödräven är större och konkurrerar om mat och lyor.", ['svt_fjallrav']),
  ("Fjällräven lever mest av lämlar", "Lämlar är fjällrävens största födokälla.", ['svt_fjallrav']),
- ("kallas en signalart", "Garnlav som signalart och vinterföda för ren. Inte källkontrollerat.", ['ingen']),
- ("Torne älv, Kalix älv, Pite älv och Vindelälven", "Sveriges fyra nationalälvar. Inte kontrollerat i detta arbete.", ['ingen']),
+ ("kallas en signalart", "Garnlav som signalart och vinterföda för ren. Inte källkontrollerat.", ['garnlav']),
+ ("Torne älv, Kalix älv, Pite älv och Vindelälven", "Sveriges fyra nationalälvar. Inte kontrollerat i detta arbete.", ['natalv']),
  ("minst 30 procent av jordens land", "Kunming–Montreal-avtalet, december 2022.", ['pew_30']),
- ("världsarvet Laponia", "Laponia är världsarv, med bl.a. Sarek och Padjelanta. Inte kontrollerat.", ['ingen']),
- ("Systemet infördes av den svenske naturforskaren Carl von Linné", "Linné och det vetenskapliga namnsystemet (1700-talet). Läroboksfaktum.", ['ingen']),
- ("blev de mörka fjärilarna vanligare", "Pepparfjärilen: förenklad framställning; vissa detaljer är omdiskuterade. Inte källkontrollerat.", ['ingen']),
+ ("världsarvet Laponia", "Laponia är världsarv, med bl.a. Sarek och Padjelanta. Inte kontrollerat.", ['laponia']),
+ ("Systemet infördes av den svenske naturforskaren Carl von Linné", "Linné och det vetenskapliga namnsystemet (1700-talet). Läroboksfaktum.", ['linne']),
+ ("blev de mörka fjärilarna vanligare", "Pepparfjärilen: förenklad framställning; vissa detaljer är omdiskuterade. Inte källkontrollerat.", ['peppered']),
  ("Det kallas en genetisk", "", ['ingen']),
 ]
 M3_GRUND = [m for m in M3_GRUND if m[1]]
 M3_LATT = [
- ("drygt två miljoner arter", "Antalet beskrivna arter. Läroboksfaktum.", ['ingen']),
+ ("drygt två miljoner arter", "Antalet beskrivna arter. Läroboksfaktum.", ['owid_species']),
  ("cirka en miljon arter är hotade", "IPBES 2019.", ['ipbes_sigma']),
  ("I Rödlistan 2025 var 5 217 arter rödlistade", "Rödlistan 2025.", ['tv4_rodlista']),
  ("Pollinering behövs för många bär", "", ['ingen']),
@@ -429,12 +430,62 @@ M3_LATT = [
 M3_LATT = [m for m in M3_LATT if m[1]]
 M3_FORDJ = [
  ("Försäkringseffekten.", "Försäkringseffekten (insurance effect) och funktionell redundans. Etablerade ekologiska begrepp, inte källkontrollerade här.", ['ingen']),
- ("Exempel: havsuttern.", "Havsutter, sjöborre och tångskog som trofisk kaskad. Klassiskt exempel, inte källkontrollerat här.", ['ingen']),
+ ("Exempel: havsuttern.", "Havsutter, sjöborre och tångskog som trofisk kaskad. Klassiskt exempel, inte källkontrollerat här.", ['fws_otter']),
  ("Exempel: bävern.", "Bävern som ekosystemingenjör. Inte källkontrollerat här.", ['ingen']),
- ("fisket stoppades 1992", "Torskkollapsen vid Newfoundland. Inte källkontrollerat här.", ['ingen']),
+ ("fisket stoppades 1992", "Torskkollapsen vid Newfoundland. Inte källkontrollerat här.", ['cod']),
  ("Hybrider mellan brunbjörn och isbjörn", "Hybrider har hittats i naturen. Inte källkontrollerat här.", ['ingen']),
  ("konvergent evolution", "Delfin och haj som exempel på konvergent evolution. Läroboksfaktum.", ['ingen']),
  ("resistenta bakterier", "", ['ingen']),
 ]
 M3_FORDJ = [m for m in M3_FORDJ if m[1]]
 MAPS.update({('03n', 'vanlig'): M3_GRUND, ('03n', 'lattlast'): M3_LATT, ('03n', 'fordjupning'): M3_FORDJ})
+
+
+# ---------------------------------------------------------------- tillägg 2026-10-18 (kontrollerade i efterhand)
+REFS.update({
+ 'sender': dict(t='Scientific American: Scientists bust myth that our bodies have more bacteria than human cells', u='https://www.scientificamerican.com/article/scientists-bust-myth-that-our-bodies-have-more-bacteria-than-human-cells/', s='K1',
+    n='Bekräftar att kvoten är ungefär 1,3 bakterier per människocell (ca 39 biljoner bakterier och 30 biljoner egna celler för en 70 kg man). Osäkerheten är stor, upp till en faktor två. ”Ungefär lika många” är alltså en rimlig förenkling.',
+    m='Sender, Fuchs & Milo (2016), PLoS Biology: ”Revised estimates for the number of human and bacteria cells in the body”.'),
+ 'wiki_margulis': dict(t='Wikipedia: Lynn Margulis', u='https://en.wikipedia.org/wiki/Lynn_Margulis', s='D',
+    n='Bekräftar att Margulis föreslog att mitokondrier och kloroplaster en gång var fria bakterier, och att hennes artikel kom 1967 (efter att ha refuserats av ett femtontal tidskrifter). Tidsangivelsen ”över en miljard år sedan” står inte på sidan och är inte kontrollerad här.',
+    m='Läs om endosymbiosteorin i en lärobok i cellbiologi.'),
+ 'irish': dict(t='CRC Research: Biodiversity and the Irish famine', u='https://crcresearch.org/featured-project/biodiversity-and-irish-famine', s='K1',
+    n='Bekräftar att bönderna nästan uteslutande odlade sorten Irish Lumper, vilket gav liten genetisk variation, och att omkring en miljon människor dog i hungersnöden.',
+    m='Sökord: Irish Lumper, Phytophthora infestans.'),
+ 'sichuan': dict(t='Worldcrunch: When humans are forced to replace the bees they killed', u='https://www.worldcrunch.com/tech-science/when-humans-are-forced-to-replace-the-bees-they-killed', s='D',
+    n='Bekräftar att bönder i Sichuan handpollinerar äppelträd eftersom bin i stort sett försvunnit (bekämpningsmedel). Artikeln nämner äpple, inte päron. Den påpekar också att ingen vetenskaplig studie av binas nedgång i området ännu gjorts. Därför står det ”i vissa fruktodlingar”.',
+    m='Sökord: hand pollination Maoxian Sichuan.'),
+ 'slu_rl2025': dict(t='SLU Artdatabanken: Sammanfattning Rödlista 2025', u='https://www.slu.se/artdatabanken/rodlistade-arter/sammanfattning-rodlista-2025/', s='K1',
+    n='Bekräftar: ”Däremot lämnar t.ex. utter och havsörn nu rödlistan.” SVT (16 dec 2025) anger att uttern betecknas som livskraftig. Äldre källor (2020) har dem som nära hotade, så uppgiften gäller 2025 års lista.',
+    m='Hela listan: artdatabanken.se.'),
+ 'garnlav': dict(t='SLU (examensarbete): Forslund & Lindgren, hänglavar i skog', u='https://stud.epsilon.slu.se/1771/1/Forslund_I_Lindgren_N_100907.pdf', s='D',
+    n='Bekräftar att garnlav ses som indikator på kontinuitetsskog (signalart) och att hänglavar är ett viktigt inslag i renarnas vinterdiet. Färgen (grågrön) och att den hänger på granar är inte kontrollerad här.',
+    m='Skogsstyrelsens lista över signalarter.'),
+ 'natalv': dict(t='Prop. 1992/93:80 (lagen.nu): nationalälvarna', u='https://lagen.nu/prop/1992/93:80', s='K1',
+    n='Bekräftar att Torne älv, Kalix älv, Pite älv och Vindelälven pekas ut som nationalälvar och att vattenkraftverk, vattenreglering och överledning för kraftändamål inte får utföras där (med undantag för obetydlig miljöpåverkan).',
+    m='Miljöbalken 4 kap. 6 §.'),
+ 'laponia': dict(t='Wikipedia: Laponia', u='https://en.wikipedia.org/wiki/Laponia', s='K1',
+    n='Bekräftar att Laponia blev världsarv 1996 och omfattar Sarek, Padjelanta, Stora Sjöfallet och Muddus (samt två naturreservat).',
+    m='UNESCO World Heritage, område 774.'),
+ 'fws_otter': dict(t='US Fish & Wildlife Service: The keystone species role of the sea otter', u='https://legacy.fws.gov/sites/default/files/documents/The%20keystone%20species%20role%20of%20the%20sea%20otter%2007302021.pdf', s='K1',
+    n='Bekräftar att havsuttrar håller sjöborrebestånden nere så att tångskogen klarar sig, och att sjöborrar annars kan beta ut tången lokalt (”urchin barrens”).',
+    m='Estes & Palmisano (1974), Science.'),
+ 'cod': dict(t='The Canadian Encyclopedia: Cod moratorium of 1992', u='https://thecanadianencyclopedia.ca/en/article/cod-moratorium-of-1992', s='K1',
+    n='Bekräftar att moratoriet för torskfisket vid Newfoundland utlystes 2 juli 1992, då den lekmogna delen av beståndet fallit till ca 1 procent av toppen. Första märkbara ökningen kom först 2008.',
+    m='Sökord: northern cod collapse.'),
+})
+
+REFS.update({
+ 'owid_species': dict(t='Our World in Data: How many species are there?', u='https://ourworldindata.org/how-many-species-are-there', s='K1',
+    n='Bekräftar att IUCN 2025 räknade ca 2,17 miljoner beskrivna arter (en del är dubbletter/synonymer, så det riktiga antalet är troligen lägre), och att uppskattningarna av det verkliga totala antalet spänner från några miljoner till miljarder, mest p.g.a. bakterier och arkéer. Det stämmer med lärobokens poäng att vi inte vet hur många arter som finns.',
+    m='Sökord: Costello 2013, Mora 2011, Larsen 2017.'),
+ 'linne': dict(t='Today in Conservation: Linnaeus publishes Species Plantarum (1753)', u='https://todayinconservation.com/2018/04/may-1-linnaeus-publishes-species-plantarum-1753/', s='K1',
+    n='Bekräftar att Linnés Species Plantarum (1753) etablerade tvådelade vetenskapliga namn (släkte + art, på latin), t.ex. Rosa canina.',
+    m='Sökord: binomial nomenclature.'),
+})
+
+REFS.update({
+ 'peppered': dict(t='The Conversation: Natural selection in black and white – how industrial pollution changed moths', u='https://theconversation.com/natural-selection-in-black-and-white-how-industrial-pollution-changed-moths-43061/', s='D',
+    n='Bekräftar att mörka pepparfjärilar blev vanligare under industrialiseringen, att sot gjorde barken mörkare, och att fågelpredation styr (Kettlewells försök på 1950-talet, Majerus uppföljning, publicerad 2012). Kettlewells metoder fick berättigad kritik, vilket Majerus arbete svarade på. Att de mörka sedan minskade när luften blev renare tas inte upp på sidan.',
+    m='Sökord: Majerus, Cook et al. 2012, Biology Letters.'),
+})

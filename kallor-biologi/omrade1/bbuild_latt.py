@@ -131,7 +131,7 @@ def ova_page(i, d):
 
 def ord_page():
     h = ('<section class="sec"><div class="sh"><h2>Viktiga ord</h2></div><p>Läs orden och titta på bilderna. Du kan komma tillbaka hit när du läser.</p>'
-         + (fig(L.ORD_FIG) if L.ORD_FIG else '') + '<div class="ord2">' + "".join(f"<div><b>{a}</b>{b}</div>" for a, b in L.ORD_EXTRA) + '</div></section>')
+         + (fig(L.ORD_FIG, w=getattr(L, 'ORD_FIGW', None)) if L.ORD_FIG else '') + '<div class="ord2">' + "".join(f"<div><b>{a}</b>{b}</div>" for a, b in L.ORD_EXTRA) + '</div></section>')
     return h
 
 def viktigast_page():

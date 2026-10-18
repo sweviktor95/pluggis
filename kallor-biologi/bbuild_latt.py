@@ -2,7 +2,8 @@
 import sys, os, re
 sys.path.insert(0, '/tmp/bio')
 from bstyle import *
-from bbuild import html_to_pdf, page_texts, doc, OUT, TABCSS
+from bbuild import html_to_pdf, page_texts, doc, OUT
+from bbuild_n import TABCSS, tabrule
 from pypdf import PdfReader, PdfWriter
 import importlib, os
 CH = os.environ.get('CH', '04')
@@ -54,6 +55,16 @@ h2.lh{font:700 22pt Carlito;color:var(--g1);margin:0 0 8pt}
 .vik{display:grid;grid-template-columns:70pt 1fr;gap:10pt;align-items:center;margin:0 0 9pt;font:11.4pt/1.35 Carlito}
 .vik img{width:70pt;border-radius:5pt}
 .sub h3{margin-top:6pt}
+.sub{break-inside:avoid}
+table.tb{width:100%;border-collapse:collapse;margin:4pt 0 10pt;font:10.6pt Carlito;break-inside:avoid}
+table.tb th{background:#e3efe6;text-align:left;padding:4pt 7pt;font-weight:700;border:.8pt solid #c9d8cd}
+table.tb td{padding:4pt 7pt;border:.8pt solid #c9d8cd}
+table.tb td.n{text-align:center}
+.arg{background:#e7eef5;border-radius:10pt;padding:9pt 14pt;margin:6pt 0 10pt;font:11pt/1.5 Carlito;break-inside:avoid}
+.arg b.h{display:block;font:700 8pt Carlito;letter-spacing:1pt;color:#2b5d7a;margin-bottom:3pt}
+ol.st{margin:0 0 10pt;padding-left:17pt}ol.st li{margin:0 0 5pt}
+.teacher h3.mm{margin-top:10pt;border-bottom:.8pt solid #cfd6d0}
+.teacher .hl{font:10pt/1.4 Carlito}
 """
 
 def esc_ex(n, typ, label, inner):
@@ -86,34 +97,41 @@ def ex_html(n, e):
         return esc_ex(n, k, "SKRIV SIFFROR", f'<span class="q">{e[1]}</span><div class="nrbox">' + "".join(f"<div><i></i>{x}</div>" for x in e[2]) + '</div>')
     raise ValueError(k)
 
-def prog(i, typ):
-    return ('<div class="lp"><span class="p1' + (' ova' if typ == 'ÖVA' else '') + f'">{typ}</span><span class="t">Del {i} av {L.NDEL}</span><span class="dots">'
-            + "".join(f'<i class="{"on" if j < i else ""}"></i>' for j in range(L.NDEL)) + '</span></div>')
+def prog(i, typ, d=None):
+    lab = (d or {}).get('prog') or f'Del {i} av {L.NDEL}'
+    if (d or {}).get('lab') and typ == 'LÄS': typ = 'LABB'
+    return ('<div class="lp"><span class="p1' + (' ova' if typ == 'ÖVA' else '') + f'">{typ}</span><span class="t">{lab}</span></div>')
 
 def lasa_page(i, d):
-    h = '<section class="sec">' + prog(i, 'LÄS') + f'<h2 class="lh">{d["titel"]}</h2><div class="t">'
-    for p in d['fore']: h += (p if p.startswith('<h3') else f"<p>{p}</p>")
+    h = f'<section class="sec m{i}">' + prog(i, 'LÄS', d) + f'<h2 class="lh">{d["titel"]}</h2><div class="t">'
+    for p in d['fore']: h += (p if p.startswith(('<h3','<table','<div','<ol')) else f"<p>{p}</p>")
     if 'sub1' in d:
-        for key in ('sub1', 'sub2'):
+        for key in ('sub1', 'sub2', 'sub3'):
+            if key not in d: continue
             t, ps, f = d[key]
-            h += f'<div class="sub"><h3>{t}</h3>' + "".join(f"<p>{p}</p>" for p in ps) + fig(L.FIG + f, w="82%") + '</div>'
+            h += f'<div class="sub"><h3>{t}</h3>' + "".join(f"<p>{p}</p>" for p in ps) + fig(L.FIG + f, w=d.get('subw', "60%")) + '</div>'
     else:
+        raw = ('<h3','<table','<div','<ol')
         if d.get('fig'): h += fig(L.FIG + d['fig'], w=d.get('figw'))
-        for p in d['efter'][:2] if d.get('fig2') else d['efter']: h += (p if p.startswith('<h3') else f"<p>{p}</p>")
+        ef = d['efter']; k = d.get('n1', 2) if d.get('fig2') else len(ef)
+        for p in ef[:k]: h += (p if p.startswith(raw) else f"<p>{p}</p>")
         if d.get('fig2'):
-            h += fig(L.FIG + d['fig2'], w="88%")
+            h += fig(L.FIG + d['fig2'], w=d.get('fig2w', "70%"))
+            for p in ef[k:]: h += (p if p.startswith(raw) else f"<p>{p}</p>")
+            for p in d.get('efter2', []): h += (p if p.startswith(raw) else f"<p>{p}</p>")
+            if d.get('fig3'): h += fig(L.FIG + d['fig3'], w=d.get('fig3w', "70%"))
     h += '</div>'
     h += f'<div class="kom"><span class="ex">!</span><div><span class="lb">KOM IHÅG</span><span class="tx">{d["kom"]}</span></div></div></section>'
     return h
 
 def ova_page(i, d):
-    h = '<section class="sec">' + prog(i, 'ÖVA') + f'<h2 class="lh">Öva: Del {i}</h2>'
+    h = f'<section class="sec m{i}">' + prog(i, 'ÖVA', d) + f'<h2 class="lh">Öva: {d["titel"]}</h2>'
     for n, e in enumerate(d['ova'], 1): h += ex_html(n, e)
     return h + '</section>'
 
 def ord_page():
     h = ('<section class="sec"><div class="sh"><h2>Viktiga ord</h2></div><p>Läs orden och titta på bilderna. Du kan komma tillbaka hit när du läser.</p>'
-         + fig(L.ORD_FIG) + '<div class="ord2">' + "".join(f"<div><b>{a}</b>{b}</div>" for a, b in L.ORD_EXTRA) + '</div></section>')
+         + (fig(L.ORD_FIG, w=getattr(L, 'ORD_FIGW', None)) if L.ORD_FIG else '') + '<div class="ord2">' + "".join(f"<div><b>{a}</b>{b}</div>" for a, b in L.ORD_EXTRA) + '</div></section>')
     return h
 
 def viktigast_page():
@@ -136,7 +154,8 @@ def first_page():
 @page{{margin:0}}
 body{{margin:0}}
 .cv img{{width:210mm;height:87.6mm;display:block}}
-.band{{background:#2f6b4f;color:#fff;height:36mm;padding:7mm 18mm 0}}
+.band{{background:#2f6b4f;color:#fff;height:36mm;padding:4mm 18mm 0}}
+.band .kn{{font:700 11pt Carlito;letter-spacing:2.5pt;color:#cfe8d6}}
 .band h1{{font:700 34pt Carlito;margin:0}}.band p{{font:15pt Carlito;margin:3pt 0 0}}
 .in{{padding:8mm 18mm 0}}
 .in p{{font-size:12pt}}
@@ -147,8 +166,8 @@ h3.sg{{font:700 14pt Carlito;color:var(--g2);margin:12pt 0 4pt}}
 .ft{{position:absolute;left:18mm;right:14.8mm;bottom:11mm;display:flex;justify-content:space-between;font:8.4pt Carlito;color:#6b625b}}
 .ft b{{color:#2f6b4f;font-size:8.8pt}}
 </style></head><body><div class="cv"><img src="file://{L.FIG}cover_lattlast.png"></div>
-<div class="band"><h1>{L.NAMN}</h1><p>{L.UNDER}</p></div>
-<div class="in"><p>{L.INTRO_L[0]}</p><p>{L.INTRO_L[1]}</p>
+<div class="band"><div class="kn">KAPITEL {L.NR}</div><h1>{L.NAMN}</h1><p>{L.UNDER}</p></div>
+<div class="in"><p>{L.INTRO_L[0]}</p><p>{L.INTRO_L[1]}</p>{('<p>'+L.INTRO_L[2]+'</p>') if len(L.INTRO_L)>2 else ''}
 <h3 class="sg">Så här gör du</h3><div class="stp">{cards}</div>
 <div class="lar"><span class="rb">DET HÄR SKA DU LÄRA DIG</span><ul>{lara}</ul></div></div>
 <div class="ft"><span>Kapitel {L.NR} · {L.NAMN} · Lättläst</span><b>1</b></div></body></html>"""
@@ -157,7 +176,20 @@ def teacher_page(start):
     pk = "".join(f"<li>{x}</li>" for x in L.TILL_PUNKTER)
     f = "".join(f"<p>{x}</p>" for x in L.FACIT)
     return ('<section class="sec teacher"><h2>Till läraren</h2><h3>Om den lättlästa versionen</h3><p>' + L.TILL_LARAREN + '</p><ul class="pu">' + pk + '</ul><p>' + L.TILL_TIPS + '</p>'
-            '<h3>Facit – övningar</h3><div class="cols2">' + f + '</div></section>')
+            + (getattr(L,'HANDLEDNING_HTML','')) + '<h3>Facit – övningar</h3><div class="cols2">' + f + '</div></section>')
+
+def named_css():
+    out = ''
+    dn = getattr(L, 'DELOMR', {})
+    for i, d in enumerate(L.DELAR, 1):
+        m = re.search(r'Delområde (\d+\.\d+)', d.get('prog', ''))
+        if m:
+            foot = f'Kapitel {L.NR} · Delområde {m.group(1)} {dn.get(m.group(1), "")} · {d["titel"]}'
+        else:
+            foot = f'Kapitel {L.NR} · {L.NAMN} · {d["titel"]}'
+        out += '.m%d{page:m%d}@page m%d{@bottom-left{content:"%s";font:8.4pt Carlito;color:#6b625b;margin-top:6mm}}' % (i, i, i, foot)
+        out += '@page m%d%s' % (i, tabrule(m.group(1) if m else L.TAB))
+    return out
 
 def build(komplett=True):
     body = ord_page()
@@ -165,7 +197,7 @@ def build(komplett=True):
         body += lasa_page(i, d) + ova_page(i, d)
     body += viktigast_page() + test_pages()
     foot = f'Kapitel {L.NR} · {L.NAMN} · Lättläst'
-    def full(b, start): return (f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, start)}{LCSS}{TABCSS(L.TAB)}</style></head><body>{b}</body></html>')
+    def full(b, start): return (f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, start)}{LCSS}{TABCSS(L.TAB)}{named_css()}{DYS}</style></head><body>{b}</body></html>')
     tmp = f'{OUT}/_latt_body.pdf'
     html_to_pdf(full(body, 2), tmp)
     n = len(PdfReader(tmp).pages)

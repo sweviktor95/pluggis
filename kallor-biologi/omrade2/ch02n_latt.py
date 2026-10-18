@@ -15,7 +15,8 @@ LARA = ["Start: vad som kännetecknar liv, och vad en cell är",
         "Delområde 2.1 Cellen: cellteorin, mikroskopet, djurcell, växtcell och bakterier",
         "Delområde 2.2 Fotosyntes och cellandning: hur växter gör mat och hur alla celler får energi",
         "Delområde 2.3 Organ och organsystem: hur celler blir vävnader, organ och en hel kropp"]
-ORD_FIG = "l_ord.png"
+ORD_FIG = FIG + "l_ord.png"
+ORD_FIGW = "52%"
 ORD_EXTRA = [("organism", "en levande varelse, till exempel en växt eller ett djur"), ("encellig", "består av en enda cell, till exempel en bakterie"), ("flercellig", "består av många celler"),
              ("cellteorin", "alla levande varelser är byggda av celler, och nya celler kommer från andra celler"), ("mikroskop", "ett instrument som förstorar små saker"),
              ("cellmembran", "ett tunt skal runt cellen"), ("cytoplasma", "geléartad massa inuti cellen"), ("cellvägg", "en stadig vägg runt växtceller"),

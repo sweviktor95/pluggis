@@ -27,7 +27,7 @@ def add(nr, t, delomr, inner):
 
 add("F2.1.2", "Transport över cellmembranet", "2.1",
  "<p>Cellen måste hela tiden ta upp ämnen som den behöver och göra sig av med sådant den inte vill ha. Det sker genom cellmembranet, som släpper igenom vissa ämnen lättare än andra. Det finns tre huvudsakliga sätt för ämnen att ta sig över.</p>"
- + fig(FIG+"f_osmos.png", "<b>Bild F2.1</b> Tre sätt att ta sig över ett membran. Den streckade linjen är membranet.", "88%")
+ + fig(FIG+"f_osmos.png", "<b>Bild F2.1</b> Tre sätt att ta sig över ett membran. Den streckade linjen är membranet.", "76%")
  + row("<p><strong class='green'>Diffusion.</strong> Alla ämnen i vätska och gas rör sig på måfå. Därför sprids de så småningom ut jämnt: nettorörelsen går från ett ställe där det finns mycket till ett där det finns lite. Det kräver ingen energi. Så tar sig till exempel syre in i cellen och koldioxid ut ur den.</p>"
        "<p><strong class='green'>Osmos.</strong> Osmos är diffusion av vatten genom ett membran som släpper igenom vatten men inte de lösta ämnena. Vattnet rör sig mot sidan där det finns mest löst ämne. Det kräver ingen energi.</p>"
        "<p><strong class='green'>Aktiv transport.</strong> Ibland behöver cellen ta in ett ämne <em>fastän</em> det redan finns mer av det inne i cellen. Då måste cellen pumpa mot strömmen, med hjälp av särskilda proteiner i membranet. Det kostar energi från cellandningen.</p>",
