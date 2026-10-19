@@ -236,32 +236,6 @@
   .algebra-uppgift { font-size: 1.8em; margin: 10px 0; }
   .algebra-svar-rad { margin: 15px 0; font-size: 1.1em; }
 
-  .jeo-brak-svar-rad {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .jeo-brak-input {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-  .jeo-brak-ruta {
-    width: 60px;
-    font-size: 1.1em;
-    padding: 4px 6px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    text-align: center;
-  }
-  .jeo-brak-streck {
-    width: 44px;
-    height: 2px;
-    background: #38564A;
-  }
   .algebra-svar-rad input {
     font-size: 1.1em;
     width: 70px;
@@ -524,104 +498,28 @@
     color: #38564A;
   }
 
-  .jeopardy-tabell {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 0;
-    table-layout: fixed;
-  }
-  .jeopardy-tabell th {
-    background: #38564A;
-    color: white;
-    padding: 10px 6px;
-    font-size: 0.9em;
-    width: 25%;
-  }
-  .jeopardy-tabell td {
-    padding: 6px;
-    text-align: center;
-    width: 25%;
-  }
-  .jeopardy-ruta {
-    width: 100%;
-    padding: 14px 4px;
-    font-size: 1.2em;
-    font-weight: bold;
-    background: #5F8472;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  .jeopardy-ruta:hover { background: #4E6F5F; }
-  .jeopardy-klar {
-    background: #cfd6e0;
-    color: #8894a5;
-    cursor: default;
-  }
-  .jeopardy-fraga-box {
-    background: white;
-    border: 1px solid #DCE6DF;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-  }
-  .jeopardy-etikett {
-    font-weight: bold;
-    color: #38564A;
-    font-size: 1.1em;
-  }
-
-  .jeopardy-lagesval {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 20px 0;
-  }
-  .jeopardy-lage-knapp {
-    display: block;
-    width: 220px;
-    height: auto;
-    white-space: normal;
-    padding: 18px 16px;
-    text-align: center;
-    line-height: 1.4;
-  }
-  .jeopardy-lage-beskrivning {
-    display: block;
-    font-size: 0.75em;
-    font-weight: normal;
-    margin-top: 6px;
-    opacity: 0.9;
-  }
-  .jeopardy-lage-rad {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 8px;
-    font-size: 0.9em;
-  }
-  .jeopardy-lage-visning { color: #38564A; font-weight: bold; }
-  .jeopardy-byt-lage-knapp {
-    background: none;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 3px 12px;
-    font-size: 0.85em;
-    color: #68776E;
-    cursor: pointer;
-  }
-  .jeopardy-byt-lage-knapp:hover { border-color: #5F8472; color: #5F8472; }
-  .jeopardy-facit {
-    background: #eef7ee;
-    border: 2px solid #5aa66b;
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 1.2em;
-    text-align: center;
-  }
+  /* ===== Funktioner intro: maskinen ===== */
+  .fi-bana { position: relative; height: 120px; margin: 12px 0 6px; }
+  .fi-bana::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 4px; background: #DCE6DF; transform: translateY(-50%); border-radius: 2px; }
+  .fi-lada { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 112px; height: 100px; border: 3px solid #38564A; border-radius: 12px; background: #E7EFE9; color: #38564A; font-size: 2em; cursor: pointer; line-height: 1.1; padding: 4px; z-index: 2; }
+  .fi-lada small { display: block; font-size: 0.4em; font-weight: bold; }
+  .fi-lada:hover, .fi-lada:focus-visible { background: #d6e6db; outline: 3px solid #5aa66b; outline-offset: 2px; }
+  .fi-lada.fi-jobbar { animation: fiSkaka 0.45s linear; }
+  @keyframes fiSkaka { 0%,100% { transform: translate(-50%, -50%); } 20% { transform: translate(-53%, -50%) rotate(-2deg); } 40% { transform: translate(-47%, -50%) rotate(2deg); } 60% { transform: translate(-53%, -50%) rotate(-2deg); } 80% { transform: translate(-47%, -50%) rotate(2deg); } }
+  .fi-kula { position: absolute; top: 50%; width: 54px; height: 54px; margin-top: -27px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1em; color: white; z-index: 3; left: 0; opacity: 0; }
+  .fi-kula.fi-x { background: #3b78b4; }
+  .fi-kula.fi-y { background: #d98a2b; }
+  .fi-sido { position: absolute; top: 0; font-size: 0.85em; color: #5b6b62; font-weight: bold; }
+  .fi-formel { background: #eef7ee; border: 2px solid #5aa66b; border-radius: 8px; padding: 10px 14px; margin: 10px 0; font-size: 1.1em; text-align: center; }
+  .fi-reglage { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+  .fi-reglage input[type=range] { width: min(260px, 70vw); }
+  .fi-tabell { border-collapse: collapse; margin: 10px auto; }
+  .fi-tabell th, .fi-tabell td { border: 1px solid #DCE6DF; padding: 6px 12px; text-align: center; min-width: 54px; }
+  .fi-tabell th { background: #E7EFE9; color: #38564A; }
+  .fi-rad-in { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; font-size: 1.2em; margin: 12px 0; }
+  .fi-rad-in input { width: 70px; font-size: 1em; padding: 4px 8px; border-radius: 6px; border: 1px solid #ccc; text-align: center; }
+  .fi-hint { color: #5b6b62; font-size: 0.95em; }
+  @media (prefers-reduced-motion: reduce) { .fi-lada.fi-jobbar { animation: none; } }
 
   .ak9-brak-wrapper { text-align: center; }
   .ak9-tallinje-svg { width: 100%; max-width: 500px; }
@@ -1004,8 +902,8 @@
 <script src="innehall/matematik-intro-ekvationer.js"></script>
 <script src="innehall/matematik-ekvationer.js"></script>
 <script src="innehall/matematik-ak9-tallinjen.js"></script>
+<script src="innehall/matematik-ak9-samband-funktioner-intro.js"></script>
 <script src="innehall/matematik-ak7-brak-tallinjen.js"></script>
-<script src="innehall/matematik-ak9-brak-repetition.js"></script>
 <script src="innehall/historia-forsta-varldskriget.js"></script>
 <script src="innehall/historia-andra-varldskriget.js"></script>
 <script src="innehall/historia-dagen-d.js"></script>
@@ -1343,9 +1241,51 @@
             '<div id="klockaDigital" class="klocka-digital"></div></div>' +
             '</div>';
         }
-        if (data.simulering === "jeopardy-brak") {
-          html += '<div id="jeopardyContainer"><div id="jeopardyBrada"></div></div>' +
-            '<button class="algebra-ny-knapp" onclick="initJeopardy()">🔄 Nytt spel</button>';
+        if (data.simulering === "funktioner-intro") {
+          html += '<div class="uttryck-steg-box">' +
+            '<h3>Steg 1: Funktionsmaskinen</h3>' +
+            '<p>Välj ett x-värde och skicka in det i maskinen. Se vad som kommer ut. <strong>Klicka på lådan</strong> för att få veta vilken formel maskinen använder.</p>' +
+            '<div class="fi-bana" id="fiBana">' +
+              '<span class="fi-sido" style="left:0">x in</span><span class="fi-sido" style="right:0">y ut</span>' +
+              '<button type="button" class="fi-lada" id="fiLada" onclick="fiVisaFormel()" aria-label="Maskinen. Klicka för att se formeln">⚙️<small>klicka här</small></button>' +
+              '<div class="fi-kula" id="fiKula" aria-hidden="true"></div>' +
+            '</div>' +
+            '<div class="fi-reglage"><label for="fiX">x = <strong id="fiXVarde">3</strong></label>' +
+            '<input type="range" id="fiX" min="-10" max="10" value="3" oninput="document.getElementById(\'fiXVarde\').innerText=this.value">' +
+            '<button type="button" class="algebra-kolla-knapp" id="fiSkickaKnapp" onclick="fiSkicka()">Skicka in x</button></div>' +
+            '<div id="fiFormel" class="fi-formel" style="display:none"></div>' +
+            '<div id="fiLogg"></div>' +
+            '<p id="fiFeedback" aria-live="polite"></p>' +
+            '<button type="button" class="algebra-ny-knapp" onclick="fiNyMaskin()">🔄 Ny maskin</button>' +
+            '</div>' +
+            '<div class="uttryck-steg-box">' +
+            '<h3>Steg 2: Räkna ut y</h3>' +
+            '<p>Du får en formel och ett x-värde. Vad blir y?</p>' +
+            '<p class="algebra-uppgift" id="fiS2Formel"></p>' +
+            '<div class="fi-rad-in"><span id="fiS2Text"></span> <input type="number" id="fiS2Svar" onkeydown="if(event.key===\'Enter\'){fiKollaS2();}">' +
+            '<button type="button" class="algebra-kolla-knapp" onclick="fiKollaS2()">Kolla svar</button></div>' +
+            '<p id="fiS2Feedback" aria-live="polite"></p>' +
+            '<button type="button" class="algebra-ny-knapp" onclick="fiNyS2()">🔄 Ny uppgift</button>' +
+            '</div>' +
+            '<div class="uttryck-steg-box">' +
+            '<h3>Steg 3: Vilket x gav det y-värdet?</h3>' +
+            '<p>Du får formeln och y-värdet som kom ut. Vilket x skickades in?</p>' +
+            '<p class="algebra-uppgift" id="fiS3Formel"></p>' +
+            '<div class="fi-rad-in"><span id="fiS3Text"></span> <input type="number" id="fiS3Svar" onkeydown="if(event.key===\'Enter\'){fiKollaS3();}">' +
+            '<button type="button" class="algebra-kolla-knapp" onclick="fiKollaS3()">Kolla svar</button></div>' +
+            '<p id="fiS3Feedback" aria-live="polite"></p>' +
+            '<button type="button" class="algebra-ny-knapp" onclick="fiNyS3()">🔄 Ny uppgift</button>' +
+            '</div>' +
+            '<div class="uttryck-steg-box">' +
+            '<h3>Steg 4: Vilken formel är det?</h3>' +
+            '<p>Här är några x-värden och y-värdena som maskinen gjorde av dem. Lista ut formeln och fyll i den.</p>' +
+            '<div id="fiS4Tabell"></div>' +
+            '<div class="fi-rad-in">y = <input type="number" id="fiS4K" aria-label="Talet framför x"> · x + <input type="number" id="fiS4M" aria-label="Konstanten" onkeydown="if(event.key===\'Enter\'){fiKollaS4();}">' +
+            '<button type="button" class="algebra-kolla-knapp" onclick="fiKollaS4()">Kolla svar</button></div>' +
+            '<p class="fi-hint">Skriv ett negativt tal med minustecken, t.ex. −2. Skriv 0 om det inte finns något tal att lägga till.</p>' +
+            '<p id="fiS4Feedback" aria-live="polite"></p>' +
+            '<button type="button" class="algebra-ny-knapp" onclick="fiNyS4()">🔄 Ny uppgift</button>' +
+            '</div>';
         }
         if (data.simulering === "ekvationer-berattelse-abstrakt") {
           html += '<div class="algebra-box">' +
@@ -1567,8 +1507,8 @@
     if (!harBarn && innehall[id] && innehall[id].simulering === "klockan-gard") {
       ritaKlockan();
     }
-    if (!harBarn && innehall[id] && innehall[id].simulering === "jeopardy-brak") {
-      initJeopardy();
+    if (!harBarn && innehall[id] && innehall[id].simulering === "funktioner-intro") {
+      fiInit();
     }
     if (!harBarn && innehall[id] && innehall[id].simulering === "uttryck-dragspel") {
       initSteg1();
@@ -3400,8 +3340,7 @@
     ritaKlockan();
   });
 
-  // ===== Jeopardy: Repetition bråk =====
-  // Hjälpfunktioner för bråkräkning och lodrät bråkrendering.
+  // ===== Hjälpfunktioner för bråkräkning och lodrät bråkrendering =====
   function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
   function storstaGemensammaNamnare(a, b) {
     a = Math.abs(a); b = Math.abs(b);
@@ -3418,287 +3357,167 @@
            '</span><span class="brak-namnare">' + n + '</span></span>';
   }
 
-  var jeopardyKategorier = ["Förlänga och förkorta", "Addition och subtraktion", "Multiplikation", "Division"];
-  var jeopardyPoangLista = [100, 200, 300, 400, 500];
+  // ===== Funktioner intro =====
+  var fiFunk = null;       // { a, b } för maskinen i steg 1
+  var fiLoggRader = [];
+  var fiBusy = false;
+  var fiS2 = null, fiS3 = null, fiS4 = null;
 
-  // 4 kategorier x 5 svårighetsgrader (100-500p), ökande svårighet i varje rad.
-  var jeopardyGeneratorer = [
-    // Kategori 0: Förlänga och förkorta
-    [
-      function() {
-        var a = randInt(1, 4), b = randInt(a + 1, 6), k = randInt(2, 4);
-        var malNamnare = b * k, ratt = a * k;
-        return { fraga: "Förläng bråket " + brakHTML(a, b) + " så att nämnaren blir " + malNamnare +
-                 ". Vad blir täljaren?", svarTyp: "heltal", ratt: ratt };
-      },
-      function() {
-        var a0 = randInt(1, 4), b0 = randInt(a0 + 1, 6), k = randInt(2, 4);
-        var a = a0 * k, b = b0 * k;
-        return { fraga: "Förkorta bråket " + brakHTML(a, b) + " genom att dela täljare och nämnare med " +
-                 k + ". Vad blir täljaren?", svarTyp: "heltal", ratt: a0 };
-      },
-      function() {
-        var a0 = randInt(2, 6), b0 = randInt(a0 + 1, 9), k = randInt(2, 5);
-        var a = a0 * k, b = b0 * k;
-        return { fraga: "Förkorta bråket " + brakHTML(a, b) + " genom att dela med " + k +
-                 ". Skriv svaret som ett bråk.", svarTyp: "brak", ratt: { taljare: a0, namnare: b0 } };
-      },
-      function() {
-        var a0 = randInt(3, 9), b0 = randInt(a0 + 1, 12), k = randInt(3, 6);
-        var a = a0 * k, b = b0 * k;
-        return { fraga: "Förkorta bråket " + brakHTML(a, b) + " genom att dela med " + k +
-                 ". Skriv svaret som ett bråk.", svarTyp: "brak", ratt: { taljare: a0, namnare: b0 } };
-      },
-      function() {
-        var a0, b0, forsok = 0;
-        do { a0 = randInt(2, 9); b0 = randInt(a0 + 1, 12); forsok++; }
-        while (storstaGemensammaNamnare(a0, b0) !== 1 && forsok < 30);
-        var m = randInt(2, 6);
-        var a = a0 * m, b = b0 * m;
-        return { fraga: "Skriv bråket " + brakHTML(a, b) + " i enklaste form.",
-                 svarTyp: "brak", ratt: { taljare: a0, namnare: b0 } };
-      }
-    ],
-    // Kategori 1: Addition och subtraktion
-    [
-      function() {
-        var n = randInt(4, 8), a = randInt(1, n - 2), b = randInt(1, Math.max(1, n - 1 - a));
-        return { fraga: brakHTML(a, n) + " + " + brakHTML(b, n) + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(a + b, n) };
-      },
-      function() {
-        var n = randInt(4, 10), a = randInt(2, n - 1), b = randInt(1, a - 1);
-        return { fraga: brakHTML(a, n) + " - " + brakHTML(b, n) + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(a - b, n) };
-      },
-      function() {
-        var b1 = randInt(2, 5), k = randInt(2, 4), b2 = b1 * k;
-        var a1 = randInt(1, b1 - 1), a2 = randInt(1, b2 - 1);
-        var summa = a1 * k + a2;
-        return { fraga: brakHTML(a1, b1) + " + " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(summa, b2) };
-      },
-      function() {
-        var b1, b2, forsok = 0;
-        do { b1 = randInt(3, 8); b2 = randInt(3, 8); forsok++; }
-        while ((b1 === b2 || b1 % b2 === 0 || b2 % b1 === 0) && forsok < 30);
-        var g = storstaGemensammaNamnare(b1, b2), lcm = b1 * b2 / g;
-        var a1 = randInt(1, b1 - 1), a2 = randInt(1, b2 - 1);
-        var n1 = a1 * (lcm / b1), n2 = a2 * (lcm / b2);
-        return { fraga: brakHTML(a1, b1) + " + " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(n1 + n2, lcm) };
-      },
-      function() {
-        var b1, b2, forsok = 0;
-        do { b1 = randInt(3, 8); b2 = randInt(3, 8); forsok++; }
-        while ((b1 === b2 || b1 % b2 === 0 || b2 % b1 === 0) && forsok < 30);
-        var g = storstaGemensammaNamnare(b1, b2), lcm = b1 * b2 / g;
-        var a1, a2, n1, n2, forsok2 = 0;
-        do {
-          a1 = randInt(1, b1 - 1); a2 = randInt(1, b2 - 1);
-          n1 = a1 * (lcm / b1); n2 = a2 * (lcm / b2);
-          forsok2++;
-        } while (n1 === n2 && forsok2 < 30);
-        if (n1 < n2) {
-          var tA = a1, tB = b1, tN = n1;
-          a1 = a2; b1 = b2; n1 = n2;
-          a2 = tA; b2 = tB; n2 = tN;
-        }
-        return { fraga: brakHTML(a1, b1) + " - " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(n1 - n2, lcm) };
-      }
-    ],
-    // Kategori 2: Multiplikation
-    [
-      function() {
-        var a = randInt(1, 5), b = randInt(a + 1, 8), heltal = randInt(2, 5);
-        return { fraga: brakHTML(a, b) + " × " + heltal + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(a * heltal, b) };
-      },
-      function() {
-        var a = randInt(2, 7), b = randInt(a + 1, 10), heltal = randInt(3, 7);
-        return { fraga: brakHTML(a, b) + " × " + heltal + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(a * heltal, b) };
-      },
-      function() {
-        var a1 = randInt(1, 5), b1 = randInt(a1 + 1, 7), a2 = randInt(1, 5), b2 = randInt(a2 + 1, 7);
-        return { fraga: brakHTML(a1, b1) + " × " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(a1 * a2, b1 * b2) };
-      },
-      function() {
-        var a1 = randInt(2, 8), b1 = randInt(a1 + 1, 10), a2 = randInt(2, 8), b2 = randInt(a2 + 1, 10);
-        return { fraga: brakHTML(a1, b1) + " × " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(a1 * a2, b1 * b2) };
-      },
-      function() {
-        var a1 = randInt(3, 11), b1 = randInt(a1 + 1, 13), a2 = randInt(3, 11), b2 = randInt(a2 + 1, 13);
-        return { fraga: brakHTML(a1, b1) + " × " + brakHTML(a2, b2) + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(a1 * a2, b1 * b2) };
-      }
-    ],
-    // Kategori 3: Division
-    [
-      function() {
-        var a = randInt(1, 10), b = randInt(2, 10);
-        return { fraga: a + " ÷ " + b + " = ? Skriv svaret som ett bråk i enklaste form.",
-                 svarTyp: "brak", ratt: forenklaBrak(a, b) };
-      },
-      function() {
-        var heltal = randInt(2, 6), c = randInt(1, 5), d = randInt(c + 1, 7);
-        return { fraga: heltal + " ÷ " + brakHTML(c, d) + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(heltal * d, c) };
-      },
-      function() {
-        var a = randInt(1, 6), b = randInt(a + 1, 8), heltal = randInt(2, 5);
-        return { fraga: brakHTML(a, b) + " ÷ " + heltal + " = ? (svara i enklaste form)",
-                 svarTyp: "brak", ratt: forenklaBrak(a, b * heltal) };
-      },
-      function() {
-        var a1 = randInt(1, 5), b1 = randInt(a1 + 1, 7), a2 = randInt(1, 5), b2 = randInt(a2 + 1, 7);
-        return { fraga: brakHTML(a1, b1) + '<span class="stort-snedstreck">/</span>' + brakHTML(a2, b2) +
-                 " = ? (svara i enklaste form)", svarTyp: "brak", ratt: forenklaBrak(a1 * b2, b1 * a2) };
-      },
-      function() {
-        var a1 = randInt(2, 9), b1 = randInt(a1 + 1, 11), a2 = randInt(2, 9), b2 = randInt(a2 + 1, 11);
-        return { fraga: brakHTML(a1, b1) + '<span class="stort-snedstreck">/</span>' + brakHTML(a2, b2) +
-                 " = ? (svara i enklaste form)", svarTyp: "brak", ratt: forenklaBrak(a1 * b2, b1 * a2) };
-      }
-    ]
-  ];
-
-  var jeopardyData = {};
-  var jeopardyLage = null; // "klassrum" eller "ova"
-
-  function initJeopardy() {
-    jeopardyLage = null;
-    visaJeopardyLagesval();
+  function fiMinus(n) { return n < 0 ? "−" + Math.abs(n) : String(n); }
+  function fiFormelText(a, b) {
+    var ax = (a === 1) ? "x" : (a === -1 ? "−x" : fiMinus(a) + "x");
+    var bt = (b > 0) ? " + " + b : (b < 0 ? " − " + Math.abs(b) : "");
+    return "y = " + ax + bt;
+  }
+  // Uträkning med insatt x, t.ex. 3 · 4 + 2 = 14
+  function fiUtrakning(a, b, x) {
+    var xs = x < 0 ? "(" + fiMinus(x) + ")" : String(x);
+    var term = (a === 1) ? xs : (a === -1 ? "−" + xs : fiMinus(a) + " · " + xs);
+    var bt = (b > 0) ? " + " + b : (b < 0 ? " − " + Math.abs(b) : "");
+    return term + bt + " = " + fiMinus(a * x + b);
+  }
+  function fiSlumpFunk() {
+    var as = [1, 2, 3, 4, 5, -1, -2, -3, 10];
+    var a = as[randInt(0, as.length - 1)];
+    var b = randInt(-8, 9);
+    if (a === 1 && b === 0) { b = randInt(2, 6); }
+    return { a: a, b: b };
+  }
+  function fiInit() {
+    fiNyMaskin();
+    fiNyS2();
+    fiNyS3();
+    fiNyS4();
   }
 
-  function visaJeopardyLagesval() {
-    var html = '<div class="jeopardy-lagesval">' +
-      '<button class="algebra-ny-knapp jeopardy-lage-knapp" onclick="valjJeopardyLage(\'klassrum\')">' +
-      '🏫 Klassrumsversion<br><span class="jeopardy-lage-beskrivning">Läraren styr - bara frågan visas, gruppen diskuterar och ropar ut svaret</span>' +
-      '</button>' +
-      '<button class="algebra-ny-knapp jeopardy-lage-knapp" onclick="valjJeopardyLage(\'ova\')">' +
-      '✏️ Öva-version<br><span class="jeopardy-lage-beskrivning">Skriv in ditt svar och få det rättat direkt</span>' +
-      '</button>' +
-      '</div>';
-    document.getElementById("jeopardyBrada").innerHTML = html;
+  // ---- Steg 1 ----
+  function fiNyMaskin() {
+    fiFunk = fiSlumpFunk();
+    fiLoggRader = [];
+    fiBusy = false;
+    var f = document.getElementById("fiFormel"); f.style.display = "none"; f.innerHTML = "";
+    document.getElementById("fiLogg").innerHTML = "";
+    document.getElementById("fiFeedback").innerHTML = "";
+    var k = document.getElementById("fiKula"); k.style.opacity = 0;
+    document.getElementById("fiSkickaKnapp").disabled = false;
   }
-
-  function valjJeopardyLage(lage) {
-    jeopardyLage = lage;
-    jeopardyData = {};
-    jeopardyKategorier.forEach(function(kat, ki) {
-      jeopardyPoangLista.forEach(function(p, ni) {
-        var key = ki + "-" + p;
-        var fraga = jeopardyGeneratorer[ki][ni]();
-        fraga.avklarad = false;
-        jeopardyData[key] = fraga;
-      });
-    });
-    ritaJeopardyBrada();
-  }
-
-  function ritaJeopardyBrada() {
-    var html = '<div class="jeopardy-lage-rad">' +
-      '<span class="jeopardy-lage-visning">' +
-      (jeopardyLage === "klassrum" ? "🏫 Klassrumsversion" : "✏️ Öva-version") +
-      '</span> <button class="jeopardy-byt-lage-knapp" onclick="initJeopardy()">🔁 Byt läge</button></div>';
-    html += '<table class="jeopardy-tabell"><thead><tr>';
-    jeopardyKategorier.forEach(function(kat) {
-      html += "<th>" + kat + "</th>";
-    });
-    html += "</tr></thead><tbody>";
-    jeopardyPoangLista.forEach(function(p) {
-      html += "<tr>";
-      jeopardyKategorier.forEach(function(kat, ki) {
-        var key = ki + "-" + p;
-        var avklarad = jeopardyData[key].avklarad;
-        html += "<td>";
-        if (avklarad) {
-          html += '<button class="jeopardy-ruta jeopardy-klar" disabled>✔️</button>';
-        } else {
-          html += '<button class="jeopardy-ruta" onclick="visaJeopardyFraga(\'' + key + '\')">' + p + "</button>";
-        }
-        html += "</td>";
-      });
-      html += "</tr>";
-    });
-    html += "</tbody></table>";
-    document.getElementById("jeopardyBrada").innerHTML = html;
-  }
-
-  function visaJeopardyFraga(key) {
-    var data = jeopardyData[key];
-    data.avklarad = true;
-
-    var delar = key.split("-");
-    var katIndex = parseInt(delar[0], 10);
-    var poang = delar[1];
-
-    var html = '<div class="jeopardy-fraga-box">';
-    html += '<p class="jeopardy-etikett">' + poang + " poäng - " + jeopardyKategorier[katIndex] + "</p>";
-    html += '<div class="algebra-uppgift">' + data.fraga + "</div>";
-
-    if (jeopardyLage === "klassrum") {
-      // Klassrumsversion: bara frågan, sen en "Visa svar"-knapp läraren
-      // klickar när gruppen har diskuterat klart.
-      html += '<div id="jeoKlassrumSvar"></div>';
-      html += '<button class="algebra-ny-knapp" onclick="visaJeopardyFacit(\'' + key + '\')">👁️ Visa svar</button>';
+  function fiVisaFormel() {
+    var f = document.getElementById("fiFormel");
+    var html = '🔍 Maskinens formel: <strong>' + fiFormelText(fiFunk.a, fiFunk.b) + '</strong>';
+    if (fiLoggRader.length) {
+      var s = fiLoggRader[fiLoggRader.length - 1];
+      html += '<br><span class="fi-hint">Senast: x = ' + fiMinus(s) + ' → ' + fiUtrakning(fiFunk.a, fiFunk.b, s) + '</span>';
     } else {
-      // Öva-version: svarsruta med direkt rättning.
-      if (data.svarTyp === "heltal") {
-        html += '<div class="algebra-svar-rad">Svar: <input type="number" id="jeoSvarHel"> ' +
-                '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
-                '\')">Kolla svar</button></div>';
-      } else {
-        html += '<div class="algebra-svar-rad jeo-brak-svar-rad">' +
-                '<div class="jeo-brak-input">' +
-                '<input type="number" id="jeoSvarTaljare" class="jeo-brak-ruta">' +
-                '<div class="jeo-brak-streck"></div>' +
-                '<input type="number" id="jeoSvarNamnare" class="jeo-brak-ruta">' +
-                '</div>' +
-                '<button class="algebra-kolla-knapp" onclick="kontrolleraJeopardySvar(\'' + key +
-                '\')">Kolla svar</button></div>';
-      }
-      html += '<p id="jeoFeedback"></p>';
+      html += '<br><span class="fi-hint">Skicka in ett x och se hur formeln räknar.</span>';
     }
-
-    html += '<button class="algebra-ny-knapp" onclick="ritaJeopardyBrada()">⬅️ Tillbaka till spelplanen</button>';
-    html += "</div>";
-
-    document.getElementById("jeopardyBrada").innerHTML = html;
+    f.innerHTML = html; f.style.display = "block";
   }
-
-  function visaJeopardyFacit(key) {
-    var data = jeopardyData[key];
-    var facitText = (data.svarTyp === "heltal") ? data.ratt : (data.ratt.taljare + "/" + data.ratt.namnare);
-    document.getElementById("jeoKlassrumSvar").innerHTML =
-      '<p class="jeopardy-facit">✅ Rätt svar: <strong>' + facitText + "</strong></p>";
-  }
-
-  function kontrolleraJeopardySvar(key) {
-    var data = jeopardyData[key];
-    var feedback = document.getElementById("jeoFeedback");
-    var ratt = false;
-    var facitText;
-
-    if (data.svarTyp === "heltal") {
-      var v = parseInt(document.getElementById("jeoSvarHel").value, 10);
-      ratt = (v === data.ratt);
-      facitText = data.ratt;
-    } else {
-      var t = parseInt(document.getElementById("jeoSvarTaljare").value, 10);
-      var n = parseInt(document.getElementById("jeoSvarNamnare").value, 10);
-      ratt = (t === data.ratt.taljare && n === data.ratt.namnare);
-      facitText = data.ratt.taljare + "/" + data.ratt.namnare;
+  function fiSkicka() {
+    if (fiBusy) { return; }
+    fiBusy = true;
+    var x = parseInt(document.getElementById("fiX").value, 10);
+    var y = fiFunk.a * x + fiFunk.b;
+    var kula = document.getElementById("fiKula"), lada = document.getElementById("fiLada");
+    var bana = document.getElementById("fiBana"), knapp = document.getElementById("fiSkickaKnapp");
+    knapp.disabled = true;
+    var reducerad = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var tid = reducerad ? 0 : 600;
+    var w = bana.clientWidth, kb = 54;
+    var vanster = 0, mitt = (w - kb) / 2, hoger = w - kb;
+    function satt(klass, text, left, anim) {
+      kula.style.transition = "none"; kula.className = "fi-kula " + klass; kula.innerText = text;
+      kula.style.left = left + "px"; kula.style.opacity = 1;
+      void kula.offsetWidth;
+      kula.style.transition = anim ? "left " + tid + "ms ease-in-out, opacity 200ms" : "none";
     }
+    satt("fi-x", fiMinus(x), vanster, true);
+    kula.style.left = mitt + "px";
+    setTimeout(function() {
+      kula.style.opacity = 0;
+      if (!reducerad) { lada.classList.add("fi-jobbar"); }
+      setTimeout(function() {
+        lada.classList.remove("fi-jobbar");
+        satt("fi-y", fiMinus(y), mitt, true);
+        kula.style.left = hoger + "px";
+        setTimeout(function() {
+          fiLoggRader.push(x);
+          var rader = fiLoggRader.map(function(xx) { return xx; });
+          var tx = '<tr><th>x</th>' + rader.map(function(v) { return '<td>' + fiMinus(v) + '</td>'; }).join("") + '</tr>';
+          var ty = '<tr><th>y</th>' + rader.map(function(v) { return '<td>' + fiMinus(fiFunk.a * v + fiFunk.b) + '</td>'; }).join("") + '</tr>';
+          document.getElementById("fiLogg").innerHTML = '<div style="overflow-x:auto"><table class="fi-tabell">' + tx + ty + '</table></div>';
+          document.getElementById("fiFeedback").innerHTML = 'x = ' + fiMinus(x) + ' blev y = ' + fiMinus(y) + '. Vad gör maskinen? Klicka på lådan för att kolla.';
+          var f = document.getElementById("fiFormel"); if (f.style.display === "block") { fiVisaFormel(); }
+          fiBusy = false; knapp.disabled = false;
+        }, tid + 50);
+      }, reducerad ? 0 : 480);
+    }, tid + 50);
+  }
 
-    if (ratt) {
-      feedback.innerHTML = '<span class="algebra-ratt">✅ Rätt! Bra jobbat.</span>';
+  // ---- Steg 2 ----
+  function fiNyS2() {
+    var f = fiSlumpFunk(), x = randInt(-4, 9);
+    fiS2 = { a: f.a, b: f.b, x: x };
+    document.getElementById("fiS2Formel").innerText = fiFormelText(f.a, f.b);
+    document.getElementById("fiS2Text").innerHTML = 'Om x = <strong>' + fiMinus(x) + '</strong>, vad är y?';
+    document.getElementById("fiS2Svar").value = "";
+    document.getElementById("fiS2Feedback").innerHTML = "";
+  }
+  function fiKollaS2() {
+    var v = parseFloat(document.getElementById("fiS2Svar").value), fb = document.getElementById("fiS2Feedback");
+    if (isNaN(v)) { fb.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>'; return; }
+    var y = fiS2.a * fiS2.x + fiS2.b;
+    if (v === y) {
+      fb.innerHTML = '<span class="algebra-ratt">✅ Rätt! ' + fiUtrakning(fiS2.a, fiS2.b, fiS2.x) + '</span>';
     } else {
-      feedback.innerHTML = '<span class="algebra-fel">❌ Inte riktigt. Rätt svar var ' + facitText + ".</span>";
+      fb.innerHTML = '<span class="algebra-fel">❌ Inte riktigt.</span> Sätt in x = ' + fiMinus(fiS2.x) + ' i formeln och räkna steg för steg: multiplicera först, addera eller subtrahera sedan.';
+    }
+  }
+
+  // ---- Steg 3 ----
+  function fiNyS3() {
+    var f = fiSlumpFunk(), x = randInt(-5, 10);
+    fiS3 = { a: f.a, b: f.b, x: x, y: f.a * x + f.b };
+    document.getElementById("fiS3Formel").innerText = fiFormelText(f.a, f.b);
+    document.getElementById("fiS3Text").innerHTML = 'Det kom ut y = <strong>' + fiMinus(fiS3.y) + '</strong>. Vad var x?';
+    document.getElementById("fiS3Svar").value = "";
+    document.getElementById("fiS3Feedback").innerHTML = "";
+  }
+  function fiKollaS3() {
+    var v = parseFloat(document.getElementById("fiS3Svar").value), fb = document.getElementById("fiS3Feedback");
+    if (isNaN(v)) { fb.innerHTML = '<span class="algebra-fel">Skriv ett tal i rutan.</span>'; return; }
+    if (v === fiS3.x) {
+      fb.innerHTML = '<span class="algebra-ratt">✅ Rätt! Kontroll: ' + fiUtrakning(fiS3.a, fiS3.b, fiS3.x) + '</span>';
+    } else {
+      var kontroll = fiMinus(fiS3.a * v + fiS3.b);
+      fb.innerHTML = '<span class="algebra-fel">❌ Inte riktigt.</span> Testa ditt svar: x = ' + fiMinus(v) + ' ger y = ' + kontroll + ', men det ska bli ' + fiMinus(fiS3.y) + '. Tips: arbeta baklänges. Ta först bort det som adderades eller subtraherades, och dela sedan med talet framför x.';
+    }
+  }
+
+  // ---- Steg 4 ----
+  function fiNyS4() {
+    var as = [1, 2, 3, 4, 5, -1, -2, -3, 10];
+    var a = as[randInt(0, as.length - 1)], b = randInt(-7, 8);
+    var d = randInt(1, 2), x0 = randInt(-1, 2), xs = [], ys = [];
+    for (var i = 0; i < 4; i++) { xs.push(x0 + i * d); ys.push(a * (x0 + i * d) + b); }
+    fiS4 = { a: a, b: b, xs: xs, ys: ys, d: d };
+    document.getElementById("fiS4Tabell").innerHTML = '<div style="overflow-x:auto"><table class="fi-tabell">' +
+      '<tr><th>x</th>' + xs.map(function(v) { return '<td>' + fiMinus(v) + '</td>'; }).join("") + '</tr>' +
+      '<tr><th>y</th>' + ys.map(function(v) { return '<td>' + fiMinus(v) + '</td>'; }).join("") + '</tr></table></div>';
+    document.getElementById("fiS4K").value = ""; document.getElementById("fiS4M").value = "";
+    document.getElementById("fiS4Feedback").innerHTML = "";
+  }
+  function fiKollaS4() {
+    var k = parseFloat(document.getElementById("fiS4K").value), m = parseFloat(document.getElementById("fiS4M").value);
+    var fb = document.getElementById("fiS4Feedback");
+    if (isNaN(k) || isNaN(m)) { fb.innerHTML = '<span class="algebra-fel">Fyll i båda rutorna.</span>'; return; }
+    var s = fiS4;
+    if (k === s.a && m === s.b) {
+      fb.innerHTML = '<span class="algebra-ratt">✅ Rätt! Formeln är ' + fiFormelText(s.a, s.b) + '.</span> Kontroll med x = ' + fiMinus(s.xs[0]) + ': ' + fiUtrakning(s.a, s.b, s.xs[0]) + '.';
+    } else if (k === s.a) {
+      fb.innerHTML = '<span class="algebra-fel">❌ Talet framför x stämmer!</span> Men konstanten är fel. Sätt in ett x-värde från tabellen och se vad som saknas för att få rätt y.';
+    } else {
+      var dy = s.ys[1] - s.ys[0];
+      fb.innerHTML = '<span class="algebra-fel">❌ Inte riktigt.</span> Titta på hur mycket y ändras när x ökar. Här ökar x med ' + s.d + ' och y ändras med ' + fiMinus(dy) + '. Hur mycket ändras y när x ökar med 1? Det är talet framför x.';
     }
   }
 

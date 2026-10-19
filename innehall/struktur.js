@@ -125,7 +125,6 @@ var struktur = [
               { id: "matematik-ak9-brak-add-sub", titel: "Addition och subtraktion av bråk" },
               { id: "matematik-ak9-brak-mult", titel: "Multiplikation av bråk" },
               { id: "matematik-ak9-brak-div", titel: "Division av bråk" },
-              { id: "matematik-ak9-brak-repetition", titel: "Jeopardy bråk" },
               { id: "matematik-ak9-brak-repetition-knapp", titel: "Repetition" }
             ]
           },
