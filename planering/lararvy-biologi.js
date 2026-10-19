@@ -20,6 +20,14 @@ window.lararBiologi = {
      "planering/biologi-omrade1/biologi-1-prov-larare.pdf"
     ],
     [
+     "Blooket (xlsx)",
+     "planering/biologi-omrade1/biologi-1-blooket.xlsx"
+    ],
+    [
+     "Kahoot (xlsx)",
+     "planering/biologi-omrade1/biologi-1-kahoot.xlsx"
+    ],
+    [
      "Jeopardy",
      "simuleringar/jeopardy-bio-1.html"
     ]
@@ -52,6 +60,14 @@ window.lararBiologi = {
     [
      "Prov med facit (lärare)",
      "planering/biologi-omrade2/biologi-2-prov-larare.pdf"
+    ],
+    [
+     "Blooket (xlsx)",
+     "planering/biologi-omrade2/biologi-2-blooket.xlsx"
+    ],
+    [
+     "Kahoot (xlsx)",
+     "planering/biologi-omrade2/biologi-2-kahoot.xlsx"
     ],
     [
      "Jeopardy",
@@ -88,6 +104,14 @@ window.lararBiologi = {
      "planering/biologi-omrade3/biologi-3-prov-larare.pdf"
     ],
     [
+     "Blooket (xlsx)",
+     "planering/biologi-omrade3/biologi-3-blooket.xlsx"
+    ],
+    [
+     "Kahoot (xlsx)",
+     "planering/biologi-omrade3/biologi-3-kahoot.xlsx"
+    ],
+    [
      "Jeopardy",
      "simuleringar/jeopardy-bio-3.html"
     ]
@@ -120,6 +144,14 @@ window.lararBiologi = {
     [
      "Prov med facit (lärare)",
      "planering/biologi-omrade4/biologi-4-prov-larare.pdf"
+    ],
+    [
+     "Blooket (xlsx)",
+     "planering/biologi-omrade4/biologi-4-blooket.xlsx"
+    ],
+    [
+     "Kahoot (xlsx)",
+     "planering/biologi-omrade4/biologi-4-kahoot.xlsx"
     ],
     [
      "Jeopardy",

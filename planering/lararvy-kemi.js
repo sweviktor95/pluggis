@@ -20,8 +20,12 @@ window.lararKemi = {
      "planering/kemi-omrade1/kemi-1-prov-larare.pdf"
     ],
     [
-     "Blooket (CSV)",
-     "planering/kemi-omrade1/kemi-1-blooket.csv"
+     "Blooket (xlsx)",
+     "planering/kemi-omrade1/kemi-1-blooket.xlsx"
+    ],
+    [
+     "Kahoot (xlsx)",
+     "planering/kemi-omrade1/kemi-1-kahoot.xlsx"
     ],
     [
      "Jeopardy",
@@ -58,8 +62,12 @@ window.lararKemi = {
      "planering/kemi-omrade2/kemi-2-prov-larare.pdf"
     ],
     [
-     "Blooket (CSV)",
-     "planering/kemi-omrade2/kemi-2-blooket.csv"
+     "Blooket (xlsx)",
+     "planering/kemi-omrade2/kemi-2-blooket.xlsx"
+    ],
+    [
+     "Kahoot (xlsx)",
+     "planering/kemi-omrade2/kemi-2-kahoot.xlsx"
     ],
     [
      "Jeopardy",
