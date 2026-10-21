@@ -1,0 +1,28 @@
+﻿"Blooket
+Import Template",,,,,,,
+Question #,Question Text,Answer 1,Answer 2,"Answer 3 
+(Optional)","Answer 4 
+(Optional)","Time Limit (sec) 
+(Max: 300 Seconds)","Correct Answer(s) 
+(Only Include Answer #)"
+1,Läran om hur organismer påverkar varandra och sin miljö kallas …,ekologi,genetik,anatomi,biologi,20,1
+2,Är temperatur en biotisk eller abiotisk faktor?,Båda,Abiotisk,Biotisk,Ingen av dem,20,2
+3,"Vad kallas en typ av livsmiljö, till exempel barrskog eller myr?",Biosfär,Population,Biotop,Nisch,20,3
+4,Alla ekosystem på jorden tillsammans kallas …,populationen,näringsväven,biotopen,biosfären,20,4
+5,Vad kallas organismer som gör egen näring med fotosyntes?,Producenter,Nedbrytare,Konsumenter,Rovdjur,20,1
+6,Åt vilket håll pekar pilen i en näringskedja?,Uppåt,Mot den som äter,Mot den som blir äten,Mot solen,20,2
+7,Vilka organismer bryter ner döda växter och djur?,Toppkonsumenter,Växtätare,"Nedbrytare, till exempel svampar och bakterier",Producenter,20,3
+8,Vad kallas flera näringskedjor som hänger ihop?,Näringsnisch,Kretslopp,Biosfär,Näringsväv,20,4
+9,Ett rovdjur försvinner och det påverkar flera led nedåt. Vad kallas det?,Kaskadeffekt,Konkurrens,Bärkraft,Nisch,30,1
+10,Varifrån kommer nästan all energi i ett ekosystem?,Från nedbrytarna,Från solen,Från växternas rötter,Från jorden,20,2
+11,Ungefär hur stor del av energin förs vidare till nästa led?,Allt,Cirka 50 procent,Cirka 10 procent,Cirka 90 procent,20,3
+12,Vad blir det mesta av energin i varje led till?,Biomassa,Glukos,Fotosyntes,Värme,20,4
+13,Vad kallas vikten av levande organismer?,Biomassa,Förna,Bärkraft,Population,20,1
+14,Enligt tumregeln: ungefär hur mycket strömming krävs för att en säl ska växa 1 kg?,Ungefär 100 kg,Ungefär 10 kg,"Ungefär 0,1 kg",Ungefär 1 kg,30,2
+15,Går energi eller materia i kretslopp?,Energi,Ingen av dem,Materia,Båda,20,3
+16,Vilken process tar upp koldioxid från luften?,Cellandning,Nedbrytning,Förbränning,Fotosyntes,20,4
+17,Vilken är en process som släpper ut koldioxid?,Cellandning,Pollinering,Osmos,Fotosyntes,20,1
+18,Döda löv och barr på marken kallas …,biomassa,förna,bärkraft,nisch,20,2
+19,Det största antal individer miljön kan försörja kallas …,kaskadeffekt,biomassa,bärkraft,förna,20,3
+20,Vad kallas en arts roll i ekosystemet: vad den äter och var och när den söker mat?,Biotop,Population,Förna,Nisch,30,4
+21,Vad kallas det när två arter tävlar om samma resurs?,Konkurrens,Pollinering,Nedbrytning,Kretslopp,20,1

@@ -20,8 +20,8 @@ window.lararBiologi = {
      "planering/biologi-omrade1/biologi-1-prov-larare.pdf"
     ],
     [
-     "Blooket (xlsx)",
-     "planering/biologi-omrade1/biologi-1-blooket.xlsx"
+     "Blooket (CSV)",
+     "planering/biologi-omrade1/biologi-1-blooket.csv"
     ],
     [
      "Kahoot (xlsx)",
@@ -62,8 +62,8 @@ window.lararBiologi = {
      "planering/biologi-omrade2/biologi-2-prov-larare.pdf"
     ],
     [
-     "Blooket (xlsx)",
-     "planering/biologi-omrade2/biologi-2-blooket.xlsx"
+     "Blooket (CSV)",
+     "planering/biologi-omrade2/biologi-2-blooket.csv"
     ],
     [
      "Kahoot (xlsx)",
@@ -104,8 +104,8 @@ window.lararBiologi = {
      "planering/biologi-omrade3/biologi-3-prov-larare.pdf"
     ],
     [
-     "Blooket (xlsx)",
-     "planering/biologi-omrade3/biologi-3-blooket.xlsx"
+     "Blooket (CSV)",
+     "planering/biologi-omrade3/biologi-3-blooket.csv"
     ],
     [
      "Kahoot (xlsx)",
@@ -146,8 +146,8 @@ window.lararBiologi = {
      "planering/biologi-omrade4/biologi-4-prov-larare.pdf"
     ],
     [
-     "Blooket (xlsx)",
-     "planering/biologi-omrade4/biologi-4-blooket.xlsx"
+     "Blooket (CSV)",
+     "planering/biologi-omrade4/biologi-4-blooket.csv"
     ],
     [
      "Kahoot (xlsx)",

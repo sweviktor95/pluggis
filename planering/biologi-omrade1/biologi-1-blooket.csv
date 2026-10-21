@@ -1,0 +1,28 @@
+﻿"Blooket
+Import Template",,,,,,,
+Question #,Question Text,Answer 1,Answer 2,"Answer 3 
+(Optional)","Answer 4 
+(Optional)","Time Limit (sec) 
+(Max: 300 Seconds)","Correct Answer(s) 
+(Only Include Answer #)"
+1,Biologi är läran om …,allt som lever,bara människokroppen,bara djur,bara växter,20,1
+2,I ett rättvist test ändrar man bara …,ingenting,en sak åt gången,alla saker samtidigt,två saker åt gången,20,2
+3,Vad kallas variabeln som du mäter?,Kontrollgrupp,Störfaktor,Beroende variabel,Oberoende variabel,20,3
+4,Vad kallas variabeln som du ändrar i ett försök?,Medelvärde,Felkälla,Beroende variabel,Oberoende variabel,20,4
+5,Varför har man en kontrollgrupp?,För att ha något att jämföra med,För att det blir fler deltagare,För att få ett snabbare svar,För att slippa mäta,30,1
+6,Vad kallas det när slumpen bestämmer vem som hamnar i vilken grupp?,Kontroll,Randomisering,Tendens,Hypotes,20,2
+7,"Vad ska stå efter siffran i en tabell, till exempel 12 mm?",Medelvärdet,Datumet,Enheten,Namnet på forskaren,20,3
+8,Vilket diagram passar bäst för att jämföra två grupper?,Linjediagram,Kartdiagram,Cirkeldiagram,Stapeldiagram,20,4
+9,Vilket diagram passar när något förändras över tid?,Linjediagram,Stapeldiagram,Bilddiagram,Tabell utan siffror,20,1
+10,Ett mätvärde avviker mycket från de andra. Vad gör du först?,Ändrar det till medelvärdet,Undersöker om det finns en förklaring,Börjar om utan att säga något,Tar bort det direkt,30,2
+11,Vad kallas något som kan göra att resultatet blir fel?,Slutsats,Hypotes,Felkälla,Kontrollgrupp,20,3
+12,Varför gör man om ett försök flera gånger?,För att försöket blir billigare,För att få en annan hypotes,För att slippa en slutsats,Så att slumpen påverkar mindre,30,4
+13,Vad kallas det när man får samma resultat om man upprepar försöket?,Tillförlitlighet,Beroende,Tendens,Randomisering,20,1
+14,"Fiskätare lever längre, men de äter också mer grönsaker. Vad kallas grönsakerna i sambandet?",Hypotes,Störfaktor,Beroende variabel,Kontrollgrupp,30,2
+15,Vilka visade att magsår orsakas av en bakterie?,Hooke och Darwin,Mendel och Linné,Marshall och Warren,Semmelweis och Pasteur,20,3
+16,Vad kräver Semmelweis av läkarna 1847?,Att de skriver ut mer antibiotika,Att de bär hatt,Att de slutar operera,Att de tvättar händerna,30,4
+17,Vad visade Pasteurs svanhalskolv?,Att mikroorganismer kommer utifrån,Att liv uppstår av sig självt,Att bakterier är ofarliga,Att luft är farlig,30,1
+18,Vad heter bakterien som orsakar magsår?,Salmonella enterica,Helicobacter pylori,Pinus sylvestris,Escherichia coli,30,2
+19,Mätningar och observationer som visar något kallas …,tyckande,tendens,belägg,pseudovetenskap,20,3
+20,Något som låter som vetenskap men saknar belägg kallas …,kontrollgrupp,slutsats,hypotes,pseudovetenskap,20,4
+21,En studie är betald av företaget som säljer produkten. Vilket källkritiskt kriterium handlar det om?,Beroende eller tendens,Äkthet,Relevans för din fråga,Tid,30,1

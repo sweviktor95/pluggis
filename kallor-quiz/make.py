@@ -7,7 +7,7 @@ TB=U+'04a76440-Blooket_Spreadsheet_Import_Template.xlsx'; TK=U+'5a8a1dc0-KahootQ
 R='/home/claude/pluggis/'
 # kemi 1: första svaret är rätt i gamla CSV:n
 K={}
-rows=list(csv.reader(open(R+'planering/kemi-omrade1/kemi-1-blooket.csv',encoding='utf-8')))[1:]
+rows=list(csv.reader(open('/home/claude/pluggis/kallor-quiz/kemi1_fragor.csv',encoding='utf-8')))[1:]
 K[1]=[(r[1],r[2],[x for x in r[3:6] if x],int(r[6])) for r in rows]
 src=open('/home/claude/pluggis/kallor-quiz/kemi2_fragor.py',encoding='utf-8').read()
 ns={}; exec(src[src.index('Q = ['):src.index('rows=[[')],ns)
@@ -30,14 +30,13 @@ for (amne,n),qs in SETS.items():
     for q,ans,t,c in sh:
         assert len(q)<=120,(q,len(q)); assert all(len(a)<=75 for a in ans),ans; assert len(set(ans))==len(ans)
     d=R+f'planering/{amne}-omrade{n}/'
-    wb=openpyxl.load_workbook(TB); ws=wb.worksheets[0]
-    for r in range(3,5):
-        for c in range(2,9): ws.cell(r,c).value=None
-    for i,(q,ans,t,c) in enumerate(sh):
-        r=3+i; ws.cell(r,2).value=q
-        for j in range(4): ws.cell(r,3+j).value=ans[j] if j<len(ans) else None
-        ws.cell(r,7).value=t; ws.cell(r,8).value=c
-    wb.save(d+f'{amne}-{n}-blooket.xlsx')
+    # Blooket kräver CSV: rad 1 rubrik, rad 2 kolumnrubriker (som mallen), frågor från rad 3
+    with open(d+f'{amne}-{n}-blooket.csv','w',encoding='utf-8-sig',newline='') as fh:
+        w=csv.writer(fh)
+        w.writerow(["Blooket\nImport Template"]+[""]*7)
+        w.writerow(["Question #","Question Text","Answer 1","Answer 2","Answer 3 \n(Optional)","Answer 4 \n(Optional)","Time Limit (sec) \n(Max: 300 Seconds)","Correct Answer(s) \n(Only Include Answer #)"])
+        for i,(q,ans,t,c) in enumerate(sh,1):
+            w.writerow([i,q]+[ans[j] if j<len(ans) else "" for j in range(4)]+[t,c])
     wb=openpyxl.load_workbook(TK); ws=wb.worksheets[0]
     for c in range(2,9): ws.cell(9,c).value=None
     for i,(q,ans,t,c) in enumerate(sh):

@@ -1,0 +1,23 @@
+Question #,Question Text,Answer 1,Answer 2,Answer 3 (Optional),Answer 4 (Optional),Time Limit (sec) (Max: 300 seconds),Correct Answer(s) (Only include Answer #)
+1,Vad ska du alltid ha på dig när du arbetar med kemikalier?,Skyddsglasögon,Solglasögon,Hörlurar,Vantar av ull,20,1
+2,Vilket nummer ringer du vid en akut olycka eller förgiftning?,112,90 000,020 20 20,1177,20,1
+3,Vad visar ett faropiktogram?,Vilken fara ett ämne har,Vad ämnet kostar,Vem som har tillverkat ämnet,Hur gammalt ämnet är,20,1
+4,Vilken utrustning använder du för att mäta massa?,Våg,Mätcylinder,Termometer,Klocka,20,1
+5,Vad är en hypotes?,En gissning som går att pröva,Ett säkert svar,En tabell med mätvärden,En slutsats,20,1
+6,Vad kallas det du ändrar i ett försök?,Oberoende variabel,Beroende variabel,Felkälla,Medelvärde,30,1
+7,Vad kallas det du mäter för att se vad ändringen gav?,Beroende variabel,Oberoende variabel,Hypotes,Modell,30,1
+8,Varför ska du bara ändra en sak i taget i ett försök?,Annars vet man inte vad som gav skillnaden,Det går snabbare,Det blir roligare,Då behöver man inte mäta,30,1
+9,"Vad är medelvärdet av 29 s, 33 s och 31 s?",31 s,29 s,93 s,33 s,40,1
+10,"Vad är medelvärdet av 148 s, 160 s och 148 s? Avrunda till hela sekunder.",152 s,148 s,160 s,456 s,40,1
+11,Vad är en felkälla?,Något som gör en mätning mindre säker,Ett försök som lyckats,En sorts diagram,En kemikalie,30,1
+12,Varför upprepar man ofta mätningar?,För att slumpens fel ska jämnas ut,För att få fler siffror att skriva ner,För att kunna byta hypotes,För att slippa en slutsats,30,1
+13,Vad är en modell i kemi?,En förenkling som hjälper oss att förklara något,En exakt kopia av verkligheten,En sorts kemikalie,En mätning,30,1
+14,Vem krävde att kemiska idéer ska prövas med försök?,Boyle,Dalton,Empedokles,Thomson,30,1
+15,Vad visade Lavoisier med sina noggranna vägningar?,Att massan är lika stor före och efter en reaktion,Att allt består av fyra element,Att atomer är odelbara,Att guld kan tillverkas,40,1
+16,Vem lade fram en atomteori i början av 1800-talet?,Dalton,Lavoisier,Boyle,Aristoteles,30,1
+17,Vad trodde man länge om vad allt var gjort av?,"Fyra element: jord, vatten, luft och eld",Bara vatten,Atomer och molekyler,Hundra grundämnen,30,1
+18,Brustabletten löste sig på 152 s i 5 °C vatten och på 31 s i 40 °C vatten. Vad visar det?,Den löser sig fortare i varmare vatten,Den löser sig fortare i kallare vatten,Temperaturen spelar ingen roll,Tabletten blev tyngre,40,1
+19,Vad innebär källkritik?,Att granska vem som säger något och vilka belägg som finns,Att tro på allt man läser,Att bara läsa reklam,Att aldrig använda internet,30,1
+20,Vilken fråga är bra att ställa när du granskar en reklam?,Vill de sälja något?,Vilken färg har förpackningen?,Hur stor är bilden?,Vem är längst?,30,1
+21,Vad är vatten?,En kemikalie,Inget ämne,Bara en vätska utan kemi,Något som är kemikaliefritt,30,1
+22,Är allt som är naturligt ofarligt?,"Nej, vissa naturliga ämnen är giftiga","Ja, naturligt är alltid ofarligt","Ja, men bara i skogen",Bara om det är gratis,30,1

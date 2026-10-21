@@ -1,0 +1,27 @@
+﻿"Blooket
+Import Template",,,,,,,
+Question #,Question Text,Answer 1,Answer 2,"Answer 3 
+(Optional)","Answer 4 
+(Optional)","Time Limit (sec) 
+(Max: 300 Seconds)","Correct Answer(s) 
+(Only Include Answer #)"
+1,Vilka tre nivåer har biologisk mångfald?,"Gener, arter och ekosystem","Land, hav och luft","Celler, vävnader och organ","Riken, släkten och arter",30,1
+2,Vad kallas alla individer av en art i ett område?,Ekosystem,Population,Släkte,Biotop,20,2
+3,Vad menas med artrikedom?,Hur gamla arterna är,Hur stora arterna är,Antalet olika arter i ett område,Antalet individer av en art,20,3
+4,Varför klarar ett artrikt ekosystem störningar bättre?,Arterna är större,Det finns färre rovdjur,Arterna är alla likadana,Fler arter kan ta över en uppgift,30,4
+5,Varför slog potatisbladmögel så hårt mot potatisen på Irland på 1840-talet?,Nästan alla plantor var genetiskt mycket lika,Potatisen var för varm,Det fanns för många olika sorter,Mögel är alltid dödligt,40,1
+6,Vilka är de fyra typerna av ekosystemtjänster?,"Biotiska, abiotiska, ekologiska och sociala","Försörjande, reglerande, stödjande och kulturella","Gröna, blå, vita och svarta","Producerande, nedbrytande, konsumerande och skyddande",30,2
+7,Vad kallas det när pollen flyttas mellan blommor?,Fotosyntes,Jäsning,Pollinering,Nedbrytning,20,3
+8,Vilket är ett exempel på en reglerande ekosystemtjänst?,Att äta bär,Att fotografera natur,Att sälja timmer,Vattenrening i en våtmark,30,4
+9,Hur kan en myr minska risken för översvämning?,Den suger upp vatten som en svamp och släpper ut det långsamt,Den frysar vattnet,Den gör vattnet saltare,Den leder bort allt vatten direkt,30,1
+10,Varför är många pollinerande arter säkrare än en enda?,Pollen räcker ändå aldrig,Om en art får ett dåligt år kan de andra pollinera,Det blir färre blommor,Bin är farliga,30,2
+11,Vilket är ett av de fem största hoten mot mångfalden?,För många pollinerare,För mycket nederbörd,Ändrad markanvändning,För mycket sol,20,3
+12,Vad är en rödlista?,En lista över arter med röda blommor,En lista över farliga arter för människor,En lista över arter man får jaga,En förteckning över hur stor risken är att arter försvinner,30,4
+13,Vad är en signalart?,En art som visar att miljön har höga naturvärden,En art som lever i flock,En art som ger varningsljud,En art som kommer utifrån,30,1
+14,Vilka är de fem rikena?,"Land, hav, luft, jord och eld","Djur, växter, svampar, bakterier och encelliga med cellkärna","Däggdjur, fåglar, fiskar, kräldjur och groddjur","Djur, växter, alger, virus och stenar",30,2
+15,Vad är en lav?,En växt utan rötter,En bakterie som bryter ner löv,Samlevnad mellan en svamp och en alg eller bakterie som gör fotosyntes,En sorts mossa,30,3
+16,Hur skrivs en arts vetenskapliga namn?,Bara artens namn,Ett svenskt ord,Tre latinska ord,Två latinska ord: släkte och art,20,4
+17,Vad är en bestämningsnyckel?,En serie val med två alternativ som leder till artens namn,En karta över arters utbredning,En metod för att räkna celler,En lista över rödlistade arter,30,1
+18,Vad är en anpassning?,Ett val som individen gör varje dag,Ett drag som gör att en art klarar sin miljö,En sjukdom hos arten,En ny art,30,2
+19,Vad kallas skillnader mellan individer av samma art?,Artrikedom,Population,Variation,Konkurrens,20,3
+20,Hur blir bakterier resistenta mot antibiotika?,Bakterierna bestämmer sig för att bli resistenta,Antibiotikan blir svagare av sig själv,Bakterierna blir större,Naturligt urval: några resistenta överlever och förökar sig,40,4

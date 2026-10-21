@@ -1,0 +1,27 @@
+﻿"Blooket
+Import Template",,,,,,,
+Question #,Question Text,Answer 1,Answer 2,"Answer 3 
+(Optional)","Answer 4 
+(Optional)","Time Limit (sec) 
+(Max: 300 Seconds)","Correct Answer(s) 
+(Only Include Answer #)"
+1,Vilken är den minsta enheten som är levande?,Cellen,Atomen,Vävnaden,Organet,20,1
+2,Vem såg celler i kork år 1665?,Louis Pasteur,Robert Hooke,Carl von Linné,Charles Darwin,20,2
+3,Okular 10× och objektiv 40×. Hur stor är förstoringen?,50 gånger,40 gånger,400 gånger,4 000 gånger,30,3
+4,Varför hjälper inte antibiotika mot en förkylning?,Förkylning är ingen sjukdom,Antibiotika är för svagt,Förkylning orsakas av svamp,Förkylning orsakas av virus,30,4
+5,Vilken del av cellen innehåller DNA?,Cellkärnan,Ribosomen,Cellväggen,Vakuolen,20,1
+6,Vilken del har växtceller men inte djurceller?,Mitokondrie,Cellvägg,Cellmembran,Cellkärna,20,2
+7,Vad är den viktigaste skillnaden mellan en bakteriecell och en djurcell?,Djurcellen har cellvägg,Bakterien har kloroplaster,Bakterien saknar cellkärna,Bakterien saknar DNA,30,3
+8,Varför har även växtceller mitokondrier?,De lagrar vatten,De gör fotosyntes,De skyddar cellen,Alla celler behöver energi från cellandning,30,4
+9,Vad kallas det när vatten tar sig in i cellen genom membranet?,Osmos,Jäsning,Fotosyntes,Pollinering,20,1
+10,Vad kallas det gröna ämnet som fångar ljuset?,Cellulosa,Klorofyll,Etanol,Glukos,20,2
+11,Vilka två ämnen tar växten upp för fotosyntesen?,Glukos och koldioxid,Syre och vatten,Koldioxid och vatten,Syre och glukos,30,3
+12,Vilka två ämnen bildas i fotosyntesen?,Syre och etanol,Glukos och koldioxid,Koldioxid och vatten,Glukos och syre,30,4
+13,I vilken del av cellen sker fotosyntesen?,Kloroplasterna,Mitokondrierna,Cellkärnan,Vakuolen,20,1
+14,I vilken del av cellen sker cellandningen?,Cellkärnan,Mitokondrierna,Kloroplasterna,Cellväggen,20,2
+15,Vilken är cellandningen med ord?,Koldioxid + vatten → glukos + syre,Glukos + koldioxid → syre + energi,Glukos + syre → koldioxid + vatten + energi,Syre + vatten → glukos + energi,40,3
+16,Gör växter cellandning på natten?,"Nej, växter gör bara fotosyntes",Bara om de har blommor,"Nej, bara på dagen","Ja, de gör cellandning hela tiden",20,4
+17,Vad bildar jäst när den får energi utan syre?,Koldioxid och alkohol,Bara vatten,Syre och glukos,Syre och vatten,30,1
+18,Vad kallas en grupp lika celler som arbetar tillsammans?,Organsystem,Vävnad,Organ,Organell,20,2
+19,"Vilken ordning är rätt, från minst till störst?","Organ, cell, vävnad, organsystem","Cell, organ, vävnad, organsystem","Cell, vävnad, organ, organsystem","Vävnad, cell, organ, organsystem",30,3
+20,Vad transporterar xylem i en växt?,Syre till roten,Pollen till blomman,Socker nedåt från bladen,Vatten och mineraler uppåt från roten,30,4

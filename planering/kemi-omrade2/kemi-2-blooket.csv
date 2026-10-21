@@ -1,0 +1,29 @@
+﻿"Blooket
+Import Template",,,,,,,
+Question #,Question Text,Answer 1,Answer 2,"Answer 3 
+(Optional)","Answer 4 
+(Optional)","Time Limit (sec) 
+(Max: 300 Seconds)","Correct Answer(s) 
+(Only Include Answer #)"
+1,Vad menas med materia?,Allt som har massa och tar plats,Bara fasta föremål,Bara det som väger mer än 1 kg,Allt som går att se,20,1
+2,Hur ligger partiklarna i ett fast ämne?,Långt ifrån varandra,Tätt i ett mönster och de vibrerar,De står helt stilla,De glider fritt förbi varandra,20,2
+3,Hur rör sig partiklarna i en gas?,De glider förbi varandra tätt,De rör sig inte alls,Snabbt åt alla håll med stora avstånd,De ligger tätt i ett mönster,20,3
+4,Vad bevisar att partiklar rör sig?,Att vatten är blött,Att is är hård,Att metall leder värme,"Diffusion, till exempel att doft sprids",20,4
+5,Hur räknar man ut densitet?,Massa delat med volym,Massa gånger volym,Volym delat med massa,Massa plus volym,20,1
+6,Ett föremål har massan 24 g och volymen 8 cm³. Vilken densitet har det?,32 g/cm³,3 g/cm³,16 g/cm³,"0,33 g/cm³",30,2
+7,Varför flyter is på vatten?,Is är kallare,Is har ingen massa,Is har lägre densitet än flytande vatten,Is har högre densitet,20,3
+8,Hur mäter man volymen hos en sten med oregelbunden form?,Med en termometer,Med ett filter,Med en våg,Med vattenförskjutning i en mätcylinder,20,4
+9,Vad kallas övergången från fast form till vätska?,Smältning,Stelning,Förångning,Kondensation,20,1
+10,Vad kallas övergången från gas till vätska?,Fällning,Kondensation,Smältning,Stelning,20,2
+11,Varför ligger temperaturen still medan is smälter?,Vattnet är redan 100 °C,Termometern slutar fungera,Värmen går åt att bryta loss partiklarna,Isen tar inte emot värme,20,3
+12,Vad är ett rent ämne?,Ett ämne utan färg,Ett ämne som är flytande,En blandning av två ämnen,Ett ämne med bara en sorts partiklar,20,4
+13,Vilket är en homogen blandning?,Saltvatten,Sand i vatten,Sallad,Granit,20,1
+14,Vad kallas det som löser ett ämne i en lösning?,Destillat,Lösningsmedel,Fällning,Filtrat,20,2
+15,Vilken metod skiljer sand från vatten?,Kromatografi,Diffusion,Filtrering,Fällning,20,3
+16,Hur får du tillbaka saltet ur saltvatten?,Rör om länge,Frys blandningen,Filtrera blandningen,Indunsta vattnet,20,4
+17,Varför går löst salt inte att filtrera bort?,Saltpartiklarna är så små att de går genom filtret,Salt är en gas,Salt är för tungt,Filtret löser salt,20,1
+18,På vad bygger destillation?,Att ämnen har olika färg,Att ämnen har olika kokpunkter,Att ämnen har olika massa,Att ämnen har olika form,20,2
+19,Vad används kromatografi till?,Att filtrera sand,Att mäta densitet,Att skilja ämnen som vandrar olika långt,Att kyla vätskor,20,3
+20,Vad är en fällning?,En gas som bildas vid kokning,Ett filter av papper,En sorts lösningsmedel,Ett fast ämne som bildas när lösningar blandas,20,4
+21,"Ett lag skulle få 5,0 g salt men fick 4,2 g. Vad blir utbytet?",84 %,119 %,"4,2 %",16 %,30,1
+22,Varför räcker det inte att mäta en egenskap för att identifiera ett ämne?,Det räcker alltid med smältpunkt,Flera ämnen kan ha liknande värde på en egenskap,Alla ämnen har samma egenskaper,Egenskaper går inte att mäta,20,2

@@ -154,7 +154,7 @@ EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv"], (
 TITEL_OVR = {"kemi-m-1-1-1": "Vad är kemi? Säkerhet och utrustning i kemilabbet", "kemi-m-2-1-1": "Vad är materia? Ämnen och material"}   # sajtsidan innehåller även Start-avsnittet
 MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade1/kemi-1-prov-elev.pdf"],
                                      ["Prov med facit (lärare)", "planering/kemi-omrade1/kemi-1-prov-larare.pdf"],
-                                     ["Blooket (xlsx)", "planering/kemi-omrade1/kemi-1-blooket.xlsx"],
+                                     ["Blooket (CSV)", "planering/kemi-omrade1/kemi-1-blooket.csv"],
                                      ["Kahoot (xlsx)", "planering/kemi-omrade1/kemi-1-kahoot.xlsx"],
                                      ["Jeopardy", "simuleringar/jeopardy-kemi-1.html"]],
                            "ppt": [["📊 Introduktion till kemi", "planering/kemi-omrade1/kemi-1-0-introduktion-till-kemi.pptx"],
@@ -162,7 +162,7 @@ MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omra
                                    ["📊 1.2 Modeller, källor och argument", "planering/kemi-omrade1/kemi-1-2-modeller-kallor-argument.pptx"]]},
             ("kemi", 2): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade2/kemi-2-prov-elev.pdf"],
                                      ["Prov med facit (lärare)", "planering/kemi-omrade2/kemi-2-prov-larare.pdf"],
-                                     ["Blooket (xlsx)", "planering/kemi-omrade2/kemi-2-blooket.xlsx"],
+                                     ["Blooket (CSV)", "planering/kemi-omrade2/kemi-2-blooket.csv"],
                                      ["Kahoot (xlsx)", "planering/kemi-omrade2/kemi-2-kahoot.xlsx"],
                                      ["Jeopardy", "simuleringar/jeopardy-kemi-2.html"]],
                            "ppt": [["📊 Introduktion till materia", "planering/kemi-omrade2/kemi-2-0-introduktion-till-materia.pptx"],
