@@ -92,6 +92,18 @@ window.hafte["kemi-omrade-3"] = {
   },
   handledning: "hafte/kemi-3-kemi-atomer-lararhandledning.pdf"
 };
+window.hafte["kemi-omrade-4"] = {
+  titel: "Område 4 – Kemiska föreningar och reaktioner (beta)",
+  vanlig: "hafte/kemi-4-kemi-foreningar-vanlig.pdf",
+  lattlast: "hafte/kemi-4-kemi-foreningar-lattlast.pdf",
+  fordjupning: "hafte/kemi-4-kemi-foreningar-fordjupning.pdf",
+  larare: {
+    lattlast: "hafte/kemi-4-kemi-foreningar-lattlast-lararversion.pdf",
+    vanlig: "hafte/kemi-4-kemi-foreningar-vanlig-lararversion.pdf",
+    fordjupning: "hafte/kemi-4-kemi-foreningar-fordjupning-lararversion.pdf"
+  },
+  handledning: "hafte/kemi-4-kemi-foreningar-lararhandledning.pdf"
+};
 // ==== KEMI END ====
 
 // ==== HISTORIA START ====

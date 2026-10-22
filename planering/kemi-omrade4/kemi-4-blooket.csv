@@ -1,0 +1,29 @@
+﻿"Blooket
+Import Template",,,,,,,
+Question #,Question Text,Answer 1,Answer 2,"Answer 3 
+(Optional)","Answer 4 
+(Optional)","Time Limit (sec) 
+(Max: 300 Seconds)","Correct Answer(s) 
+(Only Include Answer #)"
+1,Vad är en kovalent bindning?,Atomer delar elektronpar,Elektroner som rör sig fritt mellan metallatomer,En atom avger en elektron till en annan,Attraktion mellan joner,20,1
+2,Mellan vilka sorters atomer bildas oftast kovalenta bindningar?,Mellan metall och icke-metall,Mellan icke-metaller,Mellan metaller,Mellan ädelgaser,20,2
+3,"Hur många väteatomer binder en kolatom i metan, CH₄?",Två,En,Fyra,Åtta,20,3
+4,Varför leder enkla molekylföreningar vanligen inte ström?,De är alltid gaser,De innehåller inga elektroner,De har för få atomer,Det finns inga fria laddade partiklar,20,4
+5,Vad är en jon?,En laddad atom eller grupp av atomer,En atomkärna med bara neutroner,En neutral molekyl,En atom utan elektroner,20,1
+6,Hur blir en natriumatom en natriumjon?,Den tar upp en elektron och blir Na⁻,Den avger en elektron och blir Na⁺,Den delar en elektron med klor,Den avger en proton och blir Na⁺,20,2
+7,Hur blir en kloratom en kloridjon?,Den tar upp en proton och blir Cl⁻,Den avger en elektron och blir Cl⁺,Den tar upp en elektron och blir Cl⁻,Den delar sina elektroner med natrium,20,3
+8,Vad är en jonbindning?,Attraktion mellan två neutroner,Delade elektronpar mellan icke-metaller,Rörliga elektroner mellan metallatomer,Attraktion mellan positiva och negativa joner,20,4
+9,Ungefär vid vilken temperatur smälter bordssalt?,Cirka 800 °C,Cirka 80 °C,Cirka 100 °C,Cirka 0 °C,20,1
+10,Varför är jonföreningar spröda?,De innehåller många vätebindningar,Lika laddade joner hamnar bredvid varandra när lagren förskjuts,De består av stora molekyler,De har rörliga elektroner,20,2
+11,Leder fast salt elektrisk ström?,"Ja, elektronerna rör sig fritt","Nej, salt innehåller inga joner","Nej, jonerna sitter fast i gittret","Ja, jonerna rör sig fritt",20,3
+12,Varför leder saltlösning elektrisk ström?,Vattenmolekylerna blir laddade av saltet,Vattnet innehåller fria elektroner,Saltet bildar metall,Jonerna kan röra sig fritt i vattnet,20,4
+13,Ett ämne smälter vid låg temperatur och leder inte ström. Vad är det troligen?,En molekylförening,En jonförening,En ädelgas i fast form,En metall,30,1
+14,Vad kallas ämnena som reagerar i en kemisk reaktion?,Katalysatorer,Utgångsämnen,Produkter,Lösningsmedel,20,2
+15,Vilket är ett tecken på att en kemisk reaktion har skett?,Sockret löser sig i vatten,Isen smälter,Gas bildas,Vatten förångas,20,3
+16,Vilken reaktionsformel är balanserad?,2 H₂ + 2 O₂ → 2 H₂O,H₂ + 2 O₂ → 2 H₂O,H₂ + O₂ → H₂O,2 H₂ + O₂ → 2 H₂O,20,4
+17,Varför minskar massan i en öppen flaska när ättika och bikarbonat reagerar?,Koldioxidgas lämnar flaskan,Massa omvandlas till energi,Atomerna försvinner,Vätskan avdunstar helt,20,1
+18,Vad säger lagen om massans bevarande?,Massan minskar när gas bildas,Massan är lika före och efter i ett slutet system,Massan ökar vid varje reaktion,Atomer kan omvandlas till andra atomer,20,2
+19,Vilket påstående om reaktionshastighet stämmer?,Ytarean påverkar inte hastigheten,Katalysatorn förbrukas helt,Högre temperatur ger oftast snabbare reaktion,Högre temperatur ger långsammare reaktion,20,3
+20,Varför reagerar en krossad tablett fortare än en hel?,Den innehåller mer ämne,Partiklarna blir kallare,Den väger mer,Större ytarea ger fler krockar,20,4
+21,Vad innebär att en reaktion är exoterm?,Energi avges och omgivningen blir varmare,Energi tas upp och omgivningen blir kallare,Ingen energi ändras,Reaktionen går alltid långsamt,20,1
+22,Vad är en katalysator?,Ett ämne som bromsar reaktionen,Ett ämne som snabbar på reaktionen och inte förbrukas,Ett ämne som förbrukas helt,En produkt från reaktionen,20,2

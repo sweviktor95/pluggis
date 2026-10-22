@@ -149,9 +149,9 @@ tr.lab td{background:#f4f7f9}
 
 # ---- Kapitel som är byggda (häften, lärarmaterial, extra blad) ----------------
 # Nyckel: (ämnes-id, områdesnummer)
-HAFTE = {("kemi", 1): "kemi-omrade-1", ("kemi", 2): "kemi-omrade-2", ("kemi", 3): "kemi-omrade-3"}
-EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 2): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 3): ["Sammanfattning och begrepp", "Testa dig själv"]}   # blir <id>-m-<nr>-s och -t
-TITEL_OVR = {"kemi-m-1-1-1": "Vad är kemi? Säkerhet och utrustning i kemilabbet", "kemi-m-2-1-1": "Vad är materia? Ämnen och material", "kemi-m-3-1-1": "Vad är en atom? Atomen och dess partiklar"}   # sajtsidan innehåller även Start-avsnittet
+HAFTE = {("kemi", 1): "kemi-omrade-1", ("kemi", 2): "kemi-omrade-2", ("kemi", 3): "kemi-omrade-3", ("kemi", 4): "kemi-omrade-4"}
+EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 2): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 3): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 4): ["Sammanfattning och begrepp", "Testa dig själv"]}   # blir <id>-m-<nr>-s och -t
+TITEL_OVR = {"kemi-m-1-1-1": "Vad är kemi? Säkerhet och utrustning i kemilabbet", "kemi-m-2-1-1": "Vad är materia? Ämnen och material", "kemi-m-3-1-1": "Vad är en atom? Atomen och dess partiklar", "kemi-m-4-1-1": "Vad händer när atomer möts? Molekyler och kovalent bindning"}   # sajtsidan innehåller även Start-avsnittet
 MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade1/kemi-1-prov-elev.pdf"],
                                      ["Prov med facit (lärare)", "planering/kemi-omrade1/kemi-1-prov-larare.pdf"],
                                      ["Blooket (CSV)", "planering/kemi-omrade1/kemi-1-blooket.csv"],
@@ -175,7 +175,15 @@ MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omra
                                      ["Jeopardy", "simuleringar/jeopardy-kemi-3.html"]],
                            "ppt": [["📊 Introduktion till atomer", "planering/kemi-omrade3/kemi-3-0-introduktion-till-atomer.pptx"],
                                    ["📊 3.1 Atomens byggnad", "planering/kemi-omrade3/kemi-3-1-atomens-byggnad.pptx"],
-                                   ["📊 3.2 Periodiska systemet", "planering/kemi-omrade3/kemi-3-2-periodiska-systemet.pptx"]]}}
+                                   ["📊 3.2 Periodiska systemet", "planering/kemi-omrade3/kemi-3-2-periodiska-systemet.pptx"]]},
+            ("kemi", 4): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade4/kemi-4-prov-elev.pdf"],
+                                     ["Prov med facit (lärare)", "planering/kemi-omrade4/kemi-4-prov-larare.pdf"],
+                                     ["Blooket (CSV)", "planering/kemi-omrade4/kemi-4-blooket.csv"],
+                                     ["Kahoot (xlsx)", "planering/kemi-omrade4/kemi-4-kahoot.xlsx"],
+                                     ["Jeopardy", "simuleringar/jeopardy-kemi-4.html"]],
+                           "ppt": [["📊 Introduktion till kemiska föreningar", "planering/kemi-omrade4/kemi-4-0-introduktion-till-foreningar.pptx"],
+                                   ["📊 4.1 Molekyler och joner", "planering/kemi-omrade4/kemi-4-1-molekyler-och-joner.pptx"],
+                                   ["📊 4.2 Kemiska reaktioner", "planering/kemi-omrade4/kemi-4-2-kemiska-reaktioner.pptx"]]}}
 
 def skriv_js():
     data = {"plan": {"pdf": f"planering/{C['id']}-planering.pdf", "xlsx": f"planering/{C['id']}-planering.xlsx"},

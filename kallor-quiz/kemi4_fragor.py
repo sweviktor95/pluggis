@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+# (fråga, rätt, [fel1, fel2, fel3])
+Q = [
+ ("Vad är en kovalent bindning?", "Atomer delar elektronpar", ["En atom avger en elektron till en annan", "Attraktion mellan joner", "Elektroner som rör sig fritt mellan metallatomer"]),
+ ("Mellan vilka sorters atomer bildas oftast kovalenta bindningar?", "Mellan icke-metaller", ["Mellan metall och icke-metall", "Mellan metaller", "Mellan ädelgaser"]),
+ ("Hur många väteatomer binder en kolatom i metan, CH₄?", "Fyra", ["En", "Två", "Åtta"]),
+ ("Varför leder enkla molekylföreningar vanligen inte ström?", "Det finns inga fria laddade partiklar", ["De har för få atomer", "De är alltid gaser", "De innehåller inga elektroner"]),
+ ("Vad är en jon?", "En laddad atom eller grupp av atomer", ["En atom utan elektroner", "En neutral molekyl", "En atomkärna med bara neutroner"]),
+ ("Hur blir en natriumatom en natriumjon?", "Den avger en elektron och blir Na⁺", ["Den tar upp en elektron och blir Na⁻", "Den avger en proton och blir Na⁺", "Den delar en elektron med klor"]),
+ ("Hur blir en kloratom en kloridjon?", "Den tar upp en elektron och blir Cl⁻", ["Den avger en elektron och blir Cl⁺", "Den tar upp en proton och blir Cl⁻", "Den delar sina elektroner med natrium"]),
+ ("Vad är en jonbindning?", "Attraktion mellan positiva och negativa joner", ["Delade elektronpar mellan icke-metaller", "Rörliga elektroner mellan metallatomer", "Attraktion mellan två neutroner"]),
+ ("Ungefär vid vilken temperatur smälter bordssalt?", "Cirka 800 °C", ["Cirka 0 °C", "Cirka 100 °C", "Cirka 80 °C"]),
+ ("Varför är jonföreningar spröda?", "Lika laddade joner hamnar bredvid varandra när lagren förskjuts", ["De innehåller många vätebindningar", "De består av stora molekyler", "De har rörliga elektroner"]),
+ ("Leder fast salt elektrisk ström?", "Nej, jonerna sitter fast i gittret", ["Ja, elektronerna rör sig fritt", "Ja, jonerna rör sig fritt", "Nej, salt innehåller inga joner"]),
+ ("Varför leder saltlösning elektrisk ström?", "Jonerna kan röra sig fritt i vattnet", ["Vattnet innehåller fria elektroner", "Saltet bildar metall", "Vattenmolekylerna blir laddade av saltet"]),
+ ("Ett ämne smälter vid låg temperatur och leder inte ström. Vad är det troligen?", "En molekylförening", ["En jonförening", "En metall", "En ädelgas i fast form"]),
+ ("Vad kallas ämnena som reagerar i en kemisk reaktion?", "Utgångsämnen", ["Produkter", "Katalysatorer", "Lösningsmedel"]),
+ ("Vilket är ett tecken på att en kemisk reaktion har skett?", "Gas bildas", ["Isen smälter", "Sockret löser sig i vatten", "Vatten förångas"]),
+ ("Vilken reaktionsformel är balanserad?", "2 H₂ + O₂ → 2 H₂O", ["H₂ + O₂ → H₂O", "2 H₂ + 2 O₂ → 2 H₂O", "H₂ + 2 O₂ → 2 H₂O"]),
+ ("Varför minskar massan i en öppen flaska när ättika och bikarbonat reagerar?", "Koldioxidgas lämnar flaskan", ["Atomerna försvinner", "Massa omvandlas till energi", "Vätskan avdunstar helt"]),
+ ("Vad säger lagen om massans bevarande?", "Massan är lika före och efter i ett slutet system", ["Massan ökar vid varje reaktion", "Massan minskar när gas bildas", "Atomer kan omvandlas till andra atomer"]),
+ ("Vilket påstående om reaktionshastighet stämmer?", "Högre temperatur ger oftast snabbare reaktion", ["Högre temperatur ger långsammare reaktion", "Ytarean påverkar inte hastigheten", "Katalysatorn förbrukas helt"]),
+ ("Varför reagerar en krossad tablett fortare än en hel?", "Större ytarea ger fler krockar", ["Den innehåller mer ämne", "Partiklarna blir kallare", "Den väger mer"]),
+ ("Vad innebär att en reaktion är exoterm?", "Energi avges och omgivningen blir varmare", ["Energi tas upp och omgivningen blir kallare", "Ingen energi ändras", "Reaktionen går alltid långsamt"]),
+ ("Vad är en katalysator?", "Ett ämne som snabbar på reaktionen och inte förbrukas", ["Ett ämne som bromsar reaktionen", "En produkt från reaktionen", "Ett ämne som förbrukas helt"]),
+]

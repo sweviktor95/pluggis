@@ -727,7 +727,7 @@ var struktur = [
             titel: "4.1 Molekyler och joner",
             ramverk: true,
             barn: [
-              { id: "kemi-m-4-1-1", titel: "Molekyler och kovalent bindning" },
+              { id: "kemi-m-4-1-1", titel: "Vad händer när atomer möts? Molekyler och kovalent bindning" },
               { id: "kemi-m-4-1-2", titel: "Joner och jonföreningar" },
               { id: "kemi-m-4-1-3", titel: "Egenskaper hos föreningar" },
               { id: "kemi-m-4-1-l", titel: "Labb: Leder lösningar elektrisk ström?" }
@@ -743,7 +743,9 @@ var struktur = [
               { id: "kemi-m-4-2-3", titel: "Hastighet och energi" },
               { id: "kemi-m-4-2-l", titel: "Labb: Massan bevaras: väg före och efter" }
             ]
-          }
+          },
+          { id: "kemi-m-4-s", titel: "Sammanfattning och begrepp" },
+          { id: "kemi-m-4-t", titel: "Testa dig själv" }
         ]
       },
       {

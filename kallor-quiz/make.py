@@ -14,6 +14,8 @@ ns={}; exec(src[src.index('Q = ['):src.index('rows=[[')],ns)
 K[2]=[(q,r,w,30 if q.startswith('Ett ') else 20) for q,r,w in ns['Q']]
 src3=open('/home/claude/pluggis/kallor-quiz/kemi3_fragor.py',encoding='utf-8').read(); ns3={}; exec(src3,ns3)
 K[3]=[(q,r,w,30 if q.startswith('Ett ') or q.startswith('En atom') or q.startswith('Fosfor') else 20) for q,r,w in ns3['Q']]
+src4=open('/home/claude/pluggis/kallor-quiz/kemi4_fragor.py',encoding='utf-8').read(); ns4={}; exec(src4,ns4)
+K[4]=[(q,r,w,30 if q.startswith('Ett ') else 20) for q,r,w in ns4['Q']]
 SETS={('biologi',n):v for n,v in BIO.items()}; SETS.update({('kemi',n):v for n,v in K.items()})
 KT=lambda t: t if t in (5,10,20,30,60,90,120,240) else min([x for x in (5,10,20,30,60,90,120,240) if x>=t] or [240])
 def shuffled(qs,seed):

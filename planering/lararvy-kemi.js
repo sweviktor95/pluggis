@@ -135,9 +135,43 @@ window.lararKemi = {
    "nr": 4,
    "titel": "Kemiska föreningar och reaktioner",
    "ide": "Hur atomer binds ihop till molekyler och joner, och hur ämnen omvandlas utan att atomer försvinner.",
-   "hafte": null,
-   "lankar": [],
-   "ppt": []
+   "hafte": "kemi-omrade-4",
+   "lankar": [
+    [
+     "Prov (elevversion)",
+     "planering/kemi-omrade4/kemi-4-prov-elev.pdf"
+    ],
+    [
+     "Prov med facit (lärare)",
+     "planering/kemi-omrade4/kemi-4-prov-larare.pdf"
+    ],
+    [
+     "Blooket (CSV)",
+     "planering/kemi-omrade4/kemi-4-blooket.csv"
+    ],
+    [
+     "Kahoot (xlsx)",
+     "planering/kemi-omrade4/kemi-4-kahoot.xlsx"
+    ],
+    [
+     "Jeopardy",
+     "simuleringar/jeopardy-kemi-4.html"
+    ]
+   ],
+   "ppt": [
+    [
+     "📊 Introduktion till kemiska föreningar",
+     "planering/kemi-omrade4/kemi-4-0-introduktion-till-foreningar.pptx"
+    ],
+    [
+     "📊 4.1 Molekyler och joner",
+     "planering/kemi-omrade4/kemi-4-1-molekyler-och-joner.pptx"
+    ],
+    [
+     "📊 4.2 Kemiska reaktioner",
+     "planering/kemi-omrade4/kemi-4-2-kemiska-reaktioner.pptx"
+    ]
+   ]
   },
   {
    "nr": 5,
