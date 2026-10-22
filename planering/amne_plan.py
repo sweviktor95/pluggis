@@ -149,9 +149,9 @@ tr.lab td{background:#f4f7f9}
 
 # ---- Kapitel som är byggda (häften, lärarmaterial, extra blad) ----------------
 # Nyckel: (ämnes-id, områdesnummer)
-HAFTE = {("kemi", 1): "kemi-omrade-1", ("kemi", 2): "kemi-omrade-2"}
-EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 2): ["Sammanfattning och begrepp", "Testa dig själv"]}   # blir <id>-m-<nr>-s och -t
-TITEL_OVR = {"kemi-m-1-1-1": "Vad är kemi? Säkerhet och utrustning i kemilabbet", "kemi-m-2-1-1": "Vad är materia? Ämnen och material"}   # sajtsidan innehåller även Start-avsnittet
+HAFTE = {("kemi", 1): "kemi-omrade-1", ("kemi", 2): "kemi-omrade-2", ("kemi", 3): "kemi-omrade-3"}
+EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 2): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 3): ["Sammanfattning och begrepp", "Testa dig själv"]}   # blir <id>-m-<nr>-s och -t
+TITEL_OVR = {"kemi-m-1-1-1": "Vad är kemi? Säkerhet och utrustning i kemilabbet", "kemi-m-2-1-1": "Vad är materia? Ämnen och material", "kemi-m-3-1-1": "Vad är en atom? Atomen och dess partiklar"}   # sajtsidan innehåller även Start-avsnittet
 MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade1/kemi-1-prov-elev.pdf"],
                                      ["Prov med facit (lärare)", "planering/kemi-omrade1/kemi-1-prov-larare.pdf"],
                                      ["Blooket (CSV)", "planering/kemi-omrade1/kemi-1-blooket.csv"],
@@ -167,7 +167,15 @@ MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omra
                                      ["Jeopardy", "simuleringar/jeopardy-kemi-2.html"]],
                            "ppt": [["📊 Introduktion till materia", "planering/kemi-omrade2/kemi-2-0-introduktion-till-materia.pptx"],
                                    ["📊 2.1 Ämnen, blandningar och partikelmodellen", "planering/kemi-omrade2/kemi-2-1-amnen-blandningar-partikelmodellen.pptx"],
-                                   ["📊 2.2 Separations- och analysmetoder", "planering/kemi-omrade2/kemi-2-2-separation-och-analys.pptx"]]}}
+                                   ["📊 2.2 Separations- och analysmetoder", "planering/kemi-omrade2/kemi-2-2-separation-och-analys.pptx"]]},
+            ("kemi", 3): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade3/kemi-3-prov-elev.pdf"],
+                                     ["Prov med facit (lärare)", "planering/kemi-omrade3/kemi-3-prov-larare.pdf"],
+                                     ["Blooket (CSV)", "planering/kemi-omrade3/kemi-3-blooket.csv"],
+                                     ["Kahoot (xlsx)", "planering/kemi-omrade3/kemi-3-kahoot.xlsx"],
+                                     ["Jeopardy", "simuleringar/jeopardy-kemi-3.html"]],
+                           "ppt": [["📊 Introduktion till atomer", "planering/kemi-omrade3/kemi-3-0-introduktion-till-atomer.pptx"],
+                                   ["📊 3.1 Atomens byggnad", "planering/kemi-omrade3/kemi-3-1-atomens-byggnad.pptx"],
+                                   ["📊 3.2 Periodiska systemet", "planering/kemi-omrade3/kemi-3-2-periodiska-systemet.pptx"]]}}
 
 def skriv_js():
     data = {"plan": {"pdf": f"planering/{C['id']}-planering.pdf", "xlsx": f"planering/{C['id']}-planering.xlsx"},

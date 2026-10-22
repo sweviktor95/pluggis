@@ -696,7 +696,7 @@ var struktur = [
             titel: "3.1 Atomens byggnad",
             ramverk: true,
             barn: [
-              { id: "kemi-m-3-1-1", titel: "Atomen och dess partiklar" },
+              { id: "kemi-m-3-1-1", titel: "Vad är en atom? Atomen och dess partiklar" },
               { id: "kemi-m-3-1-2", titel: "Atommodellernas historia" },
               { id: "kemi-m-3-1-3", titel: "Isotoper och radioaktivitet i korthet" },
               { id: "kemi-m-3-1-l", titel: "Labb: Svarta lådan: modellera det du inte kan se" }
@@ -712,7 +712,9 @@ var struktur = [
               { id: "kemi-m-3-2-3", titel: "Grundämnen i naturen och kroppen" },
               { id: "kemi-m-3-2-l", titel: "Labb: Metaller och icke-metaller: egenskaper" }
             ]
-          }
+          },
+          { id: "kemi-m-3-s", titel: "Sammanfattning och begrepp" },
+          { id: "kemi-m-3-t", titel: "Testa dig själv" }
         ]
       },
       {

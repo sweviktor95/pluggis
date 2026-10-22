@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+# (fråga, rätt, [fel1, fel2, fel3])
+Q = [
+ ("Vilken partikel har laddningen +1?", "Protonen", ["Neutronen", "Elektronen", "Atomkärnan"]),
+ ("Var finns neutronerna i en atom?", "I atomkärnan", ["I elektronskalen", "Utanför atomen", "Mellan elektronerna"]),
+ ("Varför är en atom neutral?", "Den har lika många protoner som elektroner", ["Den har inga laddade partiklar", "Den har fler neutroner än protoner", "Den har bara elektroner"]),
+ ("Vad visar atomnumret?", "Antalet protoner", ["Antalet neutroner", "Antalet elektronskal", "Atomens massa i gram"]),
+ ("Vad är masstalet?", "Protoner plus neutroner", ["Protoner plus elektroner", "Bara antalet neutroner", "Elektroner minus protoner"]),
+ ("En atom har atomnummer 11 och masstal 23. Hur många neutroner har den?", "12", ["11", "23", "34"]),
+ ("Fosfor har atomnummer 15 och masstal 31. Hur många neutroner har en fosforatom?", "16", ["15", "31", "46"]),
+ ("Vad såg man i Rutherfords försök med guldfolie?", "De flesta alfapartiklar gick rakt igenom och några få avlänkades", ["Alla alfapartiklar studsade tillbaka", "Inga alfapartiklar gick igenom", "Alla avlänkades lite"]),
+ ("Vilken slutsats drog Rutherford 1911?", "Atomen har en liten, tung kärna", ["Atomen är en hård kula", "Elektronerna är inbäddade i en positiv massa", "Atomen saknar kärna"]),
+ ("Vad innebar Bohrs modell från 1913?", "Elektroner i banor med bestämd energi", ["Atomen är en odelbar kula", "Positiv laddning utspridd som i en plumpudding", "Elektroner finns i kärnan"]),
+ ("Vad är isotoper?", "Atomer av samma grundämne med olika antal neutroner", ["Atomer med olika antal protoner", "Atomer utan neutroner", "Atomer med lika många neutroner men olika grundämnen"]),
+ ("Hur många neutroner har kol-14?", "8", ["6", "14", "20"]),
+ ("Vad menas med halveringstid?", "Tiden det tar för hälften av kärnorna att sönderfalla", ["Hälften av ämnets livslängd", "Tiden det tar för ämnet att bli kallt", "Tiden som strålningen syns"]),
+ ("Ett ämne har halveringstiden 10 år. Hur mycket finns kvar av 80 g efter 20 år?", "20 g", ["40 g", "10 g", "0 g"]),
+ ("Hur är grundämnena ordnade i det periodiska systemet?", "Efter stigande atomnummer", ["Efter bokstavsordning", "Efter färg", "Efter när de upptäcktes"]),
+ ("Vad kallas de lodräta kolumnerna i det periodiska systemet?", "Grupper", ["Perioder", "Skal", "Serier"]),
+ ("Vilken egenskap är typisk för metaller?", "De leder värme och el", ["De är dåliga ledare", "De är spröda när de är fasta", "De är oftast gaser"]),
+ ("Vad är valenselektroner?", "Elektronerna i yttersta skalet", ["Elektronerna närmast kärnan", "Protonerna i kärnan", "Alla elektroner i atomen"]),
+ ("Varför liknar ämnen i samma grupp varandra?", "De har lika många valenselektroner", ["De har lika många neutroner", "De har samma masstal", "De upptäcktes samtidigt"]),
+ ("Varför är ädelgaserna så oreaktiva?", "Deras yttersta skal är fullt", ["De har inga elektroner", "De är alltid kalla", "De är för tunga"]),
+ ("Vilket grundämne är vanligast i jordskorpan?", "Syre", ["Järn", "Kol", "Helium"]),
+ ("Vad gjorde Mendelejev 1869 med luckorna i sitt system?", "Förutsade egenskaper hos ämnen som ännu inte hittats", ["Tog bort dem", "Fyllde dem med gissade ämnen utan egenskaper", "Räknade dem som fel"]),
+]

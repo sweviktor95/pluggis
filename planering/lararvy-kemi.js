@@ -93,9 +93,43 @@ window.lararKemi = {
    "nr": 3,
    "titel": "Atomer och grundämnen",
    "ide": "Atomens byggnad, grundämnena och det periodiska systemet. Hur modellerna växt fram genom experiment.",
-   "hafte": null,
-   "lankar": [],
-   "ppt": []
+   "hafte": "kemi-omrade-3",
+   "lankar": [
+    [
+     "Prov (elevversion)",
+     "planering/kemi-omrade3/kemi-3-prov-elev.pdf"
+    ],
+    [
+     "Prov med facit (lärare)",
+     "planering/kemi-omrade3/kemi-3-prov-larare.pdf"
+    ],
+    [
+     "Blooket (CSV)",
+     "planering/kemi-omrade3/kemi-3-blooket.csv"
+    ],
+    [
+     "Kahoot (xlsx)",
+     "planering/kemi-omrade3/kemi-3-kahoot.xlsx"
+    ],
+    [
+     "Jeopardy",
+     "simuleringar/jeopardy-kemi-3.html"
+    ]
+   ],
+   "ppt": [
+    [
+     "📊 Introduktion till atomer",
+     "planering/kemi-omrade3/kemi-3-0-introduktion-till-atomer.pptx"
+    ],
+    [
+     "📊 3.1 Atomens byggnad",
+     "planering/kemi-omrade3/kemi-3-1-atomens-byggnad.pptx"
+    ],
+    [
+     "📊 3.2 Periodiska systemet",
+     "planering/kemi-omrade3/kemi-3-2-periodiska-systemet.pptx"
+    ]
+   ]
   },
   {
    "nr": 4,

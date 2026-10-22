@@ -12,6 +12,8 @@ K[1]=[(r[1],r[2],[x for x in r[3:6] if x],int(r[6])) for r in rows]
 src=open('/home/claude/pluggis/kallor-quiz/kemi2_fragor.py',encoding='utf-8').read()
 ns={}; exec(src[src.index('Q = ['):src.index('rows=[[')],ns)
 K[2]=[(q,r,w,30 if q.startswith('Ett ') else 20) for q,r,w in ns['Q']]
+src3=open('/home/claude/pluggis/kallor-quiz/kemi3_fragor.py',encoding='utf-8').read(); ns3={}; exec(src3,ns3)
+K[3]=[(q,r,w,30 if q.startswith('Ett ') or q.startswith('En atom') or q.startswith('Fosfor') else 20) for q,r,w in ns3['Q']]
 SETS={('biologi',n):v for n,v in BIO.items()}; SETS.update({('kemi',n):v for n,v in K.items()})
 KT=lambda t: t if t in (5,10,20,30,60,90,120,240) else min([x for x in (5,10,20,30,60,90,120,240) if x>=t] or [240])
 def shuffled(qs,seed):
@@ -25,6 +27,7 @@ def shuffled(qs,seed):
         out.append((q,ans,t,p+1))
     return out
 for (amne,n),qs in SETS.items():
+    if os.environ.get('ONLY') and os.environ['ONLY']!=f'{amne}{n}': continue
     assert len(qs)>=15
     sh=shuffled(qs,hash((amne,n))%1000+7)
     for q,ans,t,c in sh:

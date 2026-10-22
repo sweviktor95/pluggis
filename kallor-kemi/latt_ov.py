@@ -53,6 +53,8 @@ elif os.environ.get("CH") == "01k":
     from latt_svar01k import SVAR  # kemi kapitel 1
 elif os.environ.get("CH") == "02k":
     from latt_svar02k import SVAR  # kemi kapitel 2
+elif os.environ.get("CH") == "03k":
+    from latt_svar03k import SVAR  # kemi kapitel 3
 elif os.environ.get("CH") == "03n":
     from latt_svar03 import SVAR  # kapitel 3 har egna svar
 

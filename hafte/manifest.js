@@ -80,6 +80,18 @@ window.hafte["kemi-omrade-2"] = {
   },
   handledning: "hafte/kemi-2-kemi-materia-lararhandledning.pdf"
 };
+window.hafte["kemi-omrade-3"] = {
+  titel: "Område 3 – Atomer och grundämnen (beta)",
+  vanlig: "hafte/kemi-3-kemi-atomer-vanlig.pdf",
+  lattlast: "hafte/kemi-3-kemi-atomer-lattlast.pdf",
+  fordjupning: "hafte/kemi-3-kemi-atomer-fordjupning.pdf",
+  larare: {
+    lattlast: "hafte/kemi-3-kemi-atomer-lattlast-lararversion.pdf",
+    vanlig: "hafte/kemi-3-kemi-atomer-vanlig-lararversion.pdf",
+    fordjupning: "hafte/kemi-3-kemi-atomer-fordjupning-lararversion.pdf"
+  },
+  handledning: "hafte/kemi-3-kemi-atomer-lararhandledning.pdf"
+};
 // ==== KEMI END ====
 
 // ==== HISTORIA START ====

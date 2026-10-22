@@ -1,0 +1,29 @@
+﻿"Blooket
+Import Template",,,,,,,
+Question #,Question Text,Answer 1,Answer 2,"Answer 3 
+(Optional)","Answer 4 
+(Optional)","Time Limit (sec) 
+(Max: 300 Seconds)","Correct Answer(s) 
+(Only Include Answer #)"
+1,Vilken partikel har laddningen +1?,Protonen,Atomkärnan,Elektronen,Neutronen,20,1
+2,Var finns neutronerna i en atom?,Mellan elektronerna,I atomkärnan,I elektronskalen,Utanför atomen,20,2
+3,Varför är en atom neutral?,Den har fler neutroner än protoner,Den har bara elektroner,Den har lika många protoner som elektroner,Den har inga laddade partiklar,20,3
+4,Vad visar atomnumret?,Antalet elektronskal,Atomens massa i gram,Antalet neutroner,Antalet protoner,20,4
+5,Vad är masstalet?,Protoner plus neutroner,Bara antalet neutroner,Protoner plus elektroner,Elektroner minus protoner,20,1
+6,En atom har atomnummer 11 och masstal 23. Hur många neutroner har den?,34,12,23,11,30,2
+7,Fosfor har atomnummer 15 och masstal 31. Hur många neutroner har en fosforatom?,46,15,16,31,30,3
+8,Vad såg man i Rutherfords försök med guldfolie?,Alla alfapartiklar studsade tillbaka,Inga alfapartiklar gick igenom,Alla avlänkades lite,De flesta alfapartiklar gick rakt igenom och några få avlänkades,20,4
+9,Vilken slutsats drog Rutherford 1911?,"Atomen har en liten, tung kärna",Elektronerna är inbäddade i en positiv massa,Atomen är en hård kula,Atomen saknar kärna,20,1
+10,Vad innebar Bohrs modell från 1913?,Positiv laddning utspridd som i en plumpudding,Elektroner i banor med bestämd energi,Elektroner finns i kärnan,Atomen är en odelbar kula,20,2
+11,Vad är isotoper?,Atomer med lika många neutroner men olika grundämnen,Atomer utan neutroner,Atomer av samma grundämne med olika antal neutroner,Atomer med olika antal protoner,20,3
+12,Hur många neutroner har kol-14?,6,14,20,8,20,4
+13,Vad menas med halveringstid?,Tiden det tar för hälften av kärnorna att sönderfalla,Tiden det tar för ämnet att bli kallt,Hälften av ämnets livslängd,Tiden som strålningen syns,20,1
+14,Ett ämne har halveringstiden 10 år. Hur mycket finns kvar av 80 g efter 20 år?,40 g,20 g,0 g,10 g,30,2
+15,Hur är grundämnena ordnade i det periodiska systemet?,Efter när de upptäcktes,Efter färg,Efter stigande atomnummer,Efter bokstavsordning,20,3
+16,Vad kallas de lodräta kolumnerna i det periodiska systemet?,Perioder,Serier,Skal,Grupper,20,4
+17,Vilken egenskap är typisk för metaller?,De leder värme och el,De är spröda när de är fasta,De är dåliga ledare,De är oftast gaser,20,1
+18,Vad är valenselektroner?,Elektronerna närmast kärnan,Elektronerna i yttersta skalet,Protonerna i kärnan,Alla elektroner i atomen,20,2
+19,Varför liknar ämnen i samma grupp varandra?,De har lika många neutroner,De upptäcktes samtidigt,De har lika många valenselektroner,De har samma masstal,20,3
+20,Varför är ädelgaserna så oreaktiva?,De har inga elektroner,De är för tunga,De är alltid kalla,Deras yttersta skal är fullt,20,4
+21,Vilket grundämne är vanligast i jordskorpan?,Syre,Kol,Järn,Helium,20,1
+22,Vad gjorde Mendelejev 1869 med luckorna i sitt system?,Tog bort dem,Förutsade egenskaper hos ämnen som ännu inte hittats,Räknade dem som fel,Fyllde dem med gissade ämnen utan egenskaper,20,2
