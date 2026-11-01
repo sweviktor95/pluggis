@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5F8472"/><stop offset="1" stop-color="#2F4A3F"/></linearGradient>
+    <radialGradient id="glow" cx="256" cy="200" r="150" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE9A8" stop-opacity=".55"/><stop offset="1" stop-color="#FFE9A8" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="256" cy="200" r="150" fill="url(#glow)"/>
+  <!-- strålar -->
+  <g stroke="#F6C85F" stroke-width="16" stroke-linecap="round" fill="none">
+    <path d="M256 52v30"/><path d="M148 96l21 21"/><path d="M364 96l-21 21"/><path d="M104 196h30"/><path d="M378 196h30"/>
+  </g>
+  <!-- glödlampa -->
+  <path d="M256 112c-45 0-80 33-80 76 0 27 13 45 28 61 9 10 14 20 14 33v7h76v-7c0-13 5-23 14-33 15-16 28-34 28-61 0-43-35-76-80-76z" fill="#F6C85F"/>
+  <path d="M226 188c0-18 13-32 30-34" stroke="#FFF3CC" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <rect x="226" y="296" width="60" height="14" rx="7" fill="#fff"/>
+  <rect x="234" y="316" width="44" height="12" rx="6" fill="#fff"/>
+  <!-- uppslagen bok -->
+  <path d="M256 372c-34-22-86-26-148-18v94c62-8 114-4 148 18z" fill="#fff"/>
+  <path d="M256 372c34-22 86-26 148-18v94c-62-8-114-4-148 18z" fill="#E4EEE8"/>
+  <path d="M256 372v94" stroke="#38564A" stroke-width="8"/>
+  <g stroke="#7FA392" stroke-width="8" stroke-linecap="round" fill="none"><path d="M138 386c32-4 66-2 96 10"/><path d="M138 414c32-4 66-2 96 10"/><path d="M374 386c-32-4-66-2-96 10"/><path d="M374 414c-32-4-66-2-96 10"/></g>
+</svg>
