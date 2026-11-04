@@ -4001,7 +4001,12 @@
              '<a class="knapp hafte-ned" href="' + h[p[0]] + '" download title="Ladda ner ' + p[1].toLowerCase() + '" aria-label="Ladda ner ' + p[1].toLowerCase() + '">⬇</a></span>';
       }
     });
-    return r + '</div></div>';
+    r += '</div></div>';
+    if (h.pluggblad) {
+      r += '<div class="hafte-rad"><strong>Plugga inför prov (PDF, beta)</strong><div class="hafte-knappar"><span class="hafte-par"><a class="knapp" href="' + h.pluggblad + '" target="_blank" rel="noopener">Sammanfattning och övningsfrågor</a>' +
+           '<a class="knapp hafte-ned" href="' + h.pluggblad + '" download title="Ladda ner pluggbladet" aria-label="Ladda ner pluggbladet">⬇</a></span></div></div>';
+    }
+    return r;
   }
 
   visaFranHash(); // visa rätt sida direkt utifrån adressen (#...), annars startsidan

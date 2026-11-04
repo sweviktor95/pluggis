@@ -13,6 +13,7 @@ window.hafte["biologi-vetenskap"] = {
     vanlig: "hafte/biologi-1-vetenskap-vanlig-lararversion.pdf",
     fordjupning: "hafte/biologi-1-vetenskap-fordjupning-lararversion.pdf"
   },
+  pluggblad: "hafte/biologi-1-vetenskap-pluggblad.pdf",
   handledning: "hafte/biologi-1-vetenskap-lararhandledning.pdf"
 };
 
@@ -26,6 +27,7 @@ window.hafte["biologi-omrade-2"] = {
     vanlig: "hafte/biologi-2-cellen-vanlig-lararversion.pdf",
     fordjupning: "hafte/biologi-2-cellen-fordjupning-lararversion.pdf"
   },
+  pluggblad: "hafte/biologi-2-cellen-pluggblad.pdf",
   handledning: "hafte/biologi-2-cellen-lararhandledning.pdf"
 };
 
@@ -39,6 +41,7 @@ window.hafte["biologi-omrade-3"] = {
     vanlig: "hafte/biologi-3-mangfald-vanlig-lararversion.pdf",
     fordjupning: "hafte/biologi-3-mangfald-fordjupning-lararversion.pdf"
   },
+  pluggblad: "hafte/biologi-3-mangfald-pluggblad.pdf",
   handledning: "hafte/biologi-3-mangfald-lararhandledning.pdf"
 };
 
@@ -52,6 +55,7 @@ window.hafte["biologi-ekologi"] = {
     vanlig: "hafte/biologi-4-ekologi-vanlig-lararversion.pdf",
     fordjupning: "hafte/biologi-4-ekologi-fordjupning-lararversion.pdf"
   },
+  pluggblad: "hafte/biologi-4-ekologi-pluggblad.pdf",
   handledning: "hafte/biologi-4-ekologi-lararhandledning.pdf"
 };
 
