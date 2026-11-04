@@ -1,0 +1,54 @@
+﻿"Blooket
+Import Template",,,,,,,
+Question #,Question Text,Answer 1,Answer 2,"Answer 3 
+(Optional)","Answer 4 
+(Optional)","Time Limit (sec) 
+(Max: 300 Seconds)","Correct Answer(s) 
+(Only Include Answer #)"
+1,Vad kallas talet under bråkstrecket i ett bråk?,Täljare,Nämnare,Kvot,Faktor,20,2
+2,Vad kallas talet över bråkstrecket i ett bråk?,Täljare,Nämnare,Summa,Produkt,20,1
+3,I bråket 3/5: i hur många lika stora delar är helheten delad?,3,8,2,5,20,4
+4,En pizza är delad i 8 lika stora bitar. Lisa äter 3 bitar. Hur stor del av pizzan äter hon?,3/5,8/3,3/8,5/8,20,3
+5,Vilket bråk är lika med 1 hel?,1/7,7/7,0/7,7/14,20,2
+6,Vilket av bråken är större än 1?,9/4,4/9,3/3,2/5,20,1
+7,Hur skrivs 11/4 i blandad form?,3 2/4,2 1/4,1 7/4,2 3/4,20,4
+8,Hur skrivs 2 1/3 som ett bråk?,3/7,6/3,7/3,2/3,20,3
+9,Hur mycket är 1/4 av 20?,4,5,80,16,20,2
+10,Hur mycket är 3/5 av 30?,18,6,50,15,20,1
+11,Vilket decimaltal är lika med 3/4?,"0,34","0,25","3,4","0,75",20,4
+12,Vilket bråk ligger mitt emellan 0 och 1 på tallinjen?,1/4,1/1,1/2,2/1,20,3
+13,"Vad kallas ett bråk där täljaren är 1, till exempel 1/6?",Blandat bråk,Stambråk,Decimalbråk,Skenbråk,20,2
+14,Vilket bråk är störst?,5/8,3/8,1/8,2/8,20,1
+15,Vilket tecken ska stå i rutan? 2/3 ☐ 3/4,>,=,Det går inte att jämföra,<,20,4
+16,"Hur ska bråken ordnas från minst till störst? 3/4, 1/2, 5/8","3/4, 5/8, 1/2","1/2, 3/4, 5/8","1/2, 5/8, 3/4","5/8, 1/2, 3/4",20,3
+17,Vilket bråk är större än 1/2?,2/5,3/5,3/7,4/9,20,2
+18,Vilket bråk ligger närmast 1?,7/8,3/4,5/6,1/2,20,1
+19,Varför är 1/6 mindre än 1/4?,Eftersom 6 är mindre än 4,Eftersom täljarna är lika,Bråken är lika stora,"Helheten delas i fler delar, så varje del blir mindre",20,4
+20,"Vilket bråk är lika med 0,25?",1/2,2/5,1/4,1/25,20,3
+21,Vilket bråk är minst?,1/2,1/8,1/3,1/5,20,2
+22,Förläng 2/3 med 4. Vilket bråk får du?,8/12,6/7,2/12,8/3,20,1
+23,Förläng 3/5 så att nämnaren blir 20. Vilket bråk får du?,3/20,15/20,7/20,12/20,20,4
+24,Vilket bråk är lika stort som 1/2?,2/5,4/9,3/6,5/11,20,3
+25,Förkorta 6/8 så långt det går.,2/3,3/4,6/4,1/2,20,2
+26,Förkorta 12/18 så långt det går.,2/3,6/9,4/6,3/2,20,1
+27,Förkorta 15/45 så långt det går.,3/9,5/15,1/5,1/3,20,4
+28,Vad gör man när man förkortar ett bråk?,Adderar samma tal till täljare och nämnare,Multiplicerar bara täljaren,Delar täljare och nämnare med samma tal,Byter plats på täljare och nämnare,20,3
+29,Vad händer med bråkets värde när man förlänger det?,Det blir större,Det ändras inte,Det blir mindre,Det blir 1,20,2
+30,Vilket av bråken går inte att förkorta?,7/12,6/9,8/12,10/15,20,1
+31,Förkorta 24/36 så långt det går.,12/18,6/9,3/2,2/3,20,4
+32,Vilka bråk är lika stora (ekvivalenta)?,2/5 och 6/10,3/4 och 6/12,2/5 och 6/15,1/3 och 3/6,20,3
+33,Beräkna 2/7 + 3/7,5/14,5/7,6/7,1/7,20,2
+34,Beräkna 5/8 − 2/8,3/8,7/8,3/16,3/4,20,1
+35,Beräkna 1/2 + 1/4,2/6,1/6,2/4,3/4,30,4
+36,Beräkna 1/3 + 1/6,2/9,1/9,1/2,2/3,30,3
+37,Beräkna 1/2 + 1/3,2/5,5/6,1/5,2/6,30,2
+38,Beräkna 2/3 + 1/4,11/12,3/7,3/12,2/12,40,1
+39,Beräkna 3/4 − 1/3,4/7,2/12,1/12,5/12,40,4
+40,Beräkna 5/6 − 1/2,2/4,4/6,1/3,1/4,30,3
+41,Beräkna 3/5 + 4/5. Svara i blandad form.,7/10,1 2/5,1 3/5,1 7/5,30,2
+42,Beräkna 7/10 − 1/5,1/2,6/5,6/10,7/5,30,1
+43,Beräkna 2/5 + 1/10,3/15,3/10,2/5,1/2,30,4
+44,"Vad gäller för nämnaren när man adderar bråk med samma nämnare, till exempel 2/9 + 4/9?",Nämnarna adderas också,Nämnarna multipliceras,Nämnaren behålls och täljarna adderas,Täljarna multipliceras,20,3
+45,Vilken är den minsta gemensamma nämnaren för 1/3 och 1/4?,7,12,6,24,20,2
+46,Adam äter 1/4 av en pizza och Bea äter 2/8. Hur stor del äter de tillsammans?,1/2,3/12,3/8,1/4,40,1
+47,Mia har 3/4 liter saft. Hon dricker 1/2 liter. Hur mycket saft är kvar?,2/2 liter,2/4 liter,1/2 liter,1/4 liter,40,4
