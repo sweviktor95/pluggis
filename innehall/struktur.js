@@ -1487,9 +1487,17 @@ var struktur = [
   },
   {
     id: "religionskunskap",
-    titel: "Religionskunskap",
+    titel: "Religionskunskap (beta)",
     ikon: "🕊️",
-    barn: []
+    barn: [
+      {
+        id: "religion-kristendom",
+        titel: "Kristendomen",
+        barn: [
+          { id: "religion-kristendom-tidsresa", titel: "Tidsresa: kristendomens historia (spel)" }
+        ]
+      }
+    ]
   },
   {
     id: "samhallskunskap",
