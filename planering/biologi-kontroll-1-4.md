@@ -39,7 +39,7 @@ T = tydlig, s = svag.
 | KK5 Planera och utföra undersökningar | 1.1, 2.2, 4.2 | 2.1, 3.1, 3.2 | Täckt |
 | KK6 Värdera undersökningar | 1.1, 3.1 | 2.2, 4.1, 4.3 | Täckt |
 
-**Så läser du tabellen.** KK1–KK2 (begrepp och samband) är tydligt täckta i alla delområden. KK5 har tre tydliga tillfällen (1.1, 2.2, 4.2) och tre svaga (2.1, 3.1, 3.2). Sårbart i område 1–4 är KK3 (argumentation i miljö- och hälsofrågor, inget tydligt tillfälle), KK4 (källor, bara 1.2) och KK6 (värdera, bara 1.1). Områden 5–12 är planerade men inte byggda: argumentation (SU4) finns i kärnmoment eller labbpass i område 5, 8, 10, 11 och 12 och källgranskning (SU3) i 7, 10 och 11, så de kan bära KK3 och KK4 senare. Argumentation (KK3) ligger nu i 1.4.2 (rutan Så argumenterar du). Värdera (KK6) har tydliga tillfällen i 1.1 och i labb 3.1; labbarna i 4.1 och 4.3 värderar modellen men inte felkällor.
+**Så läser du tabellen.** KK1–KK2 (begrepp och samband) är tydligt täckta i alla delområden. KK5 har tre tydliga tillfällen (1.1, 2.2, 4.2) och tre svaga (2.1, 3.1, 3.2). KK6 (värdera) har tydliga tillfällen i 1.1 och i labb 3.1; labbarna i 4.1 och 4.3 värderar modellen men inte felkällor. KK3 (argumentera) och KK4 (källor) har bara ett tydligt tillfälle var i område 1–4 (1.2). Områden 5–12 är planerade men inte byggda: argumentation (SU4) finns i kärnmoment eller labbpass i område 5, 8, 10, 11 och 12 och källgranskning (SU3) i 7, 10 och 11, så de kan bära KK3 och KK4 senare.
 
 ## 2. Planeringens begrepp mot häftena
 
@@ -94,7 +94,7 @@ Kontrollen söker begreppets ordstam i häftenas text (pdf). **Ord** = begreppet
 | 1.2 Söka information och bedöma källor | **relevans** | Ord | Ord | Ord | Passar min fråga. |
 | 1.2 Söka information och bedöma källor | **avsändare** | Ord | Ord | – | Den som har skapat eller publicerat informationen. |
 | 1.2 Söka information och bedöma källor | **syfte** | Ord | Ord | – | Varför någon har skrivit en text, till exempel för att informera, övertyga eller sälja. |
-| 1.2 Söka information och bedöma källor | **motargument** | Ord | Ord | Ord | *(definition saknas)* |
+| 1.2 Söka information och bedöma källor | **motargument** | Ord | Ord | Ord | Ett argument mot ett påstående. Man bemöter det med belägg. |
 | 1.2 (om tid) Modeller och förklaringar | modell | Ord | Ord | Ord | En förenklad bild eller ett förenklat försök som visar hur något fungerar. |
 | 1.2 (om tid) Modeller och förklaringar | förklaringsmodell | – | Ord | – | Ett sätt att förklara hur något fungerar. |
 | 1.2 (om tid) Modeller och förklaringar | teori | – | Ord | – | En väl prövad förklaring som stöds av många belägg. |
@@ -294,10 +294,6 @@ Kontrollen söker begreppets ordstam i häftenas text (pdf). **Ord** = begreppet
 - DNA  [1.2 (om tid) Upptäckter som ändrat vår syn på naturen]: saknas/svagt i grund/fördjupning (–/–)
 - primär källa  [1.2 (om tid) Söka information]: saknas/svagt i grund/fördjupning (–/–)
 - sekundär källa  [1.2 (om tid) Söka information]: saknas/svagt i grund/fördjupning (–/–)
-
-**definition område 1** (1)
-
-- motargument
 
 **begrepp område 2** (6)
 

@@ -118,7 +118,8 @@ NYA = {
  "sökord": "Ord man skriver in när man söker information.",
  "avsändare": "Den som har skapat eller publicerat informationen.",
  "syfte": "Varför någon har skrivit en text, till exempel för att informera, övertyga eller sälja.",
- "motargument": "Ett argument mot ett påstående. Man bemöter det med belägg.",\n "tro": "Att vara övertygad om något utan att det går att pröva med undersökningar.",
+ "motargument": "Ett argument mot ett påstående. Man bemöter det med belägg.",
+ "tro": "Att vara övertygad om något utan att det går att pröva med undersökningar.",
  # område 2
  "encellig": "En organism som bara består av en cell.",
  "energi": "Det som behövs för att något ska kunna röra sig, växa eller bli varmt.",
