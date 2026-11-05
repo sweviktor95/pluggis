@@ -194,6 +194,11 @@ LAB25 = {
 }
 
 
+# Syfte per område: de delar av ämnets syfte som området tydligast bygger på (högst tre-fyra). Kontrolleras mot momentens koder.
+SYFTE_OMR = {1: "S7 S6 S3 S4", 2: "S2 S8", 3: "S2 S7 S3", 4: "S2 S7", 5: "S2 S5 S4", 6: "S2 S7 S8", 7: "S2 S6 S3", 8: "S2 S5 S4",
+             9: "S3 S2 S6", 10: "S2 S5 S6", 11: "S2 S5 S4", 12: "S7 S4 S5"}
+def syfte_omr(n): return "; ".join(B.SYFTE[k] for k in SYFTE_OMR[n].split())
+
 # ---- Kontroll --------------------------------------------------------------
 def kontroll():
     used = collections.Counter(); seen = collections.Counter(); area_f = collections.defaultdict(set); s3 = set()
@@ -212,6 +217,13 @@ def kontroll():
     weeks = sum(d[2] for a in NEW for d in a[3]); nk = sum(len(d[5]) for a in NEW for d in a[3]); ne = sum(len(d[6]) for a in NEW for d in a[3])
     nl = sum(1 for a in NEW for d in a[3] if d[0] in LAB25)
     bad = [d[0] for a in NEW for d in a[3] if d[2] >= 1 and len(d[5]) != 3]
+    for a in NEW:
+        koder = set()
+        for d in a[3]:
+            for i in d[5]: koder |= set(B.expand(mom(i)["tags"]))
+            if d[0] in LAB25: koder |= set(B.expand(LAB25[d[0]][4]))
+        for k in SYFTE_OMR[a[0]].split():
+            if k not in koder: bad.append(f"syfte {k} saknas i område {a[0]}")
     return seen, area_f, s3, missing_ids, dup, unk, ej, weeks, nk, ne, nl, bad
 
 def kl(ks, pat): return [(B.SYFTE[k] if k.startswith("S") and not k.startswith("SU") else X.SHORT[k]) for k in ks if re.match(pat, k)]
@@ -236,24 +248,24 @@ def skriv_md(seen, s3, weeks, nk, ne, nl):
     w("# Biologi åk 7–9 – planering (Lgr22)\n")
     w("Status: förslag, väntar på granskning. Genereras av `planering/biologi_plan25.py` – ändra där, inte här.\n")
     w(f"Planen omfattar {len(NEW)} områden, {sum(len(a[3]) for a in NEW)} delområden, {nk} lektionsmoment och {nl} labbpass. Det som inte ryms står under *Om tid / fördjupning* ({ne} moment) och kan användas i fördjupningshäftena.\n")
-    w("Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilket **centralt innehåll** och vilken **förmåga** (begrepp/modeller, granska/ta ställning, undersöka) det bygger på. Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).\n")
+    w("Varje moment visar vilket **centralt innehåll** och vilken **förmåga** (begrepp/modeller, granska/ta ställning, undersöka) det bygger på. Ämnets **syfte** följer med hela kursen och anges per område, för de delar området tydligast bygger på. Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).\n")
     w("## Översikt\n"); w("| Område | Delområden |"); w("|---|---|")
     for a in NEW: w(f"| {a[0]}. {a[1]} | {', '.join(d[1] for d in a[3])} |")
     w("")
     w("## Planen\n")
     for a in NEW:
-        w(f"## {a[0]}. {a[1]}\n"); w(f"*{a[2]}*\n")
+        w(f"## {a[0]}. {a[1]}\n"); w(f"*{a[2]}*\n"); w(f"**Syfte som området tydligast bygger på:** {syfte_omr(a[0])}\n")
         for d in a[3]:
             w(f"### {d[0]} {d[1]}\n"); w(f"**Mål:** {d[3]}\n"); w(f"**Nivåer (E→A):** {d[4]}\n")
             mod = modeller(d)
             if mod: w("**Förklaringsmodeller:** " + "; ".join(mod) + "\n")
-            w("| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |"); w("|---|---|---|---|---|---|")
+            w("| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |"); w("|---|---|---|---|---|")
             for n, i in enumerate(d[5], 1):
                 m = mom(i); ks = B.expand(m["tags"])
-                w(f"| **{m['titel']}** | {m['text']} | {m['begrepp']} | {'; '.join(kl(ks,PS))} | {'; '.join(kl(ks,PC))} | {'; '.join(kl(ks,PF))} |")
+                w(f"| **{m['titel']}** | {m['text']} | {m['begrepp']} | {'; '.join(kl(ks,PC))} | {'; '.join(kl(ks,PF))} |")
             if d[0] in LAB25:
                 t, fr, var, sak, tg, beg = LAB25[d[0]]; ks = B.expand(tg)
-                w(f"| 🧪 **Labb (ca 45 min): {t}** | {fr} {var} Säkerhet: {sak} | {beg} | {'; '.join(kl(ks,PS))} | {'; '.join(kl(ks,PC))} | {'; '.join(kl(ks,PF))} |")
+                w(f"| 🧪 **Labb (ca 45 min): {t}** | {fr} {var} Säkerhet: {sak} | {beg} | {'; '.join(kl(ks,PC))} | {'; '.join(kl(ks,PF))} |")
             w("")
             if d[6]: w("**Om tid / fördjupning:** " + "; ".join(mom(i)["titel"] for i in d[6]) + "\n")
     w("## Öppna frågor\n")
@@ -279,7 +291,7 @@ def skriv_xlsx():
         ws.freeze_panes = freeze; ws.auto_filter.ref = ws.dimensions
     wb = Workbook(); mrows = []; drows = []; arows = []; lrows = []
     for a in NEW:
-        arows.append([a[0], a[1], a[2], sum(d[2] for d in a[3]), len(a[3])])
+        arows.append([a[0], a[1], a[2], sum(d[2] for d in a[3]), len(a[3]), syfte_omr(a[0])])
         for d in a[3]:
             drows.append([a[0], a[1], d[0], d[1], d[2], d[3], d[4], "; ".join(modeller(d)), "; ".join(mom(i)["titel"] for i in d[6])])
             for n, i in enumerate(d[5], 1):
@@ -293,16 +305,16 @@ def skriv_xlsx():
                 m = mom(i); ks = B.expand(m["tags"])
                 mrows.append([a[0], a[1], d[0], d[1], d[2], "Om tid / fördjupning", m["titel"], m["text"], m["begrepp"], "; ".join(kl(ks, PS)), "; ".join(kl(ks, PC)), "; ".join(kl(ks, PF))])
     ws = wb.active; ws.title = "Moment"
-    mrows = [r[:4] + r[5:] for r in mrows]; drows = [r[:4] + r[5:] for r in drows]; arows = [r[:3] + r[4:] for r in arows]
-    sheet(ws, ["Område nr", "Område", "Delområde nr", "Delområde", "Typ", "Moment", "Innehåll i texten", "Begrepp", "Syfte", "Centralt innehåll", "Förmåga"],
-          mrows, [8, 24, 9, 28, 16, 32, 55, 36, 36, 40, 22], "G2")
+    mrows = [r[:4] + r[5:9] + r[10:] for r in mrows]; drows = [r[:4] + r[5:] for r in drows]; arows = [r[:3] + r[4:] for r in arows]
+    sheet(ws, ["Område nr", "Område", "Delområde nr", "Delområde", "Typ", "Moment", "Innehåll i texten", "Begrepp", "Centralt innehåll", "Förmåga"],
+          mrows, [8, 24, 9, 28, 16, 32, 55, 36, 40, 22], "G2")
     sheet(wb.create_sheet("Delområden"), ["Område nr", "Område", "Delområde nr", "Delområde", "Mål", "Nivåer (E→A)", "Förklaringsmodeller", "Om tid / fördjupning"], drows, [8, 24, 9, 30, 50, 60, 45, 50])
-    sheet(wb.create_sheet("Områden"), ["Nr", "Område", "Idé", "Delområden"], arows, [6, 32, 70, 10])
+    sheet(wb.create_sheet("Områden"), ["Nr", "Område", "Idé", "Delområden", "Syfte som området tydligast bygger på"], arows, [6, 32, 70, 10, 90])
     sheet(wb.create_sheet("Labbar"), ["Delområde nr", "Delområde", "Labb", "Undersökningsbar fråga", "Upplägg", "Säkerhet och anmärkning"], lrows, [10, 30, 32, 40, 60, 50])
     seen = kontroll()[0]
     sheet(wb.create_sheet("Täckning"), ["Kod", "Innehåll", "Antal lektioner/labbar"], [[k, v, seen[k]] for k, v in list(B.SYFTE.items()) + list(B.CI.items()) + list(B.FORM.items())], [8, 110, 14])
     wo = wb.create_sheet("Om planen", 0)
-    for r in ["Biologi åk 7–9 – planering (Lgr22). Förslag, väntar på granskning.", "Nivåer: område → delområde → moment.", "Syfte: den del av ämnets syfte (i sak) som momentet bygger på. Delar som följer av förmåga eller innehåll är härledda automatiskt.", "Begrepp och labbar är förslag, inte granskade mot läromedel eller skolans säkerhetsregler.", "Källa: planering/biologi_plan25.py i repot (ändra där, inte här)."]:
+    for r in ["Biologi åk 7–9 – planering (Lgr22). Förslag, väntar på granskning.", "Nivåer: område → delområde → moment.", "Syfte: ämnets syfte följer med hela kursen. Per område anges de delar som området tydligast bygger på (blad Områden).", "Begrepp och labbar är förslag, inte granskade mot läromedel eller skolans säkerhetsregler.", "Källa: planering/biologi_plan25.py i repot (ändra där, inte här)."]:
         wo.append([r])
     for row in wo.iter_rows():
         for c in row: c.font = F
@@ -336,15 +348,14 @@ tr.lab td{background:#f3f9f5}
     for a in NEW: o.append(f'<tr><td><b>{a[0]}. {e(a[1])}</b></td><td>{e(", ".join(d[1] for d in a[3]))}</td></tr>')
     o.append('</table></div>')
     def rad(titel_html, text, beg, ks, cls=""):
-        sy = kl(ks, PS); ce = kl(ks, PC); fm = kl(ks, PF); k = ""
-        if sy: k += "<div><b>Syfte:</b> " + e("; ".join(sy)) + "</div>"
+        ce = kl(ks, PC); fm = kl(ks, PF); k = ""
         if ce: k += "<div><b>Innehåll:</b> " + e("; ".join(ce)) + "</div>"
         k += "<div><b>Förmåga:</b> " + e("; ".join(fm)) + "</div>"
         return f'<tr class="{cls}"><td class="m"><b>{titel_html}</b>{e(text)}</td><td>{e(beg)}</td><td class="k">{k}</td></tr>'
     for a in NEW:
         for di, d in enumerate(a[3]):
             o.append('<div class="pg">')
-            if di == 0: o.append(f'<h2>{a[0]}. {e(a[1])}</h2><div class="idea">{e(a[2])}</div>')
+            if di == 0: o.append(f'<h2>{a[0]}. {e(a[1])}</h2><div class="idea">{e(a[2])}</div><div class="mal"><b>Syfte som området tydligast bygger på:</b> {e(syfte_omr(a[0]))}</div>')
             else: o.append(f'<div class="idea" style="margin:0 0 4pt;color:#3e7d5a"><b>{a[0]}. {e(a[1])}</b></div>')
             o.append(f'<h3>{d[0]} {e(d[1])}</h3><div class="mal"><b>Mål:</b> {e(d[3])}</div><div class="niv"><b>Nivåer:</b> {e(d[4])}</div>')
             mod = modeller(d)

@@ -4,7 +4,7 @@ Status: förslag, väntar på granskning. Genereras av `planering/biologi_plan25
 
 Planen omfattar 12 områden, 25 delområden, 74 lektionsmoment och 24 labbpass. Det som inte ryms står under *Om tid / fördjupning* (80 moment) och kan användas i fördjupningshäftena.
 
-Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilket **centralt innehåll** och vilken **förmåga** (begrepp/modeller, granska/ta ställning, undersöka) det bygger på. Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
+Varje moment visar vilket **centralt innehåll** och vilken **förmåga** (begrepp/modeller, granska/ta ställning, undersöka) det bygger på. Ämnets **syfte** följer med hela kursen och anges per område, för de delar området tydligast bygger på. Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
 
 ## Översikt
 
@@ -29,6 +29,8 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Hur vi vet det vi vet i biologi: undersöka, värdera, granska och argumentera. Läggs först eftersom allt annat bygger på det.*
 
+**Syfte som området tydligast bygger på:** Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder; Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan; Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden; Formulera egna och granska andras argument; kommunicera
+
 ### 1.1 Undersöka systematiskt
 
 **Mål:** Eleven kan planera, utföra, dokumentera och värdera en undersökning med en variabel i taget, säkert och med lämplig utrustning.
@@ -37,12 +39,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Forskningscykeln (fråga – plan – utförande – värdering – ny fråga); rättvist försök
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Från fråga till plan** | Göra frågan undersökningsbar; förväntan/hypotes; oberoende, beroende och kontrollerade variabler; rättvist försök. | undersökningsbar fråga, hypotes, oberoende, beroende och kontrollerad variabel, rättvist försök | Nyfikenhet och intresse; ställa frågor om natur och människa utifrån egna upplevelser och aktuella händelser; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Undersökningar | Undersöka |
-| **Dokumentera: tabell, diagram, rapport** | Rita tabell och diagram, välja diagramtyp, skriva en kort rapport med bilder. | tabell, diagram, rapport, axel, enhet | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Undersökningar | Undersöka |
-| **Värdera: slump, felkällor, slutsats** | Upprepade mätningar, felkällor, vad resultatet visar och inte visar; nytt försök. | felkälla, slump, upprepning, giltighet, slutsats | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Undersökningar | Undersöka |
-| 🧪 **Labb (ca 45 min): Reaktionstid som rättvist försök** | Påverkar övning reaktionstiden? Varierar: antal försök. Mäter: fallsträcka med fallande linjal. Kontrollerar: hand, startläge, mätare. Planeras i lektionerna, utförs och dokumenteras i passet. Säkerhet: Låg risk. Resultaten behandlas i klassen, inte som personliga värden. | variabel, mätning, medelvärde, felkälla | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder; Färdigheter i att hantera material, utrustning och digitala verktyg | Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Från fråga till plan** | Göra frågan undersökningsbar; förväntan/hypotes; oberoende, beroende och kontrollerade variabler; rättvist försök. | undersökningsbar fråga, hypotes, oberoende, beroende och kontrollerad variabel, rättvist försök | Undersökningar | Undersöka |
+| **Dokumentera: tabell, diagram, rapport** | Rita tabell och diagram, välja diagramtyp, skriva en kort rapport med bilder. | tabell, diagram, rapport, axel, enhet | Undersökningar | Undersöka |
+| **Värdera: slump, felkällor, slutsats** | Upprepade mätningar, felkällor, vad resultatet visar och inte visar; nytt försök. | felkälla, slump, upprepning, giltighet, slutsats | Undersökningar | Undersöka |
+| 🧪 **Labb (ca 45 min): Reaktionstid som rättvist försök** | Påverkar övning reaktionstiden? Varierar: antal försök. Mäter: fallsträcka med fallande linjal. Kontrollerar: hand, startläge, mätare. Planeras i lektionerna, utförs och dokumenteras i passet. Säkerhet: Låg risk. Resultaten behandlas i klassen, inte som personliga värden. | variabel, mätning, medelvärde, felkälla | Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Vad är biologi?; Från nyfikenhet till fråga; Utföra: material, säkerhet, digitala verktyg
 
@@ -54,18 +56,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Vad en modell är; förklaringsmodellers historia (t.ex. spontan uppkomst ersätts av mikroorganismer)
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Vad kan vetenskap pröva?** | Påståenden som går/inte går att pröva, vad ett belägg är, skillnaden mot tro och åsikt, pseudovetenskap med exempel. | belägg, påstående, pseudovetenskap, tro, åsikt | Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden; Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan | Informationsgranskning | Granska/ta ställning |
-| **När forskare ändrat sig** | Pasteur och spontan uppkomst, Semmelweis och handtvätt, magsårsbakterien: hur belägg ändrar bilden. | spontan uppkomst, mikroorganism, hygien | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder; Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Modeller och historia | Begrepp/modeller |
-| **Söka information och bedöma källor** | Söksätt och olika typer av källor; trovärdighet och relevans: avsändare, syfte, reklam och vinklade rubriker; argumentera med påstående, belägg och motargument. | källa, sökord, trovärdighet, relevans, avsändare, syfte, påstående, belägg, motargument | Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan; Formulera egna och granska andras argument; kommunicera | Informationsgranskning; Argumentation | Granska/ta ställning |
-| 🧪 **Labb (ca 45 min): Granska ett påstående** | Går ett vanligt hälsopåstående att belägga? Välj ett påstående, sök två källor och bedöm trovärdighet och relevans enligt en checklista. Säkerhet: Välj neutrala påståenden i klassen; inga personuppgifter. | påstående, källa, trovärdighet, relevans | Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan | Informationsgranskning | Granska/ta ställning |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Vad kan vetenskap pröva?** | Påståenden som går/inte går att pröva, vad ett belägg är, skillnaden mot tro och åsikt, pseudovetenskap med exempel. | belägg, påstående, pseudovetenskap, tro, åsikt | Informationsgranskning | Granska/ta ställning |
+| **När forskare ändrat sig** | Pasteur och spontan uppkomst, Semmelweis och handtvätt, magsårsbakterien: hur belägg ändrar bilden. | spontan uppkomst, mikroorganism, hygien | Modeller och historia | Begrepp/modeller |
+| **Söka information och bedöma källor** | Söksätt och olika typer av källor; trovärdighet och relevans: avsändare, syfte, reklam och vinklade rubriker; argumentera med påstående, belägg och motargument. | källa, sökord, trovärdighet, relevans, avsändare, syfte, påstående, belägg, motargument | Informationsgranskning; Argumentation | Granska/ta ställning |
+| 🧪 **Labb (ca 45 min): Granska ett påstående** | Går ett vanligt hälsopåstående att belägga? Välj ett påstående, sök två källor och bedöm trovärdighet och relevans enligt en checklista. Säkerhet: Välj neutrala påståenden i klassen; inga personuppgifter. | påstående, källa, trovärdighet, relevans | Informationsgranskning | Granska/ta ställning |
 
 **Om tid / fördjupning:** Modeller och förklaringar; Upptäckter som ändrat vår syn på naturen; Söka information; Statistik och diagram i påståenden; Argumentera
 
 ## 2. Cellen och livets processer
 
 *Cellen som livets enhet, energin som driver den och vägen från cell till organism.*
+
+**Syfte som området tydligast bygger på:** Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Färdigheter i att hantera material, utrustning och digitala verktyg
 
 ### 2.1 Cellen
 
@@ -75,12 +79,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Cellteorin; skiss/modell av djurcell och växtcell
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Cellteorin och mikroskopet** | Alla organismer består av celler; hur mikroskopet visade cellen; storleksskala. | cellteori, mikroskop, förstoring | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem; Modeller och historia | Begrepp/modeller |
-| **Djurcell och växtcell** | Cellkärna, cellmembran, cytoplasma, mitokondrier, kloroplaster, cellvägg, vakuol. | cellkärna, cellmembran, cytoplasma, mitokondrie, kloroplast, cellvägg, vakuol | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem | Begrepp/modeller |
-| **Bakterier och encelliga organismer** | Cell utan cellkärna, skillnader mot djur- och växtceller, encelliga organismer. | bakterie, encellig, cell utan cellkärna | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Mikroskopera celler** | Hur ser lök- och växtceller ut i mikroskop? Gör ett preparat, rita och märk cellen, jämför med en bild av djurcell. Säkerhet: Mikroskop och objektglas hanteras varsamt; skärverktyg bara med lärare. | mikroskop, preparat, cellvägg, cellkärna | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Celler och organsystem; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Cellteorin och mikroskopet** | Alla organismer består av celler; hur mikroskopet visade cellen; storleksskala. | cellteori, mikroskop, förstoring | Celler och organsystem; Modeller och historia | Begrepp/modeller |
+| **Djurcell och växtcell** | Cellkärna, cellmembran, cytoplasma, mitokondrier, kloroplaster, cellvägg, vakuol. | cellkärna, cellmembran, cytoplasma, mitokondrie, kloroplast, cellvägg, vakuol | Celler och organsystem | Begrepp/modeller |
+| **Bakterier och encelliga organismer** | Cell utan cellkärna, skillnader mot djur- och växtceller, encelliga organismer. | bakterie, encellig, cell utan cellkärna | Celler och organsystem | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Mikroskopera celler** | Hur ser lök- och växtceller ut i mikroskop? Gör ett preparat, rita och märk cellen, jämför med en bild av djurcell. Säkerhet: Mikroskop och objektglas hanteras varsamt; skärverktyg bara med lärare. | mikroskop, preparat, cellvägg, cellkärna | Celler och organsystem; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Transport över cellmembranet; Gemensamt ursprung
 
@@ -92,12 +96,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Fotosyntesens reaktionsformel i ord; Cellandningens reaktionsformel i ord; modell av kol och energi i kretslopp
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Växten som producent** | Vad växten behöver och bildar; reaktionsformel i ord. | producent, fotosyntes, koldioxid, vatten, glukos, syre | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Fotosyntes, kretslopp, energi | Begrepp/modeller |
-| **Cellandning** | Ämnen in/ut, mitokondrien, att alla levande celler andas, energi till livsfunktioner. | cellandning, mitokondrie, energi, syre | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Fotosyntes, kretslopp, energi; Celler och organsystem | Begrepp/modeller |
-| **Processerna tillsammans** | Fotosyntes och cellandning som varandras motsatser; kol och energi i kretslopp. | kretslopp, kol, energiflöde | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Fotosyntes, kretslopp, energi | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Jäst och koldioxid** | Hur påverkar temperaturen jästens koldioxidbildning? Varierar: temperatur. Mäter: ballongens omfång eller skumhöjd efter fast tid. Säkerhet: Använd ljummet, inte hett vatten; tvätta händerna. | cellandning, jäsning, koldioxid, kontrollförsök | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Fotosyntes, kretslopp, energi; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Växten som producent** | Vad växten behöver och bildar; reaktionsformel i ord. | producent, fotosyntes, koldioxid, vatten, glukos, syre | Fotosyntes, kretslopp, energi | Begrepp/modeller |
+| **Cellandning** | Ämnen in/ut, mitokondrien, att alla levande celler andas, energi till livsfunktioner. | cellandning, mitokondrie, energi, syre | Fotosyntes, kretslopp, energi; Celler och organsystem | Begrepp/modeller |
+| **Processerna tillsammans** | Fotosyntes och cellandning som varandras motsatser; kol och energi i kretslopp. | kretslopp, kol, energiflöde | Fotosyntes, kretslopp, energi | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Jäst och koldioxid** | Hur påverkar temperaturen jästens koldioxidbildning? Varierar: temperatur. Mäter: ballongens omfång eller skumhöjd efter fast tid. Säkerhet: Använd ljummet, inte hett vatten; tvätta händerna. | cellandning, jäsning, koldioxid, kontrollförsök | Fotosyntes, kretslopp, energi; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Bladet och kloroplasten; Vad påverkar fotosyntesen?; Från glukos till växtens kropp; Jäsning
 
@@ -109,16 +113,18 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Nivåmodellen cell – vävnad – organ – organsystem – organism
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Specialiserade celler och vävnader** | Olika celltyper med olika uppgifter; vävnad och organ. | specialiserad cell, vävnad, organ | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem | Begrepp/modeller |
-| **Kroppens organsystem – översikt** | Vilka system kroppen har och vad de gör, som karta över kommande kapitel. | organsystem, organism | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem | Begrepp/modeller |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Specialiserade celler och vävnader** | Olika celltyper med olika uppgifter; vävnad och organ. | specialiserad cell, vävnad, organ | Celler och organsystem | Begrepp/modeller |
+| **Kroppens organsystem – översikt** | Vilka system kroppen har och vad de gör, som karta över kommande kapitel. | organsystem, organism | Celler och organsystem | Begrepp/modeller |
 
 **Om tid / fördjupning:** Växtens organ
 
 ## 3. Biologisk mångfald
 
 *Mångfaldens nivåer, hur organismer grupperas, vad som lever omkring oss och varför mångfalden är viktig.*
+
+**Syfte som området tydligast bygger på:** Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder; Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden
 
 ### 3.1 Mångfald, hot och ekosystemtjänster
 
@@ -128,12 +134,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Mångfaldens tre nivåer
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Gener, arter och ekosystem** | De tre nivåerna med exempel. | biologisk mångfald, genetisk variation, artmångfald, ekosystemmångfald | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Evolution och mångfald; Påverkan och hållbarhet | Begrepp/modeller |
-| **Ekosystemtjänster** | Försörjande, reglerande, kulturella och stödjande tjänster med exempel. | ekosystemtjänst, försörjande, reglerande, kulturell, stödjande | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Påverkan och hållbarhet | Begrepp/modeller |
-| **Hoten mot mångfalden** | Förlorade livsmiljöer, överutnyttjande, invasiva arter, klimat, föroreningar. | habitatförlust, invasiv art, överexploatering | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Påverkan och hållbarhet | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Artinventering i en provruta** | Hur många sorters växter finns i en kvadratmeter? Räkna olika sorter i provrutor på två platser, jämför i tabell. Säkerhet: Smaka aldrig på växter eller svampar; följ allemansrätten. | inventering, provruta, artrikedom | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Påverkan och hållbarhet; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Gener, arter och ekosystem** | De tre nivåerna med exempel. | biologisk mångfald, genetisk variation, artmångfald, ekosystemmångfald | Evolution och mångfald; Påverkan och hållbarhet | Begrepp/modeller |
+| **Ekosystemtjänster** | Försörjande, reglerande, kulturella och stödjande tjänster med exempel. | ekosystemtjänst, försörjande, reglerande, kulturell, stödjande | Påverkan och hållbarhet | Begrepp/modeller |
+| **Hoten mot mångfalden** | Förlorade livsmiljöer, överutnyttjande, invasiva arter, klimat, föroreningar. | habitatförlust, invasiv art, överexploatering | Påverkan och hållbarhet | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Artinventering i en provruta** | Hur många sorters växter finns i en kvadratmeter? Räkna olika sorter i provrutor på två platser, jämför i tabell. Säkerhet: Smaka aldrig på växter eller svampar; följ allemansrätten. | inventering, provruta, artrikedom | Påverkan och hållbarhet; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Hur mäter man mångfald?; Var finns mångfalden?
 
@@ -145,18 +151,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Systematikens nivåer och bestämningsnyckeln som modell
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Rikena** | Djur, växter, svampar, bakterier och encelliga organismer. | rike: djur, växter, svampar, bakterier | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Evolution och mångfald | Begrepp/modeller |
-| **Bestämningsnycklar** | Hur man använder och bygger en nyckel. | bestämningsnyckel, kännetecken | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Undersökningar | Undersöka |
-| **Anpassningar** | Hur byggnad och beteende passar miljön; ett första möte med naturligt urval. | anpassning, variation, naturligt urval | Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden; Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Evolution och mångfald | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Artbestämning med nyckel** | Vilka arter är det? Bestäm med nyckel. Bestäm löv eller barr med bestämningsnyckel och dokumentera med bild. Säkerhet: Samla bara vanliga arter; handtvätt. | bestämningsnyckel, kännetecken, art | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Evolution och mångfald; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Rikena** | Djur, växter, svampar, bakterier och encelliga organismer. | rike: djur, växter, svampar, bakterier | Evolution och mångfald | Begrepp/modeller |
+| **Bestämningsnycklar** | Hur man använder och bygger en nyckel. | bestämningsnyckel, kännetecken | Undersökningar | Undersöka |
+| **Anpassningar** | Hur byggnad och beteende passar miljön; ett första möte med naturligt urval. | anpassning, variation, naturligt urval | Evolution och mångfald | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Artbestämning med nyckel** | Vilka arter är det? Bestäm med nyckel. Bestäm löv eller barr med bestämningsnyckel och dokumentera med bild. Säkerhet: Samla bara vanliga arter; handtvätt. | bestämningsnyckel, kännetecken, art | Evolution och mångfald; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Varför gruppera?; Vanliga svenska arter; Alger, mossor och ormbunkar; Fröväxter; Svampar och lavar; Ryggradslösa djur; Ryggradsdjur
 
 ## 4. Ekologi
 
 *Samspel i ekosystem: energi, kretslopp, populationer och resurser, lokalt och globalt.*
+
+**Syfte som området tydligast bygger på:** Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder
 
 ### 4.1 Ekosystem och energi
 
@@ -166,12 +174,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Ekosystemet som modell: biotiska och abiotiska delar; Näringskedja, näringsväv och energipyramid
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Vad är ett ekosystem?** | Levande och icke-levande delar; gränser och exempel. | ekosystem, biotisk, abiotisk, population | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Ekosystem och populationer | Begrepp/modeller |
-| **Producenter, konsumenter och näringsvävar** | Roller i ekosystemet; rita och läsa näringskedjor och näringsvävar. | producent, konsument, nedbrytare, näringskedja, näringsväv, trofinivå | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Ekosystem och populationer; Fotosyntes, kretslopp, energi | Begrepp/modeller |
-| **Energiflöde och biomassa** | Energin minskar uppåt; varför det finns färre rovdjur än växtätare. | energiflöde, biomassa, energiförlust | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Fotosyntes, kretslopp, energi | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Energi i en näringskedja – modellspel** | Hur mycket energi når toppen av en kedja? Modell med kort och marker: energi minskar mellan nivåerna; noteras i tabell. Säkerhet: Låg risk. | energiförlust, trofinivå, modell | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Fotosyntes, kretslopp, energi; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Vad är ett ekosystem?** | Levande och icke-levande delar; gränser och exempel. | ekosystem, biotisk, abiotisk, population | Ekosystem och populationer | Begrepp/modeller |
+| **Producenter, konsumenter och näringsvävar** | Roller i ekosystemet; rita och läsa näringskedjor och näringsvävar. | producent, konsument, nedbrytare, näringskedja, näringsväv, trofinivå | Ekosystem och populationer; Fotosyntes, kretslopp, energi | Begrepp/modeller |
+| **Energiflöde och biomassa** | Energin minskar uppåt; varför det finns färre rovdjur än växtätare. | energiflöde, biomassa, energiförlust | Fotosyntes, kretslopp, energi | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Energi i en näringskedja – modellspel** | Hur mycket energi når toppen av en kedja? Modell med kort och marker: energi minskar mellan nivåerna; noteras i tabell. Säkerhet: Låg risk. | energiförlust, trofinivå, modell | Fotosyntes, kretslopp, energi; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Lokala och globala ekosystem; Habitat och nisch; Producenter, konsumenter och nedbrytare; Störs vävan – vad händer?
 
@@ -183,12 +191,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Kretsloppsmodeller för kol, kväve och vatten
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Materia tillverkas inte och försvinner inte** | Atomerna återanvänds; kretslopp och energiflöde skiljs åt. | kretslopp, materia, atom, energiflöde | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Fotosyntes, kretslopp, energi | Begrepp/modeller |
-| **Kolets kretslopp** | Fotosyntes, cellandning, förbränning, fossilt kol. | kolets kretslopp, förbränning, fossilt kol | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Fotosyntes, kretslopp, energi | Begrepp/modeller |
-| **Nedbrytning** | Nedbrytarnas roll; jordens bildning. | nedbrytning, humus, mull | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Fotosyntes, kretslopp, energi | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Nedbrytning i jord** | Hur snabbt bryts olika material ned? Starta ett försök med olika material i jord; avläs vid nästa pass. Säkerhet: Handskar och handtvätt; samla in materialet efteråt. | nedbrytning, nedbrytare, förna | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Fotosyntes, kretslopp, energi; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Materia tillverkas inte och försvinner inte** | Atomerna återanvänds; kretslopp och energiflöde skiljs åt. | kretslopp, materia, atom, energiflöde | Fotosyntes, kretslopp, energi | Begrepp/modeller |
+| **Kolets kretslopp** | Fotosyntes, cellandning, förbränning, fossilt kol. | kolets kretslopp, förbränning, fossilt kol | Fotosyntes, kretslopp, energi | Begrepp/modeller |
+| **Nedbrytning** | Nedbrytarnas roll; jordens bildning. | nedbrytning, humus, mull | Fotosyntes, kretslopp, energi | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Nedbrytning i jord** | Hur snabbt bryts olika material ned? Starta ett försök med olika material i jord; avläs vid nästa pass. Säkerhet: Handskar och handtvätt; samla in materialet efteråt. | nedbrytning, nedbrytare, förna | Fotosyntes, kretslopp, energi; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Kvävets och vattnets kretslopp
 
@@ -200,18 +208,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Populationens tillväxtkurva och bärkraft
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Populationer och förändring** | Födelser, dödsfall, in- och utvandring; tillväxtkurvor. | population, födda, döda, inflyttning, utflyttning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Ekosystem och populationer; Undersökningar | Begrepp/modeller |
-| **Begränsande faktorer** | Föda, plats, sjukdom; bärkraft. | begränsande faktor, bärkraft, resurs | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Ekosystem och populationer | Begrepp/modeller |
-| **Konkurrens, jakt och samarbete** | Predation, parasitism, symbios; samutveckling som exempel på evolution. | predation, parasitism, symbios, samutveckling | Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden; Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Ekosystem och populationer; Evolution och mångfald | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Rovdjur–bytesmodell** | Hur påverkar tillgången på föda en population? Modellspel med kort; ändra födomängd och notera populationen i tabell och diagram. Säkerhet: Låg risk. | population, begränsande faktor, bärkraft | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Ekosystem och populationer; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Populationer och förändring** | Födelser, dödsfall, in- och utvandring; tillväxtkurvor. | population, födda, döda, inflyttning, utflyttning | Ekosystem och populationer; Undersökningar | Begrepp/modeller |
+| **Begränsande faktorer** | Föda, plats, sjukdom; bärkraft. | begränsande faktor, bärkraft, resurs | Ekosystem och populationer | Begrepp/modeller |
+| **Konkurrens, jakt och samarbete** | Predation, parasitism, symbios; samutveckling som exempel på evolution. | predation, parasitism, symbios, samutveckling | Ekosystem och populationer; Evolution och mångfald | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Rovdjur–bytesmodell** | Hur påverkar tillgången på föda en population? Modellspel med kort; ändra födomängd och notera populationen i tabell och diagram. Säkerhet: Låg risk. | population, begränsande faktor, bärkraft | Ekosystem och populationer; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Ekosystems känslighet
 
 ## 5. Människan och miljön
 
 *Hur människan påverkar naturen och hur individer och samhället kan främja hållbar utveckling.*
+
+**Syfte som området tydligast bygger på:** Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa; Formulera egna och granska andras argument; kommunicera
 
 ### 5.1 Påverkan på naturen och klimat
 
@@ -221,12 +231,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Växthuseffektens modell
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Övergödning** | Orsaker och följder, exemplet Östersjön. | övergödning, fosfor, kväve, algblomning, syrebrist | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Påverkan och hållbarhet | Begrepp/modeller |
-| **Växthuseffekten** | Naturlig och förstärkt växthuseffekt. | växthuseffekt, växthusgas, global uppvärmning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Fotosyntes, kretslopp, energi; Påverkan och hållbarhet | Begrepp/modeller |
-| **Följder för arter och ekosystem** | Förändrade utbredningsområden, korallblekning, havsförsurning. | utbredningsområde, havsförsurning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Påverkan och hållbarhet | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Växthuseffekten – modell** | Hur påverkar en 'atmosfär' temperaturen? Två flaskor med termometer under lampa, den ena med lock. Modellen förenklar verkligheten. Säkerhet: Lampa blir het; vuxen hanterar. | växthuseffekt, modell, mätning | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Fotosyntes, kretslopp, energi; Påverkan och hållbarhet; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Övergödning** | Orsaker och följder, exemplet Östersjön. | övergödning, fosfor, kväve, algblomning, syrebrist | Påverkan och hållbarhet | Begrepp/modeller |
+| **Växthuseffekten** | Naturlig och förstärkt växthuseffekt. | växthuseffekt, växthusgas, global uppvärmning | Fotosyntes, kretslopp, energi; Påverkan och hållbarhet | Begrepp/modeller |
+| **Följder för arter och ekosystem** | Förändrade utbredningsområden, korallblekning, havsförsurning. | utbredningsområde, havsförsurning | Påverkan och hållbarhet | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Växthuseffekten – modell** | Hur påverkar en 'atmosfär' temperaturen? Två flaskor med termometer under lampa, den ena med lock. Modellen förenklar verkligheten. Säkerhet: Lampa blir het; vuxen hanterar. | växthuseffekt, modell, mätning | Fotosyntes, kretslopp, energi; Påverkan och hållbarhet; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Naturbruk; Miljögifter och bioackumulering; Försurning och invasiva arter; Kolsänkor och åtgärder
 
@@ -238,18 +248,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Hållbar utveckling i tre dimensioner
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Vad är hållbar utveckling?** | Ekologisk, social och ekonomisk dimension. | hållbar utveckling, ekologisk, social och ekonomisk hållbarhet | Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa; Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Påverkan och hållbarhet | Begrepp/modeller |
-| **Naturresurser och ekosystemtjänster** | Förnybart och icke-förnybart; vad vi får gratis av naturen. | naturresurs, förnybar, icke-förnybar, ekosystemtjänst | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Påverkan och hållbarhet | Begrepp/modeller |
-| **Vad kan jag och samhället göra?** | Konsumtion, mat, resor, lagar och naturskydd. | konsumtion, ekologiskt fotavtryck, naturskydd | Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa | Påverkan och hållbarhet | Granska/ta ställning |
-| 🧪 **Labb (ca 45 min): Argumentera i en miljöfråga** | Hur kan vi väga naturvetenskapliga och etiska skäl? Strukturerad diskussion med roller; samla belägg och bemöt motargument. Säkerhet: Fokusera på argument, inte personer. | argument, motargument, ståndpunkt | Formulera egna och granska andras argument; kommunicera; Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa | Argumentation | Granska/ta ställning |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Vad är hållbar utveckling?** | Ekologisk, social och ekonomisk dimension. | hållbar utveckling, ekologisk, social och ekonomisk hållbarhet | Påverkan och hållbarhet | Begrepp/modeller |
+| **Naturresurser och ekosystemtjänster** | Förnybart och icke-förnybart; vad vi får gratis av naturen. | naturresurs, förnybar, icke-förnybar, ekosystemtjänst | Påverkan och hållbarhet | Begrepp/modeller |
+| **Vad kan jag och samhället göra?** | Konsumtion, mat, resor, lagar och naturskydd. | konsumtion, ekologiskt fotavtryck, naturskydd | Påverkan och hållbarhet | Granska/ta ställning |
+| 🧪 **Labb (ca 45 min): Argumentera i en miljöfråga** | Hur kan vi väga naturvetenskapliga och etiska skäl? Strukturerad diskussion med roller; samla belägg och bemöt motargument. Säkerhet: Fokusera på argument, inte personer. | argument, motargument, ståndpunkt | Argumentation | Granska/ta ställning |
 
 **Om tid / fördjupning:** Argumentera i en miljöfråga
 
 ## 6. Kroppens system: mat, andning och blod
 
 *Hur kroppens organsystem tar upp och transporterar det cellerna behöver, och hur de samverkar.*
+
+**Syfte som området tydligast bygger på:** Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder; Färdigheter i att hantera material, utrustning och digitala verktyg
 
 ### 6.1 Mat och matspjälkning
 
@@ -259,12 +271,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Matspjälkningen som kedja; enzym och substrat (nyckel–lås)
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Kolhydrater, proteiner och fetter** | Uppgifter och källor. | kolhydrat, protein, fett, aminosyra | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem; Hälsa | Begrepp/modeller |
-| **Matens väg och spjälkning** | Matspjälkningens organ från mun till tjocktarm; enzymer och upptag i tunntarmen. | matstrupe, magsäck, tunntarm, tjocktarm, enzym, spjälkning, upptag | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem | Begrepp/modeller |
-| **Kostråd och energibalans** | Vad kostråd bygger på; vad som händer vid över- och underskott. | kostråd, energibalans, näringsrik | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Hälsa | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Enzymförsök** | Hur påverkar temperatur nedbrytning av stärkelse? Varierar: temperatur. Mäter: tid tills jodtestet inte längre ger färg. Säkerhet: Jodlösning fläckar och kan irritera; skyddsglasögon. Smaka inte på något. | enzym, stärkelse, jodtest | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Celler och organsystem; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Kolhydrater, proteiner och fetter** | Uppgifter och källor. | kolhydrat, protein, fett, aminosyra | Celler och organsystem; Hälsa | Begrepp/modeller |
+| **Matens väg och spjälkning** | Matspjälkningens organ från mun till tjocktarm; enzymer och upptag i tunntarmen. | matstrupe, magsäck, tunntarm, tjocktarm, enzym, spjälkning, upptag | Celler och organsystem | Begrepp/modeller |
+| **Kostråd och energibalans** | Vad kostråd bygger på; vad som händer vid över- och underskott. | kostråd, energibalans, näringsrik | Hälsa | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Enzymförsök** | Hur påverkar temperatur nedbrytning av stärkelse? Varierar: temperatur. Mäter: tid tills jodtestet inte längre ger färg. Säkerhet: Jodlösning fläckar och kan irritera; skyddsglasögon. Smaka inte på något. | enzym, stärkelse, jodtest | Celler och organsystem; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Vitaminer, mineraler, vatten och fibrer; Energi i maten; Enzymer och spjälkning; Upptag och tarmflora; Mat och miljö; Granska kostpåståenden
 
@@ -276,18 +288,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Dubbla blodomloppet
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Luftvägar och lungor** | Näsa till lungblåsor; gasutbyte. | luftstrupe, bronker, lungblåsor, gasutbyte | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem | Begrepp/modeller |
-| **Hjärta och blodkärl** | Hjärtats byggnad, artärer, vener, kapillärer. | hjärta, förmak, kammare, klaff, artär, ven, kapillär | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem | Begrepp/modeller |
-| **Blodomloppet och syretransport** | Lilla och stora kretsloppet. | lilla och stora kretsloppet, syretransport | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Celler och organsystem | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Puls och andning vid belastning** | Hur förändras puls och andning efter ansträngning? Mät vila och efter belastning; sammanställ i diagram. Säkerhet: Frivilligt; anpassa belastningen så att alla kan delta. | puls, andningsfrekvens, belastning | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Celler och organsystem; Hälsa; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Luftvägar och lungor** | Näsa till lungblåsor; gasutbyte. | luftstrupe, bronker, lungblåsor, gasutbyte | Celler och organsystem | Begrepp/modeller |
+| **Hjärta och blodkärl** | Hjärtats byggnad, artärer, vener, kapillärer. | hjärta, förmak, kammare, klaff, artär, ven, kapillär | Celler och organsystem | Begrepp/modeller |
+| **Blodomloppet och syretransport** | Lilla och stora kretsloppet. | lilla och stora kretsloppet, syretransport | Celler och organsystem | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Puls och andning vid belastning** | Hur förändras puls och andning efter ansträngning? Mät vila och efter belastning; sammanställ i diagram. Säkerhet: Frivilligt; anpassa belastningen så att alla kan delta. | puls, andningsfrekvens, belastning | Celler och organsystem; Hälsa; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Andning och cellandning; Blodet; Skelett och muskler; Samverkan vid ansträngning
 
 ## 7. Infektioner och immunförsvar
 
 *Bakterier och virus, smitta, kroppens försvar, vaccin och antibiotika.*
+
+**Syfte som området tydligast bygger på:** Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan; Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden
 
 ### 7.1 Bakterier, virus och smitta
 
@@ -297,12 +311,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Virusets förökning i värdcell
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Bakterier och virus** | Byggnad och förökning; nyttiga och skadliga bakterier; virus i värdceller; vad som skiljer dem åt. | bakterie, virus, värdcell, delning, förökning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Infektioner | Begrepp/modeller |
-| **Smittvägar** | Droppe, kontakt, mat, vektorer. | smittväg, droppsmitta, kontaktsmitta, vektor | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Infektioner | Begrepp/modeller |
-| **Förebygga smitta** | Hygien, isolering, smittspårning; epidemi och pandemi. | hygien, epidemi, pandemi, smittspårning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Infektioner; Hälsa | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Smittspridningsmodell med handtvätt** | Hur snabbt sprids smitta, och hur påverkar handtvätt? Modellmaterial (glitter eller fluorescerande pulver) med och utan handtvätt; räkna 'smittade'. Säkerhet: Inga odlingar från kroppen eller ytor. | smittväg, hygien, modell | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Infektioner; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Bakterier och virus** | Byggnad och förökning; nyttiga och skadliga bakterier; virus i värdceller; vad som skiljer dem åt. | bakterie, virus, värdcell, delning, förökning | Infektioner | Begrepp/modeller |
+| **Smittvägar** | Droppe, kontakt, mat, vektorer. | smittväg, droppsmitta, kontaktsmitta, vektor | Infektioner | Begrepp/modeller |
+| **Förebygga smitta** | Hygien, isolering, smittspårning; epidemi och pandemi. | hygien, epidemi, pandemi, smittspårning | Infektioner; Hälsa | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Smittspridningsmodell med handtvätt** | Hur snabbt sprids smitta, och hur påverkar handtvätt? Modellmaterial (glitter eller fluorescerande pulver) med och utan handtvätt; räkna 'smittade'. Säkerhet: Inga odlingar från kroppen eller ytor. | smittväg, hygien, modell | Infektioner; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Virus
 
@@ -314,18 +328,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Immunförsvarets modell: första försvar, antikroppar, minne; Flockimmunitet; resistens som naturligt urval
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Vita blodkroppar och antikroppar** | Hur kroppen känner igen och oskadliggör. | vit blodkropp, antikropp, antigen | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Infektioner | Begrepp/modeller |
-| **Vaccination** | Hur vaccin fungerar och flockimmunitet. | vaccin, flockimmunitet | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Infektioner | Begrepp/modeller |
-| **Antibiotika och resistens** | Antibiotika verkar på bakterier, inte virus; resistens uppstår genom naturligt urval; varför antibiotika ska användas rätt. | antibiotika, resistens, naturligt urval, mutation | Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden; Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Infektioner; Evolution och mångfald | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Granska ett vaccinpåstående** | Går ett påstående om vaccin att belägga? Sök två källor, bedöm trovärdighet och relevans, sammanfatta. Säkerhet: Välj påståenden i klassen; inga personuppgifter. | vaccin, källa, belägg | Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan | Infektioner; Informationsgranskning | Granska/ta ställning |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Vita blodkroppar och antikroppar** | Hur kroppen känner igen och oskadliggör. | vit blodkropp, antikropp, antigen | Infektioner | Begrepp/modeller |
+| **Vaccination** | Hur vaccin fungerar och flockimmunitet. | vaccin, flockimmunitet | Infektioner | Begrepp/modeller |
+| **Antibiotika och resistens** | Antibiotika verkar på bakterier, inte virus; resistens uppstår genom naturligt urval; varför antibiotika ska användas rätt. | antibiotika, resistens, naturligt urval, mutation | Infektioner; Evolution och mångfald | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Granska ett vaccinpåstående** | Går ett påstående om vaccin att belägga? Sök två källor, bedöm trovärdighet och relevans, sammanfatta. Säkerhet: Välj påståenden i klassen; inga personuppgifter. | vaccin, källa, belägg | Infektioner; Informationsgranskning | Granska/ta ställning |
 
 **Om tid / fördjupning:** Barriärer och första försvar; Immunologiskt minne; Antibiotika; Granska påståenden om vaccin och smitta
 
 ## 8. Arv, genetik och genteknik
 
 *Arvsmassan, hur egenskaper ärvs, samspelet mellan arv och miljö samt genteknikens möjligheter och etik.*
+
+**Syfte som området tydligast bygger på:** Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa; Formulera egna och granska andras argument; kommunicera
 
 ### 8.1 DNA och nedärvning
 
@@ -335,12 +351,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** DNA-modellen och gen – protein – egenskap; Mendels modell och korsningsschema
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **DNA, gener och kromosomer** | DNA som arvsmassa; gen, kromosom, genom; hur gener styr egenskaper. | DNA, gen, kromosom, genom, cellkärna, protein, egenskap | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Arv och miljö | Begrepp/modeller |
-| **Anlag och alleler** | Dominant och recessiv; genotyp och fenotyp. | allel, dominant, recessiv, genotyp, fenotyp | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Arv och miljö | Begrepp/modeller |
-| **Korsningsschema** | Sannolikheter vid en egenskap. | korsningsschema, sannolikhet | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Arv och miljö | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): DNA ur frukt** | Går DNA att göra synligt? Jordgubbe med diskmedel, salt och kall sprit; jämför med och utan diskmedel. Säkerhet: Sprit är brandfarlig och ska inte intas; skyddsglasögon. | DNA, extraktion | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Arv och miljö; Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **DNA, gener och kromosomer** | DNA som arvsmassa; gen, kromosom, genom; hur gener styr egenskaper. | DNA, gen, kromosom, genom, cellkärna, protein, egenskap | Arv och miljö | Begrepp/modeller |
+| **Anlag och alleler** | Dominant och recessiv; genotyp och fenotyp. | allel, dominant, recessiv, genotyp, fenotyp | Arv och miljö | Begrepp/modeller |
+| **Korsningsschema** | Sannolikheter vid en egenskap. | korsningsschema, sannolikhet | Arv och miljö | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): DNA ur frukt** | Går DNA att göra synligt? Jordgubbe med diskmedel, salt och kall sprit; jämför med och utan diskmedel. Säkerhet: Sprit är brandfarlig och ska inte intas; skyddsglasögon. | DNA, extraktion | Arv och miljö; Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** DNA; Från gen till egenskap; Celldelning; Könsceller och befruktning; Ärftliga sjukdomar och stamträd
 
@@ -350,18 +366,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Nivåer (E→A):** E: ger exempel och framför enkelt argument. C: förklarar samverkan och bemöter argument med belägg. A: väger flera perspektiv mot varandra.
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Arv och miljö** | Egenskaper formas av båda; tvillingar som exempel. | arv, miljö, variation, tvillingstudier | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Arv och miljö | Begrepp/modeller |
-| **Gensax, GMO och kloning** | Principer i enkel form. | GMO, gensax (CRISPR), kloning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Genteknik | Begrepp/modeller |
-| **Etiska frågor** | Vad vi bör göra – inte bara vad vi kan. | etik, försiktighetsprincipen, integritet | Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa; Formulera egna och granska andras argument; kommunicera | Genteknik; Argumentation | Granska/ta ställning |
-| 🧪 **Labb (ca 45 min): Etisk bedömning av genteknik** | Vilka argument finns för och emot en genteknisk användning? Strukturerad diskussion med roller, belägg och motargument. Säkerhet: Fokusera på argument, inte personer. | möjlighet, risk, etik, argument | Formulera egna och granska andras argument; kommunicera; Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa | Genteknik; Argumentation | Granska/ta ställning |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Arv och miljö** | Egenskaper formas av båda; tvillingar som exempel. | arv, miljö, variation, tvillingstudier | Arv och miljö | Begrepp/modeller |
+| **Gensax, GMO och kloning** | Principer i enkel form. | GMO, gensax (CRISPR), kloning | Genteknik | Begrepp/modeller |
+| **Etiska frågor** | Vad vi bör göra – inte bara vad vi kan. | etik, försiktighetsprincipen, integritet | Genteknik; Argumentation | Granska/ta ställning |
+| 🧪 **Labb (ca 45 min): Etisk bedömning av genteknik** | Vilka argument finns för och emot en genteknisk användning? Strukturerad diskussion med roller, belägg och motargument. Säkerhet: Fokusera på argument, inte personer. | möjlighet, risk, etik, argument | Genteknik; Argumentation | Granska/ta ställning |
 
 **Om tid / fördjupning:** Mutationer; Förädling och genteknik; Medicin; Jordbruk och livsmedel; Släktskap och identifiering; Möjligheter och risker
 
 ## 9. Evolution och livets historia
 
 *Hur livet uppstod och förändras, mekanismerna och bevisen. Evolutionen bär även övriga områden.*
+
+**Syfte som området tydligast bygger på:** Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden; Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan
 
 ### 9.1 Livets historia och bevis
 
@@ -371,12 +389,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Släktträd (tolkning av släktskap)
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Jordens och livets tidslinje** | Jordens ålder, de första cellerna, flercelligt liv. | tidslinje, första celler, flercelligt liv | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Evolution och mångfald | Begrepp/modeller |
-| **Fossil och massutdöenden** | Hur fossil bildas och berättar. | fossil, massutdöende, geologisk tid | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Evolution och mångfald | Begrepp/modeller |
-| **Fossil och jämförande anatomi** | Släktskap som syns i byggnad. | fossil, homologa organ, släktskap | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Evolution och mångfald; Modeller och historia | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Jämför skelett och bygg släktträd** | Vad visar likheter i byggnad om släktskap? Jämför ben i framben hos olika däggdjur med digitala bilder; rita ett enkelt släktträd. Säkerhet: Låg risk. | homologa organ, släktskap, släktträd | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Evolution och mångfald; Modeller och historia | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Jordens och livets tidslinje** | Jordens ålder, de första cellerna, flercelligt liv. | tidslinje, första celler, flercelligt liv | Evolution och mångfald | Begrepp/modeller |
+| **Fossil och massutdöenden** | Hur fossil bildas och berättar. | fossil, massutdöende, geologisk tid | Evolution och mångfald | Begrepp/modeller |
+| **Fossil och jämförande anatomi** | Släktskap som syns i byggnad. | fossil, homologa organ, släktskap | Evolution och mångfald; Modeller och historia | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Jämför skelett och bygg släktträd** | Vad visar likheter i byggnad om släktskap? Jämför ben i framben hos olika däggdjur med digitala bilder; rita ett enkelt släktträd. Säkerhet: Låg risk. | homologa organ, släktskap, släktträd | Evolution och mångfald; Modeller och historia | Undersöka |
 
 **Om tid / fördjupning:** Hur kan livet ha uppstått?; DNA och direkta observationer
 
@@ -388,18 +406,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Naturligt urval som förklaringsmodell; Darwins teori och dess prövning
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Variation och naturligt urval** | Variation och mutationer som grund; överlevnad och fortplantning; anpassning över generationer. | variation, mutation, naturligt urval, anpassning, fortplantning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Evolution och mångfald; Arv och miljö | Begrepp/modeller |
-| **Artbildning** | Isolering och särutveckling. | art, isolering, artbildning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Evolution och mångfald | Begrepp/modeller |
-| **Naturvetenskap och andra sätt att förklara** | Vad vetenskap kan och inte kan pröva. | naturvetenskaplig förklaring, prövbarhet | Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden; Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan |  | Granska/ta ställning |
-| 🧪 **Labb (ca 45 min): Modellförsök om urval** | Hur påverkar kamouflage chansen att bli upptäckt? Färgade bytespunkter på olika bakgrund; mät andel som hittas. Säkerhet: Låg risk. | naturligt urval, kamouflage, modell | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Evolution och mångfald; Undersökningar; Modeller och historia | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Variation och naturligt urval** | Variation och mutationer som grund; överlevnad och fortplantning; anpassning över generationer. | variation, mutation, naturligt urval, anpassning, fortplantning | Evolution och mångfald; Arv och miljö | Begrepp/modeller |
+| **Artbildning** | Isolering och särutveckling. | art, isolering, artbildning | Evolution och mångfald | Begrepp/modeller |
+| **Naturvetenskap och andra sätt att förklara** | Vad vetenskap kan och inte kan pröva. | naturvetenskaplig förklaring, prövbarhet |  | Granska/ta ställning |
+| 🧪 **Labb (ca 45 min): Modellförsök om urval** | Hur påverkar kamouflage chansen att bli upptäckt? Färgade bytespunkter på olika bakgrund; mät andel som hittas. Säkerhet: Låg risk. | naturligt urval, kamouflage, modell | Evolution och mångfald; Undersökningar; Modeller och historia | Undersöka |
 
 **Om tid / fördjupning:** Variation och mutationer; Människans ursprung; Darwin och förklaringens historia
 
 ## 10. Hälsa och levnadsvanor
 
 *Hur levnadsvanor och levnadsförhållanden påverkar hälsan och vad som kan göras på individ- och samhällsnivå.*
+
+**Syfte som området tydligast bygger på:** Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa; Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan
 
 ### 10.1 Stress, sömn och psykisk hälsa
 
@@ -409,12 +429,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Stressreaktionen
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Stress i kroppen** | Reaktion, kort och lång stress. | stress, stresshormon, stressreaktion | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Hälsa; Celler och organsystem | Begrepp/modeller |
-| **Sömn och motion** | Vad sömn och fysisk aktivitet gör för kroppen och psyket; råd och effekter. | sömn, dygnsrytm, kondition, fysisk aktivitet | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Hälsa | Begrepp/modeller |
-| **Psykisk ohälsa och stöd** | Sakligt om ohälsa och var man får hjälp. | psykisk ohälsa, stöd, hjälp | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Hälsa | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Sömn och vanor: statistik** | Vad säger statistik om sömn bland unga? Läs och tolka ett diagram från en myndighet; formulera en slutsats och en fråga. Säkerhet: Ingen enkät med personlig information i klassen. | statistik, diagram, slutsats | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder; Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan | Hälsa; Undersökningar; Informationsgranskning | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Stress i kroppen** | Reaktion, kort och lång stress. | stress, stresshormon, stressreaktion | Hälsa; Celler och organsystem | Begrepp/modeller |
+| **Sömn och motion** | Vad sömn och fysisk aktivitet gör för kroppen och psyket; råd och effekter. | sömn, dygnsrytm, kondition, fysisk aktivitet | Hälsa | Begrepp/modeller |
+| **Psykisk ohälsa och stöd** | Sakligt om ohälsa och var man får hjälp. | psykisk ohälsa, stöd, hjälp | Hälsa | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Sömn och vanor: statistik** | Vad säger statistik om sömn bland unga? Läs och tolka ett diagram från en myndighet; formulera en slutsats och en fråga. Säkerhet: Ingen enkät med personlig information i klassen. | statistik, diagram, slutsats | Hälsa; Undersökningar; Informationsgranskning | Undersöka |
 
 **Om tid / fördjupning:** Nervsystemet och sinnena; Hormoner och balans; Levnadsförhållanden och hälsa; Fysisk aktivitet; Levnadsvanor och sjukdom
 
@@ -424,18 +444,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Nivåer (E→A):** E: beskriver risker. C: förklarar beroende. A: argumenterar om åtgärder på samhällsnivå.
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Alkohol, tobak, nikotin och droger** | Effekter och risker; narkotika och lagstiftning. | alkohol, tobak, nikotin, cannabis, narkotika, lagstiftning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Hälsa | Begrepp/modeller |
-| **Hjärnan och beroende** | Belöningssystemet. | belöningssystem, beroende, tolerans, abstinens | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Hälsa; Celler och organsystem | Begrepp/modeller |
-| **Förebyggande och stöd** | Individ och samhälle. | förebyggande, stöd, samhällsinsats | Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa; Formulera egna och granska andras argument; kommunicera | Hälsa; Argumentation | Granska/ta ställning |
-| 🧪 **Labb (ca 45 min): Läs och tolka statistik om tobak och alkohol** | Vad visar statistiken om användning bland unga? Tolka ett diagram från en myndighet; ange vad diagrammet visar och inte visar. Säkerhet: Inga personliga berättelser i klassen. | statistik, diagram, urval | Färdigheter i att hantera material, utrustning och digitala verktyg; Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder; Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan | Hälsa; Undersökningar; Informationsgranskning | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Alkohol, tobak, nikotin och droger** | Effekter och risker; narkotika och lagstiftning. | alkohol, tobak, nikotin, cannabis, narkotika, lagstiftning | Hälsa | Begrepp/modeller |
+| **Hjärnan och beroende** | Belöningssystemet. | belöningssystem, beroende, tolerans, abstinens | Hälsa; Celler och organsystem | Begrepp/modeller |
+| **Förebyggande och stöd** | Individ och samhälle. | förebyggande, stöd, samhällsinsats | Hälsa; Argumentation | Granska/ta ställning |
+| 🧪 **Labb (ca 45 min): Läs och tolka statistik om tobak och alkohol** | Vad visar statistiken om användning bland unga? Tolka ett diagram från en myndighet; ange vad diagrammet visar och inte visar. Säkerhet: Inga personliga berättelser i klassen. | statistik, diagram, urval | Hälsa; Undersökningar; Informationsgranskning | Undersöka |
 
 **Om tid / fördjupning:** Cannabis och andra droger
 
 ## 11. Pubertet, sexualitet och relationer
 
 *Kroppens förändringar, reproduktion, skydd, relationer och samtycke.*
+
+**Syfte som området tydligast bygger på:** Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband; Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa; Formulera egna och granska andras argument; kommunicera
 
 ### 11.1 Pubertet, reproduktion, preventivmedel och STI
 
@@ -445,12 +467,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Förklaringsmodeller:** Menscykelns hormonstyrning och befruktning
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Pubertet och könsorgan** | Hormoner och kroppens förändringar; könsorganens byggnad och funktion; menstruation och sädesutlösning. | pubertet, könshormon, äggstock, testikel, livmoder, menstruation, sädesutlösning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Reproduktion och relationer; Celler och organsystem | Begrepp/modeller |
-| **Befruktning och graviditet** | Från könsceller till foster; graviditetens skeden och hälsa; förlossningen i stora drag. | äggcell, spermie, befruktning, embryo, foster, moderkaka, förlossning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Reproduktion och relationer | Begrepp/modeller |
-| **Preventivmedel och STI** | Preventivmedel och skydd, nödpreventivmedel; vanliga STI, skydd, test och behandling. | preventivmedel, kondom, nödpreventivmedel, STI, klamydia, HIV, HPV, provtagning | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Reproduktion och relationer; Infektioner | Begrepp/modeller |
-| 🧪 **Labb (ca 45 min): Faktagranska information om skydd** | Hur kan man bedöma information om preventivmedel och STI? Granska två kvalitetssäkrade källor och en vilseledande; jämför. Säkerhet: Känsligt ämne: frågor ställs anonymt; inga personliga frågor. | källa, relevans, trovärdighet | Söka svar med olika typer av källor; kritiskt tänkande och tilltro till den egna förmågan | Reproduktion och relationer; Informationsgranskning | Granska/ta ställning |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Pubertet och könsorgan** | Hormoner och kroppens förändringar; könsorganens byggnad och funktion; menstruation och sädesutlösning. | pubertet, könshormon, äggstock, testikel, livmoder, menstruation, sädesutlösning | Reproduktion och relationer; Celler och organsystem | Begrepp/modeller |
+| **Befruktning och graviditet** | Från könsceller till foster; graviditetens skeden och hälsa; förlossningen i stora drag. | äggcell, spermie, befruktning, embryo, foster, moderkaka, förlossning | Reproduktion och relationer | Begrepp/modeller |
+| **Preventivmedel och STI** | Preventivmedel och skydd, nödpreventivmedel; vanliga STI, skydd, test och behandling. | preventivmedel, kondom, nödpreventivmedel, STI, klamydia, HIV, HPV, provtagning | Reproduktion och relationer; Infektioner | Begrepp/modeller |
+| 🧪 **Labb (ca 45 min): Faktagranska information om skydd** | Hur kan man bedöma information om preventivmedel och STI? Granska två kvalitetssäkrade källor och en vilseledande; jämför. Säkerhet: Känsligt ämne: frågor ställs anonymt; inga personliga frågor. | källa, relevans, trovärdighet | Reproduktion och relationer; Informationsgranskning | Granska/ta ställning |
 
 **Om tid / fördjupning:** Könsorgan och menscykel; Graviditet och fosterutveckling; Förlossning; STI; Aborträtt och hjälp
 
@@ -460,12 +482,12 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 **Nivåer (E→A):** E: förklarar samtycke. C: resonerar om ansvar och ömsesidighet. A: analyserar situationer med flera perspektiv.
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Sexualitet och identitet** | Sakligt om variation. | sexualitet, sexuell läggning, könsidentitet | Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Reproduktion och relationer | Begrepp/modeller |
-| **Relationer, kärlek och ansvar** | Vad som kännetecknar en god relation. | relation, kärlek, ansvar, ömsesidighet | Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa | Reproduktion och relationer | Granska/ta ställning |
-| **Samtycke och gränser** | Ömsesidighet, gränser, nätet, våld och var man får hjälp. | samtycke, gräns, övergrepp, stöd | Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa | Reproduktion och relationer | Granska/ta ställning |
-| 🧪 **Labb (ca 45 min): Samtycke – fallövning** | Hur bedömer vi samtycke i olika situationer? Diskutera färdiga fall i grupp: vad är samtycke, gränser, var får man hjälp. Säkerhet: Fiktiva fall; alla får avstå från att dela. | samtycke, gräns, ömsesidighet | Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa; Formulera egna och granska andras argument; kommunicera | Reproduktion och relationer; Argumentation | Granska/ta ställning |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Sexualitet och identitet** | Sakligt om variation. | sexualitet, sexuell läggning, könsidentitet | Reproduktion och relationer | Begrepp/modeller |
+| **Relationer, kärlek och ansvar** | Vad som kännetecknar en god relation. | relation, kärlek, ansvar, ömsesidighet | Reproduktion och relationer | Granska/ta ställning |
+| **Samtycke och gränser** | Ömsesidighet, gränser, nätet, våld och var man får hjälp. | samtycke, gräns, övergrepp, stöd | Reproduktion och relationer | Granska/ta ställning |
+| 🧪 **Labb (ca 45 min): Samtycke – fallövning** | Hur bedömer vi samtycke i olika situationer? Diskutera färdiga fall i grupp: vad är samtycke, gränser, var får man hjälp. Säkerhet: Fiktiva fall; alla får avstå från att dela. | samtycke, gräns, ömsesidighet | Reproduktion och relationer; Argumentation | Granska/ta ställning |
 
 **Om tid / fördjupning:** Granska information om sex och relationer
 
@@ -473,18 +495,20 @@ Varje moment visar vilken del av ämnets **syfte** (i sak, ur kursplanen), vilke
 
 *Binder ihop begrepp, undersökningar och argumentation.*
 
+**Syfte som området tydligast bygger på:** Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder; Formulera egna och granska andras argument; kommunicera; Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa
+
 ### 12.1 Repetition inför nationella proven
 
 **Mål:** Eleven kan förklara samband mellan områden, planera och värdera en undersökning och argumentera.
 
 **Nivåer (E→A):** E: återger och planerar enkelt. C: förklarar samband och värderar upplägg. A: kopplar flera områden i ett resonemang och argumenterar med belägg.
 
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Röda trådar** | Energi, kretslopp, evolution, samverkan. | energi, kretslopp, evolution, samverkan | Naturvetenskapens världsbild med evolutionsteorin som grund; skilja naturvetenskapliga från andra sätt att förklara omvärlden; Kunskaper om natur och människokropp; använda begrepp och förklaringsmodeller för att beskriva och förklara samband | Evolution och mångfald; Fotosyntes, kretslopp, energi | Begrepp/modeller |
-| **Planera och värdera en undersökning** | Träna på hela kedjan. | hypotes, variabel, felkälla | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Undersökningar | Undersöka |
-| **Argumentera i miljö- och hälsofrågor** | Övningar. | argument, belägg, motargument | Formulera egna och granska andras argument; kommunicera; Hantera praktiska och etiska valsituationer i frågor om miljö och hälsa | Argumentation | Granska/ta ställning |
-| 🧪 **Labb (ca 45 min): Provlik mini-undersökning** | Kan du planera och värdera en undersökning på egen hand? En färdig frågeställning: planera, genomför enkelt, värdera. Säkerhet: Låg risk. | variabel, felkälla, slutsats | Egna systematiska undersökningar; påståenden kan prövas; kunskap växer fram med naturvetenskapliga arbetsmetoder | Undersökningar | Undersöka |
+| Moment | Innehåll | Begrepp | Centralt innehåll | Förmåga |
+|---|---|---|---|---|
+| **Röda trådar** | Energi, kretslopp, evolution, samverkan. | energi, kretslopp, evolution, samverkan | Evolution och mångfald; Fotosyntes, kretslopp, energi | Begrepp/modeller |
+| **Planera och värdera en undersökning** | Träna på hela kedjan. | hypotes, variabel, felkälla | Undersökningar | Undersöka |
+| **Argumentera i miljö- och hälsofrågor** | Övningar. | argument, belägg, motargument | Argumentation | Granska/ta ställning |
+| 🧪 **Labb (ca 45 min): Provlik mini-undersökning** | Kan du planera och värdera en undersökning på egen hand? En färdig frågeställning: planera, genomför enkelt, värdera. Säkerhet: Låg risk. | variabel, felkälla, slutsats | Undersökningar | Undersöka |
 
 **Om tid / fördjupning:** Kroppen som helhet; Provlik uppgiftsserie
 
