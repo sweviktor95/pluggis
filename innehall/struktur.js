@@ -1476,7 +1476,7 @@ var struktur = [
   {
     id: "moderna-sprak",
     titel: "Moderna språk",
-    ikon: "🗣️",
+    ikon: "🇪🇸🇫🇷🇩🇪",
     barn: []
   },
   {
@@ -1517,7 +1517,7 @@ var struktur = [
   {
     id: "svenska",
     titel: "Svenska",
-    ikon: "📖",
+    ikon: "🇸🇪",
     barn: []
   }
 ];
