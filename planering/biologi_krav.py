@@ -35,7 +35,7 @@ MAP = {
          "KK5": ("T", "1.2.1 planera + labb Reaktionstid"),
          "KK6": ("T", "1.2.4 Värdera: slump, felkällor, slutsats")},
  "1.2": {"KK1": ("T", "1.3.2 När forskare ändrat sig (modeller ändras)"),
-         "KK3": ("S", "1.4.4 Argumentera är 'om tid'; 1.1.3 ger bara grunden"),
+         "KK3": ("T", "1.4.2 Söka information och bedöma källor: argumentera med påstående, belägg, motargument (ruta i häftet)"),
          "KK4": ("T", "1.4.2 Söka och bedöma källor + labb Granska ett påstående")},
  "2.1": {"KK1": ("T", "2.1.1–2.1.3 celldelar och celltyper"),
          "KK2": ("T", "2.1.2 byggnad och funktion"),
@@ -49,7 +49,8 @@ MAP = {
  "3.1": {"KK1": ("T", "3.1.1, 3.4.1, 3.4.2"),
          "KK2": ("T", "3.4.2 hot och konsekvenser"),
          "KK3": ("S", "nivåtext A: väger intressen; inget kärnmoment tränar argumentation uttryckligen"),
-         "KK5": ("S", "labb Artinventering: följer ett givet upplägg")},
+         "KK5": ("S", "labb Artinventering: följer ett givet upplägg"),
+         "KK6": ("T", "labb Artinventering: Utvärdera, vad kan ha påverkat resultatet")},
  "3.2": {"KK1": ("T", "3.2.2, 3.2.3, 3.3.6"),
          "KK2": ("T", "3.3.6 anpassningar och naturligt urval"),
          "KK5": ("S", "labb Artbestämning: använder färdig nyckel")},
@@ -64,7 +65,7 @@ MAP = {
          "KK6": ("S", "nivåtext C: tolka diagram; labb Rovdjur–byte (modell)")},
 }
 NOTER = [
- "**Så läser du tabellen.** KK1–KK2 (begrepp och samband) är tydligt täckta i alla delområden. KK5 har tre tydliga tillfällen (1.1, 2.2, 4.2) och tre svaga (2.1, 3.1, 3.2). Sårbart i område 1–4 är KK3 (argumentation i miljö- och hälsofrågor, inget tydligt tillfälle), KK4 (källor, bara 1.2) och KK6 (värdera, bara 1.1). Områden 5–12 är planerade men inte byggda: argumentation (SU4) finns i kärnmoment eller labbpass i område 5, 8, 10, 11 och 12 och källgranskning (SU3) i 7, 10 och 11, så de kan bära KK3 och KK4 senare. Det som kräver beslut nu är om 1.4.4 Argumentera ska flyttas från 'Om tid' till kärna (då får KK3 ett tydligt tillfälle redan i område 1), och om labbpassen i 3.1, 4.1 och 4.3 ska få en värderingsuppgift så att KK6 övas fler gånger.",
+ "**Så läser du tabellen.** KK1–KK2 (begrepp och samband) är tydligt täckta i alla delområden. KK5 har tre tydliga tillfällen (1.1, 2.2, 4.2) och tre svaga (2.1, 3.1, 3.2). KK6 (värdera) har tydliga tillfällen i 1.1 och i labb 3.1; labbarna i 4.1 och 4.3 värderar modellen men inte felkällor. KK3 (argumentera) och KK4 (källor) har bara ett tydligt tillfälle var i område 1–4 (1.2). Områden 5–12 är planerade men inte byggda: argumentation (SU4) finns i kärnmoment eller labbpass i område 5, 8, 10, 11 och 12 och källgranskning (SU3) i 7, 10 och 11, så de kan bära KK3 och KK4 senare.",
 ]
 
 # ---- Begreppsregler -------------------------------------------------------
@@ -84,7 +85,7 @@ VAR = {
  "försörjande tjänst": ["försörjande"], "reglerande tjänst": ["reglerande"], "kulturell tjänst": ["kulturell"], "stödjande tjänst": ["stödjande"],
  "oberoende variabel": ["oberoende variabel"], "beroende variabel": ["beroende variabel"], "kontrollerad variabel": ["kontrollerad variabel", "kontrollvariabel"],
  "rättvist försök": ["rättvist försök", "rättvis"], "upprepning": ["upprepa", "upprepning"], "giltighet": ["giltighet", "giltig"],
- "bakterie": ["bakteri"], "kontrollerad variabel": ["kontrollerad variabel", "kontrollerade variabler", "kontrollvariabel"],
+ "specialiserad cell": ["specialiserad cell", "specialiserade celler"], "axel": ["axel", "axlar"], "bakterie": ["bakteri"], "kontrollerad variabel": ["kontrollerad variabel", "kontrollerade variabler", "kontrollvariabel"],
  "trovärdighet": ["trovärdig"], "relevans": ["relevan"], "överexploatering": ["överexploat", "överuttag"],
  "avsändare": ["avsändare", "avsändar"], "tillförlitlighet": ["tillförlitlig"],
 }
@@ -117,7 +118,7 @@ NYA = {
  "sökord": "Ord man skriver in när man söker information.",
  "avsändare": "Den som har skapat eller publicerat informationen.",
  "syfte": "Varför någon har skrivit en text, till exempel för att informera, övertyga eller sälja.",
- "tro": "Att vara övertygad om något utan att det går att pröva med undersökningar.",
+ "motargument": "Ett argument mot ett påstående. Man bemöter det med belägg.",\n "tro": "Att vara övertygad om något utan att det går att pröva med undersökningar.",
  # område 2
  "encellig": "En organism som bara består av en cell.",
  "energi": "Det som behövs för att något ska kunna röra sig, växa eller bli varmt.",
@@ -132,7 +133,8 @@ NYA = {
  "kontrollförsök": "Ett försök där man inte ändrar det man testar, så att man har något att jämföra med.",
  # område 3
  "genetisk variation": "Skillnader i arvsmassan mellan individer av samma art.",
- "artmångfald": "Hur många olika arter som finns i ett område.",
+ "artmångfald": "Variationen mellan arter: hur många olika arter som finns.",
+ "artrikedom": "Antalet olika arter i ett område.",
  "ekosystemmångfald": "Variationen av olika ekosystem, till exempel skog, våtmark och hav.",
  "försörjande tjänst": "Ekosystemtjänst som ger oss saker, till exempel mat, trä och rent vatten.",
  "reglerande tjänst": "Ekosystemtjänst som håller naturen i balans, till exempel pollinering och rening av vatten.",
@@ -156,7 +158,9 @@ NYA = {
  "mull": "Jord som är rik på humus.",
  "kontroll": "Ett prov där man inte ändrar något, så att man har något att jämföra med.",
  "födelse": "Nya individer som föds i en population.",
+ "födda": "Nya individer som föds eller kläcks i en population.",
  "död": "Individer som dör i en population.",
+ "döda": "Individer som dör i en population.",
  "inflyttning": "Individer som flyttar in i området.",
  "utflyttning": "Individer som flyttar ut från området.",
  "resurs": "Något levande varelser behöver, till exempel mat, vatten, ljus och plats.",

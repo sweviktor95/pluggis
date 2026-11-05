@@ -16,17 +16,17 @@ LARA = ["Delområde 1.1 Undersöka systematiskt: fråga, plan, tabell, diagram o
 ORD_FIG = None
 ORD_EXTRA = [("biologi", "läran om allt som lever"), ("organism", "allt som lever, till exempel djur, växter och bakterier"),
              ("undersökningsbar fråga", "en fråga du kan svara på genom att mäta eller titta"), ("hypotes", "det man tror blir svaret, och varför"),
-             ("variabel", "något som kan ändras eller mätas"), ("rättvist test", "man ändrar bara en sak. Allt annat är lika"),
-             ("tabell", "ett sätt att skriva ner det man mäter"),
+             ("variabel", "något som kan ändras eller mätas"), ("oberoende variabel", "det du ändrar"), ("beroende variabel", "det du mäter"), ("kontrollerade variabler", "det du håller lika"), ("rättvist test", "man ändrar bara en sak. Allt annat är lika"),
+             ("tabell", "ett sätt att skriva ner det man mäter"), ("axel", "linjen i ett diagram"), ("upprepning", "man gör om testet flera gånger"), ("medelvärde", "lägg ihop värdena och dela med antalet"), ("giltighet", "man har mätt det man ville ta reda på"),
              ("diagram", "en bild av siffror, till exempel staplar"),
              
              ("resultat", "det man mäter eller ser"), ("slutsats", "det man lär sig av resultatet"),
              ("felkälla", "något som kan göra att resultatet blir fel"), ("slump", "något som händer av en tillfällighet"),
              ("påstående", "något man säger är sant"), ("belägg", "mätningar eller observationer som visar något"),
              ("åsikt", "vad någon tycker. Går inte att mäta"), ("pseudovetenskap", "låter som vetenskap men saknar belägg"),
-             ("modell", "ett sätt att förklara hur något fungerar"), ("mikroorganism", "en mycket liten organism, till exempel en bakterie"),
+             ("modell", "ett sätt att förklara hur något fungerar"), ("mikroorganism", "en mycket liten organism, till exempel en bakterie"), ("spontan uppkomst", "gammal idé: liv uppstår av sig självt"), ("hygien", "renlighet som minskar smitta, till exempel handtvätt"),
              ("källa", "där informationen kommer ifrån"), ("trovärdig", "går att lita på"), ("relevant", "passar min fråga"),
-             ("avsändare", "den som har skrivit eller gjort texten")]
+             ("avsändare", "den som har skrivit eller gjort texten"), ("syfte", "varför någon har skrivit texten, till exempel för att informera eller sälja")]
 
 TB_ELLA = ('<table class="tb"><tr><th>Ella ändrar</th><th>Ella mäter</th><th>Ella håller lika</th></tr>'
            '<tr><td>ljuset (ljus eller mörker)</td><td>hur hög krassen blir (mm)</td><td>jord, vatten, antal frön</td></tr></table>')
@@ -53,7 +53,7 @@ TB_REP = ('<ol class="st"><li><b>Fråga.</b> Vad ville vi ta reda på?</li><li><
           '<li><b>Resultat.</b> Tabell och diagram.</li><li><b>Slutsats.</b> Svara på frågan. Skriv vad som kan ha blivit fel.</li></ol>')
 TB_CHECK = ('<table class="tb"><tr><th>Fråga om källan</th><th>Bra tecken</th></tr>'
             '<tr><td>Vem har skrivit?</td><td>Forskare, myndighet eller en känd organisation</td></tr>'
-            '<tr><td>Varför är det skrivet?</td><td>Att informera. Inte att sälja</td></tr>'
+            '<tr><td>Varför är det skrivet? (<b>syftet</b>)</td><td>Att informera. Inte att sälja</td></tr>'
             '<tr><td>Finns det belägg?</td><td>Mätningar, undersökningar eller länkar till forskning</td></tr>'
             '<tr><td>Är det nytt?</td><td>Skrivet för inte så länge sedan</td></tr>'
             '<tr><td>Säger andra källor samma sak?</td><td>Ja, minst två till</td></tr></table>')
@@ -77,6 +77,7 @@ DELAR = [
   fig="l_cykel.png",
   efter=["<span class='fake'>Påhittat exempel</span> Ella undrar: <em>Växer krasse bättre i ljus eller i mörker?</em>", "Hypotes: <em>Krassen blir högst i ljus, eftersom växter behöver ljus.</em>", "Hon gör ett <strong>rättvist test</strong> med två lådor.",
          "Ella ändrar bara en sak: ljuset. Allt annat är lika. Det man ändrar kallas en <strong>variabel</strong>.", TB_ELLA,
+         "I Ellas test är ljuset den <strong>oberoende variabeln</strong>: det hon ändrar. Krassens höjd är den <strong>beroende variabeln</strong>: det hon mäter. Jord, vatten och antal frön är <strong>kontrollerade variabler</strong>: det hon håller lika.",
          "<h3>Säkert i labbet</h3>", "Läs hela instruktionen först. Ha skyddsglasögon när läraren säger det. Ät och drick aldrig i labbet. Fråga om du är osäker."],
   fig2="l_krasse.png",
   kom="En fråga som går att undersöka kan man mäta. I ett rättvist test ändrar man bara en sak.",
@@ -89,7 +90,7 @@ DELAR = [
  dict(titel="Dokumentera", prog="Delområde 1.1 · Dokumentera",
   fore=["När du mäter ska du skriva ner värdena direkt. Använd en <strong>tabell</strong>.", "Tabellen ska ha rubriker. Skriv också enhet, till exempel mm eller s.", "<span class='fake'>Påhittade siffror</span> Så här kan Ellas tabell se ut:", TB_MAT],
   fig="l_stapel.png", figw="55%",
-  efter=["Ett <strong>diagram</strong> gör siffrorna lätta att jämföra. Ella ritar ett stapeldiagram.", "Ett bra diagram har <strong>rubrik</strong>. Axlarna har namn och enhet. Staplarna har namn.",
+  efter=["Ett <strong>diagram</strong> gör siffrorna lätta att jämföra. Ella ritar ett stapeldiagram.", "Ett bra diagram har <strong>rubrik</strong>. <strong>Axlarna</strong> (linjerna i diagrammet) har namn och enhet. Staplarna har namn.",
          "<h3>Så skriver du en rapport</h3>", TB_REP],
   kom="Skriv värdena i en tabell med rubriker och enheter. Rita ett diagram med rubrik och axlar.",
   ova=[("ringa", "Vad ska stå i tabellens rubrik?", ["Höjd (mm)", "Bara en siffra", "Inget"]),
@@ -98,7 +99,7 @@ DELAR = [
        ("fyll", ["tabell", "rubrik", "enhet"], ["Man skriver värdena i en ______________.", "Ett diagram ska ha en ______________.", "Efter siffran skriver man en ______________, till exempel mm."])]),
 
  dict(titel="Värdera", prog="Delområde 1.1 · Värdera",
-  fore=["Ett resultat kan bli fel. Det beror på <strong>felkällor</strong>.", TB_FEL, "<strong>Slump</strong> är sådant som bara händer. Därför gör man om testet flera gånger. Då blir resultatet säkrare."],
+  fore=["Ett resultat kan bli fel. Det beror på <strong>felkällor</strong>.", TB_FEL, "<strong>Slump</strong> är sådant som bara händer. Därför gör man en <strong>upprepning</strong>: man gör om testet flera gånger. Då blir resultatet säkrare. Man räknar ut ett <strong>medelvärde</strong>: lägg ihop värdena och dela med antalet.", "Ett test har bra <strong>giltighet</strong> när man mäter det man ville ta reda på. Vill du veta hur snabb reaktionen är ska du mäta tid eller fallsträcka, inte hur högt någon hoppar."],
   fig="l_stapel.png", figw="55%",
   efter=["Slutsatsen ska stämma med resultatet.", "<strong>Ellas slutsats:</strong> Krassen blir högre i mörker. Den växer på höjden för att leta efter ljus. Men den mår bäst i ljus.",
          "Hypotesen var alltså fel. Det gör inget! Man lär sig ändå.", "Ella testade bara krasse. Hon kan inte säga att alla växter gör så. Skriv alltid vad du inte vet."],
@@ -131,8 +132,8 @@ DELAR = [
 
  dict(titel="När forskare ändrat sig", prog="Delområde 1.2 · När forskare ändrat sig",
   fore=["Forskare förklarar hur saker fungerar. En förklaring kallas en <strong>modell</strong>.", "Om nya undersökningar visar något annat, ändrar forskarna modellen. Här är tre exempel."],
-  sub1=("Pasteur och kolven (1861)", ["Förr trodde många att <strong>mikroorganismer</strong>, alltså mycket små organismer, kunde uppstå av sig själva i mat.", "Pasteur kokade buljong i en kolv med lång böjd hals. Damm fastnade i böjen. Buljongen förblev klar.", "Slutsats: små organismer kommer utifrån. De uppstår inte av sig själva."], "v_pasteur.png"),
-  sub2=("Semmelweis och händerna (1847)", ["I Wien dog många mammor efter förlossningen i barnsängsfeber. Det dog fler på läkarklinikens avdelning än på barnmorskornas.", "Läkarna hade rört vid döda kroppar. Semmelweis trodde att något följde med händerna. Från 1847 skulle alla tvätta händerna i klorkalklösning.", "Dödligheten sjönk från 11,4 % till 1,3 %. Men många läkare trodde inte på honom."], "f_semmelweis2.png"),
+  sub1=("Pasteur och kolven (1861)", ["Förr trodde många att <strong>mikroorganismer</strong>, alltså mycket små organismer, kunde uppstå av sig själva i mat. Det kallades <strong>spontan uppkomst</strong>.", "Pasteur kokade buljong i en kolv med lång böjd hals. Damm fastnade i böjen. Buljongen förblev klar.", "Slutsats: små organismer kommer utifrån. De uppstår inte av sig själva."], "v_pasteur.png"),
+  sub2=("Semmelweis och händerna (1847)", ["I Wien dog många mammor efter förlossningen i barnsängsfeber. Det dog fler på läkarklinikens avdelning än på barnmorskornas.", "Läkarna hade rört vid döda kroppar. Semmelweis trodde att något följde med händerna. Från 1847 skulle alla tvätta händerna i klorkalklösning. Rena händer är god <strong>hygien</strong>.", "Dödligheten sjönk från 11,4 % till 1,3 %. Men många läkare trodde inte på honom."], "f_semmelweis2.png"),
   sub3=("Marshall, Warren och magsåren (1982)", ["Förr trodde man att magsår kom av stress och livsstil.", "Marshall och Warren hittade en bakterie i magsäcken, <em>Helicobacter pylori</em>. Många trodde inte på dem.", "År 1984 drack Marshall själv bakterier och fick en inflammation i magsäcken. Gör aldrig så själv! Idag botas magsår med antibiotika och medicin som minskar syran. De fick Nobelpriset 2005."], "f_hpylori.png"),
   subw="50%", efter=[],
   kom="En modell kan ändras när nya undersökningar visar något annat.",

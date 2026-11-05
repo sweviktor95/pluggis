@@ -117,7 +117,7 @@ add("3.1.2", "Ekosystemtjänster", f"Kapitel {NR} · Delområde 3.1 {DELOMR['3.1
 add("3.1.3", "Hoten mot mångfalden", f"Kapitel {NR} · Delområde 3.1 {DELOMR['3.1']} · Hoten mot mångfalden",
  row("<p>Arter har alltid dött ut och nya har utvecklats. Men i dag försvinner arter mycket snabbare än vad som är naturligt. FN:s expertpanel för biologisk mångfald, IPBES, bedömde 2019 att omkring en miljon djur- och växtarter är hotade av utrotning, många inom några årtionden. Nästan alla hot har samma grundorsak: människans aktiviteter. De fem största hoten, i den ordning IPBES rangordnar dem, är:</p>"
      + table(["Hot", "Vad det innebär", "Exempel"],
-             [["<b>1. Ändrad mark- och havsanvändning</b>", "Livsmiljöer försvinner eller delas upp.", "skog avverkas, myrar dikas, ängar växer igen"],
+             [["<b>1. Ändrad mark- och havsanvändning</b>", "Livsmiljöer försvinner eller delas upp (<b>habitatförlust</b>).", "skog avverkas, myrar dikas, ängar växer igen"],
               ["<b>2. Överuttag</b>", "Vi fiskar, jagar eller skördar mer än vad som hinner växa till.", "överfiske, tjuvjakt"],
               ["<b>3. Klimatförändringar</b>", "Arter måste flytta norrut eller uppåt.", "fjällens arter har ingenstans att ta vägen"],
               ["<b>4. Föroreningar</b>", "Miljögifter, plast och övergödning skadar liv i mark och vatten.", "övergödda sjöar, plast i havet"],
@@ -240,7 +240,7 @@ SAMMAN = ["<strong>Biologisk mångfald</strong> är variationen av liv på tre n
 
 BEGR = [("Anpassning", "Ett drag som gör att en art klarar sin miljö."), ("Art", "Individer som kan få fortplantningsdugliga ungar med varandra."), ("Bestämningsnyckel", "Serie val med två alternativ som leder till artens namn."),
         ("Biologisk mångfald", "Variationen av liv: genetisk mångfald, artmångfald och ekosystemmångfald."), ("Ekosystem", "Alla organismer i ett område och den miljö de lever i."),
-        ("Ekosystemtjänst", "Något naturen gör som människan har nytta av."), ("Gen", "Del av arvsmassan (DNA) som styr en egenskap."), ("Invasiv art", "Främmande art som människan fört in och som sprider sig och skadar inhemska arter."),
+        ("Ekosystemtjänst", "Något naturen gör som människan har nytta av."), ("Gen", "Del av arvsmassan (DNA) som styr en egenskap."), ("Habitatförlust", "Att en livsmiljö försvinner eller förstörs."), ("Invasiv art", "Främmande art som människan fört in och som sprider sig och skadar inhemska arter."),
         ("Konsument", "Organism som äter andra organismer."), ("Lav", "Samlevnad mellan en svamp och en alg eller bakterie som gör fotosyntes."), ("Livsmiljö", "Platsen där en art kan leva och föröka sig."),
         ("Naturligt urval", "De individer som passar bäst i miljön överlever oftare och får fler ungar."), ("Nedbrytare", "Organism som bryter ner dött material till näring."), ("Näringsväv", "Flera näringskedjor som hänger ihop."),
         ("Pollinering", "Pollen förs mellan blommor så att de kan bilda frön."), ("Population", "Alla individer av en art inom ett område."), ("Producent", "Organism som gör sin egen näring genom fotosyntes."),

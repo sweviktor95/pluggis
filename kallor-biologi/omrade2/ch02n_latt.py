@@ -23,7 +23,7 @@ ORD_EXTRA = [("organism", "en levande varelse, till exempel en växt eller ett d
              ("vakuol", "en blåsa med vatten i växtcellen"), ("ribosom", "en liten del som bygger proteiner"), ("klorofyll", "grönt ämne som fångar ljus"),
              ("glukos", "druvsocker, cellens bränsle"), ("producent", "gör egen mat, till exempel en växt"), ("kretslopp", "ämnen som går runt och används om och om igen"),
              ("vävnad", "många lika celler som arbetar ihop"), ("organ", "en del av kroppen, till exempel hjärtat"), ("organsystem", "flera organ som arbetar ihop"),
-             ("bakterie", "en encellig organism utan cellkärna"), ("antibiotika", "läkemedel mot bakterier. Hjälper inte mot virus"), ("jäsning", "när jäst får energi utan syre")]
+             ("bakterie", "en encellig organism utan cellkärna"), ("antibiotika", "läkemedel mot bakterier. Hjälper inte mot virus"), ("jäsning", "när jäst får energi utan syre"), ("energiflöde", "energin går åt ett håll, från solen till värme"), ("kontrollförsök", "ett försök där man inte ändrar det man testar. Man jämför med det")]
 
 TB_LIV = ('<table class="tb"><tr><th>Kännetecken</th><th>Exempel</th></tr>'
           '<tr><td>Celler</td><td>Allt levande är byggt av celler</td></tr><tr><td>Energi</td><td>Växter tar ljus. Djur äter mat.</td></tr>'
@@ -128,7 +128,7 @@ DELAR = [
   fore=["Fotosyntes och cellandning är varandras motsatser. Det som bildas i den ena används i den andra.", TB_PROC],
   fig="cellen-fotosyntes.png", figw="80%",
   efter=["En växt gör fotosyntes när det är ljust. Den gör <em>också</em> cellandning hela tiden, även på natten.", "Kolet går runt i ett <strong>kretslopp</strong>. Fotosyntesen tar in koldioxid. Cellandningen släpper ut koldioxid.",
-         "Energin går inte runt. Den kommer från solen och blir till värme. Därför behöver livet ny energi hela tiden."],
+         "Energin går inte runt. Den kommer från solen och blir till värme. Det kallas <strong>energiflöde</strong>: energin flödar genom naturen åt ett håll. Därför behöver livet ny energi hela tiden."],
   kom="Fotosyntes och cellandning är motsatser. Kolet går runt. Energin går inte runt.",
   ova=[("streck", "Dra streck till rätt process.", ["Fotosyntes", "Cellandning"], ["glukos + syre blir energi", "ljus och koldioxid blir glukos"]),
        ("sf", "Kryssa i rätt ruta.", ["Växter gör cellandning på natten.", "Växter gör aldrig cellandning.", "Fotosyntesen behöver ljus."]),
@@ -139,7 +139,7 @@ DELAR = [
   fore=["<strong>Fråga:</strong> Hur påverkar temperaturen hur mycket koldioxid jäst bildar?", "Du behöver: fyra flaskor med ballonger, jäst, socker, vatten, termometer, måttband och klocka."],
   fig=None,
   efter=["<ol class='st'><li>Ställ fyra vattenbad: kallt (ca 5 °C), rumsvarmt (ca 20 °C), ljummet (ca 35 °C) och varmt (ca 50 °C).</li><li>Häll 1 tsk jäst, 1 tsk socker och 1 dl ljummet vatten i varje flaska.</li><li>Sätt en ballong på varje flaska. Ställ flaskorna i baden.</li><li>Mät ballongens omkrets efter 5, 10 och 15 minuter. Fyll i tabellen.</li></ol>", TB_JAST,
-         "<strong>Säkerhet:</strong> Använd inte hett vatten. Högst ca 50 °C. Torka upp spill. Ät inte jästen. Tvätta händerna."],
+         "<strong>Säkerhet:</strong> Använd inte hett vatten. Högst ca 50 °C. Torka upp spill. Ät inte jästen. Tvätta händerna.", "<strong>Kontrollförsök:</strong> Ställ också en flaska utan jäst. Om den inte bildar gas vet du att det är jästen som gör gasen."],
   kom="Jäst bildar koldioxid. Temperaturen påverkar hur mycket.",
   ova=[("fyll", ["koldioxid", "ballongen", "temperaturen"], ["Jästen bildar gasen ______________.", "Gasen fyller ______________.", "Vi ändrar ______________ i försöket."]),
        ("ringa", "Vilken sak ska vara lika i alla flaskor?", ["Mängden jäst", "Temperaturen", "Ballongens omkrets"]),

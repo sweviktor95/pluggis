@@ -45,7 +45,7 @@ TB_TE = ('<table class="tb"><tr><th>Plats</th><th>Före (g)</th><th>Efter (g)</t
          '<tr><td>Skogsjord</td><td></td><td></td><td></td></tr><tr><td>Gräsmatta</td><td></td><td></td><td></td></tr>'
          '<tr><td>Sand</td><td></td><td></td><td></td></tr></table>')
 TB_SAMSPEL = ('<table class="tb"><tr><th>Samspel</th><th>Betyder</th><th>Exempel</th></tr>'
-              '<tr><td>Jakt</td><td>Rovdjuret får mat. Bytet dör.</td><td>lodjur och hare</td></tr>'
+              '<tr><td>Jakt (<b>predation</b>)</td><td>Rovdjuret får mat. Bytet dör.</td><td>lodjur och hare</td></tr>'
               '<tr><td>Konkurrens</td><td>Båda förlorar lite.</td><td>rödräv och fjällräv tävlar om mat</td></tr>'
               '<tr><td>Parasitism</td><td>Parasiten har nytta. Värden förlorar.</td><td>fästing på en hund</td></tr>'
               '<tr><td>Symbios</td><td>Båda har nytta.</td><td>lav: svamp och alg</td></tr></table>')
@@ -90,7 +90,7 @@ DELAR = [
        ("skriv3", "Gör en egen näringskedja med tre steg. Skriv namnen.")]),
 
  dict(titel="Energiflöde och biomassa", prog="Delområde 4.1 · Energiflöde och biomassa",
-  fore=["Nästan allt liv får sin energi från <strong>solen</strong>. Växterna fångar solljuset. Sedan går energin vidare när någon äter.", "Men bara en liten del går vidare. Ungefär 10 procent förs vidare till nästa led. Resten blir värme."] + [TB_ENERGI],
+  fore=["Nästan allt liv får sin energi från <strong>solen</strong>. Växterna fångar solljuset. Sedan går energin vidare när någon äter.", "Men bara en liten del går vidare. Ungefär 10 procent förs vidare till nästa led. Varje led kallas en <strong>trofinivå</strong>. Resten blir värme. Den stora <strong>energiförlusten</strong> gör att en näringskedja inte kan ha många led."] + [TB_ENERGI],
   fig="l_pyramid.png",
   efter=["Djuren använder energin till att röra sig och hålla sig varma. Den blir till värme och kommer inte tillbaka.", "Därför är näringskedjor korta. Det finns mest energi hos växterna och minst hos rovdjuren.",
          "<strong>Biomassa</strong> är hur mycket levande material det finns, mätt i vikt. Det finns oftast mest biomassa hos växterna och minst hos rovdjuren."],
@@ -112,7 +112,7 @@ DELAR = [
        ("skriv", "Nämn en sak som modellen gör enklare än verkligheten.", "Modellen förenklar", 2)]),
 
  dict(titel="Materia tillverkas inte och försvinner inte", prog="Delområde 4.2 · Materia tillverkas inte och försvinner inte",
-  fore=["Energin försvinner som värme. Men <strong>materien</strong> försvinner inte. Materia är det som allt är byggt av.", "Samma ämnen används om och om igen. Det kallas ett <strong>kretslopp</strong>. Energin går en väg. Ämnena går runt."],
+  fore=["Energin försvinner som värme. Men <strong>materien</strong> försvinner inte. Materia är det som allt är byggt av: <strong>atomer</strong>, mycket små byggstenar. Samma atomer används om och om igen.", "Samma ämnen används om och om igen. Det kallas ett <strong>kretslopp</strong>. Energin går en väg. Ämnena går runt."],
   fig="l_kretslopp.png",
   efter=["Växterna tar upp näring. Djuren äter växterna. Växter och djur dör. Nedbrytarna gör det döda till ny näring.",
          "Många tror att växter blir stora av jord. Så är det inte. På 1600-talet planterade van Helmont ett litet träd i en kruka med jord. Efter fem år hade trädet blivit mycket tyngre. Jorden hade nästan inte blivit lättare.",
@@ -127,7 +127,7 @@ DELAR = [
   fore=["Kol finns i allt levande. Kolet går runt mellan luften, växter, djur och marken. Det kallas <strong>kolets kretslopp</strong>."],
   fig=None,
   efter=["<ol class='st'><li><strong>Fotosyntes.</strong> Växter tar koldioxid från luften och bygger in kolet i mat.</li><li><strong>Näringskedjan.</strong> Djur äter växterna och får kolet.</li><li><strong>Cellandning.</strong> Växter och djur släpper ut koldioxid när de får energi av maten.</li><li><strong>Nedbrytning.</strong> Nedbrytare gör döda växter och djur till koldioxid.</li><li><strong>Förbränning.</strong> När vi bränner olja, kol och gas släpps koldioxid ut.</li></ol>",
-         "När vi bränner olja och kol släpper vi ut mer koldioxid än växterna hinner ta upp. Det påverkar klimatet. Mer om det i område 5."],
+         "Olja, kol och gas innehåller <strong>fossilt kol</strong>, som legat i marken i miljontals år. När vi bränner dem släpper vi ut mer koldioxid än växterna hinner ta upp. Det påverkar klimatet. Mer om det i område 5."],
   kom="Växter tar koldioxid från luften. Cellandning, nedbrytning och förbränning släpper ut den igen.",
   ova=[("ringa", "Vad tar växterna från luften?", ["Koldioxid", "Syre", "Sten"]),
        ("streck", "Dra streck till rätt förklaring.", ["Fotosyntes", "Cellandning", "Förbränning"], ["släpper ut koldioxid när vi bränner olja", "tar in koldioxid", "släpper ut koldioxid när växter och djur får energi"]),
@@ -135,7 +135,7 @@ DELAR = [
        ("skriv", "Vad händer med kolet i ett träd som dör i skogen?", "Kolet", 2)]),
 
  dict(titel="Nedbrytning", prog="Delområde 4.2 · Nedbrytning",
-  fore=["Utan nedbrytning skulle döda löv och djur ligga kvar för alltid. <strong>Nedbrytning</strong> betyder att dött material blir till enkla ämnen som kan användas igen.", "Daggmaskar och gråsuggor äter döda växtdelar och hackar sönder dem. Svampar och bakterier är nedbrytare. De gör resten.", "Döda löv och barr på marken kallas <strong>förna</strong>."],
+  fore=["Utan nedbrytning skulle döda löv och djur ligga kvar för alltid. <strong>Nedbrytning</strong> betyder att dött material blir till enkla ämnen som kan användas igen.", "Daggmaskar och gråsuggor äter döda växtdelar och hackar sönder dem. Svampar och bakterier är nedbrytare. De gör resten.", "Döda löv och barr på marken kallas <strong>förna</strong>. Det som blir kvar efter nedbrytningen är <strong>humus</strong>. Jord med mycket humus kallas <strong>mull</strong>."],
   fig=None,
   efter=["Nedbrytare släpper ut koldioxid och näring. Växterna tar upp näringen igen.", "Nedbrytningen går olika fort:", TB_NEDBR,
          "I Norrbotten är det kallt och nedbrytningen går långsamt. I regnskogen är det varmt och fuktigt. Där går nedbrytningen mycket fort."],
@@ -182,7 +182,7 @@ DELAR = [
  dict(titel="Konkurrens, jakt och samarbete", prog="Delområde 4.3 · Konkurrens, jakt och samarbete",
   fore=["Arter påverkar varandra på olika sätt:"] + [TB_SAMSPEL],
   fig=None,
-  efter=["Varje art har också en <strong>nisch</strong>. Nischen är artens roll: vad den äter, var den söker mat och var den bor. Livsmiljön är som en adress. Nischen är som ett yrke.", "Två arter med samma nisch konkurrerar hårt. Därför har arter som bor på samma plats ofta olika nischer."],
+  efter=["Varje art har också en <strong>nisch</strong>. Nischen är artens roll: vad den äter, var den söker mat och var den bor. Livsmiljön är som en adress. Nischen är som ett yrke.", "Två arter med samma nisch konkurrerar hårt. Därför har arter som bor på samma plats ofta olika nischer.", "Arter som påverkar varandra kan förändras tillsammans under många generationer. Det kallas <strong>samutveckling</strong>. Blommor och insekter som pollinerar dem är ett exempel."],
   kom="Arter kan jaga, konkurrera, vara parasiter eller samarbeta. Varje art har en egen nisch.",
   ova=[("streck", "Vilket samspel är det? Dra streck.", ["Lodjur och hare", "Fästing och hund", "Svamp och alg i en lav"], ["symbios", "jakt", "parasitism"]),
        ("ringa", "Vad är en nisch?", ["Artens roll på platsen", "Ett bo", "En sorts föda"]),

@@ -89,7 +89,7 @@ add("4.1.3", "Energiflöde och biomassa", f"Kapitel {NR} · Delområde 4.1 {DELO
  "<p>Nästan all energi i ett ekosystem kommer från solen. Producenterna fångar en liten del av solljuset med fotosyntesen och lagrar energin i glukos och andra ämnen. När en växtätare äter växten förs en del av energin vidare. Men det mesta av energin förs inte vidare.</p>"
  + roww("<h3 style='margin-top:0'>Varför försvinner energi i varje led?</h3>"
         + bullets(["Organismen använder energi för att leva: röra sig, hålla värmen och laga celler. Det mesta blir till slut värme.", "Allt äts inte upp: rötter, ben, päls och fjädrar blir kvar.", "Allt som äts tas inte upp i kroppen, utan lämnar den som avföring."])
-        + "<p>Som en tumregel förs bara omkring <strong class='green'>10 procent</strong> av energin vidare till nästa led. Resten går förlorad som värme eller hamnar hos nedbrytarna. Man brukar rita det som en <strong class='green'>energipyramid</strong>.</p>"
+        + "<p>Som en tumregel förs bara omkring <strong class='green'>10 procent</strong> av energin vidare till nästa led, alltså till nästa <strong class='green'>trofinivå</strong>: producenter är första nivån, växtätare den andra och rovdjur den tredje. Resten går förlorad som värme eller hamnar hos nedbrytarna. Den stora <strong class='green'>energiförlusten</strong> gör att en näringskedja inte kan ha så många led. Man brukar rita det som en <strong class='green'>energipyramid</strong>.</p>"
         "<p>Energi går alltså inte i kretslopp, den <strong class='green'>flödar</strong> genom ekosystemet: in som solljus och ut som värme. Därför behövs ett ständigt tillskott av solenergi.</p>",
         [fig(FIG+"ekologi-pyramid.png", "<b>Bild 4.5</b> En energipyramid. Bara ungefär en tiondel av energin förs vidare till nästa nivå.")])
  + "<h3>Biomassa</h3>"
@@ -134,7 +134,7 @@ add("4.2.2", "Kolets kretslopp", f"Kapitel {NR} · Delområde 4.2 {DELOMR['4.2']
        + steps(["<strong>Fotosyntes:</strong> Växter tar upp koldioxid från luften och bygger in kolet i glukos.", "<strong>Näringskedjan:</strong> Kolet förs vidare till djur som äter växterna.",
                 "<strong>Cellandning:</strong> Växter och djur släpper ut koldioxid när de använder glukosen.", "<strong>Nedbrytning:</strong> När organismer dör bryter nedbrytarna ner dem. Då frigörs koldioxid och näringsämnen.",
                 "<strong>Förbränning:</strong> Kol som har legat lagrat i miljontals år som olja, kol och naturgas släpps ut när människan bränner det."]),
-       [box("klimat", "Klimatet", "<p>När vi bränner fossila bränslen släpper vi ut mer koldioxid än växterna och haven hinner ta upp. Halten i luften ökar och förstärker växthuseffekten. Mer om det i område 5.</p>"),
+       [box("klimat", "Klimatet", "<p>När vi bränner fossila bränslen som kol, olja och naturgas frigör vi <strong class='green'>fossilt kol</strong>, som legat lagrat i marken i miljontals år, och släpper ut mer koldioxid än växterna och haven hinner ta upp. Halten i luften ökar och förstärker växthuseffekten. Mer om det i område 5.</p>"),
         box("kvave", "Även kväve", "<p>Växter behöver kväve för att bygga proteiner. Nedbrytarna frigör kväve ur döda organismer, och vissa bakterier kan ta kväve direkt från luften.</p>")])
  + kolla("4.2.2", ["Beskriv två processer som tar kol från luften och två som släpper ut kol till luften.", "Vad händer med kolet i ett träd som dör i skogen?", "Varför kallas det ett kretslopp och inte ett flöde?"]))
 
@@ -142,7 +142,7 @@ add("4.2.2", "Kolets kretslopp", f"Kapitel {NR} · Delområde 4.2 {DELOMR['4.2']
 add("4.2.3", "Nedbrytning", f"Kapitel {NR} · Delområde 4.2 {DELOMR['4.2']} · Nedbrytning",
  "<p>Utan nedbrytning skulle döda löv, träd och djur bli liggande för alltid, och växterna skulle ta slut på näring. <strong class='green'>Nedbrytning</strong> betyder att dött material bryts ner till enklare ämnen som kan användas igen.</p>"
  + roww("<p>Jobbet görs av flera grupper tillsammans. <strong class='green'>Detritusätare</strong> som daggmaskar, gråsuggor och hoppstjärtar äter döda växtdelar och hackar sönder dem. <strong class='green'>Nedbrytare</strong>, alltså svampar och bakterier, tar sedan hand om resten. De gör cellandning på det döda materialet och frigör koldioxid, vatten och näringsämnen som kväve och fosfor. Dessa ämnen tar växterna upp igen.</p>"
-        "<p>Döda löv och barr som ligger på marken kallas <strong class='green'>förna</strong>. I förnan lever tusentals små djur och mikroorganismer.</p>",
+        "<p>Döda löv och barr som ligger på marken kallas <strong class='green'>förna</strong>. Det som blir kvar när förnan brutits ned är <strong class='green'>humus</strong>, ett mörkt material som gör jorden bördig. Jord som är rik på humus kallas <strong class='green'>mull</strong>. I förnan lever tusentals små djur och mikroorganismer.</p>",
         [begrepp([("Nedbrytare", "Svampar och bakterier som bryter ner dött material."), ("Detritusätare", "Djur som äter döda växtdelar och hackar sönder dem."), ("Förna", "Döda löv och barr som ligger på marken.")]),
          box("visste", "Visste du?", "<p>En kompost kan bli varm, ofta över 50 °C. Värmen kommer från nedbrytarnas cellandning.</p>")])
  + "<h3>Vad påverkar hur snabbt det går?</h3>"
@@ -192,8 +192,8 @@ add("4.3.2", "Begränsande faktorer", f"Kapitel {NR} · Delområde 4.3 {DELOMR['
 
 # ------------------------------------------------------------------ 4.3.3
 add("4.3.3", "Konkurrens, jakt och samarbete", f"Kapitel {NR} · Delområde 4.3 {DELOMR['4.3']} · Konkurrens, jakt och samarbete",
- "<p>Arter påverkar varandra på olika sätt. Man brukar skilja på fyra sorters samspel.</p>"
- + cards4([("Jakt", "Rovdjuret tjänar, bytet förlorar. Lodjur och skogshare är ett exempel."), ("Konkurrens", "Båda förlorar lite. Rödräv och fjällräv konkurrerar om både mat och lyor."),
+ "<p>Arter påverkar varandra på olika sätt. Man brukar skilja på fyra sorters samspel. Arter som samspelar nära kan också förändras tillsammans under många generationer, så kallad <strong class='green'>samutveckling</strong>: blommor och insekter som pollinerar dem är ett exempel.</p>"
+ + cards4([("Jakt (predation)", "Rovdjuret tjänar, bytet förlorar. Lodjur och skogshare är ett exempel."), ("Konkurrens", "Båda förlorar lite. Rödräv och fjällräv konkurrerar om både mat och lyor."),
            ("Parasitism", "Parasiten tjänar, värden förlorar. En fästing suger blod från sin värd."), ("Symbios", "Båda tjänar på samarbetet. En lav är en svamp och en alg som lever tillsammans: algen gör fotosyntes, svampen skyddar och håller kvar vatten.")])
  + "<h3>Livsmiljö och nisch</h3>"
  + row("<p>Alla arter har en livsmiljö, platsen där de kan leva. Men varje art har också en egen roll i ekosystemet. Det kallas artens <strong class='green'>nisch</strong>: vad den äter, var och när den söker mat, var den bor och vilka den påverkar. Nischen är ungefär artens ”yrke”, medan livsmiljön är dess ”adress”.</p>"
@@ -229,11 +229,11 @@ SAMMAN = ["<strong>Ekologi</strong> handlar om hur organismer samspelar med vara
 BEGR = [("Abiotisk faktor", "Påverkan från den livlösa miljön, t.ex. ljus och temperatur."), ("Begränsande faktor", "Något som sätter en gräns för en populations storlek."), ("Biomassa", "Vikten av levande organismer, ofta mätt som torrvikt."),
         ("Biosfär", "Alla ekosystem på jorden tillsammans."), ("Biotisk faktor", "Påverkan från andra organismer."), ("Biotop", "En typ av livsmiljö, t.ex. barrskog eller sjö."), ("Bärkraft", "Det största antal individer som miljön kan försörja under lång tid."),
         ("Detritusätare", "Djur som äter döda växtdelar och hackar sönder dem."), ("Ekologi", "Läran om samspelet mellan organismer och deras miljö."), ("Ekosystem", "Organismerna och den livlösa miljön i ett område."),
-        ("Energiflöde", "Energin går in som solljus och ut som värme."), ("Energipyramid", "Bild som visar hur energin minskar för varje nivå."), ("Förna", "Döda löv och barr på marken."), ("Kaskadeffekt", "En förändring som sprider sig genom flera nivåer."),
+        ("Energiflöde", "Energin går in som solljus och ut som värme."), ("Energiförlust", "Det mesta av energin förs inte vidare till nästa led utan blir värme."), ("Energipyramid", "Bild som visar hur energin minskar för varje nivå."), ("Förna", "Döda löv och barr på marken."), ("Kaskadeffekt", "En förändring som sprider sig genom flera nivåer."),
         ("Konkurrens", "När organismer tävlar om samma resurs."), ("Konsument", "Organism som äter andra organismer."), ("Kretslopp", "När ämnen används om och om igen i naturen."), ("Livsmiljö", "Platsen där en art lever."),
         ("Materia", "Det som atomer och molekyler bygger upp. Den försvinner inte."), ("Nedbrytare", "Svampar och bakterier som bryter ner dött material."), ("Nisch", "Artens roll i ekosystemet."), ("Näringskedja", "Visar vem som äter vem."),
         ("Näringsväv", "Flera näringskedjor som hänger ihop."), ("Population", "Alla individer av en art inom ett område."), ("Producent", "Organism som gör sin egen näring genom fotosyntes."), ("Symbios", "Samarbete där båda arterna tjänar på det."),
-        ("Toppkonsument", "Djur högst upp i näringskedjan.")]
+        ("Toppkonsument", "Djur högst upp i näringskedjan."), ("Trofinivå", "Ett steg i näringskedjan, till exempel producent eller växtätare.")]
 
 TEST = [
  ("A", "Vilken organism är en producent?", ["A Flugsvamp", "B Växtplankton", "C Daggmask", "D Abborre"], 1, 0),
