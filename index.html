@@ -60,6 +60,8 @@
   .knapp.last-knapp:hover { background: #e4e7ec; }
   .last-text { font-size: 0.85em; font-weight: normal; }
   .amne-ikon { font-size: 2.5em; display: block; margin-bottom: 8px; }
+  img.flagga { height: 0.75em; width: auto; vertical-align: -0.05em; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.15); margin: 0 .06em; }
+  .amne-ikon img.flagga { height: 0.95em; margin: 0 .08em; }
   .amne-titel { font-weight: bold; font-size: 1.1em; color: #38564A; }
 
   .knapp {
@@ -915,6 +917,16 @@
 <script src="innehall/religion-kristendom.js"></script>
 
 <script>
+// Flaggemojis visas som bokstavspar (t.ex. SE, GB) på Windows. Byt kända flaggor mot bilder.
+var KANDA_FLAGGOR = { SE: 1, GB: 1, ES: 1, FR: 1, DE: 1 };
+function ikonHtml(ikon) {
+  return String(ikon).replace(/[\u{1F1E6}-\u{1F1FF}]{2}/gu, function (m) {
+    var kod = Array.from(m).map(function (c) { return String.fromCharCode(c.codePointAt(0) - 0x1F1E6 + 65); }).join("");
+    return KANDA_FLAGGOR[kod] ? '<img class="flagga" alt="" src="ikoner/flaggor/' + kod.toLowerCase() + '.svg">' : m;
+  });
+}
+</script>
+<script>
   var app = document.getElementById("app");
 
   var nodKarta = {};
@@ -1053,14 +1065,14 @@
       if (r.totalt === 0 && !(window.hafte && window.hafte[amne.id]) && !amne.ramverk) {
         // Inget innehåll än: låst ruta som inte går att öppna.
         html += '<div class="amne-ruta last" aria-disabled="true" title="Kommer snart">' +
-                '<span class="amne-ikon">' + (amne.ikon || "📘") + '</span>' +
+                '<span class="amne-ikon">' + ikonHtml(amne.ikon || "📘") + '</span>' +
                 '<span class="amne-titel">' + amne.titel + '</span>' +
                 '<span class="amne-framsteg">🔒 Kommer snart</span></div>';
         return;
       }
       if (r.klara > 0) { harKlara = true; }
       html += '<div class="amne-ruta" onclick="visNod(\'' + amne.id + '\')">' +
-              '<span class="amne-ikon">' + (amne.ikon || "📘") + '</span>' +
+              '<span class="amne-ikon">' + ikonHtml(amne.ikon || "📘") + '</span>' +
               '<span class="amne-titel">' + amne.titel + '</span>' +
               '<span class="amne-framsteg">' + (r.totalt === 0 ? 'Under uppbyggnad' : r.klara + ' av ' + r.totalt + ' klara') + '</span>' +
               '</div>';
@@ -3828,7 +3840,7 @@
   if (data.intro) { html += "<p>" + data.intro + "</p>"; }
   data.sektioner.forEach(function(sek) {
     html += '<div class="sektion">';
-    html += '<h3><span class="sektion-ikon">' + sek.ikon + '</span>' + sek.titel + '</h3>';
+    html += '<h3><span class="sektion-ikon">' + ikonHtml(sek.ikon) + '</span>' + sek.titel + '</h3>';
     sek.text.forEach(function(stycke) {
       html += /^<(p|div|ul|ol|table|figure|details)[ >]/.test(stycke) ? stycke : "<p>" + stycke + "</p>";
     });

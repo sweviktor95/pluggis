@@ -56,6 +56,17 @@
 
 <div id="innehall" style="display:none"></div>
 
+<style>img.flagga { height: 0.8em; width: auto; vertical-align: -0.05em; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.15); }</style>
+<script>
+// Flaggemojis visas som bokstavspar på Windows. Byt kända flaggor mot bilder.
+var KANDA_FLAGGOR = { SE: 1, GB: 1, ES: 1, FR: 1, DE: 1 };
+function ikonHtml(ikon) {
+  return String(ikon).replace(/[\u{1F1E6}-\u{1F1FF}]{2}/gu, function (m) {
+    var kod = Array.from(m).map(function (c) { return String.fromCharCode(c.codePointAt(0) - 0x1F1E6 + 65); }).join("");
+    return KANDA_FLAGGOR[kod] ? '<img class="flagga" alt="" src="ikoner/flaggor/' + kod.toLowerCase() + '.svg">' : m;
+  });
+}
+</script>
 <script src="innehall/struktur.js"></script>
 <script src="hafte/manifest.js"></script>
 <script src="planering/lararvy-biologi.js"></script>
@@ -118,7 +129,7 @@
       inre += hafte || '<div class="knappar" style="margin-top:10px"><span class="lank av">Häften kommer</span></div>';
       ut += '<details><summary>' + o.nr + '. ' + o.titel + '</summary><div class="inre">' + inre + '</div></details>';
     });
-    return '<details><summary>' + (nod.ikon ? nod.ikon + " " : "") + nod.titel + '</summary><div class="inre">' + ut + '</div></details>';
+    return '<details><summary>' + (nod.ikon ? ikonHtml(nod.ikon) + " " : "") + nod.titel + '</summary><div class="inre">' + ut + '</div></details>';
   }
 
   // Bygger HTML för en gren; returnerar "" om inga häften finns under den.
@@ -136,7 +147,7 @@
     var inre = (nod.barn || []).map(function(b) { return grenHtml(b, niva + 1); }).join("");
     if (!nod.barn || !nod.barn.length) { return egen; }
     if (!egen && !inre) { return ""; }
-    return '<details><summary>' + (nod.ikon ? nod.ikon + " " : "") + nod.titel + '</summary><div class="inre">' + egen + inre + '</div></details>';
+    return '<details><summary>' + (nod.ikon ? ikonHtml(nod.ikon) + " " : "") + nod.titel + '</summary><div class="inre">' + egen + inre + '</div></details>';
   }
 
   function visa() {
