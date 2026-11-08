@@ -17,5 +17,32 @@ window.lararKartlaggning = {
       ["H åk 7–9 · elev", "kartlaggning/matematik-kartlaggning-h.pdf"],
       ["H åk 7–9 · lärare", "kartlaggning/matematik-kartlaggning-h-lararversion.pdf"]
     ]
+  },
+  kemi: {
+    text: "Kartläggning – visar vilken årskurs eleven ligger på och om det beror på luckor, inlärning eller fokus/ork",
+    lankar: [
+      ["M åk 4–6 · elev", "kartlaggning/kemi-kartlaggning-m.pdf"],
+      ["M åk 4–6 · lärare", "kartlaggning/kemi-kartlaggning-m-lararversion.pdf"],
+      ["H åk 7–9 · elev", "kartlaggning/kemi-kartlaggning-h.pdf"],
+      ["H åk 7–9 · lärare", "kartlaggning/kemi-kartlaggning-h-lararversion.pdf"]
+    ]
+  },
+  fysik: {
+    text: "Kartläggning – visar vilken årskurs eleven ligger på och om det beror på luckor, inlärning eller fokus/ork",
+    lankar: [
+      ["M åk 4–6 · elev", "kartlaggning/fysik-kartlaggning-m.pdf"],
+      ["M åk 4–6 · lärare", "kartlaggning/fysik-kartlaggning-m-lararversion.pdf"],
+      ["H åk 7–9 · elev", "kartlaggning/fysik-kartlaggning-h.pdf"],
+      ["H åk 7–9 · lärare", "kartlaggning/fysik-kartlaggning-h-lararversion.pdf"]
+    ]
+  },
+  teknik: {
+    text: "Kartläggning – visar vilken årskurs eleven ligger på och om det beror på luckor, inlärning eller fokus/ork",
+    lankar: [
+      ["M åk 4–6 · elev", "kartlaggning/teknik-kartlaggning-m.pdf"],
+      ["M åk 4–6 · lärare", "kartlaggning/teknik-kartlaggning-m-lararversion.pdf"],
+      ["H åk 7–9 · elev", "kartlaggning/teknik-kartlaggning-h.pdf"],
+      ["H åk 7–9 · lärare", "kartlaggning/teknik-kartlaggning-h-lararversion.pdf"]
+    ]
   }
 };
