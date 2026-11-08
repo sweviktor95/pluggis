@@ -163,6 +163,8 @@ function ikonHtml(ikon) {
   function visa() {
     document.getElementById("port").style.display = "none";
     var ut = struktur.map(function(a) { return grenHtml(a, 0); }).join("");
+    ut += '<div class="kapitel"><h4>Kartläggning av elev med svårigheter i skolgången</h4><p class="grupp">Mall för mentor och ämneslärare: närvaro, kunskaper per ämne, hur eleven lär, mående, vad som prövats och en plan. Elevsamtalet är ett eget blad som eleven svarar på. Skolans egna blanketter och sekretessrutiner går före.</p><div class="knappar">' +
+      lank("kartlaggning/elev-kartlaggning-mall.pdf", "Mall · lärare (4 sidor)") + lank("kartlaggning/elev-kartlaggning-elevsamtal.pdf", "Elevsamtal · elev (2 sidor)") + '</div></div>';
     document.getElementById("innehall").innerHTML = ut ||
       '<p class="tomt">Inga häften är uppladdade än. De dyker upp här när de lagts in i <code>hafte/manifest.js</code>.</p>';
     document.getElementById("innehall").style.display = "block";
