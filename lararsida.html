@@ -74,6 +74,7 @@ function ikonHtml(ikon) {
 <script src="planering/lararvy-fysik.js"></script>
 <script src="planering/lararvy-teknik.js"></script>
 <script src="planering/lararvy-matematik.js"></script>
+<script src="planering/lararvy-kartlaggning.js"></script>
 <script>
   // Obs: enkel spärr mot nyfikna – inget riktigt skydd (sidan är statisk).
   var HASH = "a2c4a4f38df7a7d24eac2b8dc1c9f63487d6255208b978a29b9740423225ee3a";
@@ -118,9 +119,18 @@ function ikonHtml(ikon) {
     return k + '</div>';
   }
 
+  // Kartläggning per ämne (planering/lararvy-kartlaggning.js).
+  function kartHtml(id) {
+    var k = window.lararKartlaggning && window.lararKartlaggning[id];
+    if (!k) { return ""; }
+    return '<div class="kapitel"><h4>Kartläggning</h4><p class="grupp">' + k.text + '</p><div class="knappar">' +
+      k.lankar.map(function(l) { return lank(l[1], l[0]); }).join("") + '</div></div>';
+  }
+
   // Biologi i lärarvyn: planeringen som länk överst, därefter de nya områdena (kapitlen).
   function biologiHtml(nod, d) {
     var ut = '<div class="planlank">' + lank(d.plan.pdf, "📋 Planering (PDF)", "plan") + lank(d.plan.xlsx, "Planering (Excel)", "plan") + '</div>';
+    ut += kartHtml(nod.id);
     d.omraden.forEach(function(o) {
       var inre = '<p class="ide">' + o.ide + '</p>' +
         ((o.ppt && o.ppt.length) ? '<p class="grupp">PowerPoint – ladda ner</p><div class="knappar">' + o.ppt.map(function(l) { return lank(l[1], l[0], "plan", true); }).join("") + '</div>' : '') +
@@ -138,7 +148,7 @@ function ikonHtml(ikon) {
     if (nod.id === "kemi" && window.lararKemi) { return biologiHtml(nod, window.lararKemi); }
     if (nod.id === "fysik" && window.lararFysik) { return biologiHtml(nod, window.lararFysik); }
     if (nod.id === "teknik" && window.lararTeknik) { return biologiHtml(nod, window.lararTeknik); }
-    var egen = kapitelHtml(nod);
+    var egen = kapitelHtml(nod) + (nod.id === "matematik" ? kartHtml("matematik") : "");
     var ex = window.lararExtra && window.lararExtra[nod.id];
     if (ex) {
       egen += '<div class="kapitel"><h4>' + nod.titel + '</h4><p class="grupp">' + ex.grupp + '</p><div class="knappar">' +
