@@ -22,12 +22,18 @@ build({
     await h.imgText(C, "Tre grupper i ekosystemet", ["Producenter gör egen näring med fotosyntes.", "Konsumenter äter andra organismer.", "Nedbrytare bryter ner döda växter och djur.", "Detritusätare hackar sönder dött material."], "l_tre.png", { iw: 6.4, imgLeft: false, fs: 22, notes: "Svampar och bakterier är nedbrytare. Daggmaskar och gråsuggor är detritusätare." });
     await h.imgText(C, "Näringskedja", ["Varje steg är ett led.", "Pilen pekar mot den som äter, åt samma håll som energin.", "Först i kedjan står alltid en producent.", "Högst upp: toppkonsument."], "ekologi-kedja.png", { iw: 6.6, imgLeft: false, fs: 22, notes: "Vanligt fel: pilen ritas åt fel håll." });
     await h.imgText(C, "Näringsväv och kaskadeffekt", ["Flera kedjor som hänger ihop.", "Tar man bort en art påverkas många.", "En förändring som sprider sig genom flera led kallas kaskadeffekt.", "Fler kopplingar ger ett stabilare ekosystem."], "ekologi-vav.png", { iw: 6.6, imgLeft: false, fs: 22, notes: "Yellowstone och vargarna är ett känt men omdiskuterat exempel på kaskadeffekt." });
+    h.exempel(C, "Förklara i led", "I en skog fångas nästan alla rävar av jägare. Vad kan hända med sorkarna och med gräset?",
+      ["Börja i förändringen: vad händer först?", "Följ pilarna ett led i taget.", "Skriv ”därför” eller ”så” mellan leden.", "Avsluta med slutresultatet."],
+      "Färre rävar gör att färre sorkar blir uppätna, så sorkarna blir fler. Fler sorkar äter mer gräs, så gräset minskar. Det blir alltså mindre gräs i skogen efter en tid. Det kallas kaskadeffekt eftersom förändringen sprider sig genom flera led.");
     h.kolla(C, "Kolla dig själv", ["Varför står alltid en producent först i en näringskedja?", "Vad skulle hända i en skog om alla nedbrytare försvann?", "Förklara varför en näringsväv visar mer än en näringskedja."]);
 
     const D = "Energiflöde och biomassa";
     h.section(D, "Vart tar energin vägen?", "Solen är källan. Energin flödar genom ekosystemet och försvinner som värme.");
     await h.imgText(D, "Energin minskar för varje led", ["Nästan all energi kommer från solen.", "Bara cirka 10 procent förs vidare.", "Resten blir värme eller hamnar hos nedbrytare.", "Därför är näringskedjor korta."], "ekologi-pyramid.png", { iw: 6.4, imgLeft: false, fs: 22, notes: "10 procent är ett genomsnitt, ofta 5–20 procent." });
     h.stat(D, "Biomassa", "10 %", "av energin förs vidare till nästa led", ["Biomassa är vikten av levande organismer, ofta torrvikt.", "Den minskar oftast uppåt i kedjan.", "Därför finns det fler harar än lodjur.", "Växtbaserad mat tar vara på mer av energin."], { notes: "Fördjupning: i öppet hav kan biomassan vid ett visst tillfälle vara omvänd, eftersom växtplankton omsätts snabbt." });
+    h.exempel(D, "Förklara med energi", "Det är ovanligt att näringskedjor har fler än fem led. Förklara varför.",
+      ["Vad händer med energin i varje led?", "Hur mycket är kvar efter flera led?", "Koppla till vad organismerna behöver.", "Avsluta med slutsatsen."],
+      "Bara cirka 10 % av energin förs vidare i varje led, och resten blir värme. Efter fem led är nästan ingen energi kvar. Ett rovdjur på nästa nivå skulle inte få tillräckligt med energi för att leva, och därför finns det sällan fler än fem led.");
     h.kolla(D, "Kolla dig själv", ["Varifrån kommer nästan all energi?", "Ge två förklaringar till varför energi försvinner mellan leden.", "Varför finns det färre rovdjur än växtätare?", "Vad menas med biomassa?"]);
 
     const E = "Labb 4.1 Energi i en näringskedja";

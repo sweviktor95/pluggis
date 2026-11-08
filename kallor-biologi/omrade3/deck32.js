@@ -20,6 +20,9 @@ build({
     const C = "Anpassningar";
     h.section(C, "Passar bäst – överlever", "Fråga: varför ser fjällräv och rödräv olika ut? Koppla till miljön.");
     await h.imgText(C, "Naturligt urval", ["Variation: individer är olika.", "Urval: de som passar bäst överlever.", "Ärftlighet: draget går i arv.", "Draget blir vanligare."], "urval.png", { iw: 7.7, imgLeft: false, fs: 20, notes: "Pepparfjärilen är förenklad. Vanligt fel: att individer anpassar sig medvetet." });
+    h.exempel(C, "Förklara en anpassning", "Pingvinen har tät fjäderdräkt och ett tjockt fettlager. Förklara hur draget hjälper pingvinen och hur det kan ha blivit vanligt.",
+      ["Namnge draget.", "Förklara hur draget hjälper i miljön.", "Använd variation, urval och ärftlighet.", "Avsluta med att draget blir vanligare."],
+      "Fjäderdräkt och fettlager skyddar mot kyla. Pingviner är olika, och de som höll värmen bäst överlevde oftare (urval). De fick fler ungar, och draget går i arv. Därför blev de med bra isolering fler och fler över generationer.");
     h.kolla(C, "Kolla dig själv", ["Vad är en anpassning?", "Förklara naturligt urval med tre ord.", "Varför är en anpassning ingen sak en individ bestämmer?"]);
 
     const D = "Labb 3.2 Artbestämning med nyckel";

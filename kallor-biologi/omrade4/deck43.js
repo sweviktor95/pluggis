@@ -10,6 +10,9 @@ build({
     h.section(A, "Födda, döda, inflyttning och utflyttning", "Räkna harexemplet tillsammans: 200 + 150 − 120 + 20 − 30 = 220.");
     h.cards(A, "Fyra saker avgör populationens storlek", [["Födda", "Nya individer."], ["Döda", "Ålder, sjukdom, svält, rovdjur."], ["Inflyttning", "Individer flyttar in."], ["Utflyttning", "Individer flyttar ut."]], { h: 3.0, note: "Fler in än ut: populationen växer.", notes: "Be eleverna hitta på ett eget exempel med siffror." });
     await h.imgText(A, "Lämmelår och fjällrävar", ["Lämlarna varierar kraftigt i antal.", "Fjällräven lever av lämlar.", "Rovdjurens antal följer bytesdjurens, med fördröjning.", "Kurvorna är förenklade."], "ekologi-lamlar.png", { iw: 6.6, imgLeft: false, fs: 22, notes: "Fråga: varför kommer topparna för fjällrävarna lite efter topparna för lämlarna?" });
+    h.exempel(A, "Tolka en tabell", "Antal fjärilar per ruta i tre skogar: Skog A 12, Skog B 5, Skog C 9. Skog B har skugga och mycket gran. Vad visar tabellen?",
+      ["Läs rubriker och enheter.", "Hitta störst, minst och mönster. Använd siffror.", "Förklara med biologi: vilka faktorer kan skilja?", "Säg vad som är osäkert."],
+      "Skog A har flest fjärilar (12) och skog B minst (5). Skog B är skuggig och har mest gran, och fjärilar behöver ljus och blommor att äta av. Det kan förklara varför det blev färre. Men jag vet inte om rutorna var lika stora eller om vädret var lika vid räkningen.");
     h.kolla(A, "Kolla dig själv", ["Vilka fyra saker avgör en populations storlek?", "Varför kommer fjällrävarnas toppar efter lämlarnas?", "200 harar, 150 föds, 120 dör, 20 in, 30 ut. Hur många blir det?"]);
 
     const B = "Begränsande faktorer";

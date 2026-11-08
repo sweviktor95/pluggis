@@ -77,6 +77,17 @@ async function build(cfg) {
         s.addText(String(i + 1), { x: MX, y: y + 0.08, w: 0.55, h: 0.55, fontSize: 18, bold: true, color: C.background1, align: "center", valign: "middle", margin: 0, isTextBox: true });
         s.addText(t, { x: MX + 0.85, y, w: (o.tw || W - 2 * MX - 0.85), h: 0.7, fontSize: 24, color: C.text1, valign: "middle", margin: 0, isTextBox: true }); });
       return s; },
+    exempel(sect, title, uppgift, steg, svar, o = {}) {
+      const s = newSlide("INNEHALL", sect, o.notes || "Visa uppgiften först och låt eleverna försöka själva i par. Gå sedan igenom stegen och jämför med modellsvaret. Poängen är arbetssättet, inte just det här svaret."); s.addText(title, { placeholder: "title" });
+      s.addText("SÅ RESONERAR VI", { x: MX, y: 1.3, w: 6, h: 0.3, fontSize: 13, bold: true, color: C.accent2, charSpacing: 3, margin: 0, isTextBox: true });
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: MX, y: 1.65, w: W - 2 * MX, h: 1.25, rectRadius: 0.1, fill: { color: C.background2 }, line: { color: C.accent2, width: 2 }, objectName: "Uppgift" });
+      s.addText([{ text: "UPPGIFT  ", options: { bold: true, color: C.accent2, fontSize: 14 } }, { text: uppgift, options: { color: C.text1, fontSize: o.ufs || 20 } }], { x: MX + 0.3, y: 1.7, w: W - 2 * MX - 0.6, h: 1.15, valign: "middle", margin: 0, isTextBox: true });
+      s.addText("SÅ GÖR DU", { x: MX, y: 3.1, w: 5, h: 0.3, fontSize: 14, bold: true, color: C.accent1, charSpacing: 3, margin: 0, isTextBox: true });
+      s.addText(steg.map((t, i) => ({ text: t, options: { bullet: { type: "number" }, breakLine: i < steg.length - 1, paraSpaceAfter: 9 } })), { x: MX, y: 3.45, w: 5.3, h: 3.3, fontSize: o.sfs || 20, color: C.text1, valign: "top", margin: 0, isTextBox: true });
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.3, y: 3.1, w: W - 6.3 - MX, h: 3.7, rectRadius: 0.12, fill: { color: C.background1 }, line: { color: C.accent3, width: 2 }, objectName: "Modellsvar" });
+      s.addText("MODELLSVAR", { x: 6.55, y: 3.2, w: 4, h: 0.3, fontSize: 14, bold: true, color: C.accent1, charSpacing: 3, margin: 0, isTextBox: true });
+      s.addText(svar, { x: 6.55, y: 3.55, w: W - 6.3 - MX - 0.5, h: 3.15, fontSize: o.mfs || 20, color: C.text1, valign: "top", margin: 0, isTextBox: true });
+      return s; },
     kolla(sect, title, qs, o = {}) {
       const s = newSlide("INNEHALL", sect, o.notes || "Låt eleverna svara i par eller på whiteboard. Facit finns i lärarversionen av kapitlet."); s.addText(title, { placeholder: "title" });
       s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: MX, y: 1.7, w: W - 2 * MX, h: 4.7, rectRadius: 0.15, fill: { color: C.background2 }, line: { color: C.accent3, width: 2 }, objectName: "Kolla dig själv" });
