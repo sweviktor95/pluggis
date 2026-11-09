@@ -185,6 +185,9 @@ MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omra
                                    ["📊 4.1 Molekyler och joner", "planering/kemi-omrade4/kemi-4-1-molekyler-och-joner.pptx"],
                                    ["📊 4.2 Kemiska reaktioner", "planering/kemi-omrade4/kemi-4-2-kemiska-reaktioner.pptx"]]}}
 
+# Simuleringar (elevsidan): ett moment före labben i delområdet. Innehållet står i innehall/simuleringar.js.
+SIM = {("kemi", "2.1"): "Simulering: partikelmodellen", ("fysik", "10.1"): "Simulering: elektriska kretsar", ("teknik", "4.1"): "Simulering: balkar, drag och tryck"}
+
 def skriv_js():
     data = {"plan": {"pdf": f"planering/{C['id']}-planering.pdf", "xlsx": f"planering/{C['id']}-planering.xlsx"},
             "omraden": [{"nr": a[0], "titel": a[1], "ide": a[2], "hafte": HAFTE.get((C["id"], a[0])), "lankar": MATERIAL.get((C["id"], a[0]), {}).get("lankar", []), "ppt": MATERIAL.get((C["id"], a[0]), {}).get("ppt", [])} for a in A]}
@@ -198,6 +201,7 @@ def skriv_struktur():
         dl = []
         for d in a[3]:
             mo = [f'              {{ id: "{I}-m-{dn(d)}-{n}", titel: {js(TITEL_OVR.get(f"{I}-m-{dn(d)}-{n}", m[0]))} }}' for n, m in enumerate(d[5], 1)]
+            if (I, d[0]) in SIM: mo.append(f'              {{ id: "{I}-m-{dn(d)}-sim", titel: {js(SIM[(I, d[0])])} }}')
             if d[6]: mo.append(f'              {{ id: "{I}-m-{dn(d)}-l", titel: {js(C["labb"] + ": " + d[6][0])} }}')
             dl.append(f'          {{\n            id: "{I}-d-{dn(d)}",\n            titel: {js(d[0] + " " + d[1])},\n            ramverk: true,\n            barn: [\n' + ",\n".join(mo) + "\n            ]\n          }")
         ex = [f'          {{ id: "{I}-m-{a[0]}-{k}", titel: {js(t)} }}' for k, t in zip("st", EXTRA_BLAD.get((I, a[0]), []))]

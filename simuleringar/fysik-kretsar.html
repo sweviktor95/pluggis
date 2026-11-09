@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elektriska kretsar</title>
+<style>
+:root{--bg:#f3f8f1;--card:#fff;--ink:#1f2a24;--muted:#56655b;--line:#cfdccf;--accent:#38564A;--green:#2e7d32;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DejaVu Sans",Verdana,Arial,sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding:16px}
+h1{margin:4px 0 2px;font-size:1.6rem;color:var(--accent)}
+.sub{margin:0 0 12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+.card h2{margin:0 0 8px;font-size:1.1rem}
+canvas{width:100%;height:auto;aspect-ratio:480/400;display:block;border-radius:12px;background:#fdfaf2;touch-action:manipulation}
+.ctl{margin:0 0 12px}
+.ctl label{display:flex;justify-content:space-between;font-weight:700}
+.ctl .val{color:var(--muted);font-weight:400}
+input[type=range]{width:100%;height:32px;accent-color:var(--green)}
+.btn{font:inherit;font-size:.92rem;padding:8px 12px;border-radius:10px;border:2px solid var(--line);background:#fff;cursor:pointer;min-height:42px;color:var(--ink);margin:0 6px 6px 0}
+.btn:hover{border-color:#4caf50}
+.btn[aria-pressed="true"]{background:#e8f5e9;border-color:#4caf50;font-weight:700}
+button:focus-visible,input:focus-visible{outline:3px solid #ff8f00;outline-offset:2px}
+.read{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 0 8px}
+.read div{background:#f0f6ee;border-radius:10px;padding:6px 10px;font-size:.9rem}
+.read b{display:block;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.msg{padding:10px 12px;border-radius:12px;background:#fff8e1;border:1px solid #f0d78a;font-size:.92rem;min-height:4.6em}
+.msg.good{background:#e8f5e9;border-color:#a8d5ab}
+.eq{font-size:1rem;background:#f0f6ee;border-radius:10px;padding:8px 10px;margin:0 0 8px}
+.hint{font-size:.85rem;color:var(--muted)}
+ol{margin:6px 0 0 20px;padding:0}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Elektriska kretsar</h1>
+  <p class="sub">Koppla lampor i serie eller parallellt, ändra spänningen och skruva ur en lampa. Klicka på strömbrytaren och på lamporna i bilden.</p>
+  <div class="grid">
+    <div class="card">
+      <canvas id="cv" role="img" aria-label="Elektrisk krets med batteri, strömbrytare och lampor. Lamporna kan kopplas i serie eller parallellt."></canvas>
+      <p class="hint" style="margin:8px 0 0">Klicka på <b>strömbrytaren</b> för att slå av och på. Klicka på en <b>lampa</b> för att skruva ur den eller sätta i den igen. Gula prickar visar strömmen: den går från batteriets plus-pol, runt kretsen, tillbaka till minus-polen.</p>
+    </div>
+    <div>
+      <div class="card">
+        <h2>Bygg kretsen</h2>
+        <div role="group" aria-label="Koppling">
+          <button class="btn" id="bs" aria-pressed="true">Seriekoppling</button>
+          <button class="btn" id="bp" aria-pressed="false">Parallellkoppling</button>
+        </div>
+        <div class="ctl"><label for="nl">💡 Antal lampor <span class="val" id="nlv"></span></label><input type="range" id="nl" min="1" max="3" step="1" value="2"></div>
+        <div class="ctl"><label for="u">🔋 Batterispänning <span class="val" id="uv"></span></label><input type="range" id="u" min="1.5" max="9" step="1.5" value="6"></div>
+      </div>
+      <div class="card">
+        <h2>Mätvärden</h2>
+        <div class="read"><div>Ström från batteriet (A)<b id="itot">0</b></div><div>Total resistans<b id="rtot">0</b></div></div>
+        <div class="eq" id="eq"></div>
+        <div class="msg" id="msg" aria-live="polite"></div>
+      </div>
+      <div class="card">
+        <h2>Uppdrag</h2>
+        <ol>
+          <li>Koppla två lampor i serie. Skruva ur den ena. Vad händer med den andra?</li>
+          <li>Gör samma sak med parallellkoppling. Vad blir annorlunda?</li>
+          <li>Jämför hur starkt lamporna lyser med två respektive tre lampor i serie. Hur förklarar du det?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+"use strict";
+function $(i){return document.getElementById(i);}
+var reduce=false;try{reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
+var W=480,H=400,R=3;
+var S={par:false,n:2,u:6,on:true,broken:[false,false,false]};
+var cv=$("cv"),c=cv.getContext("2d"),SC=1;
+function rs(){var r=cv.getBoundingClientRect();if(!r.width)return;var d=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(r.width*d);cv.height=Math.round(r.width*H/W*d);SC=cv.width/W;}
+window.addEventListener("resize",rs);
+
+/* geometri */
+var TOP=80,BOT=330,BX=60;               /* ledningsrektangel */
+var LX_S=[190,290,390];                   /* lampor i serie (på övre ledningen) */
+var LX_P=[190,290,390];                   /* grenar i parallell */
+var SWX=110;                              /* strömbrytare */
+function lampPos(i){return S.par?{x:LX_P[i],y:(TOP+BOT)/2}:{x:LX_S[i],y:TOP};}
+function calc(){
+  var m=S.n,work=[],i;
+  for(i=0;i<m;i++)work.push(!S.broken[i]);
+  var res={I:[],U:[],P:[],Itot:0,Rtot:0,open:false};
+  if(!S.on){res.open=true;}
+  if(!S.par){
+    var any=work.slice(0,m).every(function(w){return w;});
+    if(!S.on||!any){res.open=true;for(i=0;i<m;i++){res.I.push(0);res.U.push(0);res.P.push(0);}res.Rtot=Infinity;}
+    else{var Rt=R*m,I=S.u/Rt;res.Rtot=Rt;res.Itot=I;for(i=0;i<m;i++){res.I.push(I);res.U.push(I*R);res.P.push(I*I*R);}}
+  } else {
+    var k=work.slice(0,m).filter(function(w){return w;}).length;
+    if(!S.on||k===0){res.open=true;res.Rtot=Infinity;for(i=0;i<m;i++){res.I.push(0);res.U.push(0);res.P.push(0);}}
+    else{res.Rtot=R/k;res.Itot=S.u/res.Rtot;for(i=0;i<m;i++){if(work[i]){res.I.push(S.u/R);res.U.push(S.u);res.P.push(S.u*S.u/R);}else{res.I.push(0);res.U.push(0);res.P.push(0);}}}
+  }
+  return res;
+}
+
+/* strömprickar */
+var dots=[];
+function paths(){
+  var ps=[],m=S.n,i;
+  if(!S.par){
+    var p=[[BX,TOP+30],[BX,TOP],[SWX-10,TOP]];
+    p.push([SWX+40,TOP]);
+    for(i=0;i<m;i++){p.push([LX_S[i]-22,TOP]);p.push([LX_S[i]+22,TOP]);}
+    p.push([LX_S[m-1]+60,TOP]);p.push([LX_S[m-1]+60,BOT]);p.push([BX,BOT]);p.push([BX,BOT-30]);
+    ps.push({pts:p,k:-1});
+  } else {
+    for(i=0;i<m;i++){
+      var x=LX_P[i];
+      ps.push({pts:[[BX,TOP+30],[BX,TOP],[SWX+40,TOP],[x,TOP],[x,TOP+75],[x,BOT-75],[x,BOT],[BX,BOT],[BX,BOT-30]],k:i});
+    }
+  }
+  return ps;
+}
+var PS=[],last=0;
+function plen(pts){var l=0;for(var i=0;i<pts.length-1;i++)l+=Math.hypot(pts[i+1][0]-pts[i][0],pts[i+1][1]-pts[i][1]);return l;}
+function posAt(pts,d){
+  for(var i=0;i<pts.length-1;i++){
+    var l=Math.hypot(pts[i+1][0]-pts[i][0],pts[i+1][1]-pts[i][1]);
+    if(d<=l||i===pts.length-2){var t=l?Math.min(1,d/l):1;return[pts[i][0]+(pts[i+1][0]-pts[i][0])*t,pts[i][1]+(pts[i+1][1]-pts[i][1])*t];}
+    d-=l;
+  }
+}
+function rebuild(){
+  PS=paths().map(function(p){return{pts:p.pts,k:p.k,len:plen(p.pts),n:7,u:[]};});
+  PS.forEach(function(p){for(var i=0;i<p.n;i++)p.u.push(i/p.n);});
+}
+
+function lampDraw(x,y,b,broken,idx,r){
+  var glow=broken?0:Math.min(1,b);
+  if(glow>0.03){var g=c.createRadialGradient(x,y,4,x,y,50);g.addColorStop(0,"rgba(255,224,102,"+(0.85*glow)+")");g.addColorStop(1,"rgba(255,224,102,0)");c.fillStyle=g;c.beginPath();c.arc(x,y,50,0,7);c.fill();}
+  c.beginPath();c.arc(x,y,20,0,7);c.fillStyle=broken?"#e7e2d8":"rgba(255,244,190,"+(0.25+0.75*glow)+")";c.fill();
+  c.strokeStyle="#555";c.lineWidth=3;c.stroke();
+  /* glödtråd */
+  c.strokeStyle=broken?"#999":(glow>0.15?"#ff8f00":"#7a7a7a");c.lineWidth=2.5;
+  c.beginPath();
+  if(broken){c.moveTo(x-10,y+8);c.lineTo(x-3,y-2);c.moveTo(x+3,y-3);c.lineTo(x+10,y+8);}
+  else{c.moveTo(x-10,y+8);c.lineTo(x-5,y-6);c.lineTo(x,y+4);c.lineTo(x+5,y-6);c.lineTo(x+10,y+8);}
+  c.stroke();
+  c.fillStyle="#555";c.fillRect(x-12,y+20,24,8);
+  c.fillStyle="#222";c.font="bold 13px DejaVu Sans, Arial";c.textAlign="center";
+  c.fillText("L"+(idx+1),x,y-28);
+  c.font="11px DejaVu Sans, Arial";c.fillStyle="#444";
+  if(broken)c.fillText("urskruvad",x,y+46);
+  else c.fillText(r.U[idx].toFixed(1)+" V "+r.I[idx].toFixed(2)+" A",x,y+46);
+  c.textAlign="start";
+}
+function draw(){
+  var r=calc();
+  c.setTransform(SC,0,0,SC,0,0);
+  c.fillStyle="#fdfaf2";c.fillRect(0,0,W,H);
+  var wire="#555";c.lineWidth=4;c.lineCap="round";c.strokeStyle=wire;
+  c.beginPath();
+  /* ledningar */
+  c.moveTo(BX,TOP+30);c.lineTo(BX,TOP);c.lineTo(SWX-10,TOP);
+  c.moveTo(SWX+40,TOP);
+  if(!S.par){
+    for(var i=0;i<S.n;i++){c.lineTo(LX_S[i]-20,TOP);c.moveTo(LX_S[i]+20,TOP);}
+    c.lineTo(LX_S[S.n-1]+60,TOP);c.lineTo(LX_S[S.n-1]+60,BOT);c.lineTo(BX,BOT);
+  } else {
+    c.lineTo(LX_P[S.n-1],TOP);c.moveTo(BX,BOT);c.lineTo(LX_P[S.n-1],BOT);
+    for(i=0;i<S.n;i++){c.moveTo(LX_P[i],TOP);c.lineTo(LX_P[i],(TOP+BOT)/2-20);c.moveTo(LX_P[i],(TOP+BOT)/2+28);c.lineTo(LX_P[i],BOT);}
+  }
+  c.moveTo(BX,BOT);c.lineTo(BX,BOT-30);
+  c.stroke();
+  /* batteri */
+  c.strokeStyle="#222";c.lineWidth=4;
+  c.beginPath();c.moveTo(BX-24,TOP+30);c.lineTo(BX+24,TOP+30);c.stroke();
+  c.lineWidth=7;c.beginPath();c.moveTo(BX-12,TOP+44);c.lineTo(BX+12,TOP+44);c.stroke();
+  c.lineWidth=4;c.beginPath();c.moveTo(BX-24,TOP+58);c.lineTo(BX+24,TOP+58);c.stroke();
+  c.lineWidth=7;c.beginPath();c.moveTo(BX-12,TOP+72);c.lineTo(BX+12,TOP+72);c.stroke();
+  c.fillStyle="#c0392b";c.font="bold 18px DejaVu Sans, Arial";c.fillText("+",BX+30,TOP+34);
+  c.fillStyle="#1e5fa0";c.fillText("−",BX+30,TOP+82);
+  c.fillStyle="#222";c.font="bold 13px DejaVu Sans, Arial";c.textAlign="center";c.fillText(S.u.toFixed(1)+" V",BX,TOP+104);c.textAlign="start";
+  c.strokeStyle=wire;c.lineWidth=4;c.beginPath();c.moveTo(BX,TOP+30-0);c.moveTo(BX,TOP+72);c.lineTo(BX,BOT-30);c.stroke();
+  /* strömbrytare */
+  c.strokeStyle="#222";c.lineWidth=5;c.beginPath();c.moveTo(SWX-10,TOP);c.lineTo(SWX+40,S.on?TOP:TOP-26);c.stroke();
+  c.fillStyle="#222";c.beginPath();c.arc(SWX-10,TOP,5,0,7);c.fill();c.beginPath();c.arc(SWX+40,TOP,5,0,7);c.fill();
+  c.fillStyle="#444";c.font="12px DejaVu Sans, Arial";c.textAlign="center";c.fillText(S.on?"Av/på: på":"Av/på: av",SWX+15,TOP-34);c.textAlign="start";
+  /* lampor */
+  for(i=0;i<S.n;i++){var lp=lampPos(i);lampDraw(lp.x,lp.y,Math.min(1,r.P[i]/12),S.broken[i],i,r);}
+  /* amperemeter-text */
+  c.fillStyle="#222";c.font="bold 13px DejaVu Sans, Arial";c.fillText("Amperemeter: "+r.Itot.toFixed(2)+" A",W-210,H-12);
+  /* prickar */
+  c.fillStyle="#f5b301";c.strokeStyle="#8a6d00";c.lineWidth=1;
+  PS.forEach(function(p){
+    var cur=S.par?(r.I[p.k]||0):r.Itot;
+    var v=cur*(reduce?0:11);
+    var vis=cur>0.001;
+    for(var j=0;j<p.n;j++){
+      p.u[j]=(p.u[j]+(v*dtG)/p.len)%1;
+      if(!vis)continue;
+      var pos=posAt(p.pts,p.u[j]*p.len);
+      c.beginPath();c.arc(pos[0],pos[1],4.2,0,7);c.fill();c.stroke();
+    }
+  });
+  return r;
+}
+var dtG=0;
+/* gränssnitt */
+function ui(r){
+  $("itot").textContent=r.Itot.toFixed(2);
+  $("rtot").textContent=r.Rtot===Infinity?"∞ (öppen)":r.Rtot.toFixed(1)+" Ω";
+  var m=S.n,eq,msg,cls="msg";
+  var nw=S.broken.slice(0,m).filter(function(b){return !b;}).length;
+  if(!S.par){
+    eq="Serie: R = "+Array(m).fill("3 Ω").join(" + ")+" = "+(R*m)+" Ω.  I = U / R = "+S.u+" V / "+(R*m)+" Ω = "+(S.u/(R*m)).toFixed(2)+" A";
+    if(!S.on){msg="Strömbrytaren är av. Kretsen är bruten, så ingen ström går.";}
+    else if(nw<m){msg="En lampa är urskruvad. I en seriekoppling finns bara en väg för strömmen. När den bryts går ingen ström, och alla lampor släcks.";}
+    else if(m===1){msg="En lampa: hela batterispänningen ligger över lampan.";}
+    else{msg="Samma ström går genom alla lampor. Batterispänningen delas mellan dem: "+(S.u/m).toFixed(1)+" V var. Lägg till fler lampor så lyser alla svagare.";cls+=" good";}
+  } else {
+    eq="Parallell: varje gren har R = 3 Ω och spänningen "+S.u+" V. Varje gren: I = "+S.u+" / 3 = "+(S.u/3).toFixed(2)+" A.  Batteriet ger "+r.Itot.toFixed(2)+" A.";
+    if(!S.on){msg="Strömbrytaren är av. Kretsen är bruten, så ingen ström går.";}
+    else if(nw===0){msg="Alla lampor är urskruvade. Ingen ström går.";}
+    else if(nw<m){msg="En lampa är urskruvad, men de andra lyser ändå. Varje lampa har en egen väg för strömmen. Resten av kretsen påverkas inte.";cls+=" good";}
+    else if(m===1){msg="En lampa: hela batterispänningen ligger över lampan.";}
+    else{msg="Alla lampor har hela batterispänningen och lyser lika starkt som en ensam lampa. Batteriet måste dock ge mer ström: "+r.Itot.toFixed(2)+" A.";cls+=" good";}
+  }
+  $("eq").textContent=eq;$("msg").textContent=msg;$("msg").className=cls;
+  $("nlv").textContent=S.n+" st";$("uv").textContent=S.u.toFixed(1)+" V";
+}
+function loop(ts){dtG=Math.min(0.05,(ts-last)/1000||0);last=ts;var r=draw();ui(r);requestAnimationFrame(loop);}
+
+$("bs").onclick=function(){S.par=false;$("bs").setAttribute("aria-pressed","true");$("bp").setAttribute("aria-pressed","false");rebuild();};
+$("bp").onclick=function(){S.par=true;$("bp").setAttribute("aria-pressed","true");$("bs").setAttribute("aria-pressed","false");rebuild();};
+$("nl").oninput=function(){S.n=+$("nl").value;rebuild();};
+$("u").oninput=function(){S.u=+$("u").value;};
+cv.addEventListener("click",function(e){
+  var rc=cv.getBoundingClientRect(),x=(e.clientX-rc.left)/rc.width*W,y=(e.clientY-rc.top)/rc.height*H;
+  if(Math.hypot(x-(SWX+15),y-TOP)<45&&y<TOP+25){S.on=!S.on;return;}
+  for(var i=0;i<S.n;i++){var lp=lampPos(i);if(Math.hypot(x-lp.x,y-lp.y)<34){S.broken[i]=!S.broken[i];return;}}
+});
+rs();rebuild();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

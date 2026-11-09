@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Balken: drag och tryck</title>
+<style>
+:root{--bg:#f3f8f1;--card:#fff;--ink:#1f2a24;--muted:#56655b;--line:#cfdccf;--accent:#38564A;--green:#2e7d32;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DejaVu Sans",Verdana,Arial,sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding:16px}
+h1{margin:4px 0 2px;font-size:1.6rem;color:var(--accent)}
+.sub{margin:0 0 12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+.card h2{margin:0 0 8px;font-size:1.1rem}
+canvas{width:100%;height:auto;aspect-ratio:480/380;display:block;border-radius:12px;background:#eef6fb}
+.ctl{margin:0 0 12px}
+.ctl label{display:flex;justify-content:space-between;font-weight:700}
+.ctl .val{color:var(--muted);font-weight:400}
+input[type=range]{width:100%;height:32px;accent-color:var(--green)}
+.btn{font:inherit;font-size:.92rem;padding:8px 12px;border-radius:10px;border:2px solid var(--line);background:#fff;cursor:pointer;min-height:42px;color:var(--ink);margin:0 6px 6px 0}
+.btn:hover{border-color:#4caf50}
+.btn[aria-pressed="true"]{background:#e8f5e9;border-color:#4caf50;font-weight:700}
+button:focus-visible,input:focus-visible{outline:3px solid #ff8f00;outline-offset:2px}
+.msg{padding:10px 12px;border-radius:12px;background:#fff8e1;border:1px solid #f0d78a;font-size:.92rem;min-height:5.4em}
+.msg.good{background:#e8f5e9;border-color:#a8d5ab}
+.msg.bad{background:#fdecea;border-color:#f1b5ae}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0 0;font-size:.85rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:18px;height:10px;border-radius:3px;display:inline-block}
+.hint{font-size:.85rem;color:var(--muted)}
+ol{margin:6px 0 0 20px;padding:0}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Balken: drag och tryck</h1>
+  <p class="sub">Belasta en balk och se vad som händer inuti den. Välj material och jämför.</p>
+  <div class="grid">
+    <div class="card">
+      <canvas id="cv" role="img" aria-label="En balk som vilar på två stöd och belastas i mitten. Översidan trycks ihop och undersidan dras isär."></canvas>
+      <div class="legend" aria-hidden="true">
+        <span><i class="sw" style="background:#2f7fd1"></i>Tryck (materialet pressas ihop)</span>
+        <span><i class="sw" style="background:#d6473b"></i>Drag (materialet sträcks)</span>
+        <span><i class="sw" style="background:#555;height:3px"></i>Armering (stålstänger)</span>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h2>Ändra förutsättningarna</h2>
+        <div role="group" aria-label="Material">
+          <button class="btn" data-m="tra" aria-pressed="false">🪵 Trä</button>
+          <button class="btn" data-m="betong" aria-pressed="true">🧱 Betong</button>
+          <button class="btn" data-m="armerad" aria-pressed="false">🏗️ Armerad betong</button>
+          <button class="btn" data-m="stal" aria-pressed="false">⚙️ Stål</button>
+        </div>
+        <div class="ctl"><label for="last">⚖️ Last i mitten <span class="val" id="lv"></span></label><input type="range" id="last" min="0" max="110" step="1" value="0"></div>
+        <button class="btn" id="reset">↺ Ny balk</button>
+        <button class="btn" id="kraft" aria-pressed="true">↔ Visa krafter</button>
+      </div>
+      <div class="card">
+        <h2>Vad händer?</h2>
+        <div class="msg" id="msg" aria-live="polite"></div>
+        <p class="hint" id="mat"></p>
+      </div>
+      <div class="card">
+        <h2>Uppdrag</h2>
+        <ol>
+          <li>Belasta en betongbalk steg för steg. Var kommer sprickorna först, uppe eller nere? Varför?</li>
+          <li>Byt till armerad betong och belasta lika mycket. Vad gör stålstängerna?</li>
+          <li>Vilket material böjer sig mest vid samma last? Vilket håller längst?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+"use strict";
+function $(i){return document.getElementById(i);}
+var W=480,H=380;
+/* last = godtyckliga enheter 0–110 */
+var MAT={
+ tra:{n:"Trä",E:0.55,crack:null,fail:72,col:"#c89b5e",txt:"Trä tål både drag och tryck rätt bra längs fibrerna och är lätt, men böjer sig ganska mycket."},
+ betong:{n:"Betong",E:1.0,crack:16,fail:30,col:"#b8b8b0",txt:"Betong tål tryck mycket bra men drag dåligt. Därför spricker den underifrån och brister snabbt."},
+ armerad:{n:"Armerad betong",E:1.0,crack:48,fail:96,col:"#b8b8b0",txt:"Betong med stålstänger i undersidan. Betongen tar trycket och stålet tar dragkraften."},
+ stal:{n:"Stål",E:2.2,crack:null,fail:104,col:"#8fa3b5",txt:"Stål tål både drag och tryck mycket bra och är stelt, men tungt och dyrt."}
+};
+var S={m:"betong",load:0,broken:false,force:true,t:0};
+var cv=$("cv"),c=cv.getContext("2d"),SC=1;
+function rs(){var r=cv.getBoundingClientRect();if(!r.width)return;var d=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(r.width*d);cv.height=Math.round(r.width*H/W*d);SC=cv.width/W;}
+window.addEventListener("resize",rs);
+
+var BX0=70,BX1=410,BY=180,BH=46;       /* balkens vila, höjd */
+function deflection(){var m=MAT[S.m];return Math.min(80,S.load/m.E*0.55);}
+function beamPath(d,pad){
+  /* övre och undre kant som kurvor; d = nedböjning i mitten */
+  var up=[],lo=[],n=24;
+  for(var i=0;i<=n;i++){var t=i/n,x=BX0+(BX1-BX0)*t,y=4*d*t*(1-t);up.push([x,BY+y]);lo.push([x,BY+BH+y]);}
+  return{up:up,lo:lo};
+}
+function draw(){
+  var m=MAT[S.m],d=deflection();
+  c.setTransform(SC,0,0,SC,0,0);
+  c.fillStyle="#eef6fb";c.fillRect(0,0,W,H);
+  /* marken och stöden */
+  c.fillStyle="#8aa66b";c.fillRect(0,330,W,50);
+  c.fillStyle="#777";c.beginPath();c.moveTo(BX0-30,330);c.lineTo(BX0+30,330);c.lineTo(BX0,BY+BH+8);c.closePath();c.fill();
+  c.beginPath();c.moveTo(BX1-30,330);c.lineTo(BX1+30,330);c.lineTo(BX1,BY+BH+8);c.closePath();c.fill();
+  c.fillStyle="#555";c.font="12px DejaVu Sans, Arial";c.textAlign="center";c.fillText("stöd",BX0,350);c.fillText("stöd",BX1,350);c.textAlign="start";
+  if(S.broken){drawBroken(m);return;}
+  var bp=beamPath(d);
+  /* balk */
+  c.beginPath();c.moveTo(bp.up[0][0],bp.up[0][1]);bp.up.forEach(function(p){c.lineTo(p[0],p[1]);});
+  for(var i=bp.lo.length-1;i>=0;i--)c.lineTo(bp.lo[i][0],bp.lo[i][1]);c.closePath();
+  c.fillStyle=m.col;c.fill();c.strokeStyle="#444";c.lineWidth=3;c.stroke();
+  /* träfibrer */
+  if(S.m==="tra"){c.strokeStyle="rgba(120,80,30,.35)";c.lineWidth=1.5;for(var k=1;k<4;k++){c.beginPath();bp.up.forEach(function(p,j){var y=p[1]+(bp.lo[j][1]-p[1])*k/4;if(j===0)c.moveTo(p[0],y);else c.lineTo(p[0],y);});c.stroke();}}
+  /* armering */
+  if(S.m==="armerad"){c.strokeStyle="#444";c.lineWidth=3.5;[0.8,0.88].forEach(function(f){c.beginPath();bp.up.forEach(function(p,j){var y=p[1]+(bp.lo[j][1]-p[1])*f;if(j===0)c.moveTo(p[0],y);else c.lineTo(p[0],y);});c.stroke();});}
+  /* stålbalk: I-profil antydan */
+  if(S.m==="stal"){c.strokeStyle="rgba(40,55,70,.5)";c.lineWidth=3;[0.22,0.78].forEach(function(f){c.beginPath();bp.up.forEach(function(p,j){var y=p[1]+(bp.lo[j][1]-p[1])*f;if(j===0)c.moveTo(p[0],y);else c.lineTo(p[0],y);});c.stroke();});}
+  /* sprickor */
+  if(m.crack!==null&&S.load>m.crack){
+    var len=Math.min(0.9,(S.load-m.crack)/(m.fail-m.crack)*0.9+(S.m==="armerad"?0.08:0.2));
+    c.strokeStyle="#222";c.lineWidth=S.m==="armerad"?1.2:2.5;
+    var xs=S.m==="armerad"?[-26,-9,9,26]:[-6];
+    xs.forEach(function(dx){var x=(BX0+BX1)/2+dx,yb=BY+BH+d*1.0*(1-Math.pow((x-(BX0+BX1)/2)/((BX1-BX0)/2),2));
+      c.beginPath();c.moveTo(x,yb);var ytop=yb-BH*len*(S.m==="armerad"?0.55:1);c.lineTo(x+3,(yb+ytop)/2);c.lineTo(x-2,ytop);c.stroke();});
+  }
+  /* last */
+  var lx=(BX0+BX1)/2,ly=BY+d-12;
+  var wl=18+S.load*0.35;
+  c.fillStyle="#555";c.fillRect(lx-wl/2,ly-wl,wl,wl);c.fillStyle="#fff";c.font="bold 11px DejaVu Sans, Arial";c.textAlign="center";c.fillText(Math.round(S.load),lx,ly-wl/2+4);c.textAlign="start";
+  c.strokeStyle="#333";c.lineWidth=2.5;c.beginPath();c.moveTo(lx,ly+2);c.lineTo(lx,ly+d*0+8);c.stroke();
+  /* krafter */
+  if(S.force&&S.load>2){
+    var a=Math.min(1,S.load/60);
+    var yt=BY+d*0.9+10,yb=BY+BH+d*0.9-10;
+    c.lineWidth=3;
+    /* tryck uppe: pilar mot varandra */
+    c.strokeStyle="#2f7fd1";c.fillStyle="#2f7fd1";
+    arrow(lx-95-40*a,yt+2,lx-95,yt+2);arrow(lx+95+40*a,yt+2,lx+95,yt+2);
+    /* drag nere: pilar från varandra */
+    c.strokeStyle="#d6473b";c.fillStyle="#d6473b";
+    arrow(lx-95,yb+2,lx-95-40*a,yb+2);arrow(lx+95,yb+2,lx+95+40*a,yb+2);
+    c.fillStyle="#2f7fd1";c.font="bold 12px DejaVu Sans, Arial";c.fillText("TRYCK",BX0+6,BY-10+d*0.2);
+    c.fillStyle="#d6473b";c.fillText("DRAG",BX0+6,BY+BH+26+d*0.2);
+    c.fillStyle="rgba(80,80,80,.8)";c.setLineDash([4,4]);c.strokeStyle="#666";c.lineWidth=1;
+    c.beginPath();c.moveTo(BX0+10,BY+BH/2+d*0.3);c.lineTo(BX1-10,BY+BH/2+d*0.3);c.stroke();c.setLineDash([]);
+  }
+}
+function arrow(x1,y1,x2,y2){
+  c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();
+  var a=Math.atan2(y2-y1,x2-x1);c.beginPath();c.moveTo(x2,y2);c.lineTo(x2-9*Math.cos(a-0.45),y2-9*Math.sin(a-0.45));c.lineTo(x2-9*Math.cos(a+0.45),y2-9*Math.sin(a+0.45));c.closePath();c.fill();
+}
+function drawBroken(m){
+  var mid=(BX0+BX1)/2,k=Math.min(1,S.t/0.8),fall=60*k*k;
+  c.fillStyle=m.col;c.strokeStyle="#444";c.lineWidth=3;
+  c.save();c.translate(BX0,BY+fall*0.5);c.rotate(0.35*k);c.fillRect(0,0,mid-BX0-2,BH);c.strokeRect(0,0,mid-BX0-2,BH);c.restore();
+  c.save();c.translate(BX1,BY+fall*0.5);c.rotate(-0.35*k);c.fillRect(-(BX1-mid-2),0,BX1-mid-2,BH);c.strokeRect(-(BX1-mid-2),0,BX1-mid-2,BH);c.restore();
+  c.fillStyle="#555";var wl=18+S.load*0.35;c.fillRect(mid-wl/2,BY+fall+40,wl,wl);
+  c.fillStyle="#c0392b";c.font="bold 20px DejaVu Sans, Arial";c.textAlign="center";c.fillText("Balken brister!",mid,90);c.textAlign="start";
+}
+function info(){
+  var m=MAT[S.m],msg,cls="msg",L=S.load;
+  $("lv").textContent=Math.round(L)+" enheter";
+  $("mat").textContent=m.txt;
+  if(S.broken){
+    if(S.m==="betong")msg="Betongen brast. Dragkraften på undersidan blev för stor, eftersom betong tål drag dåligt. Armerad betong skulle ha hållit mycket längre.";
+    else if(S.m==="tra")msg="Träet brast. Fibrerna på undersidan släppte när dragkraften blev för stor.";
+    else if(S.m==="stal")msg="Stålet gav efter vid mycket hög last.";
+    else msg="Stålstängerna gav efter vid mycket hög last, och då brast även den armerade betongen.";
+    cls+=" bad";
+  } else if(L<2){msg="Ingen last. Balken är rak. Ju mer du belastar, desto mer böjer den sig.";}
+  else{
+    msg="Balken böjs nedåt. <b>Översidan trycks ihop</b> (blå pilar) och <b>undersidan dras isär</b> (röda pilar). Mitt i balken, där linjen är streckad, är det varken drag eller tryck.";
+    if(m.crack!==null&&L>m.crack){
+      if(S.m==="betong"){msg+=" <b>Sprickor!</b> Betongen tål drag dåligt och spricker underifrån.";cls+=" bad";}
+      else{msg+=" Det syns bara hårfina sprickor. Armeringen tar dragkraften så att sprickorna inte växer.";cls+=" good";}
+    }
+  }
+  $("msg").innerHTML=msg;$("msg").className=cls;
+}
+var last=0;
+function loop(ts){
+  var dt=Math.min(0.05,(ts-last)/1000||0);last=ts;
+  if(S.broken)S.t+=dt;
+  draw();info();requestAnimationFrame(loop);
+}
+function checkBreak(){var m=MAT[S.m];if(!S.broken&&S.load>=m.fail){S.broken=true;S.t=0;}}
+$("last").oninput=function(){if(S.broken)return;S.load=+$("last").value;checkBreak();};
+Array.prototype.forEach.call(document.querySelectorAll("[data-m]"),function(b){
+  b.onclick=function(){S.m=b.getAttribute("data-m");S.broken=false;S.t=0;Array.prototype.forEach.call(document.querySelectorAll("[data-m]"),function(x){x.setAttribute("aria-pressed",x===b);});checkBreak();};
+});
+$("reset").onclick=function(){S.broken=false;S.t=0;S.load=0;$("last").value=0;};
+$("kraft").onclick=function(){S.force=!S.force;$("kraft").setAttribute("aria-pressed",S.force);};
+rs();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

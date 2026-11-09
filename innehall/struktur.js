@@ -304,6 +304,7 @@ var struktur = [
               { id: "biologi-m-2-2-1", titel: "Växten som producent" },
               { id: "biologi-m-2-2-2", titel: "Cellandning" },
               { id: "biologi-m-2-2-3", titel: "Processerna tillsammans" },
+              { id: "biologi-m-2-2-sim", titel: "Simulering: fotosyntesen" },
               { id: "biologi-m-2-2-l", titel: "Labb: Jäst och koldioxid" }
             ]
           },
@@ -668,6 +669,7 @@ var struktur = [
               { id: "kemi-m-2-1-1", titel: "Vad är materia? Ämnen och material" },
               { id: "kemi-m-2-1-2", titel: "Partikelmodellen" },
               { id: "kemi-m-2-1-3", titel: "Rena ämnen och blandningar" },
+              { id: "kemi-m-2-1-sim", titel: "Simulering: partikelmodellen" },
               { id: "kemi-m-2-1-l", titel: "Labb: Densitet och flyta eller sjunka" }
             ]
           },
@@ -1196,6 +1198,7 @@ var struktur = [
               { id: "fysik-m-10-1-1", titel: "Strömkrets, ström och spänning" },
               { id: "fysik-m-10-1-2", titel: "Resistans och Ohms lag" },
               { id: "fysik-m-10-1-3", titel: "Seriekoppling och parallellkoppling" },
+              { id: "fysik-m-10-1-sim", titel: "Simulering: elektriska kretsar" },
               { id: "fysik-m-10-1-l", titel: "Labb: Ström och spänning i serie och parallellt" }
             ]
           },
@@ -1406,6 +1409,7 @@ var struktur = [
               { id: "teknik-m-4-1-1", titel: "Krafter i konstruktioner" },
               { id: "teknik-m-4-1-2", titel: "Stabilitet och form" },
               { id: "teknik-m-4-1-3", titel: "Konstruktioner i samhället" },
+              { id: "teknik-m-4-1-sim", titel: "Simulering: balkar, drag och tryck" },
               { id: "teknik-m-4-1-l", titel: "Praktiskt arbete: Bygg och belasta en bro av papper eller spagetti" }
             ]
           },
