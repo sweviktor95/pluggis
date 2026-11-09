@@ -4018,12 +4018,8 @@ function ikonHtml(ikon) {
   }
 
   function haftenHtml(id) {
-    // Häftet gäller hela kapitlet: delsidor visar närmaste förälders häfte.
-    var h = null, sok = id;
-    while (sok && !h) {
-      h = window.hafte && window.hafte[sok];
-      sok = (nodKarta[sok] && nodKarta[sok].parentId) || null;
-    }
+    // Häften och pluggblad visas bara på kapitlets första vy, inte på delområden eller moment.
+    var h = window.hafte && window.hafte[id];
     if (!h || !(h.vanlig || h.lattlast || h.fordjupning)) { return ""; }
     var r = '<div class="hafte-rad"><strong>Läs som häfte (PDF)</strong><div class="hafte-knappar">';
     [["lattlast","Lättläst"],["vanlig","Grundtext"],["fordjupning","Fördjupning"]].forEach(function(p) {
