@@ -942,7 +942,7 @@ var struktur = [
       },
       {
         id: "fysik-omrade-2",
-        titel: "2. Materia, tryck och temperatur",
+        titel: "2. Materia, partikelmodellen och värme",
         ramverk: true,
         barn: [
           {
@@ -958,253 +958,340 @@ var struktur = [
           },
           {
             id: "fysik-d-2-2",
-            titel: "2.2 Tryck, volym och densitet",
+            titel: "2.2 Värme, värmetransport och värmeutvidgning",
             ramverk: true,
             barn: [
-              { id: "fysik-m-2-2-1", titel: "Tryck" },
-              { id: "fysik-m-2-2-2", titel: "Densitet" },
-              { id: "fysik-m-2-2-3", titel: "Gaser: tryck, volym och temperatur" },
-              { id: "fysik-m-2-2-l", titel: "Labb: Bestäm densiteten hos olika material" }
+              { id: "fysik-m-2-2-1", titel: "Ledning, strömning och strålning" },
+              { id: "fysik-m-2-2-2", titel: "Värmeutvidgning" },
+              { id: "fysik-m-2-2-3", titel: "Isolering och energisparande" },
+              { id: "fysik-m-2-2-l", titel: "Labb: Vilken metall leder värme bäst?" }
             ]
           }
         ]
       },
       {
         id: "fysik-omrade-3",
-        titel: "3. Krafter och rörelse",
+        titel: "3. Väder och klimat",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-3-1",
-            titel: "3.1 Krafter och Newtons lagar",
+            titel: "3.1 Väder och vattnets kretslopp",
             ramverk: true,
             barn: [
-              { id: "fysik-m-3-1-1", titel: "Krafter och kraftmätning" },
-              { id: "fysik-m-3-1-2", titel: "Resulterande kraft och jämvikt" },
-              { id: "fysik-m-3-1-3", titel: "Newtons andra och tredje lag" },
-              { id: "fysik-m-3-1-l", titel: "Labb: Hur påverkar underlaget friktionen?" }
+              { id: "fysik-m-3-1-1", titel: "Vattnets kretslopp" },
+              { id: "fysik-m-3-1-2", titel: "Högtryck, lågtryck och vind" },
+              { id: "fysik-m-3-1-3", titel: "Åska och extremväder" },
+              { id: "fysik-m-3-1-l", titel: "Labb: Moln i en burk" }
             ]
           },
           {
             id: "fysik-d-3-2",
-            titel: "3.2 Rörelse, hastighet och trafiksäkerhet",
+            titel: "3.2 Strålningsbalans, växthuseffekt och klimat",
             ramverk: true,
             barn: [
-              { id: "fysik-m-3-2-1", titel: "Hastighet och acceleration" },
-              { id: "fysik-m-3-2-2", titel: "Rörelseenergi och bromssträcka" },
-              { id: "fysik-m-3-2-3", titel: "Trafiksäkerhet" },
-              { id: "fysik-m-3-2-l", titel: "Labb: Mät hastigheten hos en rullande kula" }
+              { id: "fysik-m-3-2-1", titel: "Jordens strålningsbalans" },
+              { id: "fysik-m-3-2-2", titel: "Växthuseffekten" },
+              { id: "fysik-m-3-2-3", titel: "Klimatförändringar och ställningstagande" },
+              { id: "fysik-m-3-2-l", titel: "Labb: Hur påverkar ytans färg uppvärmningen?" }
             ]
           }
         ]
       },
       {
         id: "fysik-omrade-4",
-        titel: "4. Energi",
+        titel: "4. Universum",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-4-1",
-            titel: "4.1 Energiformer, flöde och oförstörbarhet",
+            titel: "4.1 Universums uppkomst och uppbyggnad",
             ramverk: true,
             barn: [
-              { id: "fysik-m-4-1-1", titel: "Energiformer och energiomvandlingar" },
-              { id: "fysik-m-4-1-2", titel: "Energins oförstörbarhet och verkningsgrad" },
-              { id: "fysik-m-4-1-3", titel: "Energins kvalitet" },
-              { id: "fysik-m-4-1-l", titel: "Labb: Studsbollen: vart tar energin vägen?" }
+              { id: "fysik-m-4-1-1", titel: "Solsystemet och gravitation" },
+              { id: "fysik-m-4-1-2", titel: "Stjärnor och galaxer" },
+              { id: "fysik-m-4-1-3", titel: "Big bang och universums utveckling" },
+              { id: "fysik-m-4-1-l", titel: "Labb: Solsystemet i skala" }
             ]
           },
           {
             id: "fysik-d-4-2",
-            titel: "4.2 Energikällor, för- och nackdelar",
+            titel: "4.2 Planeter och liv i andra solsystem",
             ramverk: true,
             barn: [
-              { id: "fysik-m-4-2-1", titel: "Energikällor i Sverige och världen" },
-              { id: "fysik-m-4-2-2", titel: "För- och nackdelar för samhälle och miljö" },
-              { id: "fysik-m-4-2-3", titel: "Energi, klimat och ställningstagande" },
-              { id: "fysik-m-4-2-l", titel: "Labb: Hur påverkar solcellens vinkel elproduktionen?" }
+              { id: "fysik-m-4-2-1", titel: "Exoplaneter och hur vi hittar dem" },
+              { id: "fysik-m-4-2-2", titel: "Livets villkor och beboeliga zonen" },
+              { id: "fysik-m-4-2-3", titel: "Granska rymdnyheter" },
+              { id: "fysik-m-4-2-l", titel: "Labb: Transitmetoden: hur upptäcks planeter?" }
             ]
           }
         ]
       },
       {
         id: "fysik-omrade-5",
-        titel: "5. Elektricitet och magnetism",
+        titel: "5. Ljud",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-5-1",
-            titel: "5.1 Elektriska kretsar",
+            titel: "5.1 Hur ljud uppstår och breder ut sig",
             ramverk: true,
             barn: [
-              { id: "fysik-m-5-1-1", titel: "Strömkrets, ström och spänning" },
-              { id: "fysik-m-5-1-2", titel: "Resistans och Ohms lag" },
-              { id: "fysik-m-5-1-3", titel: "Seriekoppling och parallellkoppling" },
-              { id: "fysik-m-5-1-l", titel: "Labb: Ström och spänning i serie och parallellt" }
+              { id: "fysik-m-5-1-1", titel: "Vibrationer och ljudkällor" },
+              { id: "fysik-m-5-1-2", titel: "Ljudets utbredning" },
+              { id: "fysik-m-5-1-3", titel: "Eko och ljudisolering" },
+              { id: "fysik-m-5-1-l", titel: "Labb: Hur snabbt går ljudet?" }
             ]
           },
           {
             id: "fysik-d-5-2",
-            titel: "5.2 Magnetism och elektromagnetism",
+            titel: "5.2 Tonhöjd, ljudstyrka och hörsel",
             ramverk: true,
             barn: [
-              { id: "fysik-m-5-2-1", titel: "Magneter och magnetfält" },
-              { id: "fysik-m-5-2-2", titel: "Elektromagnetism" },
-              { id: "fysik-m-5-2-3", titel: "Elektricitet i samhället" },
-              { id: "fysik-m-5-2-l", titel: "Labb: Bygg en elektromagnet" }
+              { id: "fysik-m-5-2-1", titel: "Frekvens och amplitud" },
+              { id: "fysik-m-5-2-2", titel: "Hörsel och hörselskydd" },
+              { id: "fysik-m-5-2-3", titel: "Registrera ljud" },
+              { id: "fysik-m-5-2-l", titel: "Labb: Hur påverkar längden tonhöjden?" }
             ]
           }
         ]
       },
       {
         id: "fysik-omrade-6",
-        titel: "6. Ljud",
+        titel: "6. Krafter och rörelse",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-6-1",
-            titel: "6.1 Hur ljud uppstår och breder ut sig",
+            titel: "6.1 Krafter och Newtons lagar",
             ramverk: true,
             barn: [
-              { id: "fysik-m-6-1-1", titel: "Vibrationer och ljudkällor" },
-              { id: "fysik-m-6-1-2", titel: "Ljudets utbredning" },
-              { id: "fysik-m-6-1-3", titel: "Eko och ljudisolering" },
-              { id: "fysik-m-6-1-l", titel: "Labb: Hur snabbt går ljudet?" }
+              { id: "fysik-m-6-1-1", titel: "Krafter och kraftmätning" },
+              { id: "fysik-m-6-1-2", titel: "Resulterande kraft och jämvikt" },
+              { id: "fysik-m-6-1-3", titel: "Newtons andra och tredje lag" },
+              { id: "fysik-m-6-1-l", titel: "Labb: Hur påverkar underlaget friktionen?" }
             ]
           },
           {
             id: "fysik-d-6-2",
-            titel: "6.2 Tonhöjd, ljudstyrka och hörsel",
+            titel: "6.2 Rörelse, hastighet och trafiksäkerhet",
             ramverk: true,
             barn: [
-              { id: "fysik-m-6-2-1", titel: "Frekvens och amplitud" },
-              { id: "fysik-m-6-2-2", titel: "Hörsel och hörselskydd" },
-              { id: "fysik-m-6-2-3", titel: "Registrera ljud" },
-              { id: "fysik-m-6-2-l", titel: "Labb: Hur påverkar längden tonhöjden?" }
+              { id: "fysik-m-6-2-1", titel: "Hastighet och acceleration" },
+              { id: "fysik-m-6-2-2", titel: "Rörelseenergi och bromssträcka" },
+              { id: "fysik-m-6-2-3", titel: "Trafiksäkerhet" },
+              { id: "fysik-m-6-2-l", titel: "Labb: Mät hastigheten hos en rullande kula" }
             ]
           }
         ]
       },
       {
         id: "fysik-omrade-7",
-        titel: "7. Ljus",
+        titel: "7. Tryck",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-7-1",
-            titel: "7.1 Ljusets utbredning och reflektion",
+            titel: "7.1 Tryck, volym och densitet",
             ramverk: true,
             barn: [
-              { id: "fysik-m-7-1-1", titel: "Ljuskällor och ljusets utbredning" },
-              { id: "fysik-m-7-1-2", titel: "Reflektion" },
-              { id: "fysik-m-7-1-3", titel: "Färg och ytor" },
-              { id: "fysik-m-7-1-l", titel: "Labb: Reflektion med ljuslåda" }
+              { id: "fysik-m-7-1-1", titel: "Tryck" },
+              { id: "fysik-m-7-1-2", titel: "Densitet" },
+              { id: "fysik-m-7-1-3", titel: "Gaser: tryck, volym och temperatur" },
+              { id: "fysik-m-7-1-l", titel: "Labb: Bestäm densiteten hos olika material" }
             ]
           },
           {
             id: "fysik-d-7-2",
-            titel: "7.2 Brytning, linser och färger",
+            titel: "7.2 Uppdrift och lufttryck",
             ramverk: true,
             barn: [
-              { id: "fysik-m-7-2-1", titel: "Brytning" },
-              { id: "fysik-m-7-2-2", titel: "Linser och optiska instrument" },
-              { id: "fysik-m-7-2-3", titel: "Färgspridning och spektrum" },
-              { id: "fysik-m-7-2-l", titel: "Labb: Brytning i vatten" }
+              { id: "fysik-m-7-2-1", titel: "Uppdrift och flytförmåga" },
+              { id: "fysik-m-7-2-2", titel: "Tryck i vätskor" },
+              { id: "fysik-m-7-2-3", titel: "Lufttryck och hur det mäts" },
+              { id: "fysik-m-7-2-l", titel: "Labb: Flyta eller sjunka? Mät uppdriften" }
             ]
           }
         ]
       },
       {
         id: "fysik-omrade-8",
-        titel: "8. Strålning, väder och klimat",
+        titel: "8. Effekt och energi",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-8-1",
-            titel: "8.1 Strålning: användning och risker",
+            titel: "8.1 Energiformer, flöde och oförstörbarhet",
             ramverk: true,
             barn: [
-              { id: "fysik-m-8-1-1", titel: "Elektromagnetisk strålning" },
-              { id: "fysik-m-8-1-2", titel: "Partikelstrålning och radioaktivitet" },
-              { id: "fysik-m-8-1-3", titel: "Användning och risker" },
-              { id: "fysik-m-8-1-l", titel: "Labb: Vad stoppar UV-strålning?" }
+              { id: "fysik-m-8-1-1", titel: "Energiformer och energiomvandlingar" },
+              { id: "fysik-m-8-1-2", titel: "Energins oförstörbarhet och verkningsgrad" },
+              { id: "fysik-m-8-1-3", titel: "Energins kvalitet" },
+              { id: "fysik-m-8-1-l", titel: "Labb: Studsbollen: vart tar energin vägen?" }
             ]
           },
           {
             id: "fysik-d-8-2",
-            titel: "8.2 Strålningsbalans, växthuseffekt och klimat",
+            titel: "8.2 Effekt och energi i vardagen",
             ramverk: true,
             barn: [
-              { id: "fysik-m-8-2-1", titel: "Jordens strålningsbalans" },
-              { id: "fysik-m-8-2-2", titel: "Växthuseffekten" },
-              { id: "fysik-m-8-2-3", titel: "Klimatförändringar och ställningstagande" },
-              { id: "fysik-m-8-2-l", titel: "Labb: Hur påverkar ytans färg uppvärmningen?" }
+              { id: "fysik-m-8-2-1", titel: "Effekt" },
+              { id: "fysik-m-8-2-2", titel: "Energi, effekt och tid" },
+              { id: "fysik-m-8-2-3", titel: "Energi i kroppen och i maten" },
+              { id: "fysik-m-8-2-l", titel: "Labb: Vilken effekt har vattenkokaren?" }
             ]
           }
         ]
       },
       {
         id: "fysik-omrade-9",
-        titel: "9. Universum",
+        titel: "9. Ljus",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-9-1",
-            titel: "9.1 Universums uppkomst och uppbyggnad",
+            titel: "9.1 Ljusets utbredning och reflektion",
             ramverk: true,
             barn: [
-              { id: "fysik-m-9-1-1", titel: "Solsystemet och gravitation" },
-              { id: "fysik-m-9-1-2", titel: "Stjärnor och galaxer" },
-              { id: "fysik-m-9-1-3", titel: "Big bang och universums utveckling" },
-              { id: "fysik-m-9-1-l", titel: "Labb: Solsystemet i skala" }
+              { id: "fysik-m-9-1-1", titel: "Ljuskällor och ljusets utbredning" },
+              { id: "fysik-m-9-1-2", titel: "Reflektion" },
+              { id: "fysik-m-9-1-3", titel: "Färg och ytor" },
+              { id: "fysik-m-9-1-l", titel: "Labb: Reflektion med ljuslåda" }
             ]
           },
           {
             id: "fysik-d-9-2",
-            titel: "9.2 Planeter och liv i andra solsystem",
+            titel: "9.2 Brytning, linser och färger",
             ramverk: true,
             barn: [
-              { id: "fysik-m-9-2-1", titel: "Exoplaneter och hur vi hittar dem" },
-              { id: "fysik-m-9-2-2", titel: "Livets villkor och beboeliga zonen" },
-              { id: "fysik-m-9-2-3", titel: "Granska rymdnyheter" },
-              { id: "fysik-m-9-2-l", titel: "Labb: Transitmetoden: hur upptäcks planeter?" }
+              { id: "fysik-m-9-2-1", titel: "Brytning" },
+              { id: "fysik-m-9-2-2", titel: "Linser och optiska instrument" },
+              { id: "fysik-m-9-2-3", titel: "Färgspridning och spektrum" },
+              { id: "fysik-m-9-2-l", titel: "Labb: Brytning i vatten" }
+            ]
+          },
+          {
+            id: "fysik-d-9-3",
+            titel: "9.3 Elektromagnetisk strålning: användning och risker",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-9-3-1", titel: "Elektromagnetisk strålning" },
+              { id: "fysik-m-9-3-2", titel: "Solljus, UV och solskydd" },
+              { id: "fysik-m-9-3-3", titel: "Röntgen, mikrovågor och mobilstrålning" },
+              { id: "fysik-m-9-3-l", titel: "Labb: Vad stoppar UV-strålning?" }
             ]
           }
         ]
       },
       {
         id: "fysik-omrade-10",
-        titel: "10. Repetition inför nationella proven",
+        titel: "10. Elektricitet och magnetism",
         ramverk: true,
         barn: [
           {
             id: "fysik-d-10-1",
-            titel: "10.1 Materia, energi och krafter",
+            titel: "10.1 Elektriska kretsar",
             ramverk: true,
             barn: [
-              { id: "fysik-m-10-1-1", titel: "Partikelmodell, tryck och densitet: repetition" },
-              { id: "fysik-m-10-1-2", titel: "Energi och energikällor: repetition" },
-              { id: "fysik-m-10-1-3", titel: "Krafter och rörelse: repetition" }
+              { id: "fysik-m-10-1-1", titel: "Strömkrets, ström och spänning" },
+              { id: "fysik-m-10-1-2", titel: "Resistans och Ohms lag" },
+              { id: "fysik-m-10-1-3", titel: "Seriekoppling och parallellkoppling" },
+              { id: "fysik-m-10-1-l", titel: "Labb: Ström och spänning i serie och parallellt" }
             ]
           },
           {
             id: "fysik-d-10-2",
-            titel: "10.2 Elektricitet, ljus, ljud, strålning och universum",
+            titel: "10.2 Magnetism och elektromagnetism",
             ramverk: true,
             barn: [
-              { id: "fysik-m-10-2-1", titel: "Elektricitet och magnetism: repetition" },
-              { id: "fysik-m-10-2-2", titel: "Ljus och ljud: repetition" },
-              { id: "fysik-m-10-2-3", titel: "Strålning, klimat och universum: repetition" }
+              { id: "fysik-m-10-2-1", titel: "Magneter och magnetfält" },
+              { id: "fysik-m-10-2-2", titel: "Elektromagnetism" },
+              { id: "fysik-m-10-2-3", titel: "Elektricitet i samhället" },
+              { id: "fysik-m-10-2-l", titel: "Labb: Bygg en elektromagnet" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-11",
+        titel: "11. Atom- och kärnfysik",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-11-1",
+            titel: "11.1 Atomkärnan och radioaktivitet",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-11-1-1", titel: "Atomen och atomkärnan" },
+              { id: "fysik-m-11-1-2", titel: "Radioaktivt sönderfall" },
+              { id: "fysik-m-11-1-3", titel: "Halveringstid" },
+              { id: "fysik-m-11-1-l", titel: "Labb: Halveringstid med mynt" }
             ]
           },
           {
-            id: "fysik-d-10-3",
-            titel: "10.3 Undersökningar, källor och argument",
+            id: "fysik-d-11-2",
+            titel: "11.2 Joniserande strålning och kärnkraft",
             ramverk: true,
             barn: [
-              { id: "fysik-m-10-3-1", titel: "Planera och värdera undersökningar" },
-              { id: "fysik-m-10-3-2", titel: "Granska källor" },
-              { id: "fysik-m-10-3-3", titel: "Argumentera om energi, teknik och miljö" }
+              { id: "fysik-m-11-2-1", titel: "Joniserande strålning i medicin och teknik" },
+              { id: "fysik-m-11-2-2", titel: "Kärnklyvning och kärnkraft" },
+              { id: "fysik-m-11-2-3", titel: "Strålskydd, avfall och ställningstagande" },
+              { id: "fysik-m-11-2-l", titel: "Labb: Hur avtar strålning med avståndet?" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-12",
+        titel: "12. Energikällor",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-12-1",
+            titel: "12.1 Energikällor och energisystem",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-12-1-1", titel: "Energikällor i Sverige och världen" },
+              { id: "fysik-m-12-1-2", titel: "För- och nackdelar för samhälle och miljö" },
+              { id: "fysik-m-12-1-3", titel: "Energi, klimat och ställningstagande" },
+              { id: "fysik-m-12-1-l", titel: "Labb: Hur påverkar solcellens vinkel elproduktionen?" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "fysik-omrade-13",
+        titel: "13. Repetition inför nationella proven",
+        ramverk: true,
+        barn: [
+          {
+            id: "fysik-d-13-1",
+            titel: "13.1 Materia, tryck, krafter och energi",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-13-1-1", titel: "Partikelmodell, tryck och densitet: repetition" },
+              { id: "fysik-m-13-1-2", titel: "Energi och energikällor: repetition" },
+              { id: "fysik-m-13-1-3", titel: "Krafter och rörelse: repetition" }
+            ]
+          },
+          {
+            id: "fysik-d-13-2",
+            titel: "13.2 Elektricitet, ljus, ljud, strålning, atomer och universum",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-13-2-1", titel: "Elektricitet och magnetism: repetition" },
+              { id: "fysik-m-13-2-2", titel: "Ljus och ljud: repetition" },
+              { id: "fysik-m-13-2-3", titel: "Strålning, atom- och kärnfysik, klimat och universum: repetition" }
+            ]
+          },
+          {
+            id: "fysik-d-13-3",
+            titel: "13.3 Undersökningar, källor och argument",
+            ramverk: true,
+            barn: [
+              { id: "fysik-m-13-3-1", titel: "Planera och värdera undersökningar" },
+              { id: "fysik-m-13-3-2", titel: "Granska källor" },
+              { id: "fysik-m-13-3-3", titel: "Argumentera om energi, teknik och miljö" }
             ]
           }
         ]

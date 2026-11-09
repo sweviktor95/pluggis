@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 """Data till fysikplaneringen åk 7–9 (Lgr22). Används av amne_plan.py."""
 CFG = dict(id="fysik", titel="Fysik", ikon="⚡", js="lararFysik", farg="5B4B9A", morkt="463a7c", ljust="e9e6f4", labb="Labb", labb_pl="labbpass", tid="ca 45 min",
- oppna=["Ska energi (område 4) komma före krafter och rörelse (område 3)? Energin återkommer i nästan alla områden.",
-        "Repetitionskapitlet (10) har inga labbpass. Vill du hellre ha provliknande undersökningar där?",
-        "Område 8 (strålning, väder och klimat) bör samordnas med geografin och kemins växthuseffekt.",
+ oppna=["Lufttrycket tas upp två gånger: beskrivande i väder (3) och som kraft per yta i tryck (7). Kontrollera att upprepningen blir fördjupning och inte dubbelarbete.",
+        "Repetitionskapitlet (13) har inga labbpass. Vill du hellre ha provliknande undersökningar där?",
+        "Kapitel 3 (väder och klimat) bör samordnas med geografin och kemins växthuseffekt.",
+        "Kapitel 11 (atom- och kärnfysik) förutsätter kemins atommodell. Kontrollera ordningen mot kemiplaneringen.",
+        "Uppdrift (7.2), värmeutvidgning (2.2), vattnets kretslopp och väder (3.1) och atomens uppbyggnad (11.1) står inte uttryckligen i Lgr22:s centrala innehåll för åk 7–9, men förekom på äldre nationella prov. Ska de vara kärna eller fördjupning?",
+        "Hävstång, moment och tyngdpunkt ligger under fördjupning i kapitel 6. Ska de upp i kärnan?",
         "Labbarna är förslag; elsäkerhet och utrustning måste stämma med skolans egna rutiner."])
 SYFTE = {
  "S1": "Ställa frågor om fysikaliska företeelser utifrån egna upplevelser och aktuella händelser",
@@ -36,7 +39,7 @@ FORM = {"F1": "Begrepp och förklaringsmodeller", "F2": "Granska information, ko
 # Område: (nr, titel, idé, [delområden])
 # Delområde: (nr, titel, mål, nivåer, modeller, [3 kärnmoment], labb, [om tid])
 # Moment: (titel, innehåll, begrepp, taggar); Labb: (titel, frågeställning, upplägg, säkerhet, taggar, begrepp)
-AREAS = [
+_GAMLA = [
 (1, "Fysik som vetenskap", "Hur fysiker arbetar: mäta, undersöka, granska och ändra sina modeller. Läggs först eftersom allt annat bygger på det.", [
  ("1.1", "Mäta och undersöka som fysiker", "Eleven kan planera, utföra, dokumentera och värdera en fysikalisk undersökning med en variabel i taget och mäta med lämpliga instrument.",
   "E: genomför enligt plan, mäter och drar enkel slutsats. C: planerar rättvist försök och värderar felkällor. A: motiverar upplägget, föreslår förbättringar och diskuterar hur säker slutsatsen är.",
@@ -258,4 +261,126 @@ AREAS = [
    ("Argumentera om energi, teknik och miljö", "Argumentera med belägg och motargument.", "argument, belägg, motargument", "SU4 S5 F2")],
   None, ["Gamla nationella prov", "Provstrategier"]),
 ]),
+]
+
+
+# ---------------------------------------------------------------------------
+# Ny kapitelordning (beslutad av Vick 2026-11-09). Bygger AREAS av de gamla områdena
+# (_GAMLA) med ny numrering plus nya delområden för kapitel som flyttats eller delats.
+# ---------------------------------------------------------------------------
+def _d(nr):
+    for a in _GAMLA:
+        for d in a[3]:
+            if d[0] == nr: return d
+    raise KeyError(nr)
+def _nr(d, ny, **kw):
+    d = list(d); d[0] = ny
+    for k, v in kw.items(): d[{"titel": 1, "mal": 2, "niv": 3, "mod": 4, "mom": 5, "labb": 6, "tid": 7}[k]] = v
+    return tuple(d)
+
+_P1 = _nr(_d("1.1"), "1.1"); _P2 = _nr(_d("1.2"), "1.2")
+_M1 = _nr(_d("2.1"), "2.1")
+_M2 = ("2.2", "Värme, värmetransport och värmeutvidgning",
+  "Eleven kan förklara hur värme transporteras och hur material utvidgas vid uppvärmning, och välja isolering utifrån egenskaper.",
+  "E: beskriver ledning, strömning och strålning med exempel. C: förklarar värmetransport och utvidgning med partikelmodellen. A: jämför isoleringsmaterial med mätdata och förklarar varför de fungerar.",
+  ["Partikelmodellen"],
+  [("Ledning, strömning och strålning", "Hur värme tar sig från varmt till kallt i fasta ämnen, vätskor, gaser och genom rymden; förklaring med partikelmodellen.", "värmeledning, strömning, värmestrålning, ledare, isolator", "FN2 FN4 S3 F1"),
+   ("Värmeutvidgning", "Varför material utvidgas när de värms: bimetall, termometer, expansionsfogar i broar och räls.", "värmeutvidgning, volym, bimetall, expansionsfog", "FN2 S2 S3 F1"),
+   ("Isolering och energisparande", "Isolerande material, luftfickor och dubbelglas; hur isolering minskar värmeförluster i hus och kläder.", "isolering, värmeförlust, luftficka", "FN2 FN4 S2 S5 F1")],
+  ("Vilken metall leder värme bäst?", "Hur snabbt leds värme i olika metaller?",
+   "Metallstavar (koppar, aluminium, stål) ställs i varmt vatten med en smörklick fäst överst. Eleverna mäter tiden tills smöret smälter. Varierar: materialet. Konstant: stavarnas längd och tjocklek samt vattnets temperatur.",
+   "Varmt vatten högst ca 60 °C. Stavarna blir varma: använd tång.", "SU1 S7 S8 F3 FN2", "värmeledning, ledare, tid, jämförelse"),
+  ["Värmepump", "Termos", "Köldbryggor"])
+_U1 = _nr(_d("9.1"), "4.1"); _U2 = _nr(_d("9.2"), "4.2")
+_L1 = _nr(_d("6.1"), "5.1"); _L2 = _nr(_d("6.2"), "5.2")
+_K1 = _nr(_d("3.1"), "6.1", tid=["Gravitation och tyngd", "Cirkelrörelse", "Hävstång och moment", "Tyngdpunkt och stabilitet", "Rymdfärder och Newtons lagar"])
+_K2 = _nr(_d("3.2"), "6.2")
+_T1 = _nr(_d("2.2"), "7.1", tid=["Tryck i kroppen", "Hydraulik", "Gasernas tryck i vardagen"])
+_T2 = ("7.2", "Uppdrift och lufttryck",
+  "Eleven kan förklara uppdrift och varför föremål flyter eller sjunker, och beskriva lufttryck och hur det mäts.",
+  "E: beskriver att vatten ger uppdrift och att luft har tryck. C: förklarar flytförmåga med kraftjämvikt och densitet. A: resonerar kvantitativt om uppdrift, densitet och tryck i nya situationer.",
+  ["Kraftjämvikt"],
+  [("Uppdrift och flytförmåga", "Uppdriften som kraft uppåt; flyta, sväva och sjunka; båtar, ubåtar och luftballonger; koppling till densitet.", "uppdrift, lyftkraft, flyta, sjunka, densitet", "FN2 FN9 S3 F1"),
+   ("Tryck i vätskor", "Trycket ökar med djupet; vattentorn, dykning och hydraulik.", "vätsketryck, djup, hydraulik", "FN2 FN9 S2 F1"),
+   ("Lufttryck och hur det mäts", "Lufttryck som kraft per yta: varför trycket sjunker med höjden, barometer och mätning, vakuum och sugkraft; återkoppling till väderkartorna i kapitel 3.", "lufttryck, barometer, vakuum", "FN2 FN10 S2 F1")],
+  ("Flyta eller sjunka? Mät uppdriften", "Hur påverkar föremålets volym den uppdrift det får i vatten?",
+   "Eleverna hänger olika stora och tunga föremål i en dynamometer, sänker dem i vatten och läser av kraften. De jämför och förklarar skillnaden som uppdrift. Varierar: föremålets volym. Konstant: vattnet och hur djupt föremålet sänks.",
+   "Torka upp spill.", "SU1 S7 S8 F3 FN9 FN10", "uppdrift, dynamometer, volym, rättvist försök"),
+  ["Arkimedes princip", "Ubåtar och ballongfärd", "Vakuum"])
+_V1 = ("3.1", "Väder och vattnets kretslopp",
+  "Eleven kan förklara vattnets kretslopp och hur lufttryck, temperatur och solinstrålning ger väder och vind.",
+  "E: beskriver kretsloppet och vanliga väderfenomen. C: förklarar hur högtryck, lågtryck och vind uppstår. A: tolkar väderkartor och resonerar om extremväder och osäkerhet i prognoser.",
+  ["Vattnets kretslopp"],
+  [("Vattnets kretslopp", "Avdunstning, kondensation och nederbörd; solen som energikälla; fasövergångar i naturen.", "kretslopp, avdunstning, kondensation, nederbörd", "FN2 FN3 FN4 S2 S3 F1"),
+   ("Högtryck, lågtryck och vind", "Lufttrycket som begrepp, kvalitativt: varm luft stiger och kall luft sjunker; tryckskillnader ger vind; hur ett lågtryck ger moln och nederbörd; väderkartor. Trycket förklaras mer ingående i kapitel 7.", "högtryck, lågtryck, vind, front", "FN2 FN3 S2 S3 F1"),
+   ("Åska och extremväder", "Hur åska och blixt uppstår; avståndet till ett åskväder med ljudets hastighet; stormar och orkaner.", "blixt, åska, storm, orkan", "FN3 FN7 FN10 S2 F1")],
+  ("Moln i en burk", "Hur bildas moln när varm, fuktig luft möter kall luft?",
+   "En glasburk med lite varmt vatten täcks med ett fat med isbitar. Eleverna observerar och förklarar kondensationen och kopplar till kretsloppet och till hur moln bildas.",
+   "Varmt vatten högst ca 50 °C. Hantera glasburken försiktigt.", "SU1 S7 S8 F3 FN3", "kondensation, moln, temperatur, kretslopp"),
+  ["Väderprognoser", "Jetströmmar", "Hur orkaner bildas"])
+_V2 = _nr(_d("8.2"), "3.2")
+_E1 = _nr(_d("4.1"), "8.1", tid=["Perpetuum mobile", "Energi i naturen", "Energiomvandlare i vardagen"])
+_E2 = ("8.2", "Effekt och energi i vardagen",
+  "Eleven kan beräkna effekt och energi och förklara vad en elräkning och energimärkning visar.",
+  "E: förklarar effekt som energi per tid och läser av märkning. C: beräknar energi = effekt · tid och jämför apparater. A: bedömer och motiverar åtgärder för att spara energi med beräkningar.",
+  ["Energins oförstörbarhet"],
+  [("Effekt", "Effekt som energi per tidsenhet, watt och kilowatt; effekt hos lampor, vattenkokare och motorer.", "effekt, watt, kilowatt", "FN4 FN10 S3 F1"),
+   ("Energi, effekt och tid", "Energi = effekt · tid; kilowattimmar; beräkna energiförbrukning och kostnad för en elapparat.", "kilowattimme, energiförbrukning, kostnad", "FN4 FN10 S3 F1"),
+   ("Energi i kroppen och i maten", "Energiinnehåll i mat, kroppens effekt och energibehov; jämförelse med apparater.", "energiinnehåll, kilojoule, energibehov", "FN4 S2 F1")],
+  ("Vilken effekt har vattenkokaren?", "Hur stor effekt har en vattenkokare, beräknad från temperaturökning och tid?",
+   "Eleverna värmer en bestämd mängd vatten i en vattenkokare, mäter temperaturökning och tid och beräknar effekten med given värmekapacitet för vatten. De jämför med märkskylten och förklarar skillnaden.",
+   "Hett vatten och el: torka upp spill, håll sladdar och vatten åtskilda, ingen rör kokaren när den är på.", "SU1 S7 S8 F3 FN4 FN10", "effekt, energi, tid, verkningsgrad"),
+  ["Standby och energisnåla hem", "Energimärkning", "Solceller och effekt"])
+_G1 = _nr(_d("7.1"), "9.1"); _G2 = _nr(_d("7.2"), "9.2")
+_G3 = ("9.3", "Elektromagnetisk strålning: användning och risker",
+  "Eleven kan beskriva det elektromagnetiska spektrumet och förklara användning och risker med UV, röntgen, mikrovågor och mobilstrålning.",
+  "E: ger exempel på strålning och på nytta och risk. C: förklarar skillnader mellan strålningsslag och skyddsåtgärder. A: väger nytta mot risk i aktuella frågor och motiverar med källor.",
+  ["Strålningsmodell"],
+  [_d("8.1")[5][0],
+   ("Solljus, UV och solskydd", "Hur UV-strålning når oss och skadar huden; ozonskiktet; solskyddsfaktor; infraröd strålning som värme.", "UV-strålning, ozon, solskydd, infraröd", "FN5 FN3 S2 F1"),
+   ("Röntgen, mikrovågor och mobilstrålning", "Användning, risker och skydd; vad vi vet och inte vet; granskning av påståenden om strålning.", "röntgen, mikrovågor, mobilstrålning, risk", "FN5 SU3 S5 S6 F2")],
+  _d("8.1")[6], ["Röntgen i sjukvården", "Mikrovågsugnens funktion", "Radiokommunikation"])
+_X1 = _nr(_d("5.1"), "10.1", tid=["Statisk elektricitet", "Elsäkerhet i hemmet"]); _X2 = _nr(_d("5.2"), "10.2")
+_A1 = ("11.1", "Atomkärnan och radioaktivitet",
+  "Eleven kan beskriva atomens och atomkärnans uppbyggnad och förklara radioaktivt sönderfall och halveringstid.",
+  "E: beskriver atomens delar och namnger alfa-, beta- och gammastrålning. C: förklarar sönderfall och halveringstid och var strålningen kommer ifrån. A: tolkar sönderfallskurvor och resonerar om modellens begränsningar.",
+  ["Atommodellen"],
+  [("Atomen och atomkärnan", "Protoner, neutroner och elektroner; atomnummer; isotoper; kärnan som liten och tung del av atomen; koppling till kemins atommodell.", "atom, atomkärna, proton, neutron, isotop", "FN5 SU2 S3 F1"),
+   ("Radioaktivt sönderfall", "Instabila kärnor; alfa-, beta- och gammastrålning; vad som händer i kärnan; naturlig bakgrundsstrålning.", "radioaktivitet, sönderfall, alfa, beta, gamma, bakgrundsstrålning", "FN5 S2 S3 F1"),
+   ("Halveringstid", "Halveringstid och sönderfallskurvor; användning vid datering och i medicin.", "halveringstid, sönderfallskurva, datering", "FN5 FN10 S3 F1")],
+  ("Halveringstid med mynt", "Hur snabbt minskar antalet ”instabila” kärnor?",
+   "Eleverna kastar 100 mynt, plockar bort alla som visar krona och upprepar med de som är kvar. De ritar sönderfallskurvan och bestämmer halveringstiden. Det är en modell: vad visar den och vad visar den inte?",
+   "Inga särskilda risker.", "SU1 SU2 S3 S7 S8 F3 FN5 FN10", "halveringstid, modell, slump, sönderfallskurva"),
+  ["Kvarkar och elementarpartiklar", "Naturliga och konstgjorda grundämnen", "Marie Curie"])
+_A2 = ("11.2", "Joniserande strålning och kärnkraft",
+  "Eleven kan förklara nytta och risker med joniserande strålning och hur kärnklyvning ger energi i kärnkraftverk.",
+  "E: ger exempel på nytta och risk med strålning och beskriver kärnkraft. C: förklarar strålskydd och kärnklyvning. A: väger nytta mot risk och granskar påståenden med källor.",
+  ["Strålningsmodell"],
+  [("Joniserande strålning i medicin och teknik", "Röntgen, gammastrålning och strålbehandling; hur joniserande strålning påverkar celler; användning i medicin, industri och datering.", "joniserande strålning, röntgen, strålbehandling", "FN5 S2 F1"),
+   ("Kärnklyvning och kärnkraft", "Kärnklyvning och kedjereaktion; hur ett kärnkraftverk omvandlar kärnenergi till el; fusion i solen som jämförelse.", "kärnklyvning, kedjereaktion, kärnbränsle, fusion", "FN4 FN5 S2 S3 F1"),
+   ("Strålskydd, avfall och ställningstagande", "Avstånd, tid och skärmning; strålningsdoser; hantering av kärnavfall; granska påståenden och argumentera om kärnkraft.", "strålskydd, dos, kärnavfall, argument", "FN4 FN5 SU3 SU4 S5 S6 F2")],
+  ("Hur avtar strålning med avståndet?", "Hur ändras ljusstyrkan från en lampa när avståndet ökar, som en modell för strålning?",
+   "Eleverna mäter ljusstyrkan med app på olika avstånd från en liten lampa och ritar en graf. De kopplar till strålskydd (avstånd) och diskuterar vad modellen visar och inte visar.",
+   "Lampan blir varm.", "SU1 SU2 S7 S8 F3 FN5", "avstånd, strålskydd, modell, graf"),
+  ["Fusion", "Strålningsdoser i vardagen", "Tjernobyl och Fukushima"])
+_EK = _nr(_d("4.2"), "12.1", titel="Energikällor och energisystem", tid=["Energilagring", "Energi i hemmet", "Elproduktion och elnät"])
+_R1 = _nr(_d("10.1"), "13.1", titel="Materia, tryck, krafter och energi")
+_R2 = _nr(_d("10.2"), "13.2", titel="Elektricitet, ljus, ljud, strålning, atomer och universum",
+          mom=_d("10.2")[5][:2] + [("Strålning, atom- och kärnfysik, klimat och universum: repetition", "Strålning och radioaktivitet, strålningsbalans och växthuseffekt, väder; universums uppbyggnad.", "strålning, radioaktivitet, växthuseffekt, universum", "FN1 FN3 FN5 S3 F1")])
+_R3 = _nr(_d("10.3"), "13.3")
+
+AREAS = [
+ (1, "Fysik som vetenskap", _GAMLA[0][2], [_P1, _P2]),
+ (2, "Materia, partikelmodellen och värme", "Partikelmodellen förklarar hur materia beter sig: fasövergångar, temperatur, värmetransport och värmeutvidgning.", [_M1, _M2]),
+ (3, "Väder och klimat", "Hur lufttryck, temperatur och solens strålning ger väder och klimat, och hur människan förstärker växthuseffekten.", [_V1, _V2]),
+ (4, "Universum", _GAMLA[8][2], [_U1, _U2]),
+ (5, "Ljud", _GAMLA[5][2], [_L1, _L2]),
+ (6, "Krafter och rörelse", _GAMLA[2][2], [_K1, _K2]),
+ (7, "Tryck", "Hur kraft per yta förklarar tryck i vätskor och gaser, uppdrift och lufttryck.", [_T1, _T2]),
+ (8, "Effekt och energi", "Energi kan inte förstöras, bara omvandlas. Energiformer, kvalitet, effekt och hur vi räknar på energi.", [_E1, _E2]),
+ (9, "Ljus", "Hur ljus breder ut sig, reflekteras och bryts och hur vi ser färger, samt resten av spektrumet: UV, röntgen och mikrovågor.", [_G1, _G2, _G3]),
+ (10, "Elektricitet och magnetism", _GAMLA[4][2], [_X1, _X2]),
+ (11, "Atom- och kärnfysik", "Atomkärnan, radioaktivitet och joniserande strålning, och hur kärnklyvning ger energi.", [_A1, _A2]),
+ (12, "Energikällor", "Hur samhället skaffar energi: energikällors för- och nackdelar och argument om framtidens energi.", [_EK]),
+ (13, "Repetition inför nationella proven", _GAMLA[9][2], [_R1, _R2, _R3]),
 ]
