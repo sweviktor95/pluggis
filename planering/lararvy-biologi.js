@@ -72,6 +72,10 @@ window.lararBiologi = {
     [
      "Jeopardy",
      "simuleringar/jeopardy-bio-2.html"
+    ],
+    [
+     "Simulering: fotosyntes",
+     "simuleringar/fotosyntes.html"
     ]
    ],
    "ppt": [

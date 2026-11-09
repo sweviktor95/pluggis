@@ -384,7 +384,8 @@ EXTRA_BLAD = {2: ['          { id: "biologi-m-2-s", titel: "Sammanfattning och b
 # Lärarmaterial per område (prov, Jeopardy) och delområde (PowerPoint)
 MATERIAL = {2: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade2/biologi-2-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade2/biologi-2-prov-larare.pdf"],
-                           ["Jeopardy", "simuleringar/jeopardy-bio-2.html"]],
+                           ["Jeopardy", "simuleringar/jeopardy-bio-2.html"],
+                           ["Simulering: fotosyntes", "simuleringar/fotosyntes.html"]],
                  "ppt": [["📊 2.1 Cellen", "planering/biologi-omrade2/biologi-2-1-cellen.pptx"],
                          ["📊 2.2 Fotosyntes och cellandning", "planering/biologi-omrade2/biologi-2-2-fotosyntes-och-cellandning.pptx"],
                          ["📊 2.3 Organ och organsystem", "planering/biologi-omrade2/biologi-2-3-organ-och-organsystem.pptx"]]},
