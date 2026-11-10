@@ -385,27 +385,19 @@ EXTRA_BLAD = {2: ['          { id: "biologi-m-2-s", titel: "Sammanfattning och b
 MATERIAL = {2: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade2/biologi-2-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade2/biologi-2-prov-larare.pdf"],
                            ["Jeopardy", "simuleringar/jeopardy-bio-2.html"]],
-                 "ppt": [["📊 2.1 Cellen", "planering/biologi-omrade2/biologi-2-1-cellen.pptx"],
-                         ["📊 2.2 Fotosyntes och cellandning", "planering/biologi-omrade2/biologi-2-2-fotosyntes-och-cellandning.pptx"],
-                         ["📊 2.3 Organ och organsystem", "planering/biologi-omrade2/biologi-2-3-organ-och-organsystem.pptx"]]},
+                 "ppt": [["📊 Hela kapitlet som PowerPoint", "planering/biologi-omrade2/biologi-2-cellen-och-livets-processer.pptx"]]},
             3: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade3/biologi-3-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade3/biologi-3-prov-larare.pdf"],
                            ["Jeopardy", "simuleringar/jeopardy-bio-3.html"]],
-                 "ppt": [["📊 Introduktion till biologisk mångfald", "planering/biologi-omrade3/biologi-3-0-introduktion-till-biologisk-mangfald.pptx"],
-                         ["📊 3.1 Mångfald, hot och ekosystemtjänster", "planering/biologi-omrade3/biologi-3-1-mangfald-hot-och-ekosystemtjanster.pptx"],
-                         ["📊 3.2 Gruppera och organismvärlden", "planering/biologi-omrade3/biologi-3-2-gruppera-och-organismvarlden.pptx"]]},
+                 "ppt": [["📊 Hela kapitlet som PowerPoint", "planering/biologi-omrade3/biologi-3-biologisk-mangfald.pptx"]]},
             1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/biologi-1-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade1/biologi-1-prov-larare.pdf"],
                            ["Jeopardy", "simuleringar/jeopardy-bio-1.html"]],
-                 "ppt": [["📊 Introduktion till biologi", "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"],
-                         ["📊 1.1 Undersöka systematiskt", "planering/biologi-omrade1/biologi-1-1-undersoka-systematiskt.pptx"],
-                         ["📊 1.2 Modeller, källor och argument", "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"]]},
+                 "ppt": [["📊 Hela kapitlet som PowerPoint", "planering/biologi-omrade1/biologi-1-biologi-som-vetenskap.pptx"]]},
             4: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade4/biologi-4-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade4/biologi-4-prov-larare.pdf"],
                            ["Jeopardy", "simuleringar/jeopardy-bio-4.html"]],
-                 "ppt": [["📊 4.1 Ekosystem och energi", "planering/biologi-omrade4/biologi-4-1-ekosystem-och-energi.pptx"],
-                         ["📊 4.2 Materiens kretslopp", "planering/biologi-omrade4/biologi-4-2-materiens-kretslopp.pptx"],
-                         ["📊 4.3 Populationer och samspel", "planering/biologi-omrade4/biologi-4-3-populationer-och-samspel.pptx"]]}}
+                 "ppt": [["📊 Hela kapitlet som PowerPoint", "planering/biologi-omrade4/biologi-4-ekologi.pptx"]]}}
 
 def skriv_js():
     import json

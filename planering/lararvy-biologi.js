@@ -34,16 +34,8 @@ window.lararBiologi = {
    ],
    "ppt": [
     [
-     "📊 Introduktion till biologi",
-     "planering/biologi-omrade1/biologi-1-0-introduktion-till-biologi.pptx"
-    ],
-    [
-     "📊 1.1 Undersöka systematiskt",
-     "planering/biologi-omrade1/biologi-1-1-undersoka-systematiskt.pptx"
-    ],
-    [
-     "📊 1.2 Modeller, källor och argument",
-     "planering/biologi-omrade1/biologi-1-2-modeller-kallor-argument.pptx"
+     "📊 Hela kapitlet som PowerPoint",
+     "planering/biologi-omrade1/biologi-1-biologi-som-vetenskap.pptx"
     ]
    ]
   },
@@ -76,16 +68,8 @@ window.lararBiologi = {
    ],
    "ppt": [
     [
-     "📊 2.1 Cellen",
-     "planering/biologi-omrade2/biologi-2-1-cellen.pptx"
-    ],
-    [
-     "📊 2.2 Fotosyntes och cellandning",
-     "planering/biologi-omrade2/biologi-2-2-fotosyntes-och-cellandning.pptx"
-    ],
-    [
-     "📊 2.3 Organ och organsystem",
-     "planering/biologi-omrade2/biologi-2-3-organ-och-organsystem.pptx"
+     "📊 Hela kapitlet som PowerPoint",
+     "planering/biologi-omrade2/biologi-2-cellen-och-livets-processer.pptx"
     ]
    ]
   },
@@ -118,16 +102,8 @@ window.lararBiologi = {
    ],
    "ppt": [
     [
-     "📊 Introduktion till biologisk mångfald",
-     "planering/biologi-omrade3/biologi-3-0-introduktion-till-biologisk-mangfald.pptx"
-    ],
-    [
-     "📊 3.1 Mångfald, hot och ekosystemtjänster",
-     "planering/biologi-omrade3/biologi-3-1-mangfald-hot-och-ekosystemtjanster.pptx"
-    ],
-    [
-     "📊 3.2 Gruppera och organismvärlden",
-     "planering/biologi-omrade3/biologi-3-2-gruppera-och-organismvarlden.pptx"
+     "📊 Hela kapitlet som PowerPoint",
+     "planering/biologi-omrade3/biologi-3-biologisk-mangfald.pptx"
     ]
    ]
   },
@@ -160,16 +136,8 @@ window.lararBiologi = {
    ],
    "ppt": [
     [
-     "📊 4.1 Ekosystem och energi",
-     "planering/biologi-omrade4/biologi-4-1-ekosystem-och-energi.pptx"
-    ],
-    [
-     "📊 4.2 Materiens kretslopp",
-     "planering/biologi-omrade4/biologi-4-2-materiens-kretslopp.pptx"
-    ],
-    [
-     "📊 4.3 Populationer och samspel",
-     "planering/biologi-omrade4/biologi-4-3-populationer-och-samspel.pptx"
+     "📊 Hela kapitlet som PowerPoint",
+     "planering/biologi-omrade4/biologi-4-ekologi.pptx"
     ]
    ]
   },

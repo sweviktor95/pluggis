@@ -34,16 +34,8 @@ window.lararKemi = {
    ],
    "ppt": [
     [
-     "📊 Introduktion till kemi",
-     "planering/kemi-omrade1/kemi-1-0-introduktion-till-kemi.pptx"
-    ],
-    [
-     "📊 1.1 Arbeta som kemist",
-     "planering/kemi-omrade1/kemi-1-1-arbeta-som-kemist.pptx"
-    ],
-    [
-     "📊 1.2 Modeller, källor och argument",
-     "planering/kemi-omrade1/kemi-1-2-modeller-kallor-argument.pptx"
+     "📊 Hela kapitlet som PowerPoint",
+     "planering/kemi-omrade1/kemi-1-kemi-som-vetenskap.pptx"
     ]
    ]
   },
@@ -76,16 +68,8 @@ window.lararKemi = {
    ],
    "ppt": [
     [
-     "📊 Introduktion till materia",
-     "planering/kemi-omrade2/kemi-2-0-introduktion-till-materia.pptx"
-    ],
-    [
-     "📊 2.1 Ämnen, blandningar och partikelmodellen",
-     "planering/kemi-omrade2/kemi-2-1-amnen-blandningar-partikelmodellen.pptx"
-    ],
-    [
-     "📊 2.2 Separations- och analysmetoder",
-     "planering/kemi-omrade2/kemi-2-2-separation-och-analys.pptx"
+     "📊 Hela kapitlet som PowerPoint",
+     "planering/kemi-omrade2/kemi-2-materia-och-partiklar.pptx"
     ]
    ]
   },
@@ -118,16 +102,8 @@ window.lararKemi = {
    ],
    "ppt": [
     [
-     "📊 Introduktion till atomer",
-     "planering/kemi-omrade3/kemi-3-0-introduktion-till-atomer.pptx"
-    ],
-    [
-     "📊 3.1 Atomens byggnad",
-     "planering/kemi-omrade3/kemi-3-1-atomens-byggnad.pptx"
-    ],
-    [
-     "📊 3.2 Periodiska systemet",
-     "planering/kemi-omrade3/kemi-3-2-periodiska-systemet.pptx"
+     "📊 Hela kapitlet som PowerPoint",
+     "planering/kemi-omrade3/kemi-3-atomer-och-grundamnen.pptx"
     ]
    ]
   },
@@ -160,16 +136,8 @@ window.lararKemi = {
    ],
    "ppt": [
     [
-     "📊 Introduktion till kemiska föreningar",
-     "planering/kemi-omrade4/kemi-4-0-introduktion-till-foreningar.pptx"
-    ],
-    [
-     "📊 4.1 Molekyler och joner",
-     "planering/kemi-omrade4/kemi-4-1-molekyler-och-joner.pptx"
-    ],
-    [
-     "📊 4.2 Kemiska reaktioner",
-     "planering/kemi-omrade4/kemi-4-2-kemiska-reaktioner.pptx"
+     "📊 Hela kapitlet som PowerPoint",
+     "planering/kemi-omrade4/kemi-4-kemiska-foreningar-och-reaktioner.pptx"
     ]
    ]
   },
