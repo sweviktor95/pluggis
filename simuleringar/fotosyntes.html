@@ -96,7 +96,7 @@ input[type=range]{width:100%;height:32px;accent-color:var(--green)}
       <div class="card">
         <canvas id="scen" role="img" aria-label="Animation av en växt med sol, koldioxid, vatten, mineraler och syre. En beskrivning av läget finns i texten under reglagen."></canvas>
         <div class="legend" aria-hidden="true">
-          <span><svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="5" fill="#f5b301"/></svg>Solljus</span>
+          <span><svg viewBox="0 0 18 18"><line x1="2" y1="9" x2="16" y2="9" stroke="#f5b301" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="5 3"/></svg>Solljus</span>
           <span><svg viewBox="0 0 18 18"><circle cx="4" cy="9" r="3" fill="#d9534f"/><circle cx="9" cy="9" r="3.4" fill="#3c3c3c"/><circle cx="14" cy="9" r="3" fill="#d9534f"/></svg>Koldioxid CO₂</span>
           <span><svg viewBox="0 0 18 18"><circle cx="6" cy="9" r="3.4" fill="#d9534f"/><circle cx="12" cy="9" r="3.4" fill="#d9534f"/></svg>Syre O₂</span>
           <span><svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="5" fill="#1e88c8"/></svg>Vatten H₂O</span>
@@ -570,8 +570,10 @@ var FL=[
   FL.forEach(function(f,fi){
     f.dots=[];
     for(var i=0;i<f.n;i++){
-      var e=document.createElementNS(ns,"circle");e.setAttribute("r",f.r);e.setAttribute("fill",f.c);
-      if(f.c==="#3c3c3c")e.setAttribute("stroke","#d9534f");
+      var e;
+      if(f.sh==="sun"){e=document.createElementNS(ns,"line");e.setAttribute("stroke",f.c);e.setAttribute("stroke-width","4");e.setAttribute("stroke-linecap","round");}
+      else{e=document.createElementNS(ns,"circle");e.setAttribute("r",f.r);e.setAttribute("fill",f.c);
+      if(f.c==="#3c3c3c")e.setAttribute("stroke","#d9534f");}
       layer.appendChild(e);f.dots.push({e:e,u:i/f.n});
     }
   });
@@ -585,7 +587,8 @@ function zoomStep(dt,ts){
       else if(reduce&&on&&d.u===0)d.u=0.5;
       var u=d.u;
       var x=lerp(f.from[0],f.to[0],u),y=lerp(f.from[1],f.to[1],u);
-      d.e.setAttribute("cx",x);d.e.setAttribute("cy",y);
+      if(f.sh==="sun"){var L=Math.hypot(f.to[0]-f.from[0],f.to[1]-f.from[1]),ux=(f.to[0]-f.from[0])/L*8,uy=(f.to[1]-f.from[1])/L*8;d.e.setAttribute("x1",x-ux);d.e.setAttribute("y1",y-uy);d.e.setAttribute("x2",x+ux);d.e.setAttribute("y2",y+uy);}
+      else{d.e.setAttribute("cx",x);d.e.setAttribute("cy",y);}
       d.e.setAttribute("opacity",on?(0.25+0.75*Math.sin(Math.PI*u)):0);
     });
   });
