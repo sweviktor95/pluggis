@@ -150,7 +150,7 @@ tr.lab td{background:#f4f7f9}
 # ---- Kapitel som är byggda (häften, lärarmaterial, extra blad) ----------------
 # Nyckel: (ämnes-id, områdesnummer)
 HAFTE = {("kemi", 1): "kemi-omrade-1", ("kemi", 2): "kemi-omrade-2", ("kemi", 3): "kemi-omrade-3", ("kemi", 4): "kemi-omrade-4"}
-EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 2): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 3): ["Sammanfattning och begrepp", "Testa dig själv"], ("kemi", 4): ["Sammanfattning och begrepp", "Testa dig själv"]}   # blir <id>-m-<nr>-s och -t
+EXTRA_BLAD = {("kemi", 1): ["Sammanfattning och begrepp", "Testa dig själv", "Flashcards"], ("kemi", 2): ["Sammanfattning och begrepp", "Testa dig själv", "Flashcards"], ("kemi", 3): ["Sammanfattning och begrepp", "Testa dig själv", "Flashcards"], ("kemi", 4): ["Sammanfattning och begrepp", "Testa dig själv", "Flashcards"]}   # blir <id>-m-<nr>-s, -t och -f
 TITEL_OVR = {"kemi-m-1-1-1": "Vad är kemi? Säkerhet och utrustning i kemilabbet", "kemi-m-2-1-1": "Vad är materia? Ämnen och material", "kemi-m-3-1-1": "Vad är en atom? Atomen och dess partiklar", "kemi-m-4-1-1": "Vad händer när atomer möts? Molekyler och kovalent bindning"}   # sajtsidan innehåller även Start-avsnittet
 MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omrade1/kemi-1-prov-elev.pdf"],
                                      ["Prov med facit (lärare)", "planering/kemi-omrade1/kemi-1-prov-larare.pdf"],
@@ -196,7 +196,7 @@ def skriv_struktur():
             if (I, d[0]) in SIM: mo.append(f'              {{ id: "{I}-m-{dn(d)}-sim", titel: {js(SIM[(I, d[0])])} }}')
             if d[6]: mo.append(f'              {{ id: "{I}-m-{dn(d)}-l", titel: {js(C["labb"] + ": " + d[6][0])} }}')
             dl.append(f'          {{\n            id: "{I}-d-{dn(d)}",\n            titel: {js(d[0] + " " + d[1])},\n            ramverk: true,\n            barn: [\n' + ",\n".join(mo) + "\n            ]\n          }")
-        ex = [f'          {{ id: "{I}-m-{a[0]}-{k}", titel: {js(t)} }}' for k, t in zip("st", EXTRA_BLAD.get((I, a[0]), []))]
+        ex = [f'          {{ id: "{I}-m-{a[0]}-{k}", titel: {js(t)} }}' for k, t in zip("stf", EXTRA_BLAD.get((I, a[0]), []))]
         ut.append(f'      {{\n        id: "{HAFTE.get((I, a[0]), f"{I}-omrade-{a[0]}")}",\n        titel: {js(f"{a[0]}. {a[1]}")},\n        ramverk: true,\n        barn: [\n' + ",\n".join(dl + ex) + "\n        ]\n      }")
     U = C["id"].upper()
     block = f'  // {U} START (genereras av planering/amne_plan.py)\n  {{\n    id: "{C["id"]}",\n    titel: {js(C["titel"] + " (beta)")},\n    ikon: "{C["ikon"]}",\n    ramverk: true,\n    barn: [\n' + ",\n".join(ut) + f'\n    ]\n  }},\n  // {U} END\n'

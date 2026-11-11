@@ -181,26 +181,32 @@
   .sektion-ikon { font-size: 1.3em; }
 
   /* ---------- Flashcards i repetitionen ---------- */
-  .flash { background: #f4f8f6; border: 2px solid #38564A; border-radius: 14px; padding: 16px 18px; margin: 0 0 22px; }
-  .flash h3 { margin: 0 0 6px; color: #38564A; }
-  .flash p { margin: 6px 0; }
-  .flash-lagen { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 12px; }
-  .flash button { font: inherit; cursor: pointer; border-radius: 10px; border: 2px solid #38564A; background: #fff; color: #1f3a30; padding: 8px 14px; }
+  .flash { background: #f4f8f6; border: 2px solid #38564A; border-radius: 14px; padding: 14px 16px 16px; margin: 0 0 22px; }
+  .flash-topp { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+  .flash h3 { margin: 0; color: #38564A; }
+  .flash-lagen { display: flex; flex-wrap: wrap; gap: 6px; }
+  .flash button { font: inherit; cursor: pointer; border-radius: 10px; border: 2px solid #38564A; background: #fff; color: #1f3a30; padding: 6px 12px; }
   .flash button:hover { background: #e4efe9; }
   .flash button:focus-visible { outline: 3px solid #e0782f; outline-offset: 2px; }
-  .flash button.flash-start { background: #38564A; color: #fff; }
-  .flash button.flash-start:hover { background: #2b443a; }
   .flash button[aria-pressed="true"] { background: #38564A; color: #fff; }
-  .flash-kort { background: #fff; border: 2px solid #9db9ac; border-radius: 14px; padding: 22px 18px; min-height: 130px; display: flex; flex-direction: column; justify-content: center; text-align: center; font-size: 1.15em; margin: 10px 0; }
-  .flash-kort .flash-etikett { font-size: 0.7em; text-transform: uppercase; letter-spacing: 0.08em; color: #5c7a6c; margin-bottom: 8px; }
-  .flash-kort .flash-svar { margin-top: 14px; padding-top: 14px; border-top: 2px dashed #9db9ac; color: #1f3a30; }
-  .flash-kort .flash-svar strong { background: #fff1b8; padding: 0 3px; border-radius: 4px; }
+  .flash button.flash-start { background: #38564A; color: #fff; }
+  .flash-scen { perspective: 1200px; }
+  .flash .flash-kort { display: block; width: 100%; padding: 0; border: 0; background: transparent; border-radius: 16px; text-align: center; font-size: 1.2em; }
+  .flash .flash-kort:hover { background: transparent; }
+  .fk-in { display: grid; position: relative; transition: transform .5s; transform-style: preserve-3d; }
+  .flash-kort.vand .fk-in { transform: rotateY(180deg); }
+  .fk-sida { grid-area: 1 / 1; min-height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 20px 22px; border-radius: 16px; border: 2px solid #9db9ac; background: #fff; box-shadow: 0 3px 10px rgba(56,86,74,.15); backface-visibility: hidden; -webkit-backface-visibility: hidden; color: #1f3a30; }
+  .fk-bak { transform: rotateY(180deg); background: #fff7d6; border-color: #d9b84a; }
+  .fk-sida small { font-size: 0.6em; text-transform: uppercase; letter-spacing: 0.08em; color: #5c7a6c; }
+  .fk-bak strong, .fk-sida strong { font-weight: 700; }
+  .fk-vand { position: absolute; right: 12px; bottom: 8px; font-size: 0.6em; color: #5c7a6c; }
   .flash-lucka { display: inline-block; min-width: 4.5em; border-bottom: 3px solid #38564A; margin: 0 3px; }
-  .flash-knappar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .flash-knappar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; min-height: 40px; }
   .flash button.flash-ja { background: #d9f0df; border-color: #2e7d4f; }
   .flash button.flash-nej { background: #fde5d6; border-color: #c25a1e; }
-  .flash-status { font-size: 0.9em; color: #4b6358; text-align: center; margin: 6px 0 0; }
-  .flash-lasforst { font-size: 0.9em; color: #4b6358; }
+  .flash-status { font-size: 0.85em; color: #4b6358; text-align: center; margin: 8px 0 0; }
+  .flash-klart { text-align: center; padding: 24px 10px; font-size: 1.1em; }
+  @media (prefers-reduced-motion: reduce) { .fk-in { transition: none; } }
   .begrepp-box {
     background: #EAF1EC;
     border-left: 4px solid #5F8472;
@@ -1205,7 +1211,7 @@ function ikonHtml(ikon) {
           if (data.begreppExempel) { html += data.begreppExempel; }
           html += '</div>';
         }
-        html += "<p>" + data.text + "</p>";
+        if (data.text) { html += "<p>" + data.text + "</p>"; }
         if (data.bild) {
           html += '<img src="' + data.bild + '" style="width:100%;border-radius:8px;">';
         }
@@ -3877,7 +3883,7 @@ function ikonHtml(ikon) {
   }
 
 
-  // ---------- Flashcards (repetition): svaret visas först när eleven själv vänt kortet ----------
+  // ---------- Flashcards (repetition): kortet vänds med klick, svaret syns först då ----------
   var flashReg = {}, flashTeller = 0;
   function flashKort(data) {
     var begr = (data.begrepp || []).map(function(b) { return { t: b.term, f: b.forklaring }; });
@@ -3896,69 +3902,73 @@ function ikonHtml(ikon) {
     return { begr: begr, luck: luck };
   }
   function flashHtml(data) {
-    if (!data.flash || !data.begrepp || !data.begrepp.length) { return ""; }
+    var src = data.flash;
+    if (!src || !src.begrepp || !src.begrepp.length) { return ""; }
     var id = "fl" + (++flashTeller);
-    var k = flashKort(data);
-    flashReg[id] = { k: k, lage: "begrepp", ko: [], miss: [], fel: 0, forsta: 0, total: 0, visad: false };
-    var knappar = '<button type="button" data-lage="begrepp" aria-pressed="true" onclick="flashLage(\'' + id + '\',\'begrepp\')">Begrepp → förklara</button>' +
-      '<button type="button" data-lage="forklaring" aria-pressed="false" onclick="flashLage(\'' + id + '\',\'forklaring\')">Förklaring → begrepp</button>' +
-      (k.luck.length ? '<button type="button" data-lage="luckor" aria-pressed="false" onclick="flashLage(\'' + id + '\',\'luckor\')">Fyll i luckor</button>' : '');
-    return '<div class="flash" id="' + id + '"><h3>🃏 Öva med flashcards</h3>' +
-      '<p>Du ser bara ena sidan av kortet. Försök svara själv, i huvudet eller på papper, innan du vänder kortet. Bedöm sedan ärligt hur det gick.</p>' +
-      '<div class="flash-lagen" role="group" aria-label="Välj hur du vill öva">' + knappar + '</div>' +
-      '<button type="button" class="flash-start" onclick="flashStart(\'' + id + '\')">Starta</button>' +
-      '<div id="' + id + 'k" aria-live="polite"></div>' +
-      '<p class="flash-lasforst">Vill du läsa först? Sammanfattning och begrepp finns längre ner på sidan.</p></div>';
+    var k = flashKort(src);
+    flashReg[id] = { k: k, lage: "begrepp", ko: [], miss: [], forsta: 0, total: 0 };
+    var knappar = '<button type="button" data-lage="begrepp" aria-pressed="true" onclick="flashLage(\'' + id + '\',\'begrepp\')">Begrepp</button>' +
+      '<button type="button" data-lage="forklaring" aria-pressed="false" onclick="flashLage(\'' + id + '\',\'forklaring\')">Förklaring</button>' +
+      (k.luck.length ? '<button type="button" data-lage="luckor" aria-pressed="false" onclick="flashLage(\'' + id + '\',\'luckor\')">Luckor</button>' : '');
+    setTimeout(function() { flashStart(id); }, 0);
+    return '<div class="flash" id="' + id + '"><div class="flash-topp"><h3>🃏 Flashcards</h3>' +
+      '<div class="flash-lagen" role="group" aria-label="Typ av kort">' + knappar + '</div></div>' +
+      '<div id="' + id + 'k"></div></div>';
   }
   function flashBlanda(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function flashLage(id, lage) {
     var r = flashReg[id]; if (!r) { return; }
     r.lage = lage;
     document.querySelectorAll("#" + id + " .flash-lagen button").forEach(function(b) { b.setAttribute("aria-pressed", b.getAttribute("data-lage") === lage ? "true" : "false"); });
+    flashStart(id);
   }
   function flashByggKort(r) {
     var a = [];
-    if (r.lage === "luckor") { r.k.luck.forEach(function(c) { a.push({ fram: c.fram, bak: c.bak, etikett: "Vilka ord saknas?" }); }); }
-    else if (r.lage === "forklaring") { r.k.begr.forEach(function(c) { a.push({ fram: c.f, bak: "<strong>" + c.t + "</strong>", etikett: "Vilket begrepp är det här?" }); }); }
-    else { r.k.begr.forEach(function(c) { a.push({ fram: "<strong>" + c.t + "</strong>", bak: c.f, etikett: "Förklara begreppet" }); }); }
+    if (r.lage === "luckor") { r.k.luck.forEach(function(c) { a.push({ fram: c.fram, bak: c.bak, etikett: "Fyll i" }); }); }
+    else if (r.lage === "forklaring") { r.k.begr.forEach(function(c) { a.push({ fram: c.f, bak: "<strong>" + c.t + "</strong>", etikett: "Förklaring" }); }); }
+    else { r.k.begr.forEach(function(c) { a.push({ fram: "<strong>" + c.t + "</strong>", bak: c.f, etikett: "Begrepp" }); }); }
     return flashBlanda(a);
   }
   function flashStart(id) {
     var r = flashReg[id]; if (!r) { return; }
-    r.ko = flashByggKort(r); r.miss = []; r.total = r.ko.length; r.forsta = 0; r.visad = false; r.runda = 0;
-    flashRita(id);
+    r.ko = flashByggKort(r); r.miss = []; r.total = r.ko.length; r.forsta = 0;
+    flashRita(id, false);
   }
-  function flashRita(id) {
+  function flashRita(id, fokus) {
     var r = flashReg[id], ut = document.getElementById(id + "k"); if (!r || !ut) { return; }
     if (!r.ko.length) {
-      var ratt = r.forsta;
-      ut.innerHTML = '<div class="flash-kort"><p><strong>Klart! 🎉</strong></p><p>Du kunde ' + ratt + ' av ' + r.total + ' direkt.</p></div>' +
-        '<div class="flash-knappar">' + (r.miss.length ? '<button type="button" class="flash-start" onclick="flashMissade(\'' + id + '\')">Öva de ' + r.miss.length + ' korten du missade</button>' : '') +
+      ut.innerHTML = '<div class="flash-klart"><p><strong>Klart! 🎉</strong> Du kunde ' + r.forsta + ' av ' + r.total + ' direkt.</p></div>' +
+        '<div class="flash-knappar">' + (r.miss.length ? '<button type="button" class="flash-start" onclick="flashMissade(\'' + id + '\')">Öva ' + r.miss.length + ' missade</button>' : '') +
         '<button type="button" onclick="flashStart(\'' + id + '\')">Börja om</button></div>';
       return;
     }
     var c = r.ko[0];
-    var h = '<div class="flash-kort"><div class="flash-etikett">' + c.etikett + '</div><div>' + c.fram + '</div>';
-    if (r.visad) { h += '<div class="flash-svar" id="' + id + 's">' + c.bak + '</div>'; }
-    h += '</div><div class="flash-knappar">';
-    if (!r.visad) { h += '<button type="button" class="flash-start" id="' + id + 'v" onclick="flashVisa(\'' + id + '\')">Visa svar</button>'; }
-    else { h += '<button type="button" class="flash-ja" id="' + id + 'ja" onclick="flashSvar(\'' + id + '\',true)">✓ Jag kunde det</button><button type="button" class="flash-nej" onclick="flashSvar(\'' + id + '\',false)">↻ Öva mer</button>'; }
-    h += '</div><p class="flash-status">Kvar: ' + r.ko.length + ' · att öva mer: ' + r.ko.filter(function(x) { return x.omtag; }).length + '</p>';
-    ut.innerHTML = h;
-    var f = document.getElementById(id + (r.visad ? "ja" : "v")); if (f) { f.focus({ preventScroll: true }); }
+    ut.innerHTML = '<div class="flash-scen"><button type="button" class="flash-kort" id="' + id + 'c" aria-label="Vänd kortet" onclick="flashVand(\'' + id + '\')"><span class="fk-in">' +
+      '<span class="fk-sida fk-fram" id="' + id + 'f"><small>' + c.etikett + '</small><span>' + c.fram + '</span><span class="fk-vand">↻ vänd</span></span>' +
+      '<span class="fk-sida fk-bak" id="' + id + 'b" aria-hidden="true"><span>' + c.bak + '</span></span></span></button></div>' +
+      '<div class="flash-knappar" id="' + id + 'a"></div>' +
+      '<p class="flash-status">' + r.ko.length + ' kvar</p>';
+    if (fokus) { var k = document.getElementById(id + "c"); if (k) { k.focus({ preventScroll: true }); } }
   }
-  function flashVisa(id) { var r = flashReg[id]; if (!r) { return; } r.visad = true; flashRita(id); }
+  function flashVand(id) {
+    var r = flashReg[id], kort = document.getElementById(id + "c"); if (!r || !kort) { return; }
+    var vand = !kort.classList.contains("vand");
+    kort.classList.toggle("vand", vand);
+    document.getElementById(id + "f").setAttribute("aria-hidden", vand ? "true" : "false");
+    document.getElementById(id + "b").setAttribute("aria-hidden", vand ? "false" : "true");
+    document.getElementById(id + "a").innerHTML = vand ?
+      '<button type="button" class="flash-ja" onclick="flashSvar(\'' + id + '\',true)">✓ Kunde det</button><button type="button" class="flash-nej" onclick="flashSvar(\'' + id + '\',false)">↻ Öva mer</button>' : "";
+  }
   function flashSvar(id, kunde) {
     var r = flashReg[id]; if (!r || !r.ko.length) { return; }
     var c = r.ko.shift();
     if (kunde) { if (!c.omtag) { r.forsta++; } }
     else { c.omtag = true; if (r.miss.indexOf(c) < 0) { r.miss.push(c); } r.ko.push(c); }
-    r.visad = false; flashRita(id);
+    flashRita(id, true);
   }
-  function flashMissade(id) { var r = flashReg[id]; if (!r) { return; } r.ko = flashBlanda(r.miss.slice()); r.ko.forEach(function(c) { c.omtag = false; }); r.visad = false; r.forsta = 0; r.total = r.ko.length; r.miss = []; flashRita(id); }
+  function flashMissade(id) { var r = flashReg[id]; if (!r) { return; } r.ko = flashBlanda(r.miss.slice()); r.ko.forEach(function(c) { c.omtag = false; }); r.forsta = 0; r.total = r.ko.length; r.miss = []; flashRita(id, true); }
   function byggSektioner(data) {
     var html = "";
-    html += flashHtml(data);
   if (data.intro) { html += "<p>" + data.intro + "</p>"; }
   data.sektioner.forEach(function(sek) {
     html += '<div class="sektion">';
@@ -4003,6 +4013,7 @@ function ikonHtml(ikon) {
     });
     html += '</ul></div>';
   }
+    html += flashHtml(data);
     return html;
   }
 

@@ -377,10 +377,10 @@ tr.lab td{background:#f3f9f5}
 
 # ---- Data till lärarvyn (lararsida.html) ------------------------------------
 HAFTE_NYCKEL = {1: "biologi-vetenskap", 2: "biologi-omrade-2", 3: "biologi-omrade-3", 4: "biologi-ekologi"}   # områden som redan har ombyggda häften
-EXTRA_BLAD = {2: ['          { id: "biologi-m-2-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-2-t", titel: "Testa dig själv" }'],
-              3: ['          { id: "biologi-m-3-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-3-t", titel: "Testa dig själv" }'],
-              1: ['          { id: "biologi-m-1-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-1-t", titel: "Testa dig själv" }'],
-              4: ['          { id: "biologi-m-4-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-4-t", titel: "Testa dig själv" }']}
+EXTRA_BLAD = {2: ['          { id: "biologi-m-2-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-2-t", titel: "Testa dig själv" }', '          { id: "biologi-m-2-f", titel: "Flashcards" }'],
+              3: ['          { id: "biologi-m-3-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-3-t", titel: "Testa dig själv" }', '          { id: "biologi-m-3-f", titel: "Flashcards" }'],
+              1: ['          { id: "biologi-m-1-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-1-t", titel: "Testa dig själv" }', '          { id: "biologi-m-1-f", titel: "Flashcards" }'],
+              4: ['          { id: "biologi-m-4-s", titel: "Sammanfattning och begrepp" }', '          { id: "biologi-m-4-t", titel: "Testa dig själv" }', '          { id: "biologi-m-4-f", titel: "Flashcards" }']}
 # Lärarmaterial per område (prov, Jeopardy) och delområde (PowerPoint)
 MATERIAL = {2: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade2/biologi-2-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade2/biologi-2-prov-larare.pdf"],

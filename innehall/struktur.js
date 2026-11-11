@@ -277,7 +277,8 @@ var struktur = [
             ]
           },
           { id: "biologi-m-1-s", titel: "Sammanfattning och begrepp" },
-          { id: "biologi-m-1-t", titel: "Testa dig själv" }
+          { id: "biologi-m-1-t", titel: "Testa dig själv" },
+          { id: "biologi-m-1-f", titel: "Flashcards" }
         ]
       },
       {
@@ -318,7 +319,8 @@ var struktur = [
             ]
           },
           { id: "biologi-m-2-s", titel: "Sammanfattning och begrepp" },
-          { id: "biologi-m-2-t", titel: "Testa dig själv" }
+          { id: "biologi-m-2-t", titel: "Testa dig själv" },
+          { id: "biologi-m-2-f", titel: "Flashcards" }
         ]
       },
       {
@@ -349,7 +351,8 @@ var struktur = [
             ]
           },
           { id: "biologi-m-3-s", titel: "Sammanfattning och begrepp" },
-          { id: "biologi-m-3-t", titel: "Testa dig själv" }
+          { id: "biologi-m-3-t", titel: "Testa dig själv" },
+          { id: "biologi-m-3-f", titel: "Flashcards" }
         ]
       },
       {
@@ -391,7 +394,8 @@ var struktur = [
             ]
           },
           { id: "biologi-m-4-s", titel: "Sammanfattning och begrepp" },
-          { id: "biologi-m-4-t", titel: "Testa dig själv" }
+          { id: "biologi-m-4-t", titel: "Testa dig själv" },
+          { id: "biologi-m-4-f", titel: "Flashcards" }
         ]
       },
       {
@@ -653,7 +657,8 @@ var struktur = [
             ]
           },
           { id: "kemi-m-1-s", titel: "Sammanfattning och begrepp" },
-          { id: "kemi-m-1-t", titel: "Testa dig själv" }
+          { id: "kemi-m-1-t", titel: "Testa dig själv" },
+          { id: "kemi-m-1-f", titel: "Flashcards" }
         ]
       },
       {
@@ -685,7 +690,8 @@ var struktur = [
             ]
           },
           { id: "kemi-m-2-s", titel: "Sammanfattning och begrepp" },
-          { id: "kemi-m-2-t", titel: "Testa dig själv" }
+          { id: "kemi-m-2-t", titel: "Testa dig själv" },
+          { id: "kemi-m-2-f", titel: "Flashcards" }
         ]
       },
       {
@@ -716,7 +722,8 @@ var struktur = [
             ]
           },
           { id: "kemi-m-3-s", titel: "Sammanfattning och begrepp" },
-          { id: "kemi-m-3-t", titel: "Testa dig själv" }
+          { id: "kemi-m-3-t", titel: "Testa dig själv" },
+          { id: "kemi-m-3-f", titel: "Flashcards" }
         ]
       },
       {
@@ -747,7 +754,8 @@ var struktur = [
             ]
           },
           { id: "kemi-m-4-s", titel: "Sammanfattning och begrepp" },
-          { id: "kemi-m-4-t", titel: "Testa dig själv" }
+          { id: "kemi-m-4-t", titel: "Testa dig själv" },
+          { id: "kemi-m-4-f", titel: "Flashcards" }
         ]
       },
       {
