@@ -88,6 +88,14 @@ window.lararBiologi = {
      "planering/biologi-omrade3/biologi-3-prov-larare.pdf"
     ],
     [
+     "Prov anpassad grundskola, kap 3–4 (elev)",
+     "planering/biologi-omrade4/biologi-3-4-prov-anpassad-elev.pdf"
+    ],
+    [
+     "Prov anpassad grundskola, kap 3–4 (lärare, med facit)",
+     "planering/biologi-omrade4/biologi-3-4-prov-anpassad-larare.pdf"
+    ],
+    [
      "Blooket (CSV)",
      "planering/biologi-omrade3/biologi-3-blooket.csv"
     ],
@@ -120,6 +128,14 @@ window.lararBiologi = {
     [
      "Prov med facit (lärare)",
      "planering/biologi-omrade4/biologi-4-prov-larare.pdf"
+    ],
+    [
+     "Prov anpassad grundskola, kap 3–4 (elev)",
+     "planering/biologi-omrade4/biologi-3-4-prov-anpassad-elev.pdf"
+    ],
+    [
+     "Prov anpassad grundskola, kap 3–4 (lärare, med facit)",
+     "planering/biologi-omrade4/biologi-3-4-prov-anpassad-larare.pdf"
     ],
     [
      "Blooket (CSV)",

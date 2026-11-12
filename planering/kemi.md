@@ -2,7 +2,7 @@
 
 Status: förslag, väntar på granskning. Genereras av `planering/amne_plan.py` från `planering/kemi_data.py` – ändra där, inte här.
 
-Planen omfattar 9 områden, 19 delområden, 57 lektionsmoment och 16 labbpass. Det som inte ryms står under *Om tid / fördjupning* (53 förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
+Planen omfattar 9 områden, 19 delområden, 57 lektionsmoment och 16 labbpass. Det som inte ryms står under *Om tid / fördjupning* (56 förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
 
 ## Översikt
 
@@ -153,7 +153,7 @@ Planen omfattar 9 områden, 19 delområden, 57 lektionsmoment och 16 labbpass. D
 | **Egenskaper hos föreningar** | Vatten, koldioxid, salt och metaller: smältpunkt, löslighet och ledningsförmåga och varför de skiljer sig. | ledningsförmåga, smältpunkt, elektrolyt | Kunskaper om kemin i naturen, i samhället och i människokroppen | Materiens uppbyggnad, kretslopp och oförstörbarhet med partikelmodeller | Begrepp och förklaringsmodeller |
 | 🧪 **Labb (ca 45 min): Leder lösningar elektrisk ström?** | Vilka ämnen leder ström när de är lösta i vatten, och varför? Testa destillerat vatten, saltvatten, sockervatten och kranvatten med en enkel lampkrets. Förklara resultaten med joner. Säkerhet: Endast låg spänning (4,5 V). Inga kontakter nära vatten med nätspänning. | jon, elektrolyt, ledningsförmåga | Egna systematiska undersökningar | Materiens uppbyggnad, kretslopp och oförstörbarhet med partikelmodeller; Vatten som lösningsmedel och transportör av ämnen, t.ex. i mark, växter …; Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
 
-**Om tid / fördjupning:** Kemiska formler och namn; Bindningar fördjupat; Elektronegativitet
+**Om tid / fördjupning:** Kemiska formler och namn; Bindningar fördjupat; Elektronegativitet; Metallbindning
 
 ### 4.2 Kemiska reaktioner
 
@@ -182,16 +182,16 @@ Planen omfattar 9 områden, 19 delområden, 57 lektionsmoment och 16 labbpass. D
 
 **Nivåer (E→A):** E: beskriver lösning och löslighet. C: förklarar hur löslighet beror på temperatur och ämne och vattnets roll i kroppen och naturen. A: förklarar lösning med partikelmodell och resonerar om transport av ämnen.
 
-**Förklaringsmodeller:** Partikelmodellen för lösningar
+**Förklaringsmodeller:** Partikelmodellen för lösningar; Polära och opolära ämnen (förenklat)
 
 | Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
 |---|---|---|---|---|---|
-| **Vatten och lösningar** | Vattenmolekylens byggnad, lösning, löslighet, mättad lösning; vad som löser sig och inte. | lösning, lösningsmedel, löst ämne, löslighet, mättad | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Vatten som lösningsmedel och transportör av ämnen, t.ex. i mark, växter … | Begrepp och förklaringsmodeller |
+| **Vatten och lösningar** | Vattenmolekylens byggnad och att den är polär; lösning, löslighet, mättad lösning; vad som löser sig och inte. Lika löser lika: varför socker och salt löser sig i vatten men olja och färg inte, och varför lacknafta rengör en pensel som vatten inte klarar. | lösning, lösningsmedel, löst ämne, löslighet, mättad, polär, opolär, lika löser lika | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Vatten som lösningsmedel och transportör av ämnen, t.ex. i mark, växter … | Begrepp och förklaringsmodeller |
 | **Koncentration och löslighet** | Koncentration som mängd löst ämne i volym; temperaturens påverkan; spädning. | koncentration, spädning, löslighetskurva | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Vatten som lösningsmedel och transportör av ämnen, t.ex. i mark, växter …; Materiens uppbyggnad, kretslopp och oförstörbarhet med partikelmodeller | Begrepp och förklaringsmodeller |
 | **Vatten som transportör** | Vatten i mark, växter och människokroppen: näringsämnen, blod, urin; vattnets kretslopp och egenskaper. | transport, näringslösning, blod, vattnets kretslopp | Kunskaper om kemin i naturen, i samhället och i människokroppen | Vatten som lösningsmedel och transportör av ämnen, t.ex. i mark, växter … | Begrepp och förklaringsmodeller |
 | 🧪 **Labb (ca 45 min): Hur mycket salt löser sig i vatten vid olika temperaturer?** | Hur påverkar temperaturen hur mycket ämne som kan lösas i vatten? Tillsätta salt eller socker till vatten av olika temperaturer tills det inte löser sig mer; jämföra och rita diagram. Säkerhet: Skyddsglasögon. Varmt vatten hanteras varsamt (max ca 50 °C). Inget ämne ska smakas. | mättad lösning, löslighet, temperatur | Egna systematiska undersökningar | Vatten som lösningsmedel och transportör av ämnen, t.ex. i mark, växter …; Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
 
-**Om tid / fördjupning:** Hårt och mjukt vatten; Havsvatten och saltvatten; Osmos
+**Om tid / fördjupning:** Hårt och mjukt vatten; Havsvatten och saltvatten; Osmos; Mol och substansmängd
 
 ### 5.2 Syror, baser och pH
 
@@ -208,7 +208,7 @@ Planen omfattar 9 områden, 19 delområden, 57 lektionsmoment och 16 labbpass. D
 | **Neutralisation i naturen och samhället** | Syra och bas bildar salt och vatten; magsyra, kalkning av sjöar och försurning. | neutralisation, salt, försurning, kalkning | Kunskaper om kemin i naturen, i samhället och i människokroppen | Kemiska processer i mark, luft och vatten och koppling till miljö och …; Separations- och analysmetoder, t.ex. filtrering, fällning, pH-mätning … | Begrepp och förklaringsmodeller |
 | 🧪 **Labb (ca 45 min): pH med rödkålsindikator** | Vilket pH har olika vardagsämnen, och kan man neutralisera en syra? Göra indikator av rödkål, testa hushållsämnen, sortera efter pH och neutralisera en svag syra med bikarbonat. Säkerhet: Skyddsglasögon. Endast svaga hushållsämnen (ättika, citron, bikarbonat, tvål). Inget smakas. | indikator, pH, neutralisation | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Separations- och analysmetoder, t.ex. filtrering, fällning, pH-mätning …; Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
 
-**Om tid / fördjupning:** Syror och baser i kroppen; Starka och svaga syror; Titrering
+**Om tid / fördjupning:** Syror och baser i kroppen; Starka och svaga syror; Titrering; Buffertar
 
 ## 6. Kemi i naturen och miljön
 
@@ -242,8 +242,8 @@ Planen omfattar 9 områden, 19 delområden, 57 lektionsmoment och 16 labbpass. D
 | Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
 |---|---|---|---|---|---|
 | **Vattenrening och dricksvatten** | Från källa till kran: sedimentering, filtrering, fällning och desinfektion; avloppsrening i stora drag. | vattenrening, fällning, filtrering, avloppsvatten | Kunskaper om kemin i naturen, i samhället och i människokroppen | Kemiska processer i mark, luft och vatten och koppling till miljö och …; Separations- och analysmetoder, t.ex. filtrering, fällning, pH-mätning … | Begrepp och förklaringsmodeller |
-| **Näringsämnen och övergödning** | Kväve och fosfor i mark och vatten; gödsling; övergödning och dess följder. | näringsämne, kväve, fosfor, övergödning | Kunskaper om kemin i naturen, i samhället och i människokroppen | Kemiska processer i mark, luft och vatten och koppling till miljö och … | Begrepp och förklaringsmodeller |
-| **Miljögifter och spridning** | Miljögifter: persistens, anrikning och spridning; exempel som DDT, PCB, kvicksilver och mikroplast; hur man kan minska riskerna. | miljögift, persistent, bioackumulering, anrikning | Formulera egna och granska andras argument | Kemiska processer i mark, luft och vatten och koppling till miljö och …; Argumentation och ställningstaganden i aktuella frågor som rör miljö … | Granska information, kommunicera och ta ställning |
+| **Näringsämnen och övergödning** | Kväve och fosfor i mark och vatten; kvävets kretslopp med kvävefixerande bakterier och fosfor som begränsad resurs i konstgödsel; gödsling; övergödning och dess följder. | näringsämne, kväve, fosfor, kvävefixering, övergödning | Kunskaper om kemin i naturen, i samhället och i människokroppen | Kemiska processer i mark, luft och vatten och koppling till miljö och … | Begrepp och förklaringsmodeller |
+| **Miljögifter och spridning** | Miljögifter: persistens, anrikning och spridning; exempel som DDT, PCB, mikroplast och tungmetaller som bly och kvicksilver; hur ämnen tar sig in i kroppen (andning, hud, mat), förs med blodet och tas om hand av levern; hur man kan minska riskerna. | miljögift, persistent, bioackumulering, anrikning, tungmetall | Formulera egna och granska andras argument | Kemiska processer i mark, luft och vatten och koppling till miljö och …; Argumentation och ställningstaganden i aktuella frågor som rör miljö … | Granska information, kommunicera och ta ställning |
 | 🧪 **Labb (ca 45 min): Rena smutsigt vatten** | Hur kan man rena smutsigt vatten, och hur rent blir det? Bygga ett reningsfilter av sand, grus och aktivt kol; jämföra grumlighet och pH före och efter. Värdera vad filtret inte tar bort. Säkerhet: Det renade vattnet får aldrig drickas. Skyddsglasögon. | filtrering, sedimentering, rening | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Kemiska processer i mark, luft och vatten och koppling till miljö och …; Separations- och analysmetoder, t.ex. filtrering, fällning, pH-mätning …; Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
 
 **Om tid / fördjupning:** Läkemedelsrester i vatten; Försurning och kalkning; Kemikaliesäkerhet
@@ -280,11 +280,11 @@ Planen omfattar 9 områden, 19 delområden, 57 lektionsmoment och 16 labbpass. D
 | Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
 |---|---|---|---|---|---|
 | **Kolhydrater** | Socker och stärkelse; glukos som energikälla; fibrer; hur kolhydrater spjälkas. | kolhydrat, glukos, stärkelse, fibrer | Kunskaper om kemin i naturen, i samhället och i människokroppen | Kolhydrater, proteiner och fetter och deras funktioner i människokroppen | Begrepp och förklaringsmodeller |
-| **Proteiner och fetter** | Aminosyror och proteiner som byggmaterial; fetter som energilager och i cellmembran; mättade och omättade. | protein, aminosyra, fett, fettsyra | Kunskaper om kemin i naturen, i samhället och i människokroppen | Kolhydrater, proteiner och fetter och deras funktioner i människokroppen | Begrepp och förklaringsmodeller |
+| **Proteiner och fetter** | Aminosyror och proteiner som byggmaterial; enzymer som proteiner som skyndar på reaktioner, till exempel när stärkelse och laktos spjälkas; fetter som energilager och i cellmembran; mättade och omättade. | protein, aminosyra, enzym, katalysator, fett, fettsyra | Kunskaper om kemin i naturen, i samhället och i människokroppen | Kolhydrater, proteiner och fetter och deras funktioner i människokroppen | Begrepp och förklaringsmodeller |
 | **Näring, energi och kostråd** | Energiinnehåll, vitaminer och mineraler; hur man granskar kostråd och produktpåståenden. | energiinnehåll, vitamin, mineral, kostråd | Formulera egna och granska andras argument | Kolhydrater, proteiner och fetter och deras funktioner i människokroppen; Informationssökning, kritisk granskning och användning av information … | Granska information, kommunicera och ta ställning |
 | 🧪 **Labb (ca 45 min): Påvisa näringsämnen i mat** | Vilka näringsämnen innehåller olika livsmedel? Testa med jod (stärkelse), glukosteststicka (socker) och fettfläck på papper. Redovisa i tabell och jämför med innehållsförteckningen. Säkerhet: Skyddsglasögon och handskar vid jod. Maten får inte ätas efter testet. | stärkelse, glukos, fett, påvisa | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Kolhydrater, proteiner och fetter och deras funktioner i människokroppen; Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
 
-**Om tid / fördjupning:** Enzymer; Vitaminer och mineraler; Matens kemi: tillsatser
+**Om tid / fördjupning:** Enzymer och temperatur; Vitaminer och mineraler; Matens kemi: tillsatser
 
 ## 8. Material, produkter och hållbarhet
 
@@ -301,7 +301,7 @@ Planen omfattar 9 områden, 19 delområden, 57 lektionsmoment och 16 labbpass. D
 | Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
 |---|---|---|---|---|---|
 | **Metaller, plast och andra material** | Metaller och legeringar, plast (polymerer), keramik; hur uppbyggnad ger egenskaper; råvara till produkt. | legering, polymer, plast, råvara, egenskap | Kunskaper om kemin i naturen, i samhället och i människokroppen | Utveckling av produkter och material, t.ex. läkemedel, funktionskläder …; Materiens uppbyggnad, kretslopp och oförstörbarhet med partikelmodeller | Begrepp och förklaringsmodeller |
-| **Batterier och elektrokemi** | Hur kemisk energi blir elektrisk energi; metaller och elektrolyt; laddningsbara batterier; risker och återvinning. | batteri, elektrod, elektrolyt, spänning | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Utveckling av produkter och material, t.ex. läkemedel, funktionskläder … | Begrepp och förklaringsmodeller |
+| **Batterier och elektrokemi** | Hur kemisk energi blir elektrisk energi genom att elektroner flyttas mellan metaller; metaller och elektrolyt; laddningsbara batterier; elektrolys, där elektrisk energi används för att framställa grundämnen som aluminium; risker och återvinning. | batteri, elektrod, elektrolyt, spänning, elektrolys, elektronövergång | Använda kemins begrepp och förklaringsmodeller för att beskriva och … | Utveckling av produkter och material, t.ex. läkemedel, funktionskläder … | Begrepp och förklaringsmodeller |
 | **Läkemedel och funktionskläder** | Hur ett läkemedel utvecklas och prövas; hur funktionskläders fibrer fungerar; användning och risker. | läkemedel, verksamt ämne, biverkning, fiber, funktionsmaterial | Kunskaper om kemin i naturen, i samhället och i människokroppen; Formulera egna och granska andras argument | Utveckling av produkter och material, t.ex. läkemedel, funktionskläder … | Granska information, kommunicera och ta ställning |
 | 🧪 **Labb (ca 45 min): Bygg ett batteri** | Vilka metallkombinationer ger högst spänning i ett enkelt batteri? Bygga batterier med olika metaller och en elektrolyt (citron, saltvatten); mäta spänning med multimeter; jämföra och förklara. Säkerhet: Skyddsglasögon. Citronsaft och saltlösning kan irritera ögon. Inga starkare syror. | elektrod, elektrolyt, spänning | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Utveckling av produkter och material, t.ex. läkemedel, funktionskläder …; Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
 
