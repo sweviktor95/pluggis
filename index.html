@@ -27,7 +27,8 @@
     font-size: 2.5em;
     margin-bottom: 5px;
   }
-  .logo { text-align: center; margin: 0 0 6px; line-height: 1; }
+  .logo { text-align: center; margin: 0 0 6px; line-height: 1; cursor: pointer; }
+  .logo:focus-visible { outline: 3px solid #ff8f00; outline-offset: 4px; border-radius: 8px; }
   .logo h1 { margin: 0; font-size: 1em; display: inline-flex; gap: 5px; align-items: flex-end; justify-content: center; flex-wrap: nowrap; }
   .logo .bk {
     display: inline-block; width: 1.05em; height: 1.15em; line-height: 1.15em; text-align: center;
@@ -110,6 +111,7 @@
   .framsteg-sammanfattning { margin: 4px 0 6px; color: #5C6B62; }
   .framsteg-bar { height: 8px; background: #DCE6DF; border-radius: 4px; overflow: hidden; margin-bottom: 14px; }
   .framsteg-bar-fyll { height: 100%; background: #2f8a4b; }
+  .labb-not { margin-top: 24px; padding: 10px 14px; background: #fff4e5; border: 1px solid #f0c78a; border-radius: 10px; color: #5a3b0a; }
   .klar-knapp { background: #7A8F82; margin-top: 24px; }
   .klar-knapp:hover { background: #667B6E; }
   .klar-knapp.ar-klar { background: #2f8a4b; }
@@ -917,7 +919,7 @@
 </head>
 <body>
 
-<div class="logo">
+<div class="logo" role="link" tabindex="0" aria-label="Till startsidan" title="Till startsidan" onclick="visStartsida()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();visStartsida();}">
   <h1 aria-label="Pluggis"><span class="bk" style="background:#E4572E;--r:-4deg;--d:0s" aria-hidden="true">P</span><span class="bk" style="background:#F2A900;--r:3deg;--d:.15s" aria-hidden="true">l</span><span class="bk" style="background:#38564A;--r:-2deg;--d:.3s" aria-hidden="true">u</span><span class="bk" style="background:#2E86AB;--r:4deg;--d:.45s" aria-hidden="true">g</span><span class="bk" style="background:#9B5DE5;--r:-3deg;--d:.6s" aria-hidden="true">g</span><span class="bk" style="background:#E4572E;--r:2deg;--d:.75s" aria-hidden="true">i</span><span class="bk" style="background:#38564A;--r:-4deg;--d:.9s" aria-hidden="true">s</span><span class="gnista" aria-hidden="true">✨</span></h1>
   <svg class="pennstreck" viewBox="0 0 330 14" aria-hidden="true"><path d="M4 8 C 50 1, 90 13, 140 7 S 240 2, 290 8" fill="none" stroke="#F2A900" stroke-width="5" stroke-linecap="round"/><path d="M296 3 L326 8 L296 13 Z" fill="#E4572E"/></svg>
 </div>
@@ -1027,7 +1029,7 @@ function ikonHtml(ikon) {
   // Räknar moment MED innehåll (tomma platshållare räknas inte).
   function raknaFramsteg(n) {
     if (!n.barn || n.barn.length === 0) {
-      if (!innehall[n.id]) { return { totalt: 0, klara: 0 }; }
+      if (!innehall[n.id] || arLabb(n)) { return { totalt: 0, klara: 0 }; }
       return { totalt: 1, klara: framsteg.klara[n.id] ? 1 : 0 };
     }
     var summa = { totalt: 0, klara: 0 };
@@ -1038,6 +1040,8 @@ function ikonHtml(ikon) {
     });
     return summa;
   }
+
+  function arLabb(n) { return !!n && typeof n.titel === "string" && n.titel.indexOf("Labb") === 0; }
 
   function framstegTagg(n) {
     var r = raknaFramsteg(n);
@@ -1162,7 +1166,7 @@ function ikonHtml(ikon) {
         }
         var knappKlass = (barn.titel.indexOf("Repetition") === 0) ? "knapp knapp-repetition" : "knapp";
         html += '<button class="' + knappKlass + '" onclick="visNod(\'' + barn.id + '\')">' +
-                framstegTagg(barn) + barn.titel + '</button>';
+                framstegTagg(barn) + (arLabb(barn) ? '🧪 ' : '') + barn.titel + '</button>';
       });
     } else {
       var data = innehall[id];
@@ -1174,7 +1178,7 @@ function ikonHtml(ikon) {
         framsteg.senastAmne[rot] = id;
         sparaFramsteg();
       }
-      html += "<h2>" + node.titel + "</h2>";
+      html += "<h2>" + (arLabb(node) ? "🧪 " : "") + node.titel + "</h2>";
       if (data && data.spel) {
         // Moment med spel: fakta är standard, spelet är ett val.
         html += '<div class="valj-lage" role="group" aria-label="Välj hur du vill lära dig">' +
@@ -1502,7 +1506,9 @@ function ikonHtml(ikon) {
     }
 
     if (!harBarn) {
-      if (innehall[id]) {
+      if (innehall[id] && arLabb(entry.node)) {
+        html += '<p class="labb-not">🧪 Labben gör du tillsammans med din lärare. Här finns inget att bocka av.</p>';
+      } else if (innehall[id]) {
         var arKlar = !!framsteg.klara[id];
         html += '<button id="klarKnapp" class="knapp klar-knapp' + (arKlar ? ' ar-klar' : '') +
                 '" onclick="vaxlaKlar(\'' + id + '\')">' +
@@ -1523,7 +1529,7 @@ function ikonHtml(ikon) {
 
     html += '<button class="knapp tillbaka" onclick="' +
             (entry.parentId ? "visNod('" + entry.parentId + "')" : "visStartsida()") +
-            '">Tillbaka</button>';
+            '">⬅️ Tillbaka</button>';
 
     app.innerHTML = html;
 

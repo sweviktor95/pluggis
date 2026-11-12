@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Undersök hur socker löser sig</title>
+<style>
+:root{--bg:#f3f8f1;--card:#fff;--ink:#1f2a24;--muted:#56655b;--line:#cfdccf;--accent:#38564A;--green:#2e7d32;--warn:#c0392b;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DejaVu Sans",Verdana,Arial,sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding:16px}
+h1{margin:4px 0 2px;font-size:1.6rem;color:var(--accent)}
+.sub{margin:0 0 12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+.card h2{margin:0 0 8px;font-size:1.1rem}
+canvas{width:100%;height:auto;display:block;border-radius:12px;background:#eef6fb}
+#cv{aspect-ratio:480/320}
+#plot{aspect-ratio:480/260;background:#fff;border:1px solid var(--line)}
+.ctl{margin:0 0 12px}
+.ctl label,.ctl .lab{display:flex;justify-content:space-between;font-weight:700}
+.ctl .val{color:var(--muted);font-weight:400;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;height:32px;accent-color:var(--green)}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.btn{font:inherit;font-size:.92rem;padding:8px 12px;border-radius:10px;border:2px solid var(--line);background:#fff;cursor:pointer;min-height:42px;color:var(--ink)}
+.btn:hover{border-color:#4caf50}
+.btn[aria-pressed="true"]{background:#e8f5e9;border-color:#4caf50}
+.btn.go{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700}
+.btn.go:disabled{opacity:.5;cursor:wait}
+button:focus-visible,input:focus-visible{outline:3px solid #ff8f00;outline-offset:2px}
+.time{font-size:1.4rem;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;margin:6px 0 0}
+.msg{padding:10px 12px;border-radius:12px;background:#fff8e1;border:1px solid #f0d78a;font-size:.92rem;margin:10px 0 0;min-height:3.4em}
+.msg.good{background:#e8f5e9;border-color:#a8d5ab}
+table{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{border:1px solid var(--line);padding:4px 6px;text-align:left}
+th{background:#eef5ee}
+tr.bad td{background:#fdeceb;color:#7a2a22}
+.tbl{overflow-x:auto}
+.mean{margin:8px 0 0;font-size:.92rem}
+.hint{font-size:.85rem;color:var(--muted)}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Undersök: hur snabbt löser sig socker?</h1>
+  <p class="sub">Fråga: hur påverkar <b>vattnets temperatur</b> tiden det tar för sockret att lösa sig?</p>
+
+  <div class="grid">
+    <div>
+      <div class="card">
+        <canvas id="cv" role="img" aria-label="Ett glas med vatten och socker. Sockret löser sig medan tiden räknas upp."></canvas>
+        <div class="time" id="time" aria-live="polite">Tid: 0 s</div>
+      </div>
+      <div class="card">
+        <h2>Ställ in försöket</h2>
+        <div class="ctl">
+          <label for="temp">Temperatur <span class="val" id="tempv">20 °C</span></label>
+          <input type="range" id="temp" min="5" max="80" step="5" value="20">
+        </div>
+        <div class="ctl">
+          <div class="lab" id="l-rora">Omrörning</div>
+          <div class="seg" role="group" aria-labelledby="l-rora">
+            <button class="btn" data-k="rora" data-v="0" aria-pressed="true">Ingen</button>
+            <button class="btn" data-k="rora" data-v="1" aria-pressed="false">Rör om</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab" id="l-socker">Socker</div>
+          <div class="seg" role="group" aria-labelledby="l-socker">
+            <button class="btn" data-k="socker" data-v="bit" aria-pressed="true">Sockerbit</button>
+            <button class="btn" data-k="socker" data-v="stro" aria-pressed="false">Strösocker</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab" id="l-vatten">Vatten</div>
+          <div class="seg" role="group" aria-labelledby="l-vatten">
+            <button class="btn" data-k="vatten" data-v="1" aria-pressed="false">1 dl</button>
+            <button class="btn" data-k="vatten" data-v="2" aria-pressed="true">2 dl</button>
+            <button class="btn" data-k="vatten" data-v="3" aria-pressed="false">3 dl</button>
+          </div>
+        </div>
+        <button class="btn go" id="go">Kör försök</button>
+        <button class="btn" id="reset">Töm tabellen</button>
+        <div class="msg" id="msg">Prova olika temperaturer. Ändra en sak i taget så blir försöket rättvist.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h2>Mätvärden</h2>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>#</th><th>Temp.</th><th>Rör</th><th>Socker</th><th>Vatten</th><th>Tid (s)</th></tr></thead>
+            <tbody id="rows"><tr><td colspan="6" class="hint">Inga försök än.</td></tr></tbody>
+          </table>
+        </div>
+        <div class="mean" id="mean"></div>
+      </div>
+      <div class="card">
+        <h2>Diagram: tid mot temperatur</h2>
+        <canvas id="plot" role="img" aria-label="Diagram över tid mot temperatur för dina försök."></canvas>
+        <p class="hint">Fyllda punkter: övriga variabler lika som i första försöket. Ofyllda punkter: något mer är ändrat, så de går inte att jämföra.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'), cx=cv.getContext('2d');
+  var plot=document.getElementById('plot'), pc=plot.getContext('2d');
+  var W=480,H=320; cv.width=W*2; cv.height=H*2; plot.width=960; plot.height=520;
+  var S={temp:20,rora:'0',socker:'bit',vatten:'2'};
+  var runs=[], running=false, anim=null;
+  var $=function(id){return document.getElementById(id)};
+
+  function modelTime(s){
+    var t=300*Math.exp(-0.04*(s.temp-5));
+    if(s.rora==='1') t*=0.4;
+    if(s.socker==='stro') t*=0.15;
+    t*=Math.pow(parseFloat(s.vatten)/2,0.3);
+    var noise=1+((Math.random()+Math.random()+Math.random())/3-0.5)*0.3;
+    return Math.max(1,Math.round(t*noise*10)/10);
+  }
+  function tint(temp){var k=(temp-5)/75;return 'rgba('+Math.round(110+120*k)+','+Math.round(200-40*k)+','+Math.round(240-150*k)+',0.55)';}
+
+  function draw(frac,t,s){
+    cx.setTransform(2,0,0,2,0,0);
+    cx.clearRect(0,0,W,H);
+    cx.fillStyle='#eef6fb'; cx.fillRect(0,0,W,H);
+    var gx=140,gy=40,gw=200,gh=230;
+    var level=gh*(0.45+0.17*parseFloat(s.vatten));
+    cx.fillStyle=tint(s.temp); cx.fillRect(gx,gy+gh-level,gw,level);
+    // socker
+    var pieces=s.socker==='bit'?1:60, left=1-frac;
+    if(s.socker==='bit'){
+      var sz=40*Math.max(0.05,left);
+      cx.globalAlpha=Math.max(0,Math.min(1,0.2+left));
+      cx.fillStyle='#fff'; cx.strokeStyle='#9aa'; cx.lineWidth=1.5;
+      cx.fillRect(gx+gw/2-sz/2,gy+gh-sz-4,sz,sz); cx.strokeRect(gx+gw/2-sz/2,gy+gh-sz-4,sz,sz);
+      cx.globalAlpha=1;
+    } else {
+      cx.fillStyle='#fff'; cx.strokeStyle='#bbb'; cx.lineWidth=0.5;
+      var n=Math.round(pieces*left);
+      for(var i=0;i<n;i++){var px=gx+14+((i*73)%(gw-28)), py=gy+gh-10-((i*37)%26);
+        cx.beginPath(); cx.arc(px,py,3.2,0,6.3); cx.fill(); cx.stroke();}
+    }
+    // omrörning
+    if(s.rora==='1'){
+      cx.strokeStyle='#7a8a90'; cx.lineWidth=5; cx.lineCap='round';
+      var a=t*6; cx.beginPath(); cx.moveTo(gx+gw/2+Math.sin(a)*40,gy-14); cx.lineTo(gx+gw/2+Math.sin(a)*40+10,gy+gh-24); cx.stroke();
+    }
+    // glas
+    cx.strokeStyle='#58707a'; cx.lineWidth=4; cx.lineJoin='round';
+    cx.beginPath(); cx.moveTo(gx,gy); cx.lineTo(gx,gy+gh); cx.lineTo(gx+gw,gy+gh); cx.lineTo(gx+gw,gy); cx.stroke();
+    cx.fillStyle='#1f2a24'; cx.font='13px DejaVu Sans, Arial'; cx.textAlign='center';
+    cx.fillText(s.temp+' °C · '+s.vatten+' dl',gx+gw/2,gy+gh+26);
+  }
+  function idle(){draw(0,0,S);}
+
+  function same(a,b,skipTemp){
+    return (skipTemp||a.temp===b.temp)&&a.rora===b.rora&&a.socker===b.socker&&a.vatten===b.vatten;
+  }
+  function diffCount(a,b){
+    return (a.temp!==b.temp)+(a.rora!==b.rora)+(a.socker!==b.socker)+(a.vatten!==b.vatten);
+  }
+
+  function run(){
+    if(running) return; running=true; $('go').disabled=true;
+    var s={temp:S.temp,rora:S.rora,socker:S.socker,vatten:S.vatten};
+    var T=modelTime(s);
+    var dur=Math.min(4200,Math.max(900,T*18)), t0=null;
+    function step(ts){
+      if(t0===null) t0=ts;
+      var p=Math.min(1,(ts-t0)/dur);
+      var e=1-Math.pow(1-p,2);
+      draw(e,p*T,s);
+      $('time').textContent='Tid: '+(p*T).toFixed(1).replace('.',',')+' s';
+      if(p<1){anim=requestAnimationFrame(step);} else {finish(s,T);}
+    }
+    anim=requestAnimationFrame(step);
+  }
+  function finish(s,T){
+    s.t=T; runs.push(s); running=false; $('go').disabled=false;
+    $('time').textContent='Tid: '+T.toFixed(1).replace('.',',')+' s';
+    render(); feedback(s);
+  }
+
+  function feedback(s){
+    var m=$('msg'); m.className='msg';
+    var base=runs[0];
+    var d=diffCount(s,base);
+    if(runs.length===1){ m.textContent='Första försöket är klart. Ändra nu bara temperaturen och kör igen.'; return;}
+    if(d>1){ m.textContent='Du har ändrat '+d+' saker jämfört med första försöket. Då vet du inte vad som gav skillnaden. Rättvist försök: ändra bara en sak.'; return;}
+    var same2=runs.filter(function(r){return same(r,s)}).length;
+    if(same2>1){ m.className='msg good'; m.textContent='Samma inställningar gav inte exakt samma tid. Slumpen påverkar, så upprepa och räkna medelvärde.'; return;}
+    var temps=runs.filter(function(r){return same(r,base,true)}).map(function(r){return r.temp});
+    var uniq=temps.filter(function(v,i){return temps.indexOf(v)===i}).length;
+    if(uniq<4){ m.textContent='Bra. Prova fler temperaturer med övrigt lika, minst fyra olika.'; return;}
+    m.className='msg good';
+    m.textContent='Nu syns ett mönster: ju varmare vatten, desto kortare tid. Partiklarna rör sig snabbare och sockret lossnar fortare.';
+  }
+
+  function render(){
+    var tb=$('rows'); tb.innerHTML='';
+    if(!runs.length){tb.innerHTML='<tr><td colspan="6" class="hint">Inga försök än.</td></tr>';$('mean').textContent='';drawPlot();return;}
+    var base=runs[0];
+    runs.forEach(function(r,i){
+      var tr=document.createElement('tr'); if(diffCount(r,base)>1) tr.className='bad';
+      tr.innerHTML='<td>'+(i+1)+'</td><td>'+r.temp+' °C</td><td>'+(r.rora==='1'?'Ja':'Nej')+'</td><td>'+(r.socker==='bit'?'Bit':'Strösocker')+'</td><td>'+r.vatten+' dl</td><td>'+r.t.toFixed(1).replace('.',',')+'</td>';
+      tb.appendChild(tr);
+    });
+    // medelvärde för grupper med minst två lika
+    var seen=[], txt=[];
+    runs.forEach(function(r){
+      var g=runs.filter(function(q){return same(q,r)});
+      if(g.length>1 && seen.indexOf(g[0])<0){
+        seen.push(g[0]);
+        var m=g.reduce(function(a,q){return a+q.t},0)/g.length;
+        txt.push(r.temp+' °C'+(diffCount(r,base)?' (ändrat)':'')+': medelvärde '+m.toFixed(1).replace('.',',')+' s av '+g.length+' försök');
+      }
+    });
+    $('mean').innerHTML=txt.length?'<b>Medelvärden</b><br>'+txt.join('<br>'):'';
+    drawPlot();
+  }
+
+  function drawPlot(){
+    var w=960,h=520,l=90,r=30,t=30,b=80;
+    pc.setTransform(1,0,0,1,0,0); pc.clearRect(0,0,w,h); pc.fillStyle='#fff'; pc.fillRect(0,0,w,h);
+    var max=60; runs.forEach(function(q){if(q.t>max)max=q.t}); max=Math.ceil(max/50)*50;
+    pc.strokeStyle='#1f2a24'; pc.lineWidth=2; pc.beginPath(); pc.moveTo(l,t); pc.lineTo(l,h-b); pc.lineTo(w-r,h-b); pc.stroke();
+    pc.fillStyle='#56655b'; pc.font='22px DejaVu Sans, Arial'; pc.textAlign='right';
+    for(var v=0;v<=max;v+=max/4){var y=h-b-(h-b-t)*v/max; pc.fillText(Math.round(v),l-8,y+7); pc.strokeStyle='#e3ebe3'; pc.lineWidth=1; pc.beginPath(); pc.moveTo(l,y); pc.lineTo(w-r,y); pc.stroke();}
+    pc.textAlign='center';
+    for(var T=10;T<=80;T+=10){var x=l+(w-l-r)*(T-5)/75; pc.fillText(T,x,h-b+28);}
+    pc.fillText('Temperatur (°C)',(l+w-r)/2,h-14);
+    pc.save(); pc.translate(26,(t+h-b)/2); pc.rotate(-Math.PI/2); pc.fillText('Tid (s)',0,0); pc.restore();
+    if(!runs.length) return;
+    var base=runs[0];
+    runs.forEach(function(q){
+      var x=l+(w-l-r)*(q.temp-5)/75, y=h-b-(h-b-t)*q.t/max;
+      var ok=same(q,base,true);
+      pc.beginPath(); pc.arc(x,y,9,0,6.3);
+      if(ok){pc.fillStyle='#2e7d32'; pc.fill();} else {pc.strokeStyle='#999'; pc.lineWidth=3; pc.stroke();}
+    });
+  }
+
+  document.querySelectorAll('.seg .btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(running) return;
+      var k=b.dataset.k; S[k]=b.dataset.v;
+      document.querySelectorAll('.seg .btn[data-k="'+k+'"]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false')});
+      idle();
+    });
+  });
+  $('temp').addEventListener('input',function(){ if(running) return; S.temp=parseInt(this.value,10); $('tempv').textContent=S.temp+' °C'; idle();});
+  $('go').addEventListener('click',run);
+  $('reset').addEventListener('click',function(){ if(running) return; runs=[]; render(); $('time').textContent='Tid: 0 s'; $('msg').className='msg'; $('msg').textContent='Prova olika temperaturer. Ändra en sak i taget så blir försöket rättvist.'; idle();});
+  idle(); drawPlot();
+})();
+</script>
+</body>
+</html>

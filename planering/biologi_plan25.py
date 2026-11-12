@@ -388,8 +388,6 @@ MATERIAL = {2: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade2/bio
                  "ppt": [["📊 Hela kapitlet som PowerPoint", "planering/biologi-omrade2/biologi-2-cellen-och-livets-processer.pptx"]]},
             3: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade3/biologi-3-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade3/biologi-3-prov-larare.pdf"],
-                           ["Prov anpassad grundskola, kap 3–4 (elev)", "planering/biologi-omrade4/biologi-3-4-prov-anpassad-elev.pdf"],
-                           ["Prov anpassad grundskola, kap 3–4 (lärare, med facit)", "planering/biologi-omrade4/biologi-3-4-prov-anpassad-larare.pdf"],
                            ["Jeopardy", "simuleringar/jeopardy-bio-3.html"]],
                  "ppt": [["📊 Hela kapitlet som PowerPoint", "planering/biologi-omrade3/biologi-3-biologisk-mangfald.pptx"]]},
             1: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade1/biologi-1-prov-elev.pdf"],
@@ -398,8 +396,6 @@ MATERIAL = {2: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade2/bio
                  "ppt": [["📊 Hela kapitlet som PowerPoint", "planering/biologi-omrade1/biologi-1-biologi-som-vetenskap.pptx"]]},
             4: {"lankar": [["Prov (elevversion)", "planering/biologi-omrade4/biologi-4-prov-elev.pdf"],
                            ["Prov med facit (lärare)", "planering/biologi-omrade4/biologi-4-prov-larare.pdf"],
-                           ["Prov anpassad grundskola, kap 3–4 (elev)", "planering/biologi-omrade4/biologi-3-4-prov-anpassad-elev.pdf"],
-                           ["Prov anpassad grundskola, kap 3–4 (lärare, med facit)", "planering/biologi-omrade4/biologi-3-4-prov-anpassad-larare.pdf"],
                            ["Jeopardy", "simuleringar/jeopardy-bio-4.html"]],
                  "ppt": [["📊 Hela kapitlet som PowerPoint", "planering/biologi-omrade4/biologi-4-ekologi.pptx"]]}}
 

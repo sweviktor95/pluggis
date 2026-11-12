@@ -178,7 +178,7 @@ MATERIAL = {("kemi", 1): {"lankar": [["Prov (elevversion)", "planering/kemi-omra
                            "ppt": [["📊 Hela kapitlet som PowerPoint", "planering/kemi-omrade4/kemi-4-kemiska-foreningar-och-reaktioner.pptx"]]}}
 
 # Simuleringar (elevsidan): ett moment före labben i delområdet. Innehållet står i innehall/simuleringar.js.
-SIM = {("kemi", "2.1"): "Simulering: partikelmodellen", ("fysik", "10.1"): "Simulering: elektriska kretsar", ("teknik", "4.1"): "Simulering: balkar, drag och tryck"}
+SIM = {("kemi", "1.1"): "Simulering: undersök hur socker löser sig", ("kemi", "2.1"): "Simulering: partikelmodellen", ("kemi", "3.1"): "Simulering: bygg en atom", ("fysik", "10.1"): "Simulering: elektriska kretsar", ("teknik", "4.1"): "Simulering: balkar, drag och tryck"}
 
 def skriv_js():
     data = {"plan": {"pdf": f"planering/{C['id']}-planering.pdf", "xlsx": f"planering/{C['id']}-planering.xlsx"},

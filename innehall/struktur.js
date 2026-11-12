@@ -642,6 +642,7 @@ var struktur = [
               { id: "kemi-m-1-1-1", titel: "Vad är kemi? Säkerhet och utrustning i kemilabbet" },
               { id: "kemi-m-1-1-2", titel: "Från fråga till plan" },
               { id: "kemi-m-1-1-3", titel: "Dokumentera och värdera" },
+              { id: "kemi-m-1-1-sim", titel: "Simulering: undersök hur socker löser sig" },
               { id: "kemi-m-1-1-l", titel: "Labb: Hur påverkar temperaturen hur fort en brustablett löser sig?" }
             ]
           },
@@ -707,6 +708,7 @@ var struktur = [
               { id: "kemi-m-3-1-1", titel: "Vad är en atom? Atomen och dess partiklar" },
               { id: "kemi-m-3-1-2", titel: "Atommodellernas historia" },
               { id: "kemi-m-3-1-3", titel: "Isotoper och radioaktivitet i korthet" },
+              { id: "kemi-m-3-1-sim", titel: "Simulering: bygg en atom" },
               { id: "kemi-m-3-1-l", titel: "Labb: Svarta lådan: modellera det du inte kan se" }
             ]
           },

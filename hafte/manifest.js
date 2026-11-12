@@ -70,6 +70,7 @@ window.hafte["kemi-omrade-1"] = {
     vanlig: "hafte/kemi-1-kemi-vetenskap-vanlig-lararversion.pdf",
     fordjupning: "hafte/kemi-1-kemi-vetenskap-fordjupning-lararversion.pdf"
   },
+  pluggblad: "hafte/kemi-1-kemi-vetenskap-pluggblad.pdf",
   handledning: "hafte/kemi-1-kemi-vetenskap-lararhandledning.pdf"
 };
 window.hafte["kemi-omrade-2"] = {
@@ -82,6 +83,7 @@ window.hafte["kemi-omrade-2"] = {
     vanlig: "hafte/kemi-2-kemi-materia-vanlig-lararversion.pdf",
     fordjupning: "hafte/kemi-2-kemi-materia-fordjupning-lararversion.pdf"
   },
+  pluggblad: "hafte/kemi-2-kemi-materia-pluggblad.pdf",
   handledning: "hafte/kemi-2-kemi-materia-lararhandledning.pdf"
 };
 window.hafte["kemi-omrade-3"] = {
@@ -94,6 +96,7 @@ window.hafte["kemi-omrade-3"] = {
     vanlig: "hafte/kemi-3-kemi-atomer-vanlig-lararversion.pdf",
     fordjupning: "hafte/kemi-3-kemi-atomer-fordjupning-lararversion.pdf"
   },
+  pluggblad: "hafte/kemi-3-kemi-atomer-pluggblad.pdf",
   handledning: "hafte/kemi-3-kemi-atomer-lararhandledning.pdf"
 };
 window.hafte["kemi-omrade-4"] = {

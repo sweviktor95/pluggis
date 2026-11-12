@@ -16,6 +16,20 @@ innehall["kemi-m-2-1-sim"] = {
  "inbaddadTitel": "Simulering: partikelmodellen"
 };
 
+innehall["kemi-m-1-1-sim"] = {
+ "text": "",
+ "bild": "",
+ "inbaddad": "simuleringar/kemi-undersokning.html",
+ "inbaddadTitel": "Simulering: undersök hur socker löser sig"
+};
+
+innehall["kemi-m-3-1-sim"] = {
+ "text": "",
+ "bild": "",
+ "inbaddad": "simuleringar/kemi-atombygge.html",
+ "inbaddadTitel": "Simulering: bygg en atom"
+};
+
 innehall["fysik-m-10-1-sim"] = {
  "text": "",
  "bild": "",

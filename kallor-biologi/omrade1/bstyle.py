@@ -11,14 +11,14 @@ CSS = r"""
 @font-face{font-family:Carlito;src:url(file:///usr/share/fonts/truetype/crosextra/Carlito-Bold.ttf);font-weight:700}
 @font-face{font-family:Carlito;src:url(file:///usr/share/fonts/truetype/crosextra/Carlito-Italic.ttf);font-weight:400;font-style:italic}
 :root{--g1:#245040;--g2:#2f6b4f;--g3:#4f8a63;--ink:#241712;--mut:#6b625b;--line:#d9d2c8}
-@page{size:A4;margin:14mm 14.8mm 17mm 18mm;
- @bottom-left{content:"__FOOT__";font:8.4pt Carlito;color:#6b625b;margin-top:6mm}
- @bottom-right{content:counter(page);font:700 8.8pt Carlito;color:var(--g2);margin-top:6mm}}
+@page{size:A4;margin:12mm 14.8mm 15mm 18mm;
+ @bottom-left{content:"__FOOT__";font:10pt Carlito;color:#6b625b;margin-top:6mm}
+ @bottom-right{content:counter(page);font:700 10.5pt Carlito;color:var(--g2);margin-top:6mm}}
 *{box-sizing:border-box}
 html,body{margin:0}
 html{counter-reset:page __START__}
-body{font-family:Lora,serif;font-size:10.1pt;line-height:1.46;color:var(--ink)}
-.tab{position:fixed;right:-14.8mm;top:22mm;width:7.5mm;height:21mm;background:var(--g2);border-radius:3mm 0 0 3mm;color:#fff;font:700 11pt Carlito;display:flex;align-items:center;justify-content:center;z-index:5}
+body{font-family:Lora,serif;font-size:12pt;line-height:1.4;color:var(--ink)}
+.tab{position:fixed;right:-14.8mm;top:22mm;width:7.5mm;height:21mm;background:var(--g2);border-radius:3mm 0 0 3mm;color:#fff;font:700 13.1pt Carlito;display:flex;align-items:center;justify-content:center;z-index:5}
 .sec{break-before:page}
 .sec:first-of-type{break-before:auto}
 .sh{display:flex;align-items:center;gap:8pt;margin:0 0 9pt;break-after:avoid}
@@ -35,10 +35,10 @@ strong,b{font-weight:700}
 .row.w{display:grid;grid-template-columns:minmax(0,1fr) 62mm;column-gap:6mm;margin:0 0 8pt;align-items:start}
 .row.w .side{margin-top:2pt}
 .side{display:flex;flex-direction:column;gap:7pt;margin-top:2pt}
-.bx{border-radius:5pt;padding:7pt 9pt;font:8.9pt/1.35 Carlito;break-inside:avoid}
-.bx .rb{display:block;font:700 7.8pt Carlito;letter-spacing:.9pt;text-transform:uppercase;margin-bottom:3pt}
-.bx b.t{display:block;font:700 9pt Carlito;color:var(--ink);margin-top:4pt}
-.bx p{margin:0 0 3pt;font:8.9pt/1.35 Carlito}
+.bx{border-radius:5pt;padding:7pt 9pt;font:10.6pt/1.35 Carlito;break-inside:avoid}
+.bx .rb{display:block;font:700 9.3pt Carlito;letter-spacing:.9pt;text-transform:uppercase;margin-bottom:3pt}
+.bx b.t{display:block;font:700 10.7pt Carlito;color:var(--ink);margin-top:4pt}
+.bx p{margin:0 0 3pt;font:10.6pt/1.35 Carlito}
 .bx.begrepp{background:#fff5d6}.bx.begrepp .rb{color:#a8651a}
 .bx.tank{background:#fdefe3}.bx.tank .rb{color:#a84d22}
 .bx.visste{background:#e5f1e9}.bx.visste .rb{color:var(--g2)}
@@ -48,50 +48,50 @@ strong,b{font-weight:700}
 .bx.fundera{background:#fdefe3}.bx.fundera .rb{color:#a84d22}
 .fig{margin:2pt 0 8pt;break-inside:avoid}
 .fig img{width:100%;display:block;border-radius:6pt}
-.cap{font:8.4pt/1.3 Carlito;color:var(--mut);margin-top:3pt}
+.cap{font:10pt/1.3 Carlito;color:var(--mut);margin-top:3pt}
 .cap b{color:var(--ink)}
 ul.pu{margin:0 0 7pt;padding:0;list-style:none}
 ul.pu li{position:relative;padding-left:12pt;margin:0 0 3pt}
 ul.pu li:before{content:"•";position:absolute;left:2pt;color:var(--ink)}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8pt;margin:3pt 0 7pt}
-.card{background:#f4f9f3;border-top:2pt solid var(--g3);border-radius:0 0 5pt 5pt;padding:6pt 8pt;font:8.9pt/1.35 Carlito;break-inside:avoid}
-.card b.h{display:block;font:700 10pt Carlito;color:var(--g2);margin-bottom:3pt}
+.card{background:#f4f9f3;border-top:2pt solid var(--g3);border-radius:0 0 5pt 5pt;padding:6pt 8pt;font:10.6pt/1.35 Carlito;break-inside:avoid}
+.card b.h{display:block;font:700 11.9pt Carlito;color:var(--g2);margin-bottom:3pt}
 .steps{list-style:none;margin:0 0 6pt;padding:0;counter-reset:s}
 .steps li{counter-increment:s;position:relative;padding-left:20pt;margin:0 0 4.5pt}
-.steps li:before{content:counter(s);position:absolute;left:0;top:1pt;width:13pt;height:13pt;border-radius:50%;background:#e0782f;color:#fff;font:700 8pt/13pt Carlito;text-align:center}
+.steps li:before{content:counter(s);position:absolute;left:0;top:1pt;width:13pt;height:13pt;border-radius:50%;background:#e0782f;color:#fff;font:700 9.5pt/13pt Carlito;text-align:center}
 .steps.g li:before{background:var(--g2)}
-.kolla{border:1.7pt solid var(--g3);border-radius:7pt;padding:8pt 13pt;margin:10pt 0 0;break-inside:avoid;font:9.6pt Carlito}
-.kolla .kr{display:block;font:700 8.6pt Carlito;letter-spacing:1pt;color:var(--g2);margin-bottom:3pt;text-transform:uppercase}
+.kolla{border:1.7pt solid var(--g3);border-radius:7pt;padding:8pt 13pt;margin:10pt 0 0;break-inside:avoid;font:11.4pt Carlito}
+.kolla .kr{display:block;font:700 10.2pt Carlito;letter-spacing:1pt;color:var(--g2);margin-bottom:3pt;text-transform:uppercase}
 .kolla ol{margin:0;padding-left:15pt}.kolla li{margin:0 0 2pt}
-.tbl{width:100%;border-collapse:collapse;font:8.6pt/1.3 Carlito;margin:3pt 0 8pt}
+.tbl{width:100%;border-collapse:collapse;font:10.2pt/1.3 Carlito;margin:3pt 0 8pt}
 .tbl th{background:#fff;text-align:left;padding:4pt 5pt;border:.7pt solid var(--line);font-weight:700;color:var(--ink)}
 .tbl td{padding:4pt 5pt;border:.7pt solid var(--line);vertical-align:top}
 .tbl td:first-child{font-weight:700}
 .tbl.num td:first-child{font-weight:400}
-.pill{break-after:avoid;display:block;width:fit-content;background:var(--g2);color:#fff;font:700 8pt Carlito;letter-spacing:.9pt;padding:2.5pt 8pt;border-radius:4pt;margin:0 0 5pt;text-transform:uppercase}
-.q{display:grid;grid-template-columns:16pt minmax(0,1fr) 22pt;gap:7pt;margin:0 0 9pt;font:9.8pt/1.4 Carlito;break-inside:avoid}
-.q .n{width:14pt;height:14pt;border-radius:50%;background:var(--g2);color:#fff;font:700 8.5pt/14pt Carlito;text-align:center}
-.q .pts{text-align:right;font:700 9pt Carlito;color:var(--ink)}
+.pill{break-after:avoid;display:block;width:fit-content;background:var(--g2);color:#fff;font:700 9.5pt Carlito;letter-spacing:.9pt;padding:2.5pt 8pt;border-radius:4pt;margin:0 0 5pt;text-transform:uppercase}
+.q{display:grid;grid-template-columns:16pt minmax(0,1fr) 22pt;gap:7pt;margin:0 0 9pt;font:11.7pt/1.4 Carlito;break-inside:avoid}
+.q .n{width:14pt;height:14pt;border-radius:50%;background:var(--g2);color:#fff;font:700 10.1pt/14pt Carlito;text-align:center}
+.q .pts{text-align:right;font:700 10.7pt Carlito;color:var(--ink)}
 .q .alts{display:grid;grid-template-columns:1fr 1fr;gap:1pt 14pt;margin-top:3pt}
 .q .alts.one{grid-template-columns:1fr}
 .q .alts div{padding-left:0}
 .lines{margin-top:4pt}.lines i{display:block;height:22pt;border-bottom:.7pt solid #bdb6ad}
-.sam{background:#e9f3e9;border-radius:8pt;padding:10pt 14pt;margin:0 0 12pt;font:10pt/1.4 Carlito}
+.sam{background:#e9f3e9;border-radius:8pt;padding:10pt 14pt;margin:0 0 12pt;font:11.9pt/1.4 Carlito}
 .sam ul{margin:0;padding:0;list-style:none}.sam li{position:relative;padding-left:11pt;margin:0 0 3.5pt}.sam li:before{content:"•";position:absolute;left:1pt}
-.begr{columns:2;column-gap:16pt;font:9.2pt/1.3 Carlito}
-.begr div{break-inside:avoid;margin:0 0 6pt}.begr b{display:block;color:var(--g2);font-size:9.6pt}
+.begr{columns:2;column-gap:16pt;font:10.9pt/1.3 Carlito}
+.begr div{break-inside:avoid;margin:0 0 6pt}.begr b{display:block;color:var(--g2);font-size:11.4pt}
 .teacher h2{font:700 19pt Carlito;color:var(--g1);margin:0 0 6pt}
-.teacher h3{font-size:12pt}
-.teacher{font:9.3pt/1.38 Carlito}
-.teacher p{font:9.3pt/1.38 Carlito}
+.teacher h3{font-size:14.3pt}
+.teacher{font:11.1pt/1.38 Carlito}
+.teacher p{font:11.1pt/1.38 Carlito}
 .cols2{columns:2;column-gap:16pt}
 .cols2 p{break-inside:avoid-column}
 .lab-h{display:flex;gap:8pt;align-items:baseline}
 .mut{color:var(--mut)}
-.note{font:8.2pt/1.35 Carlito;color:var(--mut)}
+.note{font:9.8pt/1.35 Carlito;color:var(--mut)}
 .pg{break-before:page}
 .avoid{break-inside:avoid}
-.fake{display:inline-block;background:#fde8e1;color:#a83a22;font:700 7.6pt Carlito;letter-spacing:.7pt;text-transform:uppercase;padding:1pt 6pt;border-radius:4pt;margin:0 5pt 2pt 0}
+.fake{display:inline-block;background:#fde8e1;color:#a83a22;font:700 9pt Carlito;letter-spacing:.7pt;text-transform:uppercase;padding:1pt 6pt;border-radius:4pt;margin:0 5pt 2pt 0}
 .fakeann{margin:0 0 -2pt}
 """
 

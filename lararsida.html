@@ -99,18 +99,20 @@ function ikonHtml(ikon) {
     return k + '</div>';
   }
 
-  function kapitelHtml(blad) {
+  // del: "handl" = bara lärarhandledningen, "print" = utskrifter (häften, pluggblad), annars allt.
+  function kapitelHtml(blad, del) {
     var h = window.hafte && window.hafte[blad.id];
     if (!h) { return ""; }
-    var k = '<div class="kapitel"><h4>' + (h.titel || blad.titel) + '</h4>';
+    if (del === "handl") { return ""; }
+    var k = '<div class="kapitel"><h4>' + (del === "print" ? "Utskrifter: " : "") + (h.titel || blad.titel) + '</h4>';
     k += '<p class="grupp">Elevversion (utan facit, lärarhandledning och bonuslabb) – till klassen</p>' + knappar(h);
     if (h.larare) {
       k += '<p class="grupp">Lärarversion – samma innehåll som elevhäftet, med löpande källhänvisning [1], [2] … och källförteckning sist – för dig som lärare</p>' + knappar(h.larare);
     }
     if (h.pluggblad) {
-      k += '<p class="grupp">Plugga inför prov (beta) – kompakt sammanfattning, begrepp, övningsfrågor och facit, 3 sidor att skriva ut till eleverna</p><div class="knappar">' + lank(h.pluggblad, "Pluggblad") + '</div>';
+      k += '<p class="grupp">Plugga inför prov (beta) – kompakt sammanfattning, begrepp, övningsfrågor och facit, 4 sidor att skriva ut till eleverna</p><div class="knappar">' + lank(h.pluggblad, "Pluggblad") + '</div>';
     }
-    if (h.handledning) {
+    if (h.handledning && del !== "print") {
       k += '<p class="grupp">Lärarhandledning för alla tre nivåerna (handledning, facit och bedömningsstöd) – för dig som lärare</p><div class="knappar">' + lank(h.handledning, "Lärarhandledning") + '</div>';
     }
     if (h.komplett) {
@@ -132,10 +134,17 @@ function ikonHtml(ikon) {
     var ut = '<div class="planlank">' + lank(d.plan.pdf, "📋 Planering (PDF)", "plan") + lank(d.plan.xlsx, "Planering (Excel)", "plan") + '</div>';
     ut += kartHtml(nod.id);
     d.omraden.forEach(function(o) {
+      var hh = o.hafte && window.hafte && window.hafte[o.hafte];
+      var lank2 = function(l, ladda) { return lank(l[1], l[0], ladda ? "plan" : "", ladda); };
+      var ppt = (o.ppt || []).map(function(l) { return lank2(l, true); });
+      var handl = (hh && hh.handledning) ? [lank(hh.handledning, "📘 Lärarhandledning")] : [];
+      var prov = (o.lankar || []).filter(function(l) { return l[0].indexOf("Prov") === 0; }).map(function(l) { return lank2(l); });
+      var spel = (o.lankar || []).filter(function(l) { return l[0].indexOf("Prov") !== 0; }).map(function(l) { return lank2(l); });
+      var topp = ppt.concat(handl, prov);
       var inre = '<p class="ide">' + o.ide + '</p>' +
-        ((o.ppt && o.ppt.length) ? '<p class="grupp">PowerPoint – ladda ner</p><div class="knappar">' + o.ppt.map(function(l) { return lank(l[1], l[0], "plan", true); }).join("") + '</div>' : '') +
-        ((o.lankar && o.lankar.length) ? '<p class="grupp">Prov och spel – till klassen och läraren</p><div class="knappar">' + o.lankar.map(function(l) { return lank(l[1], l[0]); }).join("") + '</div>' : '');
-      var hafte = o.hafte ? kapitelHtml({ id: o.hafte, titel: o.titel }) : "";
+        (topp.length ? '<p class="grupp">PowerPoint, lärarhandledning och prov</p><div class="knappar">' + topp.join("") + '</div>' : '') +
+        (spel.length ? '<p class="grupp">Spel och quiz till klassen</p><div class="knappar">' + spel.join("") + '</div>' : '');
+      var hafte = o.hafte ? kapitelHtml({ id: o.hafte, titel: o.titel }, "print") : "";
       inre += hafte || '<div class="knappar" style="margin-top:10px"><span class="lank av">Häften kommer</span></div>';
       ut += '<details><summary>' + o.nr + '. ' + o.titel + '</summary><div class="inre">' + inre + '</div></details>';
     });
