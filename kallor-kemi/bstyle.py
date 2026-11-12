@@ -75,7 +75,7 @@ ul.pu li:before{content:"•";position:absolute;left:2pt;color:var(--ink)}
 .q .alts{display:grid;grid-template-columns:1fr 1fr;gap:1pt 14pt;margin-top:3pt}
 .q .alts.one{grid-template-columns:1fr}
 .q .alts div{padding-left:0}
-.lines{margin-top:4pt}.lines i{display:block;height:15pt;border-bottom:.7pt solid #bdb6ad}
+.lines{margin-top:4pt}.lines i{display:block;height:22pt;border-bottom:.7pt solid #bdb6ad}
 .sam{background:#f7e6e4;border-radius:8pt;padding:10pt 14pt;margin:0 0 12pt;font:10pt/1.4 Carlito}
 .sam ul{margin:0;padding:0;list-style:none}.sam li{position:relative;padding-left:11pt;margin:0 0 3.5pt}.sam li:before{content:"•";position:absolute;left:1pt}
 .begr{columns:2;column-gap:16pt;font:9.2pt/1.3 Carlito}

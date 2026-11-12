@@ -19,7 +19,7 @@ ul{margin:0 0 4pt;padding-left:12pt}li{margin:0 0 3pt}
 .qcols{columns:1}
 table{border-collapse:collapse;margin:3pt 0;font:11pt Inter}td,th{border:.7pt solid #b9b1a6;padding:1.5pt 6pt}th{background:#e5f1e9}
 .fakeann{display:none}
-.sf{white-space:nowrap;font:10pt Inter;color:#6b625b}.lines{border-bottom:.6pt solid #bdb5aa;height:15pt;margin-top:2pt}
+.sf{white-space:nowrap;font:10pt Inter;color:#6b625b}.lines{border-bottom:.6pt solid #bdb5aa;height:22pt;margin-top:2pt}
 .fac{font:12pt/1.4 Inter;columns:2;column-gap:9mm}.fac div{break-inside:avoid;margin:0 0 4pt}
 .note{font:italic 10.5pt Inter;color:#6b625b}
 .pb{break-before:page}

@@ -38,7 +38,7 @@ h2.lh{font:700 22pt Carlito;color:var(--g1);margin:0 0 8pt}
 .sort div i{display:block;width:18pt;height:18pt;border:1.3pt solid #9aa;border-radius:4pt;margin:4pt auto 0}
 .bank{display:inline-block;background:#e4edf5;border-radius:6pt;padding:3pt 10pt;font:10.4pt Carlito;margin:5pt 0 6pt 25pt}
 .fy p{margin:0 0 7pt 25pt;font:11pt Carlito}
-.ln{margin:5pt 0 0 25pt;font:10.6pt Carlito}.ln i{display:block;height:17pt;border-bottom:.8pt solid #aab}
+.ln{margin:5pt 0 0 25pt;font:10.6pt Carlito}.ln i{display:block;height:23pt;border-bottom:.8pt solid #aab}
 .dr{display:grid;grid-template-columns:1fr 1fr;gap:6pt 40pt;margin:6pt 0 0 25pt;font:10.6pt Carlito}
 .dr div{border:1pt solid #cfd6d0;border-radius:5pt;padding:3pt 9pt;position:relative}
 .sf{margin:6pt 0 0 25pt;font:10.6pt Carlito;width:calc(100% - 25pt)}.sf table{width:100%;border-collapse:collapse}

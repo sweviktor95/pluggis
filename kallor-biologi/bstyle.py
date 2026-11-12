@@ -75,7 +75,7 @@ ul.pu li:before{content:"•";position:absolute;left:2pt;color:var(--ink)}
 .q .alts{display:grid;grid-template-columns:1fr 1fr;gap:1pt 14pt;margin-top:3pt}
 .q .alts.one{grid-template-columns:1fr}
 .q .alts div{padding-left:0}
-.lines{margin-top:4pt}.lines i{display:block;height:15pt;border-bottom:.7pt solid #bdb6ad}
+.lines{margin-top:4pt}.lines i{display:block;height:22pt;border-bottom:.7pt solid #bdb6ad}
 .sam{background:#e9f3e9;border-radius:8pt;padding:10pt 14pt;margin:0 0 12pt;font:10pt/1.4 Carlito}
 .sam ul{margin:0;padding:0;list-style:none}.sam li{position:relative;padding-left:11pt;margin:0 0 3.5pt}.sam li:before{content:"•";position:absolute;left:1pt}
 .begr{columns:2;column-gap:16pt;font:9.2pt/1.3 Carlito}
@@ -91,7 +91,35 @@ ul.pu li:before{content:"•";position:absolute;left:2pt;color:var(--ink)}
 .note{font:8.2pt/1.35 Carlito;color:var(--mut)}
 .pg{break-before:page}
 .avoid{break-inside:avoid}
+.fake{display:inline-block;background:#fde8e1;color:#a83a22;font:700 7.6pt Carlito;letter-spacing:.7pt;text-transform:uppercase;padding:1pt 6pt;border-radius:4pt;margin:0 5pt 2pt 0}
+.fakeann{margin:0 0 -2pt}
 """
+
+
+import os as _os
+DYS_TEXT = r"""
+body{font-family:"Liberation Sans",Arial,sans-serif;font-size:12pt;line-height:1.62;letter-spacing:.012em;word-spacing:.07em;text-align:left}
+p,.t p{font-family:"Liberation Sans",Arial,sans-serif;font-size:12pt;line-height:1.62;margin:0 0 9pt}
+em,i{font-style:normal;font-weight:700}
+.green{font-weight:700}
+.row{grid-template-columns:minmax(0,1fr) 54mm}
+.row.w{grid-template-columns:minmax(0,1fr) 62mm}
+.bx,.bx p,.card,.kolla,.sam,.begr,.ord2 div,.stp div,.arg,.teacher,.teacher p,.teacher .hl,.cap,.vik{font-family:"Liberation Sans",Arial,sans-serif;font-size:10.8pt;line-height:1.5;letter-spacing:.01em}
+.bx b.t,.card b.h,.begr b,.ord2 b{font-size:11.2pt}
+.tbl,table.tb,.sf,.dr,.nrbox,.ln,.fy p,.bank,.chips span,.sort div{font-family:"Liberation Sans",Arial,sans-serif;font-size:10.8pt;line-height:1.45}
+.q,.q .alts{font-family:"Liberation Sans",Arial,sans-serif;font-size:11pt;line-height:1.5}
+.ex1 .q{font-size:12.5pt}
+.kom .tx{font-size:13pt;font-family:"Liberation Sans",Arial,sans-serif}
+.t p{font-size:13pt}
+.note{font-size:9.8pt}
+h3{font-size:14.5pt;margin-top:13pt}
+.bx .rb,.kolla .kr,.pill,.fake,.kom .lb,.ex1 .ty,.sh .nr{text-transform:none;letter-spacing:.4pt;font-size:9.6pt}
+.kolla ol,.kolla li{font-size:11pt}
+ul.pu li,.steps li{font-size:inherit}
+"""
+
+# Dyslexivänlig typografi är pausad. Starta med DYS=1 i miljön för att slå på den igen.
+DYS = DYS_TEXT if _os.environ.get("DYS") == "1" else ""
 
 def css(foot, start=2):
     return CSS.replace("__FOOT__", foot).replace("__START__", str(start-1))
@@ -100,8 +128,14 @@ def esc(s):
     return H.escape(s)
 
 # ---- byggstenar -------------------------------------------------------
+import re as _re
+def shownr(nr):
+    return '' if _re.fullmatch(r'F?\d+\.\d+\.\d+', str(nr)) else nr
+
 def head(nr, titel, small=False):
-    return f'<div class="sh{" small" if small else ""}"><span class="nr">{nr}</span><h2>{titel}</h2></div>'
+    nr = shownr(nr)
+    n = f'<span class="nr">{nr}</span>' if nr else ''
+    return f'<div class="sh{" small" if small else ""}">{n}<h2>{titel}</h2></div>'
 
 def fig(src, cap=None, w=None):
     st = f' style="width:{w}"' if w else ""
@@ -130,6 +164,7 @@ def cards(items):
     return '<div class="cards">' + "".join(f'<div class="card"><b class="h">{h}</b>{t}</div>' for h, t in items) + "</div>"
 
 def kolla(nr, qs):
+    nr = shownr(nr)
     return f'<div class="kolla"><span class="kr">Kolla dig själv {nr}</span><ol>' + "".join(f"<li>{q}</li>" for q in qs) + "</ol></div>"
 
 def table(head_, rows, cls="tbl"):
