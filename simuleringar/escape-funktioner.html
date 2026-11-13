@@ -260,18 +260,18 @@ var RUM=[
 ];
 var P=[
  {rum:0,svar:11,
-  text:'Slussen styrs av en funktionsmaskin: <span class="fx">f(x) = 3x − 4</span>. Maskinen matas med <b>x = 5</b>. Vilket tal kommer ut? Det är dörrkoden.',
-  tips:'Byt ut x mot 5 och räkna.',los:'f(5) = 3·5 − 4 = 15 − 4 = 11.'},
+  text:'Slussen styrs av en funktionsmaskin: <span class="fx">y = 3x − 4</span>. Maskinen matas med <b>x = 5</b>. Vilket <b>y</b> kommer ut? Det är dörrkoden.',
+  tips:'Byt ut x mot 5 och räkna.',los:'y = 3·5 − 4 = 15 − 4 = 11.'},
  {rum:0,svar:37,
   text:'Energipanelen visar hur effekten y ändras med tiden x:',extra:tabell([0,1,2,3],[7,10,13,16])+'<div class="q" style="margin-top:6px">Mönstret fortsätter. Vad blir <b>y när x = 10</b>?</div>',
   tips:'Hur mycket ökar y när x ökar med 1? Starta på 7 när x = 0.',los:'y ökar med 3 för varje steg och startar på 7, alltså y = 3x + 7. För x = 10: 3·10 + 7 = 37.'},
  {rum:0,svar:8,
-  text:'Skyddsfältet följer funktionen <span class="fx">f(x) = 2x + 5</span>. För vilket <b>x</b> är f(x) = 21?',
+  text:'Skyddsfältet följer funktionen <span class="fx">y = 2x + 5</span>. För vilket <b>x</b> är y = 21?',
   tips:'Lös ekvationen 2x + 5 = 21.',los:'2x + 5 = 21 ⇒ 2x = 16 ⇒ x = 8.'},
  {rum:1,svar:2,
-  text:'Radarn visar en rak linje genom punkterna <b>(0, 2)</b> och <b>(4, 10)</b>. Vilken <b>lutning k</b> har linjen?',
-  extra:graf({xmin:-1,xmax:6,ymin:-1,ymax:12,lines:[{k:2,m:2,c:'#ffb02e'}],pts:[{x:0,y:2,l:'(0, 2)',dx:12,dy:18},{x:4,y:10,l:'(4, 10)',dx:-84,dy:-12}],alt:'Linje genom (0,2) och (4,10)'}),
-  tips:'k = ändring i y delat med ändring i x.',los:'k = (10 − 2)/(4 − 0) = 8/4 = 2.'},
+  text:'Radarn visar en rak linje genom punkterna <b>(0, 2)</b> och <b>(1, 4)</b>. Vilken <b>lutning k</b> har linjen?',
+  extra:graf({xmin:-1,xmax:6,ymin:-1,ymax:12,lines:[{k:2,m:2,c:'#ffb02e'}],pts:[{x:0,y:2,l:'(0, 2)',dx:12,dy:18},{x:1,y:4,l:'(1, 4)',dx:12,dy:18}],alt:'Linje genom (0,2) och (1,4)'}),
+  tips:'Hur mycket ändras y när du går ett steg åt höger i x-led?',los:'Ett steg åt höger (x ökar med 1) går linjen upp från 2 till 4, alltså 2 steg uppåt. k = 2.'},
  {rum:1,svar:129,
   text:'Rymdtaxin till maskinrummet kostar <b>45 kr</b> i startavgift plus <b>12 kr per km</b>. Vad kostar en resa på <b>7 km</b>?',
   tips:'Skriv funktionen y = 12x + 45 och sätt in x = 7.',los:'y = 12·7 + 45 = 84 + 45 = 129 kr.'},
@@ -286,9 +286,9 @@ var P=[
   extra:graf({xmin:-2,xmax:6,ymin:-3,ymax:9,lines:[{k:-2,m:6,c:'#38e1ff'}],alt:'Linjen y = −2x + 6'}),
   tips:'På x-axeln är y = 0. Lös −2x + 6 = 0.',los:'−2x + 6 = 0 ⇒ x = 3. Punkten är (3, 0).'},
  {rum:2,svar:2,
-  text:'En linje går genom punkterna <b>(1, 5)</b> och <b>(3, 11)</b>. Räta linjens ekvation är <span class="fx">y = kx + m</span>. Vad är <b>m</b>?',
-  extra:graf({xmin:-1,xmax:5,ymin:-1,ymax:13,lines:[{k:3,m:2,c:'#38e1ff'}],pts:[{x:1,y:5,l:'(1, 5)',dx:12,dy:18},{x:3,y:11,l:'(3, 11)',dx:12,dy:18}],alt:'Linje genom (1,5) och (3,11)'}),
-  tips:'Räkna först ut k, sätt sedan in en av punkterna i y = kx + m.',los:'k = (11 − 5)/(3 − 1) = 3. Punkten (1, 5): 5 = 3·1 + m ⇒ m = 2.'},
+  text:'En linje går genom punkterna <b>(1, 5)</b> och <b>(2, 8)</b>. Räta linjens ekvation är <span class="fx">y = kx + m</span>. Vad är <b>m</b>?',
+  extra:graf({xmin:-1,xmax:5,ymin:-1,ymax:13,lines:[{k:3,m:2,c:'#38e1ff'}],pts:[{x:1,y:5,l:'(1, 5)',dx:12,dy:18},{x:2,y:8,l:'(2, 8)',dx:12,dy:18}],alt:'Linje genom (1,5) och (2,8)'}),
+  tips:'Se hur mycket y ökar när x ökar med 1. Sätt sedan in en av punkterna i y = kx + m.',los:'Ett steg åt höger går y upp från 5 till 8, så k = 3. Punkten (1, 5): 5 = 3·1 + m ⇒ m = 2.'},
  {rum:2,svar:3,
   text:'En linje är <b>parallell</b> med <span class="fx">y = 3x − 5</span> och går genom punkten <b>(2, 9)</b>. Vad är <b>m</b> i linjens ekvation?',
   tips:'Parallella linjer har samma k. Sätt in punkten.',los:'k = 3. 9 = 3·2 + m ⇒ m = 3.'},
@@ -300,9 +300,9 @@ var P=[
   text:'Reaktorns kylabonnemang. <b>A:</b> 100 kr plus 5 kr per GB data. <b>B:</b> 160 kr plus 2 kr per GB. Vid hur många <b>GB</b> kostar de lika mycket?',
   tips:'Sätt 100 + 5x = 160 + 2x.',los:'100 + 5x = 160 + 2x ⇒ 3x = 60 ⇒ x = 20 GB.'},
  {rum:3,svar:-1.5,
-  text:'<b>Sista dörren.</b> Livbåtens linje går genom punkterna <b>(−2, −1)</b> och <b>(4, 11)</b>. Vilket <b>x-värde</b> har linjen när <b>y = 0</b>? Svara med decimalkomma.',
-  extra:graf({xmin:-4,xmax:6,ymin:-4,ymax:13,lines:[{k:2,m:3,c:'#ff5470'}],pts:[{x:-2,y:-1,l:'(−2, −1)',dx:10,dy:18},{x:4,y:11,l:'(4, 11)',dx:-90,dy:-12}],alt:'Linje genom (−2,−1) och (4,11)'}),
-  tips:'Räkna k, sedan m, och lös kx + m = 0.',los:'k = (11 − (−1))/(4 − (−2)) = 12/6 = 2. −1 = 2·(−2) + m ⇒ m = 3. y = 2x + 3. 0 = 2x + 3 ⇒ x = −1,5.'}
+  text:'<b>Sista dörren.</b> Livbåtens linje går genom punkterna <b>(−2, −1)</b> och <b>(−1, 1)</b>. Vilket <b>x-värde</b> har linjen när <b>y = 0</b>? Svara med decimalkomma.',
+  extra:graf({xmin:-4,xmax:6,ymin:-4,ymax:13,lines:[{k:2,m:3,c:'#ff5470'}],pts:[{x:-2,y:-1,l:'(−2, −1)',dx:-95,dy:6},{x:-1,y:1,l:'(−1, 1)',dx:12,dy:-10}],alt:'Linje genom (−2,−1) och (−1,1)'}),
+  tips:'Ta reda på k (ett steg i x-led), sedan m, och lös kx + m = 0.',los:'Ett steg åt höger går y upp från −1 till 1, så k = 2. −1 = 2·(−2) + m ⇒ m = 3. y = 2x + 3. 0 = 2x + 3 ⇒ x = −1,5.'}
 ];
 P.forEach(function(p,i){p.nr=i+1;p.bokstav=ORD.charAt(i);});
 
