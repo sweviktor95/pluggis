@@ -23,6 +23,7 @@ window.lararKartlaggning = {
     lankar: [
       ["M åk 4–6 · elev", "kartlaggning/kemi-kartlaggning-m.pdf"],
       ["M åk 4–6 · lärare", "kartlaggning/kemi-kartlaggning-m-lararversion.pdf"],
+      ["M åk 4–6 · Blooket (CSV, tillfällig)", "kartlaggning/kemi-kartlaggning-m-blooket.csv"],
       ["H åk 7–9 · elev", "kartlaggning/kemi-kartlaggning-h.pdf"],
       ["H åk 7–9 · lärare", "kartlaggning/kemi-kartlaggning-h-lararversion.pdf"]
     ]
