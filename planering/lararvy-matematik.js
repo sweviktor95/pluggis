@@ -5,3 +5,8 @@ window.lararExtra["matematik-ak7-brak"] = {
   grupp: "Blooket (beta) – 47 frågor: bråkform, jämföra, förlänga och förkorta, addition och subtraktion samt begrepp",
   lankar: [["Blooket (CSV)", "planering/matematik-ak7-brak/matematik-7-brak-blooket.csv", true]]
 };
+
+window.lararExtra["matematik-ak9-samband"] = {
+  grupp: "Escape room (beta) – Rymdstationen Origo: 13 uppgifter i fyra rum om funktioner, linjära funktioner och räta linjens ekvation. Körs på tv/tavla: klassen löser, ni skriver in koden. Nedräkningstimer, ledtrådar, lärarfacit med lösningar i spelet.",
+  lankar: [["🚀 Escape room: Station Origo", "simuleringar/escape-funktioner.html"]]
+};
