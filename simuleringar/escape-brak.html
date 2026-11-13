@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Escape room: Bråkpyramiden</title>
+<style>
+:root{--bg:#120c05;--panel:#231709;--panel2:#33230f;--line:#6b4a1f;--ink:#fff4dc;--mut:#c9a972;--cy:#ffcf4d;--am:#2fd4c4;--gr:#7be37b;--rd:#ff6a4d;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:radial-gradient(ellipse at 50% 0%,#4a2f0c 0%,var(--bg) 62%);color:var(--ink);font-family:"DejaVu Sans",system-ui,Segoe UI,Arial,sans-serif;overflow-x:hidden}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.app{position:relative;z-index:1;max-width:1800px;margin:0 auto;padding:12px 18px 28px}
+h1,h2,h3{margin:0}
+.mono{font-family:"DejaVu Sans Mono",ui-monospace,Consolas,monospace}
+/* topp */
+.top{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:8px 0 12px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .logo{width:44px;height:44px;border-radius:50%;border:3px solid var(--cy);display:grid;place-items:center;font-weight:800;color:var(--cy);box-shadow:0 0 16px #ffcf4d55}
+.brand h1{font-size:1.35rem;letter-spacing:.14em;color:var(--cy)}
+.brand small{display:block;color:var(--mut);letter-spacing:.08em}
+.timer{font-size:2.6rem;font-weight:800;letter-spacing:.06em;padding:2px 18px;border:2px solid var(--line);border-radius:14px;background:var(--panel);min-width:170px;text-align:center}
+.timer.low{color:var(--am);border-color:var(--am)}
+.timer.crit{color:var(--rd);border-color:var(--rd);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.55}}
+.code{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.code span{width:38px;height:48px;border:2px solid var(--line);border-radius:8px;display:grid;place-items:center;font-size:1.5rem;font-weight:800;background:var(--panel);color:var(--gr)}
+.code span.on{border-color:var(--gr);box-shadow:0 0 12px #7be37b66}
+.code span.pop{animation:pop .6s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.35);background:#2c4a14}100%{transform:scale(1)}}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:700;padding:10px 16px;border-radius:10px;border:2px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer;min-height:44px}
+.btn:hover{border-color:var(--cy)}
+.btn.pri{background:var(--cy);color:#2a1c00;border-color:var(--cy)}
+.btn.warn{border-color:var(--am);color:var(--am)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid var(--am);outline-offset:2px}
+/* huvud */
+.main{display:grid;grid-template-columns:320px minmax(0,1fr) 340px;gap:16px;align-items:start}
+@media (max-width:1150px){.main{grid-template-columns:1fr}}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:14px}
+.card h2{font-size:.9rem;letter-spacing:.14em;color:var(--mut);text-transform:uppercase;margin-bottom:10px}
+/* rum och portar */
+.rum{margin-bottom:14px}
+.rum h3{font-size:1rem;color:var(--cy);margin:0 0 6px;display:flex;justify-content:space-between}
+.rum.lock h3{color:var(--mut)}
+.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.door{aspect-ratio:1;border-radius:10px;border:2px solid var(--line);background:var(--panel2);color:var(--ink);font:inherit;font-size:1.3rem;font-weight:800;cursor:pointer;position:relative}
+.door:hover:not(:disabled){border-color:var(--cy)}
+.door.cur{border-color:var(--am);box-shadow:0 0 0 3px #ffb02e55}
+.door.ok{background:#2a3d10;border-color:var(--gr);color:var(--gr)}
+.door:disabled{opacity:.35;cursor:not-allowed}
+.door .l{position:absolute;bottom:2px;right:6px;font-size:.7rem;color:var(--gr)}
+/* uppgift */
+#upp{min-height:520px}
+.rumtag{display:inline-block;padding:3px 12px;border-radius:999px;background:#3a2a0a;color:var(--cy);font-weight:700;letter-spacing:.1em;font-size:.85rem}
+.q{font-size:clamp(1.3rem,2.4vw,2rem);line-height:1.45;margin:14px 0}
+.q b{color:var(--am)}
+.fx{display:inline-block;background:#2a1c08;border:1px solid var(--line);border-radius:10px;padding:2px 12px;font-family:"DejaVu Sans Mono",ui-monospace,monospace;color:var(--cy)}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 .12em;line-height:1.15;font-size:.9em}.fr i{font-style:normal;padding:0 .25em}.fr i:first-child{border-bottom:.1em solid currentColor}
+table.tab{border-collapse:collapse;margin:8px 0;font-size:1.4rem}
+table.tab th,table.tab td{border:2px solid var(--line);padding:6px 20px;text-align:center}
+table.tab th{background:var(--panel2);color:var(--cy)}
+svg.graf{width:100%;max-width:560px;height:auto;display:block;margin:8px auto;background:#1a1108;border:2px solid var(--line);border-radius:12px}
+.hint{margin-top:10px;padding:10px 14px;border-left:4px solid var(--am);background:#10302d;border-radius:8px;font-size:1.05rem;display:none}
+.hint.vis{display:block}
+.los{margin-top:10px;padding:10px 14px;border-left:4px solid var(--gr);background:#1c3510;border-radius:8px;font-size:1.05rem;display:none}
+.los.vis{display:block}
+.vald{color:var(--mut);padding:80px 10px;text-align:center;font-size:1.3rem}
+/* låspanel */
+.disp{font-size:2.2rem;font-weight:800;letter-spacing:.08em;min-height:64px;padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:#0c0703;color:var(--gr);text-align:right;overflow:hidden}
+.disp.err{border-color:var(--rd);color:var(--rd);animation:shake .45s}
+@keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.pad button{font:inherit;font-size:1.6rem;font-weight:800;padding:14px 0;border-radius:12px;border:2px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer}
+.pad button:hover{border-color:var(--cy)}
+.pad .ent{grid-column:span 3;background:var(--gr);color:#10300f;border-color:var(--gr)}
+.svarbox{margin-top:10px;padding:10px 12px;border:2px dashed var(--am);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:1.3rem}
+.svarbox b{color:var(--am);font-size:1.6rem}
+.msg{min-height:3.2em;margin-top:8px;font-size:1.05rem}
+.msg.good{color:var(--gr)}.msg.bad{color:var(--rd)}
+.note{font-size:.85rem;color:var(--mut)}
+/* overlay */
+.ov{position:fixed;inset:0;z-index:20;background:rgba(12,7,3,.92);display:none;align-items:center;justify-content:center;padding:18px}
+.ov.vis{display:flex}
+.box{background:var(--panel);border:2px solid var(--cy);border-radius:20px;max-width:820px;width:100%;max-height:92vh;overflow:auto;padding:28px;box-shadow:0 0 40px #ffcf4d33}
+.box h2{font-size:1.8rem;color:var(--cy);letter-spacing:.1em;margin-bottom:10px}
+.box p{font-size:1.2rem;line-height:1.55}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.opts .btn[aria-pressed="true"]{background:var(--cy);color:#2a1c00;border-color:var(--cy)}
+.big{font-size:clamp(2rem,6vw,4rem);font-weight:800;letter-spacing:.2em;color:var(--gr);text-align:center;margin:16px 0;text-shadow:0 0 24px #7be37b88}
+.fac table{width:100%;border-collapse:collapse;font-size:1rem}
+.fac th,.fac td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.fac th{background:var(--panel2);color:var(--cy)}
+[hidden]{display:none!important}
+@media print{body{background:#fff;color:#000}#stars,.top,.main,.ov:not(#ovFacit){display:none!important}#ovFacit{display:block!important;position:static;background:#fff}.box{border:0;box-shadow:none;max-width:none;color:#000}.fac th{background:#eee;color:#000}.fac th,.fac td{border-color:#999}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="app">
+  <div class="top">
+    <div class="brand"><div class="logo mono">½</div><div><h1>BRÅKPYRAMIDEN</h1><small>BRÅKFORM · JÄMFÖRA · FÖRLÄNGA · ADDERA · MULTIPLICERA · DIVIDERA</small></div></div>
+    <div class="timer mono" id="timer" aria-live="off">45:00</div>
+    <div class="code mono" id="kod" aria-label="Kodord"></div>
+    <div class="tools">
+      <button class="btn" id="bFacit">Lärarfacit</button>
+      <button class="btn warn" id="bOm">Börja om</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="card" id="karta"><h2>Stationskarta</h2></div>
+
+    <div class="card" id="upp">
+      <div class="vald" id="vald">Välj en port till vänster.<br>Lös uppgiften, skriv koden i låspanelen.</div>
+      <div id="uppInnehall" hidden>
+        <span class="rumtag mono" id="uTag"></span>
+        <div class="q" id="uText"></div>
+        <div id="uExtra"></div>
+        <div class="hint" id="uHint"></div>
+        <div class="los" id="uLos"></div>
+      </div>
+    </div>
+
+    <div class="card" id="las">
+      <h2>Låspanel</h2>
+      <div class="disp mono" id="disp" aria-live="polite">&nbsp;</div>
+      <div class="pad" id="pad">
+        <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+        <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+        <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+        <button data-k="/">/</button><button data-k="0">0</button><button data-k=",">,</button>
+        <button data-k="del" aria-label="Radera">⌫</button><button data-k="clr">Rensa</button><button data-k="ent" class="ent">ANGE KOD</button>
+      </div>
+      <div class="msg" id="msg">Välj en port.</div>
+      <div class="tools">
+        <button class="btn warn" id="bHint" disabled>Ledtråd (−2 min)</button>
+        <button class="btn" id="bSvar" disabled>🔑 Visa svar</button>
+      </div>
+      <div class="svarbox" id="svarBox" hidden>
+        <div>Rätt kod: <b class="mono" id="svarVal"></b></div>
+        <button class="btn pri" id="bTvinga">Öppna porten</button>
+      </div>
+      <p class="note">Fel kod kostar 1 minut. Kört fast? Visa svar kostar ingen tid. Du kan också skriva på tangentbordet. Bråk skrivs med snedstreck, t.ex. 3/4.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Intro -->
+<div class="ov vis" id="ovIntro" role="dialog" aria-modal="true" aria-labelledby="introH">
+  <div class="box">
+    <h2 id="introH">FASTNA I BRÅKPYRAMIDEN!</h2>
+    <p>Ni har följt en gammal karta in i <b>Bråkpyramiden</b>, och stentunga portar har fallit igen bakom er. Fackelljuset håller på att ta slut. För att öppna varje port måste ni lösa en bråkuppgift och skriva in rätt kod.</p>
+    <p>Varje rätt kod avslöjar en bokstav i <b>pyramidens namn</b>. När alla 13 bokstäver är avslöjade öppnas den hemliga utgången. Fyra kammare, 13 portar. Nästa kammare öppnas först när den förra är klar. Skriv bråk med snedstreck, till exempel <b>3/4</b>.</p>
+    <p><b>Välj tid:</b></p>
+    <div class="opts" id="tidOpts" role="group" aria-label="Tid">
+      <button class="btn" data-t="30" aria-pressed="false">30 min</button>
+      <button class="btn" data-t="45" aria-pressed="true">45 min</button>
+      <button class="btn" data-t="60" aria-pressed="false">60 min</button>
+      <button class="btn" data-t="0" aria-pressed="false">Ingen tid</button>
+    </div>
+    <button class="btn pri" id="bStart" style="font-size:1.3rem;padding:14px 30px">GÅ IN I PYRAMIDEN</button>
+  </div>
+</div>
+
+<!-- Slut -->
+<div class="ov" id="ovSlut" role="dialog" aria-modal="true">
+  <div class="box" id="slutBox"></div>
+</div>
+
+<!-- Facit -->
+<div class="ov" id="ovFacit" role="dialog" aria-modal="true" aria-labelledby="facH">
+  <div class="box fac">
+    <h2 id="facH">Lärarfacit</h2>
+    <p style="font-size:1rem">Kodord: <b class="mono">BRÅKPYRAMIDEN</b>. Bråk anges med snedstreck. Svar som ska vara förkortade godtas bara i enklaste form. Heltal och decimaltal (komma eller punkt) med rätt värde godtas.</p>
+    <div id="facTab"></div>
+    <div class="opts"><button class="btn" id="bFacPrint">Skriv ut</button><button class="btn pri" id="bFacStang">Stäng</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var ORD = "BRÅKPYRAMIDEN";
+
+/* ---------- Hjälpare ---------- */
+function fr(a,b){return '<span class="fr"><i>'+a+'</i><i>'+b+'</i></span>';}
+function bit(t){return t.replace(/(\d+)\/(\d+)/g,function(m,x,y){return fr(x,y);});}
+function brod(n,atna){
+  var s='<svg class="graf" viewBox="0 0 300 300" style="max-width:300px" role="img" aria-label="Rund kaka delad i '+n+' bitar, '+atna+' uppätna">';
+  for(var i=0;i<n;i++){
+    var a0=-Math.PI/2+i*2*Math.PI/n,a1=-Math.PI/2+(i+1)*2*Math.PI/n,r=130,cx=150,cy=150;
+    var x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    s+='<path d="M'+cx+','+cy+' L'+x0+','+y0+' A'+r+','+r+' 0 0 1 '+x1+','+y1+' Z" fill="'+(i<atna?'#1c1209':'#e8b04a')+'" stroke="#2a1c08" stroke-width="3" opacity="'+(i<atna?'.55':'1')+'"/>';
+  }
+  return s+'</svg>';
+}
+function staplar(lista,delar){
+  var W=560,rad=62,H=lista.length*rad+16,s='<svg class="graf" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Stapeldiagram över bråk">';
+  lista.forEach(function(e,i){
+    var y=8+i*rad,x0=70,w=W-90,h=38,t=e.t,n=e.n;
+    s+='<text x="8" y="'+(y+26)+'" fill="#ffcf4d" font-size="22" font-weight="700">'+(e.namn||'')+'</text>';
+    s+='<rect x="'+x0+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#2a1c08" stroke="#6b4a1f" stroke-width="2" rx="6"/>';
+    s+='<rect x="'+x0+'" y="'+y+'" width="'+(w*t/n)+'" height="'+h+'" fill="'+(e.c||'#e8b04a')+'" rx="6"/>';
+    if(delar){for(var k=1;k<delar;k++) s+='<line x1="'+(x0+w*k/delar)+'" y1="'+y+'" x2="'+(x0+w*k/delar)+'" y2="'+(y+h)+'" stroke="#2a1c08" stroke-width="2"/>';}
+  });
+  return s+'</svg>';
+}
+
+/* ---------- Uppgifter ---------- */
+var RUM=[
+  {namn:"Rum 1 · Ingångshallen", sub:"Bråkform och jämföra bråk"},
+  {namn:"Rum 2 · Förlängningskammaren", sub:"Förlänga och förkorta"},
+  {namn:"Rum 3 · Skattkammaren", sub:"Addition och subtraktion"},
+  {namn:"Rum 4 · Faraos grav", sub:"Multiplikation och division"}
+];
+var P=[
+ {rum:0,svar:'5/8',enkel:true,
+  text:'En rund kaka i Ingångshallen är delad i <b>8 lika stora bitar</b>. <b>3 bitar</b> har ätits upp (de mörka). Vilken <b>del av kakan är kvar</b>? Svara som bråk.',
+  extra:brod(8,3),tips:'Hur många bitar är kvar av de 8? Det är täljaren.',los:'3 av 8 bitar är uppätna, så 8 − 3 = 5 bitar är kvar. Det är 5/8.'},
+ {rum:0,svar:18,
+  text:'En kista innehåller <b>24 guldmynt</b>. <b>3/4</b> av mynten är gamla. Hur många <b>gamla mynt</b> är det?',
+  tips:'Dela 24 med nämnaren (4) och multiplicera med täljaren (3).',los:'24 / 4 = 6 och 6 · 3 = 18 gamla mynt.'},
+ {rum:0,svar:7,
+  text:'Tre stentavlor visar bråken <b>3/5</b>, <b>2/3</b> och <b>7/10</b>. Vilken tavla visar det <b>största</b> bråket? Skriv dess <b>täljare</b>.',
+  tips:'Gör bråken liknämniga, till exempel med nämnaren 30.',los:'3/5 = 18/30, 2/3 = 20/30 och 7/10 = 21/30. Störst är 7/10, så täljaren är 7.'},
+ {rum:0,svar:14,
+  text:'Hur många <b>sjundedelar</b> går det på <b>2 hela</b>?',
+  tips:'En hel är 7/7.',los:'1 hel = 7/7, så 2 hela = 14/7. Det är 14 sjundedelar.'},
+ {rum:1,svar:12,
+  text:'Förläng <b>2/3</b> så att nämnaren blir <b>18</b>. Vilken <b>täljare</b> får bråket?',
+  tips:'Med vilket tal multiplicerades 3 för att bli 18?',los:'3 · 6 = 18, så täljaren också: 2 · 6 = 12. Alltså 2/3 = 12/18.'},
+ {rum:1,svar:'3/4',enkel:true,
+  text:'Förkorta <b>18/24</b> så långt det går. Svara som bråk.',
+  tips:'Vilket är det största tal som 18 och 24 båda går att dela med?',los:'Dela täljare och nämnare med 6: 18/24 = 3/4.'},
+ {rum:1,svar:20,
+  text:'Vilket tal ska stå på frågetecknet? <span class="fx">5/9 = ?/36</span>',
+  tips:'Med vilket tal multiplicerades 9 för att bli 36?',los:'36 / 9 = 4, så täljaren: 5 · 4 = 20. Alltså 5/9 = 20/36.'},
+ {rum:2,svar:'13/20',enkel:true,
+  text:'Beräkna <span class="fx">1/4 + 2/5</span>. Svara som bråk i enklaste form.',
+  tips:'Hitta en gemensam nämnare, till exempel 20.',los:'1/4 = 5/20 och 2/5 = 8/20. Summan är 5/20 + 8/20 = 13/20.'},
+ {rum:2,svar:'1/2',enkel:true,
+  text:'Beräkna <span class="fx">5/6 − 1/3</span>. Svara som bråk i enklaste form.',
+  tips:'Skriv 1/3 med nämnaren 6.',los:'1/3 = 2/6, så 5/6 − 2/6 = 3/6 = 1/2.'},
+ {rum:2,svar:'11/8',enkel:true,
+  text:'Beräkna <span class="fx">3/4 + 5/8</span>. Svara som bråk i enklaste form. Svaret är större än 1, så täljaren blir större än nämnaren.',
+  tips:'Förläng 3/4 till åttondelar.',los:'3/4 = 6/8, så 6/8 + 5/8 = 11/8.'},
+ {rum:3,svar:'1/2',enkel:true,
+  text:'Beräkna <span class="fx">2/3 · 3/4</span>. Svara som bråk i enklaste form.',
+  tips:'Multiplicera täljare med täljare och nämnare med nämnare. Förkorta sedan.',los:'(2 · 3)/(3 · 4) = 6/12 = 1/2.'},
+ {rum:3,svar:24,
+  text:'Skatten väger <b>40 kg</b>. Faraos del är <b>3/5</b> av skatten. Hur många <b>kg</b> är Faraos del?',
+  tips:'Hitta 1/5 av 40 först.',los:'1/5 av 40 = 8, så 3/5 av 40 = 3 · 8 = 24 kg.'},
+ {rum:3,svar:6,
+  text:'<b>Sista porten.</b> Du har <b>3/4 liter</b> olja. Varje lampa rymmer <b>1/8 liter</b>. Hur många <b>lampor</b> kan du fylla?',
+  extra:staplar([{namn:'3/4',t:6,n:8,c:'#ffcf4d'}],8),
+  tips:'Du ska räkna ut 3/4 ÷ 1/8. Hur många åttondelar är 3/4?',los:'3/4 ÷ 1/8 = 3/4 · 8/1 = 24/4 = 6. (3/4 = 6/8, så det går 6 åttondelar på 3/4.)'}
+];
+P.forEach(function(p,i){p.nr=i+1;p.bokstav=ORD.charAt(i);p.plain=p.text;p.losplain=p.los;p.text=bit(p.text);p.los=bit(p.los);});
+
+/* ---------- Tillstånd ---------- */
+var S={sek:2700,tid:45,rest:2700,klara:{},cur:-1,inmat:"",hint:{},run:false,slut:false,iv:null};
+var $=function(i){return document.getElementById(i)};
+
+function fmt(s){s=Math.max(0,s);var m=Math.floor(s/60),r=s%60;return (m<10?'0':'')+m+':'+(r<10?'0':'')+r;}
+function rumKlart(r){return P.every(function(p,i){return p.rum!==r||S.klara[i];});}
+function rumOppet(r){return r===0||rumKlart(r-1);}
+function antalKlara(){return Object.keys(S.klara).length;}
+
+/* ---------- Rendering ---------- */
+function ritaKod(nyIdx){
+  var h='';
+  for(var i=0;i<ORD.length;i++){
+    var on=!!S.klara[i];
+    h+='<span class="'+(on?'on':'')+(nyIdx===i?' pop':'')+'">'+(on?P[i].bokstav:'_')+'</span>';
+  }
+  $('kod').innerHTML=h;
+}
+function ritaKarta(){
+  var k=$('karta'); var h='<h2>Stationskarta</h2>';
+  RUM.forEach(function(r,ri){
+    var oppet=rumOppet(ri);
+    h+='<div class="rum'+(oppet?'':' lock')+'"><h3><span>'+(oppet?'':'🔒 ')+r.namn+'</span></h3><div class="note" style="margin:-4px 0 8px">'+r.sub+'</div><div class="doors">';
+    P.forEach(function(p,i){
+      if(p.rum!==ri) return;
+      var cls='door'+(S.klara[i]?' ok':'')+(S.cur===i?' cur':'');
+      h+='<button class="'+cls+'" data-d="'+i+'"'+(oppet&&S.run?'':' disabled')+' aria-label="Port '+p.nr+(S.klara[i]?', öppen':'')+'">'+p.nr+(S.klara[i]?'<span class="l mono">'+p.bokstav+'</span>':'')+'</button>';
+    });
+    h+='</div></div>';
+  });
+  k.innerHTML=h;
+  k.querySelectorAll('.door').forEach(function(b){b.addEventListener('click',function(){valj(parseInt(b.dataset.d,10));});});
+}
+function ritaUpp(){
+  if(S.cur<0){$('vald').hidden=false;$('uppInnehall').hidden=true;$('bSvar').disabled=true;$('svarBox').hidden=true;return;}
+  var p=P[S.cur];
+  $('vald').hidden=true;$('uppInnehall').hidden=false;
+  $('uTag').textContent=RUM[p.rum].namn.toUpperCase()+' · DÖRR '+p.nr+' AV '+P.length;
+  $('uText').innerHTML=p.text;
+  $('uExtra').innerHTML=p.extra||'';
+  var hint=$('uHint'); hint.textContent='Ledtråd: '+p.tips; hint.classList.toggle('vis',!!S.hint[S.cur]);
+  var los=$('uLos'); los.innerHTML='<b>Lösning:</b> '+p.los; los.classList.toggle('vis',!!S.klara[S.cur]);
+  $('bHint').disabled=!!S.hint[S.cur]||!!S.klara[S.cur]||!S.run;
+  $('bSvar').disabled=!!S.klara[S.cur]||!S.run;
+  $('svarBox').hidden=true;
+}
+function ritaDisp(){ $('disp').textContent=S.inmat===''?' ':S.inmat; }
+function msg(t,c){var m=$('msg');m.textContent=t;m.className='msg '+(c||'');}
+function ritaTimer(){
+  var t=$('timer');
+  if(S.tid===0){t.textContent='∞';t.className='timer mono';return;}
+  t.textContent=fmt(S.rest);
+  t.className='timer mono'+(S.rest<=60?' crit':(S.rest<=300?' low':''));
+}
+
+/* ---------- Spelmekanik ---------- */
+function valj(i){
+  if(!S.run||S.slut) return;
+  S.cur=i;S.inmat='';ritaDisp();ritaKarta();ritaUpp();
+  msg(S.klara[i]?'Porten är redan öppen.':'Skriv koden och tryck ANGE KOD.');
+}
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){var t=a%b;a=b;b=t;}return a;}
+function malvarde(sv){ if(typeof sv==='string'&&sv.indexOf('/')>0){var q=sv.split('/');return [parseInt(q[0],10),parseInt(q[1],10)];} return [parseFloat(sv),1]; }
+function parsa(s){
+  // returnerar {a,b,bråk} eller null
+  if(!s||s==='-'||s===','||s.charAt(s.length-1)==='/'||s.charAt(s.length-1)===',') return null;
+  if(s.indexOf('/')>0){var q=s.split('/');var a=parseInt(q[0],10),b=parseInt(q[1],10);if(isNaN(a)||isNaN(b)||b===0) return null;return {a:a,b:b,brak:true};}
+  var v=parseFloat(s.replace(',','.')); if(isNaN(v)) return null; return {a:v,b:1,brak:false};
+}
+function ange(){
+  if(S.cur<0||!S.run||S.slut) return;
+  if(S.klara[S.cur]){msg('Porten är redan öppen.','good');return;}
+  var v=parsa(S.inmat);
+  if(!v){msg('Skriv ett svar först, till exempel 3/4.','bad');return;}
+  var p=P[S.cur], t=malvarde(p.svar);
+  var lika=Math.abs(v.a/v.b - t[0]/t[1])<1e-9;
+  if(lika && p.enkel && v.brak && gcd(v.a,v.b)!==1){msg('Rätt värde, men förkorta bråket så långt det går. Inget avdrag.','bad');return;}
+  if(lika){
+    S.klara[S.cur]=true;
+    var i=S.cur;
+    msg('KOD GODKÄND. Port '+p.nr+' öppnas. Bokstav avslöjad: '+p.bokstav,'good');
+    ritaKod(i);ritaKarta();ritaUpp();S.inmat='';ritaDisp();
+    if(antalKlara()===P.length){vinst();return;}
+    if(rumKlart(p.rum)&&p.rum<RUM.length-1){msg('KAMMAREN ÄR KLAR. '+RUM[p.rum+1].namn+' är upplåst. Bokstav: '+p.bokstav,'good');}
+  } else {
+    var d=$('disp');d.classList.remove('err');void d.offsetWidth;d.classList.add('err');
+    if(S.tid>0){S.rest=Math.max(0,S.rest-60);ritaTimer();msg('FEL KOD. −1 minut. Försök igen.','bad');if(S.rest<=0)slut(false);}
+    else msg('FEL KOD. Försök igen.','bad');
+  }
+}
+function ledtrad(){
+  if(S.cur<0||S.hint[S.cur]||S.klara[S.cur]) return;
+  S.hint[S.cur]=true;
+  if(S.tid>0){S.rest=Math.max(0,S.rest-120);ritaTimer();if(S.rest<=0){slut(false);return;}}
+  ritaUpp();
+}
+function visaSvar(){
+  if(S.cur<0||S.klara[S.cur]||!S.run) return;
+  $('svarVal').textContent=String(P[S.cur].svar);
+  $('svarBox').hidden=false;
+  var l=$('uLos'); l.innerHTML='<b>Lösning:</b> '+P[S.cur].los; l.classList.add('vis');
+}
+function tvingaUpp(){
+  // Nödport: öppnar porten utan tidsstraff om svaret i spelet av någon anledning skulle vara fel.
+  if(S.cur<0||S.klara[S.cur]||!S.run||S.slut) return;
+  var i=S.cur,p=P[i];
+  S.klara[i]=true;
+  msg('DÖRR '+p.nr+' ÖPPNAD MED NÖDKOD. Bokstav avslöjad: '+p.bokstav,'good');
+  ritaKod(i);ritaKarta();ritaUpp();S.inmat='';ritaDisp();
+  if(antalKlara()===P.length){vinst();return;}
+  if(rumKlart(p.rum)&&p.rum<RUM.length-1){msg('RUMMET ÄR KLART. '+RUM[p.rum+1].namn+' är upplåst. Bokstav: '+p.bokstav,'good');}
+}
+function tryck(k){
+  if(!S.run||S.cur<0||S.slut) return;
+  if(k==='ent'){ange();return;}
+  if(k==='clr'){S.inmat='';}
+  else if(k==='del'){S.inmat=S.inmat.slice(0,-1);}
+  else if(k==='/'){ if(/^\d+$/.test(S.inmat)) S.inmat+='/'; }
+  else if(k===','){ if(S.inmat.indexOf(',')<0&&S.inmat.indexOf('/')<0){S.inmat+=(S.inmat==='')?'0,':',';} }
+  else if(/^\d$/.test(k)){ if(S.inmat.length<9) S.inmat+=k; }
+  ritaDisp();
+}
+
+function tick(){
+  if(!S.run||S.slut||S.tid===0) return;
+  S.rest--; ritaTimer();
+  if(S.rest<=0) slut(false);
+}
+function start(){
+  S.klara={};S.hint={};S.cur=-1;S.inmat='';S.slut=false;S.run=true;S.rest=S.tid*60;
+  $('ovIntro').classList.remove('vis');$('ovSlut').classList.remove('vis');
+  ritaKod();ritaKarta();ritaUpp();ritaDisp();ritaTimer();msg('Välj en port.');
+  clearInterval(S.iv);S.iv=setInterval(tick,1000);
+}
+function vinst(){
+  S.slut=true;S.run=false;clearInterval(S.iv);
+  var kvar=S.tid>0?'<p>Tid kvar: <b class="mono">'+fmt(S.rest)+'</b>. Klarade ni uppdraget på '+fmt(S.tid*60-S.rest)+'.</p>':'';
+  $('slutBox').innerHTML='<h2>UTGÅNGEN ÖPPNAS!</h2><p>Alla 13 bokstäver är avslöjade. Pyramidens namn är:</p><div class="big mono">'+ORD+'</div>'+kvar+'<p>Ni tog er ut ur pyramiden med hjälp av bråk.</p><div class="opts"><button class="btn pri" id="bOm2">Spela igen</button><button class="btn" id="bSt2">Stäng</button></div>';
+  $('ovSlut').classList.add('vis');
+  $('bOm2').onclick=function(){reset();};$('bSt2').onclick=function(){$('ovSlut').classList.remove('vis');};
+}
+function slut(vann){
+  if(S.slut) return; S.slut=true;S.run=false;clearInterval(S.iv);ritaKarta();
+  $('slutBox').innerHTML='<h2 style="color:#ff5470">FACKLAN SLUKNADE!</h2><p>Tiden tog slut. Ni klarade <b>'+antalKlara()+' av '+P.length+'</b> portar. Kodordet hann inte bli klart.</p><div class="opts"><button class="btn pri" id="bFort">Fortsätt utan tid</button><button class="btn" id="bOm2">Börja om</button></div>';
+  $('ovSlut').classList.add('vis');
+  $('bFort').onclick=function(){S.tid=0;S.slut=false;S.run=true;$('ovSlut').classList.remove('vis');ritaTimer();ritaKarta();ritaUpp();};
+  $('bOm2').onclick=function(){reset();};
+}
+function reset(){
+  clearInterval(S.iv);S.run=false;S.slut=false;
+  $('ovSlut').classList.remove('vis');$('ovIntro').classList.add('vis');
+}
+
+/* ---------- Lärarfacit ---------- */
+function facit(){
+  var h='<table><tr><th>Port</th><th>Rum</th><th>Uppgift</th><th>Kod</th><th>Bokstav</th><th>Lösning</th></tr>';
+  P.forEach(function(p){
+    var svar=String(p.svar);
+    var txt=p.plain.replace(/<[^>]+>/g,'');
+    h+='<tr><td>'+p.nr+'</td><td>'+RUM[p.rum].namn.replace(/^Rum \d · /,'')+'</td><td>'+txt+'</td><td class="mono"><b>'+svar+'</b></td><td class="mono">'+p.bokstav+'</td><td>'+p.losplain+'</td></tr>';
+  });
+  $('facTab').innerHTML=h+'</table>';
+}
+
+/* ---------- Händelser ---------- */
+document.querySelectorAll('#pad button').forEach(function(b){b.addEventListener('click',function(){tryck(b.dataset.k);});});
+document.addEventListener('keydown',function(e){
+  if($('ovIntro').classList.contains('vis')||$('ovFacit').classList.contains('vis')) return;
+  var k=e.key;
+  if(/^\d$/.test(k)) tryck(k);
+  else if(k==='/') tryck('/');
+  else if(k===','||k==='.') tryck(',');
+  else if(k==='Backspace'){e.preventDefault();tryck('del');}
+  else if(k==='Enter'){ if(document.activeElement&&document.activeElement.tagName==='BUTTON'&&document.activeElement.dataset.k==='ent')return; tryck('ent'); }
+  else if(k==='Escape') tryck('clr');
+});
+$('bHint').addEventListener('click',ledtrad);
+$('bSvar').addEventListener('click',visaSvar);
+$('bTvinga').addEventListener('click',tvingaUpp);
+$('bOm').addEventListener('click',function(){ if(confirm('Börja om från start?')) reset(); });
+$('bFacit').addEventListener('click',function(){facit();$('ovFacit').classList.add('vis');});
+$('bFacStang').addEventListener('click',function(){$('ovFacit').classList.remove('vis');});
+$('bFacPrint').addEventListener('click',function(){window.print();});
+$('tidOpts').querySelectorAll('.btn').forEach(function(b){b.addEventListener('click',function(){
+  S.tid=parseInt(b.dataset.t,10);
+  $('tidOpts').querySelectorAll('.btn').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});
+});});
+$('bStart').addEventListener('click',start);
+
+/* ---------- Stjärnbakgrund ---------- */
+(function(){
+  var c=$('stars'),x=c.getContext('2d'),st=[],w,h;
+  function init(){w=c.width=innerWidth;h=c.height=innerHeight;st=[];for(var i=0;i<110;i++)st.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.3,v:Math.random()*.15+.03});}
+  function draw(){x.clearRect(0,0,w,h);x.fillStyle='#ffe7a8';st.forEach(function(s){x.globalAlpha=.4+s.r/3;x.beginPath();x.arc(s.x,s.y,s.r,0,6.3);x.fill();s.y+=s.v;if(s.y>h){s.y=0;s.x=Math.random()*w;}});
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(draw);}
+  addEventListener('resize',init);init();draw();
+})();
+
+ritaKod();ritaKarta();ritaTimer();
+})();
+</script>
+</body>
+</html>

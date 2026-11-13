@@ -74,6 +74,8 @@ svg.graf{width:100%;max-width:560px;height:auto;display:block;margin:8px auto;ba
 .pad button{font:inherit;font-size:1.6rem;font-weight:800;padding:14px 0;border-radius:12px;border:2px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer}
 .pad button:hover{border-color:var(--cy)}
 .pad .ent{grid-column:span 3;background:var(--gr);color:#032014;border-color:var(--gr)}
+.svarbox{margin-top:10px;padding:10px 12px;border:2px dashed var(--am);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:1.3rem}
+.svarbox b{color:var(--am);font-size:1.6rem}
 .msg{min-height:3.2em;margin-top:8px;font-size:1.05rem}
 .msg.good{color:var(--gr)}.msg.bad{color:var(--rd)}
 .note{font-size:.85rem;color:var(--mut)}
@@ -134,8 +136,13 @@ svg.graf{width:100%;max-width:560px;height:auto;display:block;margin:8px auto;ba
       <div class="msg" id="msg">Välj en dörr.</div>
       <div class="tools">
         <button class="btn warn" id="bHint" disabled>Ledtråd (−2 min)</button>
+        <button class="btn" id="bSvar" disabled>🔑 Visa svar</button>
       </div>
-      <p class="note">Fel kod kostar 1 minut. Du kan också skriva på tangentbordet. Använd komma för decimaler.</p>
+      <div class="svarbox" id="svarBox" hidden>
+        <div>Rätt kod: <b class="mono" id="svarVal"></b></div>
+        <button class="btn pri" id="bTvinga">Öppna dörren</button>
+      </div>
+      <p class="note">Fel kod kostar 1 minut. Kört fast? Visa svar kostar ingen tid. Du kan också skriva på tangentbordet. Använd komma för decimaler.</p>
     </div>
   </div>
 </div>
@@ -307,7 +314,7 @@ function ritaKarta(){
   k.querySelectorAll('.door').forEach(function(b){b.addEventListener('click',function(){valj(parseInt(b.dataset.d,10));});});
 }
 function ritaUpp(){
-  if(S.cur<0){$('vald').hidden=false;$('uppInnehall').hidden=true;return;}
+  if(S.cur<0){$('vald').hidden=false;$('uppInnehall').hidden=true;$('bSvar').disabled=true;$('svarBox').hidden=true;return;}
   var p=P[S.cur];
   $('vald').hidden=true;$('uppInnehall').hidden=false;
   $('uTag').textContent=RUM[p.rum].namn.toUpperCase()+' · DÖRR '+p.nr+' AV '+P.length;
@@ -316,6 +323,8 @@ function ritaUpp(){
   var hint=$('uHint'); hint.textContent='Ledtråd: '+p.tips; hint.classList.toggle('vis',!!S.hint[S.cur]);
   var los=$('uLos'); los.innerHTML='<b>Lösning:</b> '+p.los; los.classList.toggle('vis',!!S.klara[S.cur]);
   $('bHint').disabled=!!S.hint[S.cur]||!!S.klara[S.cur]||!S.run;
+  $('bSvar').disabled=!!S.klara[S.cur]||!S.run;
+  $('svarBox').hidden=true;
 }
 function ritaDisp(){ $('disp').textContent=S.inmat===''?' ':S.inmat; }
 function msg(t,c){var m=$('msg');m.textContent=t;m.className='msg '+(c||'');}
@@ -361,6 +370,22 @@ function ledtrad(){
   S.hint[S.cur]=true;
   if(S.tid>0){S.rest=Math.max(0,S.rest-120);ritaTimer();if(S.rest<=0){slut(false);return;}}
   ritaUpp();
+}
+function visaSvar(){
+  if(S.cur<0||S.klara[S.cur]||!S.run) return;
+  $('svarVal').textContent=String(P[S.cur].svar).replace('.',',');
+  $('svarBox').hidden=false;
+  var l=$('uLos'); l.innerHTML='<b>Lösning:</b> '+P[S.cur].los; l.classList.add('vis');
+}
+function tvingaUpp(){
+  // Nöddörr: öppnar dörren utan tidsstraff om svaret i spelet av någon anledning skulle vara fel.
+  if(S.cur<0||S.klara[S.cur]||!S.run||S.slut) return;
+  var i=S.cur,p=P[i];
+  S.klara[i]=true;
+  msg('DÖRR '+p.nr+' ÖPPNAD MED NÖDKOD. Bokstav avslöjad: '+p.bokstav,'good');
+  ritaKod(i);ritaKarta();ritaUpp();S.inmat='';ritaDisp();
+  if(antalKlara()===P.length){vinst();return;}
+  if(rumKlart(p.rum)&&p.rum<RUM.length-1){msg('RUMMET ÄR KLART. '+RUM[p.rum+1].namn+' är upplåst. Bokstav: '+p.bokstav,'good');}
 }
 function tryck(k){
   if(!S.run||S.cur<0||S.slut) return;
@@ -427,6 +452,8 @@ document.addEventListener('keydown',function(e){
   else if(k==='Escape') tryck('clr');
 });
 $('bHint').addEventListener('click',ledtrad);
+$('bSvar').addEventListener('click',visaSvar);
+$('bTvinga').addEventListener('click',tvingaUpp);
 $('bOm').addEventListener('click',function(){ if(confirm('Börja om från start?')) reset(); });
 $('bFacit').addEventListener('click',function(){facit();$('ovFacit').classList.add('vis');});
 $('bFacStang').addEventListener('click',function(){$('ovFacit').classList.remove('vis');});
