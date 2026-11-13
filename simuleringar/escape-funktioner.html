@@ -91,6 +91,20 @@ svg.graf{width:100%;max-width:560px;height:auto;display:block;margin:8px auto;ba
 .fac table{width:100%;border-collapse:collapse;font-size:1rem}
 .fac th,.fac td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
 .fac th{background:var(--panel2);color:var(--cy)}
+.lagrad{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;margin:0 0 8px}
+.lagrad .ln{font-weight:700;white-space:nowrap;font-size:1.05rem}
+.lagrad input{font:inherit;font-size:1.3rem;font-weight:700;padding:8px 10px;border-radius:10px;border:2px solid var(--line);background:#050810;color:var(--gr);width:100%;min-width:0;text-align:right}
+.lagrad input:disabled{opacity:.85}
+.lagrad .lres{min-width:46px;text-align:center;font-size:1.5rem}
+.lagrad.ratt input{border-color:var(--gr)}.lagrad.fel input{border-color:var(--rd);color:var(--rd)}.lagrad.forkorta input{border-color:var(--am)}
+.lagkort h2{margin-bottom:8px}
+.lt{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid var(--line);font-size:1.05rem}
+.lt:last-child{border-bottom:0}
+.lt .nyck{font-size:1.2rem;color:var(--am);white-space:nowrap}
+.lt .stat{min-width:28px;text-align:center}
+.lagnamn{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 14px}
+.lagnamn input{font:inherit;padding:9px 10px;border:2px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--ink)}
+.rank{margin:14px 0}.rank .lt{font-size:1.3rem}
 [hidden]{display:none!important}
 @media print{body{background:#fff;color:#000}#stars,.top,.main,.ov:not(#ovFacit){display:none!important}#ovFacit{display:block!important;position:static;background:#fff}.box{border:0;box-shadow:none;max-width:none;color:#000}.fac th{background:#eee;color:#000}.fac th,.fac td{border-color:#999}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -105,12 +119,13 @@ svg.graf{width:100%;max-width:560px;height:auto;display:block;margin:8px auto;ba
     <div class="code mono" id="kod" aria-label="Utrymningskod"></div>
     <div class="tools">
       <button class="btn" id="bFacit">Lärarfacit</button>
+      <button class="btn" id="bLjud" aria-pressed="true" title="Ljud på" style="font-size:1.2rem">🔊</button>
       <button class="btn warn" id="bOm">Börja om</button>
     </div>
   </div>
 
   <div class="main">
-    <div class="card" id="karta"><h2>Stationskarta</h2></div>
+    <div><div class="card" id="karta"><h2>Stationskarta</h2></div><div class="card lagkort" id="lagKort" hidden style="margin-top:14px"></div></div>
 
     <div class="card" id="upp">
       <div class="vald" id="vald">Välj en dörr till vänster.<br>Lös uppgiften, skriv koden i låspanelen.</div>
@@ -126,6 +141,7 @@ svg.graf{width:100%;max-width:560px;height:auto;display:block;margin:8px auto;ba
     <div class="card" id="las">
       <h2>Låspanel</h2>
       <div class="disp mono" id="disp" aria-live="polite">&nbsp;</div>
+      <div id="lagPanel" hidden></div>
       <div class="pad" id="pad">
         <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
         <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
@@ -160,6 +176,16 @@ svg.graf{width:100%;max-width:560px;height:auto;display:block;margin:8px auto;ba
       <button class="btn" data-t="60" aria-pressed="false">60 min</button>
       <button class="btn" data-t="0" aria-pressed="false">Ingen tid</button>
     </div>
+    <p><b>Antal lag:</b> <span class="note">Alla lag svarar på varje uppgift. Rätt svar ger en nyckel 🔑 och alla tar sig vidare.</span></p>
+    <div class="opts" id="lagOpts" role="group" aria-label="Antal lag">
+      <button class="btn" data-n="0" aria-pressed="true">Alla tillsammans</button>
+      <button class="btn" data-n="2" aria-pressed="false">2 lag</button>
+      <button class="btn" data-n="3" aria-pressed="false">3 lag</button>
+      <button class="btn" data-n="4" aria-pressed="false">4 lag</button>
+      <button class="btn" data-n="5" aria-pressed="false">5 lag</button>
+      <button class="btn" data-n="6" aria-pressed="false">6 lag</button>
+    </div>
+    <div class="lagnamn" id="lagNamn"></div>
     <button class="btn pri" id="bStart" style="font-size:1.3rem;padding:14px 30px">STARTA UPPDRAGET</button>
   </div>
 </div>
@@ -281,7 +307,8 @@ var P=[
 P.forEach(function(p,i){p.nr=i+1;p.bokstav=ORD.charAt(i);});
 
 /* ---------- Tillstånd ---------- */
-var S={sek:2700,tid:45,rest:2700,klara:{},cur:-1,inmat:"",hint:{},run:false,slut:false,iv:null};
+var SYM=["🦅","🐍","🦁","🐺","🐻","🦊"];
+var S={lag:[],lagAntal:0,testad:{},lagres:{},svarLag:{},fokus:null,sek:2700,tid:45,rest:2700,klara:{},cur:-1,inmat:"",hint:{},run:false,slut:false,iv:null};
 var $=function(i){return document.getElementById(i)};
 
 function fmt(s){s=Math.max(0,s);var m=Math.floor(s/60),r=s%60;return (m<10?'0':'')+m+':'+(r<10?'0':'')+r;}
@@ -327,26 +354,98 @@ function ritaUpp(){
   $('svarBox').hidden=true;
 }
 function ritaDisp(){ $('disp').textContent=S.inmat===''?' ':S.inmat; }
-function msg(t,c){var m=$('msg');m.textContent=t;m.className='msg '+(c||'');}
+function msg(t,c){var m=$('msg');m.textContent=t;m.className='msg '+(c||'');if(typeof LJUD!=='undefined'&&S.run&&!S.slut){if(c==='good')LJUD.spela(/NÖDKOD|ÖPPNAD|KOD GODKÄND|TESTAT/.test(t)&&c==='good'?'dorr':'ratt');else if(c==='bad')LJUD.spela('fel');}}
 function ritaTimer(){
   var t=$('timer');
   if(S.tid===0){t.textContent='∞';t.className='timer mono';return;}
   t.textContent=fmt(S.rest);
+  if(typeof LJUD!=='undefined'&&S.run&&!S.slut&&S.rest>0&&S.rest<=10)LJUD.spela('tick');
   t.className='timer mono'+(S.rest<=60?' crit':(S.rest<=300?' low':''));
+}
+
+
+/* ---------- Lagläge ---------- */
+function lagLage(){return S.lag.length>0;}
+function ritaLag(){
+  var k=$('lagKort');
+  if(!lagLage()){k.hidden=true;return;}
+  k.hidden=false;
+  var h='<h2>Lag och nycklar</h2>';
+  S.lag.forEach(function(l,i){
+    var st='';
+    if(S.cur>=0&&S.testad[S.cur]){var r=S.lagres[S.cur][i];st=r==='ratt'?'✅':(r==='forkorta'?'✏️':'❌');}
+    h+='<div class="lt"><span>'+l.sym+' <b>'+l.namn+'</b></span><span class="nyck">'+(l.nycklar?new Array(Math.min(l.nycklar,13)+1).join('🔑'):'–')+'</span><span class="stat">'+st+'</span></div>';
+  });
+  k.innerHTML=h;
+}
+function ritaLagPanel(){
+  var pn=$('lagPanel');
+  $('disp').hidden=lagLage(); pn.hidden=!lagLage();
+  if(!lagLage()) return;
+  if(S.cur<0){pn.innerHTML='<p class="note">Välj en port. Skriv varje lags svar och tryck TESTA.</p>';return;}
+  var tst=!!S.testad[S.cur], h='';
+  S.lag.forEach(function(l,i){
+    var r=tst?S.lagres[S.cur][i]:'';
+    var val=(S.svarLag[S.cur]&&S.svarLag[S.cur][i])||'';
+    h+='<div class="lagrad '+(r||'')+'"><span class="ln">'+l.sym+' '+l.namn+'</span><input class="lagsvar mono" data-l="'+i+'" value="'+val.replace(/"/g,'')+'" autocomplete="off" inputmode="text" aria-label="Svar från '+l.namn+'"'+(tst?' disabled':'')+'><span class="lres">'+(r==='ratt'?'✅🔑':(r==='forkorta'?'✏️':(r==='fel'||r==='tom'?'❌':'')))+'</span></div>';
+  });
+  pn.innerHTML=h;
+  pn.querySelectorAll('input').forEach(function(inp){
+    inp.addEventListener('focus',function(){S.fokus=inp;});
+    inp.addEventListener('input',function(){
+      inp.value=inp.value.replace(/[^0-9,.\-\/−]/g,'').replace('−','-');
+      (S.svarLag[S.cur]=S.svarLag[S.cur]||[])[parseInt(inp.dataset.l,10)]=inp.value;
+    });
+    inp.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){e.preventDefault();var nx=pn.querySelectorAll('input')[parseInt(inp.dataset.l,10)+1];if(nx)nx.focus();else testaLag();}
+    });
+  });
+  if(!tst){var f=pn.querySelector('input');if(f){S.fokus=f;}}
+}
+function testaLag(){
+  if(S.cur<0||!S.run||S.slut||S.testad[S.cur]) return;
+  var p=P[S.cur], i=S.cur, res=[], ratt=0, forkorta=0;
+  var inputs=document.querySelectorAll('#lagPanel input');
+  S.svarLag[i]=S.svarLag[i]||[];
+  S.lag.forEach(function(l,n){
+    var v=inputs[n]?inputs[n].value:'';
+    S.svarLag[i][n]=v;
+    var r=kolla(v,p); res.push(r);
+    if(r==='ratt'){l.nycklar++;ratt++;} else if(r==='forkorta'){forkorta++;}
+  });
+  S.lagres[i]=res; S.testad[i]=true; S.klara[i]=true;
+  var svar=String(p.svar).replace('.',',');
+  msg('TESTAT: '+ratt+' av '+S.lag.length+' lag hade rätt. Rätt svar: '+svar+'. Porten öppnas för alla. Bokstav: '+p.bokstav+(forkorta?' ('+forkorta+' lag hade rätt värde men inte förkortat)':''),ratt?'good':'bad');
+  ritaKod(i);ritaKarta();ritaUpp();ritaLagPanel();ritaLag();
+  if(antalKlara()===P.length){vinst();return;}
+  if(rumKlart(p.rum)&&p.rum<RUM.length-1){msg('KAMMAREN ÄR KLAR. '+RUM[p.rum+1].namn+' är upplåst.','good');}
+}
+function rankHtml(){
+  if(!lagLage()) return '';
+  var l=S.lag.slice().sort(function(a,b){return b.nycklar-a.nycklar;});
+  var h='<div class="rank"><p><b>Nycklar 🔑</b></p>';
+  l.forEach(function(x,i){h+='<div class="lt"><span>'+(i===0&&x.nycklar>0?'🏆 ':'')+x.sym+' <b>'+x.namn+'</b></span><span class="nyck">'+x.nycklar+' av '+P.length+'</span></div>';});
+  return h+'</div>';
 }
 
 /* ---------- Spelmekanik ---------- */
 function valj(i){
   if(!S.run||S.slut) return;
   S.cur=i;S.inmat='';ritaDisp();ritaKarta();ritaUpp();
-  msg(S.klara[i]?'Dörren är redan öppen.':'Skriv koden och tryck ANGE KOD.');
+  msg(lagLage()?(S.testad[i]?'Redan testad.':'Skriv varje lags svar och tryck TESTA.'):(S.klara[i]?'Dörren är redan öppen.':'Skriv koden och tryck ANGE KOD.'));ritaLagPanel();ritaLag();
 }
 function parsa(s){
   if(s===''||s==='-'||s===',') return NaN;
   var v=parseFloat(s.replace('−','-').replace(',','.'));
   return v;
 }
+function kolla(str,p){
+  str=(str||'').trim(); if(!str) return 'tom';
+  var v=parsa(str.replace('.',',')); if(isNaN(v)) return 'fel';
+  return Math.abs(v-p.svar)<1e-9?'ratt':'fel';
+}
 function ange(){
+  if(lagLage()){testaLag();return;}
   if(S.cur<0||!S.run||S.slut) return;
   if(S.klara[S.cur]){msg('Dörren är redan öppen.','good');return;}
   var v=parsa(S.inmat);
@@ -381,15 +480,27 @@ function tvingaUpp(){
   // Nöddörr: öppnar dörren utan tidsstraff om svaret i spelet av någon anledning skulle vara fel.
   if(S.cur<0||S.klara[S.cur]||!S.run||S.slut) return;
   var i=S.cur,p=P[i];
-  S.klara[i]=true;
+  S.klara[i]=true; if(lagLage()&&!S.testad[i]){S.testad[i]=true;S.lagres[i]=S.lag.map(function(){return 'tom';});}
   msg('DÖRR '+p.nr+' ÖPPNAD MED NÖDKOD. Bokstav avslöjad: '+p.bokstav,'good');
-  ritaKod(i);ritaKarta();ritaUpp();S.inmat='';ritaDisp();
+  ritaKod(i);ritaKarta();ritaUpp();S.inmat='';ritaDisp();ritaLagPanel();ritaLag();
   if(antalKlara()===P.length){vinst();return;}
   if(rumKlart(p.rum)&&p.rum<RUM.length-1){msg('RUMMET ÄR KLART. '+RUM[p.rum+1].namn+' är upplåst. Bokstav: '+p.bokstav,'good');}
 }
 function tryck(k){
   if(!S.run||S.cur<0||S.slut) return;
   if(k==='ent'){ange();return;}
+  if(lagLage()){
+    var inp=S.fokus; if(!inp||inp.disabled||!document.body.contains(inp)) return;
+    var v=inp.value;
+    if(k==='clr') v='';
+    else if(k==='del') v=v.slice(0,-1);
+    else if(k==='-'){ if(v==='') v='-'; }
+    else if(k==='/'){ if(/^\d+$/.test(v)) v+='/'; }
+    else if(k===','){ if(v.indexOf(',')<0&&v.indexOf('/')<0) v+=(v===''||v==='-')?(v+'0,'):','; }
+    else if(/^\d$/.test(k)){ if(v.length<10) v+=k; }
+    inp.value=v; (S.svarLag[S.cur]=S.svarLag[S.cur]||[])[parseInt(inp.dataset.l,10)]=v; inp.focus();
+    return;
+  }
   if(k==='clr'){S.inmat='';}
   else if(k==='del'){S.inmat=S.inmat.slice(0,-1);}
   else if(k==='-'){ if(S.inmat===''||S.inmat==='-'){S.inmat=S.inmat==='-'?'':'-';} }
@@ -404,27 +515,33 @@ function tick(){
   if(S.rest<=0) slut(false);
 }
 function start(){
+  S.lag=[];S.testad={};S.lagres={};S.svarLag={};S.fokus=null;
+  if(S.lagAntal>0){
+    var ni=document.querySelectorAll('#lagNamn input');
+    for(var n=0;n<S.lagAntal;n++){S.lag.push({namn:(ni[n]&&ni[n].value.trim())||('Lag '+(n+1)),sym:SYM[n],nycklar:0});}
+  }
   S.klara={};S.hint={};S.cur=-1;S.inmat='';S.slut=false;S.run=true;S.rest=S.tid*60;
   $('ovIntro').classList.remove('vis');$('ovSlut').classList.remove('vis');
-  ritaKod();ritaKarta();ritaUpp();ritaDisp();ritaTimer();msg('Välj en dörr.');
+  ritaKod();ritaKarta();ritaUpp();ritaDisp();ritaTimer();ritaLagPanel();ritaLag();$('bTest')&&0;document.querySelector('.pad .ent').textContent=lagLage()?'TESTA':'ANGE KOD';msg('Välj en dörr.');
   clearInterval(S.iv);S.iv=setInterval(tick,1000);
+  LJUD.start();
 }
 function vinst(){
-  S.slut=true;S.run=false;clearInterval(S.iv);
+  S.slut=true;S.run=false;clearInterval(S.iv);LJUD.stopp();setTimeout(function(){LJUD.spela('vinst');},250);
   var kvar=S.tid>0?'<p>Tid kvar: <b class="mono">'+fmt(S.rest)+'</b>. Klarade ni uppdraget på '+fmt(S.tid*60-S.rest)+'.</p>':'';
-  $('slutBox').innerHTML='<h2>LIVBÅTEN LÄMNAR STATIONEN!</h2><p>Alla 13 bokstäver är avslöjade. Utrymningskoden är:</p><div class="big mono">'+ORD+'</div>'+kvar+'<p>Ni räddade besättningen med hjälp av funktioner.</p><div class="opts"><button class="btn pri" id="bOm2">Spela igen</button><button class="btn" id="bSt2">Stäng</button></div>';
+  $('slutBox').innerHTML='<h2>LIVBÅTEN LÄMNAR STATIONEN!</h2><p>Alla 13 bokstäver är avslöjade. Utrymningskoden är:</p><div class="big mono">'+ORD+'</div>'+kvar+rankHtml()+'<p>Ni räddade besättningen med hjälp av funktioner.</p><div class="opts"><button class="btn pri" id="bOm2">Spela igen</button><button class="btn" id="bSt2">Stäng</button></div>';
   $('ovSlut').classList.add('vis');
   $('bOm2').onclick=function(){reset();};$('bSt2').onclick=function(){$('ovSlut').classList.remove('vis');};
 }
 function slut(vann){
-  if(S.slut) return; S.slut=true;S.run=false;clearInterval(S.iv);ritaKarta();
+  if(S.slut) return; S.slut=true;S.run=false;clearInterval(S.iv);LJUD.stopp();LJUD.spela('forlust');ritaKarta();
   $('slutBox').innerHTML='<h2 style="color:#ff5470">SYRET SLUT!</h2><p>Tiden tog slut. Ni klarade <b>'+antalKlara()+' av '+P.length+'</b> dörrar. Utrymningskoden hann inte bli klar.</p><div class="opts"><button class="btn pri" id="bFort">Fortsätt utan tid</button><button class="btn" id="bOm2">Börja om</button></div>';
   $('ovSlut').classList.add('vis');
   $('bFort').onclick=function(){S.tid=0;S.slut=false;S.run=true;$('ovSlut').classList.remove('vis');ritaTimer();ritaKarta();ritaUpp();};
   $('bOm2').onclick=function(){reset();};
 }
 function reset(){
-  clearInterval(S.iv);S.run=false;S.slut=false;
+  clearInterval(S.iv);S.run=false;S.slut=false;LJUD.stopp();
   $('ovSlut').classList.remove('vis');$('ovIntro').classList.add('vis');
 }
 
@@ -462,6 +579,89 @@ $('tidOpts').querySelectorAll('.btn').forEach(function(b){b.addEventListener('cl
   S.tid=parseInt(b.dataset.t,10);
   $('tidOpts').querySelectorAll('.btn').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});
 });});
+
+
+/* ---------- Ljud (Web Audio, genereras i webbläsaren) ---------- */
+var LJUD=(function(){
+  var ctx=null,master=null,musG=null,fxG=null,drone=[],timer=null,steg=0,on=true,igang=false;
+  var TEMA={lp:700,drone:[55,82.4,110],dtyp:'sawtooth',bas:55,btyp:'sine',skala:[220,261.6,329.6,392,440,523.3],ntyp:'sine',nlen:2.2,tempo:2400};
+  try{if(localStorage.getItem('pluggis-escape-ljud')==='av')on=false;}catch(e){}
+  function init(){
+    if(ctx) return true;
+    var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false;
+    ctx=new AC(); master=ctx.createGain(); master.gain.value=on?1:0; master.connect(ctx.destination);
+    musG=ctx.createGain(); musG.gain.value=0.16; musG.connect(master);
+    fxG=ctx.createGain(); fxG.gain.value=0.5; fxG.connect(master);
+    return true;
+  }
+  function ton(f,t0,dur,typ,vol,dest,glid){
+    var o=ctx.createOscillator(),g=ctx.createGain();
+    o.type=typ; o.frequency.setValueAtTime(f,t0); if(glid) o.frequency.exponentialRampToValueAtTime(glid,t0+dur);
+    g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(vol,t0+0.015); g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    o.connect(g); g.connect(dest||fxG); o.start(t0); o.stop(t0+dur+0.05);
+  }
+  function startaDrone(){
+    stoppaDrone();
+    var lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=TEMA.lp; lp.connect(musG);
+    var lfo=ctx.createOscillator(),lg=ctx.createGain(); lfo.frequency.value=0.07; lg.gain.value=TEMA.lp*0.35; lfo.connect(lg); lg.connect(lp.frequency); lfo.start();
+    drone=[lfo];
+    TEMA.drone.forEach(function(f,i){
+      var o=ctx.createOscillator(),g=ctx.createGain(); o.type=TEMA.dtyp; o.frequency.value=f; o.detune.value=(i%2?7:-7);
+      g.gain.value=0.5/TEMA.drone.length+0.1; o.connect(g); g.connect(lp); o.start(); drone.push(o);
+    });
+  }
+  function stoppaDrone(){drone.forEach(function(o){try{o.stop();}catch(e){}});drone=[];}
+  function takt(){
+    if(!ctx||!igang) return;
+    var t=ctx.currentTime+0.05, sk=TEMA.skala;
+    var n=sk[Math.floor(Math.random()*sk.length)];
+    if(steg%4===0) ton(TEMA.bas,t,1.6,TEMA.btyp,0.5,musG);
+    if(Math.random()<0.75) ton(n,t,TEMA.nlen,TEMA.ntyp,0.35,musG);
+    if(Math.random()<0.3) ton(sk[Math.floor(Math.random()*sk.length)]*2,t+TEMA.tempo/2000,TEMA.nlen*0.7,TEMA.ntyp,0.18,musG);
+    steg++;
+  }
+  function startMusik(){
+    if(!init()) return;
+    if(ctx.state==='suspended') ctx.resume();
+    igang=true; steg=0; startaDrone();
+    clearInterval(timer); timer=setInterval(takt,TEMA.tempo); takt();
+  }
+  function stoppMusik(){igang=false;clearInterval(timer);if(ctx&&musG){stoppaDrone();}}
+  var fx={
+    tryck:function(){var t=ctx.currentTime;ton(620,t,0.05,'square',0.06);},
+    ratt:function(){var t=ctx.currentTime;ton(523,t,0.18,'triangle',0.25);ton(659,t+0.1,0.18,'triangle',0.25);ton(784,t+0.2,0.35,'triangle',0.28);},
+    fel:function(){var t=ctx.currentTime;ton(190,t,0.3,'sawtooth',0.2,null,110);ton(150,t+0.12,0.35,'sawtooth',0.2,null,80);},
+    dorr:function(){var t=ctx.currentTime;ton(110,t,0.9,'sawtooth',0.18,null,70);ton(55,t,1.0,'sine',0.35);},
+    tick:function(){var t=ctx.currentTime;ton(1000,t,0.06,'square',0.09);},
+    vinst:function(){var t=ctx.currentTime,n=[523,659,784,1047,784,1047,1319];n.forEach(function(f,i){ton(f,t+i*0.16,i===n.length-1?1.2:0.3,'triangle',0.3);ton(f/2,t+i*0.16,0.3,'sine',0.2);});},
+    forlust:function(){var t=ctx.currentTime;[392,349,311,262].forEach(function(f,i){ton(f,t+i*0.35,0.6,'sawtooth',0.15,null,f*0.97);});}
+  };
+  function spela(namn){ if(!on||!init()) return; if(ctx.state==='suspended') ctx.resume(); try{fx[namn]();}catch(e){} }
+  function satt(av){
+    on=!av; try{localStorage.setItem('pluggis-escape-ljud',on?'pa':'av');}catch(e){}
+    if(master) master.gain.value=on?1:0;
+    var b=document.getElementById('bLjud'); if(b){b.textContent=on?'🔊':'🔇';b.setAttribute('aria-pressed',on?'true':'false');b.title=on?'Ljud på':'Ljud av';}
+  }
+  return {spela:spela,start:startMusik,stopp:stoppMusik,satt:satt,pa:function(){return on;}};
+})();
+(function(){
+  var b=document.getElementById('bLjud');
+  if(b){b.textContent=LJUD.pa()?'🔊':'🔇';b.addEventListener('click',function(){LJUD.satt(LJUD.pa());if(LJUD.pa())LJUD.spela('ratt');});}
+  document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('#pad button, .door, .port, [data-d]');if(t)LJUD.spela('tryck');});
+})();
+(function(){
+  var btns=document.querySelectorAll('#lagOpts button');
+  function namn(){
+    var n=S.lagAntal,w=$('lagNamn'),old=[].map.call(w.querySelectorAll('input'),function(i){return i.value;});
+    w.innerHTML='';
+    for(var k=0;k<n;k++){var i=document.createElement('input');i.type='text';i.maxLength=14;i.value=old[k]||('Lag '+(k+1));i.setAttribute('aria-label','Namn på lag '+(k+1));w.appendChild(i);}
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    S.lagAntal=parseInt(b.dataset.n,10);
+    btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    namn();
+  });});
+})();
 $('bStart').addEventListener('click',start);
 
 /* ---------- Stjärnbakgrund ---------- */
