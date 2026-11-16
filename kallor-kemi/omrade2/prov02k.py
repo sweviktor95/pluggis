@@ -55,32 +55,34 @@ KOPPL = "Uppgift 4, 8, 9, 10, 12, 13 och 14: systematiska undersökningar (mäta
 KAP = "Kapitel 2"; NAMN_ = "Materia och partiklar"
 
 def teacher_section():
-    e = sum(x[3] for x in P if x[0] == "E"); c = sum(x[3] for x in P if x[0] == "C"); a = sum(x[3] for x in P if x[0] == "A")
-    import math
-    te = math.ceil(e * 2 / 3); tc = math.ceil(c / 2); ta = math.ceil(a / 2)
+    from collections import Counter
+    cn = Counter(x[0] for x in P)
     rows = ""
     for f in ("F1", "F2", "F3"):
         idx = [i for i, t in enumerate(FORM) if f in t]
-        pts = sum(P[i][3] for i in idx)
-        rows += f'<tr><td>{f[1]}. {FN[f]}</td><td>{", ".join(str(i+1) for i in idx) or "–"}</td><td>{pts} p</td><td>{FORMKOM[f]}</td></tr>'
-    ftab = '<table class="tbl"><tr><th>Förmåga</th><th>Uppgifter</th><th>Poäng</th><th>Kommentar</th></tr>' + rows + '</table>'
+        rows += f'<tr><td>{f[1]}. {FN[f]}</td><td>{", ".join(str(i+1) for i in idx) or "–"}</td><td>{FORMKOM[f]}</td></tr>'
+    ftab = '<table class="tbl"><tr><th>Förmåga</th><th>Uppgifter</th><th>Kommentar</th></tr>' + rows + '</table>'
     return ('<section class="sec teacher"><h2>Till läraren: bedömning</h2>'
-        f'<p>Provet har {e} p på del E, {c} p på del C och {a} p på del A (totalt {e+c+a} p). Fördelningen är medvetet C-tung: de flesta poängen ligger på C, sedan E och minst på A, ungefär som i de nationella proven. Del E motsvarar lättläst-versionen, del C grundtexten och del A fördjupningen. Uppgiftstyperna varierar (flerval, flersvar, matchning, kortsvar och resonemang), och varje uppgift är kopplad till en förmåga i facit.</p>'
+        f'<p>Provet har {len(P)} uppgifter: {cn.get("E", 0)} på del E, {cn.get("C", 0)} på del C och {cn.get("A", 0)} på del A. Del E motsvarar lättläst-versionen, del C grundtexten och del A fördjupningen. Uppgiftstyperna varierar (flerval, flersvar, matchning, kortsvar och resonemang), och varje uppgift är kopplad till en förmåga i facit.</p>'
+        '<h3>Så använder du trafikljuset</h3><p>Provet har ingen poängräkning. Vid varje uppgift finns tre prickar: <b style="color:#c0392b">röd</b> (kan inte ännu), <b style="color:#b8860b">gul</b> (kan delvis) och <b style="color:#2e8b57">grön</b> (kan nästan helt). Ringa in den nivå som svaret ligger på. Eleven kan göra en egen markering med en färg och du en annan, och ni kan jämföra.</p>'
+        '<table class="tbl"><tr><th>Färg</th><th>Så bedömer du uppgiften</th></tr>'
+        '<tr><td>Röd</td><td>Svaret saknar det som efterfrågas eller bygger på missförstånd.</td></tr>'
+        '<tr><td>Gul</td><td>Svaret har någon del av det facit anger, eller rätt idé men med luckor. Vid uppgifter med flera delar (a, b, c) klarar eleven en del men inte alla.</td></tr>'
+        '<tr><td>Grön</td><td>Svaret innehåller det som facit anger, eller likvärdiga formuleringar, och hänger ihop.</td></tr></table>'
         '<h3>Förmågor som provet prövar</h3>' + ftab +
-        '<p class="note">Ett skriftligt prov kan inte pröva allt. Förmåga 2 bedöms också i labbrapporter och i bonuslabben, och förmåga 3 i diskussioner och argumentationer.</p>'
-        '<h3>Poängsättning av resonemang</h3><p>Resonemang poängsätts efter hur många led eleven för, inte efter hur mycket eleven skriver: 1 p för varje korrekt led (orsak, följd, konsekvens) som hänger ihop med föregående, och 1 p för slutsats eller för att relevanta begrepp används rätt. Ett längre svar som upprepar samma led ger inte fler poäng. Facit visar förväntade led, och andra rimliga led godtas.</p>'
+        '<p class="note">Ett skriftligt prov kan inte pröva allt. Planering, genomförande och dokumentation bedöms också i labbarna, och diskussion och argumentation i undervisningen.</p>'
+        '<h3>Bedömning av resonemang</h3><p>Resonemang bedöms efter hur många led eleven för och hur väl de hänger ihop, inte efter hur mycket eleven skriver: orsak, följd och konsekvens, samt slutsats och rätt användning av begrepp. Ett längre svar som upprepar samma led är inte bättre. Facit visar förväntade led, och andra rimliga led godtas.</p>'
         + IMPROV +
-        '<h3>Gränser för provbetyg</h3>'
-        f'<p>Det finns inga prövade gränser för det här provet. De nationella proven sätter provbetyg efter poängsumma, med gränser som fastställs efter prövning på många elever, och det går inte att göra här. Som utgångspunkt kan du pröva: <b>E</b> vid minst {te} av {e} p på del E, <b>C</b> om E-nivån är uppnådd och minst {tc} av {c} p på del C, <b>A</b> om C-nivån är uppnådd och minst {ta} av {a} p på del A. Justera efter klassens resultat och efter vad eleverna visar i övrigt.</p>'
-        '<p class="note">Kunskapskraven är kvalitativa (”enkla”, ”utvecklade” och ”välutvecklade” resonemang), och betyget sätts av en samlad bedömning av provet och elevens övriga underlag.</p>'
+        '<h3>Från trafikljus till betyg</h3>'
+        '<p>Det finns inga prövade gränser för provet. Som utgångspunkt för en samlad bedömning: del E visar grundläggande kunskaper, del C utvecklade och del A välutvecklade. Många gröna och gula på del E tyder på E-nivå, gröna på del C på C-nivå och gröna på del A på A-nivå. Kunskapskraven är kvalitativa (”enkla”, ”utvecklade” och ”välutvecklade” resonemang), så betyget sätts av en samlad bedömning av provet och elevens övriga underlag.</p>'
         '<h3>Bedömningsguide för resonemangsuppgifterna</h3>' + table(BED[0], BED[1:]) +
         '<h3>Kopplingar</h3><p>' + KOPPL + '</p>'
-        '<p class="note">Fakta är kontrollerad mot källfilen för området. Upplägget är inspirerat av nationella prov, men provet är inte prövat på elever och gränserna är förslag. Personer, annonser och mätvärden i uppgifterna är påhittade.</p></section>')
+        '<p class="note">Fakta är kontrollerad mot källfilen för området. Upplägget är inspirerat av nationella prov, men provet är inte prövat på elever och bedömningen är ett förslag. Personer, annonser och mätvärden i uppgifterna är påhittade.</p></section>')
 
 def build(lararversion):
-    h = ['<section class="sec"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">' + KAP + ' · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ &nbsp; Poäng: ____ / ' + str(sum(x[3] for x in P)) + '</div></div>'
+    h = ['<section class="sec"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">' + KAP + ' · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ </div></div>'
          '<div class="sh"><h2>' + NAMN_ + '</h2></div>'
-         '<p class="note">Hjälpmedel: penna. Del E ska alla svara på. Del C och del A visar vad du kan på högre nivåer. Svara kort och tydligt. Personer, annonser och mätvärden i uppgifterna är påhittade. Siffran till höger visar hur många poäng uppgiften ger.</p>']
+         '<p class="note">Hjälpmedel: penna. Del E ska alla svara på. Del C och del A visar vad du kan på högre nivåer. Svara kort och tydligt. Personer, annonser och mätvärden i uppgifterna är påhittade. Till höger om varje uppgift finns tre prickar: röd (kan inte ännu), gul (kan delvis) och grön (kan nästan helt). Ringa in den nivå som svaret ligger på.</p>']
     last = None; n = 0
     for (niv, q, alts, pts, nl, fac, bed) in P:
         n += 1
@@ -92,14 +94,14 @@ def build(lararversion):
         if alts:
             a = '<div class="alts">' + "".join(f"<div>{x}</div>" for x in alts) + '</div>'
         l = lines(nl) if nl and not lararversion else ""
-        fa = f'<div style="background:#f7e6e4;border-radius:5pt;padding:4pt 8pt;margin-top:4pt;font:9pt/1.35 Carlito"><b>Förmåga:</b> {FORM[n-1]} &nbsp; <b>Facit:</b> {fac}<br><b>Poäng:</b> {bed}</div>' if lararversion else ""
-        h.append(f'<div class="q" style="grid-template-columns:16pt minmax(0,1fr) 30pt"><span class="n">{n}</span><div>{q}{a}{l}{fa}</div><span class="pts">{pts} p</span></div>')
+        fa = f'<div style="background:#f7e6e4;border-radius:5pt;padding:4pt 8pt;margin-top:4pt;font:9pt/1.35 Carlito"><b>Förmåga:</b> {FORM[n-1]} &nbsp; <b>Facit:</b> {fac}</div>' if lararversion else ""
+        h.append(f'<div class="q" style="grid-template-columns:16pt minmax(0,1fr) 44pt"><span class="n">{n}</span><div>{q}{a}{l}{fa}</div><span class="tl"><i style="background:#d64541"></i><i style="background:#f2c230"></i><i style="background:#3aa860"></i></span></div>')
     h.append('</section>')
     if lararversion: h.append(teacher_section())
     return "".join(h)
 
 def doc(body, foot):
-    return f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, 1)}.q .alts{{grid-template-columns:1fr 1fr}}{DYS}</style></head><body>{body}</body></html>'
+    return f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, 1)}.q .alts{{grid-template-columns:1fr 1fr}}{DYS}.tl{{display:flex;gap:4pt;justify-content:flex-end;padding-top:1pt}}.tl i{{display:block;width:11pt;height:11pt;border-radius:50%;border:.6pt solid #555}}</style></head><body>{body}</body></html>'
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
