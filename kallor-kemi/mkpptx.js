@@ -26,6 +26,7 @@ async function build(cfg) {
   pres.defineSlideMaster({ title: "INNEHALL", background: { color: C.background1 }, slideNumber: { x: W - 1.0, y: H - 0.5, w: 0.5, h: 0.3, fontSize: 11, color: C.text2 },
     objects: [
       { placeholder: { options: { name: "title", type: "title", x: MX, y: 0.35, w: W - 2 * MX, h: 1.0, fontSize: 36, bold: true, color: C.text2, align: "left", valign: "middle", margin: 0 }, text: "" } },
+      { rect: { x: MX, y: 1.36, w: 1.1, h: 0.06, fill: { color: C.accent2 }, line: { color: C.accent2, width: 0 } } },
       { text: { text: foot, options: { x: MX, y: H - 0.5, w: 9, h: 0.3, fontSize: 11, color: C.text2, margin: 0, isTextBox: true } } }] });
 
   const sections = {};
@@ -34,10 +35,16 @@ async function build(cfg) {
 
   // title slide
   { sec("Start"); const s = newSlide("TITEL", "Start", cfg.titleNotes);
+    if (cfg.cover) {
+      const ch = W * 759 / 1818; s.addImage({ path: FIG + cfg.cover, x: 0, y: 0, w: W, h: ch, altText: "Omslagsbild" });
+      s.addText(cfg.title, { x: 0.8, y: ch + 0.15, w: 11.7, h: 0.9, fontSize: 44, bold: true, color: C.background1, margin: 0, valign: "middle", isTextBox: true });
+      s.addText(cfg.sub, { x: 0.8, y: ch + 1.05, w: 11.7, h: 0.5, fontSize: 22, color: C.background1, margin: 0, valign: "top", isTextBox: true });
+    } else {
     s.addText(cfg.kicker, { x: 0.8, y: 1.6, w: 11.7, h: 0.5, fontSize: 20, bold: true, color: C.background2, margin: 0, isTextBox: true, charSpacing: 4 });
     s.addText(cfg.title, { x: 0.8, y: 2.2, w: 11.7, h: 1.8, fontSize: 54, bold: true, color: C.background1, margin: 0, valign: "top", isTextBox: true });
     s.addText(cfg.sub, { x: 0.8, y: 4.3, w: 11.7, h: 1.2, fontSize: 24, color: C.background1, margin: 0, valign: "top", isTextBox: true });
     s.addText(cfg.lessons, { x: 0.8, y: 6.2, w: 11.7, h: 0.6, fontSize: 16, color: C.background2, margin: 0, isTextBox: true });
+    }
   }
 
   const helpers = {
@@ -49,6 +56,33 @@ async function build(cfg) {
       s.addText(bullets.map((b, i) => ({ text: b, options: { bullet: true, breakLine: i < bullets.length - 1, paraSpaceAfter: 10 } })), { x: tx, y: 1.7, w: tw, h: 4.9, fontSize: o.fs || 24, color: C.text1, valign: "top", margin: 0, isTextBox: true });
       s.addImage({ path: FIG + img, x: ix, y: 1.7 + (ih - h) / 2, w, h, altText: o.alt || title });
       if (o.cap) s.addText(o.cap, { x: ix - 0.2, y: 1.7 + (ih + h) / 2 + 0.05, w: w + 0.4, h: 0.5, fontSize: 12, color: C.text2, italic: true, margin: 0, isTextBox: true, align: "center" });
+      return s; },
+    async imgWide(sect, title, img, o = {}) {
+      const s = newSlide("INNEHALL", sect, o.notes); s.addText(title, { placeholder: "title" });
+      const [w, h] = await fit(img, W - 2 * MX, o.h || 4.5); const ix = (W - w) / 2;
+      s.addImage({ path: FIG + img, x: ix, y: 1.7, w, h, altText: o.alt || title });
+      if (o.cap) s.addText(o.cap, { x: MX, y: 1.7 + h + 0.12, w: W - 2 * MX, h: 0.6, fontSize: 16, color: C.text2, italic: true, margin: 0, isTextBox: true, align: "center", valign: "top" });
+      return s; },
+    async mom(sect, title, o = {}) {
+      // PDF-lik innehållsslide: text till vänster, bild + bildtext till höger, Begrepp- och Tänk efter-ruta som i häftet
+      const s = newSlide("INNEHALL", sect, o.notes); s.addText(title, { placeholder: "title" });
+      const hasImg = !!o.img; const lw = hasImg ? (o.lw || 5.3) : W - 2 * MX; let y = 1.6;
+      const parts = [];
+      (o.text || []).forEach((t, i, a) => parts.push({ text: t, options: { breakLine: i < a.length - 1 || !!o.bullets, paraSpaceAfter: 10 } }));
+      (o.bullets || []).forEach((t, i, a) => parts.push({ text: t, options: { bullet: true, breakLine: i < a.length - 1, paraSpaceAfter: 6 } }));
+      const th = o.th || (o.begrepp || o.tank ? 3.6 : 4.9);
+      if (parts.length) s.addText(parts, { x: MX, y, w: lw, h: th, fontSize: o.fs || (hasImg ? 24 : 28), color: C.text1, valign: "top", margin: 0, isTextBox: true });
+      if (hasImg) { const rx = MX + lw + 0.4, rw = W - MX - rx; const [w, h] = await fit(o.img, rw - 0.3, o.ih || 4.2); const fx = rx, fw = rw, fh = h + 0.3; const ix = rx + (rw - w) / 2;
+        s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: fx, y: y - 0.05, w: fw, h: fh, rectRadius: 0.1, fill: { color: "FBF1EF" }, line: { color: "EFD5D1", width: 1 }, objectName: "Bildram" });
+        s.addImage({ path: FIG + o.img, x: ix, y: y + 0.1, w, h, altText: o.alt || title });
+        if (o.cap) s.addText(o.cap, { x: rx, y: y + fh + 0.02, w: rw, h: 0.8, fontSize: 14, color: C.text2, margin: 0, valign: "top", isTextBox: true }); }
+      const by = 5.3; const boxes = []; if (o.begrepp) boxes.push("b"); if (o.tank) boxes.push("t");
+      const bw = hasImg || boxes.length < 2 ? (boxes.length === 2 ? (lw - 0.3) / 2 : lw) : (W - 2 * MX - 0.3) / 2;
+      let bx = MX;
+      if (o.begrepp) { const w2 = hasImg ? lw : (boxes.length === 2 ? (W - 2 * MX - 0.3) / 2 : W - 2 * MX); s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: by, w: w2, h: 1.55, rectRadius: 0.08, fill: { color: "FFF3D6" }, line: { color: "FFF3D6", width: 0 }, objectName: "Begrepp" });
+        s.addText([{ text: (o.beglabel || "BEGREPP"), options: { fontSize: 11, bold: true, color: C.accent5, charSpacing: 2, breakLine: true } }].concat(o.begrepp.map(([t, d], i) => ({ text: t ? t + ": " : "", options: { bold: true, fontSize: (o.beglabel ? 22 : 17), color: C.text1 } , })).flatMap((r, i) => [r, { text: o.begrepp[i][1], options: { fontSize: (o.beglabel ? 22 : 17), color: C.text1, breakLine: i < o.begrepp.length - 1 } }])), { x: bx + 0.15, y: by + 0.08, w: w2 - 0.3, h: 1.4, valign: "top", margin: 0, isTextBox: true }); bx = hasImg ? MX + lw + 0.4 : bx + w2 + 0.3; }
+      if (o.tank) { const w2 = o.begrepp ? (W - MX - bx) : (hasImg ? lw : W - 2 * MX); s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: by, w: w2, h: 1.55, rectRadius: 0.08, fill: { color: "FCE9DF" }, line: { color: "FCE9DF", width: 0 }, objectName: "Tänk efter" });
+        s.addText([{ text: "TÄNK EFTER", options: { fontSize: 11, bold: true, color: C.accent1, charSpacing: 2, breakLine: true } }, { text: o.tank, options: { fontSize: 19, color: C.text1 } }], { x: bx + 0.15, y: by + 0.08, w: w2 - 0.3, h: 1.4, valign: "top", margin: 0, isTextBox: true }); }
       return s; },
     cards(sect, title, items, o = {}) {
       const s = newSlide("INNEHALL", sect, o.notes); s.addText(title, { placeholder: "title" });
@@ -79,9 +113,9 @@ async function build(cfg) {
       return s; },
     kolla(sect, title, qs, o = {}) {
       const s = newSlide("INNEHALL", sect, o.notes || "Låt eleverna svara i par eller på whiteboard. Facit finns i lärarversionen av kapitlet."); s.addText(title, { placeholder: "title" });
-      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: MX, y: 1.7, w: W - 2 * MX, h: 4.7, rectRadius: 0.15, fill: { color: C.background2 }, line: { color: C.accent3, width: 2 }, objectName: "Kolla dig själv" });
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: MX, y: 1.7, w: W - 2 * MX, h: (qs.length === 1 ? 3.2 : 4.7), rectRadius: 0.15, fill: { color: C.background2 }, line: { color: C.accent3, width: 2 }, objectName: "Kolla dig själv" });
       s.addText("KOLLA DIG SJÄLV", { x: MX + 0.4, y: 1.9, w: 6, h: 0.4, fontSize: 14, bold: true, color: C.accent1, charSpacing: 3, margin: 0, isTextBox: true });
-      s.addText(qs.map((q, i) => ({ text: q, options: { bullet: { type: "number" }, breakLine: i < qs.length - 1, paraSpaceAfter: 12 } })), { x: MX + 0.4, y: 2.4, w: W - 2 * MX - 0.8, h: 3.8, fontSize: 26, color: C.text1, valign: "top", margin: 0, isTextBox: true });
+      s.addText(qs.map((q, i) => ({ text: q, options: { bullet: qs.length === 1 ? false : { type: "number" }, breakLine: i < qs.length - 1, paraSpaceAfter: 12 } })), { x: MX + 0.4, y: 2.4, w: W - 2 * MX - 0.8, h: (qs.length === 1 ? 2.2 : 3.8), fontSize: (qs.length === 1 ? 32 : 26), color: C.text1, valign: "top", margin: 0, isTextBox: true });
       return s; },
     async chartSlide(sect, title, bullets, chart, o = {}) {
       const s = newSlide("INNEHALL", sect, o.notes); s.addText(title, { placeholder: "title" });
