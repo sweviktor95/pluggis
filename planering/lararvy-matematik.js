@@ -8,5 +8,5 @@ window.lararExtra["matematik-ak7-brak"] = {
 
 window.lararExtra["matematik-ak9-samband"] = {
   grupp: "Escape room (beta) – Rymdstationen Origo: 13 uppgifter i fyra rum om funktioner, linjära funktioner och räta linjens ekvation. Körs på tv/tavla: klassen löser, ni skriver in koden. Nedräkningstimer, ledtrådar, lärarfacit med lösningar i spelet.",
-  lankar: [["🚀 Escape room: Station Origo", "simuleringar/escape-funktioner.html"]]
+  lankar: [["🚀 Escape room: Station Origo", "simuleringar/escape-funktioner.html"], ["📄 Blad: formel, tabell, graf (A4 liggande)", "planering/matematik-ak9-samband/funktioner-formel-tabell-graf.pdf"]]
 };
