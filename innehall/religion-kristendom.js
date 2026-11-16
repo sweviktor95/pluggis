@@ -7,4 +7,11 @@ innehall["religion-kristendom-tidsresa"] = {
   inbaddadTitel: "Tidsresa genom kristendomens historia"
 };
 
+innehall["religion-kristendom-escape"] = {
+  text: "Ni är inlåsta i en katedral. Svara rätt på frågor om kristendomen för att öppna dörrarna, samla bokstäverna och hitta nyckelordet. Spelet bygger på instuderingsfrågorna om Jesus, Bibeln, den tidiga kyrkan, reformationen och kristendomen i Sverige. Fel svar kostar tid, så diskutera i gruppen innan ni väljer.",
+  bild: "",
+  inbaddad: "simuleringar/escape-kristendomen.html",
+  inbaddadTitel: "Escape room: Uppståndelsens katedral"
+};
+
 window.innehall = innehall;

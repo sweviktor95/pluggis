@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Escape room: Uppståndelsens katedral</title>
+<style>
+:root{--bg:#0d1233;--panel:rgba(16,20,52,.86);--panel2:rgba(40,36,86,.88);--line:#b8963f;--ink:#fff8e6;--mut:#e0d2a8;--gold:#ffd978;--sky:#9fd4ff;--gr:#a6f0b2;--rd:#ff9a8a;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#0d1233;color:var(--ink);font-family:"DejaVu Sans",system-ui,Segoe UI,Arial,sans-serif;overflow-x:hidden}
+#scen{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#motes{position:fixed;inset:0;z-index:0;pointer-events:none}
+.app{position:relative;z-index:1;max-width:1800px;margin:0 auto;padding:12px 18px 28px}
+h1,h2,h3{margin:0}
+.mono{font-family:"DejaVu Sans Mono",ui-monospace,Consolas,monospace}
+.serif{font-family:Georgia,"Times New Roman",serif}
+.top{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:8px 0 12px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .logo{width:46px;height:46px;border-radius:50%;border:3px solid var(--gold);display:grid;place-items:center;font-size:1.6rem;color:var(--gold);box-shadow:0 0 22px #ffd97877;background:rgba(16,20,52,.7)}
+.brand h1{font-size:1.3rem;letter-spacing:.12em;color:var(--gold);font-family:Georgia,serif;text-shadow:0 0 12px #ffd97866}
+.brand small{display:block;color:var(--mut);letter-spacing:.06em}
+.timer{font-size:2.5rem;font-weight:800;letter-spacing:.06em;padding:2px 18px;border:2px solid var(--line);border-radius:14px;background:var(--panel);min-width:170px;text-align:center}
+.timer.low{color:var(--sky);border-color:var(--sky)}
+.timer.crit{color:var(--rd);border-color:var(--rd);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.55}}
+.code{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.code span{width:36px;height:46px;border:2px solid var(--line);border-radius:8px 8px 18px 18px;display:grid;place-items:center;font-size:1.45rem;font-weight:800;background:var(--panel);color:var(--gold);font-family:Georgia,serif}
+.code span.on{border-color:var(--gold);box-shadow:0 0 14px #ffd97888;background:rgba(80,64,20,.8)}
+.code span.pop{animation:pop .7s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.4);box-shadow:0 0 28px #fff3b0}100%{transform:scale(1)}}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:700;padding:10px 16px;border-radius:10px;border:2px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer;min-height:44px}
+.btn:hover:not(:disabled){border-color:var(--gold)}
+.btn.pri{background:var(--gold);color:#2c1f00;border-color:var(--gold)}
+.btn.warn{border-color:var(--sky);color:var(--sky)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.main{display:grid;grid-template-columns:320px minmax(0,1fr) 380px;gap:16px;align-items:start}
+@media (max-width:1150px){.main{grid-template-columns:1fr}}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:14px;backdrop-filter:blur(3px)}
+.card h2{font-size:.9rem;letter-spacing:.14em;color:var(--mut);text-transform:uppercase;margin-bottom:10px}
+.rum{margin-bottom:14px}
+.rum h3{font-size:1rem;color:var(--gold);margin:0 0 4px;font-family:Georgia,serif}
+.rum.lock h3{color:var(--mut)}
+.note{color:var(--mut);font-size:.92rem}
+.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.door{aspect-ratio:3/4;border-radius:40px 40px 8px 8px;border:2px solid var(--line);background:var(--panel2);color:var(--ink);font:inherit;font-size:1.3rem;font-weight:800;cursor:pointer;position:relative}
+.door:hover:not(:disabled){border-color:var(--gold);box-shadow:0 0 12px #ffd97866}
+.door.cur{border-color:var(--sky);box-shadow:0 0 0 3px #9fd4ff55}
+.door.ok{background:rgba(54,96,60,.85);border-color:var(--gr);color:var(--gr)}
+.door:disabled{opacity:.35;cursor:not-allowed}
+.door .l{position:absolute;bottom:4px;left:0;right:0;font-size:.95rem;color:var(--gold);font-family:Georgia,serif}
+#upp{min-height:520px}
+.rumtag{display:inline-block;padding:3px 12px;border-radius:999px;background:rgba(90,70,20,.7);color:var(--gold);font-weight:700;letter-spacing:.08em;font-size:.82rem}
+.q{font-size:clamp(1.3rem,2.3vw,1.9rem);line-height:1.45;margin:14px 0;font-family:Georgia,serif}
+.q b{color:var(--sky)}
+.hint{margin-top:10px;padding:10px 14px;border-left:4px solid var(--sky);background:rgba(30,60,90,.7);border-radius:8px;font-size:1.05rem;display:none}
+.hint.vis{display:block}
+.los{margin-top:10px;padding:10px 14px;border-left:4px solid var(--gr);background:rgba(30,70,40,.7);border-radius:8px;font-size:1.05rem;display:none}
+.los.vis{display:block}
+.vald{color:var(--mut);padding:80px 10px;text-align:center;font-size:1.3rem;font-family:Georgia,serif}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;font:inherit;font-size:1.12rem;line-height:1.35;padding:12px 14px;margin:0 0 9px;border-radius:12px;border:2px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer;min-height:56px}
+.opt b{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif}
+.opt:hover:not(:disabled){border-color:var(--gold);box-shadow:0 0 12px #ffd97855}
+.opt.fel{border-color:var(--rd);background:rgba(90,30,30,.7);opacity:.55;text-decoration:line-through}
+.opt.ratt{border-color:var(--gr);background:rgba(40,90,50,.85)}
+.opt.shake{animation:shake .45s}
+@keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.opt:disabled{cursor:not-allowed}
+.msg{min-height:3.2em;margin:8px 0 10px;font-size:1.02rem;color:var(--mut)}
+.msg.good{color:var(--gr)}.msg.bad{color:var(--rd)}
+.svarbox{margin-top:10px;padding:10px 12px;border:2px dashed var(--line);border-radius:10px}
+.ov{position:fixed;inset:0;z-index:5;background:rgba(6,8,28,.82);display:none;align-items:center;justify-content:center;padding:16px;overflow:auto}
+.ov.vis{display:flex}
+.box{background:linear-gradient(180deg,rgba(40,34,84,.97),rgba(18,20,56,.97));border:3px solid var(--gold);border-radius:20px;max-width:760px;width:100%;padding:24px 28px;box-shadow:0 0 60px #ffd97844;max-height:94vh;overflow:auto}
+.box h2{color:var(--gold);font-size:1.7rem;margin-bottom:12px;font-family:Georgia,serif;letter-spacing:.06em}
+.box p{line-height:1.55;font-size:1.08rem}
+.box .big{font-size:2.3rem;letter-spacing:.14em;color:var(--gold);text-align:center;margin:14px 0;font-family:Georgia,serif;text-shadow:0 0 18px #ffd978aa}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
+.btn[aria-pressed=true]{background:var(--gold);color:#2c1f00;border-color:var(--gold)}
+.fac table{border-collapse:collapse;width:100%;font-size:.95rem}
+.fac th,.fac td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.fac th{background:var(--panel2);color:var(--gold)}
+[hidden]{display:none!important}
+@keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(120px)}}
+@keyframes strala{0%,100%{opacity:.35}50%{opacity:.75}}
+@keyframes gloda{0%,100%{opacity:.8}50%{opacity:1}}
+#rays{animation:strala 9s ease-in-out infinite;transform-origin:800px 250px}
+.moln1{animation:drift 60s ease-in-out infinite alternate}.moln2{animation:drift 90s ease-in-out infinite alternate-reverse}.moln3{animation:drift 75s ease-in-out infinite alternate}
+#halo{animation:gloda 7s ease-in-out infinite}
+@media print{body{background:#fff;color:#000}#scen,#motes,.top,.main,.ov:not(#ovFacit){display:none!important}#ovFacit{display:block!important;position:static;background:#fff}.box{border:0;box-shadow:none;max-width:none;color:#000;background:#fff}.fac th{background:#eee;color:#000}.fac th,.fac td{border-color:#999}.box h2{color:#000}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<!-- Himmelsk bakgrund -->
+<svg id="scen" aria-hidden="true" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="himmel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1030"/><stop offset=".35" stop-color="#2a2a76"/><stop offset=".62" stop-color="#7b5aa6"/><stop offset=".82" stop-color="#e2a3a0"/><stop offset="1" stop-color="#ffd98a"/></linearGradient>
+<radialGradient id="haloG" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fffbe0" stop-opacity="1"/><stop offset=".25" stop-color="#ffe9a0" stop-opacity=".75"/><stop offset=".6" stop-color="#ffd27a" stop-opacity=".25"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+<linearGradient id="rayG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6c8" stop-opacity=".9"/><stop offset="1" stop-color="#fff6c8" stop-opacity="0"/></linearGradient>
+<linearGradient id="molnG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3dc" stop-opacity=".9"/><stop offset="1" stop-color="#e8b6b0" stop-opacity=".55"/></linearGradient>
+<linearGradient id="dim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a" stop-opacity="0"/><stop offset="1" stop-color="#fff0c0" stop-opacity=".7"/></linearGradient>
+<radialGradient id="roseG" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffe9a0"/><stop offset="1" stop-color="#e0904a"/></radialGradient>
+</defs>
+<rect width="1600" height="900" fill="url(#himmel)"/>
+<circle id="halo" cx="800" cy="250" r="520" fill="url(#haloG)"/>
+<g id="rays">
+ <polygon points="800,250 520,0 590,0" fill="url(#rayG)" opacity=".5"/><polygon points="800,250 660,0 720,0" fill="url(#rayG)" opacity=".6"/>
+ <polygon points="800,250 770,0 830,0" fill="url(#rayG)" opacity=".7"/><polygon points="800,250 880,0 940,0" fill="url(#rayG)" opacity=".6"/>
+ <polygon points="800,250 1010,0 1080,0" fill="url(#rayG)" opacity=".5"/><polygon points="800,250 350,300 360,380" fill="url(#rayG)" opacity=".35"/>
+ <polygon points="800,250 1250,300 1240,380" fill="url(#rayG)" opacity=".35"/><polygon points="800,250 600,640 760,640" fill="url(#rayG)" opacity=".3"/>
+ <polygon points="800,250 840,640 1000,640" fill="url(#rayG)" opacity=".3"/>
+</g>
+<g class="moln1" opacity=".9"><ellipse cx="260" cy="190" rx="190" ry="34" fill="url(#molnG)"/><ellipse cx="360" cy="168" rx="120" ry="30" fill="url(#molnG)"/><ellipse cx="180" cy="172" rx="90" ry="26" fill="url(#molnG)"/></g>
+<g class="moln2" opacity=".85"><ellipse cx="1300" cy="140" rx="210" ry="36" fill="url(#molnG)"/><ellipse cx="1190" cy="122" rx="110" ry="28" fill="url(#molnG)"/><ellipse cx="1400" cy="124" rx="100" ry="26" fill="url(#molnG)"/></g>
+<g class="moln3" opacity=".8"><ellipse cx="1050" cy="430" rx="260" ry="42" fill="url(#molnG)"/><ellipse cx="930" cy="410" rx="130" ry="32" fill="url(#molnG)"/><ellipse cx="200" cy="470" rx="240" ry="40" fill="url(#molnG)"/><ellipse cx="320" cy="448" rx="120" ry="30" fill="url(#molnG)"/></g>
+<!-- avlägsna kullar -->
+<path d="M0 760 Q200 690 420 740 T800 730 T1180 735 T1600 700 L1600 900 L0 900Z" fill="#5a3f7d" opacity=".75"/>
+<!-- katedralen -->
+<g fill="#1a1646">
+ <rect x="560" y="540" width="480" height="360"/>
+ <polygon points="560,540 800,420 1040,540"/>
+ <rect x="420" y="450" width="140" height="450"/><polygon points="410,450 490,290 570,450"/>
+ <rect x="1040" y="450" width="140" height="450"/><polygon points="1030,450 1110,290 1190,450"/>
+ <rect x="330" y="640" width="90" height="260"/><rect x="1180" y="640" width="90" height="260"/>
+ <polygon points="320,640 375,580 430,640"/><polygon points="1170,640 1225,580 1280,640"/>
+ <rect x="780" y="330" width="40" height="100"/><polygon points="770,330 800,250 830,330"/>
+</g>
+<g stroke="#ffd978" stroke-width="5" stroke-linecap="round" fill="none">
+ <path d="M490 262 V292 M478 274 H502"/><path d="M1110 262 V292 M1098 274 H1122"/><path d="M800 215 V255 M785 232 H815"/>
+</g>
+<circle cx="800" cy="610" r="64" fill="url(#roseG)" stroke="#ffd978" stroke-width="5"/>
+<g stroke="#1a1646" stroke-width="4"><path d="M800 548 V672 M738 610 H862 M756 566 L844 654 M844 566 L756 654"/></g>
+<circle cx="800" cy="610" r="18" fill="#fff3b0" stroke="#1a1646" stroke-width="3"/>
+<g fill="#ffd978" opacity=".95">
+ <path d="M475 520 v-34 a15 15 0 0 1 30 0 v34z"/><path d="M475 640 v-34 a15 15 0 0 1 30 0 v34z"/>
+ <path d="M1095 520 v-34 a15 15 0 0 1 30 0 v34z"/><path d="M1095 640 v-34 a15 15 0 0 1 30 0 v34z"/>
+ <path d="M620 760 v-60 a20 20 0 0 1 40 0 v60z"/><path d="M940 760 v-60 a20 20 0 0 1 40 0 v60z"/>
+ <path d="M360 760 v-50 a15 15 0 0 1 30 0 v50z"/><path d="M1210 760 v-50 a15 15 0 0 1 30 0 v50z"/>
+</g>
+<path d="M760 900 v-110 a40 40 0 0 1 80 0 v110z" fill="#ffe9a0"/>
+<path d="M776 900 v-100 a24 24 0 0 1 48 0 v100z" fill="#fff8d6"/>
+<rect x="0" y="780" width="1600" height="120" fill="url(#dim)"/>
+</svg>
+<canvas id="motes" aria-hidden="true"></canvas>
+
+<div class="app">
+  <div class="top">
+    <div class="brand"><div class="logo">✝</div><div><h1>UPPSTÅNDELSENS KATEDRAL</h1><small>KRISTENDOMEN · FRÅN BETLEHEM TILL SVERIGE</small></div></div>
+    <div class="timer mono" id="timer" aria-live="off">45:00</div>
+    <div class="code" id="kod" aria-label="Nyckelord"></div>
+    <div class="tools">
+      <button class="btn" id="bFacit">Lärarfacit</button>
+      <button class="btn" id="bLjud" aria-pressed="true" title="Musik och ljud på" style="font-size:1.2rem">🔊</button>
+      <button class="btn warn" id="bOm">Börja om</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div><div class="card" id="karta"><h2>Katedralens rum</h2></div></div>
+
+    <div class="card" id="upp">
+      <div class="vald" id="vald">Välj en dörr till vänster.<br>Svara rätt för att öppna den.</div>
+      <div id="uppInnehall" hidden>
+        <span class="rumtag mono" id="uTag"></span>
+        <div class="q" id="uText"></div>
+        <div class="hint" id="uHint"></div>
+        <div class="los" id="uLos"></div>
+      </div>
+    </div>
+
+    <div class="card" id="las">
+      <h2>Ditt svar</h2>
+      <div id="alt"></div>
+      <div class="msg" id="msg">Välj en dörr.</div>
+      <div class="tools">
+        <button class="btn warn" id="bHint" disabled>Ledtråd (−2 min)</button>
+        <button class="btn" id="bSvar" disabled>🔑 Visa svar</button>
+      </div>
+      <div class="svarbox" id="svarBox" hidden>
+        <div style="margin-bottom:8px">Rätt svar är markerat. Läs förklaringen.</div>
+        <button class="btn pri" id="bTvinga">Öppna dörren</button>
+      </div>
+      <p class="note" style="margin-top:12px">Fel svar kostar 1 minut. Kört fast? Visa svar kostar ingen tid. Diskutera i gruppen innan ni väljer.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Intro -->
+<div class="ov vis" id="ovIntro" role="dialog" aria-modal="true" aria-labelledby="introH">
+  <div class="box">
+    <h2 id="introH">INSLAGNA I KATEDRALEN</h2>
+    <p>Ni har gått in i en gammal katedral under en stjärnklar himmel. Portarna slog igen bakom er och varje dörr är låst. Dörrarna öppnas bara av den som kan kristendomens historia.</p>
+    <p>Varje rätt svar öppnar en dörr och avslöjar en bokstav i <b>nyckelordet</b>. När alla 12 bokstäver är avslöjade öppnas himlaporten. Fyra rum, tolv dörrar. Nästa rum öppnas först när det förra är klart.</p>
+    <p><b>Välj tid:</b></p>
+    <div class="opts" id="tidOpts" role="group" aria-label="Tid">
+      <button class="btn" data-t="30" aria-pressed="false">30 min</button>
+      <button class="btn" data-t="45" aria-pressed="true">45 min</button>
+      <button class="btn" data-t="60" aria-pressed="false">60 min</button>
+      <button class="btn" data-t="0" aria-pressed="false">Ingen tid</button>
+    </div>
+    <p class="note">🎵 Spelet har stillsam, himmelsk musik. Du kan stänga av den med högtalarknappen uppe till höger.</p>
+    <button class="btn pri" id="bStart" style="font-size:1.3rem;padding:14px 30px">GÅ IN I KATEDRALEN</button>
+  </div>
+</div>
+
+<!-- Slut -->
+<div class="ov" id="ovSlut" role="dialog" aria-modal="true">
+  <div class="box" id="slutBox"></div>
+</div>
+
+<!-- Facit -->
+<div class="ov" id="ovFacit" role="dialog" aria-modal="true" aria-labelledby="facH">
+  <div class="box fac" style="max-width:1000px">
+    <h2 id="facH">Lärarfacit</h2>
+    <p style="font-size:1rem">Nyckelord: <b>UPPSTÅNDELSE</b>. Frågorna bygger på instuderingsfrågorna om kristendomen (religion åk 7).</p>
+    <div id="facTab"></div>
+    <div class="opts"><button class="btn" id="bFacPrint">Skriv ut</button><button class="btn pri" id="bFacStang">Stäng</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var ORD="UPPSTÅNDELSE";
+var RUM=[
+  {namn:"Rum 1 · Betlehem",sub:"Jesu liv"},
+  {namn:"Rum 2 · Bibelns bibliotek",sub:"Bibeln"},
+  {namn:"Rum 3 · Katedralens hall",sub:"Den kristna läran växer fram"},
+  {namn:"Rum 4 · Himlaporten",sub:"Reformationen, Sverige och uppståndelsen"}
+];
+/* rätt svar står alltid först i listan; ordningen slumpas när spelet startar */
+var P=[
+ {rum:0,text:'Dörren till stallet är låst. <b>Varför flydde Josef och Maria med Jesus till Egypten?</b>',
+  alt:['Kung Herodes ville döda alla nyfödda pojkar i Betlehem','Det rådde hungersnöd i Betlehem','De ville besöka släktingar i Egypten','Romarna hade förbjudit dem att stanna'],
+  tips:'En ängel berättade för Josef om en kungs planer.',los:'Kung Herodes visste att en pojke som skulle bli kung föddes i Betlehem och bestämde att alla nyfödda pojkar skulle dö. En ängel varnade Josef, och familjen flydde till Egypten och stannade tills Herodes hade dött.'},
+ {rum:0,text:'<b>Vad hände när Johannes döpte Jesus i floden Jordan?</b>',
+  alt:['Himlen delade sig, en duva sänkte sig och en röst sa att Jesus var Guds älskade son','Floden delade sig så att Jesus kunde gå över','Johannes utsåg Jesus till kung över Judéen','Tolv fiskare steg upp ur vattnet'],
+  tips:'Något hände med himlen, och en röst hördes.',los:'Himlen delade sig, en duva sänkte sig ner över Jesus och en röst förklarade att Jesus var Guds älskade son. Alla runt omkring blev säkra på att Jesus var Messias.'},
+ {rum:0,text:'Vid Galiléiska sjön bad Jesus fiskaren Simon följa honom och gav honom ett nytt namn. <b>Vilket namn fick Simon?</b>',
+  alt:['Petrus','Paulus','Andreas','Johannes'],
+  tips:'Han blev en av de tolv lärjungarna, som också kallas apostlar.',los:'Jesus gav Simon namnet Petrus. Han blev en av de tolv lärjungarna (apostlarna), som skulle se till att Guds budskap nådde ut till så många människor som möjligt.'},
+ {rum:1,text:'Den första dörren i biblioteket har en inskription. <b>Vad betyder ordet evangelium?</b>',
+  alt:['Glatt budskap','Heligt bud','Guds namn','Den nya lagen'],
+  tips:'Evangelierna handlar om Jesus, och ordet beskriver vad budskapet är.',los:'Evangelium betyder glatt budskap. De fyra evangelierna (Matteus, Markus, Lukas och Johannes) är Nya testamentets första fyra böcker.'},
+ {rum:1,text:'Jesus talade arameiska, men evangelierna skrevs på ett annat språk. <b>Varför skrev författarna på grekiska?</b>',
+  alt:['Grekiska var ett språk som många i Medelhavsområdet förstod','Jesus hade själv bett dem skriva på grekiska','Arameiska hade förbjudits av romarna','Grekiska var det äldsta språket i världen'],
+  tips:'Författarna ville nå så många läsare som möjligt.',los:'Författarna ville sprida kunskapen om Jesus och hans budskap och skrev på grekiska, ett språk som många i Medelhavsområdet förstod. Hade de skrivit på arameiska hade inte lika många kunnat läsa texterna.'},
+ {rum:1,text:'Sista hyllan i biblioteket. <b>Vad handlar Bibelns sista bok, Uppenbarelseboken, om?</b>',
+  alt:['Striden mellan Gud och Satan vid tidernas slut','Hur Paulus reste runt och skrev brev','Jesu barndom i Nasaret','Hur den första församlingen bildades'],
+  tips:'Boken handlar om slutet på tiden och om att det onda ska besegras.',los:'Uppenbarelseboken handlar om striden mellan Gud och Satan vid tidernas slut och om svårigheterna för de första kristna. Författaren ser ändå ljust på framtiden: det onda ska besegras, och han säger "Jag såg en ny himmel och en ny jord".'},
+ {rum:2,text:'År 64 brann Rom och kejsaren skyllde på de kristna. Många förföljdes. <b>Vad kallas de kristna som dog för sin tro?</b>',
+  alt:['Martyrer','Apostlar','Lärjungar','Profeter'],
+  tips:'Ordet används om dem som fick sätta livet till för sin tro.',los:'De kristna som dog för sin tro kallas martyrer. Troligen dog både Paulus och Petrus i samband med förföljelserna.'},
+ {rum:2,text:'Kejsar Konstantin kallade biskopar och präster till ett möte i Nicea. <b>Vad bestämdes där år 325?</b>',
+  alt:['En trosbekännelse skrevs, och Gud beskrevs som treenig: Fader, Son och Ande','Att Bibeln skulle översättas till latin','Att kyrkan skulle delas i en västlig och en östlig del','Att alla kristna skulle fira advent'],
+  tips:'Mötet skrev en text som sammanfattar tron, och den används än i dag.',los:'Biskopar och präster skrev en trosbekännelse, alltså en text som sammanfattar tron. De kom också fram till att Gud visar sig på tre sätt: som Fader, Son och Ande. Det kallas en treenig Gud. Trosbekännelsen från Nicea används än i dag i kyrkor runt hela världen.'},
+ {rum:2,text:'Kyrkans stora hall har tre portar. <b>Vilka är kristendomens tre stora huvudgrupper?</b>',
+  alt:['Katolska, ortodoxa och protestantiska kyrkan','Katolska kyrkan, Svenska kyrkan och Pingstkyrkan','Ortodoxa, lutherska och baptistiska kyrkan','Romerska, grekiska och anglikanska kyrkan'],
+  tips:'Kyrkan delades år 1054 i två grenar, och den tredje bildades på 1500-talet.',los:'Kristendomens tre huvudgrupper är katolska, ortodoxa och protestantiska kyrkan. År 1054 delades kyrkan i den katolska i väst och den ortodoxa i öst. Den protestantiska bildades först på 1500-talet.'},
+ {rum:3,text:'En munk i Wittenberg satte upp 95 teser på kyrkporten. Han protesterade bland annat mot att man kunde köpa sig fri från synd. <b>Vad kallades de brev man köpte?</b>',
+  alt:['Avlatsbrev','Trosbekännelser','Konventikelplakat','Gyllene regler'],
+  tips:'Martin Luther menade att synden måste man ångra själv.',los:'Luther protesterade mot avlatsbreven. Synden kan man inte köpa sig fri från, den måste man ångra själv. Två av hans nya tankar: människan blir frälst genom tro och inte genom goda handlingar, och Bibeln är det enda en människa behöver rätta sig efter.'},
+ {rum:3,text:'Kristendomens spridning i Sverige tog fart när en kung lät döpa sig i början av 1000-talet. <b>Var döptes Olof Skötkonung?</b>',
+  alt:['Vid Husaby källa i Västergötland','I Uppsala domkyrka','I Birka vid Mälaren','Vid Lunds domkyrka'],
+  tips:'Platsen ligger i Västergötland och har en helig källa.',los:'Olof Skötkonung lät döpa sig vid Husaby källa i Västergötland. Det fick stor betydelse för kristendomens spridning i Sverige: hans undersåtar måste sluta tro på asagudarna och bli katoliker.'},
+ {rum:3,text:'<b>Sista dörren, himlaporten.</b> Varför är uppståndelsen det viktigaste för kristna?',
+  alt:['Jesus visade att döden kan besegras, och den som tror på honom får evigt liv','Den visade att Jesus var en stor kung som besegrade romarna','Det var då Bibeln skrevs ner','Den visade att alla människor måste fasta'],
+  tips:'Tänk på vad som enligt kristen tro är människans värsta fiende.',los:'Genom att uppstå på tredje dagen visade Jesus att döden kunde besegras. Döden är enligt kristen tro människans värsta fiende, men den som tror på Jesus kommer att besegra döden och få evigt liv.'}
+];
+P.forEach(function(p,i){p.nr=i+1;p.bokstav=ORD.charAt(i);p.ratt=p.alt[0];});
+
+var S={tid:45,rest:2700,klara:{},cur:-1,hint:{},run:false,slut:false,iv:null,ord:{},fel:{}};
+var $=function(i){return document.getElementById(i)};
+function fmt(s){s=Math.max(0,s);var m=Math.floor(s/60),r=s%60;return (m<10?'0':'')+m+':'+(r<10?'0':'')+r;}
+function rumKlart(r){return P.every(function(p,i){return p.rum!==r||S.klara[i];});}
+function rumOppet(r){return r===0||rumKlart(r-1);}
+function antalKlara(){return Object.keys(S.klara).length;}
+function blanda(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+function ritaKod(nyIdx){
+  var h='';
+  for(var i=0;i<ORD.length;i++){var on=!!S.klara[i];h+='<span class="'+(on?'on':'')+(nyIdx===i?' pop':'')+'">'+(on?P[i].bokstav:'_')+'</span>';}
+  $('kod').innerHTML=h;
+}
+function ritaKarta(){
+  var k=$('karta'),h='<h2>Katedralens rum</h2>';
+  RUM.forEach(function(r,ri){
+    var oppet=rumOppet(ri);
+    h+='<div class="rum'+(oppet?'':' lock')+'"><h3>'+(oppet?'':'🔒 ')+r.namn+'</h3><div class="note" style="margin:0 0 8px">'+r.sub+'</div><div class="doors">';
+    P.forEach(function(p,i){
+      if(p.rum!==ri) return;
+      var cls='door'+(S.klara[i]?' ok':'')+(S.cur===i?' cur':'');
+      h+='<button class="'+cls+'" data-d="'+i+'"'+(oppet&&S.run?'':' disabled')+' aria-label="Dörr '+p.nr+(S.klara[i]?', öppen':'')+'">'+p.nr+(S.klara[i]?'<span class="l">'+p.bokstav+'</span>':'')+'</button>';
+    });
+    h+='</div></div>';
+  });
+  k.innerHTML=h;
+  k.querySelectorAll('.door').forEach(function(b){b.addEventListener('click',function(){valj(parseInt(b.dataset.d,10));});});
+}
+function ritaAlt(){
+  var a=$('alt');
+  if(S.cur<0){a.innerHTML='<p class="note">Välj en dörr för att se svarsalternativen.</p>';return;}
+  var p=S.cur,q=P[p],ord=S.ord[p],h='';
+  ord.forEach(function(ix,n){
+    var cls='opt'+(S.fel[p]&&S.fel[p][ix]?' fel':'')+((S.klara[p]||S.visa===p)&&ix===0?' ratt':'');
+    var dis=S.klara[p]||!S.run||(S.fel[p]&&S.fel[p][ix]);
+    h+='<button class="'+cls+'" data-i="'+ix+'"'+(dis?' disabled':'')+'><b>'+String.fromCharCode(65+n)+'</b><span>'+esc(q.alt[ix])+'</span></button>';
+  });
+  a.innerHTML=h;
+  a.querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){svara(parseInt(b.dataset.i,10),b);});});
+}
+function ritaUpp(){
+  if(S.cur<0){$('vald').hidden=false;$('uppInnehall').hidden=true;$('bSvar').disabled=true;$('bHint').disabled=true;$('svarBox').hidden=true;ritaAlt();return;}
+  var p=P[S.cur];
+  $('vald').hidden=true;$('uppInnehall').hidden=false;
+  $('uTag').textContent=RUM[p.rum].namn.toUpperCase()+' · DÖRR '+p.nr+' AV '+P.length;
+  $('uText').innerHTML=p.text;
+  var hint=$('uHint');hint.textContent='Ledtråd: '+p.tips;hint.classList.toggle('vis',!!S.hint[S.cur]);
+  var los=$('uLos');los.innerHTML='<b>Förklaring:</b> '+p.los;los.classList.toggle('vis',!!S.klara[S.cur]||S.visa===S.cur);
+  $('bHint').disabled=!!S.hint[S.cur]||!!S.klara[S.cur]||!S.run;
+  $('bSvar').disabled=!!S.klara[S.cur]||!S.run;
+  $('svarBox').hidden=S.visa!==S.cur||!!S.klara[S.cur];
+  ritaAlt();
+}
+function msg(t,c){var m=$('msg');m.textContent=t;m.className='msg '+(c||'');}
+function ritaTimer(){
+  var t=$('timer');
+  if(S.tid===0){t.textContent='∞';t.className='timer mono';return;}
+  t.textContent=fmt(S.rest);
+  if(S.run&&!S.slut&&S.rest>0&&S.rest<=10)LJUD.spela('tick');
+  t.className='timer mono'+(S.rest<=60?' crit':(S.rest<=300?' low':''));
+}
+function valj(i){
+  if(!S.run||S.slut) return;
+  S.cur=i;S.visa=-1;
+  if(!S.ord[i]) S.ord[i]=blanda([0,1,2,3]);
+  ritaKarta();ritaUpp();
+  msg(S.klara[i]?'Dörren är redan öppen.':'Välj det svar du tror är rätt.');
+}
+function oppna(i,via){
+  var p=P[i];S.klara[i]=true;S.visa=-1;
+  msg((via?'DÖRR '+p.nr+' ÖPPNAD. ':'RÄTT! Dörr '+p.nr+' öppnas. ')+'Bokstav avslöjad: '+p.bokstav,'good');
+  LJUD.spela('dorr');
+  ritaKod(i);ritaKarta();ritaUpp();
+  if(antalKlara()===P.length){vinst();return;}
+  if(rumKlart(p.rum)&&p.rum<RUM.length-1){msg('RUMMET ÄR KLART. '+RUM[p.rum+1].namn+' är upplåst. Bokstav: '+p.bokstav,'good');}
+}
+function svara(ix,btn){
+  if(!S.run||S.slut||S.cur<0||S.klara[S.cur]) return;
+  if(ix===0){oppna(S.cur,false);return;}
+  (S.fel[S.cur]=S.fel[S.cur]||{})[ix]=true;
+  btn.classList.add('shake');
+  LJUD.spela('fel');
+  if(S.tid>0){S.rest=Math.max(0,S.rest-60);ritaTimer();msg('Det blev fel. −1 minut. Försök igen.','bad');if(S.rest<=0){slut();return;}}
+  else msg('Det blev fel. Försök igen.','bad');
+  setTimeout(ritaAlt,350);
+}
+function ledtrad(){
+  if(S.cur<0||S.hint[S.cur]||S.klara[S.cur]) return;
+  S.hint[S.cur]=true;
+  if(S.tid>0){S.rest=Math.max(0,S.rest-120);ritaTimer();if(S.rest<=0){slut();return;}}
+  ritaUpp();
+}
+function visaSvar(){
+  if(S.cur<0||S.klara[S.cur]||!S.run) return;
+  S.visa=S.cur;ritaUpp();
+}
+function tvinga(){
+  if(S.cur<0||S.klara[S.cur]||!S.run||S.slut) return;
+  oppna(S.cur,true);
+}
+function tick(){
+  if(!S.run||S.slut||S.tid===0) return;
+  S.rest--;ritaTimer();
+  if(S.rest<=0) slut();
+}
+function start(){
+  S.klara={};S.hint={};S.cur=-1;S.visa=-1;S.ord={};S.fel={};S.slut=false;S.run=true;S.rest=S.tid*60;
+  $('ovIntro').classList.remove('vis');$('ovSlut').classList.remove('vis');
+  ritaKod();ritaKarta();ritaUpp();ritaTimer();msg('Välj en dörr.');
+  clearInterval(S.iv);S.iv=setInterval(tick,1000);
+  LJUD.start();
+}
+function vinst(){
+  S.slut=true;S.run=false;clearInterval(S.iv);setTimeout(function(){LJUD.spela('vinst');},250);
+  var kvar=S.tid>0?'<p>Tid kvar: <b class="mono">'+fmt(S.rest)+'</b>. Ni klarade det på '+fmt(S.tid*60-S.rest)+'.</p>':'';
+  $('slutBox').innerHTML='<h2>HIMLAPORTEN ÖPPNAS!</h2><p>Alla 12 bokstäver är avslöjade. Nyckelordet är:</p><div class="big">'+ORD+'</div>'+kvar+'<p>Ni tog er ut ur katedralen med hjälp av kunskap om kristendomen. Uppståndelsen är enligt kristen tro det som visar att döden kan besegras.</p><div class="opts"><button class="btn pri" id="bOm2">Spela igen</button><button class="btn" id="bSt2">Stäng</button></div>';
+  $('ovSlut').classList.add('vis');
+  $('bOm2').onclick=function(){reset();};$('bSt2').onclick=function(){$('ovSlut').classList.remove('vis');};
+}
+function slut(){
+  if(S.slut) return;S.slut=true;S.run=false;clearInterval(S.iv);LJUD.spela('forlust');ritaKarta();
+  $('slutBox').innerHTML='<h2 style="color:#ff9a8a">LJUSET SLUKNAR</h2><p>Tiden tog slut. Ni klarade <b>'+antalKlara()+' av '+P.length+'</b> dörrar. Nyckelordet hann inte bli klart.</p><div class="opts"><button class="btn pri" id="bFort">Fortsätt utan tid</button><button class="btn" id="bOm2">Börja om</button></div>';
+  $('ovSlut').classList.add('vis');
+  $('bFort').onclick=function(){S.tid=0;S.slut=false;S.run=true;$('ovSlut').classList.remove('vis');ritaTimer();ritaKarta();ritaUpp();};
+  $('bOm2').onclick=function(){reset();};
+}
+function reset(){
+  clearInterval(S.iv);S.run=false;S.slut=false;LJUD.stopp();
+  $('ovSlut').classList.remove('vis');$('ovIntro').classList.add('vis');
+}
+function facit(){
+  var h='<table><tr><th>Dörr</th><th>Rum</th><th>Fråga</th><th>Rätt svar</th><th>Bokstav</th><th>Förklaring</th></tr>';
+  P.forEach(function(p){
+    h+='<tr><td>'+p.nr+'</td><td>'+RUM[p.rum].namn.replace(/^Rum \d · /,'')+'</td><td>'+p.text.replace(/<[^>]+>/g,'')+'</td><td><b>'+esc(p.ratt)+'</b></td><td>'+p.bokstav+'</td><td>'+p.los+'</td></tr>';
+  });
+  $('facTab').innerHTML=h+'</table>';
+}
+
+$('bHint').addEventListener('click',ledtrad);
+$('bSvar').addEventListener('click',visaSvar);
+$('bTvinga').addEventListener('click',tvinga);
+$('bOm').addEventListener('click',function(){if(confirm('Börja om från start?'))reset();});
+$('bFacit').addEventListener('click',function(){facit();$('ovFacit').classList.add('vis');});
+$('bFacStang').addEventListener('click',function(){$('ovFacit').classList.remove('vis');});
+$('bFacPrint').addEventListener('click',function(){window.print();});
+$('tidOpts').querySelectorAll('.btn').forEach(function(b){b.addEventListener('click',function(){
+  S.tid=parseInt(b.dataset.t,10);
+  $('tidOpts').querySelectorAll('.btn').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});
+});});
+$('bStart').addEventListener('click',start);
+
+/* ---------- Ljud och himmelsk musik (Web Audio, genereras i webbläsaren) ---------- */
+var LJUD=(function(){
+  var ctx=null,master=null,musG=null,fxG=null,verb=null,dry=null,timer=null,steg=0,on=true,igang=false,aktiva=[];
+  /* D-lydisk stämning: Dmaj7, Bm7, Gmaj7, A-sus. Långsamma kördoftande ackord */
+  var AKKORD=[[146.8,220,293.7,369.99,440],[123.5,185,246.9,293.7,369.99],[98,196,246.9,293.7,370],[110,164.8,220,277.2,329.6]];
+  var KLOCKA=[587.3,659.3,740,880,987.8,1174.7,1480];
+  try{if(localStorage.getItem('pluggis-escape-ljud')==='av')on=false;}catch(e){}
+  function impuls(sek){
+    var sr=ctx.sampleRate,len=Math.floor(sr*sek),b=ctx.createBuffer(2,len,sr);
+    for(var c=0;c<2;c++){var d=b.getChannelData(c);for(var i=0;i<len;i++){d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6);}}
+    return b;
+  }
+  function init(){
+    if(ctx) return true;
+    var AC=window.AudioContext||window.webkitAudioContext;if(!AC) return false;
+    ctx=new AC();master=ctx.createGain();master.gain.value=on?1:0;master.connect(ctx.destination);
+    verb=ctx.createConvolver();verb.buffer=impuls(5.5);
+    var vg=ctx.createGain();vg.gain.value=0.9;verb.connect(vg);vg.connect(master);
+    dry=ctx.createGain();dry.gain.value=0.55;dry.connect(master);
+    musG=ctx.createGain();musG.gain.value=0.2;musG.connect(dry);musG.connect(verb);
+    fxG=ctx.createGain();fxG.gain.value=0.42;fxG.connect(dry);fxG.connect(verb);
+    return true;
+  }
+  function ton(f,t0,dur,typ,vol,dest,att){
+    var o=ctx.createOscillator(),g=ctx.createGain();o.type=typ;o.frequency.setValueAtTime(f,t0);
+    att=att||0.015;g.gain.setValueAtTime(0.0001,t0);g.gain.exponentialRampToValueAtTime(vol,t0+att);g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    o.connect(g);g.connect(dest||fxG);o.start(t0);o.stop(t0+dur+0.05);return o;
+  }
+  function klocka(f,t0,vol,dest){ton(f,t0,5,'sine',vol,dest||musG);ton(f*2.01,t0,3,'sine',vol*0.35,dest||musG);ton(f*3.97,t0,1.6,'sine',vol*0.12,dest||musG);}
+  function pad(fs,t0,dur){
+    var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=1500;lp.Q.value=0.4;lp.connect(musG);
+    fs.forEach(function(f,i){
+      [['sine',0],['triangle',i%2?6:-6]].forEach(function(v){
+        var o=ctx.createOscillator(),g=ctx.createGain();o.type=v[0];o.frequency.value=f;o.detune.value=v[1];
+        var vol=(v[0]==='sine'?0.22:0.09)/fs.length*2.2;
+        g.gain.setValueAtTime(0.0001,t0);g.gain.linearRampToValueAtTime(vol,t0+dur*0.38);g.gain.linearRampToValueAtTime(vol*0.85,t0+dur*0.7);g.gain.linearRampToValueAtTime(0.0001,t0+dur+3.5);
+        o.connect(g);g.connect(lp);o.start(t0);o.stop(t0+dur+3.6);aktiva.push(o);
+      });
+    });
+  }
+  function takt(){
+    if(!ctx||!igang) return;
+    var t=ctx.currentTime+0.05,ak=AKKORD[Math.floor(steg/2)%AKKORD.length];
+    if(steg%2===0){pad(ak,t,8.5);ton(ak[0]/2,t,9,'sine',0.35,musG,2.5);}
+    if(Math.random()<0.8) klocka(KLOCKA[Math.floor(Math.random()*KLOCKA.length)],t+0.6+Math.random()*2,0.2);
+    if(Math.random()<0.45) klocka(KLOCKA[Math.floor(Math.random()*KLOCKA.length)],t+3.5+Math.random()*3,0.14);
+    steg++;
+  }
+  function startMusik(){
+    if(!init()) return;
+    if(ctx.state==='suspended') ctx.resume();
+    igang=true;steg=0;clearInterval(timer);timer=setInterval(takt,4300);takt();
+  }
+  function stoppMusik(){igang=false;clearInterval(timer);aktiva.forEach(function(o){try{o.stop();}catch(e){}});aktiva=[];}
+  var fx={
+    tryck:function(){var t=ctx.currentTime;ton(880,t,0.12,'sine',0.08);},
+    ratt:function(){var t=ctx.currentTime;[784,988,1175].forEach(function(f,i){klocka(f,t+i*0.12,0.22,fxG);});},
+    fel:function(){var t=ctx.currentTime;ton(196,t,0.6,'sine',0.3);ton(147,t+0.12,0.8,'sine',0.25);},
+    dorr:function(){var t=ctx.currentTime;[392,523,659,784,1047].forEach(function(f,i){klocka(f,t+i*0.1,0.2,fxG);});ton(98,t,1.8,'sine',0.35,fxG,0.3);},
+    tick:function(){var t=ctx.currentTime;ton(1320,t,0.08,'sine',0.07);},
+    vinst:function(){var t=ctx.currentTime;[[392,494,587,740],[440,554,659,880],[587,740,880,1175,1480]].forEach(function(ak,k){ak.forEach(function(f,i){klocka(f,t+k*1.1+i*0.07,0.2,fxG);});});pad([293.7,440,587.3,740,880],t,6);},
+    forlust:function(){var t=ctx.currentTime;[392,349,311,262].forEach(function(f,i){ton(f,t+i*0.5,1.4,'sine',0.2,fxG,0.1);});}
+  };
+  function spela(n){if(!on||!init()) return;if(ctx.state==='suspended') ctx.resume();try{fx[n]();}catch(e){}}
+  function satt(av){
+    on=!av;try{localStorage.setItem('pluggis-escape-ljud',on?'pa':'av');}catch(e){}
+    if(master) master.gain.value=on?1:0;
+    var b=document.getElementById('bLjud');if(b){b.textContent=on?'🔊':'🔇';b.setAttribute('aria-pressed',on?'true':'false');b.title=on?'Musik och ljud på':'Musik och ljud av';}
+  }
+  return {spela:spela,start:startMusik,stopp:stoppMusik,satt:satt,pa:function(){return on;}};
+})();
+(function(){
+  var b=document.getElementById('bLjud');
+  if(b){b.textContent=LJUD.pa()?'🔊':'🔇';b.setAttribute('aria-pressed',LJUD.pa()?'true':'false');b.addEventListener('click',function(){LJUD.satt(LJUD.pa());if(LJUD.pa())LJUD.spela('ratt');});}
+  document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.door');if(t)LJUD.spela('tryck');});
+})();
+
+/* ---------- Gnistrande ljuspartiklar ---------- */
+(function(){
+  var c=$('motes'),x=c.getContext('2d'),st=[],w,h;
+  function init(){w=c.width=innerWidth;h=c.height=innerHeight;st=[];for(var i=0;i<70;i++)st.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.8+.4,v:Math.random()*.25+.05,f:Math.random()*6.3});}
+  function draw(t){x.clearRect(0,0,w,h);st.forEach(function(s){x.globalAlpha=.25+.45*Math.abs(Math.sin(t/1400+s.f));x.fillStyle='#fff1b8';x.beginPath();x.arc(s.x,s.y,s.r,0,6.3);x.fill();s.y-=s.v;s.x+=Math.sin(t/3000+s.f)*.15;if(s.y<-5){s.y=h+5;s.x=Math.random()*w;}});
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(draw);}
+  addEventListener('resize',init);init();requestAnimationFrame(draw);
+})();
+
+ritaKod();ritaKarta();ritaTimer();ritaAlt();
+})();
+</script>
+</body>
+</html>

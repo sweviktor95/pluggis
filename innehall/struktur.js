@@ -1595,7 +1595,8 @@ var struktur = [
         id: "religion-kristendom",
         titel: "Kristendomen",
         barn: [
-          { id: "religion-kristendom-tidsresa", titel: "Tidsresa: kristendomens historia (spel)" }
+          { id: "religion-kristendom-tidsresa", titel: "Tidsresa: kristendomens historia (spel)" },
+          { id: "religion-kristendom-escape", titel: "Escape room: Uppståndelsens katedral (spel)" }
         ]
       }
     ]
