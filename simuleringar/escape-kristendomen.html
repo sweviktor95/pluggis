@@ -429,16 +429,16 @@ var LJUD=(function(){
   var ctx=null,master=null,musG=null,fxG=null,verb=null,dry=null,timer=null,steg=0,on=true,igang=false,aktiva=[];
   /* Psalmliknande stycke i D-dur, 60 slag/min, 8 takter som loopar.
      Orgel (med tremulant och pedalbas), kör (formantfiltrerade "aa"), solostämma, harpa och klockor. */
-  var TAKT=4; /* sekunder per takt */
+  var TAKT=6; /* sekunder per takt, långsamt och tungt */
   var ACK=[
-    {b:38,c:[50,57,62,66],m:[[0,74,2],[2,78,1],[3,76,1]]},
-    {b:37,c:[52,57,61,64],m:[[0,73,2],[2,76,2]]},
-    {b:35,c:[50,54,59,62],m:[[0,74,1],[1,71,1],[2,74,2]]},
-    {b:42,c:[54,57,61,66],m:[[0,73,2],[2,69,2]]},
-    {b:43,c:[55,59,62,67],m:[[0,71,2],[2,74,1],[3,76,1]]},
-    {b:42,c:[54,57,62,66],m:[[0,78,2],[2,74,2]]},
-    {b:40,c:[55,59,62,64],m:[[0,76,2],[2,74,1],[3,71,1]]},
-    {b:45,c:[57,61,64,69],m:[[0,73,3],[3,76,1]]}
+    {b:38,c:[50,57,62,65],m:[[0,69,2.5],[2.5,74,1.25],[3.75,72,1.25]]},
+    {b:34,c:[53,58,62,65],m:[[0,70,2.5],[2.5,69,2.5]]},
+    {b:43,c:[55,58,62,67],m:[[0,67,2.5],[2.5,70,1.25],[3.75,69,1.25]]},
+    {b:45,c:[52,57,61,64],m:[[0,69,2.5],[2.5,73,2.5]]},
+    {b:38,c:[50,57,62,65],m:[[0,74,2.5],[2.5,77,1.25],[3.75,76,1.25]]},
+    {b:36,c:[53,57,60,65],m:[[0,72,2.5],[2.5,69,2.5]]},
+    {b:43,c:[55,58,62,67],m:[[0,70,2.5],[2.5,67,2.5]]},
+    {b:45,c:[52,57,61,64],m:[[0,69,3.75],[3.75,73,1.25]]}
   ];
   var KLOCKA=[587.3,659.3,740,880,987.8,1174.7,1480];
   var orgBus=null,korBus=null,nastaT=0,takter=0;
@@ -455,7 +455,7 @@ var LJUD=(function(){
     ctx=new AC();
     var comp=ctx.createDynamicsCompressor();comp.threshold.value=-18;comp.ratio.value=4;comp.attack.value=0.02;comp.release.value=0.4;
     master=ctx.createGain();master.gain.value=on?1:0;master.connect(comp);comp.connect(ctx.destination);
-    verb=ctx.createConvolver();verb.buffer=impuls(7);
+    verb=ctx.createConvolver();verb.buffer=impuls(9);
     var vg=ctx.createGain();vg.gain.value=1.1;verb.connect(vg);vg.connect(master);
     dry=ctx.createGain();dry.gain.value=0.5;dry.connect(master);
     musG=ctx.createGain();musG.gain.value=0.3;musG.connect(dry);musG.connect(verb);
@@ -463,7 +463,7 @@ var LJUD=(function(){
     /* orgelbuss med tremulant */
     orgBus=ctx.createGain();orgBus.gain.value=0.55;
     var tl=ctx.createOscillator(),td=ctx.createGain();tl.frequency.value=5.2;td.gain.value=0.09;tl.connect(td);td.connect(orgBus.gain);tl.start();
-    var olp=ctx.createBiquadFilter();olp.type='lowpass';olp.frequency.value=2600;orgBus.connect(olp);olp.connect(musG);
+    var olp=ctx.createBiquadFilter();olp.type='lowpass';olp.frequency.value=1300;orgBus.connect(olp);olp.connect(musG);
     /* körbuss */
     korBus=ctx.createGain();korBus.gain.value=0.9;korBus.connect(musG);
     return true;
@@ -481,12 +481,12 @@ var LJUD=(function(){
   /* orgeltoner: 8', 4', 2 2/3', 2' och 16' som drawbars */
   function orgel(m,t0,dur,vol){
     var f=mf(m);
-    [[0.5,0.5],[1,1],[2,0.55],[3,0.3],[4,0.22],[6,0.08]].forEach(function(h){
+    [[0.5,0.7],[1,1],[2,0.35],[3,0.12],[4,0.06]].forEach(function(h){
       var o=ctx.createOscillator();o.type='sine';o.frequency.value=f*h[0];
       hall(o,t0,dur,vol*h[1],orgBus,0.25,0.5);
     });
     /* liten luftstöt i början (chiff) */
-    ton(f*4,t0,0.12,'triangle',vol*0.18,orgBus,0.01);
+    
   }
   function pedal(m,t0,dur){
     var f=mf(m);
@@ -500,7 +500,7 @@ var LJUD=(function(){
     var o=ctx.createOscillator();o.type='sawtooth';o.frequency.value=mf(m);
     var vib=ctx.createOscillator(),vd=ctx.createGain();vib.frequency.value=5+Math.random();vd.gain.value=7;vib.connect(vd);vd.connect(o.detune);vib.start(t0);vib.stop(t0+dur+0.1);
     var f1=ctx.createBiquadFilter(),f2=ctx.createBiquadFilter(),s=ctx.createGain();
-    f1.type='bandpass';f1.frequency.value=780;f1.Q.value=5;f2.type='bandpass';f2.frequency.value=1250;f2.Q.value=6;
+    f1.type='bandpass';f1.frequency.value=420;f1.Q.value=5;f2.type='bandpass';f2.frequency.value=800;f2.Q.value=6;
     o.connect(f1);o.connect(f2);f1.connect(s);f2.connect(s);s.gain.value=1;
     hall(o,t0,dur,vol,s,1.3,1.4);s.connect(korBus);
   }
@@ -516,24 +516,46 @@ var LJUD=(function(){
   function harpa(m,t0,vol){
     var f=mf(m);ton(f,t0,2.6,'triangle',vol,musG,0.006);ton(f*2,t0,1.4,'sine',vol*0.4,musG,0.006);
   }
-  function takt(t){
-    var a=ACK[takter%ACK.length];
-    /* orgel: ackordet i hel takt och pedalbas */
-    a.c.forEach(function(m){orgel(m,t,TAKT+0.4,0.11);});
-    pedal(a.b,t,TAKT+0.6);
-    /* kör: tre röster, en oktav upp från ackordstonerna */
-    [a.c[1],a.c[2],a.c[3]].forEach(function(m,i){kor(m+(i===0?12:0),t+0.05*i,TAKT+0.8,0.045);});
-    /* solostämma (andra varvet dubblas en oktav upp av klockor) */
-    var varv=Math.floor(takter/ACK.length);
-    a.m.forEach(function(n){
-      solo(n[1],t+n[0],n[2]*0.97,0.16);
-      if(varv%2===1) klocka(mf(n[1]+12),t+n[0],0.07);
+  function pip(m,t0,dur,vol){ /* kort orgelpipa till pulserande ostinato */
+    var f=mf(m);
+    [[1,1],[2,0.5],[3,0.25]].forEach(function(h){
+      var o=ctx.createOscillator();o.type='sine';o.frequency.value=f*h[0];
+      var g=ctx.createGain();g.gain.setValueAtTime(0.0001,t0);g.gain.linearRampToValueAtTime(vol*h[1],t0+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+      o.connect(g);g.connect(orgBus);o.start(t0);o.stop(t0+dur+0.05);aktiva.push(o);
     });
-    /* harpa: stigande arpeggio, vartannat slag */
-    var arp=[a.c[0]+12,a.c[1]+12,a.c[2]+12,a.c[3]+12,a.c[2]+24,a.c[3]+12,a.c[1]+24,a.c[2]+12];
-    for(var i=0;i<8;i++){ if(varv>0||i%2===0) harpa(arp[i],t+i*0.5+0.02,0.07); }
-    /* klocka på takten, glest */
-    if(takter%4===0) klocka(mf(a.c[0]+24),t+0.02,0.09);
+  }
+  function takt(t){
+    var a=ACK[takter%ACK.length],pos=takter%ACK.length,sv=0.65+0.55*(pos/(ACK.length-1));
+    /* stor orgel som sväller genom hela slingan (Interstellar-känsla) */
+    a.c.forEach(function(m,i){
+      [[0.5,0.6],[1,1],[2,0.35],[3,0.15]].forEach(function(h){
+        var o=ctx.createOscillator();o.type='sine';o.frequency.value=mf(m)*h[0];
+        hall(o,t,TAKT+0.8,0.1*sv*h[1],orgBus,2.4,1.2);
+      });
+    });
+    pedal(a.b,t,TAKT+1);
+    /* pulserande arpeggio, åttondelar */
+    var mönster=[0,1,2,3,2,1,2,3,0,1,2,3,2,1,3,2];
+    for(var i=0;i<16;i++){ pip(a.c[mönster[i]]+12*(i%8===7?1:0),t+i*0.375,0.55,0.07*sv); }
+    /* kör, med liten skärande liten sekund över ackordet för spänning */
+    kor(a.c[1],t,TAKT+1,0.07);kor(a.c[2]-12,t+0.1,TAKT+1,0.07);kor(a.c[3],t+0.2,TAKT+1,0.06);
+    if(pos===3||pos===7) kor(a.c[3]+1,t+1.2,TAKT-0.5,0.035);
+    /* himmelskt ljus: hög kör som sväller mot slutet, plus glittrande klockor i klimaxet */
+    if(pos>=4){kor(a.c[2]+24,t+0.3,TAKT+1,0.02*(pos-3));kor(a.c[0]+24,t+0.4,TAKT+1,0.015*(pos-3));}
+    if(pos===7){[0,1,2,3].forEach(function(i){klocka(mf(a.c[i]+24),t+0.4+i*0.35,0.07);});}
+    if(pos===0){klocka(mf(74),t+0.05,0.12);klocka(mf(81),t+0.6,0.08);}
+    /* tickande klocka (BO3-känsla) */
+    for(var k=0;k<TAKT;k++){ton(170,t+k,0.09,'triangle',0.1,musG,0.003);ton(340,t+k,0.05,'sine',0.04,musG,0.003);}
+    /* djup drönare och dov bas-smäll i början av slingan */
+    if(pos===0){
+      ton(mf(26),t,TAKT*ACK.length,'sine',0.4,musG,4);ton(mf(38),t,TAKT*ACK.length,'sine',0.2,musG,5);
+      ton(mf(26),t,5,'sine',0.7,musG,0.04);ton(mf(14),t,4,'sine',0.5,musG,0.04);
+    }
+    /* spöklik vinande ton som glider */
+    if(pos%2===1){
+      var w=ctx.createOscillator(),f0=mf(a.c[2]+24);w.type='sine';w.frequency.setValueAtTime(f0,t+1);w.frequency.linearRampToValueAtTime(f0*1.04,t+5);
+      hall(w,t+1,4.5,0.025,musG,2,2);
+    }
     takter++;
   }
   function planera(){
