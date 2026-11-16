@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Prov område 1 Kemi som vetenskap: elevversion och lärarversion (facit + bedömningsguide)."""
-import sys, os
+import sys, os, re
 sys.path.insert(0, '/tmp/kem')
 from bstyle import *
 from bbuild_n import html_to_pdf, OUT
@@ -78,6 +78,28 @@ def teacher_section():
         '<h3>Kopplingar</h3><p>' + KOPPL + '</p>'
         '<p class="note">Fakta är kontrollerad mot källfilen för området. Upplägget är inspirerat av nationella prov, men provet är inte prövat på elever och bedömningen är ett förslag. Personer, annonser och mätvärden i uppgifterna är påhittade.</p></section>')
 
+TLS = '<span class="tl"><i style="background:#d64541"></i><i style="background:#f2c230"></i><i style="background:#3aa860"></i></span>'
+
+def split_parts(q):
+    """Delar upp en uppgift i delfrågor a), b), c) ... Returnerar (inledning, [(bokstav, text)]) eller None."""
+    ms = [m for m in re.finditer(r'(?<![\w(])([a-e])\) ', q)]
+    seq = []
+    want = 'a'
+    for m in ms:
+        if m.group(1) == want:
+            seq.append(m); want = chr(ord(want) + 1)
+    if len(seq) < 2:
+        return None
+    pre = q[:seq[0].start()]
+    items = []
+    for i, m in enumerate(seq):
+        end = seq[i + 1].start() if i + 1 < len(seq) else len(q)
+        txt = q[m.end():end]
+        txt = re.sub(r'(<br>|\s)+$', '', txt)
+        items.append((m.group(1), txt))
+    pre = re.sub(r'(<br>|\s)+$', '', pre)
+    return pre, items
+
 def build(lararversion):
     h = ['<section class="sec"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">' + KAP + ' · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ </div></div>'
          '<div class="sh"><h2>' + NAMN_ + '</h2></div>'
@@ -93,14 +115,23 @@ def build(lararversion):
         if alts:
             a = '<div class="alts">' + "".join(f"<div>{x}</div>" for x in alts) + '</div>'
         l = lines(nl) if nl and not lararversion else ""
+        sp = split_parts(q)
+        if sp:
+            pre, items = sp
+            each = max(2, round(nl / len(items))) if nl else 0
+            sub = "".join(f'<div class="sp"><div><b>{lab})</b> {txt}{lines(each) if (each and not lararversion) else ""}</div>{TLS}</div>' for lab, txt in items)
+            q = pre; a2 = a; a = ""; l = ""
+            sub = a2 + sub
+        else:
+            sub = ""
         fa = f'<div style="background:#f7e6e4;border-radius:5pt;padding:4pt 8pt;margin-top:4pt;font:9pt/1.35 Carlito"><b>Förmåga:</b> {FORM[n-1]} &nbsp; <b>Facit:</b> {fac}</div>' if lararversion else ""
-        h.append(f'<div class="q" style="grid-template-columns:16pt minmax(0,1fr) 44pt"><span class="n">{n}</span><div>{q}{a}{l}{fa}</div><span class="tl"><i style="background:#d64541"></i><i style="background:#f2c230"></i><i style="background:#3aa860"></i></span></div>')
+        h.append(f'<div class="q" style="grid-template-columns:16pt minmax(0,1fr) 44pt"><span class="n">{n}</span><div>{q}{a}{sub}{l}{fa}</div>' + ('<span></span>' if sub else TLS) + '</div>')
     h.append('</section>')
     if lararversion: h.append(teacher_section())
     return "".join(h)
 
 def doc(body, foot):
-    return f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, 1)}.q .alts{{grid-template-columns:1fr 1fr}}{DYS}.tl{{display:flex;gap:4pt;justify-content:flex-end;padding-top:1pt}}.tl i{{display:block;width:11pt;height:11pt;border-radius:50%;border:.6pt solid #555}}</style></head><body>{body}</body></html>'
+    return f'<!doctype html><html lang="sv"><head><meta charset="utf-8"><style>{css(foot, 1)}.q .alts{{grid-template-columns:1fr 1fr}}{DYS}.sp{{display:grid;grid-template-columns:minmax(0,1fr) 44pt;gap:7pt;margin:5pt 0 3pt;align-items:start}}.tl{{display:flex;gap:4pt;justify-content:flex-end;padding-top:1pt}}.tl i{{display:block;width:11pt;height:11pt;border-radius:50%;border:.6pt solid #555}}</style></head><body>{body}</body></html>'
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
