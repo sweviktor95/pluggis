@@ -184,13 +184,13 @@ FACIT = [
 ]
 
 # ---------------- Inlärningsprinciper i lättläst: Tänk tillbaka, Vanlig tanke, löst exempel, fyll i ----------------
-def _bx(bg, bd, lab, col, inner):
-    return (f'<div style="background:{bg};border:1.2pt solid {bd};border-radius:9pt;padding:8pt 12pt;margin:8pt 0 10pt;break-inside:avoid;font:11pt/1.45 Carlito">'
-            f'<span style="display:block;font:700 7.8pt Carlito;letter-spacing:1pt;color:{col};margin-bottom:3pt">{lab}</span>{inner}</div>')
-def _tb(qs): return _bx("#fff7e8", "#d99a2b", "TÄNK TILLBAKA", "#8a5a07", "<ol style='margin:0;padding-left:16pt'>" + "".join(f"<li>{q}</li>" for q in qs) + "</ol>")
-def _vt(t): return _bx("#fdecea", "#d64541", "VANLIG TANKE", "#a8322a", f"<p style='margin:0'>{t}</p>")
-def _lo(t): return _bx("#e7eef5", "#2b5d7a", "LÖST EXEMPEL", "#2b5d7a", f"<p style='margin:0'>{t}</p>")
-def _fy(t): return _bx("#eef6ee", "#3aa860", "FYLL I SJÄLV", "#2e7d4a", f"<p style='margin:0'>{t}</p>")
+def _bx(kind, bg, bd, lab, col, inner):
+    return (f'<div class="bx {kind}" style="background:{bg};border:1.2pt solid {bd};border-radius:9pt;padding:8pt 12pt;margin:8pt 0 10pt;break-inside:avoid;font:11pt/1.45 Carlito">'
+            f'<span class="rb" style="display:block;font:700 7.8pt Carlito;letter-spacing:1pt;color:{col};margin-bottom:3pt;text-transform:uppercase">{lab}</span>{inner}</div>')
+def _tb(qs): return _bx("tank", "#fff7e8", "#d99a2b", "Tänk tillbaka", "#8a5a07", "<ol style='margin:0;padding-left:16pt'>" + "".join(f"<li>{q}</li>" for q in qs) + "</ol>")
+def _vt(t): return _bx("varning", "#fdecea", "#d64541", "Vanlig tanke", "#a8322a", f"<p style='margin:0'>{t}</p>")
+def _lo(t): return _bx("visste", "#e7eef5", "#2b5d7a", "Löst exempel", "#2b5d7a", f"<p style='margin:0'>{t}</p>")
+def _fy(t): return _bx("fundera", "#eef6ee", "#3aa860", "Fyll i själv", "#2e7d4a", f"<p style='margin:0'>{t}</p>")
 NYA = {
  "Vad är materia?": (None, _vt("Många tror att luft är ingenting. Men luft är materia. Den har massa och tar plats. Det märks när du blåser upp en ballong.")),
  "Ämnen och material": (["Vad är materia?", "Är luft materia? Hur vet du det?"],

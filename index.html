@@ -283,6 +283,14 @@
   .tank-tillbaka .tt-tips { font-size: 0.92em; color: #6b5420; margin: 0 0 8px; }
   .tank-tillbaka details { margin: 4px 0; }
   .tank-tillbaka summary { cursor: pointer; }
+  .ov-in { border: 1.5px solid #b9c7be; border-radius: 6px; padding: 3px 8px; font: inherit; width: 9em; margin: 2px 3px; }
+  .ov-in.ratt { border-color: #3d7a5a; background: #e1eee6; }
+  .ov-in.fel { border-color: #c0392b; background: #fdecea; }
+  .ov-fyllfri { line-height: 2.2; }
+  .ov-steg { background: #e7eef5; border-radius: 8px; padding: 8px 12px; margin: 6px 0; }
+  .ov-tips { font-size: 0.85em; color: #5a6b62; margin: 6px 0 0; }
+  .ov-tb { margin: 0 0 14px; }
+  .ov-tb textarea { width: 100%; box-sizing: border-box; margin: 4px 0 6px; font: inherit; }
   .exit-ticket {
     background: #eefaf0;
     border: 2px dashed #5aa66b;
@@ -4077,6 +4085,13 @@ function ikonHtml(ikon) {
       var nn = '<option value="">…</option>' + o.delar.map(function(v, i) { return '<option>' + (i + 1) + '</option>'; }).join("");
       h += o.delar.map(function(v) { return '<div class="ov-rad"><span class="ov-ord">' + v + '</span><select aria-label="Nummer">' + nn + '</select></div>'; }).join("");
       h += '<button type="button" class="ov-kolla" onclick="ovKolla(\'' + id + '\')">Kolla</button>';
+    } else if (o.typ === "tbak") {
+      h += o.fragor.map(function(q, i) { return '<div class="ov-tb"><p class="ov-mening"><strong>' + (i + 1) + '.</strong> ' + q.f + '</p><textarea rows="2" aria-label="Ditt svar" placeholder="Skriv ditt svar innan du kollar"></textarea><button type="button" class="ov-kolla" onclick="ovTbSvar(\'' + id + '\',' + i + ')">Visa svar</button><div class="ov-svar tb-svar" aria-live="polite"></div></div>'; }).join("");
+    } else if (o.typ === "lost") {
+      h += '<div class="ov-steglista"></div><button type="button" class="ov-kolla" onclick="ovNastaSteg(\'' + id + '\')">Visa första steget</button><p class="ov-tips">Försök först komma på steget själv, och kolla sedan.</p>';
+    } else if (o.typ === "fyllfri") {
+      h += '<p class="ov-mening ov-fyllfri">' + o.text.replace(/§/g, '<input type="text" class="ov-in" aria-label="Svar" autocomplete="off">') + '</p>';
+      h += '<button type="button" class="ov-kolla" onclick="ovKolla(\'' + id + '\')">Kolla</button> <button type="button" class="ov-kolla ov-facit" onclick="ovForslag(\'' + id + '\')">Visa facit</button>';
     } else if (o.typ === "skriv" || o.typ === "skriv2" || o.typ === "rita" || o.typ === "fri") {
       var sparat = []; try { sparat = JSON.parse(localStorage.getItem(ovNyckel(o)) || "[]"); } catch (e) {}
       var falt = o.typ === "skriv" ? [o.borja + " …"] : (o.typ === "skriv2" ? o.falt : (o.typ === "fri" ? ["Skriv ditt svar här (om du vill)"] : ["Skriv här hur ditt diagram ser ut (rita gärna på papper också)"]));
@@ -4106,6 +4121,17 @@ function ikonHtml(ikon) {
       document.querySelectorAll("#" + id + " .ov-mening").forEach(function(p, i) { var v = p.querySelector("select").value; if (!v) { klar = false; } markera(p, v === o.ratt[i]); });
     } else if (o.typ === "siffror") {
       rad.forEach(function(r, i) { var v = r.querySelector("select").value; if (!v) { klar = false; } markera(r, v === String(o.ratt[i])); });
+    } else if (o.typ === "fyllfri") {
+      var nm = function(t) { return String(t).trim().toLowerCase().replace(/,/g, "."); };
+      document.querySelectorAll("#" + id + " .ov-in").forEach(function(inp, i) {
+        var v = nm(inp.value), ac = (o.ratt[i] || []).map(nm);
+        inp.classList.remove("ratt", "fel");
+        if (!v) { klar = false; return; }
+        if (!ac.length) { return; }
+        var ok = ac.some(function(a) { return /^[\d.]+$/.test(a) ? v === a : v.indexOf(a) >= 0; });
+        inp.classList.add(ok ? "ratt" : "fel"); tot++; if (ok) { ratt++; }
+      });
+      if (!tot && klar) { ovSag(id, true, "Bra! Den här uppgiften har öppna svar. Jämför med facit."); return; }
     }
     if (!klar) { ovSag(id, false, "Svara på alla först. " + ratt + " av " + tot + " rätt hittills."); }
     else if (ratt === tot) { ovSag(id, true, "✓ Alla rätt!"); }
@@ -4115,10 +4141,23 @@ function ikonHtml(ikon) {
     var o = ovReg[id], v = [].map.call(document.querySelectorAll("#" + id + " textarea"), function(t) { return t.value; });
     try { localStorage.setItem(ovNyckel(o), JSON.stringify(v)); } catch (e) {}
   }
+  function ovTbSvar(id, i) {
+    var o = ovReg[id], rutor = document.querySelectorAll("#" + id + " .ov-tb"), r = rutor[i].querySelector(".tb-svar");
+    var vis = r.classList.contains("forslag");
+    r.className = vis ? "ov-svar tb-svar" : "ov-svar tb-svar forslag"; r.textContent = vis ? "" : "Svar: " + o.fragor[i].svar;
+    rutor[i].querySelector("button").textContent = vis ? "Visa svar" : "Dölj svar";
+  }
+  function ovNastaSteg(id) {
+    var o = ovReg[id], el = document.getElementById(id), lista = el.querySelector(".ov-steglista"), kn = el.querySelector("button");
+    var n = lista.children.length;
+    if (n < o.steg.length) { var p = document.createElement("p"); p.className = "ov-steg"; p.innerHTML = '<strong>Steg ' + (n + 1) + ':</strong> ' + o.steg[n]; lista.appendChild(p); n++; }
+    kn.textContent = n < o.steg.length ? "Visa nästa steg" : "Alla steg visade";
+    if (n >= o.steg.length) { kn.disabled = true; }
+  }
   function ovForslag(id) {
     var r = ovSvarRuta(id); var vis = r.classList.contains("forslag");
     r.className = vis ? "ov-svar" : "ov-svar forslag"; r.textContent = vis ? "" : "Facit: " + ovReg[id].forslag;
-    var kn = document.querySelector("#" + id + " .ov-kolla"); if (kn) { kn.textContent = vis ? "Visa facit" : "Dölj facit"; }
+    var kn = document.querySelector("#" + id + " .ov-facit") || document.querySelector("#" + id + " .ov-kolla"); if (kn) { kn.textContent = vis ? "Visa facit" : "Dölj facit"; }
   }
 
   function vaxlaLasstod() {
@@ -4183,7 +4222,7 @@ function ikonHtml(ikon) {
   }
 
   // ---- Repetition per kapitel: spridd repetition (Leitner, 1/3/7/21 dagar) + blandade uppgifter ----
-  var REP_NYCKEL = "pluggis-rep-v1", REP_DAGAR = [0, 1, 3, 7, 21], REP_ANTAL = 8;
+  var REP_NYCKEL = "pluggis-rep-v1", REP_DAGAR = [0, 1, 3, 7, 21], REP_ANTAL = 5;
   var repTillstand = {};
   try { repTillstand = JSON.parse(window.localStorage.getItem(REP_NYCKEL) || "{}") || {}; } catch (e) { repTillstand = {}; }
   function repSpara() { try { window.localStorage.setItem(REP_NYCKEL, JSON.stringify(repTillstand)); } catch (e) {} }

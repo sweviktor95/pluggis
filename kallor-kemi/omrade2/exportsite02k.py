@@ -34,6 +34,7 @@ M["kemi-m-2-s"] = dict(latt=BL.ord_page() + BL.viktigast_page(), van=BN.sam_html
 M["kemi-m-2-t"] = dict(latt=BL.test_pages(), van=BN.test_html(G), ford=F.uppg_html())
 
 import sajtkonv as SK
+import interakt02k as IA
 import latt_ov as LO
 import svar_ov02k as _S
 class SO:
@@ -102,6 +103,7 @@ for id_, d in M.items():
         if d[k]: niv[key] = SK.konvertera(fix(d[k]), TITEL[id_])
     if id_ == "kemi-m-2-t":
         niv["vanlig"] = TEST_GRUND; niv["fordjupning"] = TEST_FORDJ
+    IA.gor_interaktiv(niv)
     for v in niv.values():
         for sek in v["sektioner"]:
             if sek.get("fragor"): sek["fragor"] = [SO.kolla_objekt(q) for q in sek["fragor"]]
