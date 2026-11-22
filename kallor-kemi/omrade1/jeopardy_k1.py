@@ -11,7 +11,7 @@ KAT = [
    ("Vad är en hypotes?", "en gissning som går att pröva"),
    ("Vad menas med den oberoende variabeln?", "det du ändrar i försöket"),
    ("Vad är ett rättvist försök?", "man ändrar bara en variabel i taget och håller allt annat lika"),
-   ("Nämn två variabler som ska hållas lika i brustabletts-försöket.", "t.ex. vattenmängd, tablettsort och storlek, glasets form, omrörning, sättet att mäta tiden"),
+   ("Nämn två variabler som ska hållas lika i sockerbitsförsöket.", "t.ex. vattenmängd, sockerbitens sort och storlek, glasets form, omrörning, sättet att mäta tiden"),
    ("Varför har man ofta en jämförelse med bara vatten när man testar en fläckborttagare?", "för att se om skillnaden beror på produkten och inte på vattnet, tiden eller sättet man sköljer")]),
  ("Resultat och slutsats", [
    ("Hur räknar man ut ett medelvärde?", "lägg ihop alla värden och dela med antalet värden"),

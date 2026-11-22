@@ -643,7 +643,7 @@ var struktur = [
               { id: "kemi-m-1-1-2", titel: "Från fråga till plan" },
               { id: "kemi-m-1-1-3", titel: "Dokumentera och värdera" },
               { id: "kemi-m-1-1-sim", titel: "Simulering: undersök hur socker löser sig" },
-              { id: "kemi-m-1-1-l", titel: "Labb: Hur påverkar temperaturen hur fort en brustablett löser sig?" }
+              { id: "kemi-m-1-1-l", titel: "Labb: Hur påverkar temperaturen hur fort en sockerbit löser sig?" }
             ]
           },
           {

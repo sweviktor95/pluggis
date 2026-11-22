@@ -63,23 +63,16 @@ render('l_cykel', svg(W, H, b, "#fbf3f1"), W, H, 1)
 # ---------- v_brus: tre glas ---------------------------------------------------
 W, H = 1500, 560
 b = ''
-specs = [(110, "5 °C", "#cfe3f3", 0.1, "kallt"), (580, "20 °C", "#bcd9ec", 0.55, "rumstemperatur"), (1050, "40 °C", "#f1d6b8", 0.95, "varmt")]
+specs = [(110, "20 °C", "#cfe3f3", 0.3, "kranvatten"), (580, "30 °C", "#c9dfe6", 0.6, "ljummet"), (1050, "40 °C", "#f1d6b8", 0.9, "varmt")]
 for x, lab, col, val, nm in specs:
     b += beaker(x, 150, 250, 290, 0.62, col, ticks=True)
     b += thermometer(x + 285, 140, 250, val, "#d63a2e" if val > .5 else "#3a78c9")
     b += T(x + 125, 108, lab, 50, DRED, "700") + T(x + 125, 495, nm, 28, MUT)
-    # tablett
-    b += f'<ellipse cx="{x+125}" cy="{420}" rx="52" ry="14" fill="#fff" stroke="{LINE}" stroke-width="4"/>'
-    random.seed(int(val * 100))
-    nb = {0.1: 4, 0.55: 11, 0.95: 22}[val]
-    for k in range(nb):
-        bx = x + 80 + random.random() * 90; by = 215 + random.random() * 190
-        b += bubble(bx, by, random.choice([5, 7, 9, 12]))
-b += T(750, 548, "Samma mängd vatten och samma sorts tablett i alla glas. Det enda som ändras är temperaturen.", 27, INK, "700")
-for x in (110, 1050):
-    pass
-b += f'<path d="M1050,148 q-8,-24 4,-40 M1100,148 q-8,-24 4,-40 M1150,148 q-8,-24 4,-40" stroke="#c9b6a3" stroke-width="5" fill="none" stroke-linecap="round" opacity="0"/>'
-b += ''.join(f'<polygon points="{x},{y} {x+34},{y-6} {x+38},{y+28} {x+4},{y+34}" fill="#e8f4fb" stroke="#9ec6e0" stroke-width="3"/>' for x, y in [(140, 300), (200, 330)])
+    # sockerbit
+    b += f'<polygon points="{x+95},{392} {x+155},{392} {x+163},{380} {x+103},{380}" fill="#ffffff" stroke="{LINE}" stroke-width="4"/>'
+    b += f'<rect x="{x+95}" y="392" width="60" height="44" rx="3" fill="#fbfbfb" stroke="{LINE}" stroke-width="4"/>'
+    b += f'<polygon points="{x+155},{392} {x+163},{380} {x+163},{424} {x+155},{436}" fill="#e9e9e9" stroke="{LINE}" stroke-width="4"/>'
+b += T(750, 548, "Samma mängd vatten och samma sorts sockerbit i alla glas. Det enda som ändras är temperaturen.", 27, INK, "700")
 render('v_brus', svg(W, H, b, BG), W, H, 1)
 
 # ---------- v_brusdiagram ------------------------------------------------------
@@ -91,15 +84,15 @@ mx = 180
 for k in range(0, 7):
     v = k * 30; y = Y0 - (Y0 - Y1) * v / mx
     b += f'<path d="M{X0-10},{y} H{X1}" stroke="#e6d9d5" stroke-width="2"/>' + T(X0 - 18, y + 9, str(v), 26, INK, "400", "end")
-data = [("5 °C", 152, "#7fb2d9"), ("20 °C", 74, "#e8a95a"), ("40 °C", 31, "#d9534a")]
+data = [("20 °C", 165, "#7fb2d9"), ("30 °C", 110, "#e8a95a"), ("40 °C", 74, "#d9534a")]
 bw = 170
 for i, (lab, v, col) in enumerate(data):
     x = X0 + 90 + i * 260; h = (Y0 - Y1) * v / mx
     b += f'<rect x="{x}" y="{Y0-h}" width="{bw}" height="{h}" rx="6" fill="{col}"/>' + T(x + bw / 2, Y0 - h - 14, f"{v} s", 32, INK, "700") + T(x + bw / 2, Y0 + 40, lab, 30, INK, "700")
 b += T(55, 315, "", 2)
-b += f'<g transform="translate(52,315) rotate(-90)">{T(0, 0, "Tid tills tabletten är upplöst (s)", 28, INK, "700")}</g>'
+b += f'<g transform="translate(52,315) rotate(-90)">{T(0, 0, "Tid tills sockerbiten är upplöst (s)", 28, INK, "700")}</g>'
 b += T(595, 616, "Vattnets temperatur", 28, INK, "700")
-b += T(595, 52, "Hur snabbt löses brustabletten? (medelvärden)", 32, DRED, "700")
+b += T(595, 52, "Hur snabbt löses sockerbiten? (medelvärden)", 32, DRED, "700")
 render('v_brusdiagram', svg(W, H, b, "#ffffff"), W, H, 1)
 
 # ---------- l_modell: partikelmodellen ---------------------------------------

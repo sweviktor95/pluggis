@@ -9,11 +9,11 @@ SLUG = "kemi-vetenskap"
 TAB = "1"
 NAMN = "Kemi som vetenskap"
 UNDER = "Så undersöker och tänker en kemist"
-INTRO = ("Hur kan en brustablett försvinna i ett vattenglas, och varför går det fortare i varmt vatten än i kallt? Hur vet en tillverkare att en fläckborttagare verkligen fungerar? Och varför trodde människor i över tvåtusen år att allt var gjort av bara fyra element? "
+INTRO = ("Hur kan en sockerbit försvinna i ett vattenglas, och varför går det fortare i varmt vatten än i kallt? Hur vet en tillverkare att en fläckborttagare verkligen fungerar? Och varför trodde människor i över tvåtusen år att allt var gjort av bara fyra element? "
          "Kemi handlar om ämnen och hur de förändras, men också om hur kemister arbetar: de ställer frågor, mäter, jämför och granskar varandras svar. "
          "I det här kapitlet lär du dig arbeta säkert i ett kemilabb, planera ett rättvist försök och värdera resultatet. Du lär dig också vad en modell är, hur kemin har vuxit fram och hur du granskar påståenden om kemi. Namn och mätvärden i uppgifterna är påhittade, om inget annat står.")
 MAL = ["hur du arbetar säkert i ett kemilabb och läser av mätutrustning", "hur du går från en fråga till en plan med hypotes och variabler",
-       "hur du dokumenterar, räknar medelvärde och värderar ett resultat", "hur du genomför ett rättvist försök med en brustablett",
+       "hur du dokumenterar, räknar medelvärde och värderar ett resultat", "hur du genomför ett rättvist försök med en sockerbit",
        "vad en modell är i kemi och varför modeller kan förändras", "hur kemin vuxit fram från de fyra elementen till atomteorin",
        "hur du granskar påståenden om kemi, till exempel i reklam"]
 FUNDERA = "Titta på produkterna i ditt kök eller badrum: diskmedel, tvål, tandkräm, rengöring. Vilka tror du är ”kemikalier” och vilka är det inte? Skriv ner din gissning och spara den. I slutet av kapitlet får du se om du ändrar dig."
@@ -34,7 +34,7 @@ KQ = {
  "1.1.2": [("Vad är en hypotes?", "En välgrundad gissning som går att pröva i en undersökning, ofta på formen ”om … så …, eftersom …”."),
            ("Vad är skillnaden mellan den oberoende och den beroende variabeln?", "Den oberoende variabeln ändrar du. Den beroende mäter du för att se om den påverkas."),
            ("Varför ska bara en variabel ändras i taget?", "Annars vet du inte vad som orsakade skillnaden i resultatet."),
-           ("Ge två exempel på kontrollerade variabler i brustablettförsöket.", "T.ex. vattenmängd, tablettens storlek och sort, glasets form, att alla startar och stoppar klockan på samma sätt.")],
+           ("Ge två exempel på kontrollerade variabler i sockerbitsförsöket.", "T.ex. vattenmängd, sockerbitens storlek och sort, glasets form, att alla startar och stoppar klockan på samma sätt.")],
  "1.1.3": [("Varför ska man upprepa mätningarna?", "För att se hur mycket värdena varierar och för att minska risken att ett slumpfel avgör resultatet."),
            ("Räkna ut medelvärdet av 70 s, 78 s och 74 s.", "(70 + 78 + 74) / 3 = 74 s."),
            ("Vad är en felkälla? Ge ett exempel.", "Något som kan göra mätningen mindre säker, t.ex. att man startar klockan sent, läser av termometern fel eller att vattnet svalnar."),
@@ -63,7 +63,7 @@ def add(nr, t, foot, inner):
 
 # ------------------------------------------------------------------ Start
 add("Start", "Vad är kemi?", f"Kapitel {NR} · {NAMN} · Start",
- row("<p><strong class='green'>Kemi</strong> är läran om ämnen och hur de förändras. Allt du ser, äter och rör vid är gjort av kemiska ämnen: vatten, socker, plast, tvål, luft. När en brustablett löser sig, när järn rostar eller när mat tillagas sker kemiska förändringar. Kemi är därför inte något som bara finns i ett labb.</p>"
+ row("<p><strong class='green'>Kemi</strong> är läran om ämnen och hur de förändras. Allt du ser, äter och rör vid är gjort av kemiska ämnen: vatten, socker, plast, tvål, luft. När socker löser sig i vatten, när järn rostar eller när mat tillagas sker kemiska förändringar. Kemi är därför inte något som bara finns i ett labb.</p>"
      "<p>Kemi är också en <strong class='green'>naturvetenskap</strong>. Det betyder att kemister inte nöjer sig med att tro eller gissa. De ställer frågor, gör undersökningar, mäter och prövar sina förklaringar mot det som verkligen händer. Andra kemister kontrollerar och upprepar försöken. Det är det som gör att vi kan lita på kunskapen.</p>"
      "<p>Det finns många slags kemister. Några exempel är <strong class='green'>analytiska kemister</strong> som mäter vad ett prov innehåller, <strong class='green'>läkemedelskemister</strong> som tar fram och testar läkemedel, <strong class='green'>materialkemister</strong> som utvecklar material som plast och batterier och <strong class='green'>miljökemister</strong> som undersöker föroreningar i luft, vatten och mark.</p>"
      "<p>I det här kapitlet svarar vi på tre frågor:</p>"
@@ -71,7 +71,7 @@ add("Start", "Vad är kemi?", f"Kapitel {NR} · {NAMN} · Start",
    [begrepp([("Kemi", "Läran om ämnen och hur de förändras."), ("Naturvetenskap", "Kunskap som prövas med undersökningar och mätningar."), ("Ämne", "En sorts material med bestämda egenskaper, t.ex. vatten eller socker.")]),
     box("tank", "Tänk efter", "<p>Nämn tre kemiska förändringar du har sett den här veckan. Hur vet du att det är en förändring och inte bara en blandning?</p>")])
  + table(["Delområde", "Du lär dig"],
-         [["<b>1.1</b> Arbeta som kemist", "Säkerhet och utrustning, att gå från fråga till plan och att dokumentera och värdera. Labb: brustabletten och temperaturen."],
+         [["<b>1.1</b> Arbeta som kemist", "Säkerhet och utrustning, att gå från fråga till plan och att dokumentera och värdera. Labb: sockerbiten och temperaturen."],
           ["<b>1.2</b> Modeller, källor och argument", "Vad en modell är, hur kemin vuxit fram och hur du granskar påståenden. Labb: fungerar fläckborttagaren?"]])
  + kq("Start"))
 
@@ -87,7 +87,7 @@ add("1.1.1", "Säkerhet och utrustning i kemilabbet", f"Kapitel {NR} · Delområ
                   "Torka upp spill direkt och berätta för läraren om något går sönder eller spills.",
                   "Tvätta händerna när du är klar.",
                   "Vet du inte vad ett ämne är? Fråga innan du använder det."]),
-       [box("tank", "Tänk efter", "<p>Varför är regeln om skyddsglasögon viktig även när ni bara använder vatten och en brustablett?</p>")])
+       [box("tank", "Tänk efter", "<p>Varför är regeln om skyddsglasögon viktig även när ni bara använder vatten och sockerbitar?</p>")])
  + "<h3>Faropiktogram och etiketter</h3>"
  + "<p>Farliga produkter är märkta med <strong class='green'>faropiktogram</strong>: röda rutor på spetsen med en svart bild. De visar vilken sorts fara det handlar om. På etiketten finns också ett <strong class='green'>signalord</strong>, antingen <i>Fara</i> (för de allvarligaste farorna) eller <i>Varning</i>, och <strong class='green'>faroangivelser</strong> som beskriver farorna med ord. Där står också produktens namn och leverantörens kontaktuppgifter.</p>"
  + fig(FIG+"v_piktogram.png", "<b>Bild 1.2</b> De nio faropiktogrammen: explosivt, brandfarligt, oxiderande, gas under tryck, frätande, akut giftigt, hälsofarligt, varning (utropstecken) och miljöfarligt.", "96%")
@@ -98,14 +98,14 @@ add("1.1.1", "Säkerhet och utrustning i kemilabbet", f"Kapitel {NR} · Delområ
 
 # ------------------------------------------------------------------ 1.1.2
 add("1.1.2", "Från fråga till plan", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · Från fråga till plan",
- row("<p>En undersökning börjar med en fråga. Inte alla frågor går att undersöka i ett kemilabb. ”Är brustabletter goda?” är en fråga om tycke. ”Hur påverkar vattnets temperatur tiden det tar för en brustablett att lösa sig?” är en <strong class='green'>undersökningsbar fråga</strong>: du kan mäta svaret.</p>"
-     "<p>Sedan skriver du en <strong class='green'>hypotes</strong>. Det är en gissning som du kan pröva, helst med en förklaring: ”<i>Om vattnet är varmare, så löser tabletten sig fortare, eftersom allt rör sig snabbare i varmt vatten.</i>” En hypotes kan visa sig vara fel. Det är också ett viktigt resultat.</p>",
+ row("<p>En undersökning börjar med en fråga. Inte alla frågor går att undersöka i ett kemilabb. ”Är sockerbitar goda?” är en fråga om tycke. ”Hur påverkar vattnets temperatur tiden det tar för en sockerbit att lösa sig?” är en <strong class='green'>undersökningsbar fråga</strong>: du kan mäta svaret.</p>"
+     "<p>Sedan skriver du en <strong class='green'>hypotes</strong>. Det är en gissning som du kan pröva, helst med en förklaring: ”<i>Om vattnet är varmare, så löser sockerbiten sig fortare, eftersom allt rör sig snabbare i varmt vatten.</i>” En hypotes kan visa sig vara fel. Det är också ett viktigt resultat.</p>",
    [begrepp([("Undersökningsbar fråga", "En fråga som går att svara på med mätningar."), ("Hypotes", "En gissning som går att pröva."), ("Variabel", "Något som kan ändras eller mätas i ett försök.")])])
- + fig(FIG+"v_brus.png", "<b>Bild 1.4</b> Tre glas med brustablett. Samma mängd vatten och samma sorts tablett i alla glas. Det enda som ändras är temperaturen.", "96%")
+ + fig(FIG+"v_brus.png", "<b>Bild 1.4</b> Tre glas med en sockerbit. Samma mängd vatten och samma sorts sockerbit i alla glas. Det enda som ändras är temperaturen.", "96%")
  + "<h3>Variabler</h3>"
- + "<p>I ett försök finns tre sorters <strong class='green'>variabler</strong>. Den <strong class='green'>oberoende variabeln</strong> är det du ändrar, här vattnets temperatur. Den <strong class='green'>beroende variabeln</strong> är det du mäter för att se om den påverkas, här tiden tills tabletten är upplöst. Alla andra saker som kan påverka resultatet, till exempel vattenmängd, tablettens storlek och sort och hur du startar och stoppar klockan, ska du hålla lika. De kallas <strong class='green'>kontrollerade variabler</strong>.</p>"
- + table(["Sorts variabel", "I brustablettförsöket"],
-         [["Oberoende (jag ändrar)", "Vattnets temperatur: 5 °C, 20 °C och 40 °C"], ["Beroende (jag mäter)", "Tid tills tabletten är upplöst, i sekunder"], ["Kontrollerade (jag håller lika)", "Vattenmängd, tablettsort och storlek, glasets form, ingen omrörning, samma sätt att mäta tiden"]])
+ + "<p>I ett försök finns tre sorters <strong class='green'>variabler</strong>. Den <strong class='green'>oberoende variabeln</strong> är det du ändrar, här vattnets temperatur. Den <strong class='green'>beroende variabeln</strong> är det du mäter för att se om den påverkas, här tiden tills sockerbiten är upplöst. Alla andra saker som kan påverka resultatet, till exempel vattenmängd, sockerbitens storlek och sort och hur du startar och stoppar klockan, ska du hålla lika. De kallas <strong class='green'>kontrollerade variabler</strong>.</p>"
+ + table(["Sorts variabel", "I sockerbitsförsöket"],
+         [["Oberoende (jag ändrar)", "Vattnets temperatur: 20 °C, 30 °C och 40 °C"], ["Beroende (jag mäter)", "Tid tills sockerbiten är upplöst, i sekunder"], ["Kontrollerade (jag håller lika)", "Vattenmängd, sockerbitens sort och storlek, glasets form, ingen omrörning, samma sätt att mäta tiden"]])
  + roww("<h3 style='margin-top:0'>Ett rättvist försök</h3><p>Ett försök är <strong class='green'>rättvist</strong> om du bara ändrar en variabel i taget. Ändrar du två saker samtidigt, till exempel både temperatur och vattenmängd, kan du inte veta vilken som gav skillnaden. Ofta behöver du också en <strong class='green'>jämförelse</strong>, ett prov där du inte ändrar något, så att du har något att jämföra med.</p>"
         "<p>Skriv sedan en <strong class='green'>plan</strong> innan du börjar: vilken utrustning du behöver, vad du gör i vilken ordning, hur du mäter och hur många gånger du upprepar. Gör också en tom tabell att fylla i.</p>",
         [box("tank", "Tänk efter", "<p>Du vill veta om en sockerbit löser sig fortare om du rör om. Vilken variabel ändrar du, vilken mäter du och vad håller du lika?</p>")])
@@ -116,30 +116,30 @@ add("1.1.3", "Dokumentera och värdera", f"Kapitel {NR} · Delområde 1.1 {DELOM
  row("<p>Skriv ner det du mäter medan du mäter, inte efteråt. Använd en <strong class='green'>tabell</strong> med rubriker och <strong class='green'>enheter</strong> (till exempel s för sekunder och °C för grader Celsius). Ett tal utan enhet säger nästan ingenting.</p>"
      "<p>Gör alltid flera mätningar för samma sak. Då ser du hur mycket värdena varierar, och slumpen får mindre makt över resultatet. För varje temperatur räknar du ut <strong class='green'>medelvärdet</strong>: lägg ihop alla värden och dela med antalet. Av 70 s, 78 s och 74 s blir medelvärdet (70 + 78 + 74) / 3 = 74 s.</p>",
    [begrepp([("Medelvärde", "Summan av värdena delat med antalet värden."), ("Felkälla", "Något som kan göra en mätning mindre säker."), ("Slutsats", "Svaret på frågan, byggt på resultatet.")])])
- + fig(FIG+"v_brusdiagram.png", "<b>Bild 1.5</b> Medelvärden från ett exempelförsök med brustablett. Mätvärdena är påhittade.", "86%")
+ + fig(FIG+"v_brusdiagram.png", "<b>Bild 1.5</b> Medelvärden från ett exempelförsök med sockerbit. Mätvärdena är påhittade.", "86%")
  + "<p>Ett <strong class='green'>diagram</strong> gör mönster lättare att se. Lägg det du ändrar (temperaturen) på den vågräta axeln och det du mäter (tiden) på den lodräta. Skriv ut namn och enhet på båda axlarna och sätt en rubrik.</p>"
  + roww("<h3 style='margin-top:0'>Värdera resultatet</h3><p>Fråga dig: Svarar resultatet på frågan? Stämde hypotesen? Vilka <strong class='green'>felkällor</strong> kan ha påverkat? Det kan vara att klockan startades sent, att termometern lästes av fel eller att vattnet hann svalna. Skriv hur du skulle göra annorlunda nästa gång.</p>"
-        "<p>Slutsatsen ska bygga på dina egna mätningar. Skriv den som ett svar på frågan: ”<i>Ju varmare vatten, desto kortare tid tog det för tabletten att lösa sig. Hypotesen stämde.</i>” Skriv också hur säker du är. Hade du få mätningar eller stora skillnader mellan försöken är du mindre säker. Om ett värde sticker ut kan du undersöka om det beror på ett misstag, men du får inte bara ta bort det för att det inte passar.</p>",
+        "<p>Slutsatsen ska bygga på dina egna mätningar. Skriv den som ett svar på frågan: ”<i>Ju varmare vatten, desto kortare tid tog det för sockerbiten att lösa sig. Hypotesen stämde.</i>” Skriv också hur säker du är. Hade du få mätningar eller stora skillnader mellan försöken är du mindre säker. Om ett värde sticker ut kan du undersöka om det beror på ett misstag, men du får inte bara ta bort det för att det inte passar.</p>",
         [box("tank", "Tänk efter", "<p>Tre grupper mäter 148 s, 160 s och 148 s för samma temperatur. Är värdena lika nog för att lita på medelvärdet? Varför?</p>")])
  + kq("1.1.3"))
 
 # ------------------------------------------------------------------ Labb 1.1
-add("Labb", "1.1 Brustabletten och temperaturen", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · Labb 1.1 Brustabletten och temperaturen",
- "<p>Du ska undersöka hur vattnets temperatur påverkar hur fort en brustablett löser sig, och följa hela vägen från fråga till slutsats.</p>"
- + roww("<p><strong class='green'>Frågeställning:</strong> Hur påverkar vattnets temperatur tiden det tar för en brustablett att lösa sig?</p><p><strong class='green'>Hypotes:</strong> Skriv din hypotes med ”om … så …, eftersom …”.</p>"
-        "<p><strong class='green'>Material:</strong> tre genomskinliga glas (samma sort), mätcylinder, termometer, ur eller stoppur, brustabletter av samma sort (minst nio), kallt vatten med is, kranvatten och varmt vatten, skyddsglasögon.</p><h3>Gör så här</h3>"
+add("Labb", "1.1 Sockerbiten och temperaturen", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · Labb 1.1 Sockerbiten och temperaturen",
+ "<p>Du ska undersöka hur vattnets temperatur påverkar hur fort en sockerbit löser sig, och följa hela vägen från fråga till slutsats.</p>"
+ + roww("<p><strong class='green'>Frågeställning:</strong> Hur påverkar vattnets temperatur tiden det tar för en sockerbit att lösa sig?</p><p><strong class='green'>Hypotes:</strong> Skriv din hypotes med ”om … så …, eftersom …”.</p>"
+        "<p><strong class='green'>Material:</strong> tre genomskinliga glas (samma sort), mätcylinder, termometer, ur eller stoppur, sockerbitar av samma sort (minst nio), kranvatten och varmt vatten, skyddsglasögon.</p><h3>Gör så här</h3>"
         + steps(["Mät upp samma mängd vatten i varje glas, till exempel 2 dl (200 ml).",
-                 "Gör vattnet cirka 5 °C, 20 °C och 40 °C. Kontrollera med termometern. Använd inte varmare vatten än 40 °C.",
-                 "Släpp ner en hel tablett i det första glaset och starta klockan i samma stund. Rör inte om.",
-                 "Stoppa klockan när tabletten har försvunnit helt. Skriv tiden i tabellen.",
+                 "Gör vattnet cirka 20 °C, 30 °C och 40 °C. Kontrollera med termometern. Använd inte varmare vatten än 40 °C.",
+                 "Släpp försiktigt ner en hel sockerbit i det första glaset och starta klockan i samma stund. Rör inte om.",
+                 "Bestäm i förväg när sockerbiten räknas som borta, till exempel när inga korn syns kvar i botten. Stoppa klockan då och skriv tiden i tabellen.",
                  "Upprepa med nytt vatten, tre försök för varje temperatur.",
                  "Räkna ut medelvärdet för varje temperatur och rita ett stapeldiagram."]),
         [box("begrepp", "Begrepp", "<b class='t'>Oberoende variabel</b><p>Det du ändrar.</p><b class='t'>Beroende variabel</b><p>Det du mäter.</p><b class='t'>Medelvärde</b><p>Summan delat med antalet.</p>"),
-         box("tank", "Bra att veta", "<p>Brustabletten innehåller bland annat citronsyra och natriumvätekarbonat. När de kommer i vatten reagerar de med varandra och bildar koldioxidgas. Det är bubblorna du ser.</p>")])
- + table(["Temperatur", "Försök 1 (s)", "Försök 2 (s)", "Försök 3 (s)", "Medelvärde (s)"], [["5 °C", "", "", "", ""], ["20 °C", "", "", "", ""], ["40 °C", "", "", "", ""]], "tbl num")
+         box("tank", "Bra att veta", "<p>Sockerbiten består av små korn som sitter ihop. I vattnet lossnar sockerpartiklarna från varandra och sprids bland vattenpartiklarna. Sockret är kvar i vattnet, men syns inte längre. Det kallas att sockret <b>löser sig</b>.</p>")])
+ + table(["Temperatur", "Försök 1 (s)", "Försök 2 (s)", "Försök 3 (s)", "Medelvärde (s)"], [["20 °C", "", "", "", ""], ["30 °C", "", "", "", ""], ["40 °C", "", "", "", ""]], "tbl num")
  + "<h3>Frågor</h3>"
  + steps(["Vilken variabel ändrade du, vilken mätte du och vad höll du lika?", "Vad visar ditt diagram? Stämde din hypotes?", "Förklara resultatet. Hur kan det hänga ihop med att partiklarna rör sig snabbare i varmt vatten?", "Vilka felkällor kan ha påverkat resultatet, och hur skulle du minska dem?", "Hur kan du göra försöket säkrare att lita på?"], True)
- + '<p class="note">Säkerhet: Använd skyddsglasögon. Drick inte av vattnet eller tabletterna. Använd inte varmare vatten än 40 °C. Torka upp spill direkt.</p>')
+ + '<p class="note">Säkerhet: Använd skyddsglasögon. Ät och drick inget i labbet, inte heller sockerbitarna eller vattnet. Använd inte varmare vatten än 40 °C. Torka upp spill direkt.</p>')
 
 # ------------------------------------------------------------------ 1.2.1
 add("1.2.1", "Vad är en modell i kemi?", f"Kapitel {NR} · Delområde 1.2 {DELOMR['1.2']} · Vad är en modell i kemi?",
@@ -147,7 +147,7 @@ add("1.2.1", "Vad är en modell i kemi?", f"Kapitel {NR} · Delområde 1.2 {DELO
      "<p>Ett exempel är <strong class='green'>partikelmodellen</strong>. I den tänker vi oss att ett ämne är uppbyggt av små partiklar. I ett fast ämne sitter de tätt på fasta platser. I en vätska ligger de tätt men kan glida förbi varandra. I en gas är det stora avstånd och partiklarna rör sig fritt. Du lär dig mer om partikelmodellen i kapitel 2.</p>",
    [begrepp([("Modell", "En förenkling som förklarar och förutsäger."), ("Begränsning", "Det en modell inte kan förklara.")])])
  + fig(FIG+"l_modell.png", "<b>Bild 1.6</b> Partikelmodellen för fast ämne, vätska och gas. Partiklarna är i verkligheten otroligt mycket mindre än i bilden.", "96%")
- + roww("<h3 style='margin-top:0'>Vad modellen kan och inte kan</h3><p>Med partikelmodellen kan du förklara varför en gas fyller hela rummet och varför en brustablett löser sig fortare i varmt vatten: partiklarna rör sig snabbare. Men modellen säger ingenting om ämnets färg eller lukt, och i bilden ser partiklarna ut som runda bollar, vilket är en förenkling. När vi frågar något som modellen inte kan svara på behöver vi en annan eller en bättre modell.</p>"
+ + roww("<h3 style='margin-top:0'>Vad modellen kan och inte kan</h3><p>Med partikelmodellen kan du förklara varför en gas fyller hela rummet och varför en sockerbit löser sig fortare i varmt vatten: partiklarna rör sig snabbare. Men modellen säger ingenting om ämnets färg eller lukt, och i bilden ser partiklarna ut som runda bollar, vilket är en förenkling. När vi frågar något som modellen inte kan svara på behöver vi en annan eller en bättre modell.</p>"
         "<p>Modeller finns överallt i vardagen: en karta, ett kretsschema, en molekylmodell av kulor och pinnar. Alla är förenklingar som är bra för ett visst syfte.</p>",
         [box("tank", "Tänk efter", "<p>En karta över Luleå är en modell. Vad kan du se på kartan, och vad kan du inte se? Vad skulle du behöva en annan modell för?</p>")])
  + kq("1.2.1"))
@@ -205,7 +205,7 @@ SAMMAN = ["<strong>Kemi</strong> är läran om ämnen och hur de förändras. Ke
           "Du läser av en mätcylinder med ögonen i nivå med ytan, vid den lägsta delen av <strong>menisken</strong>.",
           "En <strong>hypotes</strong> är en gissning som går att pröva. I ett <strong>rättvist försök</strong> ändrar du en <strong>oberoende variabel</strong>, mäter en <strong>beroende variabel</strong> och håller övriga <strong>kontrollerade</strong>.",
           "Du upprepar mätningar, räknar <strong>medelvärde</strong>, redovisar i tabell och diagram med enheter och värderar <strong>felkällor</strong> innan du drar en <strong>slutsats</strong>.",
-          "I brustablettförsöket gick det fortare ju varmare vattnet var. Det kan förklaras med att partiklarna rör sig snabbare.",
+          "I sockerbitsförsöket gick det fortare ju varmare vattnet var. Det kan förklaras med att partiklarna rör sig snabbare.",
           "En <strong>modell</strong> är en förenkling som förklarar och förutsäger. Den har <strong>begränsningar</strong> och kan ändras när nya undersökningar visar mer.",
           "Läran om fyra element ersattes steg för steg: Boyle krävde försök, Lavoisier visade att massan bevaras och Dalton föreslog en <strong>atomteori</strong>.",
           "Med <strong>källkritik</strong> frågar du vem som säger något, varför, vilka belägg som finns, hur gammalt det är och vad andra källor säger.",
@@ -230,8 +230,8 @@ TEST = [
  ("C", "Mia testade tre fläckborttagare. Hon tog olika mycket av varje och lät dem verka olika länge. Förklara varför hennes jämförelse inte är rättvis och hur hon kan göra den rättvis.", None, 2, 5),
  ("D", "En annons säger: ”Vår kemikaliefria rengöring är säkrare än allt annat.” Granska påståendet. Förklara vad som är problemet med ordet ”kemikaliefri” och vilka frågor du skulle ställa för att avgöra om annonsen går att lita på.", None, 3, 6),
  ("D", "Läran om de fyra elementen levde i över 2 000 år innan den ersattes. Förklara varför det är en styrka för naturvetenskapen att modeller kan ändras. Använd ett exempel från kapitlet.", None, 3, 6),
- ("E", "Elias tror att en brustablett löser sig fortare om man rör om i vattnet. Planera en undersökning som kan pröva hans idé. Beskriv hypotes, vad du ändrar, vad du mäter, vad du håller lika, hur du upprepar mätningarna och hur du dokumenterar resultatet.", None, 3, 7),
- ("E", "En grupp mätte hur lång tid en brustablett tog att lösa sig (påhittade medelvärden): 10 °C: 132 s, 20 °C: 80 s, 30 °C: 52 s, 40 °C: 33 s, 50 °C: 22 s. Vilken tid skulle du uppskatta vid 35 °C? Förklara hur du kommer fram till det. Förklara också varför du inte kan vara säker på ett värde som ligger utanför det som är uppmätt, till exempel vid 80 °C.", None, 3, 7),
+ ("E", "Elias tror att en sockerbit löser sig fortare om man rör om i vattnet. Planera en undersökning som kan pröva hans idé. Beskriv hypotes, vad du ändrar, vad du mäter, vad du håller lika, hur du upprepar mätningarna och hur du dokumenterar resultatet.", None, 3, 7),
+ ("E", "En grupp mätte hur lång tid en sockerbit tog att lösa sig (påhittade medelvärden): 10 °C: 240 s, 20 °C: 165 s, 30 °C: 110 s, 40 °C: 74 s, 50 °C: 50 s. Vilken tid skulle du uppskatta vid 35 °C? Förklara hur du kommer fram till det. Förklara också varför du inte kan vara säker på ett värde som ligger utanför det som är uppmätt, till exempel vid 80 °C.", None, 3, 7),
 ]
 TEST_TABELL = (["Temperatur", "Försök 1 (s)", "Försök 2 (s)", "Försök 3 (s)"], [["20 °C", "140", "152", "146"], ["50 °C", "48", "52", "50"]])
 TEST_D_TEXT = "Elin undersökte hur snabbt en sockerbit löses i 2 dl vatten av olika temperatur. Hon upprepade varje försök tre gånger. Resultaten är påhittade."
@@ -245,13 +245,13 @@ FACIT = [
  "Hon ändrar flera saker samtidigt (mängd och tid), så hon vet inte vad som gav skillnaden. Hon ska ändra bara produkten och hålla mängd, tid, fläck, tyg och sätt att skölja lika. Hon bör också ha en jämförelse med bara vatten.",
  "Öppet svar. Ett välutvecklat svar förklarar att allt är kemiska ämnen, även vatten, så ”kemikaliefri” inte kan stämma bokstavligt och inte säger hur farliga ämnena är. Frågor: vem säger det, varför (sälja?), vilka belägg och mätningar finns, vad menas med ”säkrare”, jämfört med vad, vad säger oberoende källor, och vilken märkning (piktogram, faroangivelser) har produkten.",
  "Öppet svar. Exempel: de fyra elementen byttes ut när Boyle krävde försök och Lavoisier och Dalton lade fram nya förklaringar som stämde bättre med mätningar. Att kunna ändra modellen gör att fel rättas och förklaringarna blir bättre. En vetenskap som aldrig ändrar sig kan inte lära sig något nytt.",
- "Hypotes, t.ex. ”Om man rör om löser tabletten sig fortare, eftersom vattnet nära tabletten byts ut.” Ändra: omrörning (med/utan). Mäta: tid tills tabletten är upplöst. Hålla lika: vattenmängd, temperatur, tablettsort och storlek, glas, sättet att mäta tid. Upprepa minst tre gånger för varje fall och räkna medelvärde. Dokumentera i tabell med enheter och gärna diagram, samt felkällor.",
- "Vid 35 °C ligger tiden mellan värdena vid 30 °C (ca 52 s) och 40 °C (ca 33 s), så ca 40–45 s. Kurvan sjunker mindre brant efter hand, så en rak linje mellan punkterna är en grov uppskattning. Vid 80 °C vet vi inte hur kurvan fortsätter eftersom inget är mätt där, och trenden kan ändras. Man kan inte vara säker utanför det uppmätta området.",
+ "Hypotes, t.ex. ”Om man rör om löser sockerbiten sig fortare, eftersom vattnet nära sockerbiten byts ut.” Ändra: omrörning (med/utan). Mäta: tid tills sockerbiten är upplöst. Hålla lika: vattenmängd, temperatur, sockerbitens sort och storlek, glas, sättet att mäta tid. Upprepa minst tre gånger för varje fall och räkna medelvärde. Dokumentera i tabell med enheter och gärna diagram, samt felkällor.",
+ "Vid 35 °C ligger tiden mellan värdena vid 30 °C (ca 110 s) och 40 °C (ca 74 s), så ca 85–95 s. Kurvan sjunker mindre brant efter hand, så en rak linje mellan punkterna är en grov uppskattning. Vid 80 °C vet vi inte hur kurvan fortsätter eftersom inget är mätt där, och trenden kan ändras. Man kan inte vara säker utanför det uppmätta området.",
 ]
 LGR = ("Området täcker det centrala innehållet om kemins arbetssätt i årskurs 7–9: säkerhet och hantering av kemikalier, planering, genomförande och värdering av systematiska undersökningar, modeller och hur de förändras över tid samt granskning av påståenden om kemi. "
        "Delområde 1.1 behandlar säkerhet och utrustning, att gå från fråga till plan och att dokumentera och värdera. Delområde 1.2 behandlar modeller, kemins historia och källkritik. "
        "Labbarna tränar att genomföra ett rättvist försök med en variabel i taget och att pröva ett påstående. Uppgifterna följer betygskriteriernas progression: från att namnge och beskriva till att förklara samband och resonera i flera led, och är inspirerade av frisläppta nationella prov i kemi.")
-FAKTA = ("Uppgifterna i kapitlet kommer från öppnade källor och läroböcker; se lärarversionens källförteckning. Kontrollerat mot öppna källor: de nio faropiktogrammen och deras betydelse, signalorden Fara och Varning, vad en kemikalieetikett ska innehålla, Giftinformationscentralens telefonnummer, Kemisamfundets uttalanden om ordet kemikaliefri, uppgifter om Empedokles, Aristoteles, Boyle (1661), Lavoisier (1789) och Dalton (1808), brustablettens innehåll och koldioxidbildningen samt avläsning av menisk. "
+FAKTA = ("Uppgifterna i kapitlet kommer från öppnade källor och läroböcker; se lärarversionens källförteckning. Kontrollerat mot öppna källor: de nio faropiktogrammen och deras betydelse, signalorden Fara och Varning, vad en kemikalieetikett ska innehålla, Giftinformationscentralens telefonnummer, Kemisamfundets uttalanden om ordet kemikaliefri, uppgifter om Empedokles, Aristoteles, Boyle (1661), Lavoisier (1789) och Dalton (1808), avläsning av menisk. "
          "Ej källkontrollerat: allmänna laboratoriesäkerhetsregler, alkemisternas strävan efter guld, att atomer har mindre delar, att flugsvamp är giftig och förklaringar med partikelmodellen. Tider och temperaturer i exempelförsöken är påhittade. "
          "Källor: Skolverket, Lgr22 kursplan i kemi. · Frisläppta nationella prov i kemi åk 9. · Illustrationer: egenritade för detta kapitel.")
 HANDLEDNING_HTML = """<h3>Handledning per moment (grundtext)</h3>
@@ -259,7 +259,7 @@ HANDLEDNING_HTML = """<h3>Handledning per moment (grundtext)</h3>
 <p><b>Säkerhet och utrustning i kemilabbet.</b> C-mål: följa säkerhetsreglerna, tolka piktogram och läsa av mätutrustning rätt. Vanligt fel: att läsa av menisken uppifrån eller vid den övre kanten. Vanligt fel: att piktogram är bara dekoration. Låt eleverna hitta tre piktogram på produkter hemma.</p>
 <p><b>Från fråga till plan.</b> C-mål: formulera en undersökningsbar fråga och hypotes och skilja oberoende, beroende och kontrollerade variabler. Vanligt fel: att hypotesen måste vara rätt, eller att fler variabler ändras samtidigt. Låt eleverna skriva egna hypoteser med ”om … så …, eftersom …”.</p>
 <p><b>Dokumentera och värdera.</b> C-mål: redovisa i tabell och diagram, räkna medelvärde och värdera felkällor. Vanligt fel: att glömma enheter och axelrubriker; att ta bort ett värde för att det inte passar. Fördjupningen tar upp precision, riktighet och avvikande värden.</p>
-<p><b>Labb 1.1 Brustabletten och temperaturen.</b> Material: tre glas, mätcylinder, termometer, ur, brustabletter, isvatten, varmt vatten. Förväntat: tiden minskar när temperaturen ökar, ungefär halverad mellan varje steg i exempeldata (152 s, 74 s, 31 s, påhittade). Vanliga fel: vattnet svalnar eller värms under mätningen, olika sätt att stoppa tiden, olika stora tablettbitar. Använd inte varmare vatten än 40 °C.</p>
+<p><b>Labb 1.1 Sockerbiten och temperaturen.</b> Material: tre glas, mätcylinder, termometer, ur, sockerbitar, kranvatten, varmt vatten. Förväntat: tiden minskar när temperaturen ökar, ungefär en tredjedel kortare per steg i exempeldata (165 s, 110 s, 74 s, påhittade). Prova försöket själv i förväg: en sockerbit utan omrörning kan ta flera minuter, särskilt i kallare vatten, så planera tiden. Vanliga fel: vattnet svalnar under mätningen, olika sätt att avgöra när sockret är borta, olika stora sockerbitar eller olika sorter. Använd inte varmare vatten än 40 °C.</p>
 <p><b>Vad är en modell i kemi?</b> C-mål: förklara vad en modell är och ge exempel på vad den kan och inte kan förklara. Partikelmodellen behandlas utförligt i kapitel 2; här används den som exempel. Vanligt fel: att modellen är en bild av hur det ”egentligen ser ut”.</p>
 <p><b>Hur kemin vuxit fram.</b> C-mål: beskriva hur en modell förändrats med nya undersökningar, från fyra element till atomteori. Vanligt fel: att äldre forskare var ”dumma”. Lavoisiers vägning kan visas med brustablett i en sluten flaska eller plastpåse. Tablett och vatten ska vara åtskilda före (t.ex. i en liten kapsel), annars börjar reaktionen innan flaskan är stängd.</p>
 <p><b>Granska kemipåståenden.</b> C-mål: granska ett påstående med flera frågor och motivera bedömningen. Vanligt fel: ”naturligt är ofarligt”, ”kemikaliefritt är säkrast”. Be eleverna ta med annonser från hemma eller tidningar.</p>

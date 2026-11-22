@@ -82,11 +82,11 @@ W, H = 1100, 640
 b = ''
 X0, Y0, X1, Y1 = 150, 540, 1040, 90
 b += f'<path d="M{X0},{Y1-10} V{Y0} H{X1}" stroke="{INK}" stroke-width="5" fill="none"/>'
-mx = 180
-for k in range(0, 7):
+mx = 210
+for k in range(0, 8):
     v = k * 30; y = Y0 - (Y0 - Y1) * v / mx
     b += f'<path d="M{X0-10},{y} H{X1}" stroke="#e6d9d5" stroke-width="2"/>' + T(X0 - 18, y + 9, str(v), 26, INK, "400", "end")
-dat = [("5 °C", [150, 160, 148], None), ("20 °C", [70, 118, 72], 118), ("40 °C", [29, 33, 31], None)]
+dat = [("20 °C", [160, 172, 163], None), ("30 °C", [108, 182, 112], 182), ("40 °C", [70, 78, 74], None)]
 for i, (lab, vals, out) in enumerate(dat):
     cx = X0 + 150 + i * 300
     for j, v in enumerate(vals):
@@ -97,9 +97,9 @@ for i, (lab, vals, out) in enumerate(dat):
     mean = sum(vals) / 3; my = Y0 - (Y0 - Y1) * mean / mx
     b += f'<path d="M{cx-100},{my} H{cx+100}" stroke="{INK}" stroke-width="6"/>' + T(cx + 112, my + 9, f"{mean:.0f} s".replace(".", ","), 26, INK, "700", "start")
     b += T(cx, Y0 + 42, lab, 30, INK, "700")
-b += f'<g transform="translate(52,315) rotate(-90)">{T(0, 0, "Tid tills tabletten är upplöst (s)", 28, INK, "700")}</g>'
+b += f'<g transform="translate(52,315) rotate(-90)">{T(0, 0, "Tid tills sockerbiten är upplöst (s)", 28, INK, "700")}</g>'
 b += T(595, 616, "Vattnets temperatur", 28, INK, "700") + T(595, 52, "Tre försök per temperatur. Strecket är medelvärdet.", 30, DRED, "700")
-b += T(560, 215, "avvikande värde", 24, RED, "700", "start")
+b += T(660, 160, "avvikande värde", 24, RED, "700", "start")
 render('f_punkter', svg(W, H, b, "#ffffff"), W, H, 1)
 
 # ---------- f_dalton_nu ------------------------------------------------------
@@ -136,16 +136,16 @@ W, H = 1100, 640
 b = ''
 X0, Y0, X1, Y1 = 150, 540, 1040, 90
 b += f'<path d="M{X0},{Y1-10} V{Y0} H{X1}" stroke="{INK}" stroke-width="5" fill="none"/>'
-mx = 150
-for k in range(0, 6):
+mx = 270
+for k in range(0, 10):
     v = k * 30; y = Y0 - (Y0 - Y1) * v / mx
     b += f'<path d="M{X0-10},{y} H{X1}" stroke="#e6d9d5" stroke-width="2"/>' + T(X0 - 18, y + 9, str(v), 26, INK, "400", "end")
-pts = [(10, 132), (20, 80), (30, 52), (40, 33), (50, 22)]
+pts = [(10, 240), (20, 165), (30, 110), (40, 74), (50, 50)]
 def px(t): return X0 + (t - 5) / 50 * (X1 - X0 - 40) + 20
 def py(v): return Y0 - (Y0 - Y1) * v / mx
 b += f'<polyline points="' + " ".join(f"{px(t):.0f},{py(v):.0f}" for t, v in pts) + f'" fill="none" stroke="{RED}" stroke-width="7" stroke-linejoin="round"/>'
 for t, v in pts:
     b += f'<circle cx="{px(t):.0f}" cy="{py(v):.0f}" r="11" fill="#fff" stroke="{RED}" stroke-width="6"/>' + T(px(t), Y0 + 40, str(t), 26, INK, "700")
-b += f'<g transform="translate(52,315) rotate(-90)">{T(0, 0, "Tid tills tabletten är upplöst (s)", 28, INK, "700")}</g>'
+b += f'<g transform="translate(52,315) rotate(-90)">{T(0, 0, "Tid tills sockerbiten är upplöst (s)", 28, INK, "700")}</g>'
 b += T(595, 616, "Vattnets temperatur (°C)", 28, INK, "700") + T(595, 52, "Påhittade mätvärden", 30, DRED, "700")
 render('p_diagram', svg(W, H, b, "#ffffff"), W, H, 1)

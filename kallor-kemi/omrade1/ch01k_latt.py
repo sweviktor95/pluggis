@@ -27,10 +27,10 @@ TB_PERSON = ('<table class="tb"><tr><th>Kemist</th><th>Gör</th></tr>'
              '<tr><td>Analytisk kemist</td><td>Mäter vad ett prov innehåller</td></tr><tr><td>Läkemedelskemist</td><td>Tar fram och testar läkemedel</td></tr>'
              '<tr><td>Materialkemist</td><td>Utvecklar material, till exempel batterier</td></tr><tr><td>Miljökemist</td><td>Undersöker föroreningar</td></tr></table>')
 TB_VAR = ('<table class="tb"><tr><th>Variabel</th><th>I försöket</th></tr>'
-          '<tr><td>Jag ändrar</td><td>Vattnets temperatur</td></tr><tr><td>Jag mäter</td><td>Tiden tills tabletten är borta</td></tr>'
-          '<tr><td>Jag håller lika</td><td>Mängd vatten, sort på tablett</td></tr></table>')
+          '<tr><td>Jag ändrar</td><td>Vattnets temperatur</td></tr><tr><td>Jag mäter</td><td>Tiden tills sockerbiten är borta</td></tr>'
+          '<tr><td>Jag håller lika</td><td>Mängd vatten, sort på sockerbit</td></tr></table>')
 TB_BRUS = ('<table class="tb"><tr><th>Temperatur</th><th>Försök 1 (s)</th><th>Försök 2 (s)</th><th>Försök 3 (s)</th><th>Medelvärde (s)</th></tr>'
-           '<tr><td>5 °C</td><td></td><td></td><td></td><td></td></tr><tr><td>20 °C</td><td></td><td></td><td></td><td></td></tr><tr><td>40 °C</td><td></td><td></td><td></td><td></td></tr></table>')
+           '<tr><td>20 °C</td><td></td><td></td><td></td><td></td></tr><tr><td>30 °C</td><td></td><td></td><td></td><td></td></tr><tr><td>40 °C</td><td></td><td></td><td></td><td></td></tr></table>')
 TB_FLACK = ('<table class="tb"><tr><th>Vätska</th><th>Poäng 0–3</th></tr>'
             '<tr><td>A Bara vatten</td><td></td></tr><tr><td>B Diskmedel</td><td></td></tr><tr><td>C Fläckborttagare X</td><td></td></tr><tr><td>D Tvättmedel</td><td></td></tr></table>')
 
@@ -59,14 +59,14 @@ DELAR = [
        ("fyll", ["skyddsglasögon", "faropiktogram", "ytan"], ["Jag har ______________ på mig i labbet.", "Ett ______________ visar vilken fara ett ämne har.", "Jag läser av vid den lägsta delen av ______________."])]),
 
  dict(titel="Från fråga till plan", prog="Delområde 1.1 · Från fråga till plan",
-  fore=["En undersökning börjar med en fråga som du kan mäta svaret på.", "<strong>Exempel:</strong> Hur påverkar vattnets temperatur tiden det tar för en brustablett att lösa sig?"],
+  fore=["En undersökning börjar med en fråga som du kan mäta svaret på.", "<strong>Exempel:</strong> Hur påverkar vattnets temperatur tiden det tar för en sockerbit att lösa sig?"],
   fig="l_cykel.png", figw="85%",
   efter=["En <strong>hypotes</strong> är en gissning som du kan pröva. Skriv: ”Om … så …, eftersom …”.", "I ett försök finns tre sorters <strong>variabler</strong>.", TB_VAR,
          "Ett försök är <strong>rättvist</strong> om du bara ändrar en sak i taget."],
   fig2="v_brus.png", fig2w="95%", n1=2,
   kom="Ändra en sak i taget. Mät något. Håll allt annat lika.",
   ova=[("ringa", "Vad är en hypotes?", ["En gissning som går att pröva", "Ett säkert svar", "En tabell"]),
-       ("streck", "Dra streck till rätt sorts variabel.", ["Jag ändrar", "Jag mäter", "Jag håller lika"], ["tid tills tabletten är borta", "temperatur", "mängd vatten"]),
+       ("streck", "Dra streck till rätt sorts variabel.", ["Jag ändrar", "Jag mäter", "Jag håller lika"], ["tid tills sockerbiten är borta", "temperatur", "mängd vatten"]),
        ("sf", "Kryssa i rätt ruta.", ["I ett rättvist försök ändrar man bara en sak i taget.", "Man ska ändra både temperatur och vattenmängd.", "En hypotes kan visa sig vara fel."]),
        ("skriv", "Du vill veta om en sockerbit löser sig fortare om du rör om. Vad ändrar du?", "Jag ändrar", 2)]),
 
@@ -81,10 +81,10 @@ DELAR = [
        ("sf", "Kryssa i rätt ruta.", ["Ett tal behöver en enhet.", "Man ska bara göra en mätning.", "Man ska upprepa mätningarna."]),
        ("skriv", "Räkna ut medelvärdet av 29 s, 33 s och 31 s.", "Medelvärdet är", 2)]),
 
- dict(titel="Labb 1.1 Brustabletten och temperaturen", prog="Delområde 1.1 · Labb", lab=True,
-  fore=["<strong>Fråga:</strong> Hur påverkar vattnets temperatur tiden det tar för en brustablett att lösa sig?", "Du behöver: tre glas, mätcylinder, termometer, ur, brustabletter, vatten, skyddsglasögon."],
+ dict(titel="Labb 1.1 Sockerbiten och temperaturen", prog="Delområde 1.1 · Labb", lab=True,
+  fore=["<strong>Fråga:</strong> Hur påverkar vattnets temperatur tiden det tar för en sockerbit att lösa sig?", "Du behöver: tre glas, mätcylinder, termometer, ur, sockerbitar, vatten, skyddsglasögon."],
   fig=None,
-  efter=["<ol class='st'><li>Mät upp 2 dl vatten i varje glas.</li><li>Gör vattnet cirka 5 °C, 20 °C och 40 °C.</li><li>Släpp ner en tablett och starta klockan.</li><li>Stoppa klockan när tabletten är borta.</li><li>Gör tre försök för varje temperatur.</li><li>Räkna medelvärde.</li></ol>", TB_BRUS,
+  efter=["<ol class='st'><li>Mät upp 2 dl vatten i varje glas.</li><li>Gör vattnet cirka 20 °C, 30 °C och 40 °C.</li><li>Släpp ner en sockerbit och starta klockan.</li><li>Stoppa klockan när sockerbiten är borta.</li><li>Gör tre försök för varje temperatur.</li><li>Räkna medelvärde.</li></ol>", TB_BRUS,
          "<strong>Säkerhet:</strong> Ha skyddsglasögon. Drick inte vattnet. Använd inte varmare vatten än 40 °C. Torka upp spill."],
   kom="Rör inte om. Starta och stoppa klockan på samma sätt varje gång.",
   ova=[("fyll", ["temperaturen", "tiden", "mängd vatten"], ["Jag ändrade ______________.", "Jag mätte ______________.", "Jag höll lika ______________."]),
@@ -94,7 +94,7 @@ DELAR = [
  dict(titel="Vad är en modell i kemi?", prog="Delområde 1.2 · Vad är en modell i kemi?",
   fore=["Kemister arbetar med sådant som är för litet att se. Då använder de <strong>modeller</strong>.", "En modell är en enkel bild eller idé som förklarar något. En modell är inte riktiga verkligheten."],
   fig="l_modell.png", figw="95%",
-  efter=["<strong>Exempel:</strong> I partikelmodellen tänker vi oss att ämnen består av små partiklar.", "Modellen förklarar varför en brustablett löser sig fortare i varmt vatten: partiklarna rör sig snabbare.",
+  efter=["<strong>Exempel:</strong> I partikelmodellen tänker vi oss att ämnen består av små partiklar.", "Modellen förklarar varför en sockerbit löser sig fortare i varmt vatten: partiklarna rör sig snabbare.",
          "Men modellen kan inte förklara allt, till exempel ämnets färg. Då behövs en annan modell."],
   kom="En modell är en förenkling. Den kan förklara en del men inte allt.",
   ova=[("ringa", "Vad är en modell?", ["En enkel bild eller idé som förklarar något", "En riktig bit av ett ämne", "En tabell med mätvärden"]),
@@ -163,7 +163,7 @@ HANDLEDNING_HTML = """
 <h3 class="mm">Säkerhet och utrustning i kemilabbet</h3><p class="hl"><b>E-mål:</b> eleven följer säkerhetsreglerna och läser av en mätcylinder. <b>Vanligt fel:</b> att läsa av vid ytans övre kant.</p>
 <h3 class="mm">Från fråga till plan</h3><p class="hl"><b>E-mål:</b> eleven skriver en hypotes och pekar ut vad som ändras, mäts och hålls lika. <b>Vanligt fel:</b> att ändra flera saker samtidigt.</p>
 <h3 class="mm">Dokumentera och värdera</h3><p class="hl"><b>E-mål:</b> eleven fyller i tabell, räknar medelvärde och skriver en enkel slutsats. <b>Vanligt fel:</b> att glömma enheter.</p>
-<h3 class="mm">Labb 1.1 Brustabletten och temperaturen</h3><p class="hl"><b>Material:</b> glas, mätcylinder, termometer, ur, brustabletter. <b>Förväntat:</b> kortare tid i varmare vatten. Använd inte varmare vatten än 40 °C.</p>
+<h3 class="mm">Labb 1.1 Sockerbiten och temperaturen</h3><p class="hl"><b>Material:</b> glas, mätcylinder, termometer, ur, sockerbitar. <b>Förväntat:</b> kortare tid i varmare vatten. Använd inte varmare vatten än 40 °C.</p>
 <h3 class="mm">Vad är en modell i kemi?</h3><p class="hl"><b>E-mål:</b> eleven förklarar enkelt vad en modell är och ger ett exempel. <b>Vanligt fel:</b> att modellen är en bild av hur det ”egentligen ser ut”.</p>
 <h3 class="mm">Hur kemin vuxit fram</h3><p class="hl"><b>E-mål:</b> eleven ger exempel på hur en modell ändrats (fyra element till atomer). <b>Vanligt fel:</b> att äldre forskare var ”dumma”.</p>
 <h3 class="mm">Granska kemipåståenden</h3><p class="hl"><b>E-mål:</b> eleven ställer minst två frågor om ett påstående. <b>Vanligt fel:</b> ”naturligt är ofarligt” och ”kemikaliefritt är säkrast”.</p>
@@ -172,7 +172,7 @@ HANDLEDNING_HTML = """
 FACIT = [
  "<b>Start:</b> 1) Ämnen och hur de förändras. 2) Sant, falskt, sant. 3) ämnen, förändras, mäter. 4) Egna exempel.",
  "<b>Säkerhet och utrustning:</b> 1) Skyddsglasögon. 2) Falskt, sant, sant. 3) Volym – mätcylinder; Massa – våg; Temperatur – termometer. 4) skyddsglasögon, faropiktogram, ytan.",
- "<b>Från fråga till plan:</b> 1) En gissning som går att pröva. 2) Jag ändrar – temperatur; Jag mäter – tid tills tabletten är borta; Jag håller lika – mängd vatten. 3) Sant, falskt, sant. 4) Om du rör om eller inte.",
+ "<b>Från fråga till plan:</b> 1) En gissning som går att pröva. 2) Jag ändrar – temperatur; Jag mäter – tid tills sockerbiten är borta; Jag håller lika – mängd vatten. 3) Sant, falskt, sant. 4) Om du rör om eller inte.",
  "<b>Dokumentera och värdera:</b> 1) Lägger ihop värdena och delar med antalet. 2) medelvärdet, felkälla, slutsats. 3) Sant, falskt, sant. 4) (29 + 33 + 31) / 3 = 31 s.",
  "<b>Labb 1.1:</b> 1) temperaturen, tiden, mängd vatten. 2) Egna resultat, t.ex. kortare tid i varmare vatten. 3) T.ex. att klockan startades sent eller att vattnet svalnade.",
  "<b>Vad är en modell:</b> 1) En enkel bild eller idé som förklarar något. 2) Falskt, sant, sant. 3) förenkling, partiklar, färg. 4) T.ex. en karta eller en molekylmodell.",
