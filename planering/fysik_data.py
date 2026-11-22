@@ -278,7 +278,17 @@ def _nr(d, ny, **kw):
     for k, v in kw.items(): d[{"titel": 1, "mal": 2, "niv": 3, "mod": 4, "mom": 5, "labb": 6, "tid": 7}[k]] = v
     return tuple(d)
 
-_P1 = _nr(_d("1.1"), "1.1"); _P2 = _nr(_d("1.2"), "1.2")
+# Kapitel 1 är kortat (Vick 2026-11-22): ett delområde med tre moment och en labb. Tidigare 1.1 och 1.2 är sammanslagna;
+# alla taggar finns kvar. "Hur fysiken vuxit fram" ryms som exempel i momentet om modeller (fördjupning finns under Om tid).
+_P = ("1.1", "Mäta, undersöka och granska som fysiker",
+  "Eleven kan planera, utföra och värdera en enkel fysikalisk undersökning med en variabel i taget, och förklara att modeller och påståenden prövas mot undersökningar.",
+  "E: genomför enligt plan, mäter, ger exempel på en modell som ändrats och använder mer än en källa. C: planerar rättvist försök, värderar felkällor och motiverar bedömningen av källor. A: motiverar upplägget, diskuterar hur säker slutsatsen är och resonerar om modellers begränsningar.",
+  ["Rättvist försök; modeller prövas och förändras"],
+  [("Mäta och planera ett försök", "Storheter, enheter och instrument (avläsning, noggrannhet); undersökningsbar fråga, hypotes, oberoende, beroende och kontrollerade variabler; rättvist försök.", "storhet, enhet, mätinstrument, hypotes, variabel, rättvist försök", "FN10 S1 S7 S8 SU1 F3"),
+   ("Från mätvärden till slutsats", "Tabell och diagram, upprepade mätningar och medelvärde, felkällor och slutsats.", "tabell, diagram, medelvärde, felkälla, slutsats", "SU1 S7 S8 FN10 F3"),
+   ("Modeller och källor", "Vad en modell är och att den kan förändras när nya undersökningar visar mer (geocentriskt och heliocentriskt synsätt som exempel); granska ett påstående: vem säger det, varför och med vilka belägg.", "modell, begränsning, påstående, belägg, källkritik", "SU2 SU3 SU4 S3 S4 S5 S6 F1 F2")],
+  _d("1.1")[6],
+  ["Hur fysiken vuxit fram: från Aristoteles till Newton", "Granska ett påstående med ett eget test (isolerar jackan som reklamen säger?)", "Digitala mätverktyg och sensorer", "Mätosäkerhet"])
 _M1 = _nr(_d("2.1"), "2.1")
 _M2 = ("2.2", "Värme, värmetransport och värmeutvidgning",
   "Eleven kan förklara hur värme transporteras och hur material utvidgas vid uppvärmning, och välja isolering utifrån egenskaper.",
@@ -370,7 +380,7 @@ _R2 = _nr(_d("10.2"), "13.2", titel="Elektricitet, ljus, ljud, strålning, atome
 _R3 = _nr(_d("10.3"), "13.3")
 
 AREAS = [
- (1, "Fysik som vetenskap", _GAMLA[0][2], [_P1, _P2]),
+ (1, "Fysik som vetenskap", "En kort start: hur fysiker mäter, undersöker och granskar, så att eleverna kan arbeta som fysiker i resten av kurserna.", [_P]),
  (2, "Materia, partikelmodellen och värme", "Partikelmodellen förklarar hur materia beter sig: fasövergångar, temperatur, värmetransport och värmeutvidgning.", [_M1, _M2]),
  (3, "Väder och klimat", "Hur lufttryck, temperatur och solens strålning ger väder och klimat, och hur människan förstärker växthuseffekten.", [_V1, _V2]),
  (4, "Universum", _GAMLA[8][2], [_U1, _U2]),

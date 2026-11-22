@@ -8,7 +8,7 @@ window.lararFysik = {
   {
    "nr": 1,
    "titel": "Fysik som vetenskap",
-   "ide": "Hur fysiker arbetar: mäta, undersöka, granska och ändra sina modeller. Läggs först eftersom allt annat bygger på det.",
+   "ide": "En kort start: hur fysiker mäter, undersöker och granskar, så att eleverna kan arbeta som fysiker i resten av kurserna.",
    "hafte": null,
    "lankar": [],
    "ppt": []

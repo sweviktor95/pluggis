@@ -930,24 +930,13 @@ var struktur = [
         barn: [
           {
             id: "fysik-d-1-1",
-            titel: "1.1 Mäta och undersöka som fysiker",
+            titel: "1.1 Mäta, undersöka och granska som fysiker",
             ramverk: true,
             barn: [
-              { id: "fysik-m-1-1-1", titel: "Storheter, enheter och instrument" },
-              { id: "fysik-m-1-1-2", titel: "Från fråga till plan" },
-              { id: "fysik-m-1-1-3", titel: "Mätvärden, tabeller och diagram" },
+              { id: "fysik-m-1-1-1", titel: "Mäta och planera ett försök" },
+              { id: "fysik-m-1-1-2", titel: "Från mätvärden till slutsats" },
+              { id: "fysik-m-1-1-3", titel: "Modeller och källor" },
               { id: "fysik-m-1-1-l", titel: "Labb: Hur påverkar snörets längd en pendels svängningstid?" }
-            ]
-          },
-          {
-            id: "fysik-d-1-2",
-            titel: "1.2 Modeller, källor och argument",
-            ramverk: true,
-            barn: [
-              { id: "fysik-m-1-2-1", titel: "Vad är en modell i fysik?" },
-              { id: "fysik-m-1-2-2", titel: "Hur fysiken vuxit fram" },
-              { id: "fysik-m-1-2-3", titel: "Granska fysikpåståenden" },
-              { id: "fysik-m-1-2-l", titel: "Labb: Granska ett påstående: isolerar jackan som reklamen säger?" }
             ]
           }
         ]

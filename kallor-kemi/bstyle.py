@@ -12,8 +12,8 @@ CSS = r"""
 @font-face{font-family:Carlito;src:url(file:///usr/share/fonts/truetype/crosextra/Carlito-Italic.ttf);font-weight:400;font-style:italic}
 :root{--g1:#7a1f1f;--g2:#a8322a;--g3:#c9594f;--ink:#241712;--mut:#6b625b;--line:#d9d2c8}
 @page{size:A4;margin:12mm 14.8mm 15mm 18mm;
- @bottom-left{content:"__FOOT__";font:10pt Carlito;color:#6b625b;margin-top:6mm}
- @bottom-right{content:counter(page);font:700 10.5pt Carlito;color:var(--g2);margin-top:6mm}}
+ @bottom-left{content:"__FOOT__";font:10pt Carlito;color:#6b625b;margin-top:-8.8mm}
+ @bottom-right{content:counter(page);font:700 10.5pt Carlito;color:var(--g2);margin-top:-8.8mm}}
 *{box-sizing:border-box}
 html,body{margin:0}
 html{counter-reset:page __START__}
@@ -40,6 +40,8 @@ strong,b{font-weight:700}
 .bx b.t{display:block;font:700 10.7pt Carlito;color:var(--ink);margin-top:4pt}
 .bx p{margin:0 0 3pt;font:10.6pt/1.35 Carlito}
 .bx.begrepp{background:#fff5d6}.bx.begrepp .rb{color:#a8651a}
+.bx+.bx,.bx+.kolla,.bx+.row,p+.bx,table+.bx,.row+.bx,figure+.bx,.fig+.bx{margin-top:7pt}
+.bx ol{margin:0;padding-left:15pt}.bx ol li{margin:0 0 3pt;font:10.6pt/1.35 Carlito}
 .bx.tank{background:#fdefe3}.bx.tank .rb{color:#a84d22}
 .bx.visste{background:#f7e6e4}.bx.visste .rb{color:var(--g2)}
 .bx.klimat{background:#dcebf2}.bx.klimat .rb{color:#2b6a8a}

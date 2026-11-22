@@ -182,3 +182,45 @@ FACIT = [
  "<b>Labb 2.2:</b> 1) sanden, saltet, filtrat. 2) Egna värden, ca 9–10 g sand och 4–5 g salt. 3) T.ex. sand som fastnat, salt som sprutat eller blivit kvar på bägaren.",
  "<b>Testa dig:</b> 1) Tätt i ett mönster. 2) Densitet – massa per volym; Filtrering – skiljer fast från vätska; Blandning – minst två ämnen; Fällning – ett fast ämne bildas. 3) Sant, falskt, sant, sant, falskt, sant. 4) partiklar, kondensation, indunsta. 5) Blanda sand, salt och vatten 1; Filtrera 2; Indunsta filtratet 3; Väg saltet 4. 6) 30 / 10 = 3 g/cm³. 7) Is har lägre densitet än vatten. 8) Destillera: värm, kyl ångan och samla vattnet. Saltet blir kvar.",
 ]
+
+# ---------------- Inlärningsprinciper i lättläst: Tänk tillbaka, Vanlig tanke, löst exempel, fyll i ----------------
+def _bx(bg, bd, lab, col, inner):
+    return (f'<div style="background:{bg};border:1.2pt solid {bd};border-radius:9pt;padding:8pt 12pt;margin:8pt 0 10pt;break-inside:avoid;font:11pt/1.45 Carlito">'
+            f'<span style="display:block;font:700 7.8pt Carlito;letter-spacing:1pt;color:{col};margin-bottom:3pt">{lab}</span>{inner}</div>')
+def _tb(qs): return _bx("#fff7e8", "#d99a2b", "TÄNK TILLBAKA", "#8a5a07", "<ol style='margin:0;padding-left:16pt'>" + "".join(f"<li>{q}</li>" for q in qs) + "</ol>")
+def _vt(t): return _bx("#fdecea", "#d64541", "VANLIG TANKE", "#a8322a", f"<p style='margin:0'>{t}</p>")
+def _lo(t): return _bx("#e7eef5", "#2b5d7a", "LÖST EXEMPEL", "#2b5d7a", f"<p style='margin:0'>{t}</p>")
+def _fy(t): return _bx("#eef6ee", "#3aa860", "FYLL I SJÄLV", "#2e7d4a", f"<p style='margin:0'>{t}</p>")
+NYA = {
+ "Vad är materia?": (None, _vt("Många tror att luft är ingenting. Men luft är materia. Den har massa och tar plats. Det märks när du blåser upp en ballong.")),
+ "Ämnen och material": (["Vad är materia?", "Är luft materia? Hur vet du det?"],
+   _vt("Många tror att tunga saker alltid sjunker. Men det är <strong>densiteten</strong> som avgör, inte vikten. Ett stort skepp av stål flyter. En liten sten sjunker.")
+   + _lo("Ett trästycke väger 30 g och har volymen 50 cm³.<br>Densitet = 30 / 50 = <strong>0,6 g/cm³</strong>.<br>0,6 är lägre än vattnets 1,0. Trästycket flyter.")
+   + _fy("En plastbit väger 46 g och har volymen 40 cm³.<br>Densitet = ______ / ______ = ______ g/cm³.<br>Är värdet större eller mindre än 1,0? ______________. Flyter plastbiten? ______________.")),
+ "Partikelmodellen": (["Hur räknar du ut densitet?", "Vad är smältpunkt och kokpunkt?"],
+   _vt("Många tror att partiklarna i ett fast ämne står stilla. De vibrerar hela tiden men stannar på sina platser. Mellan partiklarna är det <strong>tomt</strong>, inte luft.")
+   + _lo("Varför känner du doften av bröd i ett annat rum?<br>Brödet avger partiklar som är gas. Gaspartiklar rör sig åt alla håll och blandar sig med luften. Det kallas <strong>diffusion</strong>.")
+   + _fy("Sockerbiten i teet gör teet sött utan omrörning.<br>Sockerpartiklarna ______________ från biten och sprider sig bland vattenpartiklarna. Det kallas ______________.")),
+ "Rena ämnen och blandningar": (["Vad händer med partiklarna när ett fast ämne smälter?", "Förklara med partiklar varför doft sprids i ett rum."],
+   _vt("Många tror att socker som har löst sig har försvunnit. Nej. Sockerpartiklarna finns kvar bland vattenpartiklarna. Därför väger lösningen lika mycket som vattnet och sockret tillsammans.")
+   + _lo("Sortera: saltvatten, sand i vatten, rent vatten.<br>Saltvatten är en <strong>lösning</strong>, du ser bara en vätska. Sand i vatten är en <strong>heterogen blandning</strong>, du ser sanden. Rent vatten är ett <strong>rent ämne</strong>.")
+   + _fy("Sortera: müsli med mjölk: ______________. Luft: ______________. Bara syre: ______________.")),
+ "Filtrering, avdunstning och sedimentering": (["Vad är en homogen och en heterogen blandning?", "Hur mycket väger en lösning av 5 g salt i 100 g vatten?"],
+   _vt("Många tror att filtrering tar bort löst salt. Nej. Lösta partiklar är så små att de går rakt igenom filtret. Då behövs <strong>avdunstning</strong>.")
+   + _lo("Sand, salt och vatten.<br>1. Filtrera: sanden stannar i filtret. 2. Indunsta filtratet: vattnet avdunstar och saltet blir kvar.")
+   + _fy("Du har kaffe med sump. Metoden heter ______________. Det som blir kvar i filtret heter ______________. Det som rinner igenom heter ______________.")),
+ "Destillation och kromatografi": (["Varför går löst salt inte att filtrera bort?", "Hur får du tillbaka saltet ur saltvatten?"],
+   _vt("Många tror att allt kokar bort samtidigt. Nej. Ämnet med lägst kokpunkt ångar först. Därför kan man skilja ämnen åt.")
+   + _lo("Etanol kokar vid 78 °C och vatten vid 100 °C.<br>Vid 78 °C ångar etanolen. Ångan kyls och blir vätska: <strong>destillat</strong>. Vattnet blir kvar i kolven.")
+   + _fy("Aceton kokar vid 56 °C och vatten vid 100 °C. Vilket kommer först i destillatet? ______________. Därför att det har ______________ kokpunkt.")),
+ "Identifiera ämnen och fällning": (["Vad utnyttjar destillation?", "Varför vandrar färger olika långt vid kromatografi?"],
+   _vt("Många tror att två ämnen som ser likadana ut är samma ämne. Salt och socker är båda vita, men olika ämnen. Därför behövs flera tester.")
+   + _lo("Salt och socker löser sig båda i vatten. Då kan du inte se skillnad. Värm lite: socker smälter och blir brunt, salt gör inte det. Nu vet du.")
+   + _fy("Ett pulver löser sig i vatten. Det skiljer inte salt och socker. Gör ett ______________ test, till exempel ______________.")),
+}
+for _d in DELAR:
+    if _d["titel"] in NYA:
+        _q, _post = NYA[_d["titel"]]
+        _d["fore"] = ([_tb(_q)] if _q else []) + list(_d["fore"])
+        _d["efter"] = list(_d["efter"]) + [_post]
+FACIT.insert(len(FACIT) - 1, "<b>Nya uppgifter (Fyll i själv):</b> Ämnen och material: 46 / 40 = 1,15 g/cm³, större än 1,0, plastbiten sjunker. Partikelmodellen: lossnar, diffusion. Rena ämnen och blandningar: heterogen blandning, blandning (lösning), rent ämne. Filtrering: filtrering, residu, filtrat. Destillation: aceton, lägre. Identifiera ämnen: annat, t.ex. värma och se om det smälter eller brunnar. Tänk tillbaka: svaren finns i förra momentets Kom ihåg och övningar.")

@@ -31,7 +31,10 @@ async function build(cfg) {
 
   const sections = {};
   function sec(name) { if (!sections[name]) { pres.addSection({ title: name }); sections[name] = 1; } return name; }
-  function newSlide(master, section, notes) { const s = pres.addSlide({ masterName: master, sectionTitle: section }); if (notes) s.addNotes(notes); return s; }
+  let pending = "";
+  function newSlide(master, section, notes) { const s = pres.addSlide({ masterName: master, sectionTitle: section }); const n = [pending, notes].filter(Boolean).join("\n\n"); if (master === "INNEHALL") pending = ""; if (n) s.addNotes(n);
+    if (master === "INNEHALL" && cfg.labels && cfg.labels[section]) s.addText(cfg.labels[section], { x: MX, y: 0.12, w: W - 2 * MX, h: 0.3, fontSize: 13, bold: true, color: C.accent1, charSpacing: 2, margin: 0, isTextBox: true, objectName: "Kapitel och moment" });
+    return s; }
 
   // title slide
   { sec("Start"); const s = newSlide("TITEL", "Start", cfg.titleNotes);
@@ -48,6 +51,7 @@ async function build(cfg) {
   }
 
   const helpers = {
+    skipSection(name, sub, notes) { sec(name); pending = [sub, notes].filter(Boolean).join(" "); },
     section(name, sub, notes) { sec(name); const s = newSlide("AVSNITT", name, notes); s.addText(name, { placeholder: "title" }); s.addText(sub, { placeholder: "body" }); },
     async imgText(sect, title, bullets, img, o = {}) {
       const s = newSlide("INNEHALL", sect, o.notes); s.addText(title, { placeholder: "title" });
@@ -116,6 +120,25 @@ async function build(cfg) {
       s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: MX, y: 1.7, w: W - 2 * MX, h: (qs.length === 1 ? 3.2 : 4.7), rectRadius: 0.15, fill: { color: C.background2 }, line: { color: C.accent3, width: 2 }, objectName: "Kolla dig själv" });
       s.addText("KOLLA DIG SJÄLV", { x: MX + 0.4, y: 1.9, w: 6, h: 0.4, fontSize: 14, bold: true, color: C.accent1, charSpacing: 3, margin: 0, isTextBox: true });
       s.addText(qs.map((q, i) => ({ text: q, options: { bullet: qs.length === 1 ? false : { type: "number" }, breakLine: i < qs.length - 1, paraSpaceAfter: 12 } })), { x: MX + 0.4, y: 2.4, w: W - 2 * MX - 0.8, h: (qs.length === 1 ? 2.2 : 3.8), fontSize: (qs.length === 1 ? 32 : 26), color: C.text1, valign: "top", margin: 0, isTextBox: true });
+      return s; },
+    tank(sect, qs, o = {}) {
+      const s = newSlide("INNEHALL", sect, o.notes || "Tänk tillbaka: eleverna svarar utan stöd i 1–2 minuter, först själva och sedan i par. Svaren finns i facit till Kolla dig själv för förra momentet."); s.addText("Tänk tillbaka", { placeholder: "title" });
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: MX, y: 1.7, w: W - 2 * MX, h: 4.3, rectRadius: 0.15, fill: { color: "FFF7E8" }, line: { color: "D99A2B", width: 2 }, objectName: "Tänk tillbaka" });
+      s.addText("FRÅN FÖRRA GÅNGEN", { x: MX + 0.4, y: 1.9, w: 6, h: 0.4, fontSize: 14, bold: true, color: "8A5A07", charSpacing: 3, margin: 0, isTextBox: true });
+      s.addText(qs.map((q, i) => ({ text: q, options: { bullet: { type: "number" }, breakLine: i < qs.length - 1, paraSpaceAfter: 14 } })), { x: MX + 0.4, y: 2.4, w: W - 2 * MX - 0.8, h: 3.4, fontSize: 26, color: C.text1, valign: "top", margin: 0, isTextBox: true });
+      s.addText("Svara först utan att titta i boken eller anteckningarna.", { x: MX, y: 6.2, w: W - 2 * MX, h: 0.5, fontSize: 18, italic: true, color: C.text2, margin: 0, isTextBox: true });
+      return s; },
+    cornell(sect, o = {}) {
+      const final = !!o.final;
+      const s = newSlide("INNEHALL", sect, o.notes || (final ? "Sista steget i Cornellmetoden: eleverna sammanfattar sidan med egna ord längst ned. Ge 2–3 minuter." : "Paus i Cornellmetoden: eleverna skriver 2–3 ledtrådsfrågor i vänsterspalten som deras anteckningar svarar på. Ge 1–2 minuter.")); s.addText(final ? "Sammanfatta med egna ord" : "Paus: skriv ledtrådar", { placeholder: "title" });
+      const x0 = MX, y0 = 1.7, wL = 2.2, wR = 4.4, hT = 3.7, hB = 1.2;
+      const box = (x, y, w, h, fill, txt, hi) => { s.addShape(pres.shapes.RECTANGLE, { x, y, w, h, fill: { color: fill }, line: { color: hi ? C.accent2 : C.accent3, width: hi ? 4 : 1.5 }, objectName: txt }); s.addText(txt, { x, y, w, h, fontSize: 16, bold: true, color: C.text2, align: "center", valign: "middle", margin: 0.1, isTextBox: true }); };
+      box(x0, y0, wL, hT, "FDF3E3", "Ledtrådar: frågor och nyckelord", !final);
+      box(x0 + wL, y0, wR, hT, "FFFFFF", "Anteckningar", false);
+      box(x0, y0 + hT, wL + wR, hB, "F7E6E4", "Sammanfattning med egna ord", final);
+      const steg = final ? ["Läs dina ledtrådar och anteckningar.", "Skriv en sammanfattning på 2–3 meningar längst ned.", "Använd dina egna ord, inte bokens."]
+                         : ["Titta på dina anteckningar.", "Skriv 2–3 frågor i vänsterspalten som anteckningarna svarar på.", "Dölj högerspalten och svara på dina frågor."];
+      s.addText(steg.map((t, i) => ({ text: t, options: { bullet: { type: "number" }, breakLine: i < steg.length - 1, paraSpaceAfter: 14 } })), { x: 7.9, y: 1.9, w: 4.8, h: 3.4, fontSize: 24, color: C.text1, valign: "top", margin: 0, isTextBox: true });
       return s; },
     async chartSlide(sect, title, bullets, chart, o = {}) {
       const s = newSlide("INNEHALL", sect, o.notes); s.addText(title, { placeholder: "title" });

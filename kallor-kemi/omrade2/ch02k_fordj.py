@@ -112,3 +112,46 @@ def teacher_html():
     return C.teacher_html("Fördjupningen riktar sig till elever som är klara tidigt eller som behöver mer utmaning mot de högre kriterierna. Den fördjupar vattnets densitetsmaximum, energi vid tillståndsförändringar, löslighet och mättade lösningar, utbyte och renhet, fraktionerad destillation och Rf-värde samt hur man planerar en analys och dess gränser, och tränar det resonemang som krävs på högsta nivå.",
       SVAR, RUTOR,
       "Källstatus: vattnets densitetsmaximum vid 4 °C och att is flyter, saltets (ca 35,7 g/100 ml vid 20 °C) och sockrets (ca 190 g/100 ml vid 25 °C) löslighet, att fasta ämnens löslighet i regel ökar och gasers minskar med temperaturen, etanolens och vattnets kokpunkter, att temperaturen ligger still under tillståndsförändringar samt grundprinciperna för destillation och kromatografi är kontrollerade mot öppna källor (se källförteckningen). Allmän läroboksfakta, inte källkontrollerad i detta arbete: fraktionerad destillation i kolonn, Rf-värdets definition, utbytesberäkning, blank- och kontrollprov, att det krävs mer energi att förånga än att smälta, jämviktsbilden för mättad lösning och att kokt vatten innehåller mindre löst gas. Alla mätvärden är påhittade.")
+
+
+# ---------------- Inlärningsprinciper i fördjupningen ----------------
+def _tb(qs): return box("tank", "Tänk tillbaka", "<ol>" + "".join(f"<li>{q}</li>" for q in qs) + "</ol>")
+def _vt(t): return box("varning", "Vanlig tanke", f"<p>{t}</p>")
+def _lo(t): return box("visste", "Löst exempel: så resonerar du", t)
+def _gs(t): return box("tank", "Gör själv", f"<p>{t}</p>")
+NYAF = {
+ "F2.1.1": (["Hur räknar du ut densitet, och vad avgör om ett föremål flyter?", "Vilka tre tillstånd finns, och hur ligger partiklarna i vart och ett?"],
+  "”Ett fast ämne är alltid tätare än sin egen vätska.” Det stämmer för nästan alla ämnen men inte för vatten: vattenmolekylerna ligger glesare i is än i flytande vatten.",
+  "<p><b>Fråga:</b> Varför kan fiskar överleva under isen på en sjö?</p><p>Is har lägre densitet än vatten, <b>därför</b> flyter den och bildas överst. <b>Eftersom</b> isen isolerar kan vattnet under inte kylas lika fort, <b>vilket leder till</b> att det djupa vattnet håller sig kring 4 °C. <b>Slutsats:</b> fisken har flytande vatten att leva i.</p>",
+  "Förklara i flera led varför en liten, grund pöl kan frysa helt men en djup sjö sällan gör det."),
+ "F2.1.2": (["Vad händer med partiklarna vid smältning?", "Vad kallas övergångarna gas till vätska och vätska till gas?"],
+  "”Temperaturen stiger hela tiden när man värmer.” Under smältning och kokning ligger temperaturen still. Värmen går då åt att bryta loss partiklar, inte att öka deras rörelse.",
+  "<p><b>Fråga:</b> Beskriv uppvärmning av is från −10 °C.</p><p>1. Temperaturen stiger till 0 °C: partiklarna vibrerar mer. 2. Platå vid 0 °C: värmen bryter loss partiklar ur mönstret (smältning). 3. Temperaturen stiger till 100 °C. 4. Platå vid 100 °C: värmen skiljer partiklarna helt (kokning). 5. Ångan värms vidare.</p>",
+  "Förklara varför platån vid kokning är längre än platån vid smältning om värmen tillförs lika jämnt."),
+ "F2.1.3": (["Vad är lösning, löst ämne och lösningsmedel?", "Hur skiljer du en homogen från en heterogen blandning?"],
+  "”En mättad lösning är en stark lösning.” Mättad betyder bara att inget mer går att lösa vid den temperaturen. Hur mycket löst ämne det är beror på ämnets löslighet.",
+  "<p><b>Fråga:</b> 50 g salt rörs ut i 100 ml vatten vid 20 °C (löslighet ca 35,7 g per 100 ml). Är lösningen mättad?</p><p>Högst 35,7 g löser sig. 50 − 35,7 = 14,3 g ligger kvar som fast ämne. <b>Slutsats:</b> lösningen är mättad.</p>",
+  "Du löser 30 g salt i 100 ml vatten vid 20 °C. Är lösningen mättad? Motivera med räkning."),
+ "F2.2.1": (["Varför går löst salt inte att filtrera bort?", "Vilka två metoder behövs för att få tillbaka både sand och salt?"],
+  "”Kranvatten är rent.” I kemin betyder rent att det bara finns en sorts partikel. Kranvatten är en blandning med lösta salter och gaser, även om det är ofarligt att dricka.",
+  "<p><b>Fråga:</b> Ett lag fick 4,6 g salt av 5,0 g. Hur bra är utbytet?</p><p>Utbyte = erhållen mängd / ursprunglig mängd × 100 = 4,6 / 5,0 × 100 = <b>92 %</b>. Tolkning: ungefär 8 % gick förlorat, till exempel salt som fastnat på filter och bägare.</p>",
+  "Lag B fick 3,9 g salt av 5,0 g. Räkna utbytet och ge två möjliga orsaker till att det blev lägre."),
+ "F2.2.2": (["Vad är destillation, och vilken skillnad utnyttjas?", "Hur fungerar kromatografi?"],
+  "”Destillation ger alltid helt rena ämnen.” Vid kokpunkter som ligger nära varandra följer lite av det andra ämnet med i ångan. Fraktionerad destillation ger bättre separation men sällan 100 %.",
+  "<p><b>Fråga:</b> Ett ämne vandrade 3,0 cm och lösningsmedlet 6,0 cm. Vilket Rf?</p><p>Rf = sträcka ämne / sträcka lösningsmedel = 3,0 / 6,0 = <b>0,50</b>.</p>",
+  "Ett ämne vandrade 4,5 cm och lösningsmedlet 9,0 cm. Räkna Rf. Vad säger det om ett annat ämne med Rf 0,9?"),
+ "F2.2.3": (["Vad är en fällning?", "Varför behöver man mäta flera egenskaper för att identifiera ett ämne?"],
+  "”Ett negativt test bevisar att ämnet inte finns.” Ämnet kan finnas i för liten mängd, eller så kan något annat störa testet. Ett test kan oftast utesluta, men sällan bevisa.",
+  "<p><b>Fråga:</b> Ett okänt vitt pulver löser sig i vatten och smälter vid ca 800 °C. Vad är det troligast?</p><p>Löslighet utesluter t.ex. sand. Smältpunkt 800 °C stämmer med salt (802 °C) men inte med socker (bryts ned vid ca 190 °C). <b>Slutsats:</b> troligen salt, men fler tester bekräftar.</p>",
+  "Ett vitt pulver löser sig i vatten och smälter inte under 300 °C. Vilket ämne är troligast, salt eller socker? Vad kan du inte vara säker på?"),
+}
+for _i, (_nr, _t, _inner) in enumerate(S):
+    if _nr in NYAF:
+        _q, _v, _l, _g = NYAF[_nr]
+        S[_i] = (_nr, _t, _tb(_q) + _inner + _vt(_v) + _lo(_l) + _gs(_g))
+RUTOR += [("Gör själv (Vattnets ovanliga densitet):", "En liten pöl har lite vatten som kyls snabbt hela vägen, och isen bildas genom hela pölen. I en djup sjö måste en stor vattenmassa kylas till 4 °C innan ytan kan frysa, och isen som bildas isolerar vattnet under."),
+          ("Gör själv (Energi och tillståndsförändringar):", "Vid kokning ska partiklarna skiljas helt från varandra, vilket kräver mycket mer energi än att bryta loss dem ur mönstret vid smältning. Därför tar det längre tid."),
+          ("Gör själv (Löslighet):", "Omättad: 30 g är mindre än 35,7 g, så allt löser sig och ytterligare 5,7 g skulle kunna lösas."),
+          ("Gör själv (Renhet och utbyte):", "3,9 / 5,0 × 100 = 78 %. T.ex. salt som fastnat på filter och bägare, eller spill."),
+          ("Gör själv (Fraktionerad destillation och Rf):", "Rf = 4,5 / 9,0 = 0,50. Rf 0,9 betyder att ämnet vandrade nästan lika långt som lösningsmedlet: det löser sig bra och fastnar lite på papperet."),
+          ("Gör själv (Planera en analys):", "Salt är troligast (smältpunkt 802 °C, socker bryts ned vid ca 190 °C). Man kan inte vara säker, eftersom flera andra salter också löser sig och har höga smältpunkter. Fler tester behövs.")]

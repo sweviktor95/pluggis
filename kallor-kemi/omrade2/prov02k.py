@@ -101,8 +101,28 @@ def split_parts(q):
     pre = re.sub(r'(<br>|\s)+$', '', pre)
     return pre, items
 
+
+def front_page(lararversion):
+    cn = {k: [i + 1 for i, x in enumerate(P) if x[0] == k] for k in "ECA"}
+    def rng(l): return f"{l[0]}–{l[-1]}"
+    box_ = '<td style="height:26pt"></td>'
+    up = ('<table class="tbl num" style="width:100%"><tr><th>Del</th><th>Uppgifter</th><th style="width:15%">Röd</th><th style="width:15%">Gul</th><th style="width:15%">Grön</th></tr>'
+          + "".join(f'<tr><td style="font-weight:700">{NIVA[k][0]} · {NIVA[k][1]}</td><td>{rng(cn[k])}</td>{box_*3}</tr>' for k in "ECA") + '</table>')
+    steg = ["F", "E", "D", "C", "B", "A"]
+    mat = ('<table class="tbl num" style="width:100%"><tr><th style="width:34%">Förmåga</th>' + "".join(f'<th>{x}</th>' for x in steg) + '</tr>'
+           + "".join(f'<tr><td style="font-weight:700">{FN[f]}</td>{box_*6}</tr>' for f in ("F1", "F2", "F3"))
+           + f'<tr><td style="font-weight:700;background:#f7e6e4">Samlad nivå på provet</td>{box_*6}</tr></table>')
+    return ('<section class="sec" style="break-after:page"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">' + KAP + ' · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ &nbsp; Datum: ________</div></div>'
+            '<div class="sh"><h2>' + NAMN_ + '</h2></div>'
+            '<h3>Så många uppgifter på varje nivå</h3>'
+            '<p class="note">Fyll i hur många uppgifter du har på röd, gul och grön, så ser du var du står på varje del.</p>' + up +
+            '<h3 style="margin-top:14pt">Nivå per förmåga</h3>'
+            '<p class="note">Markera i matrisen vilken nivå du bedömer att du ligger på i varje förmåga. Läraren markerar med en annan färg, så kan ni jämföra. Provet har ingen poängräkning.</p>' + mat +
+            '<h3 style="margin-top:14pt">Lärarens övergripande kommentarer</h3>' + lines(7) +
+            '<p class="note" style="margin-top:8pt">Nästa steg för eleven:</p>' + lines(3) + '</section>')
+
 def build(lararversion):
-    h = ['<section class="sec"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">' + KAP + ' · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ </div></div>'
+    h = [front_page(lararversion), '<section class="sec"><div class="pill">' + KAP + ' · Prov</div>'
          '<div class="sh"><h2>' + NAMN_ + '</h2></div>'
          '<p class="note">Hjälpmedel: penna. Del E ska alla svara på. Del C och del A visar vad du kan på högre nivåer. Svara kort och tydligt. Personer, annonser och mätvärden i uppgifterna är påhittade. Till höger om varje uppgift finns tre prickar: röd (kan inte ännu), gul (kan delvis) och grön (kan nästan helt). Ringa in den nivå som svaret ligger på.</p>']
     last = None; n = 0

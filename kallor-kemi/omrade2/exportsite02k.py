@@ -15,7 +15,9 @@ def fix(h): return h.replace(*IMG)
 # Lättläst: delar 1..9
 L = BL.L
 latt = {i: BL.lasa_page(i, d) + BL.ova_page(i, d) for i, d in enumerate(L.DELAR, 1)}
-GS = [inner for nr, t, inner in G.S]
+import re as _r0
+def _utanTT(h): return _r0.sub(r'<div class="bx tank"><span class="rb">Tänk tillbaka</span>.*?</div>', '', h, flags=_r0.S)
+GS = [_utanTT(inner) for nr, t, inner in G.S]
 grund = {"Start": GS[0], "2.1.1": GS[1], "2.1.2": GS[2], "2.1.3": GS[3], "L1": GS[4], "2.2.1": GS[5], "2.2.2": GS[6], "2.2.3": GS[7], "L2": GS[8]}
 fordj = {nr: inner for nr, t, inner in F.S}
 M = {

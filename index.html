@@ -263,6 +263,26 @@
     margin-top: 6px;
   }
 
+  /* Repetition per kapitel (spridd repetition, blandade uppgifter) och Tänk tillbaka */
+  .rep-kort { background: #f1f5fb; border: 2px solid #3d5a8a; border-radius: 14px; padding: 14px 16px; margin: 0 0 20px; }
+  .rep-kort h3 { margin: 0 0 6px; color: #2c4670; }
+  .rep-kort p { margin: 4px 0 10px; }
+  .rep-knappar { display: flex; flex-wrap: wrap; gap: 8px; }
+  .rep-kort.last { background: #f3f4f6; border-color: #c9cfd9; border-style: dashed; color: #5c6575; }
+  .rep-fraga { font-size: 1.15em; font-weight: 600; margin: 6px 0 14px; }
+  .rep-alt { display: block; width: 100%; text-align: left; font: inherit; cursor: pointer; border: 2px solid #3d5a8a; background: #fff; color: #1d2c45; border-radius: 10px; padding: 10px 12px; margin: 0 0 8px; }
+  .rep-alt:hover:not(:disabled) { background: #e6edf8; }
+  .rep-alt:focus-visible { outline: 3px solid #e0782f; outline-offset: 2px; }
+  .rep-alt.ratt { background: #d9f0df; border-color: #2e7d4f; }
+  .rep-alt.fel { background: #fde5d6; border-color: #c25a1e; }
+  .rep-alt:disabled { cursor: default; }
+  .rep-feedback { min-height: 1.4em; margin: 8px 0; font-weight: 600; }
+  .rep-status { font-size: 0.9em; color: #4b5a73; margin: 0 0 8px; }
+  .tank-tillbaka { background: #fff7e8; border: 2px solid #d99a2b; border-radius: 12px; padding: 12px 16px; margin: 0 0 18px; }
+  .tank-tillbaka h3 { margin: 0 0 4px; color: #8a5a07; }
+  .tank-tillbaka .tt-tips { font-size: 0.92em; color: #6b5420; margin: 0 0 8px; }
+  .tank-tillbaka details { margin: 4px 0; }
+  .tank-tillbaka summary { cursor: pointer; }
   .exit-ticket {
     background: #eefaf0;
     border: 2px dashed #5aa66b;
@@ -948,6 +968,7 @@
 <script src="innehall/kemi-omrade4.js"></script>
 <script src="innehall/simuleringar.js"></script>
 <script src="innehall/flashcards.js"></script>
+<script src="innehall/repetition.js"></script>
 <!-- HISTORIA START -->
 <script src="innehall/historia-02.js"></script>
 <!-- HISTORIA END -->
@@ -1091,7 +1112,9 @@ function ikonHtml(ikon) {
     try { id = decodeURIComponent((window.location.hash || "").replace(/^#/, "")); } catch (e) {}
     klockaStoppaSpel(); // stoppa klockans autospel om man navigerar bort mitt i
     tallinjeStoppaDrag(); // släpp ev. pågående drag på tallinjen
-    if (id && nodKarta[id]) { renderaNod(id); } else { renderaStartsida(); }
+    var repM = /^rep:(.+)$/.exec(id);
+    if (repM && typeof repBank !== "undefined" && repBank[repM[1]]) { renderaRep(repM[1]); }
+    else if (id && nodKarta[id]) { renderaNod(id); } else { renderaStartsida(); }
     window.scrollTo(0, 0);
   }
 
@@ -1157,6 +1180,7 @@ function ikonHtml(ikon) {
                 ' moment klara</p><div class="framsteg-bar"><div class="framsteg-bar-fyll" style="width:' +
                 Math.round(100 * sammanfattning.klara / sammanfattning.totalt) + '%"></div></div>';
       }
+      html += repKortHtml(id);
       node.barn.forEach(function(barn) {
         if (raknaFramsteg(barn).totalt === 0 && !(window.hafte && window.hafte[barn.id]) && !barn.ramverk) {
           // Inget innehåll här än: låst knapp som inte går att öppna.
@@ -1179,6 +1203,7 @@ function ikonHtml(ikon) {
         sparaFramsteg();
       }
       html += "<h2>" + (arLabb(node) ? "🧪 " : "") + node.titel + "</h2>";
+      html += tankTillbakaHtml(id);
       if (data && data.spel) {
         // Moment med spel: fakta är standard, spelet är ett val.
         html += '<div class="valj-lage" role="group" aria-label="Välj hur du vill lära dig">' +
@@ -4155,6 +4180,100 @@ function ikonHtml(ikon) {
            '<a class="knapp hafte-ned" href="' + h.pluggblad + '" download title="Ladda ner pluggbladet" aria-label="Ladda ner pluggbladet">⬇</a></span></div></div>';
     }
     return r;
+  }
+
+  // ---- Repetition per kapitel: spridd repetition (Leitner, 1/3/7/21 dagar) + blandade uppgifter ----
+  var REP_NYCKEL = "pluggis-rep-v1", REP_DAGAR = [0, 1, 3, 7, 21], REP_ANTAL = 8;
+  var repTillstand = {};
+  try { repTillstand = JSON.parse(window.localStorage.getItem(REP_NYCKEL) || "{}") || {}; } catch (e) { repTillstand = {}; }
+  function repSpara() { try { window.localStorage.setItem(REP_NYCKEL, JSON.stringify(repTillstand)); } catch (e) {} }
+  function repIdag() { return Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000); }
+  function repKlaraMoment(kap) {
+    var pre = repBank[kap].pre, n = 0;
+    Object.keys(framsteg.klara).forEach(function(k) { if (k.indexOf(pre) === 0) { n++; } });
+    return n;
+  }
+  function repForfallna(kap) {
+    var idag = repIdag(), b = repBank[kap].fr, r = 0;
+    b.forEach(function(f, i) { var t = repTillstand[kap + ":" + i]; if (t && t.d <= idag) { r++; } });
+    return r;
+  }
+  function repKortHtml(id) {
+    if (typeof repBank === "undefined" || !repBank[id]) { return ""; }
+    if (repKlaraMoment(id) === 0) {
+      return '<div class="rep-kort last"><h3>🔁 Repetera kapitlet</h3><p>Markera några moment som klara, så låses repetitionen för det här kapitlet upp.</p></div>';
+    }
+    var f = repForfallna(id), tot = repBank[id].fr.length;
+    var inl = f > 0 ? f + ' fråg' + (f === 1 ? 'a' : 'or') + ' är dags att repetera idag.' : 'Inget är förfallet just nu. Du kan ändå öva.';
+    return '<div class="rep-kort"><h3>🔁 Repetera kapitlet</h3>' +
+      '<p>' + inl + ' Det är bäst att repetera lite flera gånger med uppehåll, så att du minns längre. Det ska kännas lite svårt: det är då du lär dig.</p>' +
+      '<div class="rep-knappar"><button class="knapp" onclick="visNod(\'rep:' + id + '\')">Repetera (' + Math.min(REP_ANTAL, tot) + ' frågor)</button>' +
+      '<button class="knapp" onclick="repBlanda(\'' + id + '\')">🔀 Blandade uppgifter</button></div></div>';
+  }
+  var repSes = null;
+  function repBlandaArray(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function repBlanda(kap) { repSes = { blanda: true }; navigeraTill("rep:" + kap); }
+  function renderaRep(kap) {
+    var blanda = repSes && repSes.blanda; repSes = null;
+    var b = repBank[kap].fr, idag = repIdag(), forf = [], nya = [], ovr = [];
+    b.forEach(function(f, i) {
+      var t = repTillstand[kap + ":" + i];
+      if (t && t.d <= idag) { forf.push(i); } else if (!t) { nya.push(i); } else { ovr.push(i); }
+    });
+    var urval;
+    if (blanda) { urval = repBlandaArray(b.map(function(f, i) { return i; })).slice(0, REP_ANTAL); }
+    else { urval = repBlandaArray(forf).concat(repBlandaArray(nya)).concat(repBlandaArray(ovr)).slice(0, REP_ANTAL); }
+    repSes = { kap: kap, ko: urval.slice(), tot: urval.length, ratt: 0, klara: 0, igen: {} };
+    repVisaFraga();
+  }
+  function repVisaFraga() {
+    var s = repSes, kap = s.kap;
+    var tillbaka = '<button class="knapp tillbaka" onclick="visNod(\'' + kap + '\')">⬅️ Tillbaka till kapitlet</button>';
+    var html = renderaBrodsmulor(kap) + '<h2>🔁 Repetera: ' + nodKarta[kap].node.titel + '</h2>';
+    if (!s.ko.length) {
+      html += '<div class="flash-klart"><p><strong>Klart!</strong> ' + s.ratt + ' av ' + s.tot + ' rätt på första försöket.</p>' +
+        '<p>Frågor du missade kommer tillbaka snart. Kom tillbaka i morgon och repetera igen: det är då det fastnar.</p></div>' + tillbaka;
+      app.innerHTML = html; return;
+    }
+    var i = s.ko[0], f = repBank[kap].fr[i];
+    var ord = repBlandaArray(f[1].map(function(a, k) { return k; }));
+    s.aktuell = { i: i, ord: ord, svarad: false };
+    html += '<p class="rep-status">Fråga ' + Math.min(s.klara + 1, s.tot) + ' av ' + s.tot + '. Tänk först, svara sedan.</p><p class="rep-fraga" id="repFraga"></p><div id="repAlt"></div><p class="rep-feedback" id="repFb" aria-live="polite"></p><div id="repNasta"></div>' + tillbaka;
+    app.innerHTML = html;
+    document.getElementById("repFraga").textContent = f[0];
+    var alt = document.getElementById("repAlt");
+    ord.forEach(function(k) {
+      var bt = document.createElement("button"); bt.type = "button"; bt.className = "rep-alt"; bt.textContent = f[1][k];
+      bt.onclick = function() { repSvara(k); };
+      alt.appendChild(bt);
+    });
+  }
+  function repSvara(k) {
+    var s = repSes, a = s.aktuell; if (a.svarad) { return; } a.svarad = true;
+    var kap = s.kap, f = repBank[kap].fr[a.i], ratt = (k === f[2]), nyckel = kap + ":" + a.i;
+    var bts = document.querySelectorAll("#repAlt .rep-alt");
+    a.ord.forEach(function(kk, pos) { bts[pos].disabled = true; if (kk === f[2]) { bts[pos].classList.add("ratt"); } else if (kk === k) { bts[pos].classList.add("fel"); } });
+    var t = repTillstand[nyckel] || { b: 0, d: repIdag() };
+    if (ratt) { t.b = Math.min(t.b + 1, REP_DAGAR.length - 1); t.d = repIdag() + REP_DAGAR[t.b]; if (!s.igen[a.i]) { s.ratt++; } }
+    else { t.b = 0; t.d = repIdag(); s.igen[a.i] = true; }
+    repTillstand[nyckel] = t; repSpara();
+    document.getElementById("repFb").textContent = ratt ? "✓ Rätt!" : "Inte riktigt. Rätt svar är markerat. Frågan kommer tillbaka.";
+    s.ko.shift(); if (!ratt) { s.ko.push(a.i); } else { s.klara++; }
+    var nb = document.createElement("button"); nb.className = "knapp"; nb.textContent = (s.ko.length ? "Nästa fråga →" : "Se resultat →"); nb.onclick = repVisaFraga;
+    document.getElementById("repNasta").appendChild(nb); nb.focus();
+  }
+
+  // ---- Tänk tillbaka: två frågor från föregående moment, svaret visas först när eleven har tänkt ----
+  function tankTillbakaHtml(id) {
+    if (typeof tankTillbaka === "undefined") { return ""; }
+    var g = hittaGrannar(id);
+    if (!g.foreg || !tankTillbaka[g.foreg.id]) { return ""; }
+    var qs = tankTillbaka[g.foreg.id].slice(0, 2), h = '<div class="tank-tillbaka"><h3>🧠 Tänk tillbaka</h3><p class="tt-tips">Svara först i huvudet eller på papper, kolla sedan. Det är så du minns längre.</p>';
+    qs.forEach(function(q) {
+      var d = document.createElement("div"), sum = document.createElement("summary"), det = document.createElement("details"), p = document.createElement("p");
+      sum.textContent = q[0]; p.textContent = q[1]; det.appendChild(sum); det.appendChild(p); d.appendChild(det); h += d.innerHTML;
+    });
+    return h + '</div>';
   }
 
   visaFranHash(); // visa rätt sida direkt utifrån adressen (#...), annars startsidan

@@ -84,7 +84,7 @@ add("Start", "Vad är materia?", f"Kapitel {NR} · {NAMN} · Start",
 # ------------------------------------------------------------------ 2.1.1
 add("2.1.1", "Ämnen och material", f"Kapitel {NR} · Delområde 2.1 {DELOMR['2.1']} · Ämnen och material",
  "<p>Ett <strong class='green'>ämne</strong> är en sorts materia med bestämda egenskaper, till exempel vatten, järn eller socker. Ett <strong class='green'>material</strong> är det något är gjort av, till exempel trä, glas eller stål. Ett material kan bestå av ett ämne eller av flera ämnen.</p>"
- + "<p>Ämnen känner vi igen på sina <strong class='green'>egenskaper</strong>. Några kan du bedöma med sinnena, som färg, form och hårdhet. Men det är bättre att mäta, för sinnena kan lura oss. Fyra mätbara egenskaper är särskilt viktiga: densitet, smältpunkt, kokpunkt och löslighet. Ett ämne har samma värden oavsett hur stort provet är. En liten och en stor bit aluminium har samma densitet.</p>"
+ + "<p>Ämnen känner vi igen på sina <strong class='green'>egenskaper</strong>. Sinnena kan lura oss, så det är bättre att mäta. Ett ämne har samma värden oavsett hur stort provet är: en liten och en stor bit aluminium har samma densitet. Vi går igenom <b>densitet</b> först, eftersom den räcker för att förutsäga om något flyter. Därefter kommer tre egenskaper till i korthet: smältpunkt, kokpunkt och löslighet.</p>"
  + "<h3>Densitet</h3>"
  + roww("<p><strong class='green'>Densitet</strong> säger hur mycket massa ett ämne har per volym. Du räknar ut den så här:</p>"
         "<p style='text-align:center'><b>densitet = massa / volym</b></p>"
@@ -98,13 +98,13 @@ add("2.1.1", "Ämnen och material", f"Kapitel {NR} · Delområde 2.1 {DELOMR['2.
  + roww("<h3 style='margin-top:0'>Flyta eller sjunka</h3><p>Du kan använda densitet för att förutsäga om något flyter. Ett föremål flyter i en vätska om dess densitet är <b>lägre</b> än vätskans, och sjunker om den är <b>högre</b>. Is (0,92 g/cm³) flyter på vatten (ca 1,0 g/cm³), och olivolja flyter på vatten. En järnbult (7,8 g/cm³) sjunker. Havsvatten har något högre densitet än sötvatten, så det är lättare att flyta i havet än i en insjö.</p>",
         [fig(FIG+"v_flyta.png", "<b>Bild 2.3</b> Olja flyter på vatten, en isbit flyter och en järnbult sjunker.", "100%")])
  + "<h3>Smältpunkt och kokpunkt</h3>"
- + "<p><strong class='green'>Smältpunkten</strong> är den temperatur då ett fast ämne blir flytande. <strong class='green'>Kokpunkten</strong> är den temperatur då en vätska kokar och blir gas. Rena ämnen har bestämda värden, så de kan användas för att känna igen ämnet. Vatten smälter vid 0 °C och kokar vid 100 °C vid normalt lufttryck. Etanol, som finns i handsprit, smälter vid −114 °C och kokar vid 78 °C. Det betyder att etanol är gas vid temperaturer där vatten fortfarande är vätska.</p>"
+ + "<p><strong class='green'>Smältpunkten</strong> är den temperatur då ett fast ämne blir flytande. <strong class='green'>Kokpunkten</strong> är den temperatur då en vätska kokar och blir gas. Rena ämnen har bestämda värden. Vatten smälter vid 0 °C och kokar vid 100 °C. Etanol, som finns i handsprit, smälter vid −114 °C och kokar vid 78 °C.</p>"
  + table(["Ämne", "Smältpunkt (°C)", "Ämne", "Smältpunkt (°C)"],
          [["Is (vatten)", "0", "Aluminium", "658"], ["Paraffin (ljusvax)", "ca 52", "Bordssalt", "802"], ["Tenn", "232", "Guld", "1063"], ["Bly", "327", "Koppar", "1083"], ["Zink", "419", "", ""]], "tbl num")
  + "<h3>Löslighet</h3>"
  + roww("<p><strong class='green'>Löslighet</strong> säger hur mycket av ett ämne som går att lösa i en viss mängd lösningsmedel, till exempel vatten. Salt (natriumklorid) löser sig upp till ungefär 36 g i 100 ml vatten vid 20 °C. Socker löser sig mycket bättre, ungefär 190 g per 100 ml vid 25 °C. Sand är <b>olöslig</b> i vatten: det löser sig inte alls.</p>"
         "<p>När lösningsmedlet inte kan ta emot mer av ämnet är lösningen <strong class='green'>mättad</strong>. Det som tillsätts därefter blir kvar som fast ämne på botten. Fasta ämnen löser sig oftast bättre i varmt vatten än i kallt, medan gaser löser sig sämre.</p>",
-        [box("tank", "Tänk efter", "<p>En kub väger 21,6 g och har sidan 2 cm. Räkna ut volymen (sida × sida × sida) och densiteten. Flyter den på vatten?</p>")])
+        [box("tank", "Bra att veta", "<p>Mer löst ämne i ett lösningsmedel kallas en <b>koncentrerad</b> lösning, mindre en <b>utspädd</b>.</p>")])
  + kq("2.1.1"))
 
 # ------------------------------------------------------------------ 2.1.2
@@ -130,7 +130,6 @@ add("2.1.2", "Partikelmodellen", f"Kapitel {NR} · Delområde 2.1 {DELOMR['2.1']
         [fig(FIG+"v_diffusion.png", "<b>Bild 2.6</b> Diffusion: en färgdroppe sprids i vatten, efter hand blir färgen jämn. Partiklarna syns bara i modellen.", "100%")])
  + "<h3>Vad modellen inte visar</h3>"
  + "<p>Partikelmodellen är en förenkling. Bilderna är tvådimensionella, men verkligheten är tredimensionell. Bilderna visar inte rörelsen, krafterna mellan partiklarna eller deras energi. Partiklar är inte färgade kulor: färg, lukt och smak hos ämnet förklaras inte av modellen så här enkelt. Och det är inte hela sanningen att partiklarna är runda bollar. När du behöver förklara mer får du använda en bättre modell, till exempel atommodellen i kapitel 3.</p>"
- + box("tank", "Tänk efter", "<p>Varför är det svårt att rita en bra bild av partiklarnas rörelse på papper? Vilka nya bilder eller hjälpmedel kunde visa det bättre?</p>")
  + kq("2.1.2"))
 
 # ------------------------------------------------------------------ 2.1.3
@@ -143,7 +142,7 @@ add("2.1.3", "Rena ämnen och blandningar", f"Kapitel {NR} · Delområde 2.1 {DE
  + roww("<p>I en <strong class='green'>homogen blandning</strong> är allt blandat så jämnt att det ser likadant ut överallt. Du kan inte se de olika delarna. Saltvatten är ett exempel. I en <strong class='green'>heterogen blandning</strong> kan du se eller skilja delarna: sand i vatten, sallad, granit.</p>"
         "<p>En homogen blandning av ett ämne som löst sig i ett annat kallas <strong class='green'>lösning</strong>. Det ämne som löses kallas <b>löst ämne</b> och det som löser kallas <b>lösningsmedel</b>. I saltvatten är salt det lösta ämnet och vatten lösningsmedlet. Vatten är det vanligaste lösningsmedlet, men det finns fler.</p>"
         "<p>Luft är en homogen blandning av flera gaser. En blandning av metaller kallas <strong class='green'>legering</strong>. Mässing är en legering av koppar och zink, brons av koppar och tenn. Legeringen kan ha helt andra egenskaper än metallerna var för sig, till exempel vara hårdare.</p>",
-        [box("tank", "Tänk efter", "<p>Är en kopp te med socker i homogen eller heterogen? Och en kopp te med tebitar i? Förklara med partikelmodellen.</p>")])
+        [])
  + "<h3>Vad händer när ämnen blandas?</h3>"
  + "<p>När du blandar ämnen försvinner ingenting. Ämnena finns kvar som de var och går i princip att få tillbaka, så vi kan skilja dem åt (delområde 2.2). Att blanda är inte en kemisk reaktion (se kapitel 4). Därför är <b>massan</b> lika stor före och efter: löser du 5 g salt i 100 g vatten får du 105 g saltvatten.</p>"
  + kq("2.1.3"))
@@ -193,7 +192,6 @@ add("2.2.2", "Destillation och kromatografi", f"Kapitel {NR} · Delområde 2.2 {
  + roww("<p>Många färger är blandningar av flera färgämnen. Med <strong class='green'>papperskromatografi</strong> kan du se dem. Du gör en prick eller ett streck med färgen en bit upp på ett filterpapper och ställer papperets nederkant i lite lösningsmedel, till exempel vatten. Vattnet sugs upp i papperet och tar med sig färgämnena. De som löser sig bra i vatten och fastnar lite på papperet vandrar långt. De som fastnar mer vandrar kortare. Färgerna delar sig i band.</p>"
         "<p>Pennstrecket måste sitta ovanför vattenytan i början. Annars löser färgen ut i vattnet i stället för att vandra upp i papperet. Metoden används av analytiska kemister för att se vilka ämnen ett prov innehåller, till exempel färgämnen i mat eller bläck.</p>",
         [fig(FIG+"v_kromatografi.png", "<b>Bild 2.12</b> Kromatografi: tre färgämnen vandrar olika långt på papperet.", "100%")])
- + box("tank", "Tänk efter", "<p>Vilken metod skulle du välja för att (a) få ut socker ur sockervatten, (b) få rent vatten ur sockervatten, (c) se vilka färger som ingår i grön tuschpenna? Motivera.</p>")
  + kq("2.2.2"))
 
 # ------------------------------------------------------------------ 2.2.3
@@ -209,7 +207,6 @@ add("2.2.3", "Identifiera ämnen och fällning", f"Kapitel {NR} · Delområde 2.
         [fig(FIG+"v_felling.png", "<b>Bild 2.13</b> Fällning: två klara lösningar blandas och ett fast ämne bildas.", "100%")])
  + "<h3>Vad kan en analys säga?</h3>"
  + "<p>En analys kan svara på vilka ämnen som finns i ett prov, men det är inte alltid den svarar på <i>hur mycket</i>. Ett test kan också ge fel svar om provet är förorenat, om metoden inte är känslig nog, eller om flera ämnen ger samma reaktion. Dessutom säger ett prov bara något om just det provet. Ett vattenprov från en plats behöver inte stämma för hela sjön. Därför gör man upprepade prov och olika metoder, och redovisar hur säker slutsatsen är.</p>"
- + box("tank", "Tänk efter", "<p>Du får ett vitt pulver och ska ta reda på om det är socker eller salt. Vilka egenskaper kan du mäta eller testa utan att smaka på det? Vad behöver du för att kunna jämföra?</p>")
  + kq("2.2.3"))
 
 # ------------------------------------------------------------------ Labb 2.2
@@ -289,14 +286,14 @@ FAKTA = ("Kontrollerat mot öppna källor (2026-10-18): densitetsvärden för va
          "Ej källkontrollerat: att mässing är koppar och zink och brons koppar och tenn (allmän kunskap), att tryck uppstår av att partiklar slår mot väggar (allmän fysik), att gaser löser sig sämre i varmare vatten och förklaringar med partikelmodellen om värme och temperaturen som ligger still, sambandet mellan indikatorer och syra/bas (kapitel 5), att algblomning orsakas av fosfat (allmänt), att ett fartyg flyter p.g.a. sin form. Alla exempelmätvärden är påhittade. "
          "Källor: Skolverket, Lgr22 kursplan i kemi. · HyperPhysics, EngineeringToolbox, Alloprof, Creative Chemistry, RSC Education, LibreTexts. · Illustrationer: egenritade för detta kapitel.")
 HANDLEDNING_HTML = """<h3>Handledning per moment (grundtext)</h3>
-<p><b>Start.</b> Mål: eleven förstår att materia är allt som har massa och tar plats och att partikelmodellen används för att förklara tillstånd. Låt eleverna skriva sin förklaring till hur sockret hamnar i hela koppen (Fundera) och spara den. Vanligt fel: att luft inte är materia. Väg en tom och en uppblåst fotboll (eller basketboll) på en våg.</p>
-<p><b>Ämnen och material.</b> C-mål: beskriva ämnen med egenskaper, räkna ut densitet och använda den för att förutsäga flyta/sjunka. Vanligt fel: att tunga saker alltid sjunker (densitet är massa per volym) och att en stor bit har högre densitet än en liten av samma ämne. Gör gärna en snabb demo med en isbit i vatten och i etanol (lärardemo, brandfara): isen sjunker i etanol eftersom etanol har lägre densitet (0,79).</p>
-<p><b>Partikelmodellen.</b> C-mål: förklara fast, vätska, gas och tillståndsförändringar med modellen och nämna vad den inte visar. Vanliga fel: att partiklarna blir större vid uppvärmning, att det finns luft mellan partiklarna, att partiklarna själva smälter, och att temperaturen stiger under smältning. Diffusion kan demonstreras med en färgdroppe i stilla vatten (kallt och varmt) eller med doft. Att diffusion är snabbare i varmt vatten är rimligt med modellen men är inte belagt i vår källa; låt eleverna testa.</p>
-<p><b>Rena ämnen och blandningar.</b> C-mål: skilja rent ämne från blandning och homogen från heterogen blandning. Vanliga fel: att ”rent” betyder ”utan skadliga ämnen” och att luft är ett ämne. Gör korten: ge eleverna 10 vardagsprodukter att sortera.</p>
+<p><b>Start.</b> Mål: eleven förstår att materia är allt som har massa och tar plats och att partikelmodellen används för att förklara tillstånd. Låt eleverna skriva sin förklaring till hur sockret hamnar i hela koppen (Fundera) och spara den. Vanligt fel: att luft inte är materia. Väg en tom och en uppblåst fotboll (eller basketboll) på en våg. <b>Upplägg:</b> varje moment börjar med <i>Tänk tillbaka</i> (två frågor från förra momentet, svaren finns i facit till Kolla dig själv för det momentet; låt eleverna svara utan stöd i 1–2 minuter) och följs av <i>Vanlig tanke</i>, <i>Löst exempel</i>, <i>Fyll i själv</i> (halvfärdig uppgift) och <i>Gör själv</i> (egen uppgift). Ta det i den ordningen: exempel först, sedan halvfärdigt, sist självständigt.</p>
+<p><b>Ämnen och material.</b> C-mål: beskriva ämnen med egenskaper, räkna ut densitet och använda den för att förutsäga flyta/sjunka. Vanligt fel: att tunga saker alltid sjunker (densitet är massa per volym) och att en stor bit har högre densitet än en liten av samma ämne. Gör gärna en snabb demo med en isbit i vatten och i etanol (lärardemo, brandfara): isen sjunker i etanol eftersom etanol har lägre densitet (0,79). <b>Facit nya uppgifter:</b> Fyll i: 46 g / 40 cm³ = 1,15 g/cm³, större än vattnets 1,0, så plastbiten sjunker. Gör själv: 140 g / 50 cm³ = 2,8 g/cm³, sjunker.</p>
+<p><b>Partikelmodellen.</b> C-mål: förklara fast, vätska, gas och tillståndsförändringar med modellen och nämna vad den inte visar. Vanliga fel: att partiklarna blir större vid uppvärmning, att det finns luft mellan partiklarna, att partiklarna själva smälter, och att temperaturen stiger under smältning. Diffusion kan demonstreras med en färgdroppe i stilla vatten (kallt och varmt) eller med doft. Att diffusion är snabbare i varmt vatten är rimligt med modellen men är inte belagt i vår källa; låt eleverna testa. <b>Facit nya uppgifter:</b> Fyll i: sockerpartiklarna lossnar och sprids ut (diffunderar); vattenpartiklarna rör sig hela tiden; sockerpartiklarna blandas ut bland dem. Gör själv: i varmt te rör sig partiklarna snabbare, så sockret lossnar och sprids fortare.</p>
+<p><b>Rena ämnen och blandningar.</b> C-mål: skilja rent ämne från blandning och homogen från heterogen blandning. Vanliga fel: att ”rent” betyder ”utan skadliga ämnen” och att luft är ett ämne. Gör korten: ge eleverna 10 vardagsprodukter att sortera. <b>Facit nya uppgifter:</b> Fyll i: müsli med mjölk heterogen blandning, luft homogen blandning, syre rent ämne. Gör själv: 212 g; låt vattnet avdunsta (indunsta) så sockret blir kvar.</p>
 <p><b>Labb 2.1 Densitet och flyta eller sjunka.</b> Material: våg, mätcylinder, vatten, saltlösning (20 g salt i 100 ml vatten), små föremål. Förväntat: metall sjunker, trä och vissa plaster flyter, men resultaten beror på föremålen. Vanliga fel: luftbubblor på föremålet ger för stor volym, vattnet stänker, föremål som flyter hålls inte under ytan. Ett ägg flyter i tillräckligt salt vatten men sjunker i vanligt, och passar som extra demonstration.</p>
-<p><b>Filtrering, avdunstning och sedimentering.</b> C-mål: välja metod efter egenskap och förklara varför filtrering inte fungerar på löst salt. Vanligt fel: att saltet kan filtreras bort. Visa gärna ett filter med porer under förstoring om det finns tillgång.</p>
-<p><b>Destillation och kromatografi.</b> C-mål: beskriva hur destillation och kromatografi fungerar och välja rätt metod. Destillation görs helst som lärardemo. Kromatografi går bra som elevförsök med filterpapper och vattenlösliga tuschpennor. Vanliga fel: att pennstrecket hamnar under vattenytan, och att alla pennor innehåller flera färger. Prova pennorna i förväg.</p>
-<p><b>Identifiera ämnen och fällning.</b> C-mål: använda flera egenskaper för att dra en slutsats och beskriva vad en fällning är och var den används. Vanligt fel: att man kan identifiera ett ämne från en enda egenskap. Kemiska tester med indikatorer kopplas till kapitel 5.</p>
+<p><b>Filtrering, avdunstning och sedimentering.</b> C-mål: välja metod efter egenskap och förklara varför filtrering inte fungerar på löst salt. Vanligt fel: att saltet kan filtreras bort. Visa gärna ett filter med porer under förstoring om det finns tillgång. <b>Facit nya uppgifter:</b> Fyll i: filtrering; residu; filtrat. Gör själv: partiklarnas storlek. Kaffets lösta partiklar är mindre än hålen i filtret, sumpens partiklar är större.</p>
+<p><b>Destillation och kromatografi.</b> C-mål: beskriva hur destillation och kromatografi fungerar och välja rätt metod. Destillation görs helst som lärardemo. Kromatografi går bra som elevförsök med filterpapper och vattenlösliga tuschpennor. Vanliga fel: att pennstrecket hamnar under vattenytan, och att alla pennor innehåller flera färger. Prova pennorna i förväg. <b>Facit nya uppgifter:</b> Fyll i: aceton, eftersom dess kokpunkt (56 °C) är lägre än vattnets. Gör själv: bläcket är en blandning av minst tre färgämnen. Man kan inte veta vilka ämnen det är, och två ämnen kan vandra lika långt.</p>
+<p><b>Identifiera ämnen och fällning.</b> C-mål: använda flera egenskaper för att dra en slutsats och beskriva vad en fällning är och var den används. Vanligt fel: att man kan identifiera ett ämne från en enda egenskap. Kemiska tester med indikatorer kopplas till kapitel 5. <b>Facit nya uppgifter:</b> Fyll i: olösliga ämnen (t.ex. sand) och ämnen som påverkar indikatorn (syror, baser) kan uteslutas; nästa test kan vara smältpunkt eller densitet. Gör själv: en fällning har bildats, ett fast ämne.</p>
 <p><b>Labb 2.2 Separera sand, salt och vatten.</b> Material: blandning av 10 g sand och 5 g salt i 100 ml vatten (lärarförberedd), filtrering och indunstning. Förväntat: ca 9–10 g sand och 4–5 g salt, men sanden blir lätt fuktig och saltet kan spritta eller sitta kvar på bägaren. Säkerhet: skyddsglasögon, tång, ej smaka. Kromatografin är ett tillägg.</p>
 """
 LAB_HTML = ""
@@ -323,3 +320,53 @@ ELEV_HTML = ('<section class="sec"><div class="pill">Elevblad · Kopieringsunder
  '<ol class="steps g"><li>Förklara med densitet varför lagren hamnade så.</li></ol>' + lines(3) +
  '<ol class="steps g"><li>Vad hände om du hällde för snabbt? Förklara med partiklar.</li></ol>' + lines(2) + '</section>')
 RUTOR = []
+
+# ---------------- Inlärningsprinciper (Tänk tillbaka, Vanlig tanke, löst exempel, halvfärdig, egen uppgift) ----------------
+def tb(qs):
+    return box("tank", "Tänk tillbaka", "<ol class='steps g'>" + "".join(f"<li>{q}</li>" for q in qs) + "</ol>")
+def vt(txt): return box("varning", "Vanlig tanke", f"<p>{txt}</p>")
+def ls(title, body): return box("begrepp", title, body)
+def fy(body): return box("fundera", "Fyll i själv", body)
+def gs(body): return box("tank", "Gör själv", body)
+def lost(body): return box("visste", "Löst exempel", body)
+
+ADD = {
+ "Start": (None, vt("”Luft är ingenting.” Luft är materia: den har massa och tar plats. Det märks när du blåser upp en ballong.")),
+ "2.1.1": (tb(["Vad menas med materia?", "Är luft materia? Hur vet du det?"]),
+   vt("”Tunga saker sjunker och lätta saker flyter.” Det är <b>densiteten</b> som avgör, inte vikten. Ett stort skepp av stål flyter, men en liten sten sjunker.")
+   + lost("<p>Ett trästycke väger 30 g och har volymen 50 cm³.</p><p>Densitet = massa / volym = 30 g / 50 cm³ = <b>0,6 g/cm³</b>. Vatten har 1,0 g/cm³. Trästycket har lägre densitet än vatten, så det <b>flyter</b>.</p>")
+   + fy("<p><b>Halvfärdig uppgift.</b> En plastbit väger 46 g och har volymen 40 cm³.</p><p>Densitet = ______ g / ______ cm³ = ______ g/cm³. Är värdet större eller mindre än vattnets 1,0 g/cm³? Flyter plastbiten?</p>")
+   + gs("<p>En sten väger 140 g och har volymen 50 cm³. Räkna ut densiteten och avgör om den flyter i vatten. Förklara hur du vet.</p>")),
+ "2.1.2": (tb(["Hur räknar du ut densitet?", "Vad är skillnaden mellan smältpunkt och kokpunkt?"]),
+   vt("”Partiklarna i ett fast ämne står helt stilla.” De vibrerar hela tiden men håller sina platser. Och mellan partiklarna är det <b>tomt</b>, inte luft.")
+   + lost("<p><b>Förklara:</b> Varför känner du doften av bröd i ett annat rum?</p><p>Brödet avger partiklar som är gas. Gaspartiklar rör sig fritt åt alla håll och blandar sig med luftens partiklar. Det kallas <b>diffusion</b>. Till slut kommer de fram till din näsa.</p>")
+   + fy("<p><b>Halvfärdig uppgift.</b> Förklara varför sockerbiten i teet (Fundera, första sidan) gör teet sött hela vägen utan omrörning.</p><p>Sockerpartiklarna lossnar från sockerbiten och ______. Vattenpartiklarna ______ hela tiden, så sockerpartiklarna ______ ut bland dem.</p>")
+   + gs("<p>Varför går sockret fortare att lösa i varmt te än i kallt? Använd ordet partiklar.</p>")),
+ "2.1.3": (tb(["Vad händer med partiklarna när ett fast ämne smälter?", "Förklara med partiklar varför doft sprids i ett rum."]),
+   vt("”Om sockret har löst sig har det försvunnit.” Nej. Sockerpartiklarna finns kvar, utspridda bland vattenpartiklarna. Därför väger lösningen lika mycket som vattnet och sockret tillsammans.")
+   + lost("<p>Sortera: <i>saltvatten</i>, <i>sand i vatten</i>, <i>rent vatten</i>.</p><p>Saltvatten: <b>homogen blandning</b> (lösning), du ser bara en vätska. Sand i vatten: <b>heterogen blandning</b>, du ser sanden. Rent vatten: <b>rent ämne</b>.</p>")
+   + fy("<p><b>Halvfärdig uppgift.</b> Sortera: müsli med mjölk: ______. Luft: ______. Syre (bara syre): ______.</p>")
+   + gs("<p>Du löser 12 g socker i 200 g vatten. Hur mycket väger lösningen? Hur kan du få tillbaka sockret?</p>")),
+ "2.2.1": (tb(["Vad är skillnaden mellan en homogen och en heterogen blandning?", "Hur mycket väger en lösning av 5 g salt i 100 g vatten?"]),
+   vt("”Filtrering kan ta bort löst salt.” Nej. Lösta partiklar är så små att de går rakt igenom filtret. Då behövs <b>avdunstning</b>.")
+   + lost("<p><b>Mål:</b> separera sand, salt och vatten.</p><p>1. Filtrera: sanden stannar i filtret, saltvattnet rinner igenom. 2. Indunsta filtratet: vattnet avdunstar och saltet blir kvar.</p>")
+   + fy("<p><b>Halvfärdig uppgift.</b> Du har kaffesump i kaffe.</p><p>Metod: ______. Det som blir kvar i filtret kallas ______. Det som rinner igenom kallas ______.</p>")
+   + gs("<p>Ett kaffefilter släpper igenom kaffet men inte sumpen. Vilken egenskap hos partiklarna avgör det? Förklara.</p>")),
+ "2.2.2": (tb(["Varför går inte löst salt att filtrera bort?", "Hur får du tillbaka saltet ur saltvatten?"]),
+   vt("”Vid destillation kokar allt bort samtidigt.” Nej. Ämnet med lägst kokpunkt ångar av mest först. Därför kan man skilja ämnena åt.")
+   + lost("<p>Etanol (78 °C) och vatten (100 °C) värms. Vid cirka 78 °C avdunstar etanolen mest. Ångan kyls i kylaren och blir flytande: <b>destillat</b>. Vattnet blir kvar i kolven.</p>")
+   + fy("<p><b>Halvfärdig uppgift.</b> Aceton (56 °C) och vatten (100 °C) blandas och värms. Vilket ämne kommer först i destillatet? ______. Därför att dess kokpunkt är ______.</p>")
+   + gs("<p>Ett svart bläck ger vid kromatografi tre färgfläckar. Vad kan du dra för slutsats om bläcket? Vad kan du inte veta?</p>")),
+ "2.2.3": (tb(["Vilken skillnad mellan ämnen utnyttjas vid destillation?", "Varför vandrar olika färger olika långt vid kromatografi?"]),
+   vt("”Om två ämnen ser likadana ut är de samma ämne.” Salt och socker är båda vita kristaller men helt olika ämnen. Därför behövs flera tester.")
+   + lost("<p>Två vita pulver, salt och socker. Test 1: lös i vatten. Båda löser sig, så testet skiljer dem inte åt. Test 2: värm försiktigt en liten mängd. Socker smälter och blir brunt, men salt gör inte det vid samma temperatur. Två tester ger tillsammans ett säkrare svar.</p>")
+   + fy("<p><b>Halvfärdig uppgift.</b> Ett okänt pulver löser sig i vatten och påverkar inte indikatorn. Vilka ämnen kan du utesluta? ______ Vilket test skulle du göra härnäst? ______</p>")
+   + gs("<p>Du blandar två klara lösningar och det blir ett vitt grumligt ämne. Vad har hänt, och vad kallas det som bildades?</p>")),
+}
+for i, (nr, t, inner) in enumerate(S):
+    if nr in ADD and not (nr == "Labb"):
+        pre, post = ADD[nr]
+        k = inner.rfind('<div class="kolla">')
+        if k < 0: k = len(inner)
+        inner = (pre or "") + inner[:k] + post + inner[k:]
+        S[i] = (nr, t, inner)

@@ -49,7 +49,7 @@ def named_foot_css(foots, tab=None):
     for i, f in enumerate(foots, 1):
         m = re.search(r'Delområde (\d+\.\d+)', f)
         t = (m.group(1) + ('+' if str(tab).endswith('+') else '')) if m else tab
-        out += '.m%d{page:m%d}@page m%d{@bottom-left{content:"%s";font:8.4pt Carlito;color:#6b625b;margin-top:6mm}}' % (i, i, i, f)
+        out += '.m%d{page:m%d}@page m%d{@bottom-left{content:"%s";font:8.4pt Carlito;color:#6b625b;margin-top:-8.8mm}}' % (i, i, i, f)
         out += '@page m%d%s' % (i, tabrule(t))
     return out
 

@@ -2,13 +2,13 @@
 
 Status: förslag, väntar på granskning. Genereras av `planering/amne_plan.py` från `planering/fysik_data.py` – ändra där, inte här.
 
-Planen omfattar 13 områden, 27 delområden, 81 lektionsmoment och 24 labbpass. Det som inte ryms står under *Om tid / fördjupning* (77 förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
+Planen omfattar 13 områden, 26 delområden, 78 lektionsmoment och 23 labbpass. Det som inte ryms står under *Om tid / fördjupning* (76 förslag). Lektionsmoment och labbpass tillsammans täcker hela det centrala innehållet och alla delar av syftet (kontrollerat av skriptet).
 
 ## Översikt
 
 | Område | Delområden |
 |---|---|
-| 1. Fysik som vetenskap | Mäta och undersöka som fysiker, Modeller, källor och argument |
+| 1. Fysik som vetenskap | Mäta, undersöka och granska som fysiker |
 | 2. Materia, partikelmodellen och värme | Partikelmodellen och fasövergångar, Värme, värmetransport och värmeutvidgning |
 | 3. Väder och klimat | Väder och vattnets kretslopp, Strålningsbalans, växthuseffekt och klimat |
 | 4. Universum | Universums uppkomst och uppbyggnad, Planeter och liv i andra solsystem |
@@ -26,41 +26,24 @@ Planen omfattar 13 områden, 27 delområden, 81 lektionsmoment och 24 labbpass. 
 
 ## 1. Fysik som vetenskap
 
-*Hur fysiker arbetar: mäta, undersöka, granska och ändra sina modeller. Läggs först eftersom allt annat bygger på det.*
+*En kort start: hur fysiker mäter, undersöker och granskar, så att eleverna kan arbeta som fysiker i resten av kurserna.*
 
-### 1.1 Mäta och undersöka som fysiker
+### 1.1 Mäta, undersöka och granska som fysiker
 
-**Mål:** Eleven kan planera, utföra, dokumentera och värdera en fysikalisk undersökning med en variabel i taget och mäta med lämpliga instrument.
+**Mål:** Eleven kan planera, utföra och värdera en enkel fysikalisk undersökning med en variabel i taget, och förklara att modeller och påståenden prövas mot undersökningar.
 
-**Nivåer (E→A):** E: genomför enligt plan, mäter och drar enkel slutsats. C: planerar rättvist försök och värderar felkällor. A: motiverar upplägget, föreslår förbättringar och diskuterar hur säker slutsatsen är.
+**Nivåer (E→A):** E: genomför enligt plan, mäter, ger exempel på en modell som ändrats och använder mer än en källa. C: planerar rättvist försök, värderar felkällor och motiverar bedömningen av källor. A: motiverar upplägget, diskuterar hur säker slutsatsen är och resonerar om modellers begränsningar.
 
-**Förklaringsmodeller:** Rättvist försök; mätfel och upprepning
+**Förklaringsmodeller:** Rättvist försök; modeller prövas och förändras
 
 | Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
 |---|---|---|---|---|---|
-| **Storheter, enheter och instrument** | Längd, massa, tid, kraft, temperatur och ström; enheter och omvandling; hur man läser av och hur noggrant ett instrument är. | storhet, enhet, mätinstrument, noggrannhet, avläsning | Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
-| **Från fråga till plan** | Undersökningsbar fråga, hypotes, oberoende, beroende och kontrollerade variabler; rättvist försök. | undersökningsbar fråga, hypotes, variabel, rättvist försök | Ställa frågor om fysikaliska företeelser utifrån egna upplevelser och …; Egna systematiska undersökningar | Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
-| **Mätvärden, tabeller och diagram** | Tabell och diagram, upprepade mätningar och medelvärde, felkällor, slutsats och kort rapport, gärna digitalt. | tabell, diagram, medelvärde, felkälla, slutsats, rapport | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
+| **Mäta och planera ett försök** | Storheter, enheter och instrument (avläsning, noggrannhet); undersökningsbar fråga, hypotes, oberoende, beroende och kontrollerade variabler; rättvist försök. | storhet, enhet, mätinstrument, hypotes, variabel, rättvist försök | Ställa frågor om fysikaliska företeelser utifrån egna upplevelser och …; Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
+| **Från mätvärden till slutsats** | Tabell och diagram, upprepade mätningar och medelvärde, felkällor och slutsats. | tabell, diagram, medelvärde, felkälla, slutsats | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
+| **Modeller och källor** | Vad en modell är och att den kan förändras när nya undersökningar visar mer (geocentriskt och heliocentriskt synsätt som exempel); granska ett påstående: vem säger det, varför och med vilka belägg. | modell, begränsning, påstående, belägg, källkritik | Använda fysikens begrepp och förklaringsmodeller för att beskriva och …; Skilja mellan naturvetenskapliga och andra sätt att beskriva och …; Formulera egna och granska andras argument; Söka svar på ämnesspecifika frågor med olika typer av källor | Sambandet mellan undersökningar och begrepp och förklaringsmodeller; Informationssökning, kritisk granskning och användning av information …; Argumentation och ställningstaganden i aktuella frågor som rör energi … | Begrepp och förklaringsmodeller; Granska information, kommunicera och ta ställning |
 | 🧪 **Labb (ca 45 min): Hur påverkar snörets längd en pendels svängningstid?** | Hur påverkar pendelns längd tiden för en svängning? Varierar: snörets längd (t.ex. 25, 50, 100 cm). Mäter: tiden för 10 svängningar och beräknar tiden för en. Konstant: vikt och liten utslagsvinkel. Upprepa tre gånger och beräkna medelvärde. Säkerhet: Fäst stativet ordentligt. Ingen står under eller framför lodet. | oberoende och beroende variabel, period, medelvärde, felkälla | Egna systematiska undersökningar; Färdigheter i att hantera material, utrustning och digitala verktyg | Observationer och experiment (analoga och digitala verktyg) | Systematiska undersökningar |
 
-**Om tid / fördjupning:** Digitala mätverktyg och sensorer; Mätosäkerhet; Fysik i vardagen
-
-### 1.2 Modeller, källor och argument
-
-**Mål:** Eleven kan förklara att fysikaliska modeller prövas och förändras, granska påståenden om fysik och argumentera.
-
-**Nivåer (E→A):** E: ger exempel på hur en modell ändrats och använder flera källor. C: motiverar bedömningen av källorna och kopplar förändring till undersökningar. A: väger källor mot varandra och resonerar om modellers begränsningar.
-
-**Förklaringsmodeller:** Vad en modell är; modellers föränderlighet (geocentriskt → heliocentriskt)
-
-| Moment | Innehåll | Begrepp | Syfte | Centralt innehåll | Förmåga |
-|---|---|---|---|---|---|
-| **Vad är en modell i fysik?** | Modeller förenklar verkligheten: vad de kan förklara och vad de inte kan. Exempel: partikelmodell, ljusstråle, kretsschema. | modell, förenkling, begränsning, förklaring | Använda fysikens begrepp och förklaringsmodeller för att beskriva och …; Skilja mellan naturvetenskapliga och andra sätt att beskriva och … | Sambandet mellan undersökningar och begrepp och förklaringsmodeller | Begrepp och förklaringsmodeller |
-| **Hur fysiken vuxit fram** | Från Aristoteles till Galilei och Newton: nya undersökningar ändrar bilden av världen. Geocentriskt och heliocentriskt synsätt. | modell, observation, teori, förändring | Skilja mellan naturvetenskapliga och andra sätt att beskriva och … | Sambandet mellan undersökningar och begrepp och förklaringsmodeller | Begrepp och förklaringsmodeller |
-| **Granska fysikpåståenden** | Källor, avsändare, syfte och reklam: vad går att pröva? Exempel: energisparande, ”evighetsmaskiner”, påståenden om strålning. | källkritik, påstående, belägg, trovärdighet | Formulera egna och granska andras argument; Söka svar på ämnesspecifika frågor med olika typer av källor | Informationssökning, kritisk granskning och användning av information …; Argumentation och ställningstaganden i aktuella frågor som rör energi … | Granska information, kommunicera och ta ställning |
-| 🧪 **Labb (ca 45 min): Granska ett påstående: isolerar jackan som reklamen säger?** | Stämmer påståendet i en reklam om ett isolerande material? Planera och genomför ett rättvist test. Eleverna lindar olika material runt varsitt glas med varmt vatten och mäter temperaturen var 5:e minut. Varierar: material. Konstant: vattenmängd, starttemperatur och tid. De jämför med reklamens påstående. Säkerhet: Varmt vatten högst ca 50 °C. Torka upp spill. | påstående, belägg, isolering, rättvist försök, trovärdighet | Söka svar på ämnesspecifika frågor med olika typer av källor; Egna systematiska undersökningar | Observationer och experiment (analoga och digitala verktyg); Informationssökning, kritisk granskning och användning av information … | Granska information, kommunicera och ta ställning; Systematiska undersökningar |
-
-**Om tid / fördjupning:** Fysikens upptäckter och deras betydelse; Argumentationsövning: energi och teknik
+**Om tid / fördjupning:** Hur fysiken vuxit fram: från Aristoteles till Newton; Granska ett påstående med ett eget test (isolerar jackan som reklamen säger?); Digitala mätverktyg och sensorer; Mätosäkerhet
 
 ## 2. Materia, partikelmodellen och värme
 
