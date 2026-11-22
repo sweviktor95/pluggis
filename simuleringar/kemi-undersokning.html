@@ -121,7 +121,7 @@ tr.bad td{background:#fdeceb;color:#7a2a22}
     var t=300*Math.exp(-0.04*(s.temp-5));
     if(s.rora==='1') t*=0.4;
     if(s.socker==='stro') t*=0.15;
-    t*=Math.pow(parseFloat(s.vatten)/2,0.3);
+    t*=Math.pow(parseFloat(s.vatten)/2,-0.1); /* mer vatten: marginellt snabbare */
     var noise=1+((Math.random()+Math.random()+Math.random())/3-0.5)*0.3;
     return Math.max(1,Math.round(t*noise*10)/10);
   }
