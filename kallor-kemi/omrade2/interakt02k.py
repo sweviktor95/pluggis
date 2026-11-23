@@ -63,7 +63,7 @@ def _gor(rub, body):
         pos = sorted((plain.find(k), k) for k in ANS if k in plain)
         qs = [k for i, k in pos]
         if not qs: return None
-        return {"typ": "tbak", "fraga": "Tänk tillbaka: svara först utan att titta, och kolla sedan svaret.", "fragor": [{"f": q, "svar": ANS.get(_plain(q), "")} for q in qs]}
+        return {"typ": "tbak", "fraga": "Tänk tillbaka", "fragor": [{"f": q, "svar": ANS.get(_plain(q), "")} for q in qs]}
     if rub.startswith("Löst exempel"):
         delar = [d for d in re.split(r"<br\s*/?>", body) if _plain(d).strip()]
         if len(delar) < 2:
@@ -77,7 +77,7 @@ def _gor(rub, body):
                 text = re.sub(r"_{3,}", "§", body)
                 text = re.sub(r"<strong>Halvfärdig uppgift\.</strong>\s*", "", text)
                 text = text.replace("<br>", "<br><br>") if False else text
-                return {"typ": "fyllfri", "fraga": "Fyll i själv: skriv i rutorna och tryck Kolla.", "text": text, "ratt": [r for r in (ratt + [[]] * antal)[:antal]], "forslag": facit}
+                return {"typ": "fyllfri", "fraga": "Fyll i själv", "text": text, "ratt": [r for r in (ratt + [[]] * antal)[:antal]], "forslag": facit}
         return None
     if rub.startswith("Gör själv"):
         for key, fac in GS:

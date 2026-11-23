@@ -94,6 +94,7 @@
   }
   .knapp:hover { background: #4E6F5F; }
   .tillbaka { background: #999; margin-top: 20px; }
+  .tillbaka-topp { margin-top: 4px; margin-bottom: 8px; padding: 6px 14px; font-size: 0.9em; }
   .knapp-repetition { background: #c1663a; }
   .knapp-repetition:hover { background: #a5522c; }
   .inbaddad-ruta { margin: 14px 0 6px; border-radius: 8px; overflow: hidden; background: #1a1f23; }
@@ -1173,6 +1174,9 @@ function ikonHtml(ikon) {
     var harBarn = node.barn && node.barn.length > 0;
 
     var html = renderaBrodsmulor(id);
+    if (entry.parentId) {
+      html += '<button class="knapp tillbaka tillbaka-topp" onclick="visNod(\'' + entry.parentId + '\')">⬅️ Tillbaka</button>';
+    }
     var faktaStart = -1;
 
     if (harBarn) {
@@ -1200,6 +1204,7 @@ function ikonHtml(ikon) {
         html += '<button class="' + knappKlass + '" onclick="visNod(\'' + barn.id + '\')">' +
                 framstegTagg(barn) + (arLabb(barn) ? '🧪 ' : '') + barn.titel + '</button>';
       });
+      html += repBlandaKnappHtml(id);
     } else {
       var data = innehall[id];
       if (data) {
@@ -4088,7 +4093,7 @@ function ikonHtml(ikon) {
     } else if (o.typ === "tbak") {
       h += o.fragor.map(function(q, i) { return '<div class="ov-tb"><p class="ov-mening"><strong>' + (i + 1) + '.</strong> ' + q.f + '</p><textarea rows="2" aria-label="Ditt svar" placeholder="Skriv ditt svar innan du kollar"></textarea><button type="button" class="ov-kolla" onclick="ovTbSvar(\'' + id + '\',' + i + ')">Visa svar</button><div class="ov-svar tb-svar" aria-live="polite"></div></div>'; }).join("");
     } else if (o.typ === "lost") {
-      h += '<div class="ov-steglista"></div><button type="button" class="ov-kolla" onclick="ovNastaSteg(\'' + id + '\')">Visa första steget</button><p class="ov-tips">Försök först komma på steget själv, och kolla sedan.</p>';
+      h += '<div class="ov-steglista"></div><button type="button" class="ov-kolla" onclick="ovNastaSteg(\'' + id + '\')">Visa första steget</button>';
     } else if (o.typ === "fyllfri") {
       h += '<p class="ov-mening ov-fyllfri">' + o.text.replace(/§/g, '<input type="text" class="ov-in" aria-label="Svar" autocomplete="off">') + '</p>';
       h += '<button type="button" class="ov-kolla" onclick="ovKolla(\'' + id + '\')">Kolla</button> <button type="button" class="ov-kolla ov-facit" onclick="ovForslag(\'' + id + '\')">Visa facit</button>';
@@ -4242,12 +4247,27 @@ function ikonHtml(ikon) {
     if (repKlaraMoment(id) === 0) {
       return '<div class="rep-kort last"><h3>🔁 Repetera kapitlet</h3><p>Markera några moment som klara, så låses repetitionen för det här kapitlet upp.</p></div>';
     }
-    var f = repForfallna(id), tot = repBank[id].fr.length;
-    var inl = f > 0 ? f + ' fråg' + (f === 1 ? 'a' : 'or') + ' är dags att repetera idag.' : 'Inget är förfallet just nu. Du kan ändå öva.';
-    return '<div class="rep-kort"><h3>🔁 Repetera kapitlet</h3>' +
-      '<p>' + inl + ' Det är bäst att repetera lite flera gånger med uppehåll, så att du minns längre. Det ska kännas lite svårt: det är då du lär dig.</p>' +
-      '<div class="rep-knappar"><button class="knapp" onclick="visNod(\'rep:' + id + '\')">Repetera (' + Math.min(REP_ANTAL, tot) + ' frågor)</button>' +
-      '<button class="knapp" onclick="repBlanda(\'' + id + '\')">🔀 Blandade uppgifter</button></div></div>';
+    var f = repForfallna(id), tot = repBank[id].fr.length, nya = repNya(id), ant = Math.min(REP_ANTAL, f + nya);
+    var knapp;
+    if (ant > 0) {
+      knapp = '<button class="knapp" onclick="visNod(\'rep:' + id + '\')">Repetera (' + ant + ' frågor)</button>';
+    } else {
+      var d = repNastaDag(id);
+      knapp = '<button class="knapp" disabled aria-disabled="true">✓ Klart för idag' + (d > 0 ? '. Nästa omgång ' + (d === 1 ? 'i morgon' : 'om ' + d + ' dagar') : '') + '</button>';
+    }
+    return '<div class="rep-kort"><h3>🔁 Repetera kapitlet</h3><div class="rep-knappar">' + knapp + '</div></div>';
+  }
+  function repNya(kap) {
+    var n = 0; repBank[kap].fr.forEach(function(f, i) { if (!repTillstand[kap + ":" + i]) { n++; } }); return n;
+  }
+  function repNastaDag(kap) {
+    var idag = repIdag(), m = null;
+    repBank[kap].fr.forEach(function(f, i) { var t = repTillstand[kap + ":" + i]; if (t && t.d > idag && (m === null || t.d < m)) { m = t.d; } });
+    return m === null ? 0 : m - idag;
+  }
+  function repBlandaKnappHtml(id) {
+    if (typeof repBank === "undefined" || !repBank[id] || repKlaraMoment(id) === 0) { return ""; }
+    return '<div class="rep-kort rep-blanda"><button class="knapp" onclick="repBlanda(\'' + id + '\')">🔀 Blandade uppgifter</button></div>';
   }
   var repSes = null;
   function repBlandaArray(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
@@ -4261,17 +4281,17 @@ function ikonHtml(ikon) {
     });
     var urval;
     if (blanda) { urval = repBlandaArray(b.map(function(f, i) { return i; })).slice(0, REP_ANTAL); }
-    else { urval = repBlandaArray(forf).concat(repBlandaArray(nya)).concat(repBlandaArray(ovr)).slice(0, REP_ANTAL); }
+    else { urval = repBlandaArray(forf).concat(repBlandaArray(nya)).slice(0, REP_ANTAL); }
     repSes = { kap: kap, ko: urval.slice(), tot: urval.length, ratt: 0, klara: 0, igen: {} };
     repVisaFraga();
   }
   function repVisaFraga() {
     var s = repSes, kap = s.kap;
     var tillbaka = '<button class="knapp tillbaka" onclick="visNod(\'' + kap + '\')">⬅️ Tillbaka till kapitlet</button>';
-    var html = renderaBrodsmulor(kap) + '<h2>🔁 Repetera: ' + nodKarta[kap].node.titel + '</h2>';
+    var html = renderaBrodsmulor(kap) + tillbaka.replace("Tillbaka till kapitlet", "Tillbaka").replace('class="knapp tillbaka"', 'class="knapp tillbaka tillbaka-topp"') + '<h2>🔁 Repetera: ' + nodKarta[kap].node.titel + '</h2>';
     if (!s.ko.length) {
       html += '<div class="flash-klart"><p><strong>Klart!</strong> ' + s.ratt + ' av ' + s.tot + ' rätt på första försöket.</p>' +
-        '<p>Frågor du missade kommer tillbaka snart. Kom tillbaka i morgon och repetera igen: det är då det fastnar.</p></div>' + tillbaka;
+        '</div>' + tillbaka;
       app.innerHTML = html; return;
     }
     var i = s.ko[0], f = repBank[kap].fr[i];
@@ -4307,7 +4327,7 @@ function ikonHtml(ikon) {
     if (typeof tankTillbaka === "undefined") { return ""; }
     var g = hittaGrannar(id);
     if (!g.foreg || !tankTillbaka[g.foreg.id]) { return ""; }
-    var qs = tankTillbaka[g.foreg.id].slice(0, 2), h = '<div class="tank-tillbaka"><h3>🧠 Tänk tillbaka</h3><p class="tt-tips">Svara först i huvudet eller på papper, kolla sedan. Det är så du minns längre.</p>';
+    var qs = tankTillbaka[g.foreg.id].slice(0, 2), h = '<div class="tank-tillbaka"><h3>🧠 Tänk tillbaka</h3>';
     qs.forEach(function(q) {
       var d = document.createElement("div"), sum = document.createElement("summary"), det = document.createElement("details"), p = document.createElement("p");
       sum.textContent = q[0]; p.textContent = q[1]; det.appendChild(sum); det.appendChild(p); d.appendChild(det); h += d.innerHTML;

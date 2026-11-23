@@ -76,7 +76,7 @@ UPG = [
 ]
 def uppg_html():
     out = ['<section class="sec"><div class="sh"><h2>Resonera och ta ställning</h2></div>'
-           '<p class="note">Uppgifterna motsvarar de svåraste uppgifterna på nationella prov. Svara utförligt och resonera i flera led. ● grundläggande &nbsp;●● utvecklat &nbsp;●●● välutvecklat</p>']
+           '<p class="note">Personer och mätvärden är påhittade. ● grundläggande &nbsp;●● utvecklat &nbsp;●●● välutvecklat</p>']
     for i, (q, p) in enumerate(UPG, 1):
         if i == 4:
             out.append('</section><section class="sec"><div class="sh"><h2>Resonera och ta ställning, forts.</h2></div>')

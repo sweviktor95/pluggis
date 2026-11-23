@@ -53,7 +53,7 @@ LATT_DATA = {
     "biologi-m-3-1-1": latt_data([1, 2], "Vad är biologisk mångfald?"), "biologi-m-3-1-2": latt_data([3], "Ekosystemtjänster"), "biologi-m-3-1-3": latt_data([4], "Hoten mot mångfalden"), "biologi-m-3-1-l": latt_data([5], "Labb"),
     "biologi-m-3-2-1": latt_data([6], "Rikena"), "biologi-m-3-2-2": latt_data([7], "Bestämningsnycklar"), "biologi-m-3-2-3": latt_data([8], "Anpassningar"), "biologi-m-3-2-l": latt_data([9], "Labb"),
 }
-TEST_LATT = {"sektioner": [{"ikon": "📝", "titel": "Testa dig själv", "text": ["Nu får du visa vad du har lärt dig. Du kan titta i kapitlet om du vill."],
+TEST_LATT = {"sektioner": [{"ikon": "📝", "titel": "Testa dig själv", "text": [],
                             "ovningar": [LO.bygg("TEST", n, ex) for n, ex in enumerate(L.TEST, 1)]}]}
 def _txt(h): return _re.sub(r"<(?!br)[^>]+>", "", h)
 BOKST = "ABCD"
@@ -62,7 +62,7 @@ def test_grund():
     for n, (dl, q, alts, nl, pts) in enumerate(G.TEST, 1):
         if cur is None or cur["_d"] != dl:
             cur = {"_d": dl, "ikon": "📖", "titel": "Del %s · %s" % (dl, G.DEL_NAMN[dl]), "text": [], "ovningar": []}
-            if dl == "A": cur["text"] = ["Uppgifterna liknar uppgifterna på nationella prov i biologi. Personer, annonser och mätvärden är påhittade."]
+            if dl == "A": cur["text"] = ["Personer och mätvärden är påhittade."]
             sek.append(cur)
         facit = G.FACIT[n - 1]
         qq = _re.sub(r"<div class=.fakeann.>.*?</div>", "", q).replace("<br>", "<br>")
@@ -80,7 +80,7 @@ def test_grund():
     return {"sektioner": sek}
 def test_fordj():
     ov = [{"typ": "fri", "fraga": q, "forslag": F.SVAR[i]} for i, (q, p) in enumerate(F.UPG)]
-    return {"sektioner": [{"ikon": "💭", "titel": "Resonera och ta ställning", "text": ["Uppgifterna liknar de svåraste uppgifterna på nationella prov. Personer, rubriker och mätvärden är påhittade. Svara utförligt och resonera i flera led."], "ovningar": ov}]}
+    return {"sektioner": [{"ikon": "💭", "titel": "Resonera och ta ställning", "text": ["Personer och mätvärden är påhittade."], "ovningar": ov}]}
 TEST_GRUND = test_grund(); TEST_FORDJ = test_fordj()
 TITEL = {"biologi-m-3-1-1": "Vad är biologisk mångfald? Gener, arter och ekosystem", "biologi-m-3-1-2": "Ekosystemtjänster", "biologi-m-3-1-3": "Hoten mot mångfalden", "biologi-m-3-1-l": "Labb 3.1 Artinventering i en provruta",
          "biologi-m-3-2-1": "Rikena", "biologi-m-3-2-2": "Bestämningsnycklar", "biologi-m-3-2-3": "Anpassningar", "biologi-m-3-2-l": "Labb 3.2 Artbestämning med nyckel", "biologi-m-3-s": "Sammanfattning", "biologi-m-3-t": "Testa dig själv"}

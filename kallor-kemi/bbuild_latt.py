@@ -142,7 +142,7 @@ def viktigast_page():
     return h + '</section>'
 
 def test_pages():
-    h = '<section class="sec"><div class="sh"><h2>Testa dig själv</h2></div><p>Nu får du visa vad du har lärt dig. Du kan titta i kapitlet om du vill.</p>'
+    h = '<section class="sec"><div class="sh"><h2>Testa dig själv</h2></div>'
     for n, e in enumerate(L.TEST, 1):
         h += ex_html(n, e)
     return h + '</section>'

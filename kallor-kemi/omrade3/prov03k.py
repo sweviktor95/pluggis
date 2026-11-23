@@ -103,7 +103,7 @@ def split_parts(q):
 def build(lararversion):
     h = ['<section class="sec"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">' + KAP + ' · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ </div></div>'
          '<div class="sh"><h2>' + NAMN_ + '</h2></div>'
-         '<p class="note">Hjälpmedel: penna. Del E ska alla svara på. Del C och del A visar vad du kan på högre nivåer. Svara kort och tydligt. Personer, annonser och mätvärden i uppgifterna är påhittade. Till höger om varje uppgift finns tre prickar: röd (kan inte ännu), gul (kan delvis) och grön (kan nästan helt). Ringa in den nivå som svaret ligger på.</p>']
+         '<p class="note">Namn och mätvärden i uppgifterna är påhittade. Ringa in röd (kan inte ännu), gul (kan delvis) eller grön (kan nästan helt) vid varje uppgift.</p>']
     last = None; n = 0
     for (niv, q, alts, pts, nl, fac, bed) in P:
         n += 1

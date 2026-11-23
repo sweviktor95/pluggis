@@ -115,16 +115,16 @@ def front_page(lararversion):
     return ('<section class="sec" style="break-after:page"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="pill">' + KAP + ' · Prov</div><div class="note">Namn: ____________________ &nbsp; Klass: ________ &nbsp; Datum: ________</div></div>'
             '<div class="sh"><h2>' + NAMN_ + '</h2></div>'
             '<h3>Så många uppgifter på varje nivå</h3>'
-            '<p class="note">Fyll i hur många uppgifter du har på röd, gul och grön, så ser du var du står på varje del.</p>' + up +
+            '' + up +
             '<h3 style="margin-top:14pt">Nivå per förmåga</h3>'
-            '<p class="note">Markera i matrisen vilken nivå du bedömer att du ligger på i varje förmåga. Läraren markerar med en annan färg, så kan ni jämföra. Provet har ingen poängräkning.</p>' + mat +
+            '' + mat +
             '<h3 style="margin-top:14pt">Lärarens övergripande kommentarer</h3>' + lines(7) +
             '<p class="note" style="margin-top:8pt">Nästa steg för eleven:</p>' + lines(3) + '</section>')
 
 def build(lararversion):
     h = [front_page(lararversion), '<section class="sec"><div class="pill">' + KAP + ' · Prov</div>'
          '<div class="sh"><h2>' + NAMN_ + '</h2></div>'
-         '<p class="note">Hjälpmedel: penna. Del E ska alla svara på. Del C och del A visar vad du kan på högre nivåer. Svara kort och tydligt. Personer, annonser och mätvärden i uppgifterna är påhittade. Till höger om varje uppgift finns tre prickar: röd (kan inte ännu), gul (kan delvis) och grön (kan nästan helt). Ringa in den nivå som svaret ligger på.</p>']
+         '<p class="note">Namn och mätvärden i uppgifterna är påhittade. Ringa in röd (kan inte ännu), gul (kan delvis) eller grön (kan nästan helt) vid varje uppgift.</p>']
     last = None; n = 0
     for (niv, q, alts, pts, nl, fac, bed) in P:
         n += 1

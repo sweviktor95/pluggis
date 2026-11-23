@@ -64,7 +64,7 @@ LATT_DATA = {
     "biologi-m-4-3-1": latt_data([10], "Populationer"), "biologi-m-4-3-2": latt_data([11], "Begränsande faktorer"),
     "biologi-m-4-3-3": latt_data([12], "Samspel"), "biologi-m-4-3-l": latt_data([13], "Labb"),
 }
-TEST_LATT = {"sektioner": [{"ikon": "📝", "titel": "Testa dig själv", "text": ["Nu får du visa vad du har lärt dig. Du kan titta i kapitlet om du vill."],
+TEST_LATT = {"sektioner": [{"ikon": "📝", "titel": "Testa dig själv", "text": [],
                             "ovningar": [LO.bygg("TEST", n, ex) for n, ex in enumerate(L.TEST, 1)]}]}
 def _txt(h): return _re.sub(r"<(?!br)[^>]+>", "", h)
 BOKST = "ABCD"
@@ -73,7 +73,7 @@ def test_grund():
     for n, (dl, q, alts, nl, pts) in enumerate(G.TEST, 1):
         if cur is None or cur["_d"] != dl:
             cur = {"_d": dl, "ikon": "📖", "titel": "Del %s · %s" % (dl, G.DEL_NAMN[dl]), "text": [], "ovningar": []}
-            if dl == "A": cur["text"] = ["Uppgifterna liknar uppgifterna på nationella prov i biologi. Personer, annonser och mätvärden är påhittade."]
+            if dl == "A": cur["text"] = ["Personer och mätvärden är påhittade."]
             sek.append(cur)
         facit = G.FACIT[n - 1]
         qq = _re.sub(r"<div class=.fakeann.>.*?</div>", "", q).replace("<br>", "<br>")
@@ -91,7 +91,7 @@ def test_grund():
     return {"sektioner": sek}
 def test_fordj():
     ov = [{"typ": "fri", "fraga": q, "forslag": F.SVAR[i]} for i, (q, p) in enumerate(F.UPG)]
-    return {"sektioner": [{"ikon": "💭", "titel": "Resonera och ta ställning", "text": ["Uppgifterna liknar de svåraste uppgifterna på nationella prov. Personer, rubriker och mätvärden är påhittade. Svara utförligt och resonera i flera led."], "ovningar": ov}]}
+    return {"sektioner": [{"ikon": "💭", "titel": "Resonera och ta ställning", "text": ["Personer och mätvärden är påhittade."], "ovningar": ov}]}
 TEST_GRUND = test_grund(); TEST_FORDJ = test_fordj()
 TITEL = {"biologi-m-4-1-1": "Vad är ekologi?", "biologi-m-4-1-2": "Producenter, konsumenter och näringsvävar", "biologi-m-4-1-3": "Energiflöde och biomassa", "biologi-m-4-1-l": "Labb 4.1 Energi i en näringskedja",
          "biologi-m-4-2-1": "Materia tillverkas inte och försvinner inte", "biologi-m-4-2-2": "Kolets kretslopp", "biologi-m-4-2-3": "Nedbrytning", "biologi-m-4-2-l": "Labb 4.2 Nedbrytning i jord",
