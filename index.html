@@ -1562,8 +1562,6 @@ function ikonHtml(ikon) {
       }
     }
 
-    html += haftenHtml(id);
-
     html += '<button class="knapp tillbaka" onclick="' +
             (entry.parentId ? "visNod('" + entry.parentId + "')" : "visStartsida()") +
             '">⬅️ Tillbaka</button>';
@@ -4206,24 +4204,6 @@ function ikonHtml(ikon) {
     }
   }
 
-  function haftenHtml(id) {
-    // Häften och pluggblad visas bara på kapitlets första vy, inte på delområden eller moment.
-    var h = window.hafte && window.hafte[id];
-    if (!h || !(h.vanlig || h.lattlast || h.fordjupning)) { return ""; }
-    var r = '<div class="hafte-rad"><strong>Läs som häfte (PDF)</strong><div class="hafte-knappar">';
-    [["lattlast","Lättläst"],["vanlig","Grundtext"],["fordjupning","Fördjupning"]].forEach(function(p) {
-      if (h[p[0]]) {
-        r += '<span class="hafte-par"><a class="knapp" href="' + h[p[0]] + '" target="_blank" rel="noopener">' + p[1] + '</a>' +
-             '<a class="knapp hafte-ned" href="' + h[p[0]] + '" download title="Ladda ner ' + p[1].toLowerCase() + '" aria-label="Ladda ner ' + p[1].toLowerCase() + '">⬇</a></span>';
-      }
-    });
-    r += '</div></div>';
-    if (h.pluggblad) {
-      r += '<div class="hafte-rad"><strong>Plugga inför prov (PDF, beta)</strong><div class="hafte-knappar"><span class="hafte-par"><a class="knapp" href="' + h.pluggblad + '" target="_blank" rel="noopener">Sammanfattning och övningsfrågor</a>' +
-           '<a class="knapp hafte-ned" href="' + h.pluggblad + '" download title="Ladda ner pluggbladet" aria-label="Ladda ner pluggbladet">⬇</a></span></div></div>';
-    }
-    return r;
-  }
 
   // ---- Repetition per kapitel: spridd repetition (Leitner, 1/3/7/21 dagar) + blandade uppgifter ----
   var REP_NYCKEL = "pluggis-rep-v1", REP_DAGAR = [0, 1, 3, 7, 21], REP_ANTAL = 5;
