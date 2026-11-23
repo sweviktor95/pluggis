@@ -1204,7 +1204,6 @@ function ikonHtml(ikon) {
         html += '<button class="' + knappKlass + '" onclick="visNod(\'' + barn.id + '\')">' +
                 framstegTagg(barn) + (arLabb(barn) ? '🧪 ' : '') + barn.titel + '</button>';
       });
-      html += repBlandaKnappHtml(id);
     } else {
       var data = innehall[id];
       if (data) {
@@ -4265,23 +4264,17 @@ function ikonHtml(ikon) {
     repBank[kap].fr.forEach(function(f, i) { var t = repTillstand[kap + ":" + i]; if (t && t.d > idag && (m === null || t.d < m)) { m = t.d; } });
     return m === null ? 0 : m - idag;
   }
-  function repBlandaKnappHtml(id) {
-    if (typeof repBank === "undefined" || !repBank[id] || repKlaraMoment(id) === 0) { return ""; }
-    return '<div class="rep-kort rep-blanda"><button class="knapp" onclick="repBlanda(\'' + id + '\')">🔀 Blandade uppgifter</button></div>';
-  }
   var repSes = null;
   function repBlandaArray(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-  function repBlanda(kap) { repSes = { blanda: true }; navigeraTill("rep:" + kap); }
   function renderaRep(kap) {
-    var blanda = repSes && repSes.blanda; repSes = null;
+    repSes = null;
     var b = repBank[kap].fr, idag = repIdag(), forf = [], nya = [], ovr = [];
     b.forEach(function(f, i) {
       var t = repTillstand[kap + ":" + i];
       if (t && t.d <= idag) { forf.push(i); } else if (!t) { nya.push(i); } else { ovr.push(i); }
     });
     var urval;
-    if (blanda) { urval = repBlandaArray(b.map(function(f, i) { return i; })).slice(0, REP_ANTAL); }
-    else { urval = repBlandaArray(forf).concat(repBlandaArray(nya)).slice(0, REP_ANTAL); }
+    urval = repBlandaArray(forf).concat(repBlandaArray(nya)).slice(0, REP_ANTAL);
     repSes = { kap: kap, ko: urval.slice(), tot: urval.length, ratt: 0, klara: 0, igen: {} };
     repVisaFraga();
   }
