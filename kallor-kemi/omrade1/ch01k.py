@@ -78,7 +78,7 @@ add("Start", "Vad är kemi?", f"Kapitel {NR} · {NAMN} · Start",
 # ------------------------------------------------------------------ 1.1.1
 add("1.1.1", "Säkerhet och utrustning i kemilabbet", f"Kapitel {NR} · Delområde 1.1 {DELOMR['1.1']} · Säkerhet och utrustning i kemilabbet",
  "<p>I ett kemilabb arbetar du med ämnen som kan vara farliga om de hanteras fel. Därför har alla samma grundregler. De skyddar både dig och dem du arbetar med.</p>"
- + fig(FIG+"v_utrustning.png", "<b>Bild 1.1</b> Vanlig utrustning i ett kemilabb: mätcylinder, bägare, E-kolv, provrör, våg, termometer, pipett och skyddsglasögon.", "96%")
+ + fig(FIG+"v_utrustning.png", "<b>Bild 1.1</b> Vanlig utrustning i ett kemilabb: bägare, mätcylinder, E-kolv, provrör i ställ, termometer, våg, pipett, skyddsglasögon, stoppur och spatel.", "96%")
  + row("<h3 style='margin-top:0'>Grundregler</h3>"
        + bullets(["Använd <strong class='green'>skyddsglasögon</strong> hela tiden när du arbetar med kemikalier eller värme.",
                   "Sätt upp långt hår, ha inga hängande smycken och bär stängda skor.",
