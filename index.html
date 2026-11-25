@@ -927,6 +927,12 @@
   .hafte-par .knapp { margin: 0; }
   .hafte-par .knapp:first-child { border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; }
   .hafte-ned { padding-left: 9px; padding-right: 9px; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+  .kod-kort { text-align: center; background: #f3f6fb; border-radius: 12px; padding: 14px; margin: 0 0 18px; }
+  .kod-kort h3 { margin: 0 0 10px; }
+  .kod-kort input { font: inherit; padding: 10px 12px; border: 1px solid #c9ced6; border-radius: 8px; width: min(260px, 90%); text-align: center; margin-bottom: 10px; }
+  .kod-kort a { margin-left: 10px; font-size: 0.9em; color: #7a7f88; }
+  .kod-kort .knapp, .qr-knapp-rad .knapp { width: auto; min-width: 200px; text-align: center; display: inline-block; }
+  .qr-knapp-rad { text-align: center; margin: 24px 0 0; }
   .qr-sida { text-align: center; }
   .qr-sida input { font: inherit; padding: 10px 12px; border: 1px solid #c9ced6; border-radius: 8px; width: min(320px, 90%); text-align: center; }
   .qr-ruta { margin: 18px auto 6px; width: min(420px, 94%); background: #fff; border-radius: 10px; padding: 4px; box-shadow: 0 0 0 1px rgba(0,0,0,.1); }
@@ -1188,8 +1194,23 @@ function ikonHtml(ikon) {
     qrRita();
   }
 
+  function qrAlias() { try { return localStorage.getItem(ALIAS_NYCKEL) || ""; } catch (e) { return ""; } }
+  function sparaKod() {
+    var v = (document.getElementById("kod-start").value || "").trim().slice(0, 30);
+    if (!v) { return; }
+    try { localStorage.setItem(ALIAS_NYCKEL, v); } catch (e) {}
+    renderaStartsida();
+  }
+  function hoppaKod() { try { sessionStorage.setItem("pluggis-kod-hoppa", "1"); } catch (e) {} renderaStartsida(); }
+
   function renderaStartsida() {
     var html = "";
+    var hoppat = false; try { hoppat = !!sessionStorage.getItem("pluggis-kod-hoppa"); } catch (e) {}
+    if (!qrAlias() && !hoppat) {
+      html += '<div class="kod-kort"><h3>Skriv din elevkod</h3>' +
+        '<input id="kod-start" maxlength="30" placeholder="Din elevkod" onkeydown="if(event.key===\'Enter\'){sparaKod();}">' +
+        '<div><button class="knapp" onclick="sparaKod()">Spara</button> <a href="javascript:void(0)" onclick="hoppaKod()">Hoppa över</a></div></div>';
+    }
     html += '<div class="startsida-grid">';
     var harKlara = false;
     var amnen = struktur.slice().sort(function(x, y) { return x.titel.localeCompare(y.titel, "sv"); });
@@ -1214,7 +1235,7 @@ function ikonHtml(ikon) {
     if (harKlara) {
       html += '<p class="aterstall-rad"><a href="javascript:void(0)" onclick="aterstallFramsteg()">Nollställ framsteg</a></p>';
     }
-    html += '<p class="aterstall-rad"><a href="javascript:void(0)" onclick="visaQr()">Min QR-kod</a></p>';
+    html += '<p class="qr-knapp-rad"><button class="knapp" onclick="visaQr()">📱 Min QR-kod</button></p>';
     html += '<p class="larar-lank"><a href="lararsida.html">För lärare</a></p>';
     app.innerHTML = html;
   }
