@@ -188,7 +188,10 @@ function ikonHtml(ikon) {
     try {
       var d = JSON.parse(new TextDecoder().decode(avkoda(m[1])));
       if (!d || d.v !== 1 || !d.a) { throw 0; }
-      var o = elever(); o[d.a] = d; sparaElever(o);
+      d.a = String(d.a).replace(/\s+/g, " ").trim();
+      var o = elever(), nyckel = d.a.toLocaleLowerCase("sv");
+      Object.keys(o).forEach(function(k) { if (k.toLocaleLowerCase("sv") === nyckel) { delete o[k]; } });
+      o[d.a] = d; sparaElever(o);
       importMeddelande = d.a + " är inlagd.";
     } catch (e) { importMeddelande = "Länken kunde inte läsas."; }
     try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { location.hash = ""; }
