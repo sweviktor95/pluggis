@@ -1182,8 +1182,8 @@ function ikonHtml(ikon) {
     document.getElementById("app").innerHTML =
       '<button class="knapp tillbaka tillbaka-topp" onclick="renderaStartsida()">⬅️ Tillbaka</button>' +
       '<div class="qr-sida"><h2>Min QR-kod</h2>' +
-      '<p>Skriv ditt namn eller smeknamn. Läraren skannar koden med mobilkameran.</p>' +
-      '<input id="qr-alias" maxlength="30" placeholder="Ditt namn" value="' + alias.replace(/"/g, "&quot;") + '" oninput="qrRita()">' +
+      '<p>Skriv din elevkod. Läraren skannar koden med mobilkameran.</p>' +
+      '<input id="qr-alias" maxlength="30" placeholder="Din elevkod" value="' + alias.replace(/"/g, "&quot;") + '" oninput="qrRita()">' +
       '<div class="qr-ruta" id="qr-ruta"></div></div>';
     qrRita();
   }
