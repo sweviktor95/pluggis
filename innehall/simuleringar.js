@@ -9,6 +9,13 @@ innehall["biologi-m-2-2-sim"] = {
  "inbaddadTitel": "Simulering: fotosyntesen"
 };
 
+innehall["kemi-m-2-1-zoom"] = {
+ "text": "",
+ "bild": "",
+ "inbaddad": "simuleringar/kemi-zooma-in.html",
+ "inbaddadTitel": "Simulering: zooma in till atomen"
+};
+
 innehall["kemi-m-2-1-sim"] = {
  "text": "",
  "bild": "",

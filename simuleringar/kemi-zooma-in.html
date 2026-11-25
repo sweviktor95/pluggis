@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zooma in: från en vattendroppe till en atom</title>
+<style>
+:root{--bg:#f3f8f1;--card:#fff;--ink:#1f2a24;--muted:#56655b;--line:#cfdccf;--accent:#38564A;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DejaVu Sans",Verdana,Arial,sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+h1{margin:4px 0 12px;font-size:1.5rem;color:var(--accent)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+canvas{width:100%;height:auto;aspect-ratio:4/3;display:block;border-radius:12px;background:#dfeaf0}
+.zoomrad{display:flex;align-items:center;gap:10px;margin:12px 0 4px}
+.zoomrad span{font-size:.85rem;color:var(--muted);white-space:nowrap}
+input[type=range]{flex:1;height:34px;accent-color:var(--accent)}
+.btn{font:inherit;font-size:.9rem;padding:8px 12px;border-radius:10px;border:2px solid var(--line);background:#fff;cursor:pointer;min-height:40px;color:var(--ink);margin:0 6px 6px 0}
+.btn:hover{border-color:#4caf50}
+.btn[aria-pressed="true"]{background:#e8f5e9;border-color:#4caf50;font-weight:700}
+.btn.stor{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn:focus-visible,input:focus-visible{outline:3px solid #ff8f00;outline-offset:2px}
+.steg{margin:8px 0 0}
+.info h2{margin:0 0 2px;font-size:1.25rem;color:var(--accent)}
+.falt{display:inline-block;margin:0 0 8px;padding:3px 10px;border-radius:999px;background:#e8f5e9;border:1px solid #a8d5ab;font-size:.9rem;font-weight:700}
+.info p{margin:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Zooma in</h1>
+<div class="card">
+  <canvas id="c" width="640" height="480" role="img" aria-label="Zoomad bild av vatten, från en droppe till en atom"></canvas>
+  <div class="zoomrad"><span>Ut</span><input id="z" type="range" min="0" max="5" step="0.005" value="0" aria-label="Zoom"><span>In</span></div>
+  <div class="steg" id="steg"></div>
+  <div style="margin-top:8px"><button class="btn stor" id="auto">▶ Zooma in</button></div>
+</div>
+<div class="card info"><h2 id="rub"></h2><span class="falt" id="falt"></span><p id="txt"></p></div>
+</div>
+<script>
+(function () {
+  var S = [
+    { namn: "Vattendroppe", kort: "Droppe", fält: "1 cm", w: -2, text: "En droppe vatten. Den ser slät och sammanhängande ut." },
+    { namn: "Genom ett mikroskop", kort: "Mikroskop", fält: "1 µm", w: -6, text: "Även här ser vattnet slätt ut. Inga delar syns." },
+    { namn: "Små partiklar", kort: "Partiklar", fält: "10 nm", w: -8, text: "Nu syns det: vatten består av ett mycket stort antal små partiklar som rör sig hela tiden." },
+    { namn: "Molekyler", kort: "Molekyler", fält: "1 nm", w: -9, text: "Varje partikel är en molekyl. Här syns bara några få av dem." },
+    { namn: "En vattenmolekyl", kort: "Molekyl", fält: "0,5 nm", w: -9.3, text: "En vattenmolekyl, H₂O, består av tre atomer: en syreatom och två väteatomer." },
+    { namn: "En atom", kort: "Atom", fält: "0,2 nm", w: -9.7, text: "Zoomar vi in på syreatomen syns en liten kärna av protoner och neutroner. Runt kärnan rör sig elektroner i skal." }
+  ];
+  var cv = document.getElementById("c"), ctx = cv.getContext("2d"), W = 640, H = 480, CX = W / 2, CY = H / 2;
+  var dpr = Math.min(2, window.devicePixelRatio || 1); cv.width = W * dpr; cv.height = H * dpr;
+  var z = 0, spelar = false, t0 = performance.now();
+  var zin = document.getElementById("z"), stegEl = document.getElementById("steg"), autoB = document.getElementById("auto");
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Fast slumpföljd så att molekylerna ligger likadant varje gång.
+  function slump(seed) { var s = seed; return function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; }
+  var R2 = slump(7), mol2 = [];
+  for (var i = 0; i < 150; i++) { mol2.push({ x: R2() * 640 - 160 + 80, y: R2() * 480 - 120, a: R2() * 6.28, f: R2() * 6.28, h: 0.5 + R2() }); }
+  var R3 = slump(21), mol3 = [];
+  [[-170, -110], [10, -150], [170, -70], [-190, 40], [-20, 20], [150, 90], [-90, 150], [60, 170], [215, 190], [-250, -20]].forEach(function (p) { mol3.push({ x: CX + p[0], y: CY + p[1], a: R3() * 6.28, f: R3() * 6.28 }); });
+
+  function tid() { return still ? 0 : (performance.now() - t0) / 1000; }
+  function cirkel(x, y, r, fyll, kant) {
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fillStyle = fyll; ctx.fill();
+    if (kant) { ctx.strokeStyle = kant; ctx.lineWidth = Math.max(1, r * 0.08); ctx.stroke(); }
+  }
+  function kula(x, y, r, c1, c2) {
+    var g = ctx.createRadialGradient(x - r * 0.35, y - r * 0.35, r * 0.1, x, y, r);
+    g.addColorStop(0, c1); g.addColorStop(1, c2);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fillStyle = g; ctx.fill();
+  }
+  // Vattenmolekyl: syre i mitten, två väten ±52° från riktningen.
+  function vatten(x, y, rO, vinkel, text) {
+    var rH = rO * 0.58, d = rO * 1.55, hx = [], a = [vinkel - 0.91, vinkel + 0.91];
+    a.forEach(function (v) { hx.push([x + Math.cos(v) * d, y + Math.sin(v) * d]); });
+    hx.forEach(function (p) { ctx.strokeStyle = "#8d99a3"; ctx.lineWidth = Math.max(2, rO * 0.22); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(p[0], p[1]); ctx.stroke(); });
+    kula(x, y, rO, "#ff8a80", "#c62828");
+    hx.forEach(function (p) { kula(p[0], p[1], rH, "#ffffff", "#b0bec5"); });
+    if (text) {
+      ctx.fillStyle = "#1f2a24"; ctx.font = "bold " + Math.round(rO * 0.7) + "px DejaVu Sans, Verdana, Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText("O", x, y);
+      ctx.font = "bold " + Math.round(rH * 0.9) + "px DejaVu Sans, Verdana, Arial";
+      hx.forEach(function (p) { ctx.fillText("H", p[0], p[1]); });
+    }
+  }
+
+  var lager = [
+    function (t) { // 0 droppe
+      ctx.fillStyle = "rgba(0,0,0,.08)"; ctx.beginPath(); ctx.ellipse(CX + 12, CY + 205, 120, 16, 0, 0, 6.2832); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(CX, CY - 190);
+      ctx.bezierCurveTo(CX + 40, CY - 110, CX + 150, CY - 30, CX + 150, CY + 60);
+      ctx.bezierCurveTo(CX + 150, CY + 150, CX + 80, CY + 210, CX, CY + 210);
+      ctx.bezierCurveTo(CX - 80, CY + 210, CX - 150, CY + 150, CX - 150, CY + 60);
+      ctx.bezierCurveTo(CX - 150, CY - 30, CX - 40, CY - 110, CX, CY - 190);
+      var g = ctx.createLinearGradient(CX - 120, CY - 100, CX + 140, CY + 200); g.addColorStop(0, "#90caf9"); g.addColorStop(1, "#1e88e5");
+      ctx.fillStyle = g; ctx.fill();
+      ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.beginPath(); ctx.ellipse(CX - 60, CY + 20, 18, 52, 0.35, 0, 6.2832); ctx.fill();
+    },
+    function (t) { // 1 mikroskop: slätt
+      ctx.fillStyle = "rgba(255,255,255,.10)";
+      for (var i = 0; i < 6; i++) { var y = (i * 90 + t * 12) % (H + 80) - 40; ctx.beginPath(); ctx.ellipse(CX + Math.sin(t * 0.4 + i) * 30, y, 320, 14, 0, 0, 6.2832); ctx.fill(); }
+    },
+    function (t) { // 2 partiklar
+      mol2.forEach(function (m) {
+        var x = m.x + Math.sin(t * 1.6 + m.f) * 6, y = m.y + Math.cos(t * 1.3 + m.f * 1.7) * 6, a = m.a + t * 0.5 * m.h;
+        for (var k = 0; k < 2; k++) { var v = a + (k ? 0.91 : -0.91); kula(x + Math.cos(v) * 10, y + Math.sin(v) * 10, 5, "#ffffff", "#90a4ae"); }
+        kula(x, y, 8, "#ff8a80", "#c62828");
+      });
+    },
+    function (t) { // 3 molekyler
+      mol3.forEach(function (m) { vatten(m.x + Math.sin(t * 1.2 + m.f) * 10, m.y + Math.cos(t * 1.0 + m.f) * 10, 22, m.a + t * 0.35, false); });
+    },
+    function (t) { // 4 en molekyl
+      var g = ctx.createRadialGradient(CX, CY, 20, CX, CY, 250); g.addColorStop(0, "rgba(100,181,246,.35)"); g.addColorStop(1, "rgba(100,181,246,0)");
+      ctx.fillStyle = g; ctx.fillRect(CX - 300, CY - 300, 600, 600);
+      vatten(CX, CY - 20, 62, Math.PI / 2 + Math.sin(t * 0.7) * 0.12, true);
+    },
+    function (t) { // 5 atom (syre)
+      [[78, 2, 1.7], [150, 6, -1.0]].forEach(function (sk) {
+        ctx.beginPath(); ctx.arc(CX, CY, sk[0], 0, 6.2832); ctx.strokeStyle = "rgba(255,255,255,.28)"; ctx.lineWidth = 1.5; ctx.stroke();
+        for (var i = 0; i < sk[1]; i++) { var v = i * 6.2832 / sk[1] + t * sk[2] * 0.6; kula(CX + Math.cos(v) * sk[0], CY + Math.sin(v) * sk[0], 9, "#90caf9", "#1565c0"); }
+      });
+      var p = [[-13, -9], [3, -17], [15, -5], [9, 12], [-8, 15], [-18, 3], [-2, 0], [6, -4]], n = [[-6, -14], [11, -14], [16, 6], [1, 16], [-14, 10], [-14, -3], [4, 6], [-6, 4]];
+      n.forEach(function (q) { kula(CX + q[0], CY + q[1], 9, "#cfd8dc", "#78909c"); });
+      p.forEach(function (q) { kula(CX + q[0], CY + q[1], 9, "#ff8a80", "#c62828"); });
+    }
+  ];
+
+  // Bakgrunder ritas utan zoom, så att hela rutan alltid är täckt.
+  var bakgrund = ["#e9eef1", "#3f8fe0", "#cfe8fb", "#e3f2fd", "#f4f9fc", "#101826"];
+  function rita() {
+    var t = tid();
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H);
+    var fl = Math.min(lager.length - 1, Math.floor(z)), fr = z - fl;
+    for (var i = fl; i <= Math.min(lager.length - 1, fl + 1); i++) {
+      var d = z - i, a = i === fl ? 1 : Math.min(1, fr * 1.4);
+      if (a <= 0) { continue; }
+      var k = Math.pow(4, d);
+      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = bakgrund[i]; ctx.fillRect(0, 0, W, H);
+      if (i === 1) { var g1 = ctx.createRadialGradient(CX, CY, 20, CX, CY, 420); g1.addColorStop(0, "#64b5f6"); g1.addColorStop(1, "#1976d2"); ctx.fillStyle = g1; ctx.fillRect(0, 0, W, H); } ctx.translate(CX, CY); ctx.scale(k, k); ctx.translate(-CX, -CY);
+      ctx.beginPath(); ctx.rect(-W * 3, -H * 3, W * 7, H * 7); ctx.clip();
+      lager[i](t); ctx.restore();
+    }
+  }
+  function närmast() { return Math.max(0, Math.min(S.length - 1, Math.round(z))); }
+  var senast = -1;
+  function uppdatera() {
+    var n = närmast();
+    if (n !== senast) {
+      senast = n;
+      document.getElementById("rub").textContent = S[n].namn;
+      document.getElementById("falt").textContent = "Synfält ca " + S[n].fält;
+      document.getElementById("txt").textContent = S[n].text;
+      [].forEach.call(stegEl.children, function (b, i) { b.setAttribute("aria-pressed", i === n ? "true" : "false"); });
+    }
+    zin.value = z;
+  }
+  S.forEach(function (s, i) {
+    var b = document.createElement("button"); b.className = "btn"; b.textContent = s.kort;
+    b.onclick = function () { gaTill(i); }; stegEl.appendChild(b);
+  });
+  var mal = null;
+  function gaTill(i) { spelar = false; autoB.textContent = "▶ Zooma in"; mal = i; if (still) { z = i; mal = null; } }
+  zin.addEventListener("input", function () { z = parseFloat(zin.value); mal = null; spelar = false; autoB.textContent = "▶ Zooma in"; });
+  autoB.onclick = function () {
+    mal = null;
+    if (spelar) { spelar = false; autoB.textContent = "▶ Zooma in"; return; }
+    if (z >= 4.99) { z = 0; }
+    spelar = true; autoB.textContent = "⏸ Paus";
+  };
+  cv.addEventListener("wheel", function (e) { e.preventDefault(); z = Math.max(0, Math.min(5, z - e.deltaY * 0.0015)); mal = null; spelar = false; autoB.textContent = "▶ Zooma in"; }, { passive: false });
+
+  var förra = performance.now();
+  function loop(nu) {
+    var dt = Math.min(0.05, (nu - förra) / 1000); förra = nu;
+    if (spelar) { z = Math.min(5, z + dt * 0.28); if (z >= 5) { spelar = false; autoB.textContent = "↺ Börja om"; } }
+    else if (mal !== null) { var diff = mal - z; if (Math.abs(diff) < 0.01) { z = mal; mal = null; } else { z += Math.sign(diff) * Math.min(Math.abs(diff), dt * 1.4); } }
+    rita(); uppdatera(); requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

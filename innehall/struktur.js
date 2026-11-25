@@ -672,6 +672,7 @@ var struktur = [
             titel: "2.1 Ämnen, blandningar och partikelmodellen",
             ramverk: true,
             barn: [
+              { id: "kemi-m-2-1-zoom", titel: "Simulering: zooma in till atomen" },
               { id: "kemi-m-2-1-1", titel: "Vad är materia? Ämnen och material" },
               { id: "kemi-m-2-1-2", titel: "Partikelmodellen" },
               { id: "kemi-m-2-1-3", titel: "Rena ämnen och blandningar" },
