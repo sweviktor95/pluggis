@@ -169,9 +169,71 @@ function ikonHtml(ikon) {
     return '<details><summary>' + (nod.ikon ? ikonHtml(nod.ikon) + " " : "") + nod.titel + '</summary><div class="inre">' + egen + inre + '</div></details>';
   }
 
+
+  // ---- Elevframsteg: elevernas QR-länkar skannas med mobilkameran och sparas bara i den här webbläsaren ----
+  var ELEV_NYCKEL = "pluggis-elever-v1";
+  function bladIds() { var ut = []; (function g(a) { a.forEach(function(n) { if (!n.barn || !n.barn.length) { ut.push(n.id); } else { g(n.barn); } }); })(struktur); return ut; }
+  function qrHash(ids) { var h = 2166136261, s = ids.join("|"); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h.toString(36); }
+  function elever() { try { return JSON.parse(localStorage.getItem(ELEV_NYCKEL) || "{}") || {}; } catch (e) { return {}; } }
+  function sparaElever(o) { try { localStorage.setItem(ELEV_NYCKEL, JSON.stringify(o)); } catch (e) {} }
+  function avkoda(b64) {
+    var s = atob(b64.replace(/-/g, "+").replace(/_/g, "/")), by = new Uint8Array(s.length);
+    for (var i = 0; i < s.length; i++) { by[i] = s.charCodeAt(i); }
+    return by;
+  }
+  var importMeddelande = "";
+  function importeraHash() {
+    var m = /^#e=([A-Za-z0-9_-]+)$/.exec(location.hash);
+    if (!m) { return; }
+    try {
+      var d = JSON.parse(new TextDecoder().decode(avkoda(m[1])));
+      if (!d || d.v !== 1 || !d.a) { throw 0; }
+      var o = elever(); o[d.a] = d; sparaElever(o);
+      importMeddelande = d.a + " är inlagd.";
+    } catch (e) { importMeddelande = "Länken kunde inte läsas."; }
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { location.hash = ""; }
+  }
+  function antalBitar(b64, ids, prefix) {
+    var by = avkoda(b64), n = 0;
+    ids.forEach(function(id, i) { if ((by[i >> 3] >> (i & 7)) & 1) { n++; } });
+    return n;
+  }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function(c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function dagText(t) { var d = new Date(t * 86400000); return d.toISOString().slice(0, 10); }
+  function elevHtml() {
+    var o = elever(), namn = Object.keys(o).sort(function(a, b) { return a.localeCompare(b, "sv"); });
+    var ids = bladIds(), nu = qrHash(ids);
+    var ut = '<div class="kapitel"><h4>Elevframsteg</h4><p class="grupp">Eleven öppnar Pluggis → Min QR-kod. Skanna med mobilkameran och öppna länken här. Uppgifterna sparas bara i den här webbläsaren.</p>';
+    if (importMeddelande) { ut += '<p class="grupp"><b>' + esc(importMeddelande) + '</b></p>'; importMeddelande = ""; }
+    if (!namn.length) { return ut + '<p class="grupp">Inga elever inlagda än.</p></div>'; }
+    ut += '<div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:14px;width:100%"><tr><th style="text-align:left;padding:4px 8px">Elev</th>';
+    var vis = struktur.map(function(a, i) { return namn.some(function(n) { var q = o[n].s && o[n].s[i]; return q && q[1] > 0; }); });
+    struktur.forEach(function(a, i) { if (vis[i]) { ut += '<th style="padding:4px 8px">' + esc(a.titel) + '</th>'; } });
+    ut += '<th style="padding:4px 8px">Repetition</th><th style="padding:4px 8px">Skannad</th><th></th></tr>';
+    namn.forEach(function(n, k) {
+      var d = o[n], gammal = d.h !== nu;
+      ut += '<tr style="background:' + (k % 2 ? "#f6f7f9" : "#fff") + '"><td style="padding:4px 8px">' + esc(n) + (gammal ? ' <span title="Sidan har ändrats sedan koden skapades – siffrorna kan vara lite fel">⚠️</span>' : '') + '</td>';
+      struktur.forEach(function(a, i) { if (!vis[i]) { return; } var s = d.s && d.s[i]; ut += '<td style="padding:4px 8px;text-align:center">' + (s && s[1] ? s[0] + '/' + s[1] : '–') + '</td>'; });
+      ut += '<td style="padding:4px 8px;text-align:center">' + (d.r ? d.r[0] + ' sitter av ' + d.r[1] : '–') + '</td><td style="padding:4px 8px">' + dagText(d.t) + '</td>' +
+        '<td><a href="javascript:void(0)" onclick="taBortElev(' + k + ')">ta bort</a></td></tr>';
+    });
+    ut += '</table></div><div class="knappar" style="margin-top:10px"><a class="lank" href="javascript:void(0)" onclick="elevCsv()">Ladda ner CSV</a><a class="lank" href="javascript:void(0)" onclick="rensaElever()">Rensa alla</a></div></div>';
+    return ut;
+  }
+  function elevNamn() { return Object.keys(elever()).sort(function(a, b) { return a.localeCompare(b, "sv"); }); }
+  function taBortElev(k) { var o = elever(); delete o[elevNamn()[k]]; sparaElever(o); visa(); }
+  function rensaElever() { if (confirm("Ta bort alla inlagda elever?")) { sparaElever({}); visa(); } }
+  function elevCsv() {
+    var o = elever(), rader = [["Elev"].concat(struktur.map(function(a) { return a.titel + " klara"; }), struktur.map(function(a) { return a.titel + " totalt"; }), ["Repetition sitter", "Repetition sedda", "Skannad"])];
+    elevNamn().forEach(function(n) { var d = o[n]; rader.push([n].concat(struktur.map(function(a, i) { return d.s && d.s[i] ? d.s[i][0] : ""; }), struktur.map(function(a, i) { return d.s && d.s[i] ? d.s[i][1] : ""; }), [d.r ? d.r[0] : "", d.r ? d.r[1] : "", dagText(d.t)])); });
+    var csv = "﻿" + rader.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(";"); }).join("\r\n");
+    var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "elevframsteg.csv"; a.click();
+  }
+
   function visa() {
     document.getElementById("port").style.display = "none";
-    var ut = struktur.map(function(a) { return grenHtml(a, 0); }).join("");
+    importeraHash();
+    var ut = elevHtml() + struktur.map(function(a) { return grenHtml(a, 0); }).join("");
     ut += '<div class="kapitel"><h4>Kartläggning av elev med svårigheter i skolgången</h4><p class="grupp">Mall för mentor och ämneslärare: närvaro, kunskaper per ämne, hur eleven lär, mående, vad som prövats och en plan. Elevsamtalet är ett eget blad som eleven svarar på. Skolans egna blanketter och sekretessrutiner går före.</p><div class="knappar">' +
       lank("kartlaggning/elev-kartlaggning-mall.pdf", "Mall · lärare (4 sidor)") + lank("kartlaggning/elev-kartlaggning-elevsamtal.pdf", "Elevsamtal · elev (2 sidor)") + '</div></div>';
     ut += '<div class="kapitel"><h4>Särskilt stöd och brobyggare (beta)</h4><p class="grupp">Anpassade grundskolan åk 7–9: NO som ett ämne, lättläst med bilder, frågor och facit i lärarversionen. Följer läroplanen för anpassade grundskolan (Lgra22), inte Pluggis kapitel.</p><div class="knappar">' +
@@ -195,6 +257,7 @@ function ikonHtml(ikon) {
     }).catch(function() { document.getElementById("fel").textContent = "Webbläsaren stöder inte inloggning här."; });
   }
 
+  window.addEventListener("hashchange", function() { try { if (localStorage.getItem(NYCKEL) === HASH) { visa(); } } catch (e) {} });
   document.getElementById("oppna").addEventListener("click", forsok);
   document.getElementById("los").addEventListener("keydown", function(e) { if (e.key === "Enter") { forsok(); } });
   try { if (localStorage.getItem(NYCKEL) === HASH) { visa(); } } catch (e) {}

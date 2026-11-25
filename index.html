@@ -927,6 +927,10 @@
   .hafte-par .knapp { margin: 0; }
   .hafte-par .knapp:first-child { border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; }
   .hafte-ned { padding-left: 9px; padding-right: 9px; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+  .qr-sida { text-align: center; }
+  .qr-sida input { font: inherit; padding: 10px 12px; border: 1px solid #c9ced6; border-radius: 8px; width: min(320px, 90%); text-align: center; }
+  .qr-ruta { margin: 18px auto 6px; width: min(420px, 94%); background: #fff; border-radius: 10px; padding: 4px; box-shadow: 0 0 0 1px rgba(0,0,0,.1); }
+  .qr-ruta svg { width: 100%; height: auto; display: block; }
   .larar-lank { text-align: center; margin: 40px 0 10px; font-size: 13px; }
   .larar-lank a { color: #999; }
 
@@ -956,6 +960,7 @@
 <div id="app"></div>
 
 <script src="innehall/struktur.js"></script>
+<script src="stil/qrkod.js"></script>
 <script src="hafte/manifest.js"></script>
 
 <script src="innehall/matematik-tallinjen.js"></script>
@@ -1137,6 +1142,52 @@ function ikonHtml(ikon) {
   function visStartsida() { navigeraTill(""); }
   window.addEventListener("hashchange", visaFranHash);
 
+
+  // ---- Min QR-kod: elevens framsteg som en länk i en QR-kod (inget skickas, inget sparas på server) ----
+  var ALIAS_NYCKEL = "pluggis-alias-v1";
+  function qrBladlista() {
+    var ut = [];
+    (function g(a) { a.forEach(function(n) { if (!n.barn || !n.barn.length) { ut.push(n); } else { g(n.barn); } }); })(struktur);
+    return ut;
+  }
+  function qrHash(ids) {
+    var h = 2166136261, s = ids.join("|");
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    return h.toString(36);
+  }
+  function qrB64(bytes) {
+    var s = ""; bytes.forEach(function(b) { s += String.fromCharCode(b); });
+    return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function qrNyttInnehall(alias) {
+    var blad = qrBladlista(), ids = blad.map(function(n) { return n.id; });
+    var bytes = []; for (var i = 0; i < Math.ceil(ids.length / 8); i++) { bytes.push(0); }
+    ids.forEach(function(id, i) { if (framsteg.klara[id]) { bytes[i >> 3] |= 1 << (i & 7); } });
+    var s = struktur.map(function(a) { var r = raknaFramsteg(a); return [r.klara, r.totalt]; });
+    var seen = 0, sitter = 0;
+    Object.keys(repTillstand).forEach(function(k) { seen++; if (repTillstand[k] && repTillstand[k].b >= 3) { sitter++; } });
+    var d = { v: 1, a: alias, t: repIdag(), h: qrHash(ids), b: qrB64(bytes), s: s, r: [sitter, seen] };
+    var bas = location.href.split("#")[0].replace(/[^\/]*$/, "");
+    return bas + "lararsida.html#e=" + qrB64(Array.prototype.slice.call(new TextEncoder().encode(JSON.stringify(d))));
+  }
+  function qrRita() {
+    var inp = document.getElementById("qr-alias"), alias = (inp.value || "").trim().slice(0, 30);
+    try { localStorage.setItem(ALIAS_NYCKEL, alias); } catch (e) {}
+    var ruta = document.getElementById("qr-ruta");
+    if (!alias) { ruta.innerHTML = ""; return; }
+    ruta.innerHTML = window.qrSvg(qrNyttInnehall(alias), 320) || "";
+  }
+  function visaQr() {
+    var alias = ""; try { alias = localStorage.getItem(ALIAS_NYCKEL) || ""; } catch (e) {}
+    document.getElementById("app").innerHTML =
+      '<button class="knapp tillbaka tillbaka-topp" onclick="renderaStartsida()">⬅️ Tillbaka</button>' +
+      '<div class="qr-sida"><h2>Min QR-kod</h2>' +
+      '<p>Skriv ditt namn eller smeknamn. Läraren skannar koden med mobilkameran.</p>' +
+      '<input id="qr-alias" maxlength="30" placeholder="Ditt namn" value="' + alias.replace(/"/g, "&quot;") + '" oninput="qrRita()">' +
+      '<div class="qr-ruta" id="qr-ruta"></div></div>';
+    qrRita();
+  }
+
   function renderaStartsida() {
     var html = "";
     html += '<div class="startsida-grid">';
@@ -1163,6 +1214,7 @@ function ikonHtml(ikon) {
     if (harKlara) {
       html += '<p class="aterstall-rad"><a href="javascript:void(0)" onclick="aterstallFramsteg()">Nollställ framsteg</a></p>';
     }
+    html += '<p class="aterstall-rad"><a href="javascript:void(0)" onclick="visaQr()">Min QR-kod</a></p>';
     html += '<p class="larar-lank"><a href="lararsida.html">För lärare</a></p>';
     app.innerHTML = html;
   }
