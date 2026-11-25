@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#38564A">
+<link rel="icon" type="image/svg+xml" href="ikoner/icon.svg">
+<title>Pluggis – elevdata</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; max-width: 1100px; margin: 30px auto; padding: 0 20px 40px; background: #f4f8f5; color: #222; }
+  h1 { color: #38564A; margin: 8px 0 4px; }
+  h2 { color: #38564A; margin: 28px 0 8px; font-size: 20px; }
+  h3 { margin: 16px 0 6px; font-size: 16px; }
+  a { color: #38564A; }
+  .rad { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+  button, .kn { background: #38564A; color: #fff; border: 0; padding: 8px 13px; border-radius: 8px; font-size: 14px; cursor: pointer; text-decoration: none; display: inline-block; }
+  button.ljus, .kn.ljus { background: #e3e8e5; color: #233; }
+  .kort { background: #fff; border-radius: 10px; padding: 14px 16px; margin: 12px 0; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .tabell { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { padding: 6px 9px; text-align: center; border-bottom: 1px solid #eceeed; }
+  th:first-child, td:first-child { text-align: left; }
+  tr.klick:hover { background: #f0f5f2; cursor: pointer; }
+  .g { background: #cfe8d4; } .y { background: #fbeec0; } .r { background: #f6d2d0; } .n { color: #999; }
+  .info { color: #666; font-size: 14px; margin: 4px 0 10px; }
+  .ok { color: #1c6b3a; font-weight: bold; }
+  details { border: 1px solid #e3e6e4; border-radius: 8px; margin: 6px 0; background: #fff; }
+  summary { padding: 8px 12px; cursor: pointer; font-weight: bold; }
+  .inre { padding: 0 12px 8px; }
+  ul.m { margin: 4px 0 6px 0; padding-left: 20px; font-size: 14px; }
+  .prick { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; background: #ccc; }
+  .b0 { background: #ccc; } .b1 { background: #e0675f; } .b2 { background: #e6a94b; } .b3 { background: #9bc66b; } .b4 { background: #3f9a57; }
+  .frag { font-size: 14px; margin: 3px 0; }
+  .tom { color: #888; }
+  #port { max-width: 360px; margin: 40px auto; background: #fff; padding: 22px; border-radius: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,.1); }
+</style>
+</head>
+<body>
+<a href="lararsida.html">← För lärare</a>
+<h1>Elevdata</h1>
+
+<div id="port" style="display:none"><p>Logga in på lärarsidan först.</p><a class="kn" href="lararsida.html">Till inloggningen</a></div>
+<div id="app" style="display:none"></div>
+
+<script src="innehall/struktur.js"></script>
+<script src="innehall/repetition.js"></script>
+<script>
+(function () {
+  var HASH = "a2c4a4f38df7a7d24eac2b8dc1c9f63487d6255208b978a29b9740423225ee3a", NYCKEL = "pluggis-larare-v1", ELEV = "pluggis-elever-v1";
+  var vald = null, meddelande = "";
+
+  try { if (localStorage.getItem(NYCKEL) !== HASH) { throw 0; } } catch (e) { document.getElementById("port").style.display = "block"; return; }
+
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function elever() { try { return JSON.parse(localStorage.getItem(ELEV) || "{}") || {}; } catch (e) { return {}; } }
+  function spara(o) { try { localStorage.setItem(ELEV, JSON.stringify(o)); } catch (e) {} }
+  function namnLista() { return Object.keys(elever()).sort(function (a, b) { return a.localeCompare(b, "sv"); }); }
+  function dag(t) { return new Date(t * 86400000).toISOString().slice(0, 10); }
+  function avkoda(b64) { var s = atob(b64.replace(/-/g, "+").replace(/_/g, "/")), by = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) { by[i] = s.charCodeAt(i); } return by; }
+  function bladIds() { var u = []; (function g(a) { a.forEach(function (n) { if (!n.barn || !n.barn.length) { u.push(n.id); } else { g(n.barn); } }); })(struktur); return u; }
+  function qrHash(ids) { var h = 2166136261, s = ids.join("|"); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h.toString(36); }
+  function klass(k, t) { if (!t) { return "n"; } var r = k / t; return r >= 0.7 ? "g" : r >= 0.3 ? "y" : "r"; }
+
+  function importera() {
+    var m = /^#e=([A-Za-z0-9_-]+)$/.exec(location.hash);
+    if (!m) { return; }
+    try {
+      var d = JSON.parse(new TextDecoder().decode(avkoda(m[1])));
+      if (!d || d.v !== 1 || !d.a) { throw 0; }
+      d.a = String(d.a).replace(/\s+/g, " ").trim();
+      var o = elever(), nk = d.a.toLocaleLowerCase("sv");
+      Object.keys(o).forEach(function (k) { if (k.toLocaleLowerCase("sv") === nk) { delete o[k]; } });
+      o[d.a] = d; spara(o); meddelande = d.a + " är inlagd.";
+    } catch (e) { meddelande = "Länken kunde inte läsas."; }
+    try { history.replaceState(null, "", location.pathname); } catch (e) { location.hash = ""; }
+  }
+
+  // Frågor i repetitionen, i samma ordning som eleven skickar dem.
+  function frageLista() {
+    var u = []; Object.keys(repBank).forEach(function (kap) { repBank[kap].fr.forEach(function (f, i) { u.push({ kap: kap, i: i, q: f[0] }); }); });
+    return u;
+  }
+  function kapTitel(kap) { var t = kap, hitta = function (a) { a.forEach(function (n) { if (n.id === kap) { t = n.titel; } if (n.barn) { hitta(n.barn); } }); }; hitta(struktur); return t; }
+  function box(d, n) { var ch = d.c && d.c.charAt(n); return ch ? parseInt(ch, 10) : 0; } // 0 = ej sedd, 1..5 = låda 0..4 + 1
+
+  // ---- Klassöversikt ----
+  function oversikt() {
+    var o = elever(), namn = namnLista(), ids = bladIds(), nu = qrHash(ids);
+    var vis = struktur.map(function (a, i) { return namn.some(function (n) { var q = o[n].s && o[n].s[i]; return q && q[1] > 0; }); });
+    var h = '<div class="kort"><h2 style="margin-top:0">Klassöversikt</h2>';
+    if (!namn.length) { return h + '<p class="tom">Inga elever inlagda än. Eleven öppnar Pluggis och trycker på Min QR-kod. Skanna den med mobilkameran.</p></div>'; }
+    h += '<div class="tabell"><table><tr><th>Elev</th>';
+    struktur.forEach(function (a, i) { if (vis[i]) { h += '<th>' + esc(a.titel) + '</th>'; } });
+    h += '<th>Frågor som sitter</th><th>Skannad</th><th></th></tr>';
+    namn.forEach(function (n, k) {
+      var d = o[n];
+      h += '<tr class="klick" data-n="' + esc(n) + '"><td><b>' + esc(n) + '</b>' + (d.h !== nu ? ' <span title="Sidan har ändrats sedan koden skapades – siffrorna kan vara lite fel">⚠️</span>' : '') + '</td>';
+      struktur.forEach(function (a, i) { if (!vis[i]) { return; } var s = d.s && d.s[i]; h += '<td class="' + (s ? klass(s[0], s[1]) : 'n') + '">' + (s && s[1] ? s[0] + '/' + s[1] : '–') + '</td>'; });
+      h += '<td>' + (d.r ? d.r[0] + ' av ' + frageLista().length : '–') + '</td><td>' + dag(d.t) + '</td><td><a href="#" data-ta="' + esc(n) + '">ta bort</a></td></tr>';
+    });
+    h += '</table></div><p class="info">Klicka på en elev för detaljer. Grönt: minst 70 % av momenten klara, gult: 30–70 %, rött: under 30 %.</p>';
+    h += '<div class="rad"><button class="ljus" id="csv">Ladda ner CSV</button><button class="ljus" id="rensa">Rensa alla</button></div></div>';
+    return h;
+  }
+
+  // ---- Klassens svåraste frågor ----
+  function svara() {
+    var o = elever(), namn = namnLista(), fl = frageLista(), rader = [];
+    fl.forEach(function (f, n) {
+      var sedda = 0, sitter = 0;
+      namn.forEach(function (e) { var b = box(o[e], n); if (b) { sedda++; if (b >= 4) { sitter++; } } });
+      if (sedda >= 2) { rader.push({ f: f, sedda: sedda, sitter: sitter, andel: (sedda - sitter) / sedda }); }
+    });
+    rader.sort(function (a, b) { return b.andel - a.andel || b.sedda - a.sedda; });
+    var h = '<div class="kort"><h2 style="margin-top:0">Frågor som flest behöver träna mer på</h2>';
+    if (!rader.length) { return h + '<p class="tom">Visas när minst två elever har övat på samma frågor i repetitionen.</p></div>'; }
+    h += '<p class="info">Bland dem som har sett frågan: hur många som ännu inte har den i de två översta lådorna.</p>';
+    rader.slice(0, 10).forEach(function (r) { h += '<div class="frag"><b>' + (r.sedda - r.sitter) + ' av ' + r.sedda + '</b> · ' + esc(r.f.q) + ' <span class="tom">(' + esc(kapTitel(r.f.kap)) + ')</span></div>'; });
+    return h + '</div>';
+  }
+
+  // ---- Elev i detalj ----
+  function momentTrad(d) {
+    var ids = bladIds(), by = avkoda(d.b || ""), klar = {};
+    ids.forEach(function (id, i) { if ((by[i >> 3] >> (i & 7)) & 1) { klar[id] = 1; } });
+    function rakna(n) { if (!n.barn || !n.barn.length) { return klar[n.id] ? 1 : 0; } return n.barn.reduce(function (s, b) { return s + rakna(b); }, 0); }
+    function rita(n) {
+      var k = rakna(n); if (!k) { return ""; }
+      if (!n.barn || !n.barn.length) { return '<li><span class="ok">✓</span> ' + esc(n.titel) + '</li>'; }
+      return '<details><summary>' + esc(n.titel) + ' <span class="tom">(' + k + ' klara)</span></summary><div class="inre"><ul class="m">' +
+        n.barn.map(function (b) { return (b.barn && b.barn.length) ? '</ul>' + rita(b) + '<ul class="m">' : rita(b); }).join("") + '</ul></div></details>';
+    }
+    var h = struktur.map(rita).join("");
+    return h || '<p class="tom">Inga klara moment än.</p>';
+  }
+  function repDetalj(d) {
+    var fl = frageLista(), per = {}, h = "";
+    fl.forEach(function (f, n) { (per[f.kap] = per[f.kap] || []).push({ f: f, b: box(d, n) }); });
+    var tot = [0, 0, 0, 0];
+    Object.keys(per).forEach(function (kap) {
+      var l = per[kap], sedda = l.filter(function (x) { return x.b; }).length;
+      if (!sedda) { return; }
+      var sitter = l.filter(function (x) { return x.b >= 4; }).length;
+      h += '<details><summary>' + esc(kapTitel(kap)) + ' <span class="tom">(' + sedda + ' av ' + l.length + ' sedda, ' + sitter + ' sitter)</span></summary><div class="inre">';
+      l.forEach(function (x) { h += '<div class="frag"><span class="prick b' + (x.b ? Math.min(4, x.b) : 0) + '"></span>' + esc(x.f.q) + (x.b ? '' : ' <span class="tom">– ej sedd</span>') + '</div>'; });
+      h += '</div></details>';
+    });
+    return h || '<p class="tom">Inga repetitionsfrågor besvarade än.</p>';
+  }
+  function elevVy(n) {
+    var d = elever()[n]; if (!d) { vald = null; return ""; }
+    var h = '<div class="rad"><button class="ljus" id="tillbaka">← Alla elever</button></div><div class="kort"><h2 style="margin-top:0">' + esc(n) + '</h2><p class="info">Skannad ' + dag(d.t) + '. Visar de moment som eleven har markerat som klara och hur repetitionsfrågorna sitter.</p>';
+    h += '<h3>Klara moment per ämne</h3>' + momentTrad(d) + '<h3>Repetitionsfrågor</h3><p class="info"><span class="prick b0"></span>ej sedd <span class="prick b1"></span>börjat <span class="prick b2"></span>övar <span class="prick b3"></span>nästan <span class="prick b4"></span>sitter</p>' + repDetalj(d) + '</div>';
+    return h;
+  }
+
+  function rita() {
+    var app = document.getElementById("app"), h = "";
+    if (meddelande) { h += '<p class="ok">' + esc(meddelande) + '</p>'; meddelande = ""; }
+    h += vald ? elevVy(vald) : oversikt() + svara();
+    app.innerHTML = h; app.style.display = "block";
+    var t = document.getElementById("tillbaka"); if (t) { t.onclick = function () { vald = null; rita(); }; }
+    [].forEach.call(app.querySelectorAll("tr.klick"), function (r) { r.onclick = function () { vald = r.getAttribute("data-n"); rita(); window.scrollTo(0, 0); }; });
+    [].forEach.call(app.querySelectorAll("[data-ta]"), function (a) { a.onclick = function (e) { e.preventDefault(); e.stopPropagation(); var o = elever(); delete o[a.getAttribute("data-ta")]; spara(o); rita(); }; });
+    var c = document.getElementById("csv"); if (c) { c.onclick = csv; }
+    var r = document.getElementById("rensa"); if (r) { r.onclick = function () { if (confirm("Ta bort alla inlagda elever?")) { spara({}); rita(); } }; }
+  }
+  function csv() {
+    var o = elever(), rader = [["Elev"].concat(struktur.map(function (a) { return a.titel + " klara"; }), struktur.map(function (a) { return a.titel + " totalt"; }), ["Repetitionsfrågor som sitter", "Repetitionsfrågor sedda", "Skannad"])];
+    namnLista().forEach(function (n) {
+      var d = o[n], fl = frageLista(), sedda = 0, sitter = 0; fl.forEach(function (f, i) { var b = box(d, i); if (b) { sedda++; if (b >= 4) { sitter++; } } });
+      rader.push([n].concat(struktur.map(function (a, i) { return d.s && d.s[i] ? d.s[i][0] : ""; }), struktur.map(function (a, i) { return d.s && d.s[i] ? d.s[i][1] : ""; }), [sitter, sedda, dag(d.t)]));
+    });
+    var txt = "﻿" + rader.map(function (r) { return r.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(";"); }).join("\r\n");
+    var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], { type: "text/csv" })); a.download = "elevdata.csv"; a.click();
+  }
+
+  window.addEventListener("hashchange", function () { importera(); rita(); });
+  importera(); rita();
+})();
+</script>
+</body>
+</html>

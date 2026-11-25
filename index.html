@@ -1172,9 +1172,11 @@ function ikonHtml(ikon) {
     var s = struktur.map(function(a) { var r = raknaFramsteg(a); return [r.klara, r.totalt]; });
     var seen = 0, sitter = 0;
     Object.keys(repTillstand).forEach(function(k) { seen++; if (repTillstand[k] && repTillstand[k].b >= 3) { sitter++; } });
-    var d = { v: 1, a: alias, t: repIdag(), h: qrHash(ids), b: qrB64(bytes), s: s, r: [sitter, seen] };
+    var c = "";
+    Object.keys(repBank).forEach(function(kap) { repBank[kap].fr.forEach(function(f, i) { var t = repTillstand[kap + ":" + i]; c += t ? String(Math.min(8, (t.b || 0) + 1)) : "0"; }); });
+    var d = { v: 1, a: alias, t: repIdag(), h: qrHash(ids), b: qrB64(bytes), s: s, r: [sitter, seen], c: c };
     var bas = location.href.split("#")[0].replace(/[^\/]*$/, "");
-    return bas + "lararsida.html#e=" + qrB64(Array.prototype.slice.call(new TextEncoder().encode(JSON.stringify(d))));
+    return bas + "elever.html#e=" + qrB64(Array.prototype.slice.call(new TextEncoder().encode(JSON.stringify(d))));
   }
   function qrRita() {
     var inp = document.getElementById("qr-alias"), alias = (inp.value || "").trim().slice(0, 30);
