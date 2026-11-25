@@ -1150,7 +1150,8 @@ function ikonHtml(ikon) {
 
 
   // ---- Min QR-kod: elevens framsteg som en länk i en QR-kod (inget skickas, inget sparas på server) ----
-  var ALIAS_NYCKEL = "pluggis-alias-v1";
+  var ALIAS_NYCKEL = "pluggis-alias-v1", KLASS_NYCKEL = "pluggis-klass-v1";
+  function qrKlass() { try { return localStorage.getItem(KLASS_NYCKEL) || ""; } catch (e) { return ""; } }
   function qrBladlista() {
     var ut = [];
     (function g(a) { a.forEach(function(n) { if (!n.barn || !n.barn.length) { ut.push(n); } else { g(n.barn); } }); })(struktur);
@@ -1174,13 +1175,14 @@ function ikonHtml(ikon) {
     Object.keys(repTillstand).forEach(function(k) { seen++; if (repTillstand[k] && repTillstand[k].b >= 3) { sitter++; } });
     var c = "";
     Object.keys(repBank).forEach(function(kap) { repBank[kap].fr.forEach(function(f, i) { var t = repTillstand[kap + ":" + i]; c += t ? String(Math.min(8, (t.b || 0) + 1)) : "0"; }); });
-    var d = { v: 1, a: alias, t: repIdag(), h: qrHash(ids), b: qrB64(bytes), s: s, r: [sitter, seen], c: c };
+    var d = { v: 1, a: alias, k: qrKlass(), t: repIdag(), h: qrHash(ids), b: qrB64(bytes), s: s, r: [sitter, seen], c: c };
     var bas = location.href.split("#")[0].replace(/[^\/]*$/, "");
     return bas + "elever.html#e=" + qrB64(Array.prototype.slice.call(new TextEncoder().encode(JSON.stringify(d))));
   }
   function qrRita() {
     var inp = document.getElementById("qr-alias"), alias = (inp.value || "").trim().slice(0, 30);
-    try { localStorage.setItem(ALIAS_NYCKEL, alias); } catch (e) {}
+    var kl = (document.getElementById("qr-klass").value || "").trim().slice(0, 12).toUpperCase();
+    try { localStorage.setItem(ALIAS_NYCKEL, alias); localStorage.setItem(KLASS_NYCKEL, kl); } catch (e) {}
     var ruta = document.getElementById("qr-ruta");
     if (!alias) { ruta.innerHTML = ""; return; }
     ruta.innerHTML = window.qrSvg(qrNyttInnehall(alias), 320) || "";
@@ -1190,8 +1192,9 @@ function ikonHtml(ikon) {
     document.getElementById("app").innerHTML =
       '<button class="knapp tillbaka tillbaka-topp" onclick="renderaStartsida()">⬅️ Tillbaka</button>' +
       '<div class="qr-sida"><h2>Min QR-kod</h2>' +
-      '<p>Skriv din elevkod. Läraren skannar koden med mobilkameran.</p>' +
-      '<input id="qr-alias" maxlength="30" placeholder="Din elevkod" value="' + alias.replace(/"/g, "&quot;") + '" oninput="qrRita()">' +
+      '<p>Skriv din elevkod och klass. Läraren skannar koden med mobilkameran.</p>' +
+      '<input id="qr-alias" maxlength="30" placeholder="Din elevkod" value="' + alias.replace(/"/g, "&quot;") + '" oninput="qrRita()"><br>' +
+      '<input id="qr-klass" maxlength="12" placeholder="Din klass" value="' + qrKlass().replace(/"/g, "&quot;") + '" oninput="qrRita()" style="margin-top:8px">' +
       '<div class="qr-ruta" id="qr-ruta"></div></div>';
     qrRita();
   }
@@ -1200,7 +1203,8 @@ function ikonHtml(ikon) {
   function sparaKod() {
     var v = (document.getElementById("kod-start").value || "").trim().slice(0, 30);
     if (!v) { return; }
-    try { localStorage.setItem(ALIAS_NYCKEL, v); } catch (e) {}
+    var kl = (document.getElementById("klass-start").value || "").trim().slice(0, 12).toUpperCase();
+    try { localStorage.setItem(ALIAS_NYCKEL, v); localStorage.setItem(KLASS_NYCKEL, kl); } catch (e) {}
     renderaStartsida();
   }
   function hoppaKod() { try { sessionStorage.setItem("pluggis-kod-hoppa", "1"); } catch (e) {} renderaStartsida(); }
@@ -1209,8 +1213,9 @@ function ikonHtml(ikon) {
     var html = "";
     var hoppat = false; try { hoppat = !!sessionStorage.getItem("pluggis-kod-hoppa"); } catch (e) {}
     if (!qrAlias() && !hoppat) {
-      html += '<div class="kod-kort"><h3>Skriv din elevkod</h3>' +
-        '<input id="kod-start" maxlength="30" placeholder="Din elevkod" onkeydown="if(event.key===\'Enter\'){sparaKod();}">' +
+      html += '<div class="kod-kort"><h3>Skriv din elevkod och klass</h3>' +
+        '<input id="kod-start" maxlength="30" placeholder="Din elevkod"><br>' +
+        '<input id="klass-start" maxlength="12" placeholder="Din klass" onkeydown="if(event.key===\'Enter\'){sparaKod();}">' +
         '<div><button class="knapp" onclick="sparaKod()">Spara</button> <a href="javascript:void(0)" onclick="hoppaKod()">Hoppa över</a></div></div>';
     }
     html += '<div class="startsida-grid">';

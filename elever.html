@@ -49,14 +49,15 @@
 <script>
 (function () {
   var HASH = "a2c4a4f38df7a7d24eac2b8dc1c9f63487d6255208b978a29b9740423225ee3a", NYCKEL = "pluggis-larare-v1", ELEV = "pluggis-elever-v1";
-  var vald = null, meddelande = "";
+  var vald = null, meddelande = "", klassVal = "";
 
   try { if (localStorage.getItem(NYCKEL) !== HASH) { throw 0; } } catch (e) { document.getElementById("port").style.display = "block"; return; }
 
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function elever() { try { return JSON.parse(localStorage.getItem(ELEV) || "{}") || {}; } catch (e) { return {}; } }
   function spara(o) { try { localStorage.setItem(ELEV, JSON.stringify(o)); } catch (e) {} }
-  function namnLista() { return Object.keys(elever()).sort(function (a, b) { return a.localeCompare(b, "sv"); }); }
+  function namnLista() { var o = elever(); return Object.keys(o).filter(function (n) { return !klassVal || (o[n].k || "") === klassVal; }).sort(function (a, b) { return a.localeCompare(b, "sv"); }); }
+  function klasser() { var o = elever(), k = {}; Object.keys(o).forEach(function (n) { k[o[n].k || ""] = 1; }); return Object.keys(k).sort(function (a, b) { return a.localeCompare(b, "sv"); }); }
   function dag(t) { return new Date(t * 86400000).toISOString().slice(0, 10); }
   function avkoda(b64) { var s = atob(b64.replace(/-/g, "+").replace(/_/g, "/")), by = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) { by[i] = s.charCodeAt(i); } return by; }
   function bladIds() { var u = []; (function g(a) { a.forEach(function (n) { if (!n.barn || !n.barn.length) { u.push(n.id); } else { g(n.barn); } }); })(struktur); return u; }
@@ -69,6 +70,7 @@
     try {
       var d = JSON.parse(new TextDecoder().decode(avkoda(m[1])));
       if (!d || d.v !== 1 || !d.a) { throw 0; }
+      d.k = String(d.k || "").replace(/\s+/g, "").toUpperCase();
       d.a = String(d.a).replace(/\s+/g, " ").trim();
       var o = elever(), nk = d.a.toLocaleLowerCase("sv");
       Object.keys(o).forEach(function (k) { if (k.toLocaleLowerCase("sv") === nk) { delete o[k]; } });
@@ -89,14 +91,17 @@
   function oversikt() {
     var o = elever(), namn = namnLista(), ids = bladIds(), nu = qrHash(ids);
     var vis = struktur.map(function (a, i) { return namn.some(function (n) { var q = o[n].s && o[n].s[i]; return q && q[1] > 0; }); });
-    var h = '<div class="kort"><h2 style="margin-top:0">Klassöversikt</h2>';
+    var kl = klasser(), h = '<div class="kort"><h2 style="margin-top:0">Klassöversikt</h2>';
+    if (kl.filter(function (k) { return k; }).length) {
+      h += '<div class="rad"><label>Klass: <select id="klassval"><option value="">Alla klasser</option>' + kl.filter(function (k) { return k; }).map(function (k) { return '<option' + (k === klassVal ? ' selected' : '') + '>' + esc(k) + '</option>'; }).join("") + '</select></label></div>';
+    }
     if (!namn.length) { return h + '<p class="tom">Inga elever inlagda än. Eleven öppnar Pluggis och trycker på Min QR-kod. Skanna den med mobilkameran.</p></div>'; }
-    h += '<div class="tabell"><table><tr><th>Elev</th>';
+    h += '<div class="tabell"><table><tr><th>Elev</th>' + (klassVal ? '' : '<th>Klass</th>');
     struktur.forEach(function (a, i) { if (vis[i]) { h += '<th>' + esc(a.titel) + '</th>'; } });
     h += '<th>Frågor som sitter</th><th>Skannad</th><th></th></tr>';
     namn.forEach(function (n, k) {
       var d = o[n];
-      h += '<tr class="klick" data-n="' + esc(n) + '"><td><b>' + esc(n) + '</b>' + (d.h !== nu ? ' <span title="Sidan har ändrats sedan koden skapades – siffrorna kan vara lite fel">⚠️</span>' : '') + '</td>';
+      h += '<tr class="klick" data-n="' + esc(n) + '"><td><b>' + esc(n) + '</b>' + (d.h !== nu ? ' <span title="Sidan har ändrats sedan koden skapades – siffrorna kan vara lite fel">⚠️</span>' : '') + '</td>' + (klassVal ? '' : '<td>' + esc(d.k || '–') + '</td>');
       struktur.forEach(function (a, i) { if (!vis[i]) { return; } var s = d.s && d.s[i]; h += '<td class="' + (s ? klass(s[0], s[1]) : 'n') + '">' + (s && s[1] ? s[0] + '/' + s[1] : '–') + '</td>'; });
       h += '<td>' + (d.r ? d.r[0] + ' av ' + frageLista().length : '–') + '</td><td>' + dag(d.t) + '</td><td><a href="#" data-ta="' + esc(n) + '">ta bort</a></td></tr>';
     });
@@ -151,7 +156,7 @@
   }
   function elevVy(n) {
     var d = elever()[n]; if (!d) { vald = null; return ""; }
-    var h = '<div class="rad"><button class="ljus" id="tillbaka">← Alla elever</button></div><div class="kort"><h2 style="margin-top:0">' + esc(n) + '</h2><p class="info">Skannad ' + dag(d.t) + '. Visar de moment som eleven har markerat som klara och hur repetitionsfrågorna sitter.</p>';
+    var h = '<div class="rad"><button class="ljus" id="tillbaka">← Alla elever</button></div><div class="kort"><h2 style="margin-top:0">' + esc(n) + (d.k ? ' <span class="tom">· ' + esc(d.k) + '</span>' : '') + '</h2><p class="info">Skannad ' + dag(d.t) + '. Visar de moment som eleven har markerat som klara och hur repetitionsfrågorna sitter.</p>';
     h += '<h3>Klara moment per ämne</h3>' + momentTrad(d) + '<h3>Repetitionsfrågor</h3><p class="info"><span class="prick b0"></span>ej sedd <span class="prick b1"></span>börjat <span class="prick b2"></span>övar <span class="prick b3"></span>nästan <span class="prick b4"></span>sitter</p>' + repDetalj(d) + '</div>';
     return h;
   }
@@ -164,14 +169,15 @@
     var t = document.getElementById("tillbaka"); if (t) { t.onclick = function () { vald = null; rita(); }; }
     [].forEach.call(app.querySelectorAll("tr.klick"), function (r) { r.onclick = function () { vald = r.getAttribute("data-n"); rita(); window.scrollTo(0, 0); }; });
     [].forEach.call(app.querySelectorAll("[data-ta]"), function (a) { a.onclick = function (e) { e.preventDefault(); e.stopPropagation(); var o = elever(); delete o[a.getAttribute("data-ta")]; spara(o); rita(); }; });
+    var kv = document.getElementById("klassval"); if (kv) { kv.onchange = function () { klassVal = kv.value; rita(); }; }
     var c = document.getElementById("csv"); if (c) { c.onclick = csv; }
     var r = document.getElementById("rensa"); if (r) { r.onclick = function () { if (confirm("Ta bort alla inlagda elever?")) { spara({}); rita(); } }; }
   }
   function csv() {
-    var o = elever(), rader = [["Elev"].concat(struktur.map(function (a) { return a.titel + " klara"; }), struktur.map(function (a) { return a.titel + " totalt"; }), ["Repetitionsfrågor som sitter", "Repetitionsfrågor sedda", "Skannad"])];
+    var o = elever(), rader = [["Elev", "Klass"].concat(struktur.map(function (a) { return a.titel + " klara"; }), struktur.map(function (a) { return a.titel + " totalt"; }), ["Repetitionsfrågor som sitter", "Repetitionsfrågor sedda", "Skannad"])];
     namnLista().forEach(function (n) {
       var d = o[n], fl = frageLista(), sedda = 0, sitter = 0; fl.forEach(function (f, i) { var b = box(d, i); if (b) { sedda++; if (b >= 4) { sitter++; } } });
-      rader.push([n].concat(struktur.map(function (a, i) { return d.s && d.s[i] ? d.s[i][0] : ""; }), struktur.map(function (a, i) { return d.s && d.s[i] ? d.s[i][1] : ""; }), [sitter, sedda, dag(d.t)]));
+      rader.push([n, d.k || ""].concat(struktur.map(function (a, i) { return d.s && d.s[i] ? d.s[i][0] : ""; }), struktur.map(function (a, i) { return d.s && d.s[i] ? d.s[i][1] : ""; }), [sitter, sedda, dag(d.t)]));
     });
     var txt = "﻿" + rader.map(function (r) { return r.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(";"); }).join("\r\n");
     var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], { type: "text/csv" })); a.download = "elevdata.csv"; a.click();
