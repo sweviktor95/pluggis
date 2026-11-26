@@ -672,7 +672,6 @@ var struktur = [
             titel: "2.1 Ämnen, blandningar och partikelmodellen",
             ramverk: true,
             barn: [
-              { id: "kemi-m-2-1-zoom", titel: "Simulering: zooma in till atomen" },
               { id: "kemi-m-2-1-1", titel: "Vad är materia? Ämnen och material" },
               { id: "kemi-m-2-1-2", titel: "Partikelmodellen" },
               { id: "kemi-m-2-1-3", titel: "Rena ämnen och blandningar" },
@@ -709,6 +708,7 @@ var struktur = [
               { id: "kemi-m-3-1-1", titel: "Vad är en atom? Atomen och dess partiklar" },
               { id: "kemi-m-3-1-2", titel: "Atommodellernas historia" },
               { id: "kemi-m-3-1-3", titel: "Isotoper och radioaktivitet i korthet" },
+              { id: "kemi-m-3-1-zoom", titel: "Simulering: zooma in till atomen" },
               { id: "kemi-m-3-1-sim", titel: "Simulering: bygg en atom" },
               { id: "kemi-m-3-1-l", titel: "Labb: Svarta lådan: modellera det du inte kan se" }
             ]
