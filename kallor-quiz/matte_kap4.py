@@ -100,9 +100,34 @@ q("30 % av ett tal är 60. Vilket är talet?", "200", ["18", "90", "20"], 40)
 assert 60 / F(30, 100) == 200
 q("En cykel kostar 800 kr och priset höjs med 5 %. Hur många kronor höjs priset?", "40 kr", ["4 kr", "400 kr", "840 kr"], 40)
 assert 800 * F(5, 100) == 40
+# ---- Tillägg efter kapitlets begreppstest, kapiteltest och basläger: multiplikation, bråkdel av antal, förändring ----
+q("Vad händer med ett bråks värde när du förlänger det?", "Det ändras inte", ["Det ökar", "Det minskar", "Det fördubblas"])
+q("Beräkna 4 · 1/5", "4/5", ["4/20", "5/4", "1/20"], 30)
+assert 4 * F(1, 5) == F(4, 5)
+q("Beräkna 2/3 · 3/4. Svara i enklaste form.", "1/2", ["5/7", "6/7", "5/12"], 40)
+assert F(2, 3) * F(3, 4) == F(1, 2)
+q("Hur mycket är 3/4 av 100?", "75", ["34", "25", "43"], 30)
+assert F(3, 4) * 100 == 75
+q("Hur mycket är 2/5 av 30?", "12", ["6", "15", "60"], 30)
+assert F(2, 5) * 30 == 12
+q("Av 15 kulor är 6 gula. Vilken andel är gula, i enklaste form?", "2/5", ["6/15", "3/5", "15/6"], 30)
+assert F(6, 15) == F(2, 5)
+q("Priset på en bok ökade från 50 kr till 60 kr. Med hur många procent ökade priset?", "20 %", ["10 %", "60 %", "120 %"], 40)
+assert F(60 - 50, 50) == F(20, 100)
+q("Priset sänktes från 80 kr till 60 kr. Med hur många procent sänktes priset?", "25 %", ["20 %", "75 %", "15 %"], 40)
+assert F(80 - 60, 80) == F(25, 100)
+q("Priset sjönk från 20 kr till 10 kr. Det är en minskning med", "50 %", ["10 %", "100 %", "200 %"], 30)
+assert F(10, 20) == F(50, 100)
+q("En hyra på 5 000 kr höjs med 4 %. Vilken blir den nya hyran?", "5 200 kr", ["200 kr", "5 004 kr", "4 800 kr"], 40)
+assert 5000 * F(104, 100) == 5200
+q("Jeans kostar 650 kr. Du får 20 % rabatt. Vad får du betala?", "520 kr", ["130 kr", "630 kr", "670 kr"], 40)
+assert 650 * F(80, 100) == 520
+q("10 % av ett tal är 9. Vilket är talet?", "90", ["0,9", "19", "900"], 30)
+assert 9 / F(10, 100) == 90
+q("Om 1 % är 3, hur mycket är då 100 %?", "300", ["3", "100", "30"], 30)
 q("Hur mycket är 50 % av 64?", "32", ["50", "14", "64"], 20)
 assert F(64) * F(50, 100) == 32
-assert len(Q) >= 50, len(Q)
+assert len(Q) >= 60, len(Q)
 
 # ---- Blooket CSV + Kahoot xlsx (rätt svar flyttas runt) ----
 KT = lambda t: t if t in (5, 10, 20, 30, 60, 90, 120, 240) else min([x for x in (5, 10, 20, 30, 60, 90, 120, 240) if x >= t] or [240])
@@ -144,7 +169,7 @@ KAT = [
    ("Vilket är störst, 1/2 eller 1/3?", "1/2"),
    ("Beräkna 2/9 + 5/9.", "7/9"),
    ("Beräkna 1/2 + 1/6.", "2/3"),
-   ("Beräkna 5/6 − 1/4.", "7/12"),
+   ("Beräkna 2/3 · 3/4. Svara i enklaste form.", "1/2"),
    ("Hitta en gemensam nämnare för 3/8 och 5/12 och avgör vilket bråk som är störst.", "24: 3/8 = 9/24 och 5/12 = 10/24, så 5/12 är störst.")]),
  ("Procent och former", [
    ("Skriv 50 % som ett bråk.", "1/2"),
@@ -155,13 +180,13 @@ KAT = [
  ("Andel, delen och det hela", [
    ("Hur mycket är 10 % av 90?", "9"),
    ("Hur mycket är 25 % av 60?", "15"),
-   ("I en klass om 30 elever är 12 pojkar. Hur många procent är pojkar?", "40 %"),
+   ("Priset på en bok ökar från 50 kr till 60 kr. Hur många procent ökar priset?", "20 %"),
    ("20 % av ett tal är 14. Vilket är det hela?", "70"),
    ("Ett par skor kostar 600 kr. Priset sänks med 15 %. Vilket är det nya priset?", "510 kr")]),
 ]
 assert F(13, 4) == 3 + F(1, 4) and 2 + F(2, 5) == F(12, 5) and F(36, 48) == F(3, 4) and F(15, 20) == F(3, 4)
-assert F(1, 2) + F(1, 6) == F(2, 3) and F(5, 6) - F(1, 4) == F(7, 12) and F(3, 8) == F(9, 24) and F(5, 12) == F(10, 24)
-assert F(3, 8) * 100 == F(75, 2) and 0.1 * 90 == 9 and 0.25 * 60 == 15 and F(12, 30) == F(40, 100) and 14 / F(20, 100) == 70 and 600 * F(85, 100) == 510
+assert F(1, 2) + F(1, 6) == F(2, 3) and F(2, 3) * F(3, 4) == F(1, 2) and F(3, 8) == F(9, 24) and F(5, 12) == F(10, 24)
+assert F(3, 8) * 100 == F(75, 2) and 0.1 * 90 == 9 and 0.25 * 60 == 15 and F(10, 50) == F(20, 100) and 14 / F(20, 100) == 70 and 600 * F(85, 100) == 510
 data = [{"kat": k, "fr": [{"p": 100 * (i + 1), "q": qq, "a": a} for i, (qq, a) in enumerate(fr)]} for k, fr in KAT]
 h = open(R + "simuleringar/jeopardy-kemi-2.html", encoding="utf8").read()
 h = re.sub(r"var DATA=.*?\n", lambda m: "var DATA=" + json.dumps(data, ensure_ascii=False) + ";\n", h, count=1, flags=re.S)
@@ -182,6 +207,8 @@ BRAK = [
  ("Förlänga bråk", "Multiplicera täljare och nämnare med samma tal. Värdet ändras inte: 2/3 = 8/12."),
  ("Förkorta bråk", "Dividera täljare och nämnare med samma tal. Värdet ändras inte: 12/18 = 2/3."),
  ("Gemensam nämnare", "En nämnare som båda bråken kan skrivas med. Behövs för att jämföra, addera och subtrahera bråk med olika nämnare."),
+ ("Multiplikation av bråk", "Multiplicera täljare med täljare och nämnare med nämnare, och förkorta sedan: 2/3 · 3/4 = 6/12 = 1/2."),
+ ("Bråkdel av ett antal", "Multiplicera antalet med bråket: 3/4 av 100 = 3 · 100 / 4 = 75."),
  ("Enklaste form", "Bråket är förkortat så långt det går. Täljare och nämnare har ingen gemensam faktor förutom 1, till exempel 2/3."),
 ]
 PROC = [
@@ -189,8 +216,9 @@ PROC = [
  ("Procentform", "Ett tal skrivet med procenttecken, till exempel 25 %."),
  ("Decimalform", "Ett tal skrivet med decimaler, till exempel 0,25. Det är samma tal som 25 % och 1/4."),
  ("Andel", "Hur stor del något är av helheten. Kan skrivas som bråk, decimaltal eller procent."),
- ("Delen", "Den del av helheten man tittar på. I 20 % av 150 kr är delen 30 kr."),
- ("Det hela", "Helheten som delen räknas av, motsvarar 100 %. I 20 % av 150 kr är det hela 150 kr."),
+ ("Delen", "Den del av helheten man tittar på. I 20 % av 150 kr är delen 30 kr. Delen kan också vara en ökning eller minskning."),
+ ("Det hela", "Helheten som delen räknas av, motsvarar 100 %. I 20 % av 150 kr är det hela 150 kr. Vid en förändring är det hela det ursprungliga värdet."),
+ ("Procentuell förändring", "Förändringen delat med det ursprungliga värdet, skrivet i procent. Från 50 kr till 60 kr är ökningen 10/50 = 20 %."),
 ]
 def js(var, key, titel, kort):
     obj = {"sektioner": [], "flash": {"begrepp": [{"term": a, "forklaring": b} for a, b in kort]}}
