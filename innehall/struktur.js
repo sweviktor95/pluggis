@@ -65,6 +65,7 @@ var struktur = [
               { id: "matematik-ak7-brak-add-sub", titel: "Addition och subtraktion av bråk" },
               { id: "matematik-ak7-brak-mult", titel: "Multiplikation av bråk" },
               { id: "matematik-ak7-brak-div", titel: "Division av bråk" },
+              { id: "matematik-ak7-brak-flash", titel: "Flashcards" },
               { id: "matematik-ak7-brak-repetition", titel: "Repetition" }
             ]
           },
@@ -77,6 +78,7 @@ var struktur = [
               { id: "matematik-ak7-procent-huvudrakning", titel: "Huvudräkning" },
               { id: "matematik-ak7-procent-delen", titel: "Delen" },
               { id: "matematik-ak7-procent-det-hela", titel: "Det hela" },
+              { id: "matematik-ak7-procent-flash", titel: "Flashcards" },
               { id: "matematik-ak7-procent-repetition", titel: "Repetition" }
             ]
           },
