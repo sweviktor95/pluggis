@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Kapitel 4 (åk 7): bråk och procent. Egna frågor utifrån pluggbladets begrepp.
+"""Bråk och procent (åk 7). Egna frågor utifrån pluggbladets begrepp.
 Bygger Blooket-CSV, Kahoot-xlsx, Jeopardy och flashcards. Siffror kontrolleras med Fraction."""
 import csv, json, sys, re
 from fractions import Fraction as F
 import openpyxl
 R = "/home/claude/pluggis/"
-D = R + "planering/matematik-ak7-kap4/"
+D = R + "planering/matematik-ak7-brak-procent/"
 Q = []  # (fråga, rätt, [fel x3], tid)
 def q(t, r, fel, tid=20):
     assert len(fel) == 3 and r not in fel and len(set(fel)) == 3, t
@@ -136,7 +136,7 @@ for i, (t, r, fel, tid) in enumerate(Q):
     k = (i * 3 + 1) % 4
     ans = fel[:]; ans.insert(k, r)
     sh.append((t, ans, tid, k + 1))
-with open(D + "matematik-7-kap4-blooket.csv", "w", encoding="utf-8-sig", newline="") as f:
+with open(D + "matematik-7-brak-procent-blooket.csv", "w", encoding="utf-8-sig", newline="") as f:
     w = csv.writer(f, lineterminator="\r\n")
     w.writerow(["Blooket\nImport Template", "", "", "", "", "", "", ""])
     w.writerow(["Question #", "Question Text", "Answer 1", "Answer 2", "Answer 3 \n(Optional)", "Answer 4 \n(Optional)", "Time Limit (sec) \n(Max: 300 Seconds)", "Correct Answer(s) \n(Only Include Answer #)"])
@@ -149,7 +149,7 @@ for i, (t, ans, tid, c) in enumerate(sh):
     r = 9 + i; ws.cell(r, 1).value = i + 1; ws.cell(r, 2).value = t
     for j in range(4): ws.cell(r, 3 + j).value = ans[j]
     ws.cell(r, 7).value = KT(tid); ws.cell(r, 8).value = str(c)
-wb.save(D + "matematik-7-kap4-kahoot.xlsx")
+wb.save(D + "matematik-7-brak-procent-kahoot.xlsx")
 
 # ---- Jeopardy ----
 KAT = [
@@ -194,7 +194,7 @@ h = h.replace("Jeopardy: Materia och partiklar (beta)", "Jeopardy: Bråk och pro
 h = h.replace('var NIV={100:"Lättläst",200:"Lättläst",300:"Grundtext",400:"Grundtext",500:"Fördjupning"};', 'var NIV={100:"Grundläggande",200:"Grundläggande",300:"Mellan",400:"Mellan",500:"Utmaning"};')
 h = re.sub(r'<p class="note">.*?</p>', '<p class="note">Poängen visar svårigheten: 100–200 är grundläggande, 300–400 är mellan och 500 är en utmaning. Svaren är korta. Personer och exempel i frågorna är påhittade.</p>', h, count=1, flags=re.S)
 assert "Materia" not in h and "Lättläst" not in h and "DATA=[" in h
-open(R + "simuleringar/jeopardy-matematik-kap4.html", "w", encoding="utf8").write(h)
+open(R + "simuleringar/jeopardy-matematik-brak-procent.html", "w", encoding="utf8").write(h)
 
 # ---- Flashcards (elevvyn) ----
 BRAK = [
@@ -223,7 +223,7 @@ PROC = [
 def js(var, key, titel, kort):
     obj = {"sektioner": [], "flash": {"begrepp": [{"term": a, "forklaring": b} for a, b in kort]}}
     return 'innehall["%s"] = %s;\n' % (key, json.dumps(obj, ensure_ascii=False, indent=1))
-src = "// Flashcards för kapitel 4: bråk och procent (åk 7). Begreppen kommer från provets begreppslista, förklaringarna är egna.\nvar innehall = window.innehall || {};\n\n"
+src = "// Flashcards för bråk och procent (åk 7). Begreppen kommer från provets begreppslista, förklaringarna är egna.\nvar innehall = window.innehall || {};\n\n"
 src += js("", "matematik-ak7-brak-flash", "Flashcards", BRAK) + "\n" + js("", "matematik-ak7-procent-flash", "Flashcards", PROC)
-open(R + "innehall/matematik-kap4-flashcards.js", "w", encoding="utf8").write(src)
+open(R + "innehall/matematik-brak-procent-flashcards.js", "w", encoding="utf8").write(src)
 print(len(Q), "frågor;", sum(len(c["fr"]) for c in data), "jeopardy;", len(BRAK) + len(PROC), "flashcards")

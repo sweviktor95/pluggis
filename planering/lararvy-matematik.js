@@ -2,13 +2,13 @@
 // Visas som länkar under sidans rubrik. Blooket-filer är CSV som importeras direkt i Blooket.
 window.lararExtra = window.lararExtra || {};
 window.lararExtra["matematik-ak7-brak"] = {
-  grupp: "Kapitel 4: bråk och procent (beta) – 63 frågor till Blooket och Kahoot samt Jeopardy. Blooket bråk (beta) – 47 frågor: bråkform, jämföra, förlänga och förkorta, addition och subtraktion samt begrepp. Escape room (beta) – Bråkpyramiden: 13 uppgifter i fyra rum (bråkform och jämföra, förlänga och förkorta, addition och subtraktion, multiplikation och division). Körs på tv/tavla, med lärarfacit och nödutgång i spelet.",
-  lankar: [["Kapitel 4 · Blooket (CSV)", "planering/matematik-ak7-kap4/matematik-7-kap4-blooket.csv", true], ["Kapitel 4 · Kahoot (xlsx)", "planering/matematik-ak7-kap4/matematik-7-kap4-kahoot.xlsx", true], ["Kapitel 4 · Jeopardy", "simuleringar/jeopardy-matematik-kap4.html"], ["Blooket bråk (CSV)", "planering/matematik-ak7-brak/matematik-7-brak-blooket.csv", true], ["🏺 Escape room: Bråkpyramiden", "simuleringar/escape-brak.html"]]
+  grupp: "Bråk och procent (beta) – 63 frågor till Blooket och Kahoot samt Jeopardy. Escape room (beta) – Bråkpyramiden: 13 uppgifter i fyra rum (bråkform och jämföra, förlänga och förkorta, addition och subtraktion, multiplikation och division). Körs på tv/tavla, med lärarfacit och nödutgång i spelet.",
+  lankar: [["Bråk och procent · Blooket (CSV)", "planering/matematik-ak7-brak-procent/matematik-7-brak-procent-blooket.csv", true], ["Bråk och procent · Kahoot (xlsx)", "planering/matematik-ak7-brak-procent/matematik-7-brak-procent-kahoot.xlsx", true], ["Bråk och procent · Jeopardy", "simuleringar/jeopardy-matematik-brak-procent.html"], ["🏺 Escape room: Bråkpyramiden", "simuleringar/escape-brak.html"]]
 };
 
 window.lararExtra["matematik-ak7-procent"] = {
-  grupp: "Kapitel 4: bråk och procent (beta) – 63 frågor till Blooket och Kahoot samt Jeopardy med fem kategorier. Samma spel som under Bråk. Frågorna är egna och följer provets begreppslista.",
-  lankar: [["Kapitel 4 · Blooket (CSV)", "planering/matematik-ak7-kap4/matematik-7-kap4-blooket.csv", true], ["Kapitel 4 · Kahoot (xlsx)", "planering/matematik-ak7-kap4/matematik-7-kap4-kahoot.xlsx", true], ["Kapitel 4 · Jeopardy", "simuleringar/jeopardy-matematik-kap4.html"]]
+  grupp: "Bråk och procent (beta) – 63 frågor till Blooket och Kahoot samt Jeopardy med fem kategorier. Samma spel som under Bråk. Frågorna är egna och följer provets begreppslista.",
+  lankar: [["Bråk och procent · Blooket (CSV)", "planering/matematik-ak7-brak-procent/matematik-7-brak-procent-blooket.csv", true], ["Bråk och procent · Kahoot (xlsx)", "planering/matematik-ak7-brak-procent/matematik-7-brak-procent-kahoot.xlsx", true], ["Bråk och procent · Jeopardy", "simuleringar/jeopardy-matematik-brak-procent.html"]]
 };
 
 window.lararExtra["matematik-ak9-samband"] = {

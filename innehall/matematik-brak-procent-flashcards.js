@@ -1,4 +1,4 @@
-// Flashcards för kapitel 4: bråk och procent (åk 7). Begreppen kommer från provets begreppslista, förklaringarna är egna.
+// Flashcards för bråk och procent (åk 7). Begreppen kommer från provets begreppslista, förklaringarna är egna.
 var innehall = window.innehall || {};
 
 innehall["matematik-ak7-brak-flash"] = {
